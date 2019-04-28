@@ -1,0 +1,10 @@
+{
+    "name": "VitDeck.Tests",
+    "references": [
+        "VitDeck"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}
