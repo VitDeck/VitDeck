@@ -1,6 +1,7 @@
 {
-    "name": "VitDeck",
+    "name": "VitDeck.Main.GUI",
     "references": [
+        "VitDeck.Main",
         "VitDeck.Utilities"
     ],
     "includePlatforms": [
