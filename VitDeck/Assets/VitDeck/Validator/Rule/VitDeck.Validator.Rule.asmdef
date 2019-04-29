@@ -1,0 +1,8 @@
+{
+    "name": "VitDeck.Validator.Rule",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}
