@@ -1,7 +1,8 @@
 {
     "name": "VitDeck.GUI",
     "references": [
-        "VitDeck.Utilities"
+        "VitDeck.Utilities",
+        "VitDeck"
     ],
     "includePlatforms": [
         "Editor"
