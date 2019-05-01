@@ -4,7 +4,6 @@ namespace VitDeck.Utility
 {
     public static class VersionUtility
     {
-
         /// <summary>
         /// 与えられた文字列がセマンティック バージョニングに準拠しているかどうかを判定します。
         /// </summary>
