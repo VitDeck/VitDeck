@@ -4,7 +4,7 @@ using UnityEngine;
 namespace VitDeck.Main.GUI
 {
     /// <summary>
-    /// VitDeckのバージョン等の情報を表示するウィンドウです。
+    /// VitDeckのツール情報を表示するウインドウ。
     /// </summary>
     public class InfoWindow : EditorWindow
     {
