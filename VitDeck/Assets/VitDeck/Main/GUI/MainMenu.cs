@@ -3,7 +3,7 @@ using UnityEditor;
 namespace VitDeck.Main.GUI
 {
     /// <summary>
-    /// メインメニューをUnityのメニューバーに表示します。
+    /// Unityメニューバー上のメインメニュー。
     /// </summary>
     public static class MainMenu
     {
