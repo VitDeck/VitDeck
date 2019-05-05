@@ -23,10 +23,14 @@ namespace VitDeck.Utilities
         /// <summary>
         /// 与えられた文字列が有効なURL文字列かどうか判定する。
         /// </summary>
+        /// <remarks>
+        /// Uriオブジェクトを作成できる形式かつ、スキームがhttpまたはhttpsの場合のみ許容する。
+        /// </remarks>
         /// <param name="url">URL文字列</param>
-        private static bool isValidURLString(string url)
+        public static bool isValidURLString(string url)
         {
-            return !string.IsNullOrEmpty(url) && Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute);
+            Uri uri;
+            return Uri.TryCreate(url, UriKind.Absolute, out uri) && (uri.Scheme == "http" || uri.Scheme == "https");
         }
     }
 }
