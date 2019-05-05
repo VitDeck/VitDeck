@@ -31,16 +31,22 @@ namespace VitDeck.Utilities
         /// </summary>
         /// <param name="label">UIに表示する文字列</param>
         /// <param name="url">リンク先URL</param>
+        /// <param name="style">使用するGUIスタイル</param>
         /// <param name="options">指定してレイアウトオプションを渡すときのレイアウトオプションのリスト</param>
-        public static void URLButton(string label, string url, params GUILayoutOption[] options)
+        public static void URLButton(string label, string url, GUIStyle style, params GUILayoutOption[] options)
         {
             GUIContent content = new GUIContent();
             content.image = URLButtonImage;
             content.text = label;
-            if (GUILayout.Button(content, options))
+            if (GUILayout.Button(content, style, options))
             {
                 URLUtility.openURL(url);
             }
+        }
+
+        public static void URLButton(string label, string url, params GUILayoutOption[] options)
+        {
+            URLButton(label, url, GUI.skin.button, options);
         }
     }
 }
