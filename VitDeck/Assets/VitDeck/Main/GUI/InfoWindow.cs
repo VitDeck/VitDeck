@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Utilities;
 
 namespace VitDeck.Main.GUI
 {
@@ -10,6 +11,8 @@ namespace VitDeck.Main.GUI
     {
         [SerializeField]
         string versionLabel = null;
+
+        private GUILayoutOption[] buttonStyle = new GUILayoutOption[] { GUILayout.Width(130) };
 
         public static void ShowWindow()
         {
@@ -24,6 +27,8 @@ namespace VitDeck.Main.GUI
         private void OnGUI()
         {
             EditorGUILayout.LabelField(versionLabel);
+
+            CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
         }
     }
 }
