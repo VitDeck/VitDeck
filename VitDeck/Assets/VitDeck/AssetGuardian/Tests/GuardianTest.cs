@@ -11,8 +11,8 @@ namespace VitDeck.AssetGuardian.Tests
         const string GuardFolderName = "Temp";
         const string GuardPath = GuardFolderParentName + "/" + GuardFolderName;
 
-        [SetUp]
-        public void Setup()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
             AssetDatabase.DeleteAsset(GuardPath);
             AssetDatabase.CreateFolder(GuardFolderParentName, GuardFolderName);
@@ -67,8 +67,8 @@ namespace VitDeck.AssetGuardian.Tests
             Assert.That(asset, Is.Null);
         }
 
-        [TearDown]
-        public void TearDown()
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
         {
             AssetGuardian.Registry.Unregister(GuardPath);
             AssetDatabase.DeleteAsset(GuardPath);
