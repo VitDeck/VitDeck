@@ -1,18 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-using UnityEditorInternal;
 using System.Linq;
-using System.IO;
+using UnityEditor;
+using UnityEngine;
 
 namespace VitDeck.AssetGuardian
 {
+    /// <summary>
+    /// 特定のパス以下のファイルが変更されることを防ぐ。
+    /// </summary>
+    /// <remarks>
+    /// アセットの保存時の処理をフックし、保存されるアセットに保護登録済みのアセットが含まれていた場合、対象アセットに対して行われた全ての変更を破棄します。
+    /// アセットの保護登録はスクリプトコンパイル後に引き継がれない為、<see cref="InitializeOnLoadMethodAttribute"/>等を利用して再登録する必要があります。
+    /// </remarks>
+    /// <seealso cref="UnityEditor.AssetModificationProcessor"/>
     public class Guardian : UnityEditor.AssetModificationProcessor
     {
-        static HashSet<string> guardPaths = new HashSet<string>();
-
         static string[] OnWillSaveAssets(string[] paths)
         {
             return paths
@@ -27,16 +28,7 @@ namespace VitDeck.AssetGuardian
         /// <returns>アセットが保護されていた場合はtrue、そうでなければfalse。</returns>
         private static bool DiscardChangesIfTarget(string assetPath)
         {
-            bool isTarget = false;
-            foreach (var guardPath in guardPaths)
-            {
-                if (assetPath.StartsWith(guardPath))
-                {
-                    isTarget = true;
-                    break;
-                }
-            }
-            if (!isTarget)
+            if (!Registry.Contains(assetPath))
                 return false;
 
             var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
@@ -46,14 +38,5 @@ namespace VitDeck.AssetGuardian
             return true;
         }
 
-        public static void Register(string path)
-        {
-            guardPaths.Add(path);
-        }
-
-        public static void Unregister(string path)
-        {
-            guardPaths.Remove(path);
-        }
     }
 }

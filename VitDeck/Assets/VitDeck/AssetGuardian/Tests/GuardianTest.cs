@@ -1,11 +1,7 @@
-using UnityEngine;
-using UnityEditor;
-using UnityEngine.TestTools;
 using NUnit.Framework;
-using System.Collections;
-using System;
-using Object = UnityEngine.Object;
 using System.IO;
+using UnityEditor;
+using UnityEngine;
 
 namespace VitDeck.AssetGuardian.Tests
 {
@@ -36,11 +32,11 @@ namespace VitDeck.AssetGuardian.Tests
             SerializedObject serialized = new SerializedObject(asset);
             SerializedProperty valueProp = serialized.FindProperty("value");
 
-            Guardian.Register(GuardPath);
+            AssetGuardian.Registry.Register(GuardPath);
             WriteAndReload(moddedValue, serialized, valueProp);
             Assert.AreEqual(defaultValue, valueProp.stringValue);
 
-            Guardian.Unregister(GuardPath);
+            AssetGuardian.Registry.Unregister(GuardPath);
             WriteAndReload(moddedValue, serialized, valueProp);
             Assert.AreEqual(moddedValue, valueProp.stringValue);
         }
