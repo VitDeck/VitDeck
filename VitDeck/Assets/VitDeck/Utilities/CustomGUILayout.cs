@@ -1,4 +1,4 @@
-using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace VitDeck.Utilities
@@ -8,6 +8,7 @@ namespace VitDeck.Utilities
     /// </summary>
     public static class CustomGUILayout
     {
+
         /// <summary>
         /// URLリンクボタンを作成します。
         /// </summary>
@@ -16,7 +17,11 @@ namespace VitDeck.Utilities
         /// <param name="options">指定してレイアウトオプションを渡すときのレイアウトオプションのリスト</param>
         public static void URLButton(string label, string url, params GUILayoutOption[] options)
         {
-            if (GUILayout.Button(label, options))
+            GUIContent content = new GUIContent();
+            string imageFolder = AssetUtility.getImageFolderPath();
+            content.image = AssetDatabase.LoadAssetAtPath<Texture2D>(imageFolder + "/Link_icon.png");
+            content.text = label;
+            if (GUILayout.Button(content, options))
             {
                 URLUtility.openURL(url);
             }
