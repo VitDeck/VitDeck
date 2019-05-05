@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace VitDeck.Utility.Tests
+namespace VitDeck.Utilities.Tests
 {
     public class VersionUtilityTest
     {
