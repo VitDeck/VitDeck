@@ -23,7 +23,7 @@ namespace VitDeck.Utilities
             {
                 if (string.IsNullOrEmpty(_imageFolderPath))
                 {
-                    string[] imageFolderGUIDs = AssetDatabase.FindAssets("l:ImagesFolder");
+                    string[] imageFolderGUIDs = AssetDatabase.FindAssets("l:VitDeck.ImagesFolder");
                     if (imageFolderGUIDs != null && imageFolderGUIDs.Length > 0)
                     {
                         _imageFolderPath = AssetDatabase.GUIDToAssetPath(imageFolderGUIDs[0]);
