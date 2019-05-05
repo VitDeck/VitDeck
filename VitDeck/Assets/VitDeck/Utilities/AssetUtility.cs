@@ -8,27 +8,33 @@ namespace VitDeck.Utilities
     /// </summary>
     public static class AssetUtility
     {
+        private static string _imageFolderPath;
+
         /// <summary>
-        /// VitDeck用画像フォルダのパスを取得する
+        /// VitDeck用画像フォルダのパス
         /// </summary>
         /// <remarks>
         /// Unityで`ImagesFolder`ラベルが付与されているアセットの一つ目のパスを返す。
         /// 存在しない場合はExceptionを返す。
         /// </remarks>
-        /// <returns>画像が格納されているフォルダーのパス</returns>
-        public static string getImageFolderPath()
+        public static string ImageFolderPath
         {
-            string[] imageFolderGUIDs = AssetDatabase.FindAssets("l:ImagesFolder");
-            string imageFolder = "";
-            if (imageFolderGUIDs != null && imageFolderGUIDs.Length > 0)
+            get
             {
-                imageFolder = AssetDatabase.GUIDToAssetPath(imageFolderGUIDs[0]);
+                if (string.IsNullOrEmpty(_imageFolderPath))
+                {
+                    string[] imageFolderGUIDs = AssetDatabase.FindAssets("l:ImagesFolder");
+                    if (imageFolderGUIDs != null && imageFolderGUIDs.Length > 0)
+                    {
+                        _imageFolderPath = AssetDatabase.GUIDToAssetPath(imageFolderGUIDs[0]);
+                    }
+                    else
+                    {
+                        throw new DirectoryNotFoundException("Images folder not found.");
+                    }
+                }
+                return _imageFolderPath;
             }
-            else
-            {
-                throw new DirectoryNotFoundException("Images folder not found.");
-            }
-            return imageFolder;
         }
     }
 }

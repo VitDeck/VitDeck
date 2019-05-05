@@ -8,6 +8,23 @@ namespace VitDeck.Utilities
     /// </summary>
     public static class CustomGUILayout
     {
+        static private Texture2D _URLButtonImage;
+
+        /// <summary>
+        /// URLリンクボタンのアイコン画像
+        /// </summary>
+        static private Texture2D URLButtonImage
+        {
+            get
+            {
+                if (_URLButtonImage == null)
+                {
+                    string imageFolder = AssetUtility.ImageFolderPath;
+                    _URLButtonImage = AssetDatabase.LoadAssetAtPath<Texture2D>(imageFolder + "/Link_icon.png");
+                }
+                return _URLButtonImage;
+            }
+        }
 
         /// <summary>
         /// URLリンクボタンを作成します。
@@ -18,8 +35,7 @@ namespace VitDeck.Utilities
         public static void URLButton(string label, string url, params GUILayoutOption[] options)
         {
             GUIContent content = new GUIContent();
-            string imageFolder = AssetUtility.getImageFolderPath();
-            content.image = AssetDatabase.LoadAssetAtPath<Texture2D>(imageFolder + "/Link_icon.png");
+            content.image = URLButtonImage;
             content.text = label;
             if (GUILayout.Button(content, options))
             {
