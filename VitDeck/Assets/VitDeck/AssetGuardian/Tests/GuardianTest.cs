@@ -19,7 +19,7 @@ namespace VitDeck.AssetGuardian.Tests
         }
 
         [Test]
-        public void GuardAssetTest()
+        public void ModificationGuardTest()
         {
             string defaultValue = "hoge";
             string moddedValue = "fuga";
@@ -49,9 +49,28 @@ namespace VitDeck.AssetGuardian.Tests
             serialized.Update();
         }
 
+        [Test]
+        public void DeleteGuardTest()
+        {
+            var assetPath = Path.Combine(GuardPath, "TempAsset.asset");
+            TestScriptableObject asset = ScriptableObject.CreateInstance<TestScriptableObject>();
+            AssetDatabase.CreateAsset(asset, assetPath);
+
+            AssetGuardian.Registry.Register(GuardPath);
+            AssetDatabase.DeleteAsset(assetPath);
+            asset = AssetDatabase.LoadAssetAtPath<TestScriptableObject>(assetPath);
+            Assert.That(asset, Is.Not.Null);
+
+            AssetGuardian.Registry.Unregister(GuardPath);
+            AssetDatabase.DeleteAsset(assetPath);
+            asset = AssetDatabase.LoadAssetAtPath<TestScriptableObject>(assetPath);
+            Assert.That(asset, Is.Null);
+        }
+
         [TearDown]
         public void TearDown()
         {
+            AssetGuardian.Registry.Unregister(GuardPath);
             AssetDatabase.DeleteAsset(GuardPath);
         }
     }

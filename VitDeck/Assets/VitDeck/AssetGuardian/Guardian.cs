@@ -21,6 +21,11 @@ namespace VitDeck.AssetGuardian
                  .ToArray();
         }
 
+        static AssetDeleteResult OnWillDeleteAsset(string path, RemoveAssetOptions options)
+        {
+            return Registry.Contains(path) ? AssetDeleteResult.FailedDelete : AssetDeleteResult.DidNotDelete;
+        }
+
         /// <summary>
         /// アセットが保護対象であれば全ての保存されていない変更を破棄する。
         /// </summary>
