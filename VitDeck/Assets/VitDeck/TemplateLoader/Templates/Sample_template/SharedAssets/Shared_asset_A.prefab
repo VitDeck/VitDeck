@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33324089433151920}
   - component: {fileID: 23402768994488566}
   m_Layer: 0
-  m_Name: Shared_Asset_A
+  m_Name: Shared_asset_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
