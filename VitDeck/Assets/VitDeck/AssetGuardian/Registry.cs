@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
 using System.Linq;
-using UnityEngine;
+using UnityEditor;
 
 namespace VitDeck.AssetGuardian
 {
@@ -15,9 +13,12 @@ namespace VitDeck.AssetGuardian
         private const string readonlyLabel = "VitDeck.Readonly";
 
         /// <summary>
-        /// パスを保護対象にする。
+        /// アセット/ディレクトリを保護対象にする。
         /// </summary>
-        /// <param name="path"></param>
+        /// <remarks>
+        /// 対象がディレクトリの場合、再帰的に保護が行われます。
+        /// </remarks>
+        /// <param name="path">対象のパス</param>
         public static void Register(string path)
         {
             var assets = EnumerateAssets(path);
@@ -33,9 +34,12 @@ namespace VitDeck.AssetGuardian
         }
 
         /// <summary>
-        /// パスを保護対象から外す。
+        /// アセット/ディレクトリを保護対象から外す。
         /// </summary>
-        /// <param name="path"></param>
+        /// <remarks>
+        /// 対象がディレクトリの場合、再帰的に保護解除が行われます。
+        /// </remarks>
+        /// <param name="path">対象のパス</param>
         public static void Unregister(string path)
         {
             var assets = EnumerateAssets(path);

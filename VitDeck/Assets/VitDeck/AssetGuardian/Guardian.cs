@@ -14,6 +14,13 @@ namespace VitDeck.AssetGuardian
     /// <seealso cref="UnityEditor.AssetModificationProcessor"/>
     public class Guardian : UnityEditor.AssetModificationProcessor
     {
+        public static bool Protects(string path)
+        {
+            return Registry.Contains(path);
+        }
+
+        #region AssetModificationProcessor Imprementations
+
         static string[] OnWillSaveAssets(string[] paths)
         {
             return paths
@@ -23,13 +30,16 @@ namespace VitDeck.AssetGuardian
 
         static AssetDeleteResult OnWillDeleteAsset(string path, RemoveAssetOptions options)
         {
-            return Registry.Contains(path) ? AssetDeleteResult.FailedDelete : AssetDeleteResult.DidNotDelete;
+            return Protects(path) ? AssetDeleteResult.FailedDelete : AssetDeleteResult.DidNotDelete;
         }
 
         static AssetMoveResult OnWillMoveAsset(string sourcePath, string destinationPath)
         {
-            return Registry.Contains(sourcePath) ? AssetMoveResult.FailedMove : AssetMoveResult.DidNotMove;
+            return Protects(sourcePath) ? AssetMoveResult.FailedMove : AssetMoveResult.DidNotMove;
         }
+
+        #endregion
+
         /// <summary>
         /// アセットが保護対象であれば全ての保存されていない変更を破棄する。
         /// </summary>
@@ -37,7 +47,7 @@ namespace VitDeck.AssetGuardian
         /// <returns>アセットが保護されていた場合はtrue、そうでなければfalse。</returns>
         private static bool DiscardChangesIfTarget(string assetPath)
         {
-            if (!Registry.Contains(assetPath))
+            if (!Protects(assetPath))
                 return false;
 
             var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
