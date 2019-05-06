@@ -26,6 +26,10 @@ namespace VitDeck.AssetGuardian
             return Registry.Contains(path) ? AssetDeleteResult.FailedDelete : AssetDeleteResult.DidNotDelete;
         }
 
+        static AssetMoveResult OnWillMoveAsset(string sourcePath, string destinationPath)
+        {
+            return Registry.Contains(sourcePath) ? AssetMoveResult.FailedMove : AssetMoveResult.DidNotMove;
+        }
         /// <summary>
         /// アセットが保護対象であれば全ての保存されていない変更を破棄する。
         /// </summary>

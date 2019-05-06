@@ -67,6 +67,24 @@ namespace VitDeck.AssetGuardian.Tests
             Assert.That(asset, Is.Null);
         }
 
+        [Test]
+        public void MoveOutGuardTest()
+        {
+            var assetPath = Path.Combine(GuardPath, "TempAsset.asset");
+            var movedAssetPath = Path.Combine(GuardPath, "TempAssetMoved.asset");
+            TestScriptableObject asset = ScriptableObject.CreateInstance<TestScriptableObject>();
+            AssetDatabase.CreateAsset(asset, assetPath);
+
+            AssetGuardian.Registry.Register(GuardPath);
+            AssetDatabase.MoveAsset(assetPath, movedAssetPath);
+            asset = AssetDatabase.LoadAssetAtPath<TestScriptableObject>(assetPath);
+            Assert.That(asset, Is.Not.Null);
+
+            AssetGuardian.Registry.Unregister(GuardPath);
+            AssetDatabase.MoveAsset(assetPath, movedAssetPath);
+            asset = AssetDatabase.LoadAssetAtPath<TestScriptableObject>(movedAssetPath);
+            Assert.That(asset, Is.Not.Null);
+        }
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
