@@ -7,89 +7,66 @@ namespace VitDeck.AssetGuardian.Tests
 {
     public class GurdianTest
     {
-        const string GuardFolderParentName = "Assets";
-        const string GuardFolderName = "Temp";
-        const string GuardPath = GuardFolderParentName + "/" + GuardFolderName;
+        string testBaseFolder = null;
+        string testAssetPath = null;
+        TestScriptableObject testAssetInstance = null;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            AssetDatabase.DeleteAsset(GuardPath);
-            AssetDatabase.CreateFolder(GuardFolderParentName, GuardFolderName);
+            var guid = AssetDatabase.CreateFolder("Assets", "TestBaseFolder");
+            testBaseFolder = AssetDatabase.GUIDToAssetPath(guid);
+
+            testAssetInstance = ScriptableObject.CreateInstance<TestScriptableObject>();
+            testAssetPath = AssetDatabase.GenerateUniqueAssetPath(testBaseFolder + "/TestScriptableObject.asset");
+            AssetDatabase.CreateAsset(testAssetInstance, testAssetPath);
+
+            Registry.Register(testBaseFolder);
         }
 
         [Test]
-        public void ModificationGuardTest()
+        public void TestModificateSerializedValue()
         {
-            string defaultValue = "hoge";
-            string moddedValue = "fuga";
-
-            TestScriptableObject asset = ScriptableObject.CreateInstance<TestScriptableObject>();
-            asset.name = defaultValue;
-            asset.value = defaultValue;
-            AssetDatabase.CreateAsset(asset, Path.Combine(GuardPath, "TempAsset.asset"));
-
-            SerializedObject serialized = new SerializedObject(asset);
+            SerializedObject serialized = new SerializedObject(testAssetInstance);
             SerializedProperty valueProp = serialized.FindProperty("value");
 
-            AssetGuardian.Registry.Register(GuardPath);
-            WriteAndReload(moddedValue, serialized, valueProp);
-            Assert.AreEqual(defaultValue, valueProp.stringValue);
+            var defaultValue = testAssetInstance.value;
+            var moddedValue = defaultValue + "hoge";
 
-            AssetGuardian.Registry.Unregister(GuardPath);
-            WriteAndReload(moddedValue, serialized, valueProp);
-            Assert.AreEqual(moddedValue, valueProp.stringValue);
-        }
-
-        private static void WriteAndReload(string value, SerializedObject serialized, SerializedProperty valueProp)
-        {
-            valueProp.stringValue = value;
+            valueProp.stringValue = moddedValue;
             serialized.ApplyModifiedProperties();
             AssetDatabase.SaveAssets();
             serialized.Update();
+
+            Assert.That(valueProp.stringValue, Is.Not.EqualTo(moddedValue));
         }
 
         [Test]
-        public void DeleteGuardTest()
+        public void TestDelete()
         {
-            var assetPath = Path.Combine(GuardPath, "TempAsset.asset");
-            TestScriptableObject asset = ScriptableObject.CreateInstance<TestScriptableObject>();
-            AssetDatabase.CreateAsset(asset, assetPath);
-
-            AssetGuardian.Registry.Register(GuardPath);
-            AssetDatabase.DeleteAsset(assetPath);
-            asset = AssetDatabase.LoadAssetAtPath<TestScriptableObject>(assetPath);
+            AssetDatabase.DeleteAsset(testAssetPath);
+            var asset = AssetDatabase.LoadAssetAtPath<TestScriptableObject>(testAssetPath);
             Assert.That(asset, Is.Not.Null);
-
-            AssetGuardian.Registry.Unregister(GuardPath);
-            AssetDatabase.DeleteAsset(assetPath);
-            asset = AssetDatabase.LoadAssetAtPath<TestScriptableObject>(assetPath);
-            Assert.That(asset, Is.Null);
         }
 
         [Test]
-        public void MoveOutGuardTest()
+        public void TestMove()
         {
-            var assetPath = Path.Combine(GuardPath, "TempAsset.asset");
-            var movedAssetPath = Path.Combine(GuardPath, "TempAssetMoved.asset");
-            TestScriptableObject asset = ScriptableObject.CreateInstance<TestScriptableObject>();
-            AssetDatabase.CreateAsset(asset, assetPath);
+            var subFolderID = AssetDatabase.CreateFolder(testBaseFolder, "SubFolder");
+            var subFolder = AssetDatabase.GUIDToAssetPath(subFolderID);
 
-            AssetGuardian.Registry.Register(GuardPath);
-            AssetDatabase.MoveAsset(assetPath, movedAssetPath);
-            asset = AssetDatabase.LoadAssetAtPath<TestScriptableObject>(assetPath);
-            Assert.That(asset, Is.Not.Null);
+            var movedPath = AssetDatabase.GenerateUniqueAssetPath(subFolder + "MovedAsset.asset");
+            AssetDatabase.MoveAsset(testAssetPath, movedPath);
 
-            AssetGuardian.Registry.Unregister(GuardPath);
-            AssetDatabase.MoveAsset(assetPath, movedAssetPath);
-            asset = AssetDatabase.LoadAssetAtPath<TestScriptableObject>(movedAssetPath);
-            Assert.That(asset, Is.Not.Null);
+            var asset = AssetDatabase.LoadAssetAtPath<TestScriptableObject>(testAssetPath);
+            Assert.That(asset, Is.EqualTo(testAssetInstance));
         }
+
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            AssetGuardian.Registry.Unregister(GuardPath);
-            AssetDatabase.DeleteAsset(GuardPath);
+            AssetGuardian.Registry.Unregister(testBaseFolder);
+            AssetDatabase.DeleteAsset(testBaseFolder);
         }
     }
 }
