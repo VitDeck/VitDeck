@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
+using VitDeck.Utilities;
 
 namespace VitDeck.AssetGuardian
 {
@@ -21,7 +22,7 @@ namespace VitDeck.AssetGuardian
         /// <param name="path">対象のパス</param>
         public static void Register(string path)
         {
-            var assets = EnumerateAssets(path);
+            var assets = AssetUtility.EnumerateAssets(path);
             foreach (var asset in assets)
             {
                 if (IsProtected(asset))
@@ -42,7 +43,7 @@ namespace VitDeck.AssetGuardian
         /// <param name="path">対象のパス</param>
         public static void Unregister(string path)
         {
-            var assets = EnumerateAssets(path);
+            var assets = AssetUtility.EnumerateAssets(path);
             foreach (var asset in assets)
             {
                 if (!IsProtected(asset))
@@ -76,61 +77,6 @@ namespace VitDeck.AssetGuardian
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// 指定されたファイル/ディレクトリ及び、その子のパスを列挙する。
-        /// </summary>
-        /// <param name="path">ファイルもしくはディレクトリのパス</param>
-        /// <returns>パスの列挙</returns>
-        private static IEnumerable<string> EnumerateFileSystemEntries(string path)
-        {
-            if (Directory.Exists(path))
-            {
-                yield return path;
-
-                var childFiles = Directory.GetFiles(path);
-                foreach (var childFile in childFiles)
-                {
-                    yield return childFile;
-                }
-
-                var childDirectories = Directory.GetDirectories(path);
-                foreach (var childDirectory in childDirectories)
-                {
-                    var progenies = EnumerateFileSystemEntries(childDirectory);
-                    foreach (var progeny in progenies)
-                        yield return progeny;
-                }
-            }
-            else if (File.Exists(path))
-            {
-                yield return path;
-                yield break;
-            }
-            else yield break;
-        }
-
-        /// <summary>
-        /// 指定されたファイル/ディレクトリ及び、あればその子のアセットを列挙する。
-        /// </summary>
-        /// <param name="path">アセットもしくはディレクトリのパス</param>
-        /// <returns>アセットの列挙</returns>
-        private static IEnumerable<UnityEngine.Object> EnumerateAssets(string path)
-        {
-            foreach (var assetPath in EnumerateFileSystemEntries(path))
-            {
-                if (assetPath.EndsWith(".meta"))
-                {
-                    continue;
-                }
-                var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
-                if (asset == null)
-                {
-                    continue;
-                }
-                yield return asset;
-            }
         }
     }
 }
