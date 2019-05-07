@@ -11,7 +11,7 @@ namespace VitDeck.AssetGuardian
     /// </summary>
     public static class Registry
     {
-        private const string readonlyLabel = "VitDeck.Readonly";
+        private const string readonlyLabel = "VitDeck.ReadOnly";
 
         /// <summary>
         /// アセット/ディレクトリを保護対象にする。
