@@ -15,7 +15,6 @@ namespace VitDeck.AssetGuardian.Tests
         {
             var guid = AssetDatabase.CreateFolder("Assets", "TestBaseFolder");
             testBaseFolder = AssetDatabase.GUIDToAssetPath(guid);
-            Debug.Log(testBaseFolder);
         }
 
         [Test]
