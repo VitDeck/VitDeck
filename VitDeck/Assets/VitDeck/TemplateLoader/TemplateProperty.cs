@@ -10,5 +10,7 @@ public class TemplateProperty : ScriptableObject
     [SerializeField]
     TextAsset lisenseFile;
     [SerializeField]
-    string developperUrl;
+    string developer;
+    [SerializeField]
+    string developerUrl;
 }

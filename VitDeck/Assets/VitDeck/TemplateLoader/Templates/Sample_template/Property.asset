@@ -13,5 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   templateName: Sample Template
   description: This is VitDeck sample template
-  lisense: MIT License
-  developperUrl: https://github.com/vkettools/VitDeck
+  lisenseFile: {fileID: 4900000, guid: 2c5e4f38eb7e35447b696a1c5229aaff, type: 3}
+  developer: VitDeck
+  developerUrl: https://github.com/vkettools/VitDeck
