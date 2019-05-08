@@ -45,14 +45,13 @@ namespace VitDeck.AssetGuardian.GUI
         static List<string> DeleteCancelledAssetList = new List<string>();
         static List<string> MoveCancelledAssetList = new List<string>();
 
-        private static string DigestList(List<string> list)
+        private static string Digest(IEnumerable<string> list)
         {
             StringBuilder builder = new StringBuilder();
             foreach (var item in list)
             {
                 builder.AppendLine(item);
             }
-            list.Clear();
             return builder.ToString();
         }
 
