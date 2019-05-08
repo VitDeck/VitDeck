@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -14,6 +15,10 @@ namespace VitDeck.AssetGuardian
     /// <seealso cref="UnityEditor.AssetModificationProcessor"/>
     public class Guardian : UnityEditor.AssetModificationProcessor
     {
+        public static event Action<string> OnSaveCancelled;
+        public static event Action<string> OnDeleteCancelled;
+        public static event Action<string> OnMoveCancelled;
+
         public static bool Protects(string path)
         {
             return Registry.Contains(path);
@@ -30,12 +35,22 @@ namespace VitDeck.AssetGuardian
 
         static AssetDeleteResult OnWillDeleteAsset(string path, RemoveAssetOptions options)
         {
-            return Protects(path) ? AssetDeleteResult.FailedDelete : AssetDeleteResult.DidNotDelete;
+            bool isProtected = Protects(path);
+            if (isProtected && OnDeleteCancelled != null)
+            {
+                OnDeleteCancelled.Invoke(path);
+            }
+            return isProtected ? AssetDeleteResult.FailedDelete : AssetDeleteResult.DidNotDelete;
         }
 
         static AssetMoveResult OnWillMoveAsset(string sourcePath, string destinationPath)
         {
-            return Protects(sourcePath) ? AssetMoveResult.FailedMove : AssetMoveResult.DidNotMove;
+            bool isProtected = Protects(sourcePath);
+            if (isProtected && OnMoveCancelled != null)
+            {
+                OnMoveCancelled.Invoke(sourcePath);
+            }
+            return isProtected ? AssetMoveResult.FailedMove : AssetMoveResult.DidNotMove;
         }
 
         #endregion
@@ -52,7 +67,9 @@ namespace VitDeck.AssetGuardian
 
             var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
             Resources.UnloadAsset(asset);
-            Debug.Log("All changes of " + assetPath + " are discarded.");
+
+            if (OnSaveCancelled != null)
+                OnSaveCancelled.Invoke(assetPath);
 
             return true;
         }
