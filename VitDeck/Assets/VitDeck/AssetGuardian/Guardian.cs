@@ -13,27 +13,25 @@ namespace VitDeck.AssetGuardian
     /// アセットの保護登録はスクリプトコンパイル後に引き継がれない為、<see cref="InitializeOnLoadMethodAttribute"/>等を利用して再登録する必要があります。
     /// </remarks>
     /// <seealso cref="UnityEditor.AssetModificationProcessor"/>
-    public class Guardian : UnityEditor.AssetModificationProcessor
+    public class Guardian
     {
         public static event Action<string> OnSaveCancelled;
         public static event Action<string> OnDeleteCancelled;
         public static event Action<string> OnMoveCancelled;
 
-        public static bool Protects(string path)
+        public bool Protects(string path)
         {
             return Registry.Contains(path);
         }
 
-        #region AssetModificationProcessor Imprementations
-
-        static string[] OnWillSaveAssets(string[] paths)
+        public string[] OnWillSaveAssets(string[] paths)
         {
             return paths
                  .Where(path => !DiscardChangesIfTarget(path))
                  .ToArray();
         }
 
-        static AssetDeleteResult OnWillDeleteAsset(string path, RemoveAssetOptions options)
+        public AssetDeleteResult OnWillDeleteAsset(string path, RemoveAssetOptions options)
         {
             bool isProtected = Protects(path);
             if (isProtected && OnDeleteCancelled != null)
@@ -43,7 +41,7 @@ namespace VitDeck.AssetGuardian
             return isProtected ? AssetDeleteResult.FailedDelete : AssetDeleteResult.DidNotDelete;
         }
 
-        static AssetMoveResult OnWillMoveAsset(string sourcePath, string destinationPath)
+        public AssetMoveResult OnWillMoveAsset(string sourcePath, string destinationPath)
         {
             bool isProtected = Protects(sourcePath);
             if (isProtected && OnMoveCancelled != null)
@@ -53,14 +51,12 @@ namespace VitDeck.AssetGuardian
             return isProtected ? AssetMoveResult.FailedMove : AssetMoveResult.DidNotMove;
         }
 
-        #endregion
-
         /// <summary>
         /// アセットが保護対象であれば全ての保存されていない変更を破棄する。
         /// </summary>
         /// <param name="assetPath">アセットへのパス</param>
         /// <returns>アセットが保護されていた場合はtrue、そうでなければfalse。</returns>
-        private static bool DiscardChangesIfTarget(string assetPath)
+        private bool DiscardChangesIfTarget(string assetPath)
         {
             if (!Protects(assetPath))
                 return false;
