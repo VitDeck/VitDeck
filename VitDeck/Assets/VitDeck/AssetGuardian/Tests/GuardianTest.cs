@@ -8,8 +8,8 @@ namespace VitDeck.AssetGuardian.Tests
     public class GurdianTest
     {
         string testBaseFolder = null;
-        string testAssetPath = null;
-        TestScriptableObject testAssetInstance = null;
+        string protectedAssetPath = null;
+        TestScriptableObject protectedAssetInstance = null;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -17,9 +17,9 @@ namespace VitDeck.AssetGuardian.Tests
             var guid = AssetDatabase.CreateFolder("Assets", "TestBaseFolder");
             testBaseFolder = AssetDatabase.GUIDToAssetPath(guid);
 
-            testAssetInstance = ScriptableObject.CreateInstance<TestScriptableObject>();
-            testAssetPath = AssetDatabase.GenerateUniqueAssetPath(testBaseFolder + "/TestScriptableObject.asset");
-            AssetDatabase.CreateAsset(testAssetInstance, testAssetPath);
+            protectedAssetInstance = ScriptableObject.CreateInstance<TestScriptableObject>();
+            protectedAssetPath = AssetDatabase.GenerateUniqueAssetPath(testBaseFolder + "/TestScriptableObject.asset");
+            AssetDatabase.CreateAsset(protectedAssetInstance, protectedAssetPath);
 
             Registry.Register(testBaseFolder);
         }
@@ -27,26 +27,18 @@ namespace VitDeck.AssetGuardian.Tests
         [Test]
         public void TestModificateSerializedValue()
         {
-            SerializedObject serialized = new SerializedObject(testAssetInstance);
-            SerializedProperty valueProp = serialized.FindProperty("value");
-
-            var defaultValue = testAssetInstance.value;
-            var moddedValue = defaultValue + "hoge";
-
-            valueProp.stringValue = moddedValue;
-            serialized.ApplyModifiedProperties();
-            AssetDatabase.SaveAssets();
-            serialized.Update();
-
-            Assert.That(valueProp.stringValue, Is.Not.EqualTo(moddedValue));
+            Guardian guardian = new Guardian();
+            Assert.That(guardian.OnWillSaveAsset(protectedAssetPath), Is.False);
         }
 
         [Test]
         public void TestDelete()
         {
-            AssetDatabase.DeleteAsset(testAssetPath);
-            var asset = AssetDatabase.LoadAssetAtPath<TestScriptableObject>(testAssetPath);
-            Assert.That(asset, Is.Not.Null);
+            var returnsFail = Is.EqualTo(AssetDeleteResult.FailedDelete);
+            Guardian guardian = new Guardian();
+            Assert.That(guardian.OnWillDeleteAsset(protectedAssetPath, RemoveAssetOptions.DeleteAssets), returnsFail);
+            Assert.That(guardian.OnWillDeleteAsset(protectedAssetPath, RemoveAssetOptions.MoveAssetToTrash), returnsFail);
+
         }
 
         [Test]
@@ -54,12 +46,10 @@ namespace VitDeck.AssetGuardian.Tests
         {
             var subFolderID = AssetDatabase.CreateFolder(testBaseFolder, "SubFolder");
             var subFolder = AssetDatabase.GUIDToAssetPath(subFolderID);
-
             var movedPath = AssetDatabase.GenerateUniqueAssetPath(subFolder + "MovedAsset.asset");
-            AssetDatabase.MoveAsset(testAssetPath, movedPath);
 
-            var asset = AssetDatabase.LoadAssetAtPath<TestScriptableObject>(testAssetPath);
-            Assert.That(asset, Is.EqualTo(testAssetInstance));
+            Guardian guardian = new Guardian();
+            Assert.That(guardian.OnWillMoveAsset(protectedAssetPath, movedPath), Is.EqualTo(AssetMoveResult.FailedMove));
         }
 
         [OneTimeTearDown]
