@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using UnityEditor;
 using VitDeck.Utilities;
@@ -7,9 +5,9 @@ using VitDeck.Utilities;
 namespace VitDeck.AssetGuardian
 {
     /// <summary>
-    /// 保護対象のアセット及びフォルダの情報を格納する。
+    /// アセットを保護する/しないを管理する。
     /// </summary>
-    public static class Registry
+    public static class ProtectionLabel
     {
         private const string readonlyLabel = "VitDeck.ReadOnly";
 
@@ -17,10 +15,10 @@ namespace VitDeck.AssetGuardian
         /// アセット/ディレクトリを保護対象にする。
         /// </summary>
         /// <remarks>
-        /// 対象がディレクトリの場合、再帰的に保護が行われます。
+        /// 対象がディレクトリの場合、全ての子を保護対象にします。
         /// </remarks>
         /// <param name="path">対象のパス</param>
-        public static void Register(string path)
+        public static void Attach(string path)
         {
             var assets = AssetUtility.EnumerateAssets(path);
             foreach (var asset in assets)
@@ -38,10 +36,10 @@ namespace VitDeck.AssetGuardian
         /// アセット/ディレクトリを保護対象から外す。
         /// </summary>
         /// <remarks>
-        /// 対象がディレクトリの場合、再帰的に保護解除が行われます。
+        /// 対象がディレクトリの場合、全ての子が保護対象から外れます。
         /// </remarks>
         /// <param name="path">対象のパス</param>
-        public static void Unregister(string path)
+        public static void Detach(string path)
         {
             var assets = AssetUtility.EnumerateAssets(path);
             foreach (var asset in assets)
@@ -60,7 +58,7 @@ namespace VitDeck.AssetGuardian
         /// </summary>
         /// <param name="assetPath">判定するアセットのパス</param>
         /// <returns>保護対象であればtrue、そうでなければfalse。</returns>
-        public static bool Contains(string assetPath)
+        public static bool IsAttachedTo(string assetPath)
         {
             var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
             return IsProtected(asset);

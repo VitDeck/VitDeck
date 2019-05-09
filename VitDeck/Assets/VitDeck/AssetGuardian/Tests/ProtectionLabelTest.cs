@@ -1,12 +1,10 @@
 using NUnit.Framework;
-using System.Collections;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 namespace VitDeck.AssetGuardian.Tests
 {
-    public class RegistryTest
+    public class ProtectionLabelTest
     {
         string testBaseFolder;
 
@@ -20,24 +18,24 @@ namespace VitDeck.AssetGuardian.Tests
         [Test]
         public void TestRegisterAndUnregister()
         {
-            Registry.Register(testBaseFolder);
-            Assert.That(Registry.Contains(testBaseFolder), Is.True);
+            ProtectionLabel.Attach(testBaseFolder);
+            Assert.That(ProtectionLabel.IsAttachedTo(testBaseFolder), Is.True);
 
             var assetInstance = ScriptableObject.CreateInstance<TestScriptableObject>();
             var assetPath = AssetDatabase.GenerateUniqueAssetPath(testBaseFolder + "/TempAsset.asset");
             AssetDatabase.CreateAsset(assetInstance, assetPath);
-            Registry.Register(testBaseFolder);
-            Assert.That(Registry.Contains(assetPath), Is.True);
+            ProtectionLabel.Attach(testBaseFolder);
+            Assert.That(ProtectionLabel.IsAttachedTo(assetPath), Is.True);
 
-            Registry.Unregister(testBaseFolder);
-            Assert.That(Registry.Contains(testBaseFolder), Is.False);
-            Assert.That(Registry.Contains(assetPath), Is.False);
+            ProtectionLabel.Detach(testBaseFolder);
+            Assert.That(ProtectionLabel.IsAttachedTo(testBaseFolder), Is.False);
+            Assert.That(ProtectionLabel.IsAttachedTo(assetPath), Is.False);
         }
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            Registry.Unregister(testBaseFolder);
+            ProtectionLabel.Detach(testBaseFolder);
             AssetDatabase.DeleteAsset(testBaseFolder);
         }
     }

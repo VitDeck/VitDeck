@@ -14,9 +14,9 @@ namespace VitDeck.AssetGuardian.GUI
         [InitializeOnLoadMethod]
         public static void Initialze()
         {
-            Trigger.OnSaveCancelled += Guardian_OnSaveCancelled;
-            Trigger.OnDeleteCancelled += Guardian_OnDeleteCancelled;
-            Trigger.OnMoveCancelled += Guardian_OnMoveCancelled;
+            Handler.OnSaveCancelled += Guardian_OnSaveCancelled;
+            Handler.OnDeleteCancelled += Guardian_OnDeleteCancelled;
+            Handler.OnMoveCancelled += Guardian_OnMoveCancelled;
 
             EditorApplication.update += EditorApplicaton_Update;
         }

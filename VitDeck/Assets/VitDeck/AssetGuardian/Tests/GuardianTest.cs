@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -21,7 +20,7 @@ namespace VitDeck.AssetGuardian.Tests
             protectedAssetPath = AssetDatabase.GenerateUniqueAssetPath(testBaseFolder + "/TestScriptableObject.asset");
             AssetDatabase.CreateAsset(protectedAssetInstance, protectedAssetPath);
 
-            Registry.Register(testBaseFolder);
+            ProtectionLabel.Attach(testBaseFolder);
         }
 
         [Test]
@@ -55,7 +54,7 @@ namespace VitDeck.AssetGuardian.Tests
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            AssetGuardian.Registry.Unregister(testBaseFolder);
+            ProtectionLabel.Detach(testBaseFolder);
             AssetDatabase.DeleteAsset(testBaseFolder);
         }
     }
