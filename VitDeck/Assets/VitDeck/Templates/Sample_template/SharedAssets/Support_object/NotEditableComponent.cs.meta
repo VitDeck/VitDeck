@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 8b892c6f104b2c24c98896d5cec9aef9
+labels:
+- VitDeck.ReadOnly
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
