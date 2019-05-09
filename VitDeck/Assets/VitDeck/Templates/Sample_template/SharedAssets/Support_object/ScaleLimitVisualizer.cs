@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class ScaleLimitVisualizer : MonoBehaviour {
-
+public class ScaleLimitVisualizer : MonoBehaviour
+{
     public Vector3 scaleLimit = new Vector3(4, 5, 3);
 
     public bool isWireFrame = true;
@@ -15,11 +15,10 @@ public class ScaleLimitVisualizer : MonoBehaviour {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireCube(pos, scaleLimit);
         }
-
         else
         {
             Gizmos.color = new Color(1, 1, 0, 0.8f);
             Gizmos.DrawCube(pos, scaleLimit);
-        }     
+        }
     }
 }
