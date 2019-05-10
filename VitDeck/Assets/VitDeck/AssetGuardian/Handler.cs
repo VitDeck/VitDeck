@@ -27,7 +27,7 @@ namespace VitDeck.AssetGuardian
         }
 
         [InitializeOnLoadMethod]
-        public static void Initialize()
+        private static void Initialize()
         {
             guardian = new Guardian();
         }
