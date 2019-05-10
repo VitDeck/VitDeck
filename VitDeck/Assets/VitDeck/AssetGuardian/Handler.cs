@@ -5,7 +5,7 @@ using UnityEditor;
 namespace VitDeck.AssetGuardian
 {
     /// <summary>
-    /// UnityEditorの保存処理をフックし、Guardianを呼び出すクラス。
+    /// UnityEditorのアセットに対する操作をフックし、Guardianを呼び出すクラス。
     /// </summary>
     public class Handler : UnityEditor.AssetModificationProcessor
     {
@@ -32,6 +32,12 @@ namespace VitDeck.AssetGuardian
             guardian = new Guardian();
         }
 
+        /// <summary>
+        /// UnityEditor上でアセットを保存する直前に呼び出される。
+        /// </summary>
+        /// <seealso cref="AssetModificationProcessor"/>
+        /// <param name="paths">保存しようとしているパスの配列。</param>
+        /// <returns>実際に保存されるパスの配列。</returns>
         static string[] OnWillSaveAssets(string[] paths)
         {
             if (!active)
@@ -53,6 +59,13 @@ namespace VitDeck.AssetGuardian
             return list.ToArray();
         }
 
+        /// <summary>
+        /// UnityEditor上でアセットを削除する直前に呼び出される。
+        /// </summary>
+        /// <seealso cref="AssetModificationProcessor"/>
+        /// <param name="path">削除しようとしているパス。</param>
+        /// <param name="options">削除の方法。</param>
+        /// <returns>アセットを削除したかどうか。</returns>
         static AssetDeleteResult OnWillDeleteAsset(string path, RemoveAssetOptions options)
         {
             if (!active)
@@ -68,6 +81,12 @@ namespace VitDeck.AssetGuardian
             return result;
         }
 
+        /// <summary>
+        /// UnityEditor上でアセットの移動が行われる直前に呼び出される。
+        /// </summary>
+        /// <param name="sourcePath">移動元のパス。</param>
+        /// <param name="destinationPath">移動先のパス。</param>
+        /// <returns>アセットを移動したかどうか。</returns>
         static AssetMoveResult OnWillMoveAsset(string sourcePath, string destinationPath)
         {
             if (!active)

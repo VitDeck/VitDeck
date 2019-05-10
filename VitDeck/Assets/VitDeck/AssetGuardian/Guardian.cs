@@ -4,12 +4,11 @@ using UnityEngine;
 namespace VitDeck.AssetGuardian
 {
     /// <summary>
-    /// 特定のパス以下のファイルが変更されることを防ぐ。
+    /// 特定のファイルが変更されることを防ぐ。
     /// </summary>
     /// <remarks>
     /// 与えられたアセットが保護登録済みだった場合、対象アセットに対して行われた全ての変更を破棄します。
     /// </remarks>
-    /// <seealso cref="UnityEditor.AssetModificationProcessor"/>
     public class Guardian
     {
         public bool Protects(string path)
