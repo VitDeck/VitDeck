@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace VitDeck.TemplateLoader
 {
+    /// <summary>
+    /// テンプレートから作成機能を提供する。
+    /// </summary>
     public static class TemplateLoader
     {
         /// <summary>
@@ -53,7 +56,7 @@ namespace VitDeck.TemplateLoader
         /// <returns>テンプレート名のフォルダ名の配列</returns>
         public static string[] GetTemplateFolders()
         {
-            string[] templateFolders = new string[] { "Sample Template", "テンプレートB" };
+            string[] templateFolders = new string[] { };
             var templatesFolderGuids = AssetDatabase.FindAssets("l:VitDeck.TemplatesFolder");
             if (templatesFolderGuids != null && templatesFolderGuids.Length > 0)
             {
@@ -84,12 +87,12 @@ namespace VitDeck.TemplateLoader
         /// <summary>
         /// GUIDに対応したアセットパスの配列を返す。
         /// </summary>
-        /// <param name="templateFolderGuids">guidの配列</param>
+        /// <param name="guids">guidの配列</param>
         /// <returns>アセットパスの配列</returns>
-        private static string[] GuidsToPaths(string[] templateFolderGuids)
+        private static string[] GuidsToPaths(string[] guids)
         {
             var names = new List<string>();
-            foreach (var guid in templateFolderGuids)
+            foreach (var guid in guids)
             {
                 var name = AssetDatabase.GUIDToAssetPath(guid);
                 names.Add(name);
