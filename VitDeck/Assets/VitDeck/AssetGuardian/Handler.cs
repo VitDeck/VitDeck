@@ -15,7 +15,7 @@ namespace VitDeck.AssetGuardian
         public static event Action<string> OnDeleteCancelled;
         public static event Action<string> OnMoveCancelled;
 
-        private static bool active;
+        private static bool active = true;
 
         /// <summary>
         /// アセットの保護機能の有効/無効を切り替える。
