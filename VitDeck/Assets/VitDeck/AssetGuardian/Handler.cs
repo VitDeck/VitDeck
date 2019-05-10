@@ -15,6 +15,17 @@ namespace VitDeck.AssetGuardian
         public static event Action<string> OnDeleteCancelled;
         public static event Action<string> OnMoveCancelled;
 
+        private static bool active;
+
+        /// <summary>
+        /// アセットの保護機能の有効/無効を切り替える。
+        /// </summary>
+        /// <param name="active">監視を行うかどうか。</param>
+        public static void SetActive(bool active)
+        {
+            Handler.active = active;
+        }
+
         [InitializeOnLoadMethod]
         public static void Initialize()
         {
@@ -23,6 +34,9 @@ namespace VitDeck.AssetGuardian
 
         static string[] OnWillSaveAssets(string[] paths)
         {
+            if (!active)
+                return paths;
+
             var list = new List<string>();
             foreach (var path in paths)
             {
@@ -41,7 +55,11 @@ namespace VitDeck.AssetGuardian
 
         static AssetDeleteResult OnWillDeleteAsset(string path, RemoveAssetOptions options)
         {
+            if (!active)
+                return AssetDeleteResult.DidNotDelete;
+
             var result = guardian.OnWillDeleteAsset(path, options);
+
             if (result == AssetDeleteResult.FailedDelete)
             {
                 if (OnDeleteCancelled != null)
@@ -52,7 +70,11 @@ namespace VitDeck.AssetGuardian
 
         static AssetMoveResult OnWillMoveAsset(string sourcePath, string destinationPath)
         {
+            if (!active)
+                return AssetMoveResult.DidNotMove;
+
             var result = guardian.OnWillMoveAsset(sourcePath, destinationPath);
+
             if (result == AssetMoveResult.FailedMove)
             {
                 if (OnMoveCancelled != null)
