@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using VitDeck.Utilities;
@@ -10,6 +11,14 @@ namespace VitDeck.AssetGuardian
     public static class ProtectionLabel
     {
         private const string readonlyLabel = "VitDeck.ReadOnly";
+
+        [InitializeOnLoadMethod]
+        private static void Initialize()
+        {
+            var assets = EnumerateAllAttachedObjects();
+            foreach (var asset in assets)
+                SetEditable(asset, false);
+        }
 
         /// <summary>
         /// アセット/ディレクトリを保護対象にする。
@@ -51,6 +60,7 @@ namespace VitDeck.AssetGuardian
             var labels = AssetDatabase.GetLabels(asset);
             labels = labels.Concat(new string[] { readonlyLabel }).ToArray();
             AssetDatabase.SetLabels(asset, labels);
+            SetEditable(asset, false);
         }
 
         private static void Detach(UnityEngine.Object asset)
@@ -61,6 +71,16 @@ namespace VitDeck.AssetGuardian
             var labels = AssetDatabase.GetLabels(asset);
             labels = labels.Where(label => label != readonlyLabel).ToArray();
             AssetDatabase.SetLabels(asset, labels);
+            SetEditable(asset, true);
+        }
+
+        private static void SetEditable(UnityEngine.Object asset, bool editable)
+        {
+            if (editable)
+                asset.hideFlags &= ~UnityEngine.HideFlags.NotEditable;
+            else
+                asset.hideFlags |= UnityEngine.HideFlags.NotEditable;
+
         }
 
         /// <summary>
@@ -72,6 +92,16 @@ namespace VitDeck.AssetGuardian
         {
             var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
             return IsProtected(asset);
+        }
+
+        public static IEnumerable<UnityEngine.Object> EnumerateAllAttachedObjects()
+        {
+            var assetGUIDs = AssetDatabase.FindAssets("l:" + readonlyLabel);
+            foreach (var guid in assetGUIDs)
+            {
+                var path = AssetDatabase.GUIDToAssetPath(guid);
+                yield return AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path);
+            }
         }
 
         private static bool IsProtected(UnityEngine.Object asset)
