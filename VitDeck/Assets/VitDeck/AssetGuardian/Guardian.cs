@@ -19,10 +19,6 @@ namespace VitDeck.AssetGuardian
         public bool OnWillSaveAsset(string path)
         {
             bool isProtected = Protects(path);
-            if (isProtected)
-            {
-                DiscardDirtyChanges(path);
-            }
             return !isProtected;
         }
 
