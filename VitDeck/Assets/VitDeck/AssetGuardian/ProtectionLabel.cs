@@ -23,12 +23,7 @@ namespace VitDeck.AssetGuardian
             var assets = AssetUtility.EnumerateAssets(path);
             foreach (var asset in assets)
             {
-                if (IsProtected(asset))
-                    continue;
-
-                var labels = AssetDatabase.GetLabels(asset);
-                labels = labels.Concat(new string[] { readonlyLabel }).ToArray();
-                AssetDatabase.SetLabels(asset, labels);
+                Attach(asset);
             }
         }
 
@@ -44,13 +39,28 @@ namespace VitDeck.AssetGuardian
             var assets = AssetUtility.EnumerateAssets(path);
             foreach (var asset in assets)
             {
-                if (!IsProtected(asset))
-                    continue;
-
-                var labels = AssetDatabase.GetLabels(asset);
-                labels = labels.Where(label => label != readonlyLabel).ToArray();
-                AssetDatabase.SetLabels(asset, labels);
+                Detach(asset);
             }
+        }
+
+        private static void Attach(UnityEngine.Object asset)
+        {
+            if (IsProtected(asset))
+                return;
+
+            var labels = AssetDatabase.GetLabels(asset);
+            labels = labels.Concat(new string[] { readonlyLabel }).ToArray();
+            AssetDatabase.SetLabels(asset, labels);
+        }
+
+        private static void Detach(UnityEngine.Object asset)
+        {
+            if (!IsProtected(asset))
+                return;
+
+            var labels = AssetDatabase.GetLabels(asset);
+            labels = labels.Where(label => label != readonlyLabel).ToArray();
+            AssetDatabase.SetLabels(asset, labels);
         }
 
         /// <summary>
