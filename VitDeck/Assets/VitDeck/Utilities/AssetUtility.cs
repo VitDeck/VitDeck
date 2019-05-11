@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 
@@ -35,6 +36,22 @@ namespace VitDeck.Utilities
                 }
                 return _imageFolderPath;
             }
+        }
+
+        /// <summary>
+        /// GUIDに対応したアセットパスの配列を返す。
+        /// </summary>
+        /// <param name="guids">guidの配列</param>
+        /// <returns>アセットパスの配列</returns>
+        public static string[] GuidsToPaths(string[] guids)
+        {
+            var names = new List<string>();
+            foreach (var guid in guids)
+            {
+                var name = AssetDatabase.GUIDToAssetPath(guid);
+                names.Add(name);
+            }
+            return names.ToArray();
         }
     }
 }

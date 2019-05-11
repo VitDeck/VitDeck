@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Utilities;
 
 namespace VitDeck.TemplateLoader
 {
@@ -19,10 +21,64 @@ namespace VitDeck.TemplateLoader
         /// <returns>複製が成功した場合trueを返す。</returns>
         public static bool Load(string templateFolderName, string path = "Assets")
         {
-            Debug.Log("Load:" + templateFolderName);
-            Debug.Log("Load to:" + path);
+            const string templateAssetsFolder = "TemplateAssets";
+            var result = false;
+            //guidをキーとしたアセット辞書
+            var assetDictionary = new Dictionary<string, TemplateAsset>();
 
-            return false;
+            //Create asset dictionary
+            var separatorChar = Path.AltDirectorySeparatorChar;
+            var templateFolderPath = GetTemplatesFolderPath() + separatorChar + templateFolderName;
+            var templateAssetsFolderPath = templateFolderPath + separatorChar + templateAssetsFolder;
+            Debug.Log("Load:" + templateFolderPath);
+            var assetGuids = AssetDatabase.FindAssets("", new string[] { templateAssetsFolderPath });
+            foreach (var guid in assetGuids.Distinct())
+            {
+                var assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                var destinationPath = createDistinationPath(templateAssetsFolderPath, assetPath, path);
+                var ta = new TemplateAsset(guid, assetPath, destinationPath);
+                assetDictionary.Add(guid, ta);
+            }
+            //Copy Assets
+            Debug.Log("Load to:" + path);   
+            foreach (TemplateAsset ta in assetDictionary.Values)
+            {
+                //Copy all file and folder in `templateAssets` folder
+                if (ta.isAssetInFolder(templateAssetsFolderPath))
+                {
+                    if (!AssetDatabase.CopyAsset(ta.templatePath, ta.destinationPath))
+                    {
+                        Debug.LogError("Template copy failed.");
+                    }
+                }
+            }
+            result = true;
+            foreach (TemplateAsset ta in assetDictionary.Values)
+            {
+                //Remove readonly label
+                var obj = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(ta.destinationPath);
+                List<string> labels = new List<string>(AssetDatabase.GetLabels(obj));
+                labels.RemoveAll(s => s.Contains("VitDeck.ReadOnly"));
+                AssetDatabase.SetLabels(obj, labels.ToArray());
+                //Delete dummy assets
+                if (AssetDatabase.GetMainAssetTypeAtPath(ta.destinationPath) == typeof(VitDeckDummy))
+                {
+                    AssetDatabase.DeleteAsset(ta.destinationPath);
+                }
+            }
+            //Replace Asset names
+            //todo: #17 https://github.com/vkettools/VitDeck/issues/17
+            //
+
+            //Replace object reference
+            //todo
+
+            return result;
+        }
+
+        private static string createDistinationPath(string templateFolderPath, string assetPath, string targetPath)
+        {
+            return assetPath.Replace(templateFolderPath, targetPath);
         }
 
         /// <summary>
@@ -32,6 +88,7 @@ namespace VitDeck.TemplateLoader
         /// <returns>テンプレート名</returns>
         public static string GetTemplateName(string folderName)
         {
+            // ToDo: #18 https://github.com/vkettools/VitDeck/issues/18
             return "テンプレート名:" + folderName;
         }
 
@@ -57,13 +114,11 @@ namespace VitDeck.TemplateLoader
         public static string[] GetTemplateFolders()
         {
             string[] templateFolders = new string[] { };
-            var templatesFolderGuids = AssetDatabase.FindAssets("l:VitDeck.TemplatesFolder");
-            if (templatesFolderGuids != null && templatesFolderGuids.Length > 0)
             {
-                var templatesFolderPath = AssetDatabase.GUIDToAssetPath(templatesFolderGuids[0]);
+                var templatesFolderPath = GetTemplatesFolderPath();
                 var templateFolderIndex = templatesFolderPath.Split(Path.AltDirectorySeparatorChar).Length;
                 var templateFolderGuids = AssetDatabase.FindAssets("t:Folder", new string[] { templatesFolderPath });
-                var paths = GuidsToPaths(templateFolderGuids);
+                var paths = AssetUtility.GuidsToPaths(templateFolderGuids);
                 var folderNameList = new List<string>();
 
                 //Templatesフォルダ直下のディレクトリ名を取得
@@ -77,27 +132,55 @@ namespace VitDeck.TemplateLoader
                 }
                 templateFolders = folderNameList.Distinct().ToArray();
             }
-            else
-            {
-                throw new DirectoryNotFoundException("Templates folder not found.");
-            }
             return templateFolders;
         }
 
         /// <summary>
-        /// GUIDに対応したアセットパスの配列を返す。
+        /// テンプレートの格納されたフォルダのパスを返す。
+        /// VitDeck.TempletsFolderを付けたフォルダーの最初の一つを返す。
         /// </summary>
-        /// <param name="guids">guidの配列</param>
-        /// <returns>アセットパスの配列</returns>
-        private static string[] GuidsToPaths(string[] guids)
+        /// <returns></returns>
+        private static string GetTemplatesFolderPath()
         {
-            var names = new List<string>();
-            foreach (var guid in guids)
+            var templatesFolderGuids = AssetDatabase.FindAssets("l:VitDeck.TemplatesFolder");
+            var path = "";
+            if (templatesFolderGuids != null && templatesFolderGuids.Length > 0)
             {
-                var name = AssetDatabase.GUIDToAssetPath(guid);
-                names.Add(name);
+                path = AssetDatabase.GUIDToAssetPath(templatesFolderGuids[0]);
             }
-            return names.ToArray();
+            else
+            {
+                throw new DirectoryNotFoundException("Templates folder not found.");
+            }
+            return path;
+        }
+
+        private class TemplateAsset
+        {
+            public TemplateAsset(string _guid, string _templatePath, string _destinationPath)
+            {
+                guid = _guid;
+                templatePath = _templatePath;
+                destinationPath = _destinationPath;
+            }
+            internal bool isFolder
+            {
+                get
+                {
+                    return AssetDatabase.IsValidFolder(templatePath);
+                }
+            }
+            internal bool isAssetInFolder(string path)
+            {
+                return Path.GetDirectoryName(templatePath) == path;
+            }
+            //テンプレート内GUID
+            internal string guid;
+            //テンプレート内パス
+            internal string templatePath;
+            //コピー先パス
+            internal string destinationPath;
+
         }
     }
 }
