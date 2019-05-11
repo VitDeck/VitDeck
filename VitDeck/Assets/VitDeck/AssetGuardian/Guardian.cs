@@ -26,7 +26,7 @@ namespace VitDeck.AssetGuardian
             return !isProtected;
         }
 
-        private static void DiscardDirtyChanges(string path)
+        public static void DiscardDirtyChanges(string path)
         {
             var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path);
             Resources.UnloadAsset(asset);

@@ -25,20 +25,31 @@ namespace VitDeck.AssetGuardian.GUI
         {
             if (SaveCancelledAssetList.Count > 0)
             {
-                EditorUtility.DisplayDialog("保存はキャンセルされました。 - VitDeck", "以下のアセットは主催者によりロックされています。\n" + Digest(SaveCancelledAssetList), "ok");
+                bool discardChanges = EditorUtility.DisplayDialog("VitDeck Asset Guardian", "以下のアセットの変更は許可されていません。\n" + Digest(SaveCancelledAssetList), "変更を破棄", "ok");
+                if (discardChanges)
+                    DiscardChanges();
+
                 SaveCancelledAssetList.Clear();
             }
             if (DeleteCancelledAssetList.Count > 0)
             {
-                EditorUtility.DisplayDialog("削除はキャンセルされました。 - VitDeck", "以下のアセットは主催者によりロックされています。\n" + Digest(DeleteCancelledAssetList), "ok");
+                EditorUtility.DisplayDialog("VitDeck Asset Guardian", "以下のアセットの削除は許可されていません。\n" + Digest(DeleteCancelledAssetList), "ok");
                 DeleteCancelledAssetList.Clear();
             }
             if (MoveCancelledAssetList.Count > 0)
             {
-                EditorUtility.DisplayDialog("移動はキャンセルされました。 - VitDeck", "以下のアセットは主催者によりロックされています。\n" + Digest(MoveCancelledAssetList), "ok");
+                EditorUtility.DisplayDialog("VitDeck Asset Guardian", "以下のアセットの移動は許可されていません。\n" + Digest(MoveCancelledAssetList), "ok");
                 MoveCancelledAssetList.Clear();
             }
 
+        }
+
+        private static void DiscardChanges()
+        {
+            foreach (var asset in SaveCancelledAssetList)
+            {
+                Guardian.DiscardDirtyChanges(asset);
+            }
         }
 
         static List<string> SaveCancelledAssetList = new List<string>();
