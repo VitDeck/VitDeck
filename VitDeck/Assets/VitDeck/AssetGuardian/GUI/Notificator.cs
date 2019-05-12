@@ -25,7 +25,7 @@ namespace VitDeck.AssetGuardian.GUI
         {
             if (SaveCancelledAssetList.Count > 0)
             {
-                bool discardChanges = EditorUtility.DisplayDialog("VitDeck Asset Guardian", "以下のアセットの変更は許可されていません。\n" + Digest(SaveCancelledAssetList), "ok");
+                EditorUtility.DisplayDialog("VitDeck Asset Guardian", "以下のアセットの変更は許可されていません。\n" + Digest(SaveCancelledAssetList), "ok");
 
                 SaveCancelledAssetList.Clear();
             }
