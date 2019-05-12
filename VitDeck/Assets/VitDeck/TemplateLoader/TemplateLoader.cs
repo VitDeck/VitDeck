@@ -29,9 +29,13 @@ namespace VitDeck.TemplateLoader
             var assetDictionary = new Dictionary<string, TemplateAsset>();
 
             Debug.Log("Load:" + templateFolderPath);
-            //Create asset dictionary
-            Debug.Log("Create assetDictionary");
             var assetGuids = AssetDatabase.FindAssets("", new string[] { templateAssetsFolderPath });
+            if(assetGuids.Length == 0)
+            {
+                return true;
+            }
+            //Create asset dictionary
+            Debug.Log("Create asset dictionary");
             foreach (var guid in assetGuids.Distinct())
             {
                 var assetPath = AssetDatabase.GUIDToAssetPath(guid);
@@ -46,7 +50,7 @@ namespace VitDeck.TemplateLoader
             }
 
             //Copy Assets
-            Debug.Log("Load to:" + path);
+            Debug.Log("Load template to:" + path);
             foreach (TemplateAsset ta in assetDictionary.Values)
             {
                 //Copy all child files and folders in `templateAssets` folder
