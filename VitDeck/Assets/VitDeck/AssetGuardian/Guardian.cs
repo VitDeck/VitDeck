@@ -18,14 +18,7 @@ namespace VitDeck.AssetGuardian
 
         public bool OnWillSaveAsset(string path)
         {
-            bool isProtected = Protects(path);
-            return !isProtected;
-        }
-
-        public static void DiscardDirtyChanges(string path)
-        {
-            var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path);
-            Resources.UnloadAsset(asset);
+            return true;
         }
 
         public AssetDeleteResult OnWillDeleteAsset(string path, RemoveAssetOptions options)

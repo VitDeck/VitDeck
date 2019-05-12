@@ -25,9 +25,7 @@ namespace VitDeck.AssetGuardian.GUI
         {
             if (SaveCancelledAssetList.Count > 0)
             {
-                bool discardChanges = EditorUtility.DisplayDialog("VitDeck Asset Guardian", "以下のアセットの変更は許可されていません。\n" + Digest(SaveCancelledAssetList), "変更を破棄", "ok");
-                if (discardChanges)
-                    DiscardChanges();
+                bool discardChanges = EditorUtility.DisplayDialog("VitDeck Asset Guardian", "以下のアセットの変更は許可されていません。\n" + Digest(SaveCancelledAssetList), "ok");
 
                 SaveCancelledAssetList.Clear();
             }
@@ -42,14 +40,6 @@ namespace VitDeck.AssetGuardian.GUI
                 MoveCancelledAssetList.Clear();
             }
 
-        }
-
-        private static void DiscardChanges()
-        {
-            foreach (var asset in SaveCancelledAssetList)
-            {
-                Guardian.DiscardDirtyChanges(asset);
-            }
         }
 
         static List<string> SaveCancelledAssetList = new List<string>();

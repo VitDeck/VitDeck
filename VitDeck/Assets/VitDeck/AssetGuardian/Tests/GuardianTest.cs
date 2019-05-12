@@ -22,14 +22,7 @@ namespace VitDeck.AssetGuardian.Tests
 
             ProtectionLabel.Attach(testBaseFolder);
         }
-
-        [Test]
-        public void TestModificateSerializedValue()
-        {
-            Guardian guardian = new Guardian();
-            Assert.That(guardian.OnWillSaveAsset(protectedAssetPath), Is.False);
-        }
-
+        
         [Test]
         public void TestDelete()
         {
