@@ -21,38 +21,47 @@ namespace VitDeck.TemplateLoader
         /// <returns>複製が成功した場合trueを返す。</returns>
         public static bool Load(string templateFolderName, string path = "Assets")
         {
-            const string templateAssetsFolder = "TemplateAssets";
-            var result = false;
-            //guidをキーとしたアセット辞書
-            var assetDictionary = new Dictionary<string, TemplateAsset>();
 
-            //Create asset dictionary
+
+            const string templateAssetsFolder = "TemplateAssets";
             var separatorChar = Path.AltDirectorySeparatorChar;
             var templateFolderPath = GetTemplatesFolderPath() + separatorChar + templateFolderName;
             var templateAssetsFolderPath = templateFolderPath + separatorChar + templateAssetsFolder;
+            //テンプレート側のguidをキーとしたアセット辞書
+            var assetDictionary = new Dictionary<string, TemplateAsset>();
+
             Debug.Log("Load:" + templateFolderPath);
+            //Create asset dictionary
+            Debug.Log("Create assetDictionary");
             var assetGuids = AssetDatabase.FindAssets("", new string[] { templateAssetsFolderPath });
             foreach (var guid in assetGuids.Distinct())
             {
                 var assetPath = AssetDatabase.GUIDToAssetPath(guid);
-                var destinationPath = createDistinationPath(templateAssetsFolderPath, assetPath, path);
-                var ta = new TemplateAsset(guid, assetPath, destinationPath);
-                assetDictionary.Add(guid, ta);
+                var destinationPath = CreateDistinationPath(templateAssetsFolderPath, assetPath, path);
+                //todo: #17 set replacedDistinationPath
+                assetDictionary.Add(guid, new TemplateAsset(guid, assetPath, destinationPath));
             }
+            //Check distination path
+            if(IsCopyAssetAlreadyExist(assetDictionary, templateAssetsFolderPath))
+            {
+                return false;
+            }
+
             //Copy Assets
-            Debug.Log("Load to:" + path);   
+            Debug.Log("Load to:" + path);
             foreach (TemplateAsset ta in assetDictionary.Values)
             {
-                //Copy all file and folder in `templateAssets` folder
-                if (ta.isAssetInFolder(templateAssetsFolderPath))
+                //Copy all child files and folders in `templateAssets` folder
+                if (ta.IsAssetInFolder(templateAssetsFolderPath))
                 {
                     if (!AssetDatabase.CopyAsset(ta.templatePath, ta.destinationPath))
                     {
-                        Debug.LogError("Template copy failed.");
+                        Debug.LogError(string.Format("Template load failed.{0} to {1}", ta.templatePath, ta.destinationPath));
                     }
                 }
             }
-            result = true;
+
+            //Modify copyed assets
             foreach (TemplateAsset ta in assetDictionary.Values)
             {
                 //Remove readonly label
@@ -61,7 +70,7 @@ namespace VitDeck.TemplateLoader
                 labels.RemoveAll(s => s.Contains("VitDeck.ReadOnly"));
                 AssetDatabase.SetLabels(obj, labels.ToArray());
                 //Delete dummy assets
-                if (AssetDatabase.GetMainAssetTypeAtPath(ta.destinationPath) == typeof(VitDeckDummy))
+                if (ta.IsDummyAsset)
                 {
                     AssetDatabase.DeleteAsset(ta.destinationPath);
                 }
@@ -71,12 +80,76 @@ namespace VitDeck.TemplateLoader
             //
 
             //Replace object reference
-            //todo
-
-            return result;
+            var replacePairDictionary = CreateReplacePairDictionary(assetDictionary);
+            if (replacePairDictionary.Count > 0)
+            {
+                foreach (TemplateAsset ta in assetDictionary.Values)
+                {
+                    if (ta.IsDummyAsset || ta.IsFolder)
+                        continue;
+                    StreamReader sr = new StreamReader(Path.GetFullPath(ta.destinationPath));
+                    string s = sr.ReadToEnd();
+                    sr.Close();
+                    string replaced = s;
+                    foreach (var guid in replacePairDictionary.Keys)
+                    {
+                        replaced = replaced.Replace(guid, replacePairDictionary[guid]);
+                    }
+                    if (s == replaced)
+                        continue;
+                    StreamWriter sw = new StreamWriter(Path.GetFullPath(ta.destinationPath));
+                    sw.Write(replaced);
+                    sw.Close();
+                }
+            }
+            return true;
         }
 
-        private static string createDistinationPath(string templateFolderPath, string assetPath, string targetPath)
+        /// <summary>
+        /// コピー先直下にすでに同名アセットがあるかどうか確認する。
+        /// </summary>
+        /// <param name="assetDictionary">コピー対象のアセット辞書</param>
+        /// <param name="templateAssetsFolderPath">コピーするテンプレートアセットのルートフォルダパス</param>
+        /// <returns>コピーが不可能な場合trueを返す</returns>
+        private static bool IsCopyAssetAlreadyExist(Dictionary<string, TemplateAsset> assetDictionary, string templateAssetsFolderPath)
+        {
+            foreach (TemplateAsset ta in assetDictionary.Values)
+            {
+                if (ta.IsAssetInFolder(templateAssetsFolderPath))
+                {
+                    var result = AssetDatabase.ValidateMoveAsset(ta.templatePath, ta.destinationPath);
+                    if (result != "")
+                    {
+                        Debug.LogError(string.Format("Template load failed. {0}", result));
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 置換するGUIDのペア辞書を作成する。
+        /// </summary>
+        /// <param name="assetDictionary"></param>
+        /// <returns></returns>
+        private static Dictionary<string, string> CreateReplacePairDictionary(Dictionary<string, TemplateAsset> assetDictionary)
+        {
+            var dic = new Dictionary<string, string>();
+            foreach (var t in assetDictionary.Values)
+            {
+                if (t.IsDummyAsset || t.IsFolder)
+                    continue;
+                var searchStr = t.guid;
+                var replaceStr = AssetDatabase.AssetPathToGUID(t.destinationPath);
+                Debug.Log(t.templatePath + " to " + t.destinationPath);
+                Debug.Log("replace:" + searchStr + " : " + replaceStr);
+                dic.Add(searchStr, replaceStr);
+            }
+            return dic;
+        }
+
+        private static string CreateDistinationPath(string templateFolderPath, string assetPath, string targetPath)
         {
             return assetPath.Replace(templateFolderPath, targetPath);
         }
@@ -163,16 +236,23 @@ namespace VitDeck.TemplateLoader
                 templatePath = _templatePath;
                 destinationPath = _destinationPath;
             }
-            internal bool isFolder
+            internal bool IsFolder
             {
                 get
                 {
                     return AssetDatabase.IsValidFolder(templatePath);
                 }
             }
-            internal bool isAssetInFolder(string path)
+            internal bool IsAssetInFolder(string path)
             {
                 return Path.GetDirectoryName(templatePath) == path;
+            }
+            internal bool IsDummyAsset
+            {
+                get
+                {
+                    return AssetDatabase.GetMainAssetTypeAtPath(templatePath) == typeof(VitDeckDummy);
+                }
             }
             //テンプレート内GUID
             internal string guid;
@@ -180,7 +260,8 @@ namespace VitDeck.TemplateLoader
             internal string templatePath;
             //コピー先パス
             internal string destinationPath;
-
+            //置換後のアセットパス
+            internal string replacedDestinationPath;
         }
     }
 }
