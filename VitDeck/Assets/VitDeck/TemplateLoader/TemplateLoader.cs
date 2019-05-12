@@ -129,8 +129,8 @@ namespace VitDeck.TemplateLoader
         /// <summary>
         /// 置換するGUIDのペア辞書を作成する。
         /// </summary>
-        /// <param name="assetDictionary"></param>
-        /// <returns></returns>
+        /// <param name="assetDictionary">コピー対象のアセット辞書</param>
+        /// <returns>置換前のduid,置換後のguidをペアにした辞書</returns>
         private static Dictionary<string, string> CreateReplacePairDictionary(Dictionary<string, TemplateAsset> assetDictionary)
         {
             var dic = new Dictionary<string, string>();
@@ -226,6 +226,9 @@ namespace VitDeck.TemplateLoader
             return path;
         }
 
+        /// <summary>
+        /// テンプレート内のコピー対象のアセット情報
+        /// </summary>
         private class TemplateAsset
         {
             public TemplateAsset(string _guid, string _templatePath, string _destinationPath)
@@ -241,16 +244,16 @@ namespace VitDeck.TemplateLoader
                     return AssetDatabase.IsValidFolder(templatePath);
                 }
             }
-            internal bool IsAssetInFolder(string path)
-            {
-                return Path.GetDirectoryName(templatePath) == path;
-            }
             internal bool IsDummyAsset
             {
                 get
                 {
                     return AssetDatabase.GetMainAssetTypeAtPath(templatePath) == typeof(VitDeckDummy);
                 }
+            }
+            internal bool IsAssetInFolder(string path)
+            {
+                return Path.GetDirectoryName(templatePath) == path;
             }
             //テンプレート内GUID
             internal string guid;
