@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -15,9 +16,18 @@ namespace VitDeck.AssetGuardian
         [InitializeOnLoadMethod]
         private static void Initialize()
         {
+            // HideFlagsの設定はInitializeOnLoadより後でないと一部のアセットで失敗するので遅延させる。
+            EditorApplication.update += DelayedInitialize;
+        }
+
+        private static void DelayedInitialize()
+        {
             var assets = EnumerateAllAttachedObjects();
             foreach (var asset in assets)
+            {
                 SetEditable(asset, false);
+            }
+            EditorApplication.update -= DelayedInitialize;
         }
 
         /// <summary>
