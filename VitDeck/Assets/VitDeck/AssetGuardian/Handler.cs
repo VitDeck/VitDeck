@@ -30,6 +30,12 @@ namespace VitDeck.AssetGuardian
         private static void Initialize()
         {
             guardian = new Guardian();
+            UnityAssetDuplicationEvent.OnDuplicated += OnAssetDuplicated;
+        }
+
+        private static void OnAssetDuplicated(string assetPath)
+        {
+            ProtectionLabel.Detach(assetPath);
         }
 
         /// <summary>
