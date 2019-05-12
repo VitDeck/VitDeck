@@ -62,6 +62,10 @@ namespace VitDeck.AssetGuardian
             }
         }
 
+        /// <summary>
+        /// 特定のアセットを保護対象に加える。
+        /// </summary>
+        /// <param name="asset">対象のアセット</param>
         public static void Attach(UnityEngine.Object asset)
         {
             if (IsProtected(asset))
@@ -73,6 +77,10 @@ namespace VitDeck.AssetGuardian
             SetEditable(asset, false);
         }
 
+        /// <summary>
+        /// 特定のアセットを保護対象から外す。
+        /// </summary>
+        /// <param name="asset">対象のアセット</param>
         public static void Detach(UnityEngine.Object asset)
         {
             if (!IsProtected(asset))
@@ -104,6 +112,10 @@ namespace VitDeck.AssetGuardian
             return IsProtected(asset);
         }
 
+        /// <summary>
+        /// 保護対象に登録された全てのアセットを列挙する。
+        /// </summary>
+        /// <returns>保護対象アセットの列挙可能オブジェクト。</returns>
         public static IEnumerable<UnityEngine.Object> EnumerateAllAttachedAssets()
         {
             var assetGUIDs = AssetDatabase.FindAssets("l:" + readonlyLabel);

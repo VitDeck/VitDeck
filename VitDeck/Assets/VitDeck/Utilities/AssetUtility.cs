@@ -39,10 +39,10 @@ namespace VitDeck.Utilities
         }
 
         /// <summary>
-        /// 指定されたファイル/ディレクトリ及び、その子のアセットを列挙する。
+        /// 指定されたファイル/フォルダ及び、その子のアセットを列挙する。
         /// </summary>
-        /// <param name="path">アセットもしくはディレクトリのパス</param>
-        /// <returns>アセットの列挙</returns>
+        /// <param name="path">アセットもしくはフォルダのパス</param>
+        /// <returns>アセットの列挙可能オブジェクト</returns>
         public static IEnumerable<UnityEngine.Object> EnumerateAssets(string path)
         {
             foreach (var assetPath in IOUtility.EnumerateFileSystemEntries(path))
