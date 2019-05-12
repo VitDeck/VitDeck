@@ -21,8 +21,6 @@ namespace VitDeck.TemplateLoader
         /// <returns>複製が成功した場合trueを返す。</returns>
         public static bool Load(string templateFolderName, string path = "Assets")
         {
-
-
             const string templateAssetsFolder = "TemplateAssets";
             var separatorChar = Path.AltDirectorySeparatorChar;
             var templateFolderPath = GetTemplatesFolderPath() + separatorChar + templateFolderName;
@@ -42,7 +40,7 @@ namespace VitDeck.TemplateLoader
                 assetDictionary.Add(guid, new TemplateAsset(guid, assetPath, destinationPath));
             }
             //Check distination path
-            if(IsCopyAssetAlreadyExist(assetDictionary, templateAssetsFolderPath))
+            if (IsCopyAssetAlreadyExist(assetDictionary, templateAssetsFolderPath))
             {
                 return false;
             }
