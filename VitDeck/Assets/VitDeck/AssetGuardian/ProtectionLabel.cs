@@ -141,7 +141,11 @@ namespace VitDeck.AssetGuardian
             foreach (var guid in assetGUIDs)
             {
                 var path = AssetDatabase.GUIDToAssetPath(guid);
-                yield return AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path);
+                var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path);
+                if (asset == null)
+                    continue;
+
+                yield return asset;
             }
         }
 
