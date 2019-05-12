@@ -53,19 +53,18 @@ namespace VitDeck.TemplateLoader.GUI
                 EditorGUILayout.HelpBox(message.message, message.type, true);
             }
         }
-    }
-
-    /// <summary>
-    /// HelpBoxに表示するメッセージ
-    /// </summary>
-    internal class Message
-    {
-        public Message(string _message, MessageType _type)
+        /// <summary>
+        /// HelpBoxに表示するメッセージ
+        /// </summary>
+        internal class Message
         {
-            message = _message;
-            type = _type;
+            public Message(string _message, MessageType _type)
+            {
+                message = _message;
+                type = _type;
+            }
+            public string message;
+            public MessageType type;
         }
-        public string message;
-        public MessageType type;
     }
 }
