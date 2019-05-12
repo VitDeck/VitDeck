@@ -118,7 +118,6 @@ namespace VitDeck.AssetGuardian
                 asset.hideFlags &= ~UnityEngine.HideFlags.NotEditable;
             else
                 asset.hideFlags |= UnityEngine.HideFlags.NotEditable;
-
         }
 
         /// <summary>

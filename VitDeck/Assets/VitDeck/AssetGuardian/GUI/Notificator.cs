@@ -7,10 +7,8 @@ using System.Text;
 
 namespace VitDeck.AssetGuardian.GUI
 {
-
     public class Notificator
     {
-
         [InitializeOnLoadMethod]
         public static void Initialze()
         {
@@ -39,7 +37,6 @@ namespace VitDeck.AssetGuardian.GUI
                 EditorUtility.DisplayDialog("VitDeck Asset Guardian", "以下のアセットの移動は許可されていません。\n" + Digest(MoveCancelledAssetList), "ok");
                 MoveCancelledAssetList.Clear();
             }
-
         }
 
         static List<string> SaveCancelledAssetList = new List<string>();
@@ -58,7 +55,6 @@ namespace VitDeck.AssetGuardian.GUI
 
         private static void Guardian_OnSaveCancelled(string obj)
         {
-
             SaveCancelledAssetList.Add(obj);
         }
 

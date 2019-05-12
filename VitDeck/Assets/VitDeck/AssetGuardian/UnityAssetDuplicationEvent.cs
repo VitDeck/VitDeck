@@ -38,7 +38,6 @@ namespace VitDeck.AssetGuardian
                 default:
                     // Debug.Log("Event: " + evt.type + " command: " + evt.commandName + " item: " + asset.name);
                     break;
-
             }
         }
 

@@ -30,7 +30,6 @@ namespace VitDeck.AssetGuardian.Tests
             Guardian guardian = new Guardian();
             Assert.That(guardian.OnWillDeleteAsset(protectedAssetPath, RemoveAssetOptions.DeleteAssets), returnsFail);
             Assert.That(guardian.OnWillDeleteAsset(protectedAssetPath, RemoveAssetOptions.MoveAssetToTrash), returnsFail);
-
         }
 
         [Test]
