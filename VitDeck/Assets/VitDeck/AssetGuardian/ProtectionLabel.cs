@@ -13,6 +13,26 @@ namespace VitDeck.AssetGuardian
     {
         private const string readonlyLabel = "VitDeck.ReadOnly";
 
+        [MenuItem("Assets/Protect")]
+        static void Protect()
+        {
+            var assets = Selection.objects;
+            foreach (var asset in assets)
+            {
+                Attach(asset);
+            }
+        }
+
+        [MenuItem("Assets/Unprotect")]
+        static void Unprotect()
+        {
+            var assets = Selection.objects;
+            foreach (var asset in assets)
+            {
+                Detach(asset);
+            }
+        }
+
         [InitializeOnLoadMethod]
         private static void Initialize()
         {
