@@ -22,7 +22,7 @@ namespace VitDeck.AssetGuardian
 
         private static void DelayedInitialize()
         {
-            var assets = EnumerateAllAttachedObjects();
+            var assets = EnumerateAllAttachedAssets();
             foreach (var asset in assets)
             {
                 SetEditable(asset, false);
@@ -62,7 +62,7 @@ namespace VitDeck.AssetGuardian
             }
         }
 
-        private static void Attach(UnityEngine.Object asset)
+        public static void Attach(UnityEngine.Object asset)
         {
             if (IsProtected(asset))
                 return;
@@ -73,7 +73,7 @@ namespace VitDeck.AssetGuardian
             SetEditable(asset, false);
         }
 
-        private static void Detach(UnityEngine.Object asset)
+        public static void Detach(UnityEngine.Object asset)
         {
             if (!IsProtected(asset))
                 return;
@@ -104,7 +104,7 @@ namespace VitDeck.AssetGuardian
             return IsProtected(asset);
         }
 
-        public static IEnumerable<UnityEngine.Object> EnumerateAllAttachedObjects()
+        public static IEnumerable<UnityEngine.Object> EnumerateAllAttachedAssets()
         {
             var assetGUIDs = AssetDatabase.FindAssets("l:" + readonlyLabel);
             foreach (var guid in assetGUIDs)
