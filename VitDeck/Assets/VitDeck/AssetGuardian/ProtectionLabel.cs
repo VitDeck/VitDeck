@@ -122,7 +122,7 @@ namespace VitDeck.AssetGuardian
             var prefabType = PrefabUtility.GetPrefabType(asset);
             if (prefabType == PrefabType.Prefab)
             {
-                //HideSubAsset(asset);
+                HideSubAsset(asset);
             }
         }
 
