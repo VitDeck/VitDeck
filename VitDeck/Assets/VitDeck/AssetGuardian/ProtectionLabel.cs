@@ -118,6 +118,24 @@ namespace VitDeck.AssetGuardian
                 asset.hideFlags &= ~UnityEngine.HideFlags.NotEditable;
             else
                 asset.hideFlags |= UnityEngine.HideFlags.NotEditable;
+
+            var prefabType = PrefabUtility.GetPrefabType(asset);
+            if (prefabType == PrefabType.Prefab)
+            {
+                //HideSubAsset(asset);
+            }
+        }
+
+        private static void HideSubAsset(UnityEngine.Object asset)
+        {
+            var path = AssetDatabase.GetAssetPath(asset);
+            var assets = AssetDatabase.LoadAllAssetsAtPath(path);
+            foreach (var a in assets)
+            {
+                if (AssetDatabase.IsMainAsset(a))
+                    continue;
+                a.hideFlags |= UnityEngine.HideFlags.HideInHierarchy;
+            }
         }
 
         /// <summary>
