@@ -34,7 +34,7 @@ namespace VitDeck.AssetGuardian.GUI
             }
             if (MoveCancelledAssetList.Count > 0)
             {
-                EditorUtility.DisplayDialog("VitDeck Asset Guardian", "以下のアセットの移動は許可されていません。\n" + Digest(MoveCancelledAssetList), "ok");
+                EditorUtility.DisplayDialog("VitDeck Asset Guardian", "以下のアセットの移動または名前の変更は許可されていません。\n" + Digest(MoveCancelledAssetList), "ok");
                 MoveCancelledAssetList.Clear();
             }
         }
