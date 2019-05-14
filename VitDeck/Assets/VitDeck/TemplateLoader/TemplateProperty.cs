@@ -6,14 +6,14 @@ namespace VitDeck.TemplateLoader
     public class TemplateProperty : ScriptableObject
     {
         [SerializeField]
-        string templateName;
+        public string templateName;
         [SerializeField]
-        string description;
+        public string description;
         [SerializeField]
-        TextAsset lisenseFile;
+        public TextAsset lisenseFile;
         [SerializeField]
-        string developer;
+        public string developer;
         [SerializeField]
-        string developerUrl;
+        public string developerUrl;
     }
 }

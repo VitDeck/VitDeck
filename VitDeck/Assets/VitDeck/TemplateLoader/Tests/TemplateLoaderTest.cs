@@ -30,14 +30,22 @@ namespace VitDeck.TemplateLoader.Test
         [Test]
         public void TestGetTemplateNames()
         {
-            // ToDo: #18 https://github.com/vkettools/VitDeck/issues/18
-            Assert.That(TemplateLoader.GetTemplateNames(new string[] { "Sample_template" }), Is.EqualTo(new string[] { "テンプレート名:Sample_template" }));
+            Assert.That(TemplateLoader.GetTemplateNames(new string[] { "invalid", "Sample_template" }), Is.EqualTo(new string[] { "No name[invalid]", "Sample Template" }));
         }
         [Test]
         public void TestGetTemplateName()
         {
-            // ToDo: #18 https://github.com/vkettools/VitDeck/issues/18
-            Assert.That(TemplateLoader.GetTemplateName("Sample_template"), Is.EqualTo("テンプレート名:Sample_template"));
+            Assert.That(TemplateLoader.GetTemplateName("Sample_template"), Is.EqualTo("Sample Template"));
+        }
+
+        [Test]
+        public void TestGetTemplateProperty()
+        {
+            Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").templateName, Is.EqualTo("Sample Template"));
+            Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").description, Is.EqualTo("This is VitDeck sample template"));
+            Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").developer, Is.EqualTo("VitDeck"));
+            Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").developerUrl, Is.EqualTo("https://github.com/vkettools/VitDeck"));
+            Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").lisenseFile.name, Is.EqualTo("LICENSE"));
         }
     }
 }

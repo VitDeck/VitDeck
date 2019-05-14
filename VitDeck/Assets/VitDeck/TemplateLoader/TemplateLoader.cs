@@ -30,7 +30,7 @@ namespace VitDeck.TemplateLoader
 
             Debug.Log("Load:" + templateFolderPath);
             var assetGuids = AssetDatabase.FindAssets("", new string[] { templateAssetsFolderPath });
-            if(assetGuids.Length == 0)
+            if (assetGuids.Length == 0)
             {
                 return true;
             }
@@ -163,8 +163,8 @@ namespace VitDeck.TemplateLoader
         /// <returns>テンプレート名</returns>
         public static string GetTemplateName(string folderName)
         {
-            // ToDo: #18 https://github.com/vkettools/VitDeck/issues/18
-            return "テンプレート名:" + folderName;
+            var name = GetTemplateProperty(folderName).templateName ?? string.Format("No name[{0}]", folderName);
+            return name;
         }
 
         /// <summary>
@@ -228,6 +228,32 @@ namespace VitDeck.TemplateLoader
                 throw new DirectoryNotFoundException("Templates folder not found.");
             }
             return path;
+        }
+
+        /// <summary>
+        /// テンプレート情報を取得する
+        /// </summary>
+        /// <param name="name">テンプレートのフォルダ名</param>
+        /// <returns><テンプレート情報オブジェクト</returns>
+        public static TemplateProperty GetTemplateProperty(string name)
+        {
+            var rootPath = GetTemplatesFolderPath() + Path.AltDirectorySeparatorChar + name;
+            var guids = AssetDatabase.FindAssets("t:TemplateProperty", new string[] { rootPath });
+            TemplateProperty property = null;
+            if (guids.Length >= 2)
+            {
+                Debug.LogWarning("複数のテンプレート情報ファイルが存在します。");
+            }
+            else if (guids.Length == 1)
+            {
+                var propertyFilePath = AssetDatabase.GUIDToAssetPath(guids[0]);
+                property = AssetDatabase.LoadAssetAtPath<TemplateProperty>(propertyFilePath);
+            }
+            else
+            {
+                Debug.LogWarning("テンプレート情報ファイルがみつかりませんでした。");
+            }
+            return property ?? ScriptableObject.CreateInstance<TemplateProperty>();
         }
 
         /// <summary>
