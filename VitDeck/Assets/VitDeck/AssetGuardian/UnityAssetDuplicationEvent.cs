@@ -32,8 +32,14 @@ namespace VitDeck.AssetGuardian
             switch (evt.commandName)
             {
                 case "Duplicate":
-                    if (OnDuplicated != null)
-                        OnDuplicated(path);
+                    var objs = Selection.objects;
+                    foreach(var obj in objs)
+                    {
+                        var p = AssetDatabase.GetAssetPath(obj);
+                        if (OnAssetWillDuplicate != null)
+                            OnAssetWillDuplicate(p);
+                    }
+                    
                     break;
                 default:
                     // Debug.Log("Event: " + evt.type + " command: " + evt.commandName + " item: " + asset.name);
@@ -41,8 +47,8 @@ namespace VitDeck.AssetGuardian
             }
         }
 
-        public static AssetDuplicatedDelegate OnDuplicated;
+        public static AssetDuplicateEventDelegate OnAssetWillDuplicate;
 
-        public delegate void AssetDuplicatedDelegate(string assetPath);
+        public delegate void AssetDuplicateEventDelegate(string assetPath);
     }
 }

@@ -30,12 +30,14 @@ namespace VitDeck.AssetGuardian
         private static void Initialize()
         {
             guardian = new Guardian();
-            UnityAssetDuplicationEvent.OnDuplicated += OnAssetDuplicated;
+            UnityAssetDuplicationEvent.OnAssetWillDuplicate += OnAssetWillDuplicate;
         }
 
-        private static void OnAssetDuplicated(string assetPath)
+        private static void OnAssetWillDuplicate(string assetPath)
         {
-            ProtectionLabel.Detach(assetPath);
+            var copiedPath = AssetDatabase.GenerateUniqueAssetPath(assetPath);
+            if (ProtectionLabel.IsAttachedTo(assetPath))
+                DelayedDeprotector.Reserve(copiedPath);
         }
 
         /// <summary>
@@ -74,6 +76,7 @@ namespace VitDeck.AssetGuardian
         /// <returns>アセットを削除したかどうか。</returns>
         static AssetDeleteResult OnWillDeleteAsset(string path, RemoveAssetOptions options)
         {
+
             if (!active)
                 return AssetDeleteResult.DidNotDelete;
 
@@ -95,6 +98,7 @@ namespace VitDeck.AssetGuardian
         /// <returns>アセットを移動したかどうか。</returns>
         static AssetMoveResult OnWillMoveAsset(string sourcePath, string destinationPath)
         {
+
             if (!active)
                 return AssetMoveResult.DidNotMove;
 
@@ -107,5 +111,7 @@ namespace VitDeck.AssetGuardian
             }
             return result;
         }
+
+
     }
 }
