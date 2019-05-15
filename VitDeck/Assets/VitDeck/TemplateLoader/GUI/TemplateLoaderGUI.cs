@@ -48,8 +48,9 @@ namespace VitDeck.TemplateLoader.GUI
 
         private void OnGUI()
         {
+            EditorGUIUtility.labelWidth  = 80;
             EditorGUILayout.LabelField("Template Loader");
-            popupIndex = EditorGUILayout.Popup("Template", popupIndex, templateOptions);
+            popupIndex = EditorGUILayout.Popup("Template:", popupIndex, templateOptions);
             if (UnityEngine.GUI.changed)
             {
                 templateProperty = TemplateLoader.GetTemplateProperty(templateFolders[popupIndex]);
@@ -61,7 +62,7 @@ namespace VitDeck.TemplateLoader.GUI
             EditorGUILayout.LabelField("Description:", templateProperty.description);
             EditorGUILayout.LabelField("Developer:", templateProperty.developer);
             if (!string.IsNullOrEmpty(templateProperty.developerUrl))
-                CustomGUILayout.URLButton(templateProperty.developerUrl, templateProperty.developerUrl);
+                CustomGUILayout.URLButton("Open developer website", templateProperty.developerUrl);
             if (templateProperty.lisenseFile)
             {
                 licenceScroll = EditorGUILayout.BeginScrollView(licenceScroll);
@@ -70,7 +71,7 @@ namespace VitDeck.TemplateLoader.GUI
             }
             //Replace List
             EditorGUILayout.LabelField("", UnityEngine.GUI.skin.horizontalSlider);
-            tmp = EditorGUILayout.TextField("サークルID", tmp);
+            tmp = EditorGUILayout.TextField("サークルID:", tmp);
             if (GUILayout.Button("作成"))
             {
                 messages = new List<Message>();
