@@ -132,7 +132,7 @@ namespace VitDeck.AssetGuardian
             var assets = AssetDatabase.LoadAllAssetsAtPath(path);
             foreach (var a in assets)
             {
-                if (AssetDatabase.IsMainAsset(a))
+                if (a == null || AssetDatabase.IsMainAsset(a))
                     continue;
                 a.hideFlags |= UnityEngine.HideFlags.HideInHierarchy;
             }
