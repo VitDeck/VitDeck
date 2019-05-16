@@ -10,6 +10,10 @@ namespace VitDeck.Main.GUI
     {
         [SerializeField]
         string versionLabel = null;
+        //[SerializeField]
+        string latestVersionLabel = null;
+        [SerializeField]
+        UpdateCheck check = new UpdateCheck();
 
         public static void ShowWindow()
         {
@@ -19,11 +23,19 @@ namespace VitDeck.Main.GUI
         private void OnEnable()
         {
             versionLabel = "Version : " + VitDeck.GetVersion();
+            latestVersionLabel = "Latest Version : " + check.GetLatestVersion();
         }
 
         private void OnGUI()
         {
             EditorGUILayout.LabelField(versionLabel);
+            if(check.IsLatest()) {
+                EditorGUILayout.LabelField("最新のバージョンです");
+            }
+            else{
+                EditorGUILayout.LabelField(latestVersionLabel);
+                GUILayout.Button("Update");
+            }
         }
     }
 }
