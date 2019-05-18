@@ -8,7 +8,7 @@ namespace VitDeck.Main.Tests
         [Test]
         public void TestVitDeckVersion()
         {
-            UpdateCheck check = new UpdateCheck();
+            var check = new UpdateCheck();
             string version = check.GetLatestVersion();
             Assert.That(VersionUtility.IsSemanticVersioning(version), Is.True);
         }
