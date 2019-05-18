@@ -17,7 +17,8 @@ namespace VitDeck.TemplateLoader.Test
             Assert.That(TemplateLoader.Load("Sample_template", "Assets/TestTemplateLoad"), Is.True);
             LogAssert.Expect(LogType.Error, new Regex("^Template load failed.*"));
             TemplateLoader.Load("Sample_template", "Assets/TestTemplateLoad/invalid");
-
+            LogAssert.Expect(LogType.Error, new Regex("^Template load failed.*"));
+            TemplateLoader.Load("Sample_template", "invalid");
             AssetDatabase.DeleteAsset("Assets/{BOOTHID}_{NAME}");
             AssetDatabase.DeleteAsset("Assets/TestTemplateLoad");
         }
