@@ -8,7 +8,7 @@ namespace VitDeck.Main
 	/// <summary>
 	/// VitDeckが最新版になっているかバージョンチェックを行うクラス。
 	/// </summary>
-	public class UpdateCheck // Latest Check
+	public class UpdateCheck
 	{
 		private static readonly string github_api = "https://api.github.com/repos";
 		private static readonly string owner = "/vkettools";
@@ -21,6 +21,7 @@ namespace VitDeck.Main
 		{
 			var localVersion = VitDeck.GetVersion();
 			var latestVersion = GetLatestVersion();
+
 			return string.Equals(localVersion, latestVersion);
 		}
 
@@ -29,8 +30,7 @@ namespace VitDeck.Main
 			var release = ReleaseInfoCoroutine();
 			while (release.MoveNext()) { }
 			var version = release.Current.ToString();
-			
-			Debug.Log("info: " + version);
+
 			return version;
 		}
 

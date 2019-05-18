@@ -19,7 +19,6 @@ namespace VitDeck.Main
             var downloader = DownloadCoroutine(url, package_name);
             while (downloader.MoveNext()) { }
             
-            Debug.Log("Download is complete.");
         }
         
         IEnumerator DownloadCoroutine(string url, string package_name)
@@ -30,7 +29,6 @@ namespace VitDeck.Main
             while (!request.isDone)
             {
                 loading = request.downloadProgress;
-                Debug.Log("Download: " + loading + "%");            
                 yield return null;
             }
 

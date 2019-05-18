@@ -10,10 +10,14 @@ namespace VitDeck.Main.GUI
     {
         [SerializeField]
         string versionLabel = null;
-        //[SerializeField]
-        string latestVersionLabel = null;
         [SerializeField]
+        string latestVersionLabel = null;
+
         UpdateCheck check = new UpdateCheck();
+        PackageDownloader downloader = new PackageDownloader();
+        string test_url = "https://github.com/sktkkoo/any-test-repository/releases/download/v1.0/releasetest-1.0.0.unitypackage";
+        string test_package_name = "releasetest-1.0.0.unitypackage";
+
 
         public static void ShowWindow()
         {
@@ -29,12 +33,19 @@ namespace VitDeck.Main.GUI
         private void OnGUI()
         {
             EditorGUILayout.LabelField(versionLabel);
-            if(check.IsLatest()) {
+
+            if(check.IsLatest())
+            {
                 EditorGUILayout.LabelField("最新のバージョンです");
+                return;
             }
-            else{
-                EditorGUILayout.LabelField(latestVersionLabel);
-                GUILayout.Button("Update");
+
+            EditorGUILayout.LabelField(latestVersionLabel);
+            EditorGUILayout.LabelField("最新のバージョンにアップデートしてください");
+            if(GUILayout.Button("Update"))
+            {
+                downloader.Download(test_url, test_package_name);
+                AssetDatabase.ImportPackage(Application.dataPath + "/" + test_package_name, true);
             }
         }
     }
