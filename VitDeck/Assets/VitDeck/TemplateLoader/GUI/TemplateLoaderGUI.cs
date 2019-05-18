@@ -11,20 +11,15 @@ namespace VitDeck.TemplateLoader.GUI
     public class TemplateLoaderWindow : EditorWindow
     {
         const string prefix = "VitDeck/";
-        List<Message> messages = new List<Message>();
         private static TemplateLoaderWindow window;
-        /// <summary>
-        /// テンプレートフォルダ名の配列
-        /// </summary>
         private static string[] templateFolders = { };
-        /// <summary>
-        /// ポップアップ表示名の配列
-        /// </summary>
         private static string[] templateOptions = { };
         private static int popupIndex = 0;
-        private static TemplateProperty templateProperty;
-
         private static Vector2 licenceScroll;
+        private static TemplateProperty templateProperty;
+        private static List<Message> messages = new List<Message>();
+
+        //todo: #17 https://github.com/vkettools/VitDeck/issues/17
         private static string tmp;
 
         [MenuItem(prefix + "Load Template", priority = 100)]
@@ -48,7 +43,7 @@ namespace VitDeck.TemplateLoader.GUI
 
         private void OnGUI()
         {
-            EditorGUIUtility.labelWidth  = 80;
+            EditorGUIUtility.labelWidth = 80;
             EditorGUILayout.LabelField("Template Loader");
             popupIndex = EditorGUILayout.Popup("Template:", popupIndex, templateOptions);
             if (UnityEngine.GUI.changed)
@@ -71,11 +66,14 @@ namespace VitDeck.TemplateLoader.GUI
             }
             //Replace List
             EditorGUILayout.LabelField("", UnityEngine.GUI.skin.horizontalSlider);
+            //todo: #17 https://github.com/vkettools/VitDeck/issues/17
             tmp = EditorGUILayout.TextField("サークルID:", tmp);
+
             if (GUILayout.Button("作成"))
             {
                 messages = new List<Message>();
-                if (TemplateLoader.Load(templateFolders[popupIndex]))
+                var folderName = templateFolders[popupIndex];
+                if (TemplateLoader.Load(folderName))
                 {
                     messages.Add(new Message(string.Format("テンプレート`{0}`をコピーしました。", templateFolders[popupIndex]), MessageType.Info));
                 }
@@ -84,11 +82,12 @@ namespace VitDeck.TemplateLoader.GUI
                     messages.Add(new Message(string.Format("テンプレート`{0}`のコピーに失敗しました。", templateFolders[popupIndex]), MessageType.Error));
                 }
             }
-            foreach (var message in messages)
+            foreach (var msg in messages)
             {
-                EditorGUILayout.HelpBox(message.message, message.type, true);
+                EditorGUILayout.HelpBox(msg.message, msg.type, true);
             }
         }
+
         /// <summary>
         /// HelpBoxに表示するメッセージ
         /// </summary>
