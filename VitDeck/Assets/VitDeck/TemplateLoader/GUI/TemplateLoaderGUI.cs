@@ -73,13 +73,14 @@ namespace VitDeck.TemplateLoader.GUI
             {
                 messages = new List<Message>();
                 var folderName = templateFolders[popupIndex];
+                var templateName = templateOptions[popupIndex];
                 if (TemplateLoader.Load(folderName))
                 {
-                    messages.Add(new Message(string.Format("テンプレート`{0}`をコピーしました。", templateFolders[popupIndex]), MessageType.Info));
+                    messages.Add(new Message(string.Format("テンプレート`{0}`をコピーしました。", templateName), MessageType.Info));
                 }
                 else
                 {
-                    messages.Add(new Message(string.Format("テンプレート`{0}`のコピーに失敗しました。", templateFolders[popupIndex]), MessageType.Error));
+                    messages.Add(new Message(string.Format("テンプレート`{0}`のコピーに失敗しました。", templateName), MessageType.Error));
                 }
             }
             foreach (var msg in messages)
