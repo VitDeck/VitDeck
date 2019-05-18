@@ -15,8 +15,6 @@ namespace VitDeck.AssetGuardian
     {
         static bool watching;
 
-        private static IEnumerable<Object> reserveAssets;
-
         public static void Reserve(string path)
         {
             if (!watching)
@@ -30,13 +28,14 @@ namespace VitDeck.AssetGuardian
 
             watching = true;
             EditorApplication.update += Update;
+            ProtectedAssetPostProcessor.SetMode(ProtectedAssetPostProcessor.Mode.Unprotect);
         }
 
         static void StopWatching()
         {
             if (!watching)
                 return;
-
+            ProtectedAssetPostProcessor.SetMode(ProtectedAssetPostProcessor.Mode.Reprotect);
             EditorApplication.update -= Update;
             watching = false;
         }
@@ -44,32 +43,6 @@ namespace VitDeck.AssetGuardian
         static void Update()
         {
             StopWatching();
-
-            var assets = reserveAssets.ToArray();
-            reserveAssets = null;
-
-            foreach (var asset in assets)
-            {
-                ProtectionLabel.Detach(asset);
-            }
-
-            Selection.objects = assets;
-            EditorApplication.ExecuteMenuItem("Assets/Reimport");
-        }
-
-        static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
-        {
-            if (!watching)
-                return;
-
-            var instances = importedAssets
-                .Select(path => AssetDatabase.LoadAssetAtPath<Object>(path))
-                .Where(asset => asset != null);
-
-            if (reserveAssets == null)
-                reserveAssets = instances;
-            else
-                reserveAssets = reserveAssets.Concat(instances);
         }
     }
 }

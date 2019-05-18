@@ -83,33 +83,58 @@ namespace VitDeck.AssetGuardian
         }
 
         /// <summary>
-        /// 特定のアセットを保護対象に加える。
+        /// アセットを保護対象に加える。
         /// </summary>
         /// <param name="asset">対象のアセット</param>
         public static void Attach(UnityEngine.Object asset)
         {
-            if (IsProtected(asset))
+            if (IsLabbeled(asset))
                 return;
-
-            var labels = AssetDatabase.GetLabels(asset);
-            labels = labels.Concat(new string[] { readonlyLabel }).ToArray();
-            AssetDatabase.SetLabels(asset, labels);
+            AddReadonlyLabel(asset);
             SetEditable(asset, false);
         }
 
+
         /// <summary>
-        /// 特定のアセットを保護対象から外す。
+        /// アセットの保護状態を修復する。
+        /// </summary>
+        /// <remarks>
+        /// Unityの各種操作をした際にHideFlagsが剥がれてしまう場合があるので、その際に修復を行う。
+        /// </remarks>
+        /// <param name="asset"></param>
+        public static void Repair(UnityEngine.Object asset)
+        {
+            if (IsLabbeled(asset))
+            {
+                SetEditable(asset, false);
+            }
+        }
+
+        /// <summary>
+        /// アセットを保護対象から外す。
         /// </summary>
         /// <param name="asset">対象のアセット</param>
         public static void Detach(UnityEngine.Object asset)
         {
-            if (!IsProtected(asset))
+            if (!IsLabbeled(asset))
                 return;
+            RemoveReadonlyLabel(asset);
+            SetEditable(asset, true);
+        }
 
+
+        private static void AddReadonlyLabel(UnityEngine.Object asset)
+        {
+            var labels = AssetDatabase.GetLabels(asset);
+            labels = labels.Concat(new string[] { readonlyLabel }).ToArray();
+            AssetDatabase.SetLabels(asset, labels);
+        }
+
+        private static void RemoveReadonlyLabel(UnityEngine.Object asset)
+        {
             var labels = AssetDatabase.GetLabels(asset);
             labels = labels.Where(label => label != readonlyLabel).ToArray();
             AssetDatabase.SetLabels(asset, labels);
-            SetEditable(asset, true);
         }
 
         private static void SetEditable(UnityEngine.Object asset, bool editable)
@@ -146,7 +171,7 @@ namespace VitDeck.AssetGuardian
         public static bool IsAttachedTo(string assetPath)
         {
             var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
-            return IsProtected(asset);
+            return IsLabbeled(asset);
         }
 
         /// <summary>
@@ -167,7 +192,7 @@ namespace VitDeck.AssetGuardian
             }
         }
 
-        private static bool IsProtected(UnityEngine.Object asset)
+        private static bool IsLabbeled(UnityEngine.Object asset)
         {
             var labels = AssetDatabase.GetLabels(asset);
 
