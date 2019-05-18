@@ -53,5 +53,26 @@ namespace VitDeck.Utilities
             }
             return names.ToArray();
         }
+
+        /// 指定されたファイル/フォルダ及び、その子のアセットを列挙する。
+        /// </summary>
+        /// <param name="path">アセットもしくはフォルダのパス</param>
+        /// <returns>アセットの列挙可能オブジェクト</returns>
+        public static IEnumerable<UnityEngine.Object> EnumerateAssets(string path)
+        {
+            foreach (var assetPath in IOUtility.EnumerateFileSystemEntries(path))
+            {
+                if (assetPath.EndsWith(".meta"))
+                {
+                    continue;
+                }
+                var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
+                if (asset == null)
+                {
+                    continue;
+                }
+                yield return asset;
+            }
+        }
     }
 }
