@@ -8,7 +8,6 @@ namespace VitDeck.AssetGuardian
 {
     public class ProtectedAssetPostProcessor : AssetPostprocessor
     {
-
         static Mode mode = Mode.Reprotect;
 
         public static void SetMode(Mode mode)

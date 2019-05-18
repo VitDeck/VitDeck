@@ -94,7 +94,6 @@ namespace VitDeck.AssetGuardian
             SetEditable(asset, false);
         }
 
-
         /// <summary>
         /// アセットの保護状態を修復する。
         /// </summary>
@@ -121,7 +120,6 @@ namespace VitDeck.AssetGuardian
             RemoveReadonlyLabel(asset);
             SetEditable(asset, true);
         }
-
 
         private static void AddReadonlyLabel(UnityEngine.Object asset)
         {
