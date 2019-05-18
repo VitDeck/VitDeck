@@ -13,79 +13,96 @@ namespace VitDeck.TemplateLoader
     /// </summary>
     public static class TemplateLoader
     {
+        private const string readonlyLabel = "VitDeck.ReadOnly";
+
         /// <summary>
         /// テンプレートからベースフォルダを複製する。
         /// </summary>
         /// <param name="templateFolderName">テンプレートのルートフォルダ名</param>
-        /// <param name="path">`Assets`から始まる複製先のフォルダパス。省略時はAssets直下に複製される。</param>
+        /// <param name="copyDistinationPath">`Assets`から始まる複製先のフォルダパス。省略時はAssets直下に複製される。</param>
         /// <returns>複製が成功した場合trueを返す。</returns>
-        public static bool Load(string templateFolderName, string path = "Assets")
+        public static bool Load(string templateFolderName, string copyDistinationPath = "Assets")
         {
             const string templateAssetsFolder = "TemplateAssets";
             var separatorChar = Path.AltDirectorySeparatorChar;
             var templateFolderPath = GetTemplatesFolderPath() + separatorChar + templateFolderName;
-            var templateAssetsFolderPath = templateFolderPath + separatorChar + templateAssetsFolder;
-            //テンプレート側のguidをキーとしたアセット辞書
-            var assetDictionary = new Dictionary<string, TemplateAsset>();
+            var copyRootPath = templateFolderPath + separatorChar + templateAssetsFolder;
+  
 
             Debug.Log("Load:" + templateFolderPath);
-            var assetGuids = AssetDatabase.FindAssets("", new string[] { templateAssetsFolderPath });
+            var assetGuids = AssetDatabase.FindAssets("", new string[] { copyRootPath });
             if (assetGuids.Length == 0)
             {
                 return true;
             }
+
             //Create asset dictionary
             Debug.Log("Create asset dictionary");
+            //テンプレート側のguidをキーとしたアセット辞書
+            var assetDictionary = new Dictionary<string, TemplateAsset>();
             foreach (var guid in assetGuids.Distinct())
             {
                 var assetPath = AssetDatabase.GUIDToAssetPath(guid);
-                var destinationPath = CreateDistinationPath(templateAssetsFolderPath, assetPath, path);
+                var destinationPath = CreateDistinationPath(assetPath, copyRootPath, copyDistinationPath);
                 //todo: #17 set replacedDistinationPath
                 assetDictionary.Add(guid, new TemplateAsset(guid, assetPath, destinationPath));
             }
+
             //Check distination path
-            if (IsCopyAssetAlreadyExist(assetDictionary, templateAssetsFolderPath))
+            if (CheckDestinationExists(assetDictionary, copyRootPath))
             {
                 return false;
             }
 
             //Copy Assets
-            Debug.Log("Load template to:" + path);
-            foreach (TemplateAsset ta in assetDictionary.Values)
+            Debug.Log("Load template to:" + copyDistinationPath);
+            foreach (var ta in assetDictionary.Values)
             {
                 //Copy all child files and folders in `templateAssets` folder
-                if (ta.IsAssetInFolder(templateAssetsFolderPath))
+                if (ta.IsAssetInFolder(copyRootPath))
                 {
                     if (!AssetDatabase.CopyAsset(ta.templatePath, ta.destinationPath))
                     {
                         Debug.LogError(string.Format("Template load failed.{0} to {1}", ta.templatePath, ta.destinationPath));
+                        return false;
                     }
                 }
             }
 
-            //Modify copyed assets
-            foreach (TemplateAsset ta in assetDictionary.Values)
+            ModifyCopyedAssets(assetDictionary);
+
+            return true;
+        }
+
+        private static void ModifyCopyedAssets(Dictionary<string, TemplateAsset> assetDictionary)
+        {
+            foreach (var ta in assetDictionary.Values)
             {
                 //Remove readonly label
-                var obj = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(ta.destinationPath);
-                List<string> labels = new List<string>(AssetDatabase.GetLabels(obj));
-                labels.RemoveAll(s => s.Contains("VitDeck.ReadOnly"));
-                AssetDatabase.SetLabels(obj, labels.ToArray());
+                var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(ta.destinationPath);
+                var labels = AssetDatabase.GetLabels(asset);
+                labels = labels.Where(label => label != readonlyLabel).ToArray();
+                AssetDatabase.SetLabels(asset, labels.ToArray());
                 //Delete dummy assets
                 if (ta.IsDummyAsset)
                 {
                     AssetDatabase.DeleteAsset(ta.destinationPath);
                 }
             }
-            //Replace Asset names
-            //todo: #17 https://github.com/vkettools/VitDeck/issues/17
-            //
 
-            //Replace object reference
+            ReplaceObjectReference(assetDictionary);
+
+            //Replace Asset file names
+            //Replace Scene object names
+            //todo: #17 https://github.com/vkettools/VitDeck/issues/17
+        }
+
+        private static void ReplaceObjectReference(Dictionary<string, TemplateAsset> assetDictionary)
+        {
             var replacePairDictionary = CreateReplacePairDictionary(assetDictionary);
             if (replacePairDictionary.Count > 0)
             {
-                foreach (TemplateAsset ta in assetDictionary.Values)
+                foreach (var ta in assetDictionary.Values)
                 {
                     if (ta.IsDummyAsset || ta.IsFolder)
                         continue;
@@ -104,25 +121,24 @@ namespace VitDeck.TemplateLoader
                     sw.Close();
                 }
             }
-            return true;
         }
 
         /// <summary>
         /// コピー先直下にすでに同名アセットがあるかどうか確認する。
         /// </summary>
         /// <param name="assetDictionary">コピー対象のアセット辞書</param>
-        /// <param name="templateAssetsFolderPath">コピーするテンプレートアセットのルートフォルダパス</param>
+        /// <param name="copyRootPath">コピーするテンプレートアセットのルートフォルダパス</param>
         /// <returns>コピーが不可能な場合trueを返す</returns>
-        private static bool IsCopyAssetAlreadyExist(Dictionary<string, TemplateAsset> assetDictionary, string templateAssetsFolderPath)
+        private static bool CheckDestinationExists(Dictionary<string, TemplateAsset> assetDictionary, string copyRootPath)
         {
-            foreach (TemplateAsset ta in assetDictionary.Values)
+            foreach (var ta in assetDictionary.Values)
             {
-                if (ta.IsAssetInFolder(templateAssetsFolderPath))
+                if (ta.IsAssetInFolder(copyRootPath))
                 {
-                    var result = AssetDatabase.ValidateMoveAsset(ta.templatePath, ta.destinationPath);
-                    if (result != "")
+                    var error = AssetDatabase.ValidateMoveAsset(ta.templatePath, ta.destinationPath);
+                    if (!string.IsNullOrEmpty(error))
                     {
-                        Debug.LogError(string.Format("Template load failed. {0}", result));
+                        Debug.LogError(string.Format("Template load failed. {0}", error));
                         return true;
                     }
                 }
@@ -138,22 +154,22 @@ namespace VitDeck.TemplateLoader
         private static Dictionary<string, string> CreateReplacePairDictionary(Dictionary<string, TemplateAsset> assetDictionary)
         {
             var dic = new Dictionary<string, string>();
-            foreach (var t in assetDictionary.Values)
+            foreach (var ta in assetDictionary.Values)
             {
-                if (t.IsDummyAsset || t.IsFolder)
+                if (ta.IsDummyAsset || ta.IsFolder)
                     continue;
-                var searchStr = t.guid;
-                var replaceStr = AssetDatabase.AssetPathToGUID(t.destinationPath);
-                Debug.Log(t.templatePath + " to " + t.destinationPath);
-                Debug.Log("replace:" + searchStr + " : " + replaceStr);
+                var searchStr = ta.guid;
+                var replaceStr = AssetDatabase.AssetPathToGUID(ta.destinationPath);
+                Debug.Log(ta.templatePath + " to " + ta.destinationPath);
+                //Debug.Log("replace:" + searchStr + " : " + replaceStr);
                 dic.Add(searchStr, replaceStr);
             }
             return dic;
         }
 
-        private static string CreateDistinationPath(string templateFolderPath, string assetPath, string targetPath)
+        private static string CreateDistinationPath(string assetPath, string copyRootPath, string targetPath)
         {
-            return assetPath.Replace(templateFolderPath, targetPath);
+            return assetPath.Replace(copyRootPath, targetPath);
         }
 
         /// <summary>
@@ -168,7 +184,7 @@ namespace VitDeck.TemplateLoader
         }
 
         /// <summary>
-        /// テンプレート名を取得する
+        /// テンプレート名を配列で取得する。
         /// </summary>
         /// <param name="folderNames">フォルダ名の配列</param>
         /// <returns>テンプレート名の配列</returns>
