@@ -28,7 +28,6 @@ namespace VitDeck.TemplateLoader
             var templateFolderPath = GetTemplatesFolderPath() + separatorChar + templateFolderName;
             var copyRootPath = templateFolderPath + separatorChar + templateAssetsFolder;
   
-
             Debug.Log("Load:" + templateFolderPath);
             var assetGuids = AssetDatabase.FindAssets("", new string[] { copyRootPath });
             if (assetGuids.Length == 0)
