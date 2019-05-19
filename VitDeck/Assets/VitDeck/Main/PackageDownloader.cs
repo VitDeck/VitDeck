@@ -14,9 +14,9 @@ namespace VitDeck.Main
     {
         public float loading = 0.0f;
         
-        public void Download(string url, string package_name)
+        public void Download(string download_url, string package_name)
         {
-            var downloader = DownloadCoroutine(url, package_name);
+            var downloader = DownloadCoroutine(download_url, package_name);
             while (downloader.MoveNext()) { }
             
         }
