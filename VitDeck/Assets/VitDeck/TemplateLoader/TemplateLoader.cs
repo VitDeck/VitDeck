@@ -14,20 +14,23 @@ namespace VitDeck.TemplateLoader
     public static class TemplateLoader
     {
         private const string readonlyLabel = "VitDeck.ReadOnly";
+        private const string replceStringFormat = "{{{0}}}";
 
         /// <summary>
         /// テンプレートからベースフォルダを複製する。
         /// </summary>
         /// <param name="templateFolderName">テンプレートのルートフォルダ名</param>
+        /// <param name="replaceLsit">置換情報ID,置換後文字列のペア</param>
         /// <param name="copyDistinationPath">`Assets`から始まる複製先のフォルダパス。省略時はAssets直下に複製される。</param>
         /// <returns>複製が成功した場合trueを返す。</returns>
-        public static bool Load(string templateFolderName, string copyDistinationPath = "Assets")
+        public static bool Load(string templateFolderName, Dictionary<string, string> replaceLsit, string copyDistinationPath = "Assets")
         {
             const string templateAssetsFolder = "TemplateAssets";
             var separatorChar = Path.AltDirectorySeparatorChar;
             var templateFolderPath = GetTemplatesFolderPath() + separatorChar + templateFolderName;
             var copyRootPath = templateFolderPath + separatorChar + templateAssetsFolder;
-  
+            var property = GetTemplateProperty(templateFolderName);
+
             Debug.Log("Load:" + templateFolderPath);
             var assetGuids = AssetDatabase.FindAssets("", new string[] { copyRootPath });
             if (assetGuids.Length == 0)
@@ -43,7 +46,7 @@ namespace VitDeck.TemplateLoader
             {
                 var assetPath = AssetDatabase.GUIDToAssetPath(guid);
                 var destinationPath = CreateDistinationPath(assetPath, copyRootPath, copyDistinationPath);
-                //todo: #17 set replacedDistinationPath
+                var replacedDestinationPath = CreateReplacedDistinationPath(property, destinationPath, replaceLsit);
                 assetDictionary.Add(guid, new TemplateAsset(guid, assetPath, destinationPath));
             }
 
@@ -73,6 +76,8 @@ namespace VitDeck.TemplateLoader
             return true;
         }
 
+
+
         private static void ModifyCopiedAssets(Dictionary<string, TemplateAsset> assetDictionary)
         {
             foreach (var ta in assetDictionary.Values)
@@ -91,8 +96,9 @@ namespace VitDeck.TemplateLoader
 
             ReplaceObjectReference(assetDictionary);
 
-            //Replace Asset file names
             //Replace Scene object names
+
+            //Replace Asset file names
             //todo: #17 https://github.com/vkettools/VitDeck/issues/17
         }
 
@@ -169,6 +175,21 @@ namespace VitDeck.TemplateLoader
         private static string CreateDistinationPath(string assetPath, string copyRootPath, string targetPath)
         {
             return assetPath.Replace(copyRootPath, targetPath);
+        }
+
+        private static string CreateReplacedDistinationPath(TemplateProperty property, string destinationPath, Dictionary<string, string> replaceLsit)
+        {
+            var replacedPath = destinationPath;
+            if (replaceLsit != null)
+            {
+                foreach (var def in property.replaceList)
+                {
+                    var serchStr = string.Format(replceStringFormat, def.searchString);
+                    var replaceStr = replaceLsit.ContainsKey(def.ID) ? replaceLsit[def.ID] : string.Empty;
+                    replacedPath = replacedPath.Replace(serchStr, replaceStr);
+                }
+            }
+            return replacedPath;
         }
 
         /// <summary>

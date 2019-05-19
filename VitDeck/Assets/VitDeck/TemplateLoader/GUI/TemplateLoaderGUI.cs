@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -18,9 +19,7 @@ namespace VitDeck.TemplateLoader.GUI
         private static Vector2 licenceScroll;
         private static TemplateProperty templateProperty;
         private static List<Message> messages = new List<Message>();
-
-        //todo: #17 https://github.com/vkettools/VitDeck/issues/17
-        private static string tmp;
+        private static Dictionary<string, string> replaceStringList = new Dictionary<string, string>();
 
         [MenuItem(prefix + "Load Template", priority = 100)]
         static void Ooen()
@@ -41,11 +40,25 @@ namespace VitDeck.TemplateLoader.GUI
             if (templateFolders.Length > 0)
             {
                 templateProperty = TemplateLoader.GetTemplateProperty(templateFolders[popupIndex]);
+                replaceStringList = CreateReplaceStringList(templateProperty.replaceList);
             }
             else
             {
                 messages.Add(new Message("テンプレートがありません。", MessageType.Warning));
             }
+        }
+
+        private static Dictionary<string, string> CreateReplaceStringList(ReplacementDefinition[] replaceList)
+        {
+            var list = new Dictionary<string, string>();
+            if (replaceList != null)
+            {
+                foreach (var def in replaceList)
+                {
+                    list.Add(def.ID, "");
+                }
+            }
+            return list;
         }
 
         private void OnGUI()
@@ -56,6 +69,7 @@ namespace VitDeck.TemplateLoader.GUI
             if (UnityEngine.GUI.changed)
             {
                 templateProperty = TemplateLoader.GetTemplateProperty(templateFolders[popupIndex]);
+                replaceStringList = CreateReplaceStringList(templateProperty.replaceList);
                 licenceScroll = new Vector2();
                 messages = new List<Message>();
             }
@@ -75,15 +89,20 @@ namespace VitDeck.TemplateLoader.GUI
                 }
                 //Replace List
                 EditorGUILayout.LabelField("", UnityEngine.GUI.skin.horizontalSlider);
-                //todo: #17 https://github.com/vkettools/VitDeck/issues/17
-                tmp = EditorGUILayout.TextField("サークルID:", tmp);
+                if (templateProperty.replaceList != null)
+                {
+                    foreach (var replace in templateProperty.replaceList)
+                    {
+                        replaceStringList[replace.ID] = EditorGUILayout.TextField(replace.label, replaceStringList[replace.ID]);
+                    }
+                }
 
                 if (GUILayout.Button("作成"))
                 {
                     messages = new List<Message>();
                     var folderName = templateFolders[popupIndex];
                     var templateName = templateOptions[popupIndex];
-                    if (TemplateLoader.Load(folderName))
+                    if (TemplateLoader.Load(folderName, replaceStringList))
                     {
                         messages.Add(new Message(string.Format("テンプレート`{0}`をコピーしました。", templateName), MessageType.Info));
                     }
@@ -112,5 +131,6 @@ namespace VitDeck.TemplateLoader.GUI
             public string message;
             public MessageType type;
         }
+
     }
 }

@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
@@ -11,14 +12,14 @@ namespace VitDeck.TemplateLoader.Test
         [Test]
         public void TestLoad()
         {
-            Assert.That(TemplateLoader.Load("Sample_template", "Assets"), Is.True);
-            //todo: #17 https://github.com/vkettools/VitDeck/issues/17
+            var replaceList = new Dictionary<string, string>();
+            Assert.That(TemplateLoader.Load("Sample_template", replaceList, "Assets"), Is.True);
             AssetDatabase.CreateFolder("Assets", "TestTemplateLoad");
-            Assert.That(TemplateLoader.Load("Sample_template", "Assets/TestTemplateLoad"), Is.True);
+            Assert.That(TemplateLoader.Load("Sample_template", replaceList, "Assets/TestTemplateLoad"), Is.True);
             LogAssert.Expect(LogType.Error, new Regex("^Template load failed.*"));
-            TemplateLoader.Load("Sample_template", "Assets/TestTemplateLoad/invalid");
+            TemplateLoader.Load("Sample_template", replaceList, "Assets/TestTemplateLoad/invalid");
             LogAssert.Expect(LogType.Error, new Regex("^Template load failed.*"));
-            TemplateLoader.Load("Sample_template", "invalid");
+            TemplateLoader.Load("Sample_template", replaceList, "invalid");
             AssetDatabase.DeleteAsset("Assets/{BOOTHID}_{NAME}");
             AssetDatabase.DeleteAsset("Assets/TestTemplateLoad");
         }

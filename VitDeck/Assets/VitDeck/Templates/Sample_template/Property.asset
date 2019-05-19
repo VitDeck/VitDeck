@@ -16,3 +16,10 @@ MonoBehaviour:
   lisenseFile: {fileID: 4900000, guid: 2c5e4f38eb7e35447b696a1c5229aaff, type: 3}
   developer: VitDeck
   developerUrl: https://github.com/vkettools/VitDeck
+  replaceList:
+  - ID: BOOTHID
+    searchString: BOOTHID
+    label: "\u30D6\u30FC\u30B9ID"
+  - ID: NAME
+    searchString: NAME
+    label: "\u540D\u524D"
