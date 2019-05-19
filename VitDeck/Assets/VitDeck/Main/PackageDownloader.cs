@@ -28,7 +28,7 @@ namespace VitDeck.Main
 
             while (!request.isDone)
             {
-                loading = request.downloadProgress;
+                Loading = request.downloadProgress;
                 yield return null;
             }
 
