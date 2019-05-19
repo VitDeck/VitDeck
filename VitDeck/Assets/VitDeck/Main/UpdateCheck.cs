@@ -14,26 +14,26 @@ namespace VitDeck.Main
 		public static bool IsLatest()
 		{
 			// テスト用
-			var release_url = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
+			var releaseUrl = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
 
 			var localVersion = VitDeck.GetVersion();
-			var latestVersion = GetLatestVersion(release_url);
+			var latestVersion = GetLatestVersion(releaseUrl);
 
 			return string.Equals(localVersion, latestVersion);
 		}
 
-		public static string GetLatestVersion(string release_url)
+		public static string GetLatestVersion(string releaseUrl)
 		{
-			var release = ReleaseInfoCoroutine(release_url);
+			var release = ReleaseInfoCoroutine(releaseUrl);
 			while (release.MoveNext()) { }
 			var version = release.Current.ToString();
 
 			return version;
 		}
 
-		static IEnumerator ReleaseInfoCoroutine(string release_url)
+		static IEnumerator ReleaseInfoCoroutine(string releaseUrl)
 		{
-			var request = UnityWebRequest.Get(release_url);
+			var request = UnityWebRequest.Get(releaseUrl);
 			request.downloadHandler = new DownloadHandlerBuffer();
 			yield return request.SendWebRequest();
 

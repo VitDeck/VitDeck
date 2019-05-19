@@ -10,14 +10,14 @@ namespace VitDeck.Main
     /// </summary>
     public class Repository
     {
-        private static readonly string owner = "vkettools";
-        private static readonly string repository = "VitDeck";
-        private static readonly string github_url = "https://github.com";
-        private static readonly string github_api = "https://api.github.com/repos/";
+        private static readonly string Owner = "vkettools";
+        private static readonly string RepositoryName = "VitDeck";
+        private static readonly string GithubUrl = "https://github.com";
+        private static readonly string GithubApi = "https://api.github.com/repos/";
                
         public static string GetLatestReleaseURL()
         {
-            return github_api + owner + repository + "/releases/latest";
+            return GithubApi + Owner + RepositoryName + "/releases/latest";
         }
 
         public string GetPackageName(string tag)
@@ -28,9 +28,9 @@ namespace VitDeck.Main
         public string GetDownloadURL(string tag)
         {
             return String.Format("{0}/{1}/{2]/{3}/{4}/{5}",
-                            github_url,
-                            owner,
-                            repository,
+                            GithubUrl,
+                            Owner,
+                            RepositoryName,
                             "releases/download",
                             tag,
                             GetPackageName(tag));

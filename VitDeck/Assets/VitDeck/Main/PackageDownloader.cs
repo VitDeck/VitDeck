@@ -7,23 +7,23 @@ using UnityEditor;
 
 namespace VitDeck.Main
 {
-   	/// <summary>
-	/// unitypackageのダウンロードを行うクラス。
-	/// </summary>
+    /// <summary>
+    /// unitypackageのダウンロードを行うクラス。
+    /// </summary>
     public class PackageDownloader
     {
-        public float loading = 0.0f;
-        
-        public void Download(string download_url, string package_name)
+        public float Loading = 0.0f;
+
+        public void Download(string downloadUrl, string packageName)
         {
-            var downloader = DownloadCoroutine(download_url, package_name);
+            var downloader = DownloadCoroutine(downloadUrl, packageName);
             while (downloader.MoveNext()) { }
-            
+
         }
-        
-        IEnumerator DownloadCoroutine(string download_url, string package_name)
+
+        IEnumerator DownloadCoroutine(string downloadUrl, string packageName)
         {
-            var request = UnityWebRequest.Get(download_url);
+            var request = UnityWebRequest.Get(downloadUrl);
             request.SendWebRequest();
 
             while (!request.isDone)
@@ -38,7 +38,7 @@ namespace VitDeck.Main
             }
             else
             {
-                File.WriteAllBytes(Application.dataPath + "/" + package_name,
+                File.WriteAllBytes(Application.dataPath + "/" + packageName,
                     request.downloadHandler.data);
             }
         }
