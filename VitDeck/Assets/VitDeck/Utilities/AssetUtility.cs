@@ -39,6 +39,21 @@ namespace VitDeck.Utilities
         }
 
         /// <summary>
+        /// GUIDに対応したアセットパスの配列を返す。
+        /// </summary>
+        /// <param name="guids">guidの配列</param>
+        /// <returns>アセットパスの配列</returns>
+        public static string[] GuidsToPaths(string[] guids)
+        {
+            var names = new List<string>();
+            foreach (var guid in guids)
+            {
+                var name = AssetDatabase.GUIDToAssetPath(guid);
+                names.Add(name);
+            }
+            return names.ToArray();
+        }
+
         /// 指定されたファイル/フォルダ及び、その子のアセットを列挙する。
         /// </summary>
         /// <param name="path">アセットもしくはフォルダのパス</param>

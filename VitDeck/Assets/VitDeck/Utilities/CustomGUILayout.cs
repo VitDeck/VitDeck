@@ -20,7 +20,7 @@ namespace VitDeck.Utilities
                 if (_URLButtonImage == null)
                 {
                     string imageFolder = AssetUtility.ImageFolderPath;
-                    _URLButtonImage = AssetDatabase.LoadAssetAtPath<Texture2D>(imageFolder + "/Link_icon.png");
+                    _URLButtonImage = AssetDatabase.LoadAssetAtPath<Texture2D>(imageFolder + "/Link_icon.png") ?? new Texture2D(16, 16);
                 }
                 return _URLButtonImage;
             }
