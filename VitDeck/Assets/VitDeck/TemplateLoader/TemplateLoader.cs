@@ -68,7 +68,7 @@ namespace VitDeck.TemplateLoader
                 }
             }
 
-            ModifyCopyedAssets(assetDictionary);
+            ModifyCopiedAssets(assetDictionary);
 
             return true;
         }
