@@ -11,8 +11,11 @@ namespace VitDeck.Main
 	/// </summary>
 	public static class UpdateCheck
 	{
-		public static bool IsLatest(string release_url)
+		public static bool IsLatest()
 		{
+			// テスト用
+			var release_url = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
+
 			var localVersion = VitDeck.GetVersion();
 			var latestVersion = GetLatestVersion(release_url);
 

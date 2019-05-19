@@ -21,9 +21,9 @@ namespace VitDeck.Main
             
         }
         
-        IEnumerator DownloadCoroutine(string url, string package_name)
+        IEnumerator DownloadCoroutine(string download_url, string package_name)
         {
-            var request = UnityWebRequest.Get(url);
+            var request = UnityWebRequest.Get(download_url);
             request.SendWebRequest();
 
             while (!request.isDone)

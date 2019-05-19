@@ -38,7 +38,7 @@ namespace VitDeck.Main.GUI
         {
             EditorGUILayout.LabelField(versionLabel);
 
-            if(UpdateCheck.IsLatest(release_url))
+            if(UpdateCheck.IsLatest())
             {
                 EditorGUILayout.LabelField("最新のバージョンです");
                 return;
