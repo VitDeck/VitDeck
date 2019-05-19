@@ -33,7 +33,6 @@ namespace VitDeck.TemplateLoader.GUI
         [InitializeOnLoadMethod]
         static void Init()
         {
-            TemplateLoader.GetTemplateFolders();
             templateFolders = TemplateLoader.GetTemplateFolders();
             templateOptions = TemplateLoader.GetTemplateNames(templateFolders);
             popupIndex = 0;
