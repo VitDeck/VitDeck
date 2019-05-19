@@ -38,7 +38,14 @@ namespace VitDeck.TemplateLoader.GUI
             templateOptions = TemplateLoader.GetTemplateNames(templateFolders);
             popupIndex = 0;
             licenceScroll = new Vector2();
-            templateProperty = TemplateLoader.GetTemplateProperty(templateFolders[popupIndex]);
+            if (templateFolders.Length > 0)
+            {
+                templateProperty = TemplateLoader.GetTemplateProperty(templateFolders[popupIndex]);
+            }
+            else
+            {
+                messages.Add(new Message("テンプレートがありません。", MessageType.Warning));
+            }
         }
 
         private void OnGUI()
@@ -52,35 +59,38 @@ namespace VitDeck.TemplateLoader.GUI
                 licenceScroll = new Vector2();
                 messages = new List<Message>();
             }
-            //Template Property
-            EditorGUILayout.LabelField("", UnityEngine.GUI.skin.horizontalSlider);
-            EditorGUILayout.LabelField("Description:", templateProperty.description);
-            EditorGUILayout.LabelField("Developer:", templateProperty.developer);
-            if (!string.IsNullOrEmpty(templateProperty.developerUrl))
-                CustomGUILayout.URLButton("Open developer website", templateProperty.developerUrl);
-            if (templateProperty.lisenseFile)
+            if (templateProperty != null)
             {
-                licenceScroll = EditorGUILayout.BeginScrollView(licenceScroll);
-                GUILayout.TextArea(templateProperty.lisenseFile.text);
-                EditorGUILayout.EndScrollView();
-            }
-            //Replace List
-            EditorGUILayout.LabelField("", UnityEngine.GUI.skin.horizontalSlider);
-            //todo: #17 https://github.com/vkettools/VitDeck/issues/17
-            tmp = EditorGUILayout.TextField("サークルID:", tmp);
-
-            if (GUILayout.Button("作成"))
-            {
-                messages = new List<Message>();
-                var folderName = templateFolders[popupIndex];
-                var templateName = templateOptions[popupIndex];
-                if (TemplateLoader.Load(folderName))
+                //Template Property
+                EditorGUILayout.LabelField("", UnityEngine.GUI.skin.horizontalSlider);
+                EditorGUILayout.LabelField("Description:", templateProperty.description);
+                EditorGUILayout.LabelField("Developer:", templateProperty.developer);
+                if (!string.IsNullOrEmpty(templateProperty.developerUrl))
+                    CustomGUILayout.URLButton("Open developer website", templateProperty.developerUrl);
+                if (templateProperty.lisenseFile)
                 {
-                    messages.Add(new Message(string.Format("テンプレート`{0}`をコピーしました。", templateName), MessageType.Info));
+                    licenceScroll = EditorGUILayout.BeginScrollView(licenceScroll);
+                    GUILayout.TextArea(templateProperty.lisenseFile.text);
+                    EditorGUILayout.EndScrollView();
                 }
-                else
+                //Replace List
+                EditorGUILayout.LabelField("", UnityEngine.GUI.skin.horizontalSlider);
+                //todo: #17 https://github.com/vkettools/VitDeck/issues/17
+                tmp = EditorGUILayout.TextField("サークルID:", tmp);
+
+                if (GUILayout.Button("作成"))
                 {
-                    messages.Add(new Message(string.Format("テンプレート`{0}`のコピーに失敗しました。", templateName), MessageType.Error));
+                    messages = new List<Message>();
+                    var folderName = templateFolders[popupIndex];
+                    var templateName = templateOptions[popupIndex];
+                    if (TemplateLoader.Load(folderName))
+                    {
+                        messages.Add(new Message(string.Format("テンプレート`{0}`をコピーしました。", templateName), MessageType.Info));
+                    }
+                    else
+                    {
+                        messages.Add(new Message(string.Format("テンプレート`{0}`のコピーに失敗しました。", templateName), MessageType.Error));
+                    }
                 }
             }
             foreach (var msg in messages)
