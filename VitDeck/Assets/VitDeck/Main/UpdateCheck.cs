@@ -2,41 +2,35 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
+using VitDeck.Utility;
 
 namespace VitDeck.Main
 {
 	/// <summary>
 	/// VitDeckが最新版になっているかバージョンチェックを行うクラス。
 	/// </summary>
-	public class UpdateCheck
+	public static class UpdateCheck
 	{
-		private static readonly string github_api = "https://api.github.com/repos";
-		private static readonly string owner = "/vkettools";
-		private static readonly string repository = "/VitDeck";
-		private static readonly string release_url = github_api + owner + repository + "/releases/latest";
-		// テスト用URL
-		public static string test_url = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
-
-		public bool IsLatest()
+		public static bool IsLatest(string release_url)
 		{
 			var localVersion = VitDeck.GetVersion();
-			var latestVersion = GetLatestVersion();
+			var latestVersion = GetLatestVersion(release_url);
 
 			return string.Equals(localVersion, latestVersion);
 		}
 
-		public string GetLatestVersion()
+		public static string GetLatestVersion(string release_url)
 		{
-			var release = ReleaseInfoCoroutine();
+			var release = ReleaseInfoCoroutine(release_url);
 			while (release.MoveNext()) { }
 			var version = release.Current.ToString();
 
 			return version;
 		}
 
-		IEnumerator ReleaseInfoCoroutine()
+		static IEnumerator ReleaseInfoCoroutine(string release_url)
 		{
-			var request = UnityWebRequest.Get(test_url);
+			var request = UnityWebRequest.Get(release_url);
 			request.downloadHandler = new DownloadHandlerBuffer();
 			yield return request.SendWebRequest();
 

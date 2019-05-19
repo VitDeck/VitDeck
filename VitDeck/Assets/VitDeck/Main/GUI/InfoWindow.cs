@@ -12,12 +12,15 @@ namespace VitDeck.Main.GUI
         string versionLabel = null;
         [SerializeField]
         string latestVersionLabel = null;
+        [SerializeField]
+        string tag = null;
 
-        UpdateCheck check = new UpdateCheck();
         PackageDownloader downloader = new PackageDownloader();
-        string test_url = "https://github.com/sktkkoo/any-test-repository/releases/download/v1.0/releasetest-1.0.0.unitypackage";
-        string test_package_name = "releasetest-1.0.0.unitypackage";
 
+        // テスト用
+        string release_url = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
+        string download_url = "https://github.com/sktkkoo/any-test-repository/releases/download/v1.0/releasetest-1.0.0.unitypackage";
+        string package_name = "releasetest-1.0.0.unitypackage";
 
         public static void ShowWindow()
         {
@@ -26,15 +29,16 @@ namespace VitDeck.Main.GUI
 
         private void OnEnable()
         {
+            tag = UpdateCheck.GetLatestVersion(release_url);
             versionLabel = "Version : " + VitDeck.GetVersion();
-            latestVersionLabel = "Latest Version : " + check.GetLatestVersion();
+            latestVersionLabel = "Latest Version : " + tag;
         }
 
         private void OnGUI()
         {
             EditorGUILayout.LabelField(versionLabel);
 
-            if(check.IsLatest())
+            if(UpdateCheck.IsLatest(release_url))
             {
                 EditorGUILayout.LabelField("最新のバージョンです");
                 return;
@@ -44,8 +48,8 @@ namespace VitDeck.Main.GUI
             EditorGUILayout.LabelField("最新のバージョンにアップデートしてください");
             if(GUILayout.Button("Update"))
             {
-                downloader.Download(test_url, test_package_name);
-                AssetDatabase.ImportPackage(Application.dataPath + "/" + test_package_name, true);
+                downloader.Download(download_url, package_name);
+                AssetDatabase.ImportPackage(Application.dataPath + "/" + package_name, true);
             }
         }
     }
