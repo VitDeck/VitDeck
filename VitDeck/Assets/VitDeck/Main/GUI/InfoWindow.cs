@@ -15,12 +15,8 @@ namespace VitDeck.Main.GUI
         [SerializeField]
         string tag = null;
 
-        PackageDownloader downloader = new PackageDownloader();
-
         // テスト用
         string releaseUrl = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
-        string downloadUrl = "https://github.com/sktkkoo/any-test-repository/releases/download/v1.0/releasetest-1.0.0.unitypackage";
-        string packageName = "releasetest-1.0.0.unitypackage";
 
         public static void ShowWindow()
         {
@@ -48,8 +44,7 @@ namespace VitDeck.Main.GUI
             EditorGUILayout.LabelField("最新のバージョンにアップデートしてください");
             if(GUILayout.Button("Update"))
             {
-                downloader.Download(downloadUrl, packageName);
-                AssetDatabase.ImportPackage(Application.dataPath + "/" + packageName, true);
+                UpdateCheck.UpdatePackage();
             }
         }
     }

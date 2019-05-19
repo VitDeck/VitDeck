@@ -11,6 +11,17 @@ namespace VitDeck.Main
 	/// </summary>
 	public static class UpdateCheck
 	{
+		public static readonly string downloadUrl = "https://github.com/sktkkoo/any-test-repository/releases/download/v1.0/releasetest-1.0.0.unitypackage";
+        public static readonly string packageName = "releasetest-1.0.0.unitypackage";
+
+		public static void UpdatePackage()
+		{
+			var downloader = new PackageDownloader();
+            downloader.Download(downloadUrl, packageName);
+            downloader.Import(packageName);
+            downloader.Settlement(packageName);
+		}
+
 		public static bool IsLatest()
 		{
 			// テスト用
