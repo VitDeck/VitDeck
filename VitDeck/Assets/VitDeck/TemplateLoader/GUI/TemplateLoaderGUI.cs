@@ -37,6 +37,7 @@ namespace VitDeck.TemplateLoader.GUI
             templateOptions = TemplateLoader.GetTemplateNames(templateFolders);
             popupIndex = 0;
             licenceScroll = new Vector2();
+            messages = new List<Message>();
             if (templateFolders.Length > 0)
             {
                 templateProperty = TemplateLoader.GetTemplateProperty(templateFolders[popupIndex]);
