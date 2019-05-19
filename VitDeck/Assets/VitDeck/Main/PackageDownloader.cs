@@ -42,6 +42,24 @@ namespace VitDeck.Main
                     request.downloadHandler.data);
             }
         }
-    }
 
+        public void Import(string packageName){
+            AssetDatabase.ImportPackage(Application.dataPath + "/" + packageName, true);
+        }
+
+        public void Settlement(string packageName)
+        {
+            var filePath = Application.dataPath + "/" + packageName;
+            var fileInfo = new FileInfo(filePath);
+
+            if (fileInfo.Exists)
+            {
+                fileInfo.Delete();
+            }
+            else
+            {
+                throw new FileNotFoundException();
+            }
+        }
+    }
 }
