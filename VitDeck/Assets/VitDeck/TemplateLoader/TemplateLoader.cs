@@ -73,7 +73,7 @@ namespace VitDeck.TemplateLoader
             return true;
         }
 
-        private static void ModifyCopyedAssets(Dictionary<string, TemplateAsset> assetDictionary)
+        private static void ModifyCopiedAssets(Dictionary<string, TemplateAsset> assetDictionary)
         {
             foreach (var ta in assetDictionary.Values)
             {
