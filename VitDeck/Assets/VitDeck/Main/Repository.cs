@@ -8,7 +8,7 @@ namespace VitDeck.Main
     /// <summary>
     /// VitDeckのGitHubリポジトリ関連の情報管理クラス。
     /// </summary>
-    public class Repository
+    public static class Repository
     {
         private static readonly string Owner = "vkettools";
         private static readonly string RepositoryName = "VitDeck";
@@ -20,12 +20,12 @@ namespace VitDeck.Main
             return GithubApi + Owner + RepositoryName + "/releases/latest";
         }
 
-        public string GetPackageName(string tag)
+        public static string GetPackageName(string tag)
         {
             return "VitDeck-" + tag + ".unitypackage";
         }
 
-        public string GetDownloadURL(string tag)
+        public static string GetDownloadURL(string tag)
         {
             return String.Format("{0}/{1}/{2]/{3}/{4}/{5}",
                             GithubUrl,
