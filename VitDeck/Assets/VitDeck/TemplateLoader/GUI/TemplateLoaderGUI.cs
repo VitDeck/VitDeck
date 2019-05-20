@@ -96,7 +96,7 @@ namespace VitDeck.TemplateLoader.GUI
                         replaceStringList[replace.ID] = EditorGUILayout.TextField(replace.label, replaceStringList[replace.ID]);
                     }
                 }
-
+                EditorGUI.BeginDisabledGroup(!CheckAllReplaceFieldFilled(replaceStringList));
                 if (GUILayout.Button("作成"))
                 {
                     messages = new List<Message>();
@@ -111,11 +111,22 @@ namespace VitDeck.TemplateLoader.GUI
                         messages.Add(new Message(string.Format("テンプレート`{0}`のコピーに失敗しました。", templateName), MessageType.Error));
                     }
                 }
+                EditorGUI.EndDisabledGroup();
             }
             foreach (var msg in messages)
             {
                 EditorGUILayout.HelpBox(msg.message, msg.type, true);
             }
+        }
+
+        private static bool CheckAllReplaceFieldFilled(Dictionary<string, string> replaceStringList)
+        {
+            foreach (var str in replaceStringList.Values)
+            {
+                if (string.IsNullOrEmpty(str))
+                    return false;
+            }
+            return true;
         }
 
         /// <summary>

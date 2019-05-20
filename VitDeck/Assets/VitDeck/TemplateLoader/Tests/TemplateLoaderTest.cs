@@ -13,6 +13,8 @@ namespace VitDeck.TemplateLoader.Test
         public void TestLoad()
         {
             var replaceList = new Dictionary<string, string>();
+            replaceList.Add("BOOTHID", "id");
+            replaceList.Add("NAME", "name");
             Assert.That(TemplateLoader.Load("Sample_template", replaceList, "Assets"), Is.True);
             AssetDatabase.CreateFolder("Assets", "TestTemplateLoad");
             Assert.That(TemplateLoader.Load("Sample_template", replaceList, "Assets/TestTemplateLoad"), Is.True);
@@ -20,7 +22,7 @@ namespace VitDeck.TemplateLoader.Test
             TemplateLoader.Load("Sample_template", replaceList, "Assets/TestTemplateLoad/invalid");
             LogAssert.Expect(LogType.Error, new Regex("^Template load failed.*"));
             TemplateLoader.Load("Sample_template", replaceList, "invalid");
-            AssetDatabase.DeleteAsset("Assets/{BOOTHID}_{NAME}");
+            AssetDatabase.DeleteAsset("Assets/id_name");
             AssetDatabase.DeleteAsset("Assets/TestTemplateLoad");
         }
         [Test]
