@@ -15,8 +15,7 @@ namespace VitDeck.Main.GUI
         [SerializeField]
         string tag = null;
 
-        // テスト用
-        string releaseUrl = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
+        string releaseUrl = Repository.GetLatestReleaseURL();
 
         public static void ShowWindow()
         {
@@ -35,22 +34,22 @@ namespace VitDeck.Main.GUI
             EditorGUILayout.LabelField(versionLabel);
             EditorGUILayout.LabelField(latestVersionLabel);
 
-            if (UpdateCheck.IsLatest())
-            {
-                EditorGUILayout.LabelField("最新のバージョンです");
-                return;
-            }
-
             if (tag == "None")
             {
                 EditorGUILayout.LabelField("ネットワークに接続できません");
                 return;
             }
 
+            if (UpdateCheck.IsLatest(releaseUrl))
+            {
+                EditorGUILayout.LabelField("最新のバージョンです");
+                return;
+            }
+
             EditorGUILayout.LabelField("最新のバージョンにアップデートしてください");
             if (GUILayout.Button("Update"))
             {
-                UpdateCheck.UpdatePackage();
+                UpdateCheck.UpdatePackage(tag);
             }
         }
     }

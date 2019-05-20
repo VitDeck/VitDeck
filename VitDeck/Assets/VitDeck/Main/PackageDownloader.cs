@@ -16,12 +16,11 @@ namespace VitDeck.Main
 
         public void Download(string downloadUrl, string packageName)
         {
-            var downloader = DownloadCoroutine(downloadUrl, packageName);
+            var downloader = Downloader(downloadUrl, packageName);
             while (downloader.MoveNext()) { }
-
         }
 
-        IEnumerator DownloadCoroutine(string downloadUrl, string packageName)
+        IEnumerator Downloader(string downloadUrl, string packageName)
         {
             using (var request = UnityWebRequest.Get(downloadUrl))
             {

@@ -11,10 +11,10 @@ namespace VitDeck.Main
     /// </summary>
     public static class UpdateCheck
     {
-        public static void UpdatePackage()
+        public static void UpdatePackage(string tag)
         {
-            string downloadUrl = "https://github.com/sktkkoo/any-test-repository/releases/download/v1.0/releasetest-1.0.0.unitypackage";
-            string packageName = "releasetest-1.0.0.unitypackage";
+            string downloadUrl = Repository.GetDownloadURL(tag);
+            string packageName = Repository.GetPackageName(tag);
 
             var downloader = new PackageDownloader();
             downloader.Download(downloadUrl, packageName);
@@ -22,27 +22,24 @@ namespace VitDeck.Main
             downloader.Settlement(packageName);
         }
 
-        public static bool IsLatest()
+        public static bool IsLatest(string releaseUrl)
         {
-            // テスト用
-            var releaseUrl = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
-
-            var localVersion = VitDeck.GetVersion();
-            var latestVersion = GetLatestVersion(releaseUrl);
+            string localVersion = VitDeck.GetVersion();
+            string latestVersion = GetLatestVersion(releaseUrl);
 
             return string.Equals(localVersion, latestVersion);
         }
 
         public static string GetLatestVersion(string releaseUrl)
         {
-            var release = ReleaseInfoCoroutine(releaseUrl);
+            var release = ReleaseInfo(releaseUrl);
             while (release.MoveNext()) { }
             var version = release.Current.ToString();
 
             return version;
         }
 
-        static IEnumerator ReleaseInfoCoroutine(string releaseUrl)
+        static IEnumerator ReleaseInfo(string releaseUrl)
         {
             using (var request = UnityWebRequest.Get(releaseUrl))
             {
@@ -62,14 +59,14 @@ namespace VitDeck.Main
                 else
                 {
                     var text = request.downloadHandler.text;
-                    var info = JsonUtility.FromJson<ReleaseInfo>(text);
+                    var info = JsonUtility.FromJson<Release>(text);
                     yield return info.tag_name;
                 }
             }
         }
 
         [Serializable]
-        public class ReleaseInfo
+        public class Release
         {
             public string tag_name;
         }
