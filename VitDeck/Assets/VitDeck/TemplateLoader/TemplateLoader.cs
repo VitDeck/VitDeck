@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using VitDeck.Utilities;
 
 namespace VitDeck.TemplateLoader
@@ -76,8 +78,6 @@ namespace VitDeck.TemplateLoader
             return true;
         }
 
-
-
         private static void ModifyCopiedAssets(Dictionary<string, TemplateAsset> assetDictionary, TemplateProperty property, Dictionary<string, string> replaceList)
         {
             foreach (var ta in assetDictionary.Values)
@@ -107,10 +107,31 @@ namespace VitDeck.TemplateLoader
         {
             foreach (var ta in assetDictionary.Values)
             {
-                if (AssetDatabase.GetMainAssetTypeAtPath(ta.replacedDestinationPath) == typeof(SceneAsset))
+                if (AssetDatabase.GetMainAssetTypeAtPath(ta.replacedDestinationPath) != typeof(SceneAsset))
+                    continue;
+                var scene = EditorSceneManager.OpenScene(ta.replacedDestinationPath, OpenSceneMode.Additive);
+                foreach (var rootObject in scene.GetRootGameObjects())
                 {
-                    Debug.Log("Scene");
+                    foreach (var t in rootObject.GetComponentsInChildren<Transform>())
+                    {
+                        //Debug.Log(t.gameObject.name);
+                        ReplaceSceneObjectName(t.gameObject, property.replaceList, replaceList);
+                    }
                 }
+                EditorSceneManager.SaveScene(scene);
+                EditorSceneManager.CloseScene(scene, true);
+            }
+        }
+
+        private static void ReplaceSceneObjectName(GameObject gameObject, ReplacementDefinition[] replaceDef, Dictionary<string, string> replaceList)
+        {
+            if (replaceDef == null || replaceList == null || replaceList.Count == 0)
+                return;
+            foreach (var def in replaceDef)
+            {
+                var serchStr = string.Format(replceStringFormat, def.searchString);
+                var replaceStr = replaceList.ContainsKey(def.ID) ? replaceList[def.ID] : string.Empty;
+                gameObject.name = gameObject.name.Replace(serchStr, replaceStr);
             }
         }
 
@@ -133,7 +154,6 @@ namespace VitDeck.TemplateLoader
             foreach (KeyValuePair<string, TemplateAsset> pair in ordered)
             {
                 var ta = pair.Value;
-                // ta.replacedDestinationPath = ReplaceDistinationPath(ta.destinationPath, property, replaceList);
                 //一時パス
                 var before = tempPathDictionary[ta.destinationPath];
                 //最終パス
