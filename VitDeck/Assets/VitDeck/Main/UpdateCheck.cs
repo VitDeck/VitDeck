@@ -57,6 +57,7 @@ namespace VitDeck.Main
                 if (request.isHttpError || request.isNetworkError)
                 {
                     Debug.Log(request.error);
+					yield return "None";
                 }
                 else
                 {

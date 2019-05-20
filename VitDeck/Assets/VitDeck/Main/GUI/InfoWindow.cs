@@ -33,16 +33,22 @@ namespace VitDeck.Main.GUI
         private void OnGUI()
         {
             EditorGUILayout.LabelField(versionLabel);
+            EditorGUILayout.LabelField(latestVersionLabel);
 
-            if(UpdateCheck.IsLatest())
+            if (UpdateCheck.IsLatest())
             {
                 EditorGUILayout.LabelField("最新のバージョンです");
                 return;
             }
 
-            EditorGUILayout.LabelField(latestVersionLabel);
+            if (tag == "None")
+            {
+                EditorGUILayout.LabelField("ネットワークに接続できません");
+                return;
+            }
+
             EditorGUILayout.LabelField("最新のバージョンにアップデートしてください");
-            if(GUILayout.Button("Update"))
+            if (GUILayout.Button("Update"))
             {
                 UpdateCheck.UpdatePackage();
             }
