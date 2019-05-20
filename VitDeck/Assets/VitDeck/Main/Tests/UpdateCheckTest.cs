@@ -5,12 +5,12 @@ namespace VitDeck.Main.Tests
 {
     public class UpdateCheckTest
     {
-        private static readonly string test_url = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
+        private static readonly string testUrl = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
         
         [Test]
         public void TestLatestVersioning()
         {
-            string tag = UpdateCheck.GetLatestVersion(test_url);
+            string tag = UpdateCheck.GetLatestVersion(testUrl);
             Assert.That(VersionUtility.IsSemanticVersioning(tag), Is.True);
             Assert.That(tag == "0.0.0");
         }
