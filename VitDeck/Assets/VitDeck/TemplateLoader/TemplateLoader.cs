@@ -146,7 +146,8 @@ namespace VitDeck.TemplateLoader
                     foreach (var p in ordered)
                     {
                         var tmpPath = tempPathDictionary[p.Value.destinationPath];
-                        if (tmpPath.IndexOf(before) == 0)
+                        if (tmpPath.IndexOf(before) == 0 &&
+                           (tmpPath.Length == before.Length || tmpPath[before.Length] == Path.AltDirectorySeparatorChar))
                         {
                             tempPathDictionary[p.Value.destinationPath] = tmpPath.Replace(before, after);
                         }
