@@ -23,27 +23,30 @@ namespace VitDeck.Main
 
         IEnumerator DownloadCoroutine(string downloadUrl, string packageName)
         {
-            var request = UnityWebRequest.Get(downloadUrl);
-            request.SendWebRequest();
+            using (var request = UnityWebRequest.Get(downloadUrl))
+            {
+                request.SendWebRequest();
 
-            while (!request.isDone)
-            {
-                Loading = request.downloadProgress;
-                yield return null;
-            }
+                while (!request.isDone)
+                {
+                    Loading = request.downloadProgress;
+                    yield return null;
+                }
 
-            if (request.isHttpError || request.isNetworkError)
-            {
-                Debug.Log(request.error);
-            }
-            else
-            {
-                File.WriteAllBytes(Application.dataPath + "/" + packageName,
-                    request.downloadHandler.data);
+                if (request.isHttpError || request.isNetworkError)
+                {
+                    Debug.Log(request.error);
+                }
+                else
+                {
+                    File.WriteAllBytes(Application.dataPath + "/" + packageName,
+                        request.downloadHandler.data);
+                }
             }
         }
 
-        public void Import(string packageName){
+        public void Import(string packageName)
+        {
             AssetDatabase.ImportPackage(Application.dataPath + "/" + packageName, true);
         }
 
