@@ -252,7 +252,7 @@ namespace VitDeck.TemplateLoader
         private static string CreateReplacedDistinationPath(TemplateProperty property, string destinationPath, Dictionary<string, string> replaceLsit)
         {
             var replacedPath = destinationPath;
-            if (replaceLsit != null)
+            if (property.replaceList != null)
             {
                 foreach (var def in property.replaceList)
                 {
