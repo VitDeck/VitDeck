@@ -54,7 +54,14 @@ namespace VitDeck.TemplateLoader.GUI
             {
                 foreach (var def in replaceList)
                 {
-                    list.Add(def.ID, "");
+                    if (!list.ContainsKey(def.ID))
+                    {
+                        list.Add(def.ID, "");
+                    }
+                    else
+                    {
+                        Debug.LogError(string.Format("Replace ListのID:{0}が重複しています。", def.ID));
+                    }
                 }
             }
             return list;
