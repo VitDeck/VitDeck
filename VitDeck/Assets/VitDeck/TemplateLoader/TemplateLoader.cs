@@ -271,7 +271,9 @@ namespace VitDeck.TemplateLoader
         /// <returns>テンプレート名</returns>
         public static string GetTemplateName(string folderName)
         {
-            var name = GetTemplateProperty(folderName).templateName ?? string.Format("No name[{0}]", folderName);
+            var name = GetTemplateProperty(folderName).templateName;
+            if (string.IsNullOrEmpty(name))
+                name = string.Format("No name[{0}]", folderName);
             return name;
         }
 
