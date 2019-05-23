@@ -52,7 +52,9 @@ namespace VitDeck.TemplateLoader
             }
 
             //Check distination path
-            if (CheckDestinationExists(assetDictionary, copyRootPath) || CheckDuplicatePath(assetDictionary))
+            if (CheckDestinationExists(assetDictionary, copyRootPath) ||
+                CheckDuplicatePath(assetDictionary) ||
+                CheckPathLengthLimit(assetDictionary))
             {
                 return false;
             }
@@ -234,6 +236,23 @@ namespace VitDeck.TemplateLoader
             {
                 Debug.Log("重複する作成先パスが存在します。");
                 return true;
+            }
+            return false;
+        }
+
+        private static bool CheckPathLengthLimit(Dictionary<string, TemplateAsset> assetDictionary)
+        {
+            var maxPathLength = 255;
+            //`Assets`フォルダーのフルパス
+            var projectPath = Application.dataPath;
+            foreach (var ta in assetDictionary.Values)
+            {
+                var pathLength = projectPath.Length + ta.replacedDestinationPath.Length - "Assets".Length;
+                if (pathLength > maxPathLength)
+                {
+                    Debug.LogError(string.Format("長すぎるパスが存在します。:{0}", ta.replacedDestinationPath));
+                    return true;
+                }
             }
             return false;
         }
