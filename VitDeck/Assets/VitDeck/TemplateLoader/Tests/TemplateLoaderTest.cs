@@ -22,8 +22,12 @@ namespace VitDeck.TemplateLoader.Test
             TemplateLoader.Load("Sample_template", replaceList, "Assets/TestTemplateLoad/invalid");
             LogAssert.Expect(LogType.Error, new Regex("^Template load failed.*"));
             TemplateLoader.Load("Sample_template", replaceList, "invalid");
-            AssetDatabase.DeleteAsset("Assets/id_name");
-            AssetDatabase.DeleteAsset("Assets/TestTemplateLoad");
+            var invalidReplaceList = new Dictionary<string, string>();
+            invalidReplaceList.Add("BOOTHID", "/");
+            invalidReplaceList.Add("NAME", "test2");
+            AssetDatabase.CreateFolder("Assets", "TestTemplateLoad2");
+            LogAssert.Expect(LogType.Error, new Regex("^入力した文字列に使えない文字が含まれています。.*"));
+            TemplateLoader.Load("Sample_template", invalidReplaceList, "Assets/TestTemplateLoad2");
         }
         [Test]
         public void TestGetTemplateFolders()
@@ -50,6 +54,13 @@ namespace VitDeck.TemplateLoader.Test
             Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").developer, Is.EqualTo("VitDeck"));
             Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").developerUrl, Is.EqualTo("https://github.com/vkettools/VitDeck"));
             Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").lisenseFile.name, Is.EqualTo("LICENSE"));
+        }
+        [TearDown]
+        public void Destoroy()
+        {
+            AssetDatabase.DeleteAsset("Assets/id_name");
+            AssetDatabase.DeleteAsset("Assets/TestTemplateLoad");
+            AssetDatabase.DeleteAsset("Assets/TestTemplateLoad2");
         }
     }
 }

@@ -54,7 +54,8 @@ namespace VitDeck.TemplateLoader
             //Check distination path
             if (CheckDestinationExists(assetDictionary, copyRootPath) ||
                 CheckDuplicatePath(assetDictionary) ||
-                CheckPathLengthLimit(assetDictionary))
+                CheckPathLengthLimit(assetDictionary) ||
+                CheckInvalidReplaceChar(replaceLsit))
             {
                 return false;
             }
@@ -77,6 +78,20 @@ namespace VitDeck.TemplateLoader
             ModifyCopiedAssets(assetDictionary, property, replaceLsit);
 
             return true;
+        }
+
+        private static bool CheckInvalidReplaceChar(Dictionary<string, string> replaceLsit)
+        {
+            char[] invalidChars = Path.GetInvalidFileNameChars();
+            foreach (var str in replaceLsit.Values)
+            {
+                if (str.IndexOfAny(invalidChars) >= 0)
+                {
+                    Debug.LogError(string.Format("入力した文字列に使えない文字が含まれています。{0}", str));
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static void ModifyCopiedAssets(Dictionary<string, TemplateAsset> assetDictionary, TemplateProperty property, Dictionary<string, string> replaceList)
