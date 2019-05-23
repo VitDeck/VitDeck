@@ -14,11 +14,11 @@ namespace VitDeck.Main
         private static readonly string Owner = "vkettools";
         private static readonly string RepositoryName = "VitDeck";
         private static readonly string GithubUrl = "https://github.com";
-        private static readonly string GithubApi = "https://api.github.com/repos/";
+        private static readonly string GithubApi = "https://api.github.com/repos";
 
         public static string GetLatestReleaseURL()
         {
-            return GithubApi + Owner + RepositoryName + "/releases/latest";
+            return GithubApi + "/" + Owner + "/" + RepositoryName + "/releases/latest";
         }
 
         public static string GetPackageName(string tag)
