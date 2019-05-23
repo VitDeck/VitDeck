@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VitDeck.Utility;
 
 namespace VitDeck.Main
 {
@@ -14,7 +15,7 @@ namespace VitDeck.Main
         private static readonly string RepositoryName = "VitDeck";
         private static readonly string GithubUrl = "https://github.com";
         private static readonly string GithubApi = "https://api.github.com/repos/";
-               
+
         public static string GetLatestReleaseURL()
         {
             return GithubApi + Owner + RepositoryName + "/releases/latest";
@@ -22,11 +23,17 @@ namespace VitDeck.Main
 
         public static string GetPackageName(string tag)
         {
+            if (!VersionUtility.IsSemanticVersioning(tag))
+                return null;
+
             return "VitDeck-" + tag + ".unitypackage";
         }
 
         public static string GetDownloadURL(string tag)
         {
+            if (!VersionUtility.IsSemanticVersioning(tag))
+                return null;
+
             return String.Format("{0}/{1}/{2]/{3}/{4}/{5}",
                             GithubUrl,
                             Owner,
