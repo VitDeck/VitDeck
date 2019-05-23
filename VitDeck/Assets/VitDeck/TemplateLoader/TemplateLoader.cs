@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -51,7 +52,7 @@ namespace VitDeck.TemplateLoader
             }
 
             //Check distination path
-            if (CheckDestinationExists(assetDictionary, copyRootPath))
+            if (CheckDestinationExists(assetDictionary, copyRootPath) || CheckDuplicatePath(assetDictionary))
             {
                 return false;
             }
@@ -219,6 +220,20 @@ namespace VitDeck.TemplateLoader
                         return true;
                     }
                 }
+            }
+            return false;
+        }
+
+        private static bool CheckDuplicatePath(Dictionary<string, TemplateAsset> assetDictionary)
+        {
+            var pathList = new List<string>();
+            var assets = assetDictionary.Values;
+            foreach (var asset in assets)
+                pathList.Add(asset.replacedDestinationPath);
+            if (pathList.Count != pathList.Distinct<string>().Count<string>())
+            {
+                Debug.Log("重複する作成先パスが存在します。");
+                return true;
             }
             return false;
         }
