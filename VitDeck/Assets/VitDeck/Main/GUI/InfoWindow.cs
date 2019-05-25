@@ -41,21 +41,18 @@ namespace VitDeck.Main.GUI
             {
                 EditorGUILayout.LabelField("現在、最新のバージョンを取得できません。");
                 EditorGUILayout.LabelField("ネットワーク接続を確認し、しばらく待ってやり直してください。");
-                CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
-                return;
             }
-
-            if (UpdateCheck.IsLatest(releaseUrl))
+            else if (UpdateCheck.IsLatest(releaseUrl))
             {
                 EditorGUILayout.LabelField("最新のバージョンです");
                 CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
-                return;
             }
-
-            EditorGUILayout.LabelField("最新のバージョンにアップデートしてください");
-            if (GUILayout.Button("Update"))
-                UpdateCheck.UpdatePackage(tag);
-            
+            else
+            {
+                EditorGUILayout.LabelField("最新のバージョンにアップデートしてください");
+                if (GUILayout.Button("Update"))
+                    UpdateCheck.UpdatePackage(tag);
+            }
             CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
         }
     }
