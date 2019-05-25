@@ -49,9 +49,7 @@ namespace VitDeck.Main.GUI
 
             EditorGUILayout.LabelField("最新のバージョンにアップデートしてください");
             if (GUILayout.Button("Update"))
-            {
                 UpdateCheck.UpdatePackage(tag);
-            }
         }
     }
 }
