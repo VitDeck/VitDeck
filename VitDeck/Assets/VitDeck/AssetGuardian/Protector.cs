@@ -41,7 +41,7 @@ namespace VitDeck.AssetGuardian
         /// <param name="asset">対象のアセット</param>
         public static void Protect(UnityEngine.Object asset)
         {
-            marker.Protect(asset);
+            marker.Mark(asset);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace VitDeck.AssetGuardian
         /// <param name="asset">対象のアセット</param>
         public static void Unprotect(UnityEngine.Object asset)
         {
-            marker.Unprotect(asset);
+            marker.Unmark(asset);
         }
 
         [InitializeOnLoadMethod]
@@ -78,11 +78,11 @@ namespace VitDeck.AssetGuardian
             {
                 case ProtectionRepairMode.Reprotect:
                     foreach (var asset in importedAssets.LoadAssetFromPath<UnityEngine.Object>())
-                        marker.RepairProtection(asset);
+                        marker.RepairMarking(asset);
                     break;
                 case ProtectionRepairMode.Unprotect:
                     foreach (var asset in importedAssets.LoadAssetFromPath<UnityEngine.Object>())
-                        marker.Unprotect(asset);
+                        marker.Unmark(asset);
                     break;
                 default:
                     break;
@@ -92,7 +92,7 @@ namespace VitDeck.AssetGuardian
         private static void OnAssetWillDuplicate(string assetPath)
         {
             var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
-            if (marker.IsProtected(asset))
+            if (marker.IsMarked(asset))
             {
                 setReprotectModeAfterEditorUpdate.Reserve();
                 SetProtectionRepairMode(ProtectionRepairMode.Unprotect);
@@ -113,7 +113,7 @@ namespace VitDeck.AssetGuardian
             foreach (var path in paths)
             {
                 var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path);
-                if (marker.IsProtected(asset))
+                if (marker.IsMarked(asset))
                 {
                     if (OnSaveCancelled != null)
                         OnSaveCancelled.Invoke(path);
@@ -133,7 +133,7 @@ namespace VitDeck.AssetGuardian
                 return AssetDeleteResult.DidNotDelete;
 
             var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path);
-            var isProtected = marker.IsProtected(asset);
+            var isProtected = marker.IsMarked(asset);
 
             if (isProtected)
             {
@@ -154,7 +154,7 @@ namespace VitDeck.AssetGuardian
                 return AssetMoveResult.DidNotMove;
 
             var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(sourcePath);
-            var isProtected = marker.IsProtected(asset);
+            var isProtected = marker.IsMarked(asset);
 
             if (isProtected)
             {

@@ -32,17 +32,17 @@ namespace VitDeck.AssetGuardian.Tests
 
             var protection = new LabelAndHideFlagProtectionMarker();
 
-            Assert.That(protection.IsProtected(asset), Is.False);
+            Assert.That(protection.IsMarked(asset), Is.False);
 
-            protection.Protect(asset);
-            Assert.That(protection.IsProtected(asset), Is.True);
+            protection.Mark(asset);
+            Assert.That(protection.IsMarked(asset), Is.True);
 
             ReimportAssets(asset);
-            protection.RepairProtection(asset);
-            Assert.That(protection.IsProtected(asset), Is.True);
+            protection.RepairMarking(asset);
+            Assert.That(protection.IsMarked(asset), Is.True);
 
-            protection.Unprotect(asset);
-            Assert.That(protection.IsProtected(asset), Is.False);
+            protection.Unmark(asset);
+            Assert.That(protection.IsMarked(asset), Is.False);
 
             protection.Dispose();
 

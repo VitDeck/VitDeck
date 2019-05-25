@@ -55,7 +55,7 @@ namespace VitDeck.AssetGuardian
         /// アセットを保護対象に加える。
         /// </summary>
         /// <param name="asset">対象のアセット</param>
-        public void Protect(UnityEngine.Object asset)
+        public void Mark(UnityEngine.Object asset)
         {
             AttachStatic(asset);
         }
@@ -64,7 +64,7 @@ namespace VitDeck.AssetGuardian
         /// アセットを保護対象から外す。
         /// </summary>
         /// <param name="asset">対象のアセット</param>
-        public void Unprotect(UnityEngine.Object asset)
+        public void Unmark(UnityEngine.Object asset)
         {
             DetachStatic(asset);
         }
@@ -73,7 +73,7 @@ namespace VitDeck.AssetGuardian
         /// アセットが保護されている場合、保護状態を修復する。
         /// </summary>
         /// <param name="asset"></param>
-        public void RepairProtection(UnityEngine.Object asset)
+        public void RepairMarking(UnityEngine.Object asset)
         {
             RepairStatic(asset);
         }
@@ -83,7 +83,7 @@ namespace VitDeck.AssetGuardian
         /// </summary>
         /// <param name="assetPath">判定するアセットのパス</param>
         /// <returns>保護対象であればtrue、そうでなければfalse。</returns>
-        public bool IsProtected(UnityEngine.Object asset)
+        public bool IsMarked(UnityEngine.Object asset)
         {
             return IsLabbeled(asset);
         }

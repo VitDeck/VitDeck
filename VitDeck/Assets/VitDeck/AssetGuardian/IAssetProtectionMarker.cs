@@ -4,12 +4,12 @@ namespace VitDeck.AssetGuardian
 {
     public interface IAssetProtectionMarker
     {
-        void Protect(Object asset);
+        void Mark(Object asset);
 
-        void Unprotect(Object asset);
+        void Unmark(Object asset);
 
-        void RepairProtection(Object asset);
+        void RepairMarking(Object asset);
 
-        bool IsProtected(Object asset);
+        bool IsMarked(Object asset);
     }
 }
