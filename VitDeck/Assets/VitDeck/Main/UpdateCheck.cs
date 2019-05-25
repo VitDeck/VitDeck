@@ -12,7 +12,6 @@ namespace VitDeck.Main
     {
         public static void UpdatePackage(string tag)
         {
-
             string downloadUrl = Repository.GetDownloadURL(tag);
             string packageName = Repository.GetPackageName(tag);
 
@@ -79,4 +78,3 @@ namespace VitDeck.Main
         }
     }
 }
-
