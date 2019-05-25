@@ -34,7 +34,7 @@ namespace VitDeck.Main
             if (!VersionUtility.IsSemanticVersioning(tag))
                 return null;
 
-            return String.Format("{0}/{1}/{2]/{3}/{4}/{5}",
+            return String.Format("{0}/{1}/{2}/{3}/{4}/{5}",
                             GithubUrl,
                             Owner,
                             RepositoryName,
