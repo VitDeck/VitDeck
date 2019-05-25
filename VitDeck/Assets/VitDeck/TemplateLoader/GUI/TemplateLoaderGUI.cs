@@ -148,6 +148,5 @@ namespace VitDeck.TemplateLoader.GUI
             public string message;
             public MessageType type;
         }
-
     }
 }
