@@ -8,10 +8,10 @@ namespace VitDeck.AssetGuardian
     /// <summary>
     /// UnityEditorのアセットに対する操作をフックし、保護処理を行うクラス。
     /// </summary>
-    public static class ProtectionHandler
+    public static class Protector
     {
         static EditorDelayedAction setReprotectModeAfterEditorUpdate;
-        static LabelAndHideFlagProtectionMarker marker;
+        static IAssetProtectionMarker marker;
 
         private static bool active = true;
 
@@ -20,7 +20,7 @@ namespace VitDeck.AssetGuardian
             Reprotect,
             Unprotect
         }
-        static ProtectionRepairMode protectionRepairMode;
+        private static ProtectionRepairMode protectionRepairMode;
 
         public static event Action<string> OnSaveCancelled;
         public static event Action<string> OnDeleteCancelled;

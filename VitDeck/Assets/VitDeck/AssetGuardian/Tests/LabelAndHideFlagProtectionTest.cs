@@ -14,8 +14,8 @@ namespace VitDeck.AssetGuardian.Tests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            globalHandlerActivationState = ProtectionHandler.Active;
-            ProtectionHandler.Active = false;
+            globalHandlerActivationState = Protector.Active;
+            Protector.Active = false;
 
             var baseFolderGUID = AssetDatabase.CreateFolder("Assets", "TestBaseFolder");
             baseFolderPath = AssetDatabase.GUIDToAssetPath(baseFolderGUID);
@@ -59,7 +59,7 @@ namespace VitDeck.AssetGuardian.Tests
         {
             AssetDatabase.DeleteAsset(baseFolderPath);
 
-            ProtectionHandler.Active = globalHandlerActivationState;
+            Protector.Active = globalHandlerActivationState;
         }
     }
 }
