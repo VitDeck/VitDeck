@@ -35,6 +35,24 @@ namespace VitDeck.AssetGuardian
             set { active = value; }
         }
 
+        /// <summary>
+        /// アセットを保護する。
+        /// </summary>
+        /// <param name="asset">対象のアセット</param>
+        public static void Protect(UnityEngine.Object asset)
+        {
+            marker.Protect(asset);
+        }
+
+        /// <summary>
+        /// アセットの保護を解除する。
+        /// </summary>
+        /// <param name="asset">対象のアセット</param>
+        public static void Unprotect(UnityEngine.Object asset)
+        {
+            marker.Unprotect(asset);
+        }
+
         [InitializeOnLoadMethod]
         private static void Initialize()
         {
