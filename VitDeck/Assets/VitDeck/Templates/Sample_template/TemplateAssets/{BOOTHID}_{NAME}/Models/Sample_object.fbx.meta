@@ -18,7 +18,12 @@ ModelImporter:
     3300002: Booth
     4300000: Booth
     4300002: Base
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Booth_material
+    second: {fileID: 2100000, guid: e9115a14465af3541a37d00fd436469b, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
