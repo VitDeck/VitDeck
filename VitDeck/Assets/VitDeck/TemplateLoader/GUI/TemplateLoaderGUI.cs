@@ -18,9 +18,7 @@ namespace VitDeck.TemplateLoader.GUI
         private static Vector2 licenceScroll;
         private static TemplateProperty templateProperty;
         private static List<Message> messages = new List<Message>();
-
-        //todo: #17 https://github.com/vkettools/VitDeck/issues/17
-        private static string tmp;
+        private static Dictionary<string, string> replaceStringList = new Dictionary<string, string>();
 
         [MenuItem(prefix + "Load Template", priority = 100)]
         static void Ooen()
@@ -41,11 +39,32 @@ namespace VitDeck.TemplateLoader.GUI
             if (templateFolders.Length > 0)
             {
                 templateProperty = TemplateLoader.GetTemplateProperty(templateFolders[popupIndex]);
+                replaceStringList = CreateReplaceStringList(templateProperty.replaceList);
             }
             else
             {
                 messages.Add(new Message("テンプレートがありません。", MessageType.Warning));
             }
+        }
+
+        private static Dictionary<string, string> CreateReplaceStringList(ReplacementDefinition[] replaceList)
+        {
+            var list = new Dictionary<string, string>();
+            if (replaceList != null)
+            {
+                foreach (var def in replaceList)
+                {
+                    if (!list.ContainsKey(def.ID))
+                    {
+                        list.Add(def.ID, "");
+                    }
+                    else
+                    {
+                        Debug.LogError(string.Format("Replace ListのID:{0}が重複しています。", def.ID));
+                    }
+                }
+            }
+            return list;
         }
 
         private void OnGUI()
@@ -56,6 +75,7 @@ namespace VitDeck.TemplateLoader.GUI
             if (UnityEngine.GUI.changed)
             {
                 templateProperty = TemplateLoader.GetTemplateProperty(templateFolders[popupIndex]);
+                replaceStringList = CreateReplaceStringList(templateProperty.replaceList);
                 licenceScroll = new Vector2();
                 messages = new List<Message>();
             }
@@ -75,15 +95,20 @@ namespace VitDeck.TemplateLoader.GUI
                 }
                 //Replace List
                 EditorGUILayout.LabelField("", UnityEngine.GUI.skin.horizontalSlider);
-                //todo: #17 https://github.com/vkettools/VitDeck/issues/17
-                tmp = EditorGUILayout.TextField("サークルID:", tmp);
-
+                if (templateProperty.replaceList != null)
+                {
+                    foreach (var replace in templateProperty.replaceList)
+                    {
+                        replaceStringList[replace.ID] = EditorGUILayout.TextField(replace.label, replaceStringList[replace.ID]);
+                    }
+                }
+                EditorGUI.BeginDisabledGroup(!CheckAllReplaceFieldFilled(replaceStringList));
                 if (GUILayout.Button("作成"))
                 {
                     messages = new List<Message>();
                     var folderName = templateFolders[popupIndex];
                     var templateName = templateOptions[popupIndex];
-                    if (TemplateLoader.Load(folderName))
+                    if (TemplateLoader.Load(folderName, replaceStringList))
                     {
                         messages.Add(new Message(string.Format("テンプレート`{0}`をコピーしました。", templateName), MessageType.Info));
                     }
@@ -92,11 +117,22 @@ namespace VitDeck.TemplateLoader.GUI
                         messages.Add(new Message(string.Format("テンプレート`{0}`のコピーに失敗しました。", templateName), MessageType.Error));
                     }
                 }
+                EditorGUI.EndDisabledGroup();
             }
             foreach (var msg in messages)
             {
                 EditorGUILayout.HelpBox(msg.message, msg.type, true);
             }
+        }
+
+        private static bool CheckAllReplaceFieldFilled(Dictionary<string, string> replaceStringList)
+        {
+            foreach (var str in replaceStringList.Values)
+            {
+                if (string.IsNullOrEmpty(str))
+                    return false;
+            }
+            return true;
         }
 
         /// <summary>

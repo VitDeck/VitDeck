@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using VitDeck.Utilities;
 
@@ -14,20 +15,23 @@ namespace VitDeck.TemplateLoader
     public static class TemplateLoader
     {
         private const string readonlyLabel = "VitDeck.ReadOnly";
+        private const string replceStringFormat = "{{{0}}}";
 
         /// <summary>
         /// テンプレートからベースフォルダを複製する。
         /// </summary>
         /// <param name="templateFolderName">テンプレートのルートフォルダ名</param>
+        /// <param name="replaceLsit">置換情報ID,置換後文字列のペア</param>
         /// <param name="copyDistinationPath">`Assets`から始まる複製先のフォルダパス。省略時はAssets直下に複製される。</param>
         /// <returns>複製が成功した場合trueを返す。</returns>
-        public static bool Load(string templateFolderName, string copyDistinationPath = "Assets")
+        public static bool Load(string templateFolderName, Dictionary<string, string> replaceLsit, string copyDistinationPath = "Assets")
         {
             const string templateAssetsFolder = "TemplateAssets";
             var separatorChar = Path.AltDirectorySeparatorChar;
             var templateFolderPath = GetTemplatesFolderPath() + separatorChar + templateFolderName;
             var copyRootPath = templateFolderPath + separatorChar + templateAssetsFolder;
-  
+            var property = GetTemplateProperty(templateFolderName);
+
             Debug.Log("Load:" + templateFolderPath);
             var assetGuids = AssetDatabase.FindAssets("", new string[] { copyRootPath });
             if (assetGuids.Length == 0)
@@ -43,12 +47,15 @@ namespace VitDeck.TemplateLoader
             {
                 var assetPath = AssetDatabase.GUIDToAssetPath(guid);
                 var destinationPath = CreateDistinationPath(assetPath, copyRootPath, copyDistinationPath);
-                //todo: #17 set replacedDistinationPath
-                assetDictionary.Add(guid, new TemplateAsset(guid, assetPath, destinationPath));
+                var replacedDestinationPath = CreateReplacedDistinationPath(property, destinationPath, replaceLsit);
+                assetDictionary.Add(guid, new TemplateAsset(guid, assetPath, destinationPath, replacedDestinationPath));
             }
 
             //Check distination path
-            if (CheckDestinationExists(assetDictionary, copyRootPath))
+            if (CheckDestinationExists(assetDictionary, copyRootPath) ||
+                CheckDuplicatePath(assetDictionary) ||
+                CheckPathLengthLimit(assetDictionary) ||
+                CheckInvalidReplaceChar(replaceLsit))
             {
                 return false;
             }
@@ -68,12 +75,26 @@ namespace VitDeck.TemplateLoader
                 }
             }
 
-            ModifyCopiedAssets(assetDictionary);
-
+            ModifyCopiedAssets(assetDictionary, property, replaceLsit);
+            AssetDatabase.Refresh();
             return true;
         }
 
-        private static void ModifyCopiedAssets(Dictionary<string, TemplateAsset> assetDictionary)
+        private static bool CheckInvalidReplaceChar(Dictionary<string, string> replaceLsit)
+        {
+            char[] invalidChars = Path.GetInvalidFileNameChars();
+            foreach (var str in replaceLsit.Values)
+            {
+                if (str.IndexOfAny(invalidChars) >= 0)
+                {
+                    Debug.LogError(string.Format("入力した文字列に使えない文字が含まれています。{0}", str));
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static void ModifyCopiedAssets(Dictionary<string, TemplateAsset> assetDictionary, TemplateProperty property, Dictionary<string, string> replaceList)
         {
             foreach (var ta in assetDictionary.Values)
             {
@@ -89,37 +110,121 @@ namespace VitDeck.TemplateLoader
                 }
             }
 
-            ReplaceObjectReference(assetDictionary);
+            ReplaceObjectReference(assetDictionary, property, replaceList);
 
             //Replace Asset file names
+            ReplaceAssetFileName(assetDictionary, property, replaceList);
+
             //Replace Scene object names
-            //todo: #17 https://github.com/vkettools/VitDeck/issues/17
+            ReplaceSceneObjectNames(assetDictionary, property, replaceList);
         }
 
-        private static void ReplaceObjectReference(Dictionary<string, TemplateAsset> assetDictionary)
+        private static void ReplaceSceneObjectNames(Dictionary<string, TemplateAsset> assetDictionary, TemplateProperty property, Dictionary<string, string> replaceList)
         {
-            var replacePairDictionary = CreateReplacePairDictionary(assetDictionary);
-            if (replacePairDictionary.Count > 0)
+            foreach (var ta in assetDictionary.Values)
+            {
+                if (AssetDatabase.GetMainAssetTypeAtPath(ta.replacedDestinationPath) != typeof(SceneAsset))
+                    continue;
+                var scene = EditorSceneManager.OpenScene(ta.replacedDestinationPath, OpenSceneMode.Additive);
+                foreach (var rootObject in scene.GetRootGameObjects())
+                {
+                    foreach (var t in rootObject.GetComponentsInChildren<Transform>())
+                    {
+                        //Debug.Log(t.gameObject.name);
+                        ReplaceSceneObjectName(t.gameObject, property.replaceList, replaceList);
+                    }
+                }
+                EditorSceneManager.SaveScene(scene);
+                EditorSceneManager.CloseScene(scene, true);
+            }
+        }
+
+        private static void ReplaceSceneObjectName(GameObject gameObject, ReplacementDefinition[] replaceDef, Dictionary<string, string> replaceList)
+        {
+            if (replaceDef == null || replaceList == null || replaceList.Count == 0)
+                return;
+            foreach (var def in replaceDef)
+            {
+                var serchStr = string.Format(replceStringFormat, def.searchString);
+                var replaceStr = replaceList.ContainsKey(def.ID) ? replaceList[def.ID] : string.Empty;
+                gameObject.name = gameObject.name.Replace(serchStr, replaceStr);
+            }
+        }
+
+        private static void ReplaceAssetFileName(Dictionary<string, TemplateAsset> assetDictionary, TemplateProperty property, Dictionary<string, string> replaceList)
+        {
+            //置換中一時パスのリスト
+            var tempPathDictionary = new Dictionary<string, string>();
+            foreach (var ta in assetDictionary.Values)
+            {
+                tempPathDictionary.Add(ta.destinationPath, ta.destinationPath);
+            }
+
+            // 置換前のコピー先パス長の昇順で処理
+            IOrderedEnumerable<KeyValuePair<string, TemplateAsset>> ordered =
+                assetDictionary.OrderBy(selector =>
+                {
+                    return selector.Value.destinationPath.Length;
+                });
+
+            foreach (KeyValuePair<string, TemplateAsset> pair in ordered)
+            {
+                var ta = pair.Value;
+                //一時パス
+                var before = tempPathDictionary[ta.destinationPath];
+                //最終パス
+                var after = ta.replacedDestinationPath;
+                AssetDatabase.MoveAsset(before, after);
+                Debug.Log("from:" + ta.destinationPath + " to:" + ta.replacedDestinationPath);
+                //一時パスの置換
+                if (ta.IsFolder)
+                {
+                    foreach (var p in ordered)
+                    {
+                        var tmpPath = tempPathDictionary[p.Value.destinationPath];
+                        if (tmpPath.IndexOf(before) == 0 &&
+                           (tmpPath.Length == before.Length || tmpPath[before.Length] == Path.AltDirectorySeparatorChar))
+                        {
+                            tempPathDictionary[p.Value.destinationPath] = tmpPath.Replace(before, after);
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void ReplaceObjectReference(Dictionary<string, TemplateAsset> assetDictionary, TemplateProperty property, Dictionary<string, string> replaceList)
+        {
+            var replaceGuidPairDictionary = CreateReplaceGuidPairDictionary(assetDictionary);
+            var replaceNamePairDictionary = CreateReplaceNamePairDictionary(property, replaceList);
+            if (replaceGuidPairDictionary.Count > 0)
             {
                 foreach (var ta in assetDictionary.Values)
                 {
-                    if (ta.IsDummyAsset || ta.IsFolder)
-                        continue;
-                    StreamReader sr = new StreamReader(Path.GetFullPath(ta.destinationPath));
-                    string s = sr.ReadToEnd();
-                    sr.Close();
-                    string replaced = s;
-                    foreach (var guid in replacePairDictionary.Keys)
-                    {
-                        replaced = replaced.Replace(guid, replacePairDictionary[guid]);
-                    }
-                    if (s == replaced)
-                        continue;
-                    StreamWriter sw = new StreamWriter(Path.GetFullPath(ta.destinationPath));
-                    sw.Write(replaced);
-                    sw.Close();
+                    IReferenceModifier modifier = BuildReferenceModifier(ta, replaceGuidPairDictionary, replaceNamePairDictionary);
+                    if (modifier != null)
+                        modifier.Modify(ta.destinationPath);
                 }
             }
+        }
+
+        private static IReferenceModifier BuildReferenceModifier(TemplateAsset ta, Dictionary<string, string> replaceGuidPairDictionary, Dictionary<string, string> replaceNamePairDictionary)
+        {
+            if (ta.IsDummyAsset || ta.IsFolder)
+                return null;
+            IReferenceModifier modifier = null;
+            if (AssetDatabase.GetMainAssetTypeAtPath(ta.templatePath) == typeof(AnimationClip))
+            {
+                modifier = new AnimationClipReferenceModifier(replaceNamePairDictionary);
+            }
+            else if(Path.GetExtension(ta.templatePath).Equals(".fbx", StringComparison.OrdinalIgnoreCase))
+            {
+                modifier = new FbxReferenceModifier(replaceGuidPairDictionary);
+            }
+            else
+            {
+                modifier = new GuidReferenceModifier(replaceGuidPairDictionary);
+            }
+            return modifier;
         }
 
         /// <summary>
@@ -145,12 +250,43 @@ namespace VitDeck.TemplateLoader
             return false;
         }
 
+        private static bool CheckDuplicatePath(Dictionary<string, TemplateAsset> assetDictionary)
+        {
+            var pathList = new List<string>();
+            var assets = assetDictionary.Values;
+            foreach (var asset in assets)
+                pathList.Add(asset.replacedDestinationPath);
+            if (pathList.Count != pathList.Distinct<string>().Count<string>())
+            {
+                Debug.Log("重複する作成先パスが存在します。");
+                return true;
+            }
+            return false;
+        }
+
+        private static bool CheckPathLengthLimit(Dictionary<string, TemplateAsset> assetDictionary)
+        {
+            var maxPathLength = 255;
+            //`Assets`フォルダーのフルパス
+            var projectPath = Application.dataPath;
+            foreach (var ta in assetDictionary.Values)
+            {
+                var pathLength = projectPath.Length + ta.replacedDestinationPath.Length - "Assets".Length;
+                if (pathLength > maxPathLength)
+                {
+                    Debug.LogError(string.Format("長すぎるパスが存在します。:{0}", ta.replacedDestinationPath));
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /// <summary>
         /// 置換するGUIDのペア辞書を作成する。
         /// </summary>
         /// <param name="assetDictionary">コピー対象のアセット辞書</param>
         /// <returns>置換前のduid,置換後のguidをペアにした辞書</returns>
-        private static Dictionary<string, string> CreateReplacePairDictionary(Dictionary<string, TemplateAsset> assetDictionary)
+        private static Dictionary<string, string> CreateReplaceGuidPairDictionary(Dictionary<string, TemplateAsset> assetDictionary)
         {
             var dic = new Dictionary<string, string>();
             foreach (var ta in assetDictionary.Values)
@@ -166,9 +302,39 @@ namespace VitDeck.TemplateLoader
             return dic;
         }
 
+        private static Dictionary<string, string> CreateReplaceNamePairDictionary(TemplateProperty property, Dictionary<string, string> replaceList)
+        {
+            var dic = new Dictionary<string, string>();
+            if (property.replaceList != null)
+            {
+                foreach (var def in property.replaceList)
+                {
+                    var serchStr = string.Format(replceStringFormat, def.searchString);
+                    var replaceStr = replaceList.ContainsKey(def.ID) ? replaceList[def.ID] : string.Empty;
+                    dic.Add(serchStr, replaceStr);
+                }
+            }
+            return dic;
+        }
+
         private static string CreateDistinationPath(string assetPath, string copyRootPath, string targetPath)
         {
             return assetPath.Replace(copyRootPath, targetPath);
+        }
+
+        private static string CreateReplacedDistinationPath(TemplateProperty property, string destinationPath, Dictionary<string, string> replaceLsit)
+        {
+            var replacedPath = destinationPath;
+            if (property.replaceList != null)
+            {
+                foreach (var def in property.replaceList)
+                {
+                    var serchStr = string.Format(replceStringFormat, def.searchString);
+                    var replaceStr = replaceLsit.ContainsKey(def.ID) ? replaceLsit[def.ID] : string.Empty;
+                    replacedPath = replacedPath.Replace(serchStr, replaceStr);
+                }
+            }
+            return replacedPath;
         }
 
         /// <summary>
@@ -178,7 +344,9 @@ namespace VitDeck.TemplateLoader
         /// <returns>テンプレート名</returns>
         public static string GetTemplateName(string folderName)
         {
-            var name = GetTemplateProperty(folderName).templateName ?? string.Format("No name[{0}]", folderName);
+            var name = GetTemplateProperty(folderName).templateName;
+            if (string.IsNullOrEmpty(name))
+                name = string.Format("No name[{0}]", folderName);
             return name;
         }
 
@@ -276,11 +444,12 @@ namespace VitDeck.TemplateLoader
         /// </summary>
         private class TemplateAsset
         {
-            public TemplateAsset(string _guid, string _templatePath, string _destinationPath)
+            public TemplateAsset(string _guid, string _templatePath, string _destinationPath, string _replacedDestinationPath)
             {
                 guid = _guid;
                 templatePath = _templatePath;
                 destinationPath = _destinationPath;
+                replacedDestinationPath = _replacedDestinationPath;
             }
             internal bool IsFolder
             {

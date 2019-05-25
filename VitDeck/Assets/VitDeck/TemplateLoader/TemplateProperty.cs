@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace VitDeck.TemplateLoader
@@ -15,5 +16,7 @@ namespace VitDeck.TemplateLoader
         public string developer;
         [SerializeField]
         public string developerUrl;
+        [SerializeField]
+        public ReplacementDefinition[] replaceList;
     }
 }
