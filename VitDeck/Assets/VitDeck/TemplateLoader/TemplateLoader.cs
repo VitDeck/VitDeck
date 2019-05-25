@@ -76,7 +76,7 @@ namespace VitDeck.TemplateLoader
             }
 
             ModifyCopiedAssets(assetDictionary, property, replaceLsit);
-
+            AssetDatabase.Refresh();
             return true;
         }
 
