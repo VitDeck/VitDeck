@@ -34,3 +34,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Templates assets
+VitDeck/Assets/VitDeck/Templates/*
+!Sample_template

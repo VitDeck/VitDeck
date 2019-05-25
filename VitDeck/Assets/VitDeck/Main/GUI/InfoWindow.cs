@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Utilities;
 
 namespace VitDeck.Main.GUI
 {
@@ -16,6 +17,8 @@ namespace VitDeck.Main.GUI
         string tag = null;
 
         string releaseUrl = Repository.GetLatestReleaseURL();
+
+        private GUILayoutOption[] buttonStyle = new GUILayoutOption[] { GUILayout.Width(130) };
 
         public static void ShowWindow()
         {
@@ -36,20 +39,24 @@ namespace VitDeck.Main.GUI
 
             if (tag == "None")
             {
-                EditorGUILayout.LabelField("最新のバージョンを取得できません。");
+                EditorGUILayout.LabelField("現在、最新のバージョンを取得できません。");
                 EditorGUILayout.LabelField("ネットワーク接続を確認し、しばらく待ってやり直してください。");
+                CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
                 return;
             }
 
             if (UpdateCheck.IsLatest(releaseUrl))
             {
                 EditorGUILayout.LabelField("最新のバージョンです");
+                CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
                 return;
             }
 
             EditorGUILayout.LabelField("最新のバージョンにアップデートしてください");
             if (GUILayout.Button("Update"))
                 UpdateCheck.UpdatePackage(tag);
+            
+            CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
         }
     }
 }

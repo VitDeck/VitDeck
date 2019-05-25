@@ -15,12 +15,6 @@ namespace VitDeck.Main.GUI
             // グローバルな設定画面を開く
         }
 
-        [MenuItem(prefix + "Load Template", priority = 100)]
-        static void LoadTemplate()
-        {
-            // TemplateLoaderを開く
-        }
-
         [MenuItem(prefix + "Check Booth", priority = 101)]
         static void CheckBooth()
         {

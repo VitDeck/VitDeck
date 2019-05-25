@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace VitDeck.Utility
+namespace VitDeck.Utilities
 {
     public static class VersionUtility
     {

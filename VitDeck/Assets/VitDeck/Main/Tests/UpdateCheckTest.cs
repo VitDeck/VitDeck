@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using VitDeck.Utility;
+using VitDeck.Utilities;
 
 namespace VitDeck.Main.Tests
 {
