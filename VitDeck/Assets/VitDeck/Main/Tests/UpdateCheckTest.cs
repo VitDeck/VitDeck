@@ -12,7 +12,7 @@ namespace VitDeck.Main.Tests
         {
             string tag = UpdateCheck.GetLatestVersion(testUrl);
             Assert.That(VersionUtility.IsSemanticVersioning(tag), Is.True);
-            Assert.That(tag == "0.0.0");
+            Assert.AreEqual(tag, "0.0.0");
         }
     }
 }

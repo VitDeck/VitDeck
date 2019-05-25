@@ -13,6 +13,7 @@ namespace VitDeck.Main
     public class PackageDownloader
     {
         public float Loading = 0.0f;
+        string DirectoryPath = Application.dataPath;
 
         public void Download(string downloadUrl, string packageName)
         {
@@ -38,7 +39,7 @@ namespace VitDeck.Main
                 }
                 else
                 {
-                    File.WriteAllBytes(Application.dataPath + "/" + packageName,
+                    File.WriteAllBytes(DirectoryPath + "/" + packageName,
                         request.downloadHandler.data);
                 }
             }
@@ -46,21 +47,23 @@ namespace VitDeck.Main
 
         public void Import(string packageName)
         {
-            AssetDatabase.ImportPackage(Application.dataPath + "/" + packageName, true);
+            var filePath = DirectoryPath + "/" + packageName;
+            var fileInfo = new FileInfo(filePath);
+
+            if (fileInfo.Exists)
+            {
+                AssetDatabase.ImportPackage(filePath, true);
+            }
         }
 
         public void Settlement(string packageName)
         {
-            var filePath = Application.dataPath + "/" + packageName;
+            var filePath = DirectoryPath + "/" + packageName;
             var fileInfo = new FileInfo(filePath);
 
             if (fileInfo.Exists)
             {
                 fileInfo.Delete();
-            }
-            else
-            {
-                throw new FileNotFoundException();
             }
         }
     }
