@@ -216,6 +216,10 @@ namespace VitDeck.TemplateLoader
             {
                 modifier = new AnimationClipReferenceModifier(replaceNamePairDictionary);
             }
+            else if(Path.GetExtension(ta.templatePath).Equals(".fbx", StringComparison.OrdinalIgnoreCase))
+            {
+                modifier = new FbxReferenceModifier(replaceGuidPairDictionary);
+            }
             else
             {
                 modifier = new GuidReferenceModifier(replaceGuidPairDictionary);
