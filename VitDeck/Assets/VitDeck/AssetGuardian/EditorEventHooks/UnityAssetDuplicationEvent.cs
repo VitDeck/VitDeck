@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace VitDeck.AssetGuardian
 {
+    /// <summary>
+    /// AssetGuardian内で使う為に、UnityEditor上でアセットの複製コマンドが呼ばれた瞬間をフックする。
+    /// </summary>
     [InitializeOnLoad]
     public static class UnityAssetDuplicationEvent
     {

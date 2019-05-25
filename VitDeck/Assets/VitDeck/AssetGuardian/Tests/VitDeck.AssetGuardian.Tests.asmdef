@@ -1,7 +1,8 @@
 {
     "name": "VitDeck.AssetGuardian.Tests",
     "references": [
-        "VitDeck.AssetGuardian"
+        "VitDeck.AssetGuardian",
+        "VitDeck.Utilities"
     ],
     "includePlatforms": [
         "Editor"

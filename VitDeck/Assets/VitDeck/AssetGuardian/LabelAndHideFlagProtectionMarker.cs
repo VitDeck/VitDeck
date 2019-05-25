@@ -7,19 +7,22 @@ using VitDeck.Utilities;
 namespace VitDeck.AssetGuardian
 {
     /// <summary>
-    /// アセットを保護する/しないを管理する。
+    /// アセットの保護フラグを管理する。
     /// </summary>
-    public static class ProtectionLabel
+    public class LabelAndHideFlagProtectionMarker : IAssetProtectionMarker, IDisposable
     {
         private const string readonlyLabel = "VitDeck.ReadOnly";
 
+        private EditorDelayedAction delayedInitialize;
+
+        //TODO: MenuItemAttributeが付いたデバッグ用関数をリリース前に削除する。
         [MenuItem("Assets/Protect")]
         static void Protect()
         {
             var assets = Selection.objects;
             foreach (var asset in assets)
             {
-                Attach(asset);
+                AttachStatic(asset);
             }
         }
 
@@ -29,56 +32,22 @@ namespace VitDeck.AssetGuardian
             var assets = Selection.objects;
             foreach (var asset in assets)
             {
-                Detach(asset);
+                DetachStatic(asset);
             }
         }
 
-        [InitializeOnLoadMethod]
-        private static void Initialize()
+        public LabelAndHideFlagProtectionMarker()
         {
-            // HideFlagsの設定はInitializeOnLoadより後でないと一部のアセットで失敗するので遅延させる。
-            EditorApplication.update += DelayedInitialize;
+            delayedInitialize = new EditorDelayedAction(DelayedInitialize, 0);
+            delayedInitialize.Reserve();
         }
 
-        private static void DelayedInitialize()
+        private void DelayedInitialize()
         {
-            var assets = EnumerateAllAttachedAssets();
+            var assets = EnumerateAllProtectedAssets();
             foreach (var asset in assets)
             {
                 SetEditable(asset, false);
-            }
-            EditorApplication.update -= DelayedInitialize;
-        }
-
-        /// <summary>
-        /// アセット/ディレクトリを保護対象にする。
-        /// </summary>
-        /// <remarks>
-        /// 対象がディレクトリの場合、全ての子を保護対象にします。
-        /// </remarks>
-        /// <param name="path">対象のパス</param>
-        public static void Attach(string path)
-        {
-            var assets = AssetUtility.EnumerateAssets(path);
-            foreach (var asset in assets)
-            {
-                Attach(asset);
-            }
-        }
-
-        /// <summary>
-        /// アセット/ディレクトリを保護対象から外す。
-        /// </summary>
-        /// <remarks>
-        /// 対象がディレクトリの場合、全ての子が保護対象から外れます。
-        /// </remarks>
-        /// <param name="path">対象のパス</param>
-        public static void Detach(string path)
-        {
-            var assets = AssetUtility.EnumerateAssets(path);
-            foreach (var asset in assets)
-            {
-                Detach(asset);
             }
         }
 
@@ -86,7 +55,42 @@ namespace VitDeck.AssetGuardian
         /// アセットを保護対象に加える。
         /// </summary>
         /// <param name="asset">対象のアセット</param>
-        public static void Attach(UnityEngine.Object asset)
+        public void Protect(UnityEngine.Object asset)
+        {
+            AttachStatic(asset);
+        }
+
+        /// <summary>
+        /// アセットを保護対象から外す。
+        /// </summary>
+        /// <param name="asset">対象のアセット</param>
+        public void Unprotect(UnityEngine.Object asset)
+        {
+            DetachStatic(asset);
+        }
+
+        /// <summary>
+        /// アセットが保護されている場合、保護状態を修復する。
+        /// </summary>
+        /// <param name="asset"></param>
+        public void RepairProtection(UnityEngine.Object asset)
+        {
+            RepairStatic(asset);
+        }
+
+        /// <summary>
+        /// アセットが保護対象に含まれているかどうか判定する。
+        /// </summary>
+        /// <param name="assetPath">判定するアセットのパス</param>
+        /// <returns>保護対象であればtrue、そうでなければfalse。</returns>
+        public bool IsProtected(UnityEngine.Object asset)
+        {
+            return IsLabbeled(asset);
+        }
+
+
+
+        private static void AttachStatic(UnityEngine.Object asset)
         {
             if (IsLabbeled(asset))
                 return;
@@ -94,31 +98,20 @@ namespace VitDeck.AssetGuardian
             SetEditable(asset, false);
         }
 
-        /// <summary>
-        /// アセットの保護状態を修復する。
-        /// </summary>
-        /// <remarks>
-        /// Unityの各種操作をした際にHideFlagsが剥がれてしまう場合があるので、その際に修復を行う。
-        /// </remarks>
-        /// <param name="asset"></param>
-        public static void Repair(UnityEngine.Object asset)
-        {
-            if (IsLabbeled(asset))
-            {
-                SetEditable(asset, false);
-            }
-        }
-
-        /// <summary>
-        /// アセットを保護対象から外す。
-        /// </summary>
-        /// <param name="asset">対象のアセット</param>
-        public static void Detach(UnityEngine.Object asset)
+        private static void DetachStatic(UnityEngine.Object asset)
         {
             if (!IsLabbeled(asset))
                 return;
             RemoveReadonlyLabel(asset);
             SetEditable(asset, true);
+        }
+
+        private static void RepairStatic(UnityEngine.Object asset)
+        {
+            if (IsLabbeled(asset))
+            {
+                SetEditable(asset, false);
+            }
         }
 
         private static void AddReadonlyLabel(UnityEngine.Object asset)
@@ -161,22 +154,7 @@ namespace VitDeck.AssetGuardian
             }
         }
 
-        /// <summary>
-        /// パスが保護対象に含まれているかどうか判定する。
-        /// </summary>
-        /// <param name="assetPath">判定するアセットのパス</param>
-        /// <returns>保護対象であればtrue、そうでなければfalse。</returns>
-        public static bool IsAttachedTo(string assetPath)
-        {
-            var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
-            return IsLabbeled(asset);
-        }
-
-        /// <summary>
-        /// 保護対象に登録された全てのアセットを列挙する。
-        /// </summary>
-        /// <returns>保護対象アセットの列挙可能オブジェクト。</returns>
-        public static IEnumerable<UnityEngine.Object> EnumerateAllAttachedAssets()
+        private static IEnumerable<UnityEngine.Object> EnumerateAllProtectedAssets()
         {
             var assetGUIDs = AssetDatabase.FindAssets("l:" + readonlyLabel);
             foreach (var guid in assetGUIDs)
@@ -201,6 +179,15 @@ namespace VitDeck.AssetGuardian
             }
 
             return false;
+        }
+
+        public void Dispose()
+        {
+            if (delayedInitialize != null)
+            {
+                delayedInitialize.Dispose();
+                delayedInitialize = null;
+            }
         }
     }
 }
