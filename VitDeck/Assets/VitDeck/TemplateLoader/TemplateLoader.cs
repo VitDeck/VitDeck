@@ -110,7 +110,7 @@ namespace VitDeck.TemplateLoader
                 }
             }
 
-            ReplaceObjectReference(assetDictionary);
+            ReplaceObjectReference(assetDictionary, property, replaceList);
 
             //Replace Asset file names
             ReplaceAssetFileName(assetDictionary, property, replaceList);
@@ -192,30 +192,35 @@ namespace VitDeck.TemplateLoader
             }
         }
 
-        private static void ReplaceObjectReference(Dictionary<string, TemplateAsset> assetDictionary)
+        private static void ReplaceObjectReference(Dictionary<string, TemplateAsset> assetDictionary, TemplateProperty property, Dictionary<string, string> replaceList)
         {
-            var replacePairDictionary = CreateReplacePairDictionary(assetDictionary);
-            if (replacePairDictionary.Count > 0)
+            var replaceGuidPairDictionary = CreateReplaceGuidPairDictionary(assetDictionary);
+            var replaceNamePairDictionary = CreateReplaceNamePairDictionary(property, replaceList);
+            if (replaceGuidPairDictionary.Count > 0)
             {
                 foreach (var ta in assetDictionary.Values)
                 {
-                    if (ta.IsDummyAsset || ta.IsFolder)
-                        continue;
-                    StreamReader sr = new StreamReader(Path.GetFullPath(ta.destinationPath));
-                    string s = sr.ReadToEnd();
-                    sr.Close();
-                    string replaced = s;
-                    foreach (var guid in replacePairDictionary.Keys)
-                    {
-                        replaced = replaced.Replace(guid, replacePairDictionary[guid]);
-                    }
-                    if (s == replaced)
-                        continue;
-                    StreamWriter sw = new StreamWriter(Path.GetFullPath(ta.destinationPath));
-                    sw.Write(replaced);
-                    sw.Close();
+                    IReferenceModifier modifier = BuildReferenceModifier(ta, replaceGuidPairDictionary, replaceNamePairDictionary);
+                    if (modifier != null)
+                        modifier.Modify(ta.destinationPath);
                 }
             }
+        }
+
+        private static IReferenceModifier BuildReferenceModifier(TemplateAsset ta, Dictionary<string, string> replaceGuidPairDictionary, Dictionary<string, string> replaceNamePairDictionary)
+        {
+            if (ta.IsDummyAsset || ta.IsFolder)
+                return null;
+            IReferenceModifier modifier = null;
+            if (AssetDatabase.GetMainAssetTypeAtPath(ta.templatePath) == typeof(AnimationClip))
+            {
+                modifier = new AnimationClipReferenceModifier(replaceNamePairDictionary);
+            }
+            else
+            {
+                modifier = new GuidReferenceModifier(replaceGuidPairDictionary);
+            }
+            return modifier;
         }
 
         /// <summary>
@@ -277,7 +282,7 @@ namespace VitDeck.TemplateLoader
         /// </summary>
         /// <param name="assetDictionary">コピー対象のアセット辞書</param>
         /// <returns>置換前のduid,置換後のguidをペアにした辞書</returns>
-        private static Dictionary<string, string> CreateReplacePairDictionary(Dictionary<string, TemplateAsset> assetDictionary)
+        private static Dictionary<string, string> CreateReplaceGuidPairDictionary(Dictionary<string, TemplateAsset> assetDictionary)
         {
             var dic = new Dictionary<string, string>();
             foreach (var ta in assetDictionary.Values)
@@ -289,6 +294,21 @@ namespace VitDeck.TemplateLoader
                 Debug.Log(ta.templatePath + " to " + ta.destinationPath);
                 //Debug.Log("replace:" + searchStr + " : " + replaceStr);
                 dic.Add(searchStr, replaceStr);
+            }
+            return dic;
+        }
+
+        private static Dictionary<string, string> CreateReplaceNamePairDictionary(TemplateProperty property, Dictionary<string, string> replaceList)
+        {
+            var dic = new Dictionary<string, string>();
+            if (property.replaceList != null)
+            {
+                foreach (var def in property.replaceList)
+                {
+                    var serchStr = string.Format(replceStringFormat, def.searchString);
+                    var replaceStr = replaceList.ContainsKey(def.ID) ? replaceList[def.ID] : string.Empty;
+                    dic.Add(serchStr, replaceStr);
+                }
             }
             return dic;
         }
