@@ -30,6 +30,26 @@ namespace VitDeck.TemplateLoader.Test
             TemplateLoader.Load("Sample_template", invalidReplaceList, "Assets/TestTemplateLoad2");
         }
         [Test]
+        public void TestFbxReferenceModifier()
+        {
+            var replaceList = new Dictionary<string, string>();
+            replaceList.Add("BOOTHID", "id");
+            replaceList.Add("NAME", "name");
+            AssetDatabase.CreateFolder("Assets", "TestTemplateLoad");
+            Assert.That(TemplateLoader.Load("Sample_template", replaceList, "Assets/TestTemplateLoad"), Is.True);
+            var modelImporter = ModelImporter.GetAtPath("Assets/TestTemplateLoad/id_name/Models/Sample_object.fbx");
+            var map = modelImporter.GetExternalObjectMap();
+            foreach (var pair in map)
+            {
+                if (pair.Value is Material)
+                {
+                    var mat = pair.Value as Material;
+                    var matPath = AssetDatabase.GetAssetPath(mat.GetInstanceID());
+                    Assert.That(matPath, Is.EqualTo("Assets/TestTemplateLoad/id_name/Materials/Sample Material.mat"));
+                }
+            }
+        }
+        [Test]
         public void TestGetTemplateFolders()
         {
             Assert.That(TemplateLoader.GetTemplateFolders().Length, Is.EqualTo(1));
