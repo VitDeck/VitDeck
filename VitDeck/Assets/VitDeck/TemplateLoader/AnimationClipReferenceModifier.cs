@@ -35,7 +35,6 @@ namespace VitDeck.TemplateLoader
                 {
                     if (newPaths[i].Contains(key))
                     {
-                        Debug.Log(binding.path);
                         newPaths[i] = newPaths[i].Replace(key, replaceNamePairDictionary[key]);
                         findFlag = true;
                     }
@@ -43,14 +42,16 @@ namespace VitDeck.TemplateLoader
             }
             if (findFlag)
             {
+                var newClip = new AnimationClip();
+                EditorUtility.CopySerialized(clip, newClip);
+                newClip.ClearCurves();
                 for (int i = 0; i < bindings.Length; i++)
                 {
                     var binding = bindings[i];
                     var curve = AnimationUtility.GetEditorCurve(clip, binding);
-                    Debug.Log(newPaths[i] + " " + binding.propertyName);
-                    AnimationUtility.SetEditorCurve(clip, binding, null);
-                    clip.SetCurve(newPaths[i], binding.type, binding.propertyName, curve);
+                    newClip.SetCurve(newPaths[i], binding.type, binding.propertyName, curve);
                 }
+                AssetDatabase.CreateAsset(newClip, path);
             }
         }
     }
