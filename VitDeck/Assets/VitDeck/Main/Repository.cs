@@ -18,7 +18,11 @@ namespace VitDeck.Main
 
         public static string GetLatestReleaseURL()
         {
-            return GithubApi + "/" + Owner + "/" + RepositoryName + "/releases/latest";
+            return String.Format("{0}/{1}/{2}/{3}", 
+                            GithubApi,
+                            Owner,
+                            RepositoryName,
+                            "releases/latest");
         }
 
         public static string GetPackageName(string tag)
@@ -26,7 +30,7 @@ namespace VitDeck.Main
             if (!VersionUtility.IsSemanticVersioning(tag))
                 return null;
 
-            return "VitDeck-" + tag + ".unitypackage";
+            return String.Format("VitDeck-{0}.unitypackage", tag);
         }
 
         public static string GetDownloadURL(string tag)
