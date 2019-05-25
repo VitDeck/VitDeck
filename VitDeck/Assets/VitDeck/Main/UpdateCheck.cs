@@ -13,6 +13,7 @@ namespace VitDeck.Main
     {
         public static void UpdatePackage(string tag)
         {
+
             string downloadUrl = Repository.GetDownloadURL(tag);
             string packageName = Repository.GetPackageName(tag);
 
@@ -32,11 +33,19 @@ namespace VitDeck.Main
 
         public static string GetLatestVersion(string releaseUrl)
         {
-            var release = ReleaseInfo(releaseUrl);
-            while (release.MoveNext()) { }
-            var version = release.Current.ToString();
-
-            return version;
+            try
+            {
+                var release = ReleaseInfo(releaseUrl);
+                while (release.MoveNext()) { }
+                var version = release.Current.ToString();
+                return version;
+            }
+            catch (NullReferenceException e)
+            {
+                Debug.Log("URL (that can not be got version info): " + releaseUrl);
+                Debug.LogWarning(e);
+                return "None";
+            }
         }
 
         static IEnumerator ReleaseInfo(string releaseUrl)
@@ -54,7 +63,6 @@ namespace VitDeck.Main
                 if (request.isHttpError || request.isNetworkError)
                 {
                     Debug.Log(request.error);
-					yield return "None";
                 }
                 else
                 {

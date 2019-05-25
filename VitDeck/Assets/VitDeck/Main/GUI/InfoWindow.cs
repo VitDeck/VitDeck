@@ -36,7 +36,8 @@ namespace VitDeck.Main.GUI
 
             if (tag == "None")
             {
-                EditorGUILayout.LabelField("ネットワークに接続できません");
+                EditorGUILayout.LabelField("最新のバージョンを取得できません。");
+                EditorGUILayout.LabelField("ネットワーク接続を確認し、しばらく待ってやり直してください。");
                 return;
             }
 
