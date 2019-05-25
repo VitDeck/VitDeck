@@ -13,7 +13,7 @@ namespace VitDeck.Main
     public class PackageDownloader
     {
         public float Loading = 0.0f;
-        string DirectoryPath = Application.dataPath;
+        string DirectoryPath = Path.GetTempPath();
 
         public void Download(string downloadUrl, string packageName)
         {
