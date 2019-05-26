@@ -15,8 +15,14 @@ namespace VitDeck.Main
         private static readonly string RepositoryName = "VitDeck";
         private static readonly string GithubUrl = "https://github.com";
         private static readonly string GithubApi = "https://api.github.com/repos";
+        private static readonly string ReleaseURL = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
 
         public static string GetLatestReleaseURL()
+        {
+            return ReleaseURL;
+        }
+
+        public static string GetReleaseURLByGitHubAPI()
         {
             return String.Format("{0}/{1}/{2}/{3}", 
                             GithubApi,
@@ -27,17 +33,11 @@ namespace VitDeck.Main
 
         public static string GetPackageName(string tag)
         {
-            if (!VersionUtility.IsSemanticVersioning(tag))
-                return null;
-
             return String.Format("VitDeck-{0}.unitypackage", tag);
         }
 
         public static string GetDownloadURL(string tag)
         {
-            if (!VersionUtility.IsSemanticVersioning(tag))
-                return null;
-
             return String.Format("{0}/{1}/{2}/{3}/{4}/{5}",
                             GithubUrl,
                             Owner,
