@@ -1,4 +1,5 @@
-SET BAT_LOG=%~dp0release.log
+setlocal
+set BAT_LOG=%~dp0release.log
 echo Build VitDeck release files. > %BAT_LOG% 2>&1
 echo %date% %time% >> %BAT_LOG% 2>&1
 if "%1"=="" (
@@ -7,22 +8,29 @@ if "%1"=="" (
  set  VERSION=%1
 )
 echo VERSION: %VERSION% >> %BAT_LOG% 2>&1
-set UNITY_PATH="C:\Program Files\Unity\Hub\Editor\2017.4.15f1\Editor\Unity.exe" >> %BAT_LOG% 2>&1
-set LOG_FILE="release-unity.log" >> %BAT_LOG% 2>&1
-set PACKAGE_NAME="VitDeck-%VERSION%.unitypackage" >> %BAT_LOG% 2>&1
-set VITDECK_ROOT="Assets\VitDeck" >> %BAT_LOG% 2>&1
-set RELEASE_PATH="Release\VitDeck" >> %BAT_LOG% 2>&1
+set UNITY_PATH="C:\Program Files\Unity\Hub\Editor\2017.4.15f1\Editor\Unity.exe"
+set LOG_FILE="release-unity.log"
+set PACKAGE_NAME="VitDeck-%VERSION%.unitypackage"
+set VITDECK_ROOT=Assets\VitDeck
+set RELEASE_PATH=Release\VitDeck
 
-@rem Remove Test folder
-del /Q %VITDECK_ROOT%\AssetGuardian\Tests >> %BAT_LOG% 2>&1
-del /Q %VITDECK_ROOT%Exporter\Tests >> %BAT_LOG% 2>&1
-del /Q %VITDECK_ROOT%\Main\Tests >> %BAT_LOG% 2>&1
-del /Q %VITDECK_ROOT%\TemplateLoader\Tests >> %BAT_LOG% 2>&1
-del /Q %VITDECK_ROOT%\Utilities\Tests >> %BAT_LOG% 2>&1
-del /Q %VITDECK_ROOT%\Validator\Tests >> %BAT_LOG% 2>&1
+echo Remove Test folder >> %BAT_LOG% 2>&1
+del /Q VitDeck\%VITDECK_ROOT%\AssetGuardian\Tests
+del /Q VitDeck\%VITDECK_ROOT%\Exporter\Tests
+del /Q VitDeck\%VITDECK_ROOT%\Main\Tests
+del /Q VitDeck\%VITDECK_ROOT%\TemplateLoader\Tests
+del /Q VitDeck\%VITDECK_ROOT%\Utilities\Tests
+del /Q VitDeck\%VITDECK_ROOT%\Validator\Tests
 
-@rem Export unitypackage
+echo Copy documents >> %BAT_LOG% 2>&1
+copy /Y LICENSE VitDeck\%VITDECK_ROOT%\LICENSE.txt >> %BAT_LOG% 2>&1
+copy /Y README.md VitDeck\%VITDECK_ROOT%\README.txt >> %BAT_LOG% 2>&1
+
+
+echo Mount >> %BAT_LOG% 2>&1
 subst Z: . >> %BAT_LOG% 2>&1
+
+echo Export unitypackage >> %BAT_LOG% 2>&1
 %UNITY_PATH%^
  -exportPackage %VITDECK_ROOT% %PACKAGE_NAME%^
  -projectPath "Z:\VitDeck"^
@@ -31,10 +39,9 @@ subst Z: . >> %BAT_LOG% 2>&1
  -logfile %LOG_FILE%^
  -quit
 
-@rem Move to Release folder
+echo Move to Release folder >> %BAT_LOG% 2>&1
 mkdir %RELEASE_PATH% >> %BAT_LOG% 2>&1
 move .\VitDeck\%PACKAGE_NAME% %RELEASE_PATH% >> %BAT_LOG% 2>&1
-copy /Y LICENSE %RELEASE_PATH% >> %BAT_LOG% 2>&1
-copy /Y README.md %RELEASE_PATH% >> %BAT_LOG% 2>&1
-move %RELEASE_PATH%\README.md %RELEASE_PATH%\README.txt >> %BAT_LOG% 2>&1
+
+echo Unmount >> %BAT_LOG% 2>&1
 subst Z: /D
