@@ -1,3 +1,4 @@
+#pragma warning disable SA1402 // FileMayOnlyContainASingleType
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -59,3 +60,4 @@ namespace VitDeck.AssetGuardian.Tests
         }
     }
 }
+#pragma warning restore SA1402 // FileMayOnlyContainASingleType
