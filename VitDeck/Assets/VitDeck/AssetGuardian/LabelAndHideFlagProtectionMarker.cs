@@ -15,27 +15,6 @@ namespace VitDeck.AssetGuardian
 
         private EditorDelayedAction delayedInitialize;
 
-        //TODO: MenuItemAttributeが付いたデバッグ用関数をリリース前に削除する。
-        [MenuItem("Assets/Protect")]
-        static void Protect()
-        {
-            var assets = Selection.objects;
-            foreach (var asset in assets)
-            {
-                AttachStatic(asset);
-            }
-        }
-
-        [MenuItem("Assets/Unprotect")]
-        static void Unprotect()
-        {
-            var assets = Selection.objects;
-            foreach (var asset in assets)
-            {
-                DetachStatic(asset);
-            }
-        }
-
         public LabelAndHideFlagProtectionMarker()
         {
             delayedInitialize = new EditorDelayedAction(DelayedInitialize, 0);
