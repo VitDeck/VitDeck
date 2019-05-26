@@ -22,8 +22,6 @@ namespace VitDeck.AssetGuardian
             {
                 OnImportedPostProcess.Invoke(importedAssets);
             }
-
-            
         }
     }
 }

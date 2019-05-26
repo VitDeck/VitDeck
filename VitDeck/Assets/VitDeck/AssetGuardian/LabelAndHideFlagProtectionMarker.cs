@@ -67,8 +67,6 @@ namespace VitDeck.AssetGuardian
             return IsLabbeled(asset);
         }
 
-
-
         private static void AttachStatic(UnityEngine.Object asset)
         {
             if (IsLabbeled(asset))

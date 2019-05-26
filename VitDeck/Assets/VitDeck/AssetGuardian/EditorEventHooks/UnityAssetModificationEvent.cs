@@ -18,7 +18,6 @@ namespace VitDeck.AssetGuardian
         static List<OnWillDeleteAssetHandler> deleteHandlers = new List<OnWillDeleteAssetHandler>();
         static List<OnWillMoveAssetHandler> moveHandlers = new List<OnWillMoveAssetHandler>();
 
-
         public static void AddSaveHandler(OnWillSaveAssetsHandler handler)
         {
             saveHandlers.Add(handler);
