@@ -1,5 +1,6 @@
 SET BAT_LOG=%~dp0release.log
 echo Build VitDeck release files. > %BAT_LOG% 2>&1
+echo %date% %time% >> %BAT_LOG% 2>&1
 if "%1"=="" (
  set /p VERSION="input VERSION:"
 ) else (
