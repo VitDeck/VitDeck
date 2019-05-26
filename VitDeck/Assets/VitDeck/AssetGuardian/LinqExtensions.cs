@@ -15,20 +15,5 @@ namespace VitDeck.AssetGuardian
             foreach (var path in paths)
                 yield return AssetDatabase.LoadAssetAtPath<T>(path);
         }
-
-        //public static IEnumerable<Object> LoadAssetFromPathWithChildren(this IEnumerable<string> paths)
-        //{
-        //    foreach (var path in paths)
-        //    {
-        //        var assets = AssetDatabase.LoadAllAssetsAtPath(path);
-        //        if (assets == null || assets.Length == 0)
-        //        {
-        //            yield return AssetDatabase.LoadAssetAtPath<Object>(path);
-        //            yield break;
-        //        }
-        //        foreach (var asset in assets)
-        //            yield return asset;
-        //    }
-        //}
     }
 }
