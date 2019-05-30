@@ -67,15 +67,8 @@ namespace VitDeck.AssetGuardian.Tests
             foreach (var instance in allInstances)
             {
                 if (instance == null)
-                    return;
-                try
-                {
-                    Assert.That(instance.hideFlags, Is.EqualTo(hideFlagStore[instance]));
-                }
-                catch (AssertionException)
-                {
-                    throw;
-                }
+                    continue;
+                Assert.That(instance.hideFlags, Is.EqualTo(hideFlagStore[instance]));
             }
 
             marker.Dispose();
