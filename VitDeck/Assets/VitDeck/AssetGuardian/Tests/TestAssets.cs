@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEditor.SceneManagement;
 
 namespace VitDeck.AssetGuardian.Tests
 {
@@ -32,9 +33,9 @@ namespace VitDeck.AssetGuardian.Tests
 
     public class TestFolderAsset : TestAsset
     {
-        public TestFolderAsset()
+        public TestFolderAsset(string parentPath = "Assets")
         {
-            var guid = AssetDatabase.CreateFolder("Assets", "TestFolder");
+            var guid = AssetDatabase.CreateFolder(parentPath, "TestFolder");
             Path = AssetDatabase.GUIDToAssetPath(guid);
             Instance = AssetDatabase.LoadAssetAtPath<DefaultAsset>(Path);
         }
@@ -54,9 +55,34 @@ namespace VitDeck.AssetGuardian.Tests
     {
         public TestMaterialAsset(string parentPath)
         {
-            Path = GeneratePath(parentPath, "TestMaterial.material");
+            Path = GeneratePath(parentPath, "TestMaterial.mat");
             Instance = new Material(Shader.Find("Specular"));
             AssetDatabase.CreateAsset(Instance, Path);
+        }
+    }
+
+    public class TestPrefabAsset : TestAsset
+    {
+        public TestPrefabAsset(string parentPath)
+        {
+            Path = GeneratePath(parentPath, "TestPrefab.prefab");
+
+            var rootGameObject = new GameObject("root");
+
+            var childGameObject = new GameObject("child");
+            childGameObject.transform.SetParent(rootGameObject.transform);
+
+            var grandChildGameObject = new GameObject("grandChild");
+            grandChildGameObject.transform.SetParent(childGameObject.transform);
+
+            var grandChildCanvasGameObject = new GameObject("grandChildCanvas",
+                typeof(RectTransform),
+                typeof(Canvas),
+                typeof(UnityEngine.UI.CanvasScaler),
+                typeof(UnityEngine.UI.GraphicRaycaster));
+            grandChildCanvasGameObject.transform.SetParent(childGameObject.transform);
+
+            Instance = PrefabUtility.CreatePrefab(Path, rootGameObject);
         }
     }
 }

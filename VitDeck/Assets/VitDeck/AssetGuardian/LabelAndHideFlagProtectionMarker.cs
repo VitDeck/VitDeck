@@ -108,14 +108,12 @@ namespace VitDeck.AssetGuardian
         private static void SetEditable(UnityEngine.Object asset, bool editable)
         {
             if (editable)
-                asset.hideFlags &= ~UnityEngine.HideFlags.NotEditable;
-            else
-                asset.hideFlags |= UnityEngine.HideFlags.NotEditable;
-
-            var prefabType = PrefabUtility.GetPrefabType(asset);
-            if (prefabType == PrefabType.Prefab)
             {
-                HideSubAsset(asset);
+                AssetRestorer.Restore(asset);
+            }
+            else
+            {
+                asset.hideFlags |= UnityEngine.HideFlags.NotEditable;
             }
         }
 
