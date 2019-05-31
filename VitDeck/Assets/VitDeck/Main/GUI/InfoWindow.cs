@@ -14,9 +14,9 @@ namespace VitDeck.Main.GUI
         [SerializeField]
         string latestVersionLabel = null;
         [SerializeField]
-        string tag = null;
+        string version = null;
 
-        string releaseUrl = Repository.GetLatestReleaseURL();
+        string releaseURL = LatestRelease.GetReleaseJsonURL();
 
         private GUILayoutOption[] buttonStyle = new GUILayoutOption[] { GUILayout.Width(130) };
 
@@ -27,9 +27,18 @@ namespace VitDeck.Main.GUI
 
         private void OnEnable()
         {
-            tag = UpdateCheck.GetLatestVersion(releaseUrl);
             versionLabel = "Version : " + VitDeck.GetVersion();
-            latestVersionLabel = "Latest Version : " + tag;
+
+            LatestRelease.FetchReleaseInfo(releaseURL);
+            if (LatestRelease.GetVersion() == null)
+            {
+                version = "None";
+            }
+            else
+            {
+                version = LatestRelease.GetVersion();
+            }
+            latestVersionLabel = "Latest Version : " + version;
         }
 
         private void OnGUI()
@@ -37,12 +46,12 @@ namespace VitDeck.Main.GUI
             EditorGUILayout.LabelField(versionLabel);
             EditorGUILayout.LabelField(latestVersionLabel);
 
-            if (tag == "None")
+            if (version == "None")
             {
                 EditorGUILayout.LabelField("現在、最新のバージョンを取得できません。");
                 EditorGUILayout.LabelField("ネットワーク接続を確認し、しばらく待ってやり直してください。");
             }
-            else if (UpdateCheck.IsLatest(releaseUrl))
+            else if (UpdateCheck.IsLatest(releaseURL))
             {
                 EditorGUILayout.LabelField("最新のバージョンです");
                 CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
@@ -51,7 +60,7 @@ namespace VitDeck.Main.GUI
             {
                 EditorGUILayout.LabelField("最新のバージョンにアップデートしてください");
                 if (GUILayout.Button("Update"))
-                    UpdateCheck.UpdatePackage(tag);
+                    UpdateCheck.UpdatePackage(version);
             }
             CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
         }
