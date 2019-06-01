@@ -67,6 +67,5 @@ namespace VitDeck.Main.GUI
                     UpdateCheck.UpdatePackage(version);
             }
         }
-
     }
 }
