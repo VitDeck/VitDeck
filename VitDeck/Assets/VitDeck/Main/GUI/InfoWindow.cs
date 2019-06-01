@@ -16,7 +16,7 @@ namespace VitDeck.Main.GUI
         [SerializeField]
         string version = null;
 
-        string releaseURL = JsonReleaseInfo.GetJsonURL();
+        private static readonly string releaseURL = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
 
         private GUILayoutOption[] buttonStyle = new GUILayoutOption[] { GUILayout.Width(130) };
 
