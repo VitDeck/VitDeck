@@ -7,16 +7,16 @@ using UnityEngine.Networking;
 namespace VitDeck.Main
 {
     /// <summary>
-    /// VitDeckの最新リリース情報を管理するクラス。
+    /// 指定したURLから取得可能なJSON形式のリリース情報を管理するクラス。
     /// <summary>
-    public static class LatestRelease
+    public static class JsonReleaseInfo
     {
         private static string releaseJsonURL = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
         private static string version = null;
         private static string packageName = null;
         private static string downloadUrl = null;
 
-        public static string GetReleaseJsonURL()
+        public static string GetJsonURL()
         {
             return releaseJsonURL;
         }
@@ -36,11 +36,11 @@ namespace VitDeck.Main
             return downloadUrl;
         }
 
-        public static void FetchReleaseInfo(string releaseUrl)
+        public static void FetchInfo(string releaseUrl)
         {
             var release = ReleaseEnumerator(releaseUrl);
             while (release.MoveNext()) { }
-            var info = JsonUtility.FromJson<Release>(release.Current.ToString());
+            var info = JsonUtility.FromJson<ReleaseInfo>(release.Current.ToString());
 
             version = info.version;
             packageName = info.package_name;
@@ -73,7 +73,7 @@ namespace VitDeck.Main
         }
 
         [Serializable]
-        public class Release
+        public class ReleaseInfo
         {
             public string version;
             public string package_name;

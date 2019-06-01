@@ -10,8 +10,8 @@ namespace VitDeck.Main.Tests
         [Test]
         public void TestLatestVersioning()
         {
-            LatestRelease.FetchReleaseInfo(testURL);
-            string version = LatestRelease.GetVersion();
+            JsonReleaseInfo.FetchInfo(testURL);
+            string version = JsonReleaseInfo.GetVersion();
             Assert.That(VersionUtility.IsSemanticVersioning(version), Is.True);
             Assert.That(version, Is.EqualTo("1.0.0"));
         }

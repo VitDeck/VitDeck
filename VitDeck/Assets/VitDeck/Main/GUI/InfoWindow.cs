@@ -16,7 +16,7 @@ namespace VitDeck.Main.GUI
         [SerializeField]
         string version = null;
 
-        string releaseURL = LatestRelease.GetReleaseJsonURL();
+        string releaseURL = JsonReleaseInfo.GetJsonURL();
 
         private GUILayoutOption[] buttonStyle = new GUILayoutOption[] { GUILayout.Width(130) };
 
@@ -29,14 +29,14 @@ namespace VitDeck.Main.GUI
         {
             versionLabel = "Version : " + VitDeck.GetVersion();
 
-            LatestRelease.FetchReleaseInfo(releaseURL);
-            if (LatestRelease.GetVersion() == null)
+            JsonReleaseInfo.FetchInfo(releaseURL);
+            if (JsonReleaseInfo.GetVersion() == null)
             {
                 version = "None";
             }
             else
             {
-                version = LatestRelease.GetVersion();
+                version = JsonReleaseInfo.GetVersion();
             }
             latestVersionLabel = "Latest Version : " + version;
         }
@@ -59,7 +59,6 @@ namespace VitDeck.Main.GUI
             else if (UpdateCheck.IsLatest(releaseURL))
             {
                 EditorGUILayout.LabelField("最新のバージョンです");
-                CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
             }
             else
             {
