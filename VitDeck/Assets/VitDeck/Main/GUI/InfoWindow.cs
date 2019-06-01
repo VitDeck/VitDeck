@@ -45,7 +45,12 @@ namespace VitDeck.Main.GUI
         {
             EditorGUILayout.LabelField(versionLabel);
             EditorGUILayout.LabelField(latestVersionLabel);
+            VersionCheckLabelField();
+            CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
+        }
 
+        private void VersionCheckLabelField()
+        {
             if (version == "None")
             {
                 EditorGUILayout.LabelField("現在、最新のバージョンを取得できません。");
@@ -62,7 +67,7 @@ namespace VitDeck.Main.GUI
                 if (GUILayout.Button("Update"))
                     UpdateCheck.UpdatePackage(version);
             }
-            CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
         }
+
     }
 }

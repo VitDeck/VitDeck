@@ -40,6 +40,11 @@ namespace VitDeck.Main
         {
             var release = ReleaseEnumerator(releaseUrl);
             while (release.MoveNext()) { }
+            var info = JsonUtility.FromJson<Release>(release.Current.ToString());
+
+            version = info.version;
+            packageName = info.package_name;
+            downloadUrl = info.download_url;
         }
 
         static IEnumerator ReleaseEnumerator(string releaseUrl)
@@ -62,11 +67,7 @@ namespace VitDeck.Main
                 else
                 {
                     var text = request.downloadHandler.text;
-                    var info = JsonUtility.FromJson<Release>(text);
-
-                    version = info.version;
-                    packageName = info.package_name;
-                    downloadUrl = info.download_url;
+                    yield return text;
                 }
             }
         }
