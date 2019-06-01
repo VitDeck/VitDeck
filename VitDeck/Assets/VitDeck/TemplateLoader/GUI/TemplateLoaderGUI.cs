@@ -28,7 +28,6 @@ namespace VitDeck.TemplateLoader.GUI
             window.Show();
         }
 
-        [InitializeOnLoadMethod]
         static void Init()
         {
             templateFolders = TemplateLoader.GetTemplateFolders();
