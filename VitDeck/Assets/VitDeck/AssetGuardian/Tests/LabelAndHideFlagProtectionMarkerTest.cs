@@ -1,8 +1,12 @@
 using NUnit.Framework;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.TestTools;
 using VitDeck.Utilities;
 
 namespace VitDeck.AssetGuardian.Tests
@@ -23,11 +27,10 @@ namespace VitDeck.AssetGuardian.Tests
 
         public static object[] SourceOfTestMarking()
         {
-            return new object[]
-            {
-                typeof(TestScriptableObjectAsset),
-                typeof(TestMaterialAsset)
-            };
+            return Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(type => type.IsSubclassOf(typeof(TestAsset)))
+                .ToArray();
         }
 
         [TestCaseSource("SourceOfTestMarking")]
@@ -36,19 +39,37 @@ namespace VitDeck.AssetGuardian.Tests
             ITestAsset asset = (ITestAsset)System.Activator.CreateInstance(assetType, baseFolder.Path);
             var marker = new LabelAndHideFlagProtectionMarker();
 
+            // Get Default HideFlags
+            var allInstances = AssetUtility.LoadAllAssetsWithoutSceneAtPath(asset.Path);
+            var hideFlagStore = new Dictionary<Object, HideFlags>();
+            foreach (var instance in allInstances)
+            {
+                hideFlagStore.Add(instance, instance.hideFlags);
+            }
+
+            // Mark
             marker.Mark(asset.Instance);
             Assert.That(marker.IsMarked(asset.Instance), Is.True);
             Assert.That(asset.Instance.hideFlags &= HideFlags.NotEditable, Is.EqualTo(HideFlags.NotEditable));
             Assert.That(AssetDatabase.GetLabels(asset.Instance).Contains("VitDeck.ReadOnly"), Is.True);
 
+            // Repair
             ReimportAssets(asset.Instance);
             marker.RepairMarking(asset.Instance);
             Assert.That(marker.IsMarked(asset.Instance), Is.True);
 
+            // Unmark
             marker.Unmark(asset.Instance);
             Assert.That(marker.IsMarked(asset.Instance), Is.False);
-            Assert.That(asset.Instance.hideFlags &= HideFlags.NotEditable, Is.EqualTo(HideFlags.None));
             Assert.That(AssetDatabase.GetLabels(asset.Instance).Contains("VitDeck.ReadOnly"), Is.False);
+
+            // Check HideFlags
+            foreach (var instance in allInstances)
+            {
+                if (instance == null)
+                    continue;
+                Assert.That(instance.hideFlags, Is.EqualTo(hideFlagStore[instance]));
+            }
 
             marker.Dispose();
         }
