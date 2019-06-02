@@ -15,12 +15,12 @@ set VITDECK_ROOT=Assets\VitDeck
 set RELEASE_PATH=Release\VitDeck
 
 echo Remove Test folder >> %BAT_LOG% 2>&1
-del /Q VitDeck\%VITDECK_ROOT%\AssetGuardian\Tests
-del /Q VitDeck\%VITDECK_ROOT%\Exporter\Tests
-del /Q VitDeck\%VITDECK_ROOT%\Main\Tests
-del /Q VitDeck\%VITDECK_ROOT%\TemplateLoader\Tests
-del /Q VitDeck\%VITDECK_ROOT%\Utilities\Tests
-del /Q VitDeck\%VITDECK_ROOT%\Validator\Tests
+call :DelFolder "VitDeck\%VITDECK_ROOT%\AssetGuardian\Tests" "%BAT_LOG%"
+call :DelFolder "VitDeck\%VITDECK_ROOT%\Exporter\Tests" "%BAT_LOG%"
+call :DelFolder "VitDeck\%VITDECK_ROOT%\Main\Tests" "%BAT_LOG%"
+call :DelFolder "VitDeck\%VITDECK_ROOT%\TemplateLoader\Tests" "%BAT_LOG%"
+call :DelFolder "VitDeck\%VITDECK_ROOT%\Utilities\Tests" "%BAT_LOG%"
+call :DelFolder "VitDeck\%VITDECK_ROOT%\Validator\Tests" "%BAT_LOG%"
 
 echo Copy documents >> %BAT_LOG% 2>&1
 copy /Y LICENSE VitDeck\%VITDECK_ROOT%\LICENSE.txt >> %BAT_LOG% 2>&1
@@ -45,3 +45,16 @@ move .\VitDeck\%PACKAGE_NAME% %RELEASE_PATH% >> %BAT_LOG% 2>&1
 
 echo Unmount >> %BAT_LOG% 2>&1
 subst Z: /D
+
+exit /b
+
+
+REM Delete folder
+:DelFolder
+rmdir /s /q %1
+if not exist %1 (
+echo Success rmdir /s /q %1 >> %2
+) else (
+echo Error rmdir /s /q %1 >> %2
+)
+exit /b
