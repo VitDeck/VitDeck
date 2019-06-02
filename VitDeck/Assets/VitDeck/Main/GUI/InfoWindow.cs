@@ -14,9 +14,9 @@ namespace VitDeck.Main.GUI
         [SerializeField]
         string latestVersionLabel = null;
         [SerializeField]
-        string tag = null;
+        string version = null;
 
-        string releaseUrl = Repository.GetLatestReleaseURL();
+        private static readonly string releaseURL = JsonReleaseInfo.GetReleaseUrl();
 
         private GUILayoutOption[] buttonStyle = new GUILayoutOption[] { GUILayout.Width(130) };
 
@@ -27,33 +27,45 @@ namespace VitDeck.Main.GUI
 
         private void OnEnable()
         {
-            tag = UpdateCheck.GetLatestVersion(releaseUrl);
             versionLabel = "Version : " + VitDeck.GetVersion();
-            latestVersionLabel = "Latest Version : " + tag;
+
+            JsonReleaseInfo.FetchInfo(releaseURL);
+            if (JsonReleaseInfo.GetVersion() == null)
+            {
+                version = "None";
+            }
+            else
+            {
+                version = JsonReleaseInfo.GetVersion();
+            }
+            latestVersionLabel = "Latest Version : " + version;
         }
 
         private void OnGUI()
         {
             EditorGUILayout.LabelField(versionLabel);
             EditorGUILayout.LabelField(latestVersionLabel);
+            VersionCheckLabelField();
+            CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
+        }
 
-            if (tag == "None")
+        private void VersionCheckLabelField()
+        {
+            if (version == "None")
             {
                 EditorGUILayout.LabelField("現在、最新のバージョンを取得できません。");
                 EditorGUILayout.LabelField("ネットワーク接続を確認し、しばらく待ってやり直してください。");
             }
-            else if (UpdateCheck.IsLatest(releaseUrl))
+            else if (UpdateCheck.IsLatest(releaseURL))
             {
                 EditorGUILayout.LabelField("最新のバージョンです");
-                CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
             }
             else
             {
                 EditorGUILayout.LabelField("最新のバージョンにアップデートしてください");
                 if (GUILayout.Button("Update"))
-                    UpdateCheck.UpdatePackage(tag);
+                    UpdateCheck.UpdatePackage(version);
             }
-            CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
         }
     }
 }
