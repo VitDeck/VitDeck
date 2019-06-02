@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Utilities;
 
 namespace VitDeck.AssetGuardian
 {
@@ -13,7 +14,7 @@ namespace VitDeck.AssetGuardian
     {
         private static readonly Dictionary<AssetTypeIdentifier, IRestorer> restoreTools = new Dictionary<AssetTypeIdentifier, IRestorer>();
 
-        private static readonly DefaultRestorer defaultRestorer = new DefaultRestorer();
+        private static readonly IRestorer defaultRestorer = new SimpleRestorer(HideFlags.None);
 
         static AssetRestorer()
         {
@@ -40,10 +41,28 @@ namespace VitDeck.AssetGuardian
         private static void RegisterAll()
         {
             restoreTools.Add(
-                new AssetTypeIdentifier(typeof(GameObject), PrefabType.Prefab),
-                new PrefabRestorer());
-            restoreTools.Add(
                 new AssetTypeIdentifier(typeof(DefaultAsset)),
+                new SimpleRestorer(HideFlags.NotEditable));
+            restoreTools.Add(
+                new AssetTypeIdentifier(typeof(GameObject), PrefabType.Prefab),
+                new PrefabRestorer(HideFlags.None));
+            restoreTools.Add(
+                new AssetTypeIdentifier(typeof(AudioClip)),
+                new SimpleRestorer(HideFlags.NotEditable));
+            restoreTools.Add(
+                new AssetTypeIdentifier(typeof(GameObject), PrefabType.ModelPrefab),
+                new PrefabRestorer(HideFlags.NotEditable));
+            restoreTools.Add(
+                new AssetTypeIdentifier(typeof(Shader)),
+                new SimpleRestorer(HideFlags.NotEditable));
+            restoreTools.Add(
+                new AssetTypeIdentifier(typeof(TextAsset)),
+                new SimpleRestorer(HideFlags.NotEditable));
+            restoreTools.Add(
+                new AssetTypeIdentifier(typeof(LightingDataAsset)),
+                new SimpleRestorer(HideFlags.None, HideFlags.HideInHierarchy | HideFlags.NotEditable));
+            restoreTools.Add(
+                new AssetTypeIdentifier(typeof(SceneAsset)),
                 new SimpleRestorer(HideFlags.NotEditable));
         }
 
@@ -52,16 +71,14 @@ namespace VitDeck.AssetGuardian
             void Restore(Object asset);
         }
 
-        private class DefaultRestorer : IRestorer
-        {
-            public void Restore(Object asset)
-            {
-                asset.hideFlags = HideFlags.None;
-            }
-        }
-
         private class PrefabRestorer : IRestorer
         {
+            private readonly HideFlags baseHideFlags;
+            public PrefabRestorer(HideFlags baseHideFlags)
+            {
+                this.baseHideFlags = baseHideFlags;
+            }
+
             public void Restore(Object asset)
             {
                 var rootGameObject = asset as GameObject;
@@ -70,11 +87,11 @@ namespace VitDeck.AssetGuardian
                 {
                     if (transform == rootTransform || transform.parent == rootTransform)
                     {
-                        transform.gameObject.hideFlags = HideFlags.None;
+                        transform.gameObject.hideFlags = baseHideFlags;
                     }
                     else
                     {
-                        transform.gameObject.hideFlags = HideFlags.HideInHierarchy;
+                        transform.gameObject.hideFlags = baseHideFlags | HideFlags.HideInHierarchy;
                     }
                 }
                 HideAllComponents(rootGameObject);
@@ -86,23 +103,33 @@ namespace VitDeck.AssetGuardian
                 var components = gameObject.GetComponentsInChildren<Component>(true);
                 foreach (var component in components)
                 {
-                    component.hideFlags = HideFlags.HideInHierarchy;
+                    component.hideFlags = baseHideFlags | HideFlags.HideInHierarchy;
                 }
             }
         }
 
         private class SimpleRestorer : IRestorer
         {
-            private readonly HideFlags defaultHideFlags;
+            private readonly HideFlags defaultMainHideFlags;
+            private readonly HideFlags defaultSubHideFlags;
 
-            public SimpleRestorer(HideFlags defaultHideFlags)
+            public SimpleRestorer(HideFlags defaultHideFlags) : this(defaultHideFlags, defaultHideFlags) { }
+
+            public SimpleRestorer(HideFlags defaultMainHideFlags, HideFlags defaultSubHideFlags)
             {
-                this.defaultHideFlags = defaultHideFlags;
+                this.defaultMainHideFlags = defaultMainHideFlags;
+                this.defaultSubHideFlags = defaultSubHideFlags;
             }
 
-            public void Restore(Object asset)
+            public virtual void Restore(Object asset)
             {
-                asset.hideFlags = defaultHideFlags;
+                var path = AssetDatabase.GetAssetPath(asset);
+                var assets = AssetUtility.LoadAllAssetsWithoutSceneAtPath(path);
+                foreach (var subAssets in assets)
+                {
+                    subAssets.hideFlags = defaultSubHideFlags;
+                }
+                asset.hideFlags = defaultMainHideFlags;
             }
         }
     }

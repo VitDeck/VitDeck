@@ -40,7 +40,7 @@ namespace VitDeck.AssetGuardian.Tests
             var marker = new LabelAndHideFlagProtectionMarker();
 
             // Get Default HideFlags
-            var allInstances = AssetDatabase.LoadAllAssetsAtPath(asset.Path);
+            var allInstances = AssetUtility.LoadAllAssetsWithoutSceneAtPath(asset.Path);
             var hideFlagStore = new Dictionary<Object, HideFlags>();
             foreach (var instance in allInstances)
             {

@@ -74,5 +74,24 @@ namespace VitDeck.Utilities
                 yield return asset;
             }
         }
+
+        /// <summary>
+        /// <see cref="AssetDatabase.LoadAllAssetsAtPath(string)"/>を安全に呼び出すメソッド。
+        /// </summary>
+        /// <remarks>
+        /// シーン(<see cref="SceneAsset"/>)に対して<see cref="AssetDatabase.LoadAllAssetsAtPath(string)"/>を行うと、<code>Do not use ReadObjectThreaded on scene objects!</code>というエラーが出ます。その回避のために、対象がSceneAssetであればメインアセットのみを読み込むという処理を行っています。
+        /// </remarks>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static UnityEngine.Object[] LoadAllAssetsWithoutSceneAtPath(string path)
+        {
+            UnityEngine.Object[] allInstances;
+            var mainAsset = AssetDatabase.LoadMainAssetAtPath(path);
+            if (mainAsset is SceneAsset)
+                allInstances = new UnityEngine.Object[] { mainAsset };
+            else
+                allInstances = AssetDatabase.LoadAllAssetsAtPath(path);
+            return allInstances;
+        }
     }
 }
