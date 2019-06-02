@@ -150,17 +150,6 @@ namespace VitDeck.AssetGuardian.Tests
         }
     }
 
-    //public class TestMonoBehaviourAsset : TestAsset
-    //{
-    //    public TestMonoBehaviourAsset(string parentPath)
-    //    {
-    //        Path = GeneratePath(parentPath, "TestMonoBehaviourAsset.cs");
-    //        System.IO.File.WriteAllText(Path, "// This is a test file.\nusing System;");
-    //        AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
-    //        Instance = AssetDatabase.LoadAssetAtPath<MonoScript>(Path);
-    //    }
-    //}
-
     public class TestReflectionProbeAsset : TestAsset
     {
         public TestReflectionProbeAsset(string parentPath)
