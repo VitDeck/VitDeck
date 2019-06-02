@@ -11,9 +11,15 @@ namespace VitDeck.Main
     /// <summary>
     public static class JsonReleaseInfo
     {
+        private static string releaseUrl = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
         private static string version = null;
         private static string packageName = null;
         private static string downloadUrl = null;
+
+        public static string GetReleaseUrl()
+        {
+            return releaseUrl;
+        }
 
         public static string GetVersion()
         {
