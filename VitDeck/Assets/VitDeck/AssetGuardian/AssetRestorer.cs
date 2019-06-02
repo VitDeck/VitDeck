@@ -94,6 +94,7 @@ namespace VitDeck.AssetGuardian
                         transform.gameObject.hideFlags = baseHideFlags | HideFlags.HideInHierarchy;
                     }
                 }
+                // コンポーネントのHideFlagsのセットは後でやらないとGameObject側に対する処理で上書きされてしまう。
                 HideAllComponents(rootGameObject);
 
             }
