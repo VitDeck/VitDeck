@@ -59,6 +59,14 @@ namespace VitDeck.AssetGuardian.Tests
             Path = AssetDatabase.GUIDToAssetPath(guid);
             Instance = AssetDatabase.LoadAssetAtPath<DefaultAsset>(Path);
         }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+
+            // Shaderをフォルダ内に含む場合、フォルダの削除が行われない場合があるので二回削除する。
+            base.Dispose();
+        }
     }
 
     public class TestPrefabAsset : TestAsset
