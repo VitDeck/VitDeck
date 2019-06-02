@@ -31,24 +31,6 @@ namespace VitDeck.AssetGuardian.Tests
         {
             AssetDatabase.DeleteAsset(Path);
         }
-
-        [MenuItem("Assets/Create/CreateAllTestAssets")]
-        private static void CreateAllTestAssets()
-        {
-            var baseObj = Selection.activeContext;
-            var basePath = AssetDatabase.GetAssetPath(baseObj);
-            var folder = System.IO.Path.GetDirectoryName(basePath);
-
-            var assets = System.Reflection.Assembly.GetExecutingAssembly()
-                .GetTypes()
-                .Where(type => type.IsSubclassOf(typeof(TestAsset)))
-                .Select(type => (TestAsset)Activator.CreateInstance(type, folder));
-
-            foreach (var asset in assets)
-            {
-                Debug.Log("Create " + asset.Instance);
-            }
-        }
     }
 
     public class TestFolderAsset : TestAsset
