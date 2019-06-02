@@ -96,7 +96,6 @@ namespace VitDeck.AssetGuardian
                 }
                 // コンポーネントのHideFlagsのセットは後でやらないとGameObject側に対する処理で上書きされてしまう。
                 HideAllComponents(rootGameObject);
-
             }
 
             private void HideAllComponents(GameObject gameObject)
