@@ -30,7 +30,8 @@ namespace VitDeck.Validator
         /// <summary>
         /// 定められたルールに従って検証する。検証後にresultフィールドを結果として返す
         /// </summary>
+        /// <param name="baseFolder">ベースフォルダの`Assets/`から始まる相対パス。</param>
         /// <returns>`result`に格納された検証結果</returns>
-        public abstract ValidationResult Validate();
+        public abstract ValidationResult Validate(string baseFolder);
     }
 }
