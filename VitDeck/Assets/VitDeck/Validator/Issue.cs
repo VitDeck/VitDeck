@@ -7,7 +7,7 @@ namespace VitDeck.Validator
     /// </summary>
     public class Issue
     {
-        public Issue(Object target, IssueLevel level, string message, string solution, string solutionURL)
+        public Issue(Object target, IssueLevel level, string message, string solution = "", string solutionURL = "")
         {
             this.target = target;
             this.level = level;
@@ -41,6 +41,7 @@ namespace VitDeck.Validator
     /// </summary>
     public enum IssueLevel
     {
+        Fatal = 3,
         Error = 2,
         Warning = 1,
         Info = 0
