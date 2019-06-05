@@ -7,7 +7,10 @@ namespace VitDeck.Validator
     /// </summary>
     public class SampleRuleSet : BaseRuleSet
     {
-        public new readonly string ruleSetName = "サンプルルールセット";
+        public override string RuleSetName
+        {
+            get { return "サンプルルールセット"; }
+        }
         [Validation]
         public SampleRule rule1 = new SampleRule("ルール１");
         [Validation]

@@ -36,7 +36,7 @@ namespace VitDeck.Validator.Test
         public void TestRuleSet()
         {
             var ruleSet = new SampleRuleSet();
-            Assert.That(ruleSet.ruleSetName, Is.EqualTo("サンプルルールセット"));
+            Assert.That(ruleSet.RuleSetName, Is.EqualTo("サンプルルールセット"));
             Assert.That(ruleSet.GetRules().Length, Is.EqualTo(2));
         }
     }

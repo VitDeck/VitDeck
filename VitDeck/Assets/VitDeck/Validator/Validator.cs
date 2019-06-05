@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using VitDeck.Utilities;
 
@@ -33,6 +36,21 @@ namespace VitDeck.Validator
 
             }
             return results.ToArray();
+        }
+
+        public static BaseRuleSet[] GetRuleSets()
+        {
+            var types = Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(type => type.IsSubclassOf(typeof(BaseRuleSet)));
+            var ruleSets = new List<BaseRuleSet>();
+            foreach (var type in types)
+            {
+                var instance = (BaseRuleSet)System.Activator.CreateInstance(type);
+                if (instance != null)
+                    ruleSets.Add(instance);
+            }
+            return ruleSets.ToArray();
         }
     }
 

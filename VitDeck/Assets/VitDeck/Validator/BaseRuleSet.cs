@@ -10,9 +10,12 @@ namespace VitDeck.Validator
     public abstract class BaseRuleSet
     {
         /// <summary>
-        /// ルールセット名
+        /// ルールセット名を返すプロパティ
         /// </summary>
-        public readonly string ruleSetName = "Base Rule set";
+        public abstract string RuleSetName
+        {
+            get;
+        }
 
         /// <summary>
         /// ルールセットに含まれる検証ルールの配列を返す
