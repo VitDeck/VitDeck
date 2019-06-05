@@ -46,7 +46,7 @@ namespace VitDeck.Validator.GUI
         {
             EditorGUIUtility.labelWidth = 80;
             EditorGUILayout.LabelField("Rule Checker");
-            popupIndex = EditorGUILayout.Popup("RuleSet:", popupIndex, ruleSetNames);
+            popupIndex = EditorGUILayout.Popup("Rule Set:", popupIndex, ruleSetNames);
             //BaseFolder field
             DefaultAsset newFolder = (DefaultAsset)EditorGUILayout.ObjectField("Base Folder:", baseFolder, typeof(DefaultAsset), true);
             var path = AssetDatabase.GetAssetPath(newFolder);
