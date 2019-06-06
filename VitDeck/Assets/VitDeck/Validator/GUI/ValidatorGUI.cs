@@ -87,7 +87,7 @@ namespace VitDeck.Validator.GUI
                     msaageAreaScroll = EditorGUILayout.BeginScrollView(msaageAreaScroll);
                     foreach (var msg in messages)
                     {
-                        if (msg.issue != null && msg.issue.level < (isHideInfoMessage ? IssueLevel.Warning : IssueLevel.Info))
+                        if (msg.type < (isHideInfoMessage ? MessageType.Warning : MessageType.Info))
                             continue;
                         GetMessageBox(msg);
                     }
@@ -155,7 +155,7 @@ namespace VitDeck.Validator.GUI
             var log = "";
             foreach (var result in results)
             {
-                log += result.GetResultLog(level) + Environment.NewLine;
+                log += result.GetResultLog(true, level) + Environment.NewLine;
             }
             return log;
         }
@@ -217,6 +217,9 @@ namespace VitDeck.Validator.GUI
             }
             foreach (var result in results)
             {
+                var ruleResultLog = result.GetResultLog(false);
+                if (!string.IsNullOrEmpty(ruleResultLog))
+                    messages.Add(new Message(ruleResultLog, MessageType.Info, null));
                 foreach (var issue in result.Issues)
                 {
                     messages.Add(new Message(result.RuleName + Environment.NewLine + issue.message + Environment.NewLine + issue.solution, GetMessageType(issue.level), issue));

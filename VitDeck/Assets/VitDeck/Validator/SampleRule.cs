@@ -28,7 +28,7 @@ namespace VitDeck.Validator
             AddIssue(new Issue(null, IssueLevel.Warning, "これはサンプルルールの改行の多い検証結果(警告)です。" + Environment.NewLine + items, "解決策テキスト", "https://github.com/vkettools/VitDeck/issues/57"));
             AddIssue(new Issue(null, IssueLevel.Error, "これはサンプルルールの検証結果(エラー)です。長い文------------------------------------------------------------章", "解決策テキスト", "https://github.com/vkettools/VitDeck/issues/57"));
 
-            AddResultLog("customSetting：" + customSetting);
+            AddResultLog("Ruleのissueに紐付かないログです。customSetting：" + customSetting);
         }
     }
 }

@@ -44,11 +44,13 @@ namespace VitDeck.Validator
         /// </summary>
         /// <param name="level">指定したレベル以上のログを出力する。</param>
         /// <returns>ログテキスト</returns>
-        public string GetResultLog(IssueLevel level = IssueLevel.Info)
+        public string GetResultLog(bool issueLogs = true, IssueLevel level = IssueLevel.Info)
         {
+            if (!issueLogs && string.IsNullOrEmpty(resultLog))
+                return "";
             var log = string.Format("# {0}", RuleName) + Environment.NewLine;
             log += resultLog;
-            if (Issues.Count > 0)
+            if (issueLogs && Issues.Count > 0)
             {
                 foreach (var issue in Issues)
                 {
