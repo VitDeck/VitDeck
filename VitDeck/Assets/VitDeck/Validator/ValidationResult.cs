@@ -42,22 +42,40 @@ namespace VitDeck.Validator
         /// <summary>
         /// 検証ログを取得する。
         /// </summary>
-        /// <returns></returns>
-        public string GetResultLog()
+        /// <param name="level">指定したレベル以上のログを出力する。</param>
+        /// <returns>ログテキスト</returns>
+        public string GetResultLog(IssueLevel level = IssueLevel.Info)
         {
-            //ToDo:resultLogとIssuesから整形したログを返す（オプションで出力する情報を変える？）
-            var log = string.Format("{0}: {1}", RuleName, resultLog);
+            var log = string.Format("# {0}", RuleName) + Environment.NewLine;
+            log += resultLog;
             if (Issues.Count > 0)
             {
                 foreach (var issue in Issues)
                 {
-                    var issueLog = issue.message + Environment.NewLine +
-                        issue.solution + Environment.NewLine +
-                        issue.solutionURL + Environment.NewLine;
-                    log += issueLog;
+                    if (issue.level < level)
+                        continue;
+                    var levelMark = GetLevelMark(issue);
+                    var issueLog = levelMark + issue.message + Environment.NewLine;
+                    if (!string.IsNullOrEmpty(issue.solution))
+                        issueLog += issue.solution + Environment.NewLine;
+                    if (!string.IsNullOrEmpty(issue.solutionURL))
+                        issueLog += issue.solutionURL + Environment.NewLine;
+                    log += issueLog + Environment.NewLine;
                 }
             }
             return log;
+        }
+
+        private string GetLevelMark(Issue issue)
+        {
+            switch (issue.level)
+            {
+                case IssueLevel.Info: return "## [info]";
+                case IssueLevel.Warning: return "## [!]";
+                case IssueLevel.Error: return "## [!!]";
+                case IssueLevel.Fatal: return "## [!!!]";
+                default: return "";
+            }
         }
     }
 }
