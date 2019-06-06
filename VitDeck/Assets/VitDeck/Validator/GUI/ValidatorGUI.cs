@@ -76,9 +76,9 @@ namespace VitDeck.Validator.GUI
             //Help message
             if (messages != null)
             {
-                var errorCount = GetMessageCount(IssueLevel.Error) + GetMessageCount(IssueLevel.Fatal);
-                var warningCount = GetMessageCount(IssueLevel.Warning);
-                var infoCount = GetMessageCount(IssueLevel.Info);
+                var errorCount = GetMessageCount(MessageType.Error);
+                var warningCount = GetMessageCount(MessageType.Warning);
+                var infoCount = GetMessageCount(MessageType.Info);
                 var sum = errorCount + warningCount + infoCount;
                 var CountMessage = string.Format("{0}(Error:{1}  Warning:{2}  Informaiton:{3})", sum, errorCount, warningCount, infoCount);
                 isOpenMessageArea = EditorGUILayout.Foldout(isOpenMessageArea, "Messages:" + CountMessage);
@@ -188,18 +188,15 @@ namespace VitDeck.Validator.GUI
             }
         }
 
-        private int GetMessageCount(IssueLevel level)
+        private int GetMessageCount(MessageType type)
         {
             var count = 0;
-            if (results != null)
+            if (messages != null)
             {
-                foreach (var result in results)
+                foreach (var msg in messages)
                 {
-                    foreach (var issue in result.Issues)
-                    {
-                        if (issue.level == level)
-                            count++;
-                    }
+                    if (msg.type == type)
+                        count++;
                 }
             }
             return count;
