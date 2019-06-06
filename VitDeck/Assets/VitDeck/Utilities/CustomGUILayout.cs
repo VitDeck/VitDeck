@@ -38,6 +38,7 @@ namespace VitDeck.Utilities
             GUIContent content = new GUIContent();
             content.image = URLButtonImage;
             content.text = label;
+            content.tooltip = url;
             if (GUILayout.Button(content, style, options))
             {
                 URLUtility.openURL(url);
