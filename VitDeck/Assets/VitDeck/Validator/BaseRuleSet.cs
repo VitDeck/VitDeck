@@ -31,6 +31,8 @@ namespace VitDeck.Validator
                 var rule = ruleField.GetValue(this) as IRule;
                 if (rule != null)
                     rules.Add(rule);
+                else
+                    Debug.LogWarning(string.Format("IRule以外のフィールドに[Validation]が指定されているため無視されます。({0} in {1})", ruleField.Name, this.GetType().Name));
             }
             return rules.ToArray();
         }
