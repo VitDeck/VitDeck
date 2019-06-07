@@ -21,7 +21,7 @@ namespace VitDeck.Validator
         /// ルールセットに含まれる検証ルールの配列を返す
         /// </summary>
         /// <returns>検証ルールの配列</returns>
-        public IRule[] GetRules()
+        public virtual IRule[] GetRules()
         {
             var rules = new List<IRule>();
             var ruleFields = this.GetType().GetFields()
