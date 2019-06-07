@@ -13,7 +13,7 @@ namespace VitDeck.Validator
             this.customSetting = custom;
         }
 
-        internal override void Logic(string baseFolder)
+        protected override void Logic(string baseFolder)
         {
             //前提チェック
             if (string.IsNullOrEmpty(baseFolder))

@@ -228,7 +228,7 @@ namespace VitDeck.Validator.GUI
         /// <summary>
         /// HelpBoxに表示するメッセージ
         /// </summary>
-        internal class Message
+        private class Message
         {
             public Message(string message, MessageType type, Issue issue = null)
             {

@@ -8,11 +8,11 @@ namespace VitDeck.Validator
         /// <summary>
         /// ルール名
         /// </summary>
-        internal string name;
+        protected string name;
         /// <summary>
         /// 検証結果
         /// </summary>
-        internal ValidationResult result;
+        protected ValidationResult result;
 
         public BaseRule(string name)
         {
@@ -28,12 +28,12 @@ namespace VitDeck.Validator
             return result;
         }
 
-        internal void AddResultLog(string log)
+        protected void AddResultLog(string log)
         {
             result.AddResultLog(log);
         }
 
-        internal void AddIssue(Issue issue)
+        protected void AddIssue(Issue issue)
         {
             result.AddIssue(issue);
         }
@@ -60,6 +60,6 @@ namespace VitDeck.Validator
         /// ルールの検証ロジック。
         /// </summary>
         /// <param name="baseFolder">ベースフォルダの`Assets/`から始まる相対パス。</param>
-        internal abstract void Logic(string baseFolder);
+        protected abstract void Logic(string baseFolder);
     }
 }
