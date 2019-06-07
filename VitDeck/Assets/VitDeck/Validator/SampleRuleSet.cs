@@ -12,8 +12,8 @@ namespace VitDeck.Validator
             get { return "サンプルルールセット"; }
         }
         [Validation]
-        public SampleRule rule1 = new SampleRule("ルール１");
+        public IRule rule1 = new SampleRule("ルール１");
         [Validation]
-        public SampleRule rule2 = new SampleRule("ルール２", "カスタム設定値２");
+        public IRule rule2 = new SampleRule("ルール２", "カスタム設定値２");
     }
 }
