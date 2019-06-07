@@ -25,7 +25,8 @@ namespace VitDeck.Validator
         {
             var rules = new List<IRule>();
             var ruleFields = this.GetType().GetFields()
-                 .Where(field => field.GetCustomAttributes(typeof(ValidationAttribute), false) != null);
+                 .Where(field => field.GetCustomAttributes(typeof(ValidationAttribute), false) != null)
+                 .OrderBy(field => (ValidationAttribute)(field.GetCustomAttributes(typeof(ValidationAttribute), false).GetValue(0)));
             foreach (var ruleField in ruleFields)
             {
                 var rule = ruleField.GetValue(this) as IRule;
