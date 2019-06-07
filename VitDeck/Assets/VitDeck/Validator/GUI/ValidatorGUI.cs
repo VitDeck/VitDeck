@@ -41,7 +41,7 @@ namespace VitDeck.Validator.GUI
                 return ruleSetNames;
             }
         }
-        private int popupIndex = 0;
+        private BaseRuleSet selectedRuleSet;
         private DefaultAsset baseFolder;
         private ValidationResult[] results;
         private string validationLog;
@@ -74,10 +74,10 @@ namespace VitDeck.Validator.GUI
         {
             var userSettings = UserSettingUtility.GetUserSettings();
             baseFolder = AssetDatabase.LoadAssetAtPath<DefaultAsset>(userSettings.validatorFolderPath);
-            var ruleSet = RuleSets.Where(a => a.GetType().Name == userSettings.validatorRuleSetType).First<BaseRuleSet>();
-            if (ruleSet != null)
+            var ruleSets = RuleSets.Where(a => a.GetType().Name == userSettings.validatorRuleSetType);
+            if (ruleSets.Count() > 0)
             {
-                popupIndex = Array.IndexOf(RuleSets, ruleSet);
+                selectedRuleSet = ruleSets.First<BaseRuleSet>();
             }
         }
 
@@ -85,7 +85,10 @@ namespace VitDeck.Validator.GUI
         {
             var userSettings = UserSettingUtility.GetUserSettings();
             userSettings.validatorFolderPath = AssetDatabase.GetAssetPath(baseFolder);
-            userSettings.validatorRuleSetType = RuleSets[popupIndex].GetType().Name;
+            if(selectedRuleSet != null)
+            {
+                userSettings.validatorRuleSetType = selectedRuleSet.GetType().Name;
+            }
         }
 
         private void OnGUI()
@@ -93,7 +96,8 @@ namespace VitDeck.Validator.GUI
             EditorGUIUtility.labelWidth = 80;
             EditorGUILayout.LabelField("Rule Checker");
             //Rule set dropdown
-            popupIndex = EditorGUILayout.Popup("Rule Set:", popupIndex, RuleSetNames);
+            var index = EditorGUILayout.Popup("Rule Set:", GetPopupIndex(selectedRuleSet), RuleSetNames);
+            selectedRuleSet = RuleSets[index];
             //Base folder field
             DefaultAsset newFolder = (DefaultAsset)EditorGUILayout.ObjectField("Base Folder:", baseFolder, typeof(DefaultAsset), true);
             var path = AssetDatabase.GetAssetPath(newFolder);
@@ -139,16 +143,27 @@ namespace VitDeck.Validator.GUI
                 OnCopyResultLog();
         }
 
+        private int GetPopupIndex(BaseRuleSet selectedRuleSet)
+        {
+            var index = 0;
+            if(Array.IndexOf(RuleSets, selectedRuleSet) > 0)
+            {
+                index = Array.IndexOf(RuleSets, selectedRuleSet);
+            }
+            return index;
+        }
+
         private void OnValidate()
         {
+            if (selectedRuleSet == null)
+                return;
             ClearLogs();
             SaveSettings();
-            var ruleSet = RuleSets[popupIndex];
             var baseFolderPath = AssetDatabase.GetAssetPath(baseFolder);
             OutLog("Starting validation.");
-            results = Validator.Validate(ruleSet, baseFolderPath);
+            results = Validator.Validate(selectedRuleSet, baseFolderPath);
             var header = string.Format("- version:{0}", "1.0.0") + Environment.NewLine;//ToDo: バージョン取得方法の検討
-            header += string.Format("- Rule set:{0}", ruleSet.RuleSetName) + Environment.NewLine;
+            header += string.Format("- Rule set:{0}", selectedRuleSet.RuleSetName) + Environment.NewLine;
             header += string.Format("- Base folder:{0}", baseFolderPath) + Environment.NewLine;
             var log = header;
             log += GetResultLog(results, isHideInfoMessage ? IssueLevel.Warning : IssueLevel.Info);
