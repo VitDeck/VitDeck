@@ -11,6 +11,7 @@ echo VERSION: %VERSION% >> %BAT_LOG% 2>&1
 set UNITY_PATH="C:\Program Files\Unity\Hub\Editor\2017.4.15f1\Editor\Unity.exe"
 set LOG_FILE="release-unity.log"
 set PACKAGE_NAME="VitDeck-%VERSION%.unitypackage"
+set RELEASE_INFO_JSON="latest.json"
 set VITDECK_ROOT=Assets\VitDeck
 set RELEASE_PATH=Release\VitDeck
 
@@ -38,6 +39,13 @@ echo Export unitypackage >> %BAT_LOG% 2>&1
  -nographics^
  -logfile %LOG_FILE%^
  -quit
+
+echo Generate json file >> %BAT_LOG% 2>&1
+echo { > %RELEASE_INFO_JSON% 2>&1
+echo  "version": "%VERSION%", >> %RELEASE_INFO_JSON% 2>&1
+echo  "package_name": "VitDeck-%VERSION%.unitypackage", >> %RELEASE_INFO_JSON% 2>&1
+echo  "download_url": "https://github.com/vkettools/VitDeck/releases/download/%VERSION%/VitDeck-%VERSION%.unitypackage" >> %RELEASE_INFO_JSON% 2>&1
+echo } >> %RELEASE_INFO_JSON% 2>&1
 
 echo Move to Release folder >> %BAT_LOG% 2>&1
 mkdir %RELEASE_PATH% >> %BAT_LOG% 2>&1
