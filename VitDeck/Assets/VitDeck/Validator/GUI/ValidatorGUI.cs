@@ -163,7 +163,7 @@ namespace VitDeck.Validator.GUI
             var baseFolderPath = AssetDatabase.GetAssetPath(baseFolder);
             OutLog("Starting validation.");
             results = Validator.Validate(selectedRuleSet, baseFolderPath);
-            var header = string.Format("- version:{0}", "1.0.0") + Environment.NewLine;//ToDo: バージョン取得方法の検討
+            var header = string.Format("- version:{0}", VersionUtility.GetVersion()) + Environment.NewLine;
             header += string.Format("- Rule set:{0}", selectedRuleSet.RuleSetName) + Environment.NewLine;
             header += string.Format("- Base folder:{0}", baseFolderPath) + Environment.NewLine;
             var log = header;
