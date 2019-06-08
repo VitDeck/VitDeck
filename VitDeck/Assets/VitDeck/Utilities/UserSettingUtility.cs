@@ -7,7 +7,7 @@ namespace VitDeck.Utilities
     public class UserSettingUtility
     {
         private const string assetPath = "Assets/VitDeck/Utilities/UserSettings.asset";
-        internal static UserSettings GetUserSettings()
+        public static UserSettings GetUserSettings()
         {
             var settings = AssetDatabase.LoadAssetAtPath<UserSettings>(assetPath);
             if (settings == null)
