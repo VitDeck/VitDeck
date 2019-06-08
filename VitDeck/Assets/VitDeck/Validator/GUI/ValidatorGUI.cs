@@ -181,7 +181,12 @@ namespace VitDeck.Validator.GUI
         private void GetMessageBox(Message msg)
         {
             GUILayout.BeginHorizontal();
+
+            var helpBoxRect = EditorGUILayout.BeginHorizontal();
+            if (Event.current.type == EventType.MouseUp && helpBoxRect.Contains(Event.current.mousePosition) && msg.issue != null)
+                EditorGUIUtility.PingObject(msg.issue.target);
             EditorGUILayout.HelpBox(msg.message, msg.type, true);
+            EditorGUILayout.EndHorizontal();
             if (msg.issue != null && !string.IsNullOrEmpty(msg.issue.solutionURL))
             {
                 CustomGUILayout.URLButton("Help", msg.issue.solutionURL, GUILayout.Width(50));
@@ -275,7 +280,11 @@ namespace VitDeck.Validator.GUI
                     messages.Add(new Message(ruleResultLog, MessageType.Info, null));
                 foreach (var issue in result.Issues)
                 {
-                    messages.Add(new Message(result.RuleName + Environment.NewLine + issue.message + Environment.NewLine + issue.solution, GetMessageType(issue.level), issue));
+                    var txt = result.RuleName + Environment.NewLine;
+                    if (issue.target != null)
+                        txt += issue.target.name + Environment.NewLine;
+                    txt += issue.message + Environment.NewLine + issue.solution;
+                    messages.Add(new Message(txt, GetMessageType(issue.level), issue));
                 }
             }
         }
