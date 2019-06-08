@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,9 +7,10 @@ namespace VitDeck.Utilities
 {
     public class UserSettingUtility
     {
-        private const string assetPath = "Assets/VitDeck/Utilities/UserSettings.asset";
+        private const string settingFileName = "UserSettings.asset";
         public static UserSettings GetUserSettings()
         {
+            var assetPath = Path.Combine(AssetUtility.ConfigFolderPath, settingFileName);
             var settings = AssetDatabase.LoadAssetAtPath<UserSettings>(assetPath);
             if (settings == null)
             {
