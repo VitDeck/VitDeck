@@ -1,4 +1,6 @@
+using System.Linq;
 using System.Text.RegularExpressions;
+using UnityEditor;
 
 namespace VitDeck.Utilities
 {
@@ -15,6 +17,16 @@ namespace VitDeck.Utilities
         public static bool IsSemanticVersioning(string version)
         {
             return Regex.IsMatch(version, @"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-\w+(\.\w+)*)?(\+\w+(\.\w+)*)?$");
+        }
+
+        /// <summary>
+        /// バージョン番号を取得する。取得できなかった場合は空文字を返す。
+        /// </summary>
+        /// <returns>バージョン番号</returns>
+        public static string GetVersion()
+        {
+            var productInfo = AssetDatabase.LoadAssetAtPath<ProductInfo>(AssetUtility.ConfigFolderPath + "/ProductInfo.asset");
+            return productInfo != null ? productInfo.version : string.Empty;
         }
     }
 }
