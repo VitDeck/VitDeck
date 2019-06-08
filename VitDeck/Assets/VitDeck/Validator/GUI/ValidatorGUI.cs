@@ -14,9 +14,9 @@ namespace VitDeck.Validator.GUI
     {
         const string prefix = "VitDeck/";
         private static ValidatorWindow window;
-        private static BaseRuleSet[] ruleSets;
+        private static IRuleSet[] ruleSets;
         private static string[] ruleSetNames;
-        private static BaseRuleSet[] RuleSets
+        private static IRuleSet[] RuleSets
         {
             get
             {
@@ -41,7 +41,7 @@ namespace VitDeck.Validator.GUI
                 return ruleSetNames;
             }
         }
-        private BaseRuleSet selectedRuleSet;
+        private IRuleSet selectedRuleSet;
         private DefaultAsset baseFolder;
         private ValidationResult[] results;
         private string validationLog;
@@ -77,7 +77,7 @@ namespace VitDeck.Validator.GUI
             var ruleSets = RuleSets.Where(a => a.GetType().Name == userSettings.validatorRuleSetType);
             if (ruleSets.Count() > 0)
             {
-                selectedRuleSet = ruleSets.First<BaseRuleSet>();
+                selectedRuleSet = ruleSets.First<IRuleSet>();
             }
         }
 
@@ -144,7 +144,7 @@ namespace VitDeck.Validator.GUI
                 OnCopyResultLog();
         }
 
-        private int GetPopupIndex(BaseRuleSet selectedRuleSet)
+        private int GetPopupIndex(IRuleSet selectedRuleSet)
         {
             var index = 0;
             if (Array.IndexOf(RuleSets, selectedRuleSet) > 0)

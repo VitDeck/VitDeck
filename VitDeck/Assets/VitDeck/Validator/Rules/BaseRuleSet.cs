@@ -7,7 +7,7 @@ namespace VitDeck.Validator
     /// <summary>
     /// 実行する検証ルールのセットを定義するための抽象クラス。
     /// </summary>
-    public abstract class BaseRuleSet
+    public abstract class BaseRuleSet : IRuleSet
     {
         /// <summary>
         /// ルールセット名を返すプロパティ
