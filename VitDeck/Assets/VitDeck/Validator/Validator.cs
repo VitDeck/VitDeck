@@ -52,7 +52,7 @@ namespace VitDeck.Validator
                 }
                 catch (MissingMethodException)
                 {
-                    Debug.LogError(type + "の取得に失敗しました。RuleSetに引数付きコンストラクタを定義することは出来ません。");
+                    Debug.LogError(type + "の取得に失敗しました。RuleSetは引数無しでインスタンスを生成出来る必要があります。");
                 }
 
             }
