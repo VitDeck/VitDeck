@@ -85,7 +85,7 @@ namespace VitDeck.Validator.GUI
         {
             var userSettings = UserSettingUtility.GetUserSettings();
             userSettings.validatorFolderPath = AssetDatabase.GetAssetPath(baseFolder);
-            if(selectedRuleSet != null)
+            if (selectedRuleSet != null)
             {
                 userSettings.validatorRuleSetType = selectedRuleSet.GetType().Name;
             }
@@ -147,7 +147,7 @@ namespace VitDeck.Validator.GUI
         private int GetPopupIndex(BaseRuleSet selectedRuleSet)
         {
             var index = 0;
-            if(Array.IndexOf(RuleSets, selectedRuleSet) > 0)
+            if (Array.IndexOf(RuleSets, selectedRuleSet) > 0)
             {
                 index = Array.IndexOf(RuleSets, selectedRuleSet);
             }
