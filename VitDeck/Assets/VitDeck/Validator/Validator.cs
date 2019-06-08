@@ -23,7 +23,6 @@ namespace VitDeck.Validator
             {
                 try
                 {
-
                     ValidationResult result = rule.Validate(baseFolder);
                     results.Add(result);
                 }
@@ -33,7 +32,6 @@ namespace VitDeck.Validator
                     results.Add(rule.GetResult());
                     break;
                 }
-
             }
             return results.ToArray();
         }
@@ -53,5 +51,4 @@ namespace VitDeck.Validator
             return ruleSets.ToArray();
         }
     }
-
 }

@@ -1,5 +1,3 @@
-
-
 namespace VitDeck.Validator
 {
     /// <summary>
