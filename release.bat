@@ -23,6 +23,9 @@ call :DelFolder "VitDeck\%VITDECK_ROOT%\TemplateLoader\Tests" "%BAT_LOG%"
 call :DelFolder "VitDeck\%VITDECK_ROOT%\Utilities\Tests" "%BAT_LOG%"
 call :DelFolder "VitDeck\%VITDECK_ROOT%\Validator\Tests" "%BAT_LOG%"
 
+echo Delete UserSettings.asset >> %BAT_LOG% 2>&1
+del /s /q "VitDeck\%VITDECK_ROOT%\Config\UserSettings.asset"
+
 echo Copy documents >> %BAT_LOG% 2>&1
 copy /Y LICENSE VitDeck\%VITDECK_ROOT%\LICENSE.txt >> %BAT_LOG% 2>&1
 copy /Y README.md VitDeck\%VITDECK_ROOT%\README.txt >> %BAT_LOG% 2>&1
