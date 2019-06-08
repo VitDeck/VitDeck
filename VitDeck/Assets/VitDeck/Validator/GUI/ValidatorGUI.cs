@@ -89,6 +89,7 @@ namespace VitDeck.Validator.GUI
             {
                 userSettings.validatorRuleSetType = selectedRuleSet.GetType().Name;
             }
+            UserSettingUtility.SaveUserSettings(userSettings);
         }
 
         private void OnGUI()

@@ -17,5 +17,10 @@ namespace VitDeck.Utilities
             }
             return settings;
         }
+        public static void SaveUserSettings(UserSettings settings)
+        {
+            EditorUtility.SetDirty(settings);
+            AssetDatabase.SaveAssets();
+        }
     }
 }
