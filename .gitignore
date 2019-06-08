@@ -38,3 +38,5 @@ sysinfo.txt
 # Templates assets
 VitDeck/Assets/VitDeck/Templates/*
 !Sample_template
+VitDeck/Assets/VitDeck/Config/UserSettings.asset
+VitDeck/Assets/VitDeck/Config/UserSettings.asset.meta

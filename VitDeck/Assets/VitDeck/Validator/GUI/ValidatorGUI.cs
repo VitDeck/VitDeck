@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using VitDeck.Utilities;
@@ -13,9 +14,34 @@ namespace VitDeck.Validator.GUI
     {
         const string prefix = "VitDeck/";
         private static ValidatorWindow window;
-        private BaseRuleSet[] ruleSets = { };
-        private string[] ruleSetNames = { };
-        private int popupIndex = 0;
+        private static BaseRuleSet[] ruleSets;
+        private static string[] ruleSetNames;
+        private static BaseRuleSet[] RuleSets
+        {
+            get
+            {
+                if (ruleSets == null)
+                {
+                    ruleSets = Validator.GetRuleSets();
+                }
+                return ruleSets;
+            }
+        }
+        private static string[] RuleSetNames
+        {
+            get
+            {
+                if (ruleSetNames == null)
+                {
+                    var names = new List<string>();
+                    foreach (var rule in RuleSets)
+                        names.Add(rule.RuleSetName);
+                    ruleSetNames = names.ToArray();
+                }
+                return ruleSetNames;
+            }
+        }
+        private BaseRuleSet selectedRuleSet;
         private DefaultAsset baseFolder;
         private ValidationResult[] results;
         private string validationLog;
@@ -34,18 +60,36 @@ namespace VitDeck.Validator.GUI
             window.Show();
         }
 
+        [InitializeOnLoadMethod]
         private void Init()
         {
             validationLog = "";
             messages = new List<Message>();
-            ruleSets = Validator.GetRuleSets();
-            var names = new List<string>();
-            foreach (var rule in ruleSets)
-                names.Add(rule.RuleSetName);
-            ruleSetNames = names.ToArray();
             isOpenResultLogArea = false;
             isOpenMessageArea = true;
-            //Todo：前回保存検索オプションの復元  https://github.com/vkettools/VitDeck/issues/60
+            LoadSettings();
+        }
+
+        private void LoadSettings()
+        {
+            var userSettings = UserSettingUtility.GetUserSettings();
+            baseFolder = AssetDatabase.LoadAssetAtPath<DefaultAsset>(userSettings.validatorFolderPath);
+            var ruleSets = RuleSets.Where(a => a.GetType().Name == userSettings.validatorRuleSetType);
+            if (ruleSets.Count() > 0)
+            {
+                selectedRuleSet = ruleSets.First<BaseRuleSet>();
+            }
+        }
+
+        private void SaveSettings()
+        {
+            var userSettings = UserSettingUtility.GetUserSettings();
+            userSettings.validatorFolderPath = AssetDatabase.GetAssetPath(baseFolder);
+            if(selectedRuleSet != null)
+            {
+                userSettings.validatorRuleSetType = selectedRuleSet.GetType().Name;
+            }
+            UserSettingUtility.SaveUserSettings(userSettings);
         }
 
         private void OnGUI()
@@ -53,7 +97,8 @@ namespace VitDeck.Validator.GUI
             EditorGUIUtility.labelWidth = 80;
             EditorGUILayout.LabelField("Rule Checker");
             //Rule set dropdown
-            popupIndex = EditorGUILayout.Popup("Rule Set:", popupIndex, ruleSetNames);
+            var index = EditorGUILayout.Popup("Rule Set:", GetPopupIndex(selectedRuleSet), RuleSetNames);
+            selectedRuleSet = RuleSets[index];
             //Base folder field
             DefaultAsset newFolder = (DefaultAsset)EditorGUILayout.ObjectField("Base Folder:", baseFolder, typeof(DefaultAsset), true);
             var path = AssetDatabase.GetAssetPath(newFolder);
@@ -99,16 +144,27 @@ namespace VitDeck.Validator.GUI
                 OnCopyResultLog();
         }
 
+        private int GetPopupIndex(BaseRuleSet selectedRuleSet)
+        {
+            var index = 0;
+            if(Array.IndexOf(RuleSets, selectedRuleSet) > 0)
+            {
+                index = Array.IndexOf(RuleSets, selectedRuleSet);
+            }
+            return index;
+        }
+
         private void OnValidate()
         {
+            if (selectedRuleSet == null)
+                return;
             ClearLogs();
-            //Todo: 検証オプションの保存 https://github.com/vkettools/VitDeck/issues/60
-            var ruleSet = ruleSets[popupIndex]; //Todo: 再コンパイルが実行されてruleSetsが解放されていた時の対策　https://github.com/vkettools/VitDeck/issues/60
+            SaveSettings();
             var baseFolderPath = AssetDatabase.GetAssetPath(baseFolder);
             OutLog("Starting validation.");
-            results = Validator.Validate(ruleSet, baseFolderPath);
+            results = Validator.Validate(selectedRuleSet, baseFolderPath);
             var header = string.Format("- version:{0}", "1.0.0") + Environment.NewLine;//ToDo: バージョン取得方法の検討
-            header += string.Format("- Rule set:{0}", ruleSet.RuleSetName) + Environment.NewLine;
+            header += string.Format("- Rule set:{0}", selectedRuleSet.RuleSetName) + Environment.NewLine;
             header += string.Format("- Base folder:{0}", baseFolderPath) + Environment.NewLine;
             var log = header;
             log += GetResultLog(results, isHideInfoMessage ? IssueLevel.Warning : IssueLevel.Info);

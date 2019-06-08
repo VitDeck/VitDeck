@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using VitDeck.Utilities;
 
 namespace VitDeck.Main
 {
@@ -22,7 +23,7 @@ namespace VitDeck.Main
 
         public static bool IsLatest(string releaseUrl)
         {
-            string localVersion = VitDeck.GetVersion();
+            string localVersion = VersionUtility.GetVersion();
             string latestVersion = JsonReleaseInfo.GetVersion();
 
             return string.Equals(localVersion, latestVersion);

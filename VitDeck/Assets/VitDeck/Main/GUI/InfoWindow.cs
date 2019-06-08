@@ -27,7 +27,7 @@ namespace VitDeck.Main.GUI
 
         private void OnEnable()
         {
-            versionLabel = "Version : " + VitDeck.GetVersion();
+            versionLabel = "Version : " + VersionUtility.GetVersion();
 
             JsonReleaseInfo.FetchInfo(releaseURL);
             if (JsonReleaseInfo.GetVersion() == null)

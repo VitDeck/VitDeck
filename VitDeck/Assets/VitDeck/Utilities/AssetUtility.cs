@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 
 namespace VitDeck.Utilities
@@ -10,13 +11,13 @@ namespace VitDeck.Utilities
     public static class AssetUtility
     {
         private static string _imageFolderPath;
-
+        private static string _configFolderPath;
         /// <summary>
         /// VitDeck用画像フォルダのパス
         /// </summary>
         /// <remarks>
         /// Unityで`ImagesFolder`ラベルが付与されているアセットの一つ目のパスを返す。
-        /// 存在しない場合はExceptionを返す。
+        /// 存在しない場合はDirectoryNotFoundExceptionを返す。
         /// </remarks>
         public static string ImageFolderPath
         {
@@ -24,17 +25,43 @@ namespace VitDeck.Utilities
             {
                 if (string.IsNullOrEmpty(_imageFolderPath))
                 {
-                    string[] imageFolderGUIDs = AssetDatabase.FindAssets("l:VitDeck.ImagesFolder");
-                    if (imageFolderGUIDs != null && imageFolderGUIDs.Length > 0)
-                    {
-                        _imageFolderPath = AssetDatabase.GUIDToAssetPath(imageFolderGUIDs[0]);
-                    }
-                    else
-                    {
-                        throw new DirectoryNotFoundException("Images folder not found.");
-                    }
+                    _imageFolderPath = GetFolderPath("VitDeck.ImagesFolder");
                 }
                 return _imageFolderPath;
+            }
+        }
+        /// <summary>
+        /// 設定ファイル用フォルダのパス
+        /// </summary>
+        /// <remarks>
+        /// Unityでラベルが付与されているアセットの一つ目のパスを返す。
+        /// 存在しない場合はDirectoryNotFoundExceptionを返す。
+        /// </remarks>
+        public static string ConfigFolderPath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_configFolderPath))
+                {
+                    _configFolderPath = GetFolderPath("VitDeck.ConfigFolder");
+                }
+                return _configFolderPath;
+            }
+        }
+
+        private static string GetFolderPath(string assetLabel)
+        {
+            string folderPath = AssetDatabase.FindAssets("l:" + assetLabel)
+                 .Select(guid => AssetDatabase.GUIDToAssetPath(guid))
+                 .Where(path => path != null)
+                 .FirstOrDefault();
+            if (folderPath != null)
+            {
+                return folderPath;
+            }
+            else
+            {
+                throw new DirectoryNotFoundException(string.Format("folder for {0} not found.", assetLabel));
             }
         }
 
