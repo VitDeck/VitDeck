@@ -11,7 +11,8 @@ namespace VitDeck.Validator.Test
         public void TestValidate()
         {
             var rule = new SampleRule("サンプルルール");
-            var result = rule.Validate("Assets/VitDeck/Validator/Tests/SampleRule");
+            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests/SampleRule");
+            var result = rule.Validate(target);
             Assert.That(result.RuleName,Is.EqualTo("サンプルルール"));
             Assert.That(result.Issues.Count, Is.AtLeast(1));
         }

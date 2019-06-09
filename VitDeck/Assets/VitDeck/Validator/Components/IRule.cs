@@ -5,7 +5,7 @@ namespace VitDeck.Validator
     /// </summary>
     public interface IRule
     {
-        ValidationResult Validate(string baseFolder);
+        ValidationResult Validate(ValidationTarget target);
         ValidationResult GetResult();
     }
 }

@@ -18,12 +18,13 @@ namespace VitDeck.Validator
         public static ValidationResult[] Validate(IRuleSet ruleSet, string baseFolder)
         {
             var rules = ruleSet.GetRules();
+            var target = new ValidationTarget(baseFolder);
             var results = new List<ValidationResult>();
             foreach (var rule in rules)
             {
                 try
                 {
-                    ValidationResult result = rule.Validate(baseFolder);
+                    ValidationResult result = rule.Validate(target);
                     results.Add(result);
                 }
                 catch (FatalValidationErrorException e)
