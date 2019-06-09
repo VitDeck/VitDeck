@@ -42,12 +42,12 @@ namespace VitDeck.Validator
         /// </summary>
         /// <param name="baseFolder">ベースフォルダの`Assets/`から始まる相対パス。</param>
         /// <returns>`result`に格納された検証結果</returns>
-        public ValidationResult Validate(string baseFolderPath)
+        public ValidationResult Validate(ValidationTarget target)
         {
             result = new ValidationResult(name);
             try
             {
-                Logic(baseFolderPath);
+                Logic(target);
             }
             catch (FatalValidationErrorException e)
             {
@@ -60,6 +60,6 @@ namespace VitDeck.Validator
         /// ルールの検証ロジック。
         /// </summary>
         /// <param name="baseFolder">ベースフォルダの`Assets/`から始まる相対パス。</param>
-        protected abstract void Logic(string baseFolderPath);
+        protected abstract void Logic(ValidationTarget target);
     }
 }
