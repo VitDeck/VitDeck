@@ -58,6 +58,8 @@ namespace VitDeck.Validator
                         continue;
                     var levelMark = GetLevelMark(issue);
                     var issueLog = levelMark + issue.message + Environment.NewLine;
+                    if (issue.target != null)
+                        issueLog += string.Format("({0})", issue.target.name) + Environment.NewLine;
                     if (!string.IsNullOrEmpty(issue.solution))
                         issueLog += issue.solution + Environment.NewLine;
                     if (!string.IsNullOrEmpty(issue.solutionURL))
