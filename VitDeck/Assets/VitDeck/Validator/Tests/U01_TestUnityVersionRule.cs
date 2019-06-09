@@ -12,7 +12,8 @@ namespace VitDeck.Validator.Test
         {
             var version = UnityEngine.Application.unityVersion;
             var rule = new UnityVersionRule("Unityバージョンテスト", version);
-            var result = rule.Validate("Assets/VitDeck/Validator/Tests");
+            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests");
+            var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("Unityバージョンテスト"));
             Assert.That(result.Issues.Count, Is.EqualTo(0));
         }
@@ -21,7 +22,8 @@ namespace VitDeck.Validator.Test
         {
             var version = UnityEngine.Application.unityVersion;
             var rule = new UnityVersionRule("Unityバージョンテスト", "invalidVersion");
-            var result = rule.Validate("Assets/VitDeck/Validator/Tests");
+            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests");
+            var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("Unityバージョンテスト"));
             Assert.That(result.Issues.Count, Is.EqualTo(1));
             Assert.That(result.Issues[0].target, Is.EqualTo(null));

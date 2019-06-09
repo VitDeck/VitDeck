@@ -19,7 +19,7 @@ namespace VitDeck.Validator
             this.version = version;
         }
 
-        protected override void Logic(string baseFolderPath)
+        protected override void Logic(ValidationTarget target)
         {
             if (Application.unityVersion != version)
             {
