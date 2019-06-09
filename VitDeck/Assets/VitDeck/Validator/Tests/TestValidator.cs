@@ -11,7 +11,7 @@ namespace VitDeck.Validator.Test
         public void TestValidate()
         {
             var ruleSet = new SampleRuleSet();
-            var results = Validator.Validate(ruleSet, "Assts/Test");
+            var results = Validator.Validate(ruleSet, "Assets/VitDeck/Validator/Tests");
             foreach (var result in results)
             {
                 Debug.Log(result.GetResultLog());
