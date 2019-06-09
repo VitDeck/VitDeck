@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace VitDeck.Validator
 {
     [Serializable]
-    internal class FatalValidationErrorException : Exception
+    public class FatalValidationErrorException : Exception
     {
         public FatalValidationErrorException()
         {

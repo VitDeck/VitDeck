@@ -15,7 +15,7 @@ namespace VitDeck.Validator
         /// <summary>
         /// ルールチェックを実行する。
         /// </summary>
-        public static ValidationResult[] Validate(BaseRuleSet ruleSet, string baseFolder)
+        public static ValidationResult[] Validate(IRuleSet ruleSet, string baseFolder)
         {
             var rules = ruleSet.GetRules();
             var results = new List<ValidationResult>();
@@ -36,17 +36,24 @@ namespace VitDeck.Validator
             return results.ToArray();
         }
 
-        public static BaseRuleSet[] GetRuleSets()
+        public static IRuleSet[] GetRuleSets()
         {
-            var types = Assembly.GetExecutingAssembly()
-                .GetTypes()
-                .Where(type => type.IsSubclassOf(typeof(BaseRuleSet)));
-            var ruleSets = new List<BaseRuleSet>();
+            var types = System.AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => typeof(IRuleSet).IsAssignableFrom(type) && !type.IsAbstract && !type.IsInterface);
+            var ruleSets = new List<IRuleSet>();
             foreach (var type in types)
             {
-                var instance = (BaseRuleSet)System.Activator.CreateInstance(type);
-                if (instance != null)
-                    ruleSets.Add(instance);
+                try
+                {
+                    var instance = (IRuleSet)System.Activator.CreateInstance(type);
+                    if (instance != null)
+                        ruleSets.Add(instance);
+                }
+                catch (MissingMethodException)
+                {
+                    Debug.LogError(type + "の取得に失敗しました。RuleSetは引数無しでインスタンスを生成出来る必要があります。");
+                }
             }
             return ruleSets.ToArray();
         }

@@ -1,5 +1,5 @@
 {
-    "name": "VitDeck.Validator.Rule",
+    "name": "VitDeck.Validator.Components",
     "references": [],
     "includePlatforms": [
         "Editor"

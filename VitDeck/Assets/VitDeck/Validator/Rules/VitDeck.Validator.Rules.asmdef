@@ -2,7 +2,7 @@
     "name": "VitDeck.Validator.Rules",
     "references": [
         "VitDeck.Utilities",
-        "VitDeck.Validator.Rule"
+        "VitDeck.Validator.Components"
     ],
     "includePlatforms": [
         "Editor"
