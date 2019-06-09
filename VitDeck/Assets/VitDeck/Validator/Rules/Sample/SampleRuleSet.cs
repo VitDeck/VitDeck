@@ -9,6 +9,8 @@ namespace VitDeck.Validator
         {
             get { return "サンプルルールセット"; }
         }
+        [Validation(order = -2)]
+        public IRule unityVersionRule = new UnityVersionRule("Unityバージョンルール", "2017.4.15f1");
         [Validation(order = -1)]
         public IRule rule1 = new SampleRule("ルール１");
         [Validation]
