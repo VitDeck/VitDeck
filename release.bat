@@ -53,6 +53,7 @@ echo } >> %RELEASE_INFO_JSON% 2>&1
 echo Move to Release folder >> %BAT_LOG% 2>&1
 mkdir %RELEASE_PATH% >> %BAT_LOG% 2>&1
 move .\VitDeck\%PACKAGE_NAME% %RELEASE_PATH% >> %BAT_LOG% 2>&1
+move %RELEASE_INFO_JSON% %RELEASE_PATH% >> %BAT_LOG% 2>&1
 
 echo Unmount >> %BAT_LOG% 2>&1
 subst Z: /D
