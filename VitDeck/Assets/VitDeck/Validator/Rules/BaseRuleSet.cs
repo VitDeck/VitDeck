@@ -18,6 +18,17 @@ namespace VitDeck.Validator
         }
 
         /// <summary>
+        /// 検証対象検索オブジェクトを返す。
+        /// </summary>
+        public virtual IValidationTargetFinder TargetFinder
+        {
+            get
+            {
+                return new ValidationTargetFinder();
+            }
+        }
+
+        /// <summary>
         /// ルールセットに含まれる検証ルールの配列を返す
         /// </summary>
         /// <returns>検証ルールの配列</returns>
