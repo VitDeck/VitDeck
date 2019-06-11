@@ -64,7 +64,6 @@ namespace VitDeck.Validator.Test
             Assert.That(target.GetScenes(), Is.EqualTo(scenes));
             Assert.That(target.GetRootObjects(), Is.EqualTo(rootObjects));
             Assert.That(target.GetAllObjects(), Is.EqualTo(allObjects));
-
         }
         [Test]
         public void TestValidationtargetError()
