@@ -32,22 +32,24 @@ namespace VitDeck.Validator
         /// <summary>
         /// ベースフォルダ内のアセットの全てのGUIDを検索する
         /// </summary>
-        /// <remarks>検索結果にベースフォルダは含まれない。</remarks>
+        /// <remarks>検索結果にベースフォルダ自身を含む。</remarks>
         /// <param name="baseFolderPath">ベースフォルダのパス</param>
         /// <returns>ベースフォルダ内のアセットの全てのGUID</returns>
         public string[] FindAssetGuids(string baseFolderPath)
         {
             if (!AssetDatabase.IsValidFolder(baseFolderPath))
                 return null;
+            var baseFolderGuid = AssetDatabase.AssetPathToGUID(baseFolderPath);
             var assetGuids = AssetDatabase.FindAssets("", new string[] { baseFolderPath })
                 .Distinct()
-                .ToArray<string>();
-            return assetGuids;
+                .ToList<string>();
+            assetGuids.Insert(0, baseFolderGuid);
+            return assetGuids.ToArray();
         }
         /// <summary>
         /// ベースフォルダ内のアセットの全てのパスを検索する
         /// </summary>
-        /// <remarks>検索結果にベースフォルダは含まれない。</remarks>
+        /// <remarks>検索結果にベースフォルダ自身を含む。</remarks>
         /// <param name="baseFolderPath">ベースフォルダのパス</param>
         /// <returns>ベースフォルダ内のアセットの全てのパス</returns>
         public string[] FindAssetPaths(string baseFolderPath)
@@ -57,24 +59,27 @@ namespace VitDeck.Validator
             var assetPaths = AssetDatabase.FindAssets("", new string[] { baseFolderPath })
                 .Distinct()
                 .Select(guid => AssetDatabase.GUIDToAssetPath(guid))
-                .ToArray<string>();
-            return assetPaths;
+                .ToList<string>();
+            assetPaths.Insert(0, baseFolderPath);
+            return assetPaths.ToArray();
         }
         /// <summary>
         /// ベースフォルダ内のアセットの全てのオブジェクトを検索する
         /// </summary>
-        /// <remarks>検索結果にベースフォルダは含まれない。</remarks>
+        /// <remarks>検索結果にベースフォルダ自身を含む。</remarks>
         /// <param name="baseFolderPath">ベースフォルダのパス</param>
         /// <returns>ベースフォルダ内のアセットのオブジェクト</returns>
         public UnityEngine.Object[] FindAssetObjects(string baseFolderPath)
         {
             if (!AssetDatabase.IsValidFolder(baseFolderPath))
                 return null;
+            var baseFolder = AssetDatabase.LoadMainAssetAtPath(baseFolderPath);
             var assetObjects = AssetDatabase.FindAssets("", new string[] { baseFolderPath })
                 .Distinct()
                 .Select(guid => AssetDatabase.LoadMainAssetAtPath(AssetDatabase.GUIDToAssetPath(guid)))
-                .ToArray<UnityEngine.Object>();
-            return assetObjects;
+                .ToList<UnityEngine.Object>();
+            assetObjects.Insert(0, baseFolder);
+            return assetObjects.ToArray();
         }
 
         public Scene[] FindScenes(string baseFolderPath)
