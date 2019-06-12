@@ -1,3 +1,5 @@
+using UnityEditor;
+
 namespace VitDeck.Validator
 {
     /// <summary>
@@ -47,6 +49,9 @@ namespace VitDeck.Validator
             result = new ValidationResult(name);
             try
             {
+                var path = target.GetBaseFolderPath();
+                if (!AssetDatabase.IsValidFolder(path))
+                    throw new FatalValidationErrorException(string.Format("正しいベースフォルダを指定してください。:{0}", path));
                 Logic(target);
             }
             catch (FatalValidationErrorException e)

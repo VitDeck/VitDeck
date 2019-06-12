@@ -23,13 +23,13 @@ namespace VitDeck.Validator.Test
         public void TestValidateException()
         {
             var ruleSet = new SampleRuleSet();
-            LogAssert.Expect(LogType.Error, new Regex("^ルールチェックを中断しました:.*ベースフォルダが指定されていません。"));
-            var results = Validator.Validate(ruleSet, "");
+            LogAssert.Expect(LogType.Error, new Regex(@"ルールチェックを中断しました:正しいベースフォルダを指定してください。:invalid"));
+            var results = Validator.Validate(ruleSet, "invalid");
             Assert.That(results.Length, Is.AtLeast(1));
             Assert.That(results[0].Issues.Count, Is.EqualTo(1));
             Assert.That(results[0].Issues[0].target, Is.EqualTo(null));
             Assert.That(results[0].Issues[0].level, Is.EqualTo(IssueLevel.Fatal));
-            Assert.That(results[0].Issues[0].message, Is.EqualTo("ベースフォルダが指定されていません。"));
+            Assert.That(results[0].Issues[0].message, Is.EqualTo("正しいベースフォルダを指定してください。:invalid"));
             Assert.That(results[0].Issues[0].solution, Is.EqualTo(""));
             Assert.That(results[0].Issues[0].solutionURL, Is.EqualTo(""));
         }
