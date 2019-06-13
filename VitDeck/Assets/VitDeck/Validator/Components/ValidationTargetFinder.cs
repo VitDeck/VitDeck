@@ -21,6 +21,10 @@ namespace VitDeck.Validator
         /// <returns>検証対象</returns>
         public ValidationTarget Find(string baseFonderPath)
         {
+            if (!AssetDatabase.IsValidFolder(baseFonderPath))
+            {
+                throw new FatalValidationErrorException(string.Format("正しいベースフォルダを指定してください。:{0}", baseFonderPath));
+            }
             return new ValidationTarget(baseFonderPath,
                 FindAssetGuids(baseFonderPath),
                 FindAssetPaths(baseFonderPath),

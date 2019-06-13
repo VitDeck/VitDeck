@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using System.Linq;
 using UnityEditor;
+using UnityEngine;
 
 namespace VitDeck.Validator.Test
 {
@@ -20,6 +21,16 @@ namespace VitDeck.Validator.Test
             //Assert.That(validationTarget.GetScenes(), Is.Not.Null); //ToDo:実装
             //Assert.That(validationTarget.GetRootObjects(), Is.Not.Null); //ToDo:実装
             //Assert.That(validationTarget.GetAllObjects(), Is.Not.Null); //ToDo:実装
+        }
+        [Test]
+        public void TestFindInvalid()
+        {
+            var testFolder = "Invalid";
+            var finder = new ValidationTargetFinder();
+            Assert.That(()=> finder.Find(testFolder),
+                 Throws.Exception.TypeOf<FatalValidationErrorException>()
+                 .And.Message.EqualTo("正しいベースフォルダを指定してください。:Invalid"));
+
         }
         [Test]
         public void TestFindAssetPaths()

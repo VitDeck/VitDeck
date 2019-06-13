@@ -22,9 +22,10 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestValidateException()
         {
-            var ruleSet = new SampleRuleSet();
-            LogAssert.Expect(LogType.Error, new Regex(@"ルールチェックを中断しました:正しいベースフォルダを指定してください。:invalid"));
+            var ruleSet = new ExceptionRuleSet();
+            //Find中の例外
             var results = Validator.Validate(ruleSet, "invalid");
+            LogAssert.Expect(LogType.Error, new Regex(@".*正しいベースフォルダを指定してください。.*"));
             Assert.That(results.Length, Is.AtLeast(1));
             Assert.That(results[0].Issues.Count, Is.EqualTo(1));
             Assert.That(results[0].Issues[0].target, Is.EqualTo(null));
@@ -32,6 +33,9 @@ namespace VitDeck.Validator.Test
             Assert.That(results[0].Issues[0].message, Is.EqualTo("正しいベースフォルダを指定してください。:invalid"));
             Assert.That(results[0].Issues[0].solution, Is.EqualTo(""));
             Assert.That(results[0].Issues[0].solutionURL, Is.EqualTo(""));
+            //Validate中の例外
+            results = Validator.Validate(ruleSet, "Assets/VitDeck/Validator/Tests");
+            LogAssert.Expect(LogType.Error, new Regex(@"ルールチェックを中断しました:テスト用の例外"));
         }
         [Test]
         public void TestRuleSet()

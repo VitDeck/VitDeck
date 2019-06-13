@@ -18,8 +18,20 @@ namespace VitDeck.Validator
         public static ValidationResult[] Validate(IRuleSet ruleSet, string baseFolder)
         {
             var rules = ruleSet.GetRules();
-            var target = ruleSet.TargetFinder.Find(baseFolder);
+            ValidationTarget target;
             var results = new List<ValidationResult>();
+            try
+            {
+                target = ruleSet.TargetFinder.Find(baseFolder);
+            }
+            catch(FatalValidationErrorException e)
+            {
+                Debug.LogError(e.Message);
+                var result = new ValidationResult("検証対象の検索");
+                result.AddIssue(new Issue(null, IssueLevel.Fatal, e.Message));
+                results.Add(result);
+                return results.ToArray();
+            }
             foreach (var rule in rules)
             {
                 try
