@@ -8,10 +8,8 @@ namespace VitDeck.Validator
     /// </summary>
     public class ExceptionRule : BaseRule
     {
-        private string customSetting;
-        public ExceptionRule(string name, string custom = "デフォルト設定値") : base(name)
+        public ExceptionRule(string name) : base(name)
         {
-            this.customSetting = custom;
         }
 
         protected override void Logic(ValidationTarget target)
