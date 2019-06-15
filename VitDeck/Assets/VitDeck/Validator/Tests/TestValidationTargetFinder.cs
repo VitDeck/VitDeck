@@ -30,7 +30,6 @@ namespace VitDeck.Validator.Test
             Assert.That(()=> finder.Find(testFolder),
                  Throws.Exception.TypeOf<FatalValidationErrorException>()
                  .And.Message.EqualTo("正しいベースフォルダを指定してください。:Invalid"));
-
         }
         [Test]
         public void TestFindAssetPaths()
