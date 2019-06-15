@@ -15,16 +15,16 @@ namespace VitDeck.Validator
         /// <summary>
         /// ルールチェックを実行する。
         /// </summary>
-        public static ValidationResult[] Validate(IRuleSet ruleSet, string baseFolder)
+        public static ValidationResult[] Validate(IRuleSet ruleSet, string baseFolder, bool forceOpenScene = false)
         {
             var rules = ruleSet.GetRules();
             ValidationTarget target;
             var results = new List<ValidationResult>();
             try
             {
-                target = ruleSet.TargetFinder.Find(baseFolder);
+                target = ruleSet.TargetFinder.Find(baseFolder, forceOpenScene);
             }
-            catch(FatalValidationErrorException e)
+            catch (FatalValidationErrorException e)
             {
                 Debug.LogError(e.Message);
                 var result = new ValidationResult("検証対象の検索");
