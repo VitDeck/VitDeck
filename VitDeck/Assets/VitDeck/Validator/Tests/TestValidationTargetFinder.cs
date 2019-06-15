@@ -97,7 +97,7 @@ namespace VitDeck.Validator.Test
         {
             var testFolder = "Assets/VitDeck/Validator/Tests/ValidationTargetFinder";
             var finder = new ValidationTargetFinder();
-            var rootObjects = finder.FindRootObjects(testFolder);
+            var rootObjects = finder.FindRootObjects(testFolder, true);
             //New Scene
             Assert.That(rootObjects.Length, Is.EqualTo(3));
             Assert.That(Array.Exists(rootObjects, obj => obj.name == "Cube(main)"), Is.True);
@@ -128,6 +128,16 @@ namespace VitDeck.Validator.Test
             Assert.That(finder.FindScenes(path), Is.Null);
             Assert.That(finder.FindRootObjects(path), Is.Null);
             Assert.That(finder.FindAllObjects(path), Is.Null);
+        }
+        [Test]
+        public void TestFindNoObject()
+        {
+            var testFolder = "Assets/VitDeck/Validator/Tests/ValidationTargetFinderNoObject";
+            var finder = new ValidationTargetFinder();
+            var rootObjects = finder.FindRootObjects(testFolder, true);
+            Assert.That(rootObjects.Length, Is.EqualTo(0));
+            var allObjects = finder.FindAllObjects(testFolder, true);
+            Assert.That(allObjects.Length, Is.EqualTo(0));
         }
     }
 }
