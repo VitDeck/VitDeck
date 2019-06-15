@@ -39,7 +39,6 @@ namespace VitDeck.Validator.Test
             Assert.That(issue.message, Is.EqualTo(System.String.Format("アセットのパスが長すぎます。（制限={0}, 超過={1}, パス={2}）", targetAssetPath.Length - 1, 1, targetAssetPath)));
             Assert.That(issue.solution, Is.Empty);
             Assert.That(issue.solutionURL, Is.Empty);
-
         }
     }
 }
