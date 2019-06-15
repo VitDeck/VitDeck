@@ -8,7 +8,7 @@ namespace VitDeck.Validator.Test
     public class TestAssetPathLengthRule
     {
         [Test]
-        public void TestValidate()
+        public void TestValidateNoTargets()
         {
             var version = UnityEngine.Application.unityVersion;
             var rule = new AssetPathLengthRule("アセットパス長テスト");
@@ -18,7 +18,7 @@ namespace VitDeck.Validator.Test
             Assert.That(result.Issues.Count, Is.EqualTo(0));
         }
         [Test]
-        public void TestValidateError()
+        public void TestValidate()
         {
             var targetAssetPath = "Assets/VitDeck/Validator/Tests/A03_TestAssetPathLengthRule.cs";
             var targetAssetPaths = new string[] { targetAssetPath };
