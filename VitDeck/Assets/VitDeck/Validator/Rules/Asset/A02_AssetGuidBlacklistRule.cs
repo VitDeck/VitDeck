@@ -14,7 +14,7 @@ namespace VitDeck.Validator
         /// コンストラクタ
         /// </summary>
         /// <param name="name">ルール名</param>
-        /// <param name="guids">禁止アセットのGUID配列</param>
+        /// <param name="guids">検出したいアセットのGUIDの配列</param>
         public AssetGuidBlacklistRule(string name, string[] guids) : base(name)
         {
             this.guids = guids;
