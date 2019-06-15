@@ -15,5 +15,7 @@ namespace VitDeck.Validator
         public IRule rule2 = new SampleRule("ルール２", "カスタム設定値２");
         [Validation]
         public IRule unityVersionRule = new UnityVersionRule("Unityバージョンルール", "2017.4.15f1");
+        [Validation]
+        public IRule assetPathLengthRule = new AssetPathLengthRule("アセットパス長制限ルール");
     }
 }
