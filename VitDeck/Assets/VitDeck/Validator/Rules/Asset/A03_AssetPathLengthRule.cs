@@ -29,7 +29,7 @@ namespace VitDeck.Validator
                 if (excess > 0)
                 {
                     var referenceObject = AssetDatabase.LoadAssetAtPath<Object>(path);
-                    var message = System.String.Format("長すぎるパスがあります。（制限={0}, 超過={1}, パス={2}）", limit, excess, path);
+                    var message = System.String.Format("アセットのパスが長すぎます。（制限={0}, 超過={1}, パス={2}）", limit, excess, path);
                     AddIssue(new Issue(referenceObject, IssueLevel.Error, message, string.Empty));
                 }
             }
