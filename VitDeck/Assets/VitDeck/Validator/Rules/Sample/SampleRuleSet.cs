@@ -18,5 +18,7 @@ namespace VitDeck.Validator
         [Validation]
         public IRule assetGuidBlacklistRule = new AssetGuidBlacklistRule("[A02]特定のGUIDを持つアセットの検出ルール",
             new string[] { "740112f6e77ca914d9c26eef5d68accd", "ae68339621fb41b4f9905188526120ea" });
+        [Validation]
+        public IRule assetPathLengthRule = new AssetPathLengthRule("[A03]アセットパス長制限ルール", 184);
     }
 }
