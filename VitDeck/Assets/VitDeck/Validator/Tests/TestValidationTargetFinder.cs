@@ -109,7 +109,7 @@ namespace VitDeck.Validator.Test
         {
             var testFolder = "Assets/VitDeck/Validator/Tests/ValidationTargetFinder";
             var finder = new ValidationTargetFinder();
-            var allObjects = finder.FindAllObjects(testFolder);
+            var allObjects = finder.FindAllObjects(testFolder, true);
             //New Scene
             Assert.That(allObjects.Length, Is.AtLeast(4));
             Assert.That(Array.Exists(allObjects, obj => obj.name == "Cube(main)"), Is.True);
