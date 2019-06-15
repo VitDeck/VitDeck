@@ -117,7 +117,6 @@ namespace VitDeck.Validator
                 var scene = SceneManager.GetSceneByPath(path);
                 if (scene.path == null)
                 {
-
                     if (forceOpenScene ? true :
                         EditorUtility.DisplayDialog("検証対象のシーンが開かれていません。", "検証対象のシーンを開きますか？" + Environment.NewLine + path, "開く", "中止"))
                     {
