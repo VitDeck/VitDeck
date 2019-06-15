@@ -16,6 +16,6 @@ namespace VitDeck.Validator
         [Validation]
         public IRule unityVersionRule = new UnityVersionRule("Unityバージョンルール", "2017.4.15f1");
         [Validation]
-        public IRule assetPathLengthRule = new AssetPathLengthRule("アセットパス長制限ルール");
+        public IRule assetPathLengthRule = new AssetPathLengthRule("[A03]アセットパス長制限ルール");
     }
 }
