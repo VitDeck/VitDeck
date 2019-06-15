@@ -11,6 +11,11 @@ namespace VitDeck.Validator
         string RuleSetName { get; }
 
         /// <summary>
+        /// 検証対象検索オブジェクト
+        /// </summary>
+        IValidationTargetFinder TargetFinder { get; }
+
+        /// <summary>
         /// ルールセットに含まれる検証ルールの配列を返す
         /// </summary>
         /// <returns>検証ルールの配列</returns>

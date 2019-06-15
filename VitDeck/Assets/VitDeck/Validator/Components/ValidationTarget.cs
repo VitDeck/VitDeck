@@ -6,6 +6,7 @@ namespace VitDeck.Validator
     /// <summary>
     /// 検証対象オブジェクトを格納したコンテナクラス
     /// </summary>
+    /// <remarks>設定されていない対象を取得しようとした場合は`FatalValidationErrorException`を発生させる。</remarks>
     public class ValidationTarget
     {
         private readonly string baseFolderPath;
@@ -19,11 +20,28 @@ namespace VitDeck.Validator
         /// <summary>
         /// コンストラクタ。
         /// </summary>
-        /// <param name="baseFolderPath">`Asset`から始まる検証対象のベースフォルダのパス</param>
-        public ValidationTarget(string baseFolderPath)
+        /// <param name="baseFolderPath">ベースフォルダのパス</param>
+        /// <param name="assetGuids">ベースフォルダ内の全てのアセットファイルのGUID</param>
+        /// <param name="assetPaths">ベースフォルダ内の全てのアセットファイルのパス</param>
+        /// <param name="assetObjects">ベースフォルダ内の全てのアセットオブジェクト</param>
+        /// <param name="scenes">検証対象のシーン</param>
+        /// <param name="rootObjects">検証対象のルートオブジェクト</param>
+        /// <param name="allObjects">検証対象の全てのオブジェクト</param>
+        public ValidationTarget(string baseFolderPath,
+                                string[] assetGuids = null,
+                                string[] assetPaths = null,
+                                UnityEngine.Object[] assetObjects = null,
+                                Scene[] scenes = null,
+                                GameObject[] rootObjects = null,
+                                GameObject[] allObjects = null)
         {
             this.baseFolderPath = baseFolderPath;
-            //ToDo:各種対象の詰め込み
+            this.assetGuids = assetGuids;
+            this.assetPaths = assetPaths;
+            this.assetObjects = assetObjects;
+            this.scenes = scenes;
+            this.rootObjects = rootObjects;
+            this.allObjects = allObjects;
         }
 
         /// <summary>
@@ -40,6 +58,8 @@ namespace VitDeck.Validator
         /// <returns>検証対象の全てのシーンファイル</returns>
         public Scene[] GetScenes()
         {
+            if (scenes == null)
+                throw new FatalValidationErrorException("Faild to get scenes.");
             return scenes;
         }
         /// <summary>
@@ -48,6 +68,8 @@ namespace VitDeck.Validator
         /// <returns> 検証対象の全てのルートオブジェクト</returns>
         public GameObject[] GetRootObjects()
         {
+            if (rootObjects == null)
+                throw new FatalValidationErrorException("Faild to get root objects.");
             return rootObjects;
         }
         /// <summary>
@@ -56,6 +78,8 @@ namespace VitDeck.Validator
         /// <returns>検証対象の全てのGameObject</returns>
         public GameObject[] GetAllObjects()
         {
+            if (allObjects == null)
+                throw new FatalValidationErrorException("Faild to get all objects.");
             return allObjects;
 
         }
@@ -65,6 +89,8 @@ namespace VitDeck.Validator
         /// <returns>全てのアセットのGUID</returns>
         public string[] GetAllAssetGuids()
         {
+            if (assetGuids == null)
+                throw new FatalValidationErrorException("Faild to get asset GUIDs.");
             return assetGuids;
         }
         /// <summary>
@@ -73,6 +99,8 @@ namespace VitDeck.Validator
         /// <returns>検証対象の全てのアセットのパス</returns>
         public string[] GetAllAssetPaths()
         {
+            if (assetPaths == null)
+                throw new FatalValidationErrorException("Faild to get asset Paths.");
             return assetPaths;
         }
         /// <summary>
@@ -81,6 +109,8 @@ namespace VitDeck.Validator
         /// <returns>全てのアセットのオブジェクト</returns>
         public UnityEngine.Object[] GetAllAssets()
         {
+            if (assetObjects == null)
+                throw new FatalValidationErrorException("Faild to get asset Objects.");
             return assetObjects;
         }
     }
