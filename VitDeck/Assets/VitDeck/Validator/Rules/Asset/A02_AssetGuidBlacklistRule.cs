@@ -25,14 +25,11 @@ namespace VitDeck.Validator
             var hitObjectPaths = target.GetAllAssetGuids()
                 .Where(targetGuid => Array.Exists(guids, guid => guid == targetGuid))
                 .Select(guid => AssetDatabase.GUIDToAssetPath(guid));
-            if (hitObjectPaths.Count() > 0)
+            foreach (var path in hitObjectPaths)
             {
-                foreach (var path in hitObjectPaths)
-                {
-                    var obj = AssetDatabase.LoadMainAssetAtPath(path);
-                    var message = "該当するアセットが検出されました。" + Environment.NewLine + path;
-                    AddIssue(new Issue(obj, IssueLevel.Error, message, string.Empty, string.Empty));
-                }
+                var obj = AssetDatabase.LoadMainAssetAtPath(path);
+                var message = "該当するアセットが検出されました。" + Environment.NewLine + path;
+                AddIssue(new Issue(obj, IssueLevel.Error, message, string.Empty, string.Empty));
             }
         }
     }
