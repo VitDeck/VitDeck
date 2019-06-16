@@ -30,7 +30,7 @@ namespace VitDeck.Validator
         /// <param name="pivot">バウンディングボックスの原点（中心下）</param>
         public BoothBoundsRule(string name, Vector3 size, float margin, Vector3 pivot) : base(name)
         {
-            var center = pivot + Vector3.up * size.y * 0.5f;
+            var center = pivot + (Vector3.up * size.y * 0.5f);
             var limit = new Bounds(center, size);
             limit.Expand(margin);
             this.limit = limit;
