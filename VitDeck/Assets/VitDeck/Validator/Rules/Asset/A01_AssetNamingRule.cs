@@ -9,15 +9,15 @@ namespace VitDeck.Validator
     /// </summary>
     public class AssetNamingRule : BaseRule
     {
-        private readonly string patternMatch;
+        private readonly string permissionPattern;
         /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="name">ルール名</param>
         /// <param name="assetName">アセット名</param>
-        public AssetNamingRule(string name, string patternMatch = "^[\x21-\x7e]+$") : base(name)
+        public AssetNamingRule(string name, string permissionPattern = "^[\x21-\x7e]+$") : base(name)
         {
-            this.patternMatch = patternMatch;
+            this.permissionPattern = permissionPattern;
         }
 
         protected override void Logic(ValidationTarget target)
@@ -27,10 +27,10 @@ namespace VitDeck.Validator
             foreach (var path in paths)
             {
                 var filename = Path.GetFileName(path);
-                if (!Regex.IsMatch(filename, patternMatch))
+                if (!Regex.IsMatch(filename, permissionPattern))
                 {
                     var reference = AssetDatabase.LoadMainAssetAtPath(path);                    
-                    var message = string.Format("アセット名({0})に使用禁止文字が含まれています。(使用可能文字の範囲={1})", filename, patternMatch);                    
+                    var message = string.Format("アセット名({0})に使用禁止文字が含まれています。(使用可能文字の範囲={1})", filename, permissionPattern);                    
                     AddIssue(new Issue(reference, IssueLevel.Error, message, string.Empty));
                 }
             }
