@@ -11,23 +11,25 @@ namespace VitDeck.Validator
     public class BoothBoundsRule : BaseRule
     {
         private readonly Bounds limit;
-        private readonly Vector3 pivot;
-        private readonly Vector3 size;
-        private readonly float margin;
 
         /// <summary>
         /// コンストラクタ。
         /// </summary>
         /// <param name="name">ルールの名前</param>
-        /// <param name="pivot">バウンディングボックスの原点（中心下）</param>
         /// <param name="size">バウンディングボックスの大きさ</param>
         /// <param name="margin">制限に持たせる余裕</param>
-        public BoothBoundsRule(string name, Vector3 pivot, Vector3 size, float margin) : base(name)
-        {
-            this.pivot = pivot;
-            this.size = size;
-            this.margin = margin;
+        public BoothBoundsRule(string name, Vector3 size, float margin)
+            : this(name, size, margin, pivot: Vector3.zero) { }
 
+        /// <summary>
+        /// コンストラクタ。
+        /// </summary>
+        /// <param name="name">ルールの名前</param>
+        /// <param name="size">バウンディングボックスの大きさ</param>
+        /// <param name="margin">制限に持たせる余裕</param>
+        /// <param name="pivot">バウンディングボックスの原点（中心下）</param>
+        public BoothBoundsRule(string name, Vector3 size, float margin, Vector3 pivot) : base(name)
+        {
             var center = pivot + Vector3.up * size.y * 0.5f;
             var limit = new Bounds(center, size);
             limit.Expand(margin);
@@ -44,7 +46,7 @@ namespace VitDeck.Validator
 
             foreach (var oversize in oversizes)
             {
-                AddIssue(new Issue(oversize.objectReference, IssueLevel.Error, string.Format("オブジェクトがブースサイズ制限を超えています。（制限={0}, オブジェクト位置={1}）", limit, oversize.bounds)));
+                AddIssue(new Issue(oversize.objectReference, IssueLevel.Error, string.Format("オブジェクトがブースサイズ制限を超えています。（制限={0}, オブジェクト={1}）", limit, oversize.bounds)));
             }
         }
 
