@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using System.Text.RegularExpressions;
 
 namespace VitDeck.Validator
@@ -13,8 +13,8 @@ namespace VitDeck.Validator
         /// コンストラクタ
         /// </summary>
         /// <param name="name">ルール名</param>
-        /// <param name="assetName">アセット名</param>
-        public AssetNamingRule(string name, string permissionPattern = "[\x21-\x7e]+") : base(name)
+        /// <param name="permissionPattern">アセット名</param>
+        public AssetNamingRule(string name, string permissionPattern = "[\x21-\x7e ]+") : base(name)
         {
             this.permissionPattern = permissionPattern;
         }
