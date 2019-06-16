@@ -1,6 +1,5 @@
 ﻿using UnityEditor;
 using System.Text.RegularExpressions;
-using System.IO;
 
 namespace VitDeck.Validator
 {
@@ -15,7 +14,7 @@ namespace VitDeck.Validator
         /// </summary>
         /// <param name="name">ルール名</param>
         /// <param name="assetName">アセット名</param>
-        public AssetNamingRule(string name, string permissionPattern = "^[\x21-\x7e]+$") : base(name)
+        public AssetNamingRule(string name, string permissionPattern = "[\x21-\x7e]+") : base(name)
         {
             this.permissionPattern = permissionPattern;
         }
@@ -23,16 +22,28 @@ namespace VitDeck.Validator
         protected override void Logic(ValidationTarget target)
         {
             var paths = target.GetAllAssetPaths();
-            
+            var matchPattern = string.Format("^{0}$", permissionPattern);
+
             foreach (var path in paths)
             {
-                if (!Regex.IsMatch(path, permissionPattern))
+                if (!Regex.IsMatch(path, matchPattern))
                 {
+                    string prohibition = GetProhibitionPattern(path, permissionPattern);
                     var reference = AssetDatabase.LoadMainAssetAtPath(path);
-                    var message = string.Format("アセット名({0})に使用禁止文字が含まれています。(使用可能文字の範囲={1})", path, permissionPattern);                    
+                    var message = string.Format("アセット名({0})に使用禁止文字({1})が含まれています。", path, prohibition);
                     AddIssue(new Issue(reference, IssueLevel.Error, message, string.Empty));
                 }
             }
+        }
+
+        private string GetProhibitionPattern(string path, string permissionPattern)
+        {
+            string prohibition = path;
+            foreach (Match match in Regex.Matches(path, permissionPattern))
+            {
+                prohibition = Regex.Replace(prohibition, match.Value, "");
+            }
+            return prohibition;
         }
     }
 }
