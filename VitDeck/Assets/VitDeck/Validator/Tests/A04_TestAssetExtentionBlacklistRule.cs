@@ -24,8 +24,10 @@ namespace VitDeck.Validator.Test
         {
             var rule = new AssetExtentionBlacklistRule("拡張子テスト", new string[] { "TXT", ".prefab", ".Fbx" });
             var path = "Assets/VitDeck/Validator/Tests/Data/A04_AssetExtentionBlacklistRule/TestData.txt";
+            var folderPath = "Assets/VitDeck/Validator/Tests/Data/A04_AssetExtentionBlacklistRule/test.txt";
             var targetPaths = new string[] {
                 path ,
+                folderPath,
                 "Assets/VitDeck/Validator/Tests/test dummy data.prefab" ,
                 "Assets/VitDeck/Validator/Tests/test dummy data.fake.FBX",
                 "Assets/VitDeck/Validator/Tests/test_dummy_OK.fbx2" };

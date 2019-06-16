@@ -31,7 +31,7 @@ namespace VitDeck.Validator
             var extList = new List<string>();
             foreach (var extention in extentions)
             {
-                if(!string.IsNullOrEmpty(extention))
+                if (!string.IsNullOrEmpty(extention))
                 {
                     var ext = extention.StartsWith(".") ? extention : "." + extention;
                     extList.Add(ext);
@@ -45,6 +45,8 @@ namespace VitDeck.Validator
                 .Where(targetPath => extList.Exists(ext => ext.Equals(Path.GetExtension(targetPath), StringComparison.InvariantCultureIgnoreCase)));
             foreach (var path in hitPaths)
             {
+                if (AssetDatabase.IsValidFolder(path))
+                    continue;
                 var obj = AssetDatabase.LoadMainAssetAtPath(path);
                 var message = string.Format("拡張子が`{0}`のアセットが検出されました。", Path.GetExtension(path)) + Environment.NewLine + path;
                 AddIssue(new Issue(obj, IssueLevel.Error, message, string.Empty, string.Empty));
