@@ -18,7 +18,8 @@ namespace VitDeck.Validator
         /// <param name="name">ルール名</param>
         /// <param name="extentions">検出したい拡張子の配列 (例：`.blend`,`TXT`)</param>
         /// <remarks>
-        /// `extentions`の`.`から始まっていない設定文字列は先頭に`.`があるものとして解釈する。
+        /// `extentions`の設定文字列は大文字/小文字を考慮しない。
+        /// `.`から始まっていない場合は先頭に`.`があるものとして解釈する。
         /// </remarks>
         public AssetExtentionBlacklistRule(string name, string[] extentions) : base(name)
         {
