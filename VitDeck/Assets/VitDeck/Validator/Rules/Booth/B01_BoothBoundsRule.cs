@@ -46,7 +46,7 @@ namespace VitDeck.Validator
 
             foreach (var oversize in oversizes)
             {
-                AddIssue(new Issue(oversize.objectReference, IssueLevel.Error, string.Format("オブジェクトがブースサイズ制限を超えています。（制限={0}, オブジェクト={1}, オブジェクトの種類={2}）", limit, oversize.bounds, oversize.objectReference.GetType().Name)));
+                AddIssue(new Issue(oversize.objectReference, IssueLevel.Error, string.Format("オブジェクトがブースサイズ制限を超えています。{3}制限={0}{3}対象={1}{3}オブジェクトの種類={2}", limit, oversize.bounds, oversize.objectReference.GetType().Name, System.Environment.NewLine)));
             }
         }
 
