@@ -58,7 +58,6 @@ namespace VitDeck.Validator
                         AddIssue(new Issue(obj, IssueLevel.Error, message, solution, string.Empty));
                     }
                 }
-
             }
         }
     }
