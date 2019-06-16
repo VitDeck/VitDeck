@@ -26,11 +26,10 @@ namespace VitDeck.Validator
             
             foreach (var path in paths)
             {
-                var filename = Path.GetFileName(path);
-                if (!Regex.IsMatch(filename, permissionPattern))
+                if (!Regex.IsMatch(path, permissionPattern))
                 {
-                    var reference = AssetDatabase.LoadMainAssetAtPath(path);                    
-                    var message = string.Format("アセット名({0})に使用禁止文字が含まれています。(使用可能文字の範囲={1})", filename, permissionPattern);                    
+                    var reference = AssetDatabase.LoadMainAssetAtPath(path);
+                    var message = string.Format("アセット名({0})に使用禁止文字が含まれています。(使用可能文字の範囲={1})", path, permissionPattern);                    
                     AddIssue(new Issue(reference, IssueLevel.Error, message, string.Empty));
                 }
             }

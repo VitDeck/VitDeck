@@ -37,7 +37,6 @@ namespace VitDeck.Validator.Test
         {
             var targetAssetPath = "Assets/VitDeck/Validator/Tests/Data/A01_AssetNamingRule/FailName_あああ.prefab";
             var targetAssetPaths = new string[] { targetAssetPath };
-            var failFilename = "FailName_あああ.prefab";
             var pattern = "^[\x21-\x7e]+$";
 
             var rule = new AssetNamingRule("アセット名使用禁止文字検出", pattern);
@@ -51,7 +50,30 @@ namespace VitDeck.Validator.Test
             Assert.That(issue.level, Is.EqualTo(IssueLevel.Error));
             Assert.That(issue.target, Is.EqualTo(AssetDatabase.LoadMainAssetAtPath(targetAssetPath)));
             Assert.That(issue.message,
-                        Is.EqualTo(string.Format("アセット名({0})に使用禁止文字が含まれています。(使用可能文字の範囲={1})", failFilename, pattern)));
+                        Is.EqualTo(string.Format("アセット名({0})に使用禁止文字が含まれています。(使用可能文字の範囲={1})", targetAssetPath, pattern)));
+            Assert.That(issue.solution, Is.Empty);
+            Assert.That(issue.solutionURL, Is.Empty);
+        }
+
+        [Test]
+        public void TestValidateFailFolderName()
+        {
+            var targetAssetPath = "Assets/VitDeck/Validator/Tests/Data/A01_AssetNamingRule/FailFolderName_あああ";
+            var targetAssetPaths = new string[] { targetAssetPath };
+            var pattern = "^[\x21-\x7e]+$";
+
+            var rule = new AssetNamingRule("アセット名使用禁止文字検出", pattern);
+            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests/Data/A01_AssetNamingRule", assetPaths: targetAssetPaths);
+            var result = rule.Validate(target);
+
+            Assert.That(result.RuleName, Is.EqualTo("アセット名使用禁止文字検出"));
+            Assert.That(result.Issues.Count, Is.EqualTo(1));
+
+            var issue = result.Issues[0];
+            Assert.That(issue.level, Is.EqualTo(IssueLevel.Error));
+            Assert.That(issue.target, Is.EqualTo(AssetDatabase.LoadMainAssetAtPath(targetAssetPath)));
+            Assert.That(issue.message,
+                        Is.EqualTo(string.Format("アセット名({0})に使用禁止文字が含まれています。(使用可能文字の範囲={1})", targetAssetPath, pattern)));
             Assert.That(issue.solution, Is.Empty);
             Assert.That(issue.solutionURL, Is.Empty);
         }
