@@ -15,7 +15,6 @@ namespace VitDeck.Validator
         /// </summary>
         /// <param name="name">ルール名</param>
         /// <param name="assetName">アセット名</param>
-		/// <remarks>`regularExpression`</remarks>
         public AssetNamingRule(string name, string patternMatch = "^[\x21-\x7e]+$") : base(name)
         {
             this.patternMatch = patternMatch;
