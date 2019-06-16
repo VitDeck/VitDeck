@@ -13,7 +13,7 @@ namespace VitDeck.Validator
         /// コンストラクタ
         /// </summary>
         /// <param name="name">ルール名</param>
-        /// <param name="permissionPattern">アセット名</param>
+        /// <param name="permissionPattern">使用許可文字列の正規表現</param>
         public AssetNamingRule(string name, string permissionPattern = "[\x21-\x7e ]+") : base(name)
         {
             this.permissionPattern = permissionPattern;
