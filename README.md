@@ -9,7 +9,12 @@ VitDeckは多人数がUnityを使用して特定のルールに沿った制作�
 
 # 汎用ルール
 以下のルールが最初から利用できます。独自ルールも定義可能です。
-- 指定したバージョンのUnityを使用しているか
+- 指定のUnityバージョンで動作しているか検証
+- アセット名の使用禁止文字の検出
+- 特定のGUIDを持つアセットの検出
+- アセットの長すぎるパスの検出
+- 特定の拡張子を持つアセットの検出
+- ブースがBounds内に収まっているかの検証
 
 # ツール構成方法
 - [テンプレートの作成方法](https://github.com/vkettools/VitDeck/wiki/MakingTemplate)
@@ -19,7 +24,7 @@ VitDeckは多人数がUnityを使用して特定のルールに沿った制作�
 # 動作環境
 以下の環境でテストしています。
 - Windows 10
-- Unity 2017.4.15f1
+- Unity 2017.4.28f1
 
 # License
 Copyright (c) 2019 VketTools
