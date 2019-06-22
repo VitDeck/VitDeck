@@ -17,5 +17,11 @@ namespace VitDeck.Utilities.Tests
             Assert.That(VersionUtility.IsSemanticVersioning("1.342.1-alpha3.2.3+5260032"), Is.True);
             Assert.That(VersionUtility.IsSemanticVersioning("1.342.1+5260032-alpha3.2.3"), Is.False);
         }
+        [Test]
+        public void TestGetVersion()
+        {
+            var version = VersionUtility.GetVersion();
+            Assert.That(VersionUtility.IsSemanticVersioning(version), Is.True);
+        }
     }
 }

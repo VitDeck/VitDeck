@@ -15,12 +15,6 @@ namespace VitDeck.Main.GUI
             // グローバルな設定画面を開く
         }
 
-        [MenuItem(prefix + "Check Booth", priority = 101)]
-        static void CheckBooth()
-        {
-            // ブースチェッカーを開く
-        }
-
         [MenuItem(prefix + "Export Booth", priority = 102)]
         static void ExportBooth()
         {
