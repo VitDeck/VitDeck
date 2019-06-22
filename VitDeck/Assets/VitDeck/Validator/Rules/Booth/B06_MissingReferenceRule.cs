@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEditor;
@@ -15,7 +13,7 @@ namespace VitDeck.Validator
         protected override void Logic(ValidationTarget target)
         {
             var missingPrefabs = target.GetAllObjects()
-                .Where(gameObject => PrefabUtility.GetPrefabType(gameObject) == PrefabType.MissingPrefabInstance);
+                .Where(IsMissingPrefab);
             foreach (var missingPrefab in missingPrefabs)
             {
                 var targetGameObject = missingPrefab;
@@ -23,10 +21,8 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(targetGameObject, IssueLevel.Error, errorMessage));
             }
 
-            var missingProperties = target.GetAllObjects()
-                .SelectMany(gameObject => gameObject.GetComponents<Component>())
-                .SelectMany(LoadAllProperties)
-                .Where(IsMissng);
+            var noMissingPrefabs = target.GetAllObjects().Where(IsNotMissingPrefab);
+            var missingProperties = new AllPropertiesEnumerator(noMissingPrefabs).Where(IsMissng);
 
             foreach (var missingProperty in missingProperties)
             {
@@ -37,15 +33,14 @@ namespace VitDeck.Validator
             }
         }
 
-        static IEnumerable<SerializedProperty> LoadAllProperties(Object obj)
+        static bool IsMissingPrefab(GameObject gameObject)
         {
-            var serializedObject = new SerializedObject(obj);
-            var iterator = serializedObject.GetIterator();
+            return PrefabUtility.GetPrefabType(gameObject) == PrefabType.MissingPrefabInstance;
+        }
 
-            while (iterator.NextVisible(true))
-            {
-                yield return iterator;
-            }
+        static bool IsNotMissingPrefab(GameObject gameObject)
+        {
+            return !IsMissingPrefab(gameObject);
         }
 
         static bool IsMissng(SerializedProperty serializedProperty)

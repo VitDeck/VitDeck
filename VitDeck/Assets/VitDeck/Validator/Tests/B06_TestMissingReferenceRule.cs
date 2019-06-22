@@ -39,8 +39,7 @@ namespace VitDeck.Validator.Test
         public void TestAssetReferenceMissing()
         {
             var rule = new MissingReferenceRule("missing検出ルール");
-            var gameObjectName = "TestObject";
-            var gameObject = new GameObject(gameObjectName);
+            var gameObject = new GameObject("TestObject");
             var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", allObjects: new GameObject[] { gameObject });
 
             var meshAsset = new TestMeshAsset(rootFolder.Path);
@@ -51,7 +50,7 @@ namespace VitDeck.Validator.Test
             var result = rule.Validate(target);
             Assert.That(result.Issues.Count, Is.EqualTo(1));
             Assert.That(result.Issues[0].message,
-                Is.EqualTo(string.Format("missingフィールドが含まれています！（{0} > {1} > Mesh）", gameObjectName, typeof(MeshFilter).Name)));
+                Is.EqualTo(string.Format("missingフィールドが含まれています！（{0} > {1} > Mesh）", gameObject.name, typeof(MeshFilter).Name)));
             Assert.That(result.Issues[0].target, Is.EqualTo(meshFilter));
         }
 
@@ -71,6 +70,28 @@ namespace VitDeck.Validator.Test
             Assert.That(result.Issues[0].message,
                 Is.EqualTo(string.Format("missingプレハブが含まれています！（{0}）", gameObject.name)));
             Assert.That(result.Issues[0].target, Is.EqualTo(gameObject));
+        }
+
+        [Test]
+        public void TestRecursiveReferenceTest()
+        {
+            var rule = new MissingReferenceRule("missing検出ルール");
+
+            var prefabAsset = new TestPrefabAsset(rootFolder.Path);
+            var parentGameObject = new GameObject("TestParentObject", typeof(Rigidbody), typeof(FixedJoint));
+            var childGameObject = new GameObject("TestChildObject", typeof(Rigidbody), typeof(FixedJoint));
+            childGameObject.GetComponent<FixedJoint>().connectedBody = parentGameObject.GetComponent<Rigidbody>();
+            var materialAsset = new TestMaterialAsset(rootFolder.Path);
+            childGameObject.AddComponent<TrailRenderer>().material = materialAsset.Instance;
+
+            AssetDatabase.SaveAssets();
+
+            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", allObjects: new GameObject[] { parentGameObject, childGameObject });
+            materialAsset.Dispose();
+            var result = rule.Validate(target);
+            Assert.That(result.Issues.Count, Is.EqualTo(1));
+            Assert.That(result.Issues[0].message,
+                Is.EqualTo("missingフィールドが含まれています！（TestChildObject > TrailRenderer > Element 0）"));
         }
     }
 }
