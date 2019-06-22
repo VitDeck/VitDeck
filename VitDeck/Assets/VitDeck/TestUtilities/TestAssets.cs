@@ -252,6 +252,5 @@ namespace VitDeck.TestUtilities
             Instance = AssetDatabase.LoadMainAssetAtPath(Path) as SceneAsset;
         }
     }
-
 }
 #pragma warning restore SA1402 // FileMayOnlyContainASingleType
