@@ -1,13 +1,19 @@
 # VitDeck
 VitDeckは多人数がUnityを使用して特定のルールに沿った制作物を作る場合の作業を支援するツールです。
 以下の機能を持っています。
-- 管理者が事前に準備したテンプレートから作成する
-- 制作物が管理者が設定したルールに沿っているかのチェックする
+- 管理者が事前に準備したテンプレートからアセットを作成する
+- 制作物が管理者が設定したルールに沿っているかチェックする
 - 入稿パッケージを作成する
 
-作業管理者がVitDeckをフォークしてテンプレートおよび作成ルールを構成した上で作業者に配布することを前提にしています。
+作業管理者がVitDeckをフォークし、テンプレートおよび作成ルールを構成した上で作業者に配布することを前提にしています。
+
+# ツール構成方法
+- [テンプレートの作成方法](https://github.com/vkettools/VitDeck/wiki/MakingTemplate)
+- [ルールセットの作成方法](https://github.com/vkettools/VitDeck/wiki/MakingRuleSet)
+- [アップデート通知の構成](https://github.com/vkettools/VitDeck/wiki/ConfiguringUpdateNortification)
 
 # 汎用ルール
+VitDeckでは検証したいルールの組み合わせとその設定をルールセットと呼ばれる単位で管理します。
 以下のルールが最初から利用できます。独自ルールも定義可能です。
 - 指定のUnityバージョンで動作しているか検証
 - アセット名の使用禁止文字の検出
@@ -15,11 +21,8 @@ VitDeckは多人数がUnityを使用して特定のルールに沿った制作�
 - アセットの長すぎるパスの検出
 - 特定の拡張子を持つアセットの検出
 - ブースがBounds内に収まっているかの検証
-
-# ツール構成方法
-- [テンプレートの作成方法](https://github.com/vkettools/VitDeck/wiki/MakingTemplate)
-- [独自ルールの作成方法](https://github.com/vkettools/VitDeck/wiki/MakingRuleSet)
-- [アップデート通知の構成](https://github.com/vkettools/VitDeck/wiki/ConfiguringUpdateNortification)
+- コンポーネントのホワイトリスト検証
+- コンポーネントのブラックリスト検証
 
 # 動作環境
 以下の環境でテストしています。
