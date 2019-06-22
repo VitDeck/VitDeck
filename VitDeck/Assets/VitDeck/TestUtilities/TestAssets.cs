@@ -16,11 +16,16 @@ namespace VitDeck.TestUtilities
         UnityEngine.Object Instance { get; }
     }
 
-    public abstract class TestAsset : ITestAsset
+    public abstract class TestAsset<T> : ITestAsset where T : UnityEngine.Object
     {
         public string Path { get; protected set; }
 
-        public UnityEngine.Object Instance { get; protected set; }
+        public T Instance { get; protected set; }
+
+        UnityEngine.Object ITestAsset.Instance
+        {
+            get { return Instance; }
+        }
 
         protected string GeneratePath(string parentPath, string defaultName)
         {
@@ -33,13 +38,13 @@ namespace VitDeck.TestUtilities
         }
     }
 
-    public class TestFolderAsset : TestAsset
+    public class TestFolderAsset : TestAsset<DefaultAsset>
     {
         public TestFolderAsset(string parentPath = "Assets")
         {
             var guid = AssetDatabase.CreateFolder(parentPath, "TestFolder");
             Path = AssetDatabase.GUIDToAssetPath(guid);
-            Instance = AssetDatabase.LoadAssetAtPath<DefaultAsset>(Path);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path) as DefaultAsset;
         }
 
         public override void Dispose()
@@ -51,7 +56,7 @@ namespace VitDeck.TestUtilities
         }
     }
 
-    public class TestPrefabAsset : TestAsset
+    public class TestPrefabAsset : TestAsset<GameObject>
     {
         public TestPrefabAsset(string parentPath)
         {
@@ -76,7 +81,7 @@ namespace VitDeck.TestUtilities
         }
     }
 
-    public class TestAnimationClipAsset : TestAsset
+    public class TestAnimationClipAsset : TestAsset<AnimationClip>
     {
         public TestAnimationClipAsset(string parentPath)
         {
@@ -86,7 +91,7 @@ namespace VitDeck.TestUtilities
         }
     }
 
-    public class TestAnimationOverrideControllerAsset : TestAsset
+    public class TestAnimationOverrideControllerAsset : TestAsset<AnimatorOverrideController>
     {
         public TestAnimationOverrideControllerAsset(string parentPath)
         {
@@ -96,40 +101,40 @@ namespace VitDeck.TestUtilities
         }
     }
 
-    public class TestAudioClipAsset : TestAsset
+    public class TestAudioClipAsset : TestAsset<AudioClip>
     {
         public TestAudioClipAsset(string parentPath)
         {
             Path = GeneratePath(parentPath, "TestAudioClip.mp3");
             TestDataBinary.WriteAudio(Path);
             AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
-            Instance = AssetDatabase.LoadAssetAtPath<AudioClip>(Path);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path) as AudioClip;
         }
     }
 
-    public class TestModelAsset : TestAsset
+    public class TestModelAsset : TestAsset<GameObject>
     {
         public TestModelAsset(string parentPath)
         {
             Path = GeneratePath(parentPath, "TestModel.fbx");
             TestDataBinary.WriteFbx(Path);
             AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
-            Instance = AssetDatabase.LoadAssetAtPath<GameObject>(Path);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path) as GameObject;
         }
     }
 
-    public class TestLightMapDataAsset : TestAsset
+    public class TestLightMapDataAsset : TestAsset<LightingDataAsset>
     {
         public TestLightMapDataAsset(string parentPath)
         {
             Path = GeneratePath(parentPath, "TestLightMapAsset.asset");
             TestDataBinary.WriteLightingData(Path);
             AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
-            Instance = AssetDatabase.LoadAssetAtPath<LightingDataAsset>(Path);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path) as LightingDataAsset;
         }
     }
 
-    public class TestMaterialAsset : TestAsset
+    public class TestMaterialAsset : TestAsset<Material>
     {
         public TestMaterialAsset(string parentPath)
         {
@@ -139,30 +144,30 @@ namespace VitDeck.TestUtilities
         }
     }
 
-    public class TestMeshAsset : TestAsset
+    public class TestMeshAsset : TestAsset<GameObject>
     {
         public TestMeshAsset(string parentPath)
         {
             Path = GeneratePath(parentPath, "TestMesh.obj");
             TestDataBinary.WriteObj(Path);
             AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
-            Instance = AssetDatabase.LoadAssetAtPath<GameObject>(Path);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path) as GameObject;
         }
     }
 
-    public class TestReflectionProbeAsset : TestAsset
+    public class TestReflectionProbeAsset : TestAsset<Cubemap>
     {
         public TestReflectionProbeAsset(string parentPath)
         {
             Path = GeneratePath(parentPath, "TestReflectionProbe.exr");
             TestDataBinary.WriteCubeMap(Path);
             AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
-            Instance = AssetDatabase.LoadAssetAtPath<Cubemap>(Path);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path) as Cubemap;
         }
     }
 
-    public class TestScriptableObjectAsset<T> : TestAsset
-        where T: ScriptableObject
+    public class TestScriptableObjectAsset<T> : TestAsset<T>
+        where T : ScriptableObject
     {
         public TestScriptableObjectAsset(string parentPath)
         {
@@ -172,18 +177,18 @@ namespace VitDeck.TestUtilities
         }
     }
 
-    public class TestShaderAsset : TestAsset
+    public class TestShaderAsset : TestAsset<Shader>
     {
         public TestShaderAsset(string parentPath)
         {
             Path = GeneratePath(parentPath, "TestShader.shader");
             TestDataBinary.WriteShader(Path);
             AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
-            Instance = AssetDatabase.LoadAssetAtPath<Shader>(Path);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path) as Shader;
         }
     }
 
-    public class TestSkyboxAsset : TestAsset
+    public class TestSkyboxAsset : TestAsset<Material>
     {
         public TestSkyboxAsset(string parentPath)
         {
@@ -193,7 +198,7 @@ namespace VitDeck.TestUtilities
         }
     }
 
-    public class TestSpriteAsset : TestAsset
+    public class TestSpriteAsset : TestAsset<Sprite>
     {
         public TestSpriteAsset(string parentPath)
         {
@@ -204,47 +209,47 @@ namespace VitDeck.TestUtilities
         }
     }
 
-    public class TestTextAsset : TestAsset
+    public class TestTextAsset : TestAsset<TextAsset>
     {
         public TestTextAsset(string parentPath)
         {
             Path = GeneratePath(parentPath, "TestTextAsset.txt");
             TestDataBinary.WriteText(Path);
             AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
-            Instance = AssetDatabase.LoadAssetAtPath<TextAsset>(Path);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path) as TextAsset;
         }
     }
 
-    public class TestTextureAsset : TestAsset
+    public class TestTextureAsset : TestAsset<Texture>
     {
         public TestTextureAsset(string parentPath)
         {
             Path = GeneratePath(parentPath, "TestTexture.png");
             TestDataBinary.WriteImage(Path);
             AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
-            Instance = AssetDatabase.LoadAssetAtPath<Texture>(Path);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path) as Texture;
         }
     }
 
-    public class TestAnimatiorControllerAsset : TestAsset
+    public class TestAnimatiorControllerAsset : TestAsset<AnimatorController>
     {
         public TestAnimatiorControllerAsset(string parentPath)
         {
             Path = GeneratePath(parentPath, "TestAnimatiorController.controller");
             TestDataBinary.WriteAnimatorController(Path);
             AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
-            Instance = AssetDatabase.LoadMainAssetAtPath(Path);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path) as AnimatorController;
         }
     }
 
-    public class TestSceneAsset : TestAsset
+    public class TestSceneAsset : TestAsset<SceneAsset>
     {
         public TestSceneAsset(string parentPath)
         {
             Path = GeneratePath(parentPath, "TestScene.unity");
             TestDataBinary.WriteScene(Path);
             AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
-            Instance = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(Path);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path) as SceneAsset;
         }
     }
 
