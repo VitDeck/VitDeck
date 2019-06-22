@@ -57,5 +57,19 @@ namespace VitDeck.Validator.Test
             Assert.That(issue.solution, Is.Empty);
             Assert.That(issue.solutionURL, Is.Empty);
         }
+        [TestCase(@"[0-9a-zA-Z _\-]+", "Assets/test.-_test", ".")]
+        public void TestValidateMatches(string matchPattern, string assetPath, string matchChars)
+        {
+            var targetAssetPath = assetPath;
+            var targetAssetPaths = new string[] { targetAssetPath };
+            var pattern = matchPattern;
+
+            var rule = new AssetNamingRule("マッチ文字列テスト", pattern);
+            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", assetPaths: targetAssetPaths);
+            var result = rule.Validate(target);
+
+            Assert.That(result.Issues.Count, Is.EqualTo(1));
+            Assert.That(result.Issues[0].message, Is.EqualTo(string.Format("アセット名({0})に使用禁止文字({1})が含まれています。", assetPath, matchChars)));
+        }
     }
 }

@@ -43,10 +43,13 @@ namespace VitDeck.Validator
 
         private string GetProhibitionPattern(string assetName, string permissionPattern)
         {
-            string prohibition = assetName;
-            foreach (Match match in Regex.Matches(assetName, permissionPattern))
+            string prohibition = "";
+            foreach (char c in assetName)
             {
-                prohibition = Regex.Replace(prohibition, match.Value, "");
+                if (Regex.IsMatch(c.ToString(), permissionPattern))
+                    continue;
+                else
+                    prohibition += c;
             }
             return prohibition;
         }
