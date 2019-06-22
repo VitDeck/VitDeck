@@ -39,7 +39,8 @@ namespace VitDeck.Validator.Test
         public void TestAssetReferenceMissing()
         {
             var rule = new MissingReferenceRule("missing検出ルール");
-            var gameObject = new GameObject("TestObject");
+            var gameObjectName = "TestObject";
+            var gameObject = new GameObject(gameObjectName);
             var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", allObjects: new GameObject[] { gameObject });
 
             var meshAsset = new TestMeshAsset(rootFolder.Path);
@@ -50,7 +51,7 @@ namespace VitDeck.Validator.Test
             var result = rule.Validate(target);
             Assert.That(result.Issues.Count, Is.EqualTo(1));
             Assert.That(result.Issues[0].message,
-                Is.EqualTo("missingフィールドが含まれています！（TestObject (UnityEngine.MeshFilter)/Mesh）"));
+                Is.EqualTo(string.Format("missingフィールドが含まれています！（{0} > {1} > Mesh）", gameObjectName, typeof(MeshFilter).Name)));
             Assert.That(result.Issues[0].target, Is.EqualTo(meshFilter));
         }
 
@@ -68,7 +69,7 @@ namespace VitDeck.Validator.Test
             var result = rule.Validate(target);
             Assert.That(result.Issues.Count, Is.EqualTo(1));
             Assert.That(result.Issues[0].message,
-                Is.EqualTo("missingプレハブが含まれています！（TestPrefab (UnityEngine.GameObject)）"));
+                Is.EqualTo(string.Format("missingプレハブが含まれています！（{0}）", gameObject.name)));
             Assert.That(result.Issues[0].target, Is.EqualTo(gameObject));
         }
     }

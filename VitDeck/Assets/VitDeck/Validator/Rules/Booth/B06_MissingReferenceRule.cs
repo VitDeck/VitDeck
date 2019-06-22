@@ -16,11 +16,11 @@ namespace VitDeck.Validator
         {
             var missingPrefabs = target.GetAllObjects()
                 .Where(gameObject => PrefabUtility.GetPrefabType(gameObject) == PrefabType.MissingPrefabInstance);
-            foreach(var missingPrefab in missingPrefabs)
+            foreach (var missingPrefab in missingPrefabs)
             {
-                var targetObject = missingPrefab;
-                var errorMessage = string.Format("missingプレハブが含まれています！（{0}）", targetObject);
-                AddIssue(new Issue(targetObject, IssueLevel.Error, errorMessage));
+                var targetGameObject = missingPrefab;
+                var errorMessage = string.Format("missingプレハブが含まれています！（{0}）", targetGameObject.name);
+                AddIssue(new Issue(targetGameObject, IssueLevel.Error, errorMessage));
             }
 
             var missingProperties = target.GetAllObjects()
@@ -28,11 +28,12 @@ namespace VitDeck.Validator
                 .SelectMany(LoadAllProperties)
                 .Where(IsMissng);
 
-            foreach(var missingProperty in missingProperties)
+            foreach (var missingProperty in missingProperties)
             {
-                var targetObject = missingProperty.serializedObject.targetObject;
-                var errorMessage = string.Format("missingフィールドが含まれています！（{0}/{1}）", targetObject , missingProperty.displayName);
-                AddIssue(new Issue(targetObject, IssueLevel.Error, errorMessage));
+                var targetComponent = missingProperty.serializedObject.targetObject as Component;
+                var errorMessage = string.Format("missingフィールドが含まれています！（{0} > {1} > {2}）",
+                    targetComponent.gameObject.name, targetComponent.GetType().Name, missingProperty.displayName);
+                AddIssue(new Issue(targetComponent, IssueLevel.Error, errorMessage));
             }
         }
 
