@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,12 +17,14 @@ namespace VitDeck.Validator.Test
             Assert.That(result.Issues.Count, Is.EqualTo(0));
         }
 
-        [Test]
-        public void TestValidateCorrectAssetName()
+        [TestCase("[\x21-\x7e]+", "Assets/VitDeck/Validator/Tests/Data/A01_AssetNamingRule/CorrectName_!#$%&'()+,;=@{}~.prefab")]
+        [TestCase(@"[a-zA-Z0-9 _\.\-]+", "Assets/VitDeck/Validator/Tests/Data/A01_AssetNamingRule/CorrectName_-.prefab")]
+        [TestCase(@"[a-zA-Z0-9 _\.\-]+", "Assets/VitDeck/Validator/Tests/Data/A01_AssetNamingRule")]
+        public void TestValidateCorrectAssetName(string matchPattern, string assetPath)
         {
-            var targetAssetPath = "Assets/VitDeck/Validator/Tests/Data/A01_AssetNamingRule/CorrectName_!#$%&'()+,;=@{}~.prefab";
+            var targetAssetPath = assetPath;
             var targetAssetPaths = new string[] { targetAssetPath };
-            var pattern = "[\x21-\x7e]+";
+            var pattern = matchPattern;
 
             var rule = new AssetNamingRule("アセット名使用禁止文字検出", pattern);
             var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", assetPaths: targetAssetPaths);

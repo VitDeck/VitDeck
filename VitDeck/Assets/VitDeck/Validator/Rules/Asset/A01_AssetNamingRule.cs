@@ -1,11 +1,15 @@
 using UnityEditor;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace VitDeck.Validator
 {
     /// <summary>
     /// アセット名の使用禁止文字を検出するルール
     /// </summary>
+    /// <remarks>
+    /// フォルダ名またはアセット名(拡張子含む)をチェックする。
+    /// </remarks>
     public class AssetNamingRule : BaseRule
     {
         private readonly string permissionPattern;
@@ -26,9 +30,10 @@ namespace VitDeck.Validator
 
             foreach (var path in paths)
             {
-                if (!Regex.IsMatch(path, matchPattern))
+                var assetName = Path.GetFileName(path);
+                if (!Regex.IsMatch(assetName, matchPattern))
                 {
-                    string prohibition = GetProhibitionPattern(path, permissionPattern);
+                    string prohibition = GetProhibitionPattern(assetName, permissionPattern);
                     var reference = AssetDatabase.LoadMainAssetAtPath(path);
                     var message = string.Format("アセット名({0})に使用禁止文字({1})が含まれています。", path, prohibition);
                     AddIssue(new Issue(reference, IssueLevel.Error, message, string.Empty));
