@@ -80,5 +80,13 @@ namespace VitDeck.AssetGuardian.Tests
             AssetDatabase.CopyAsset(dataPath, path);
             AssetDatabase.SetLabels(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path), new string[] { });
         }
+
+        public static void WriteAnimatorController(string path)
+        {
+            var dataGUID = AssetDatabase.FindAssets(testDataSearchFilter + "Test AnimatorController").FirstOrDefault();
+            var dataPath = AssetDatabase.GUIDToAssetPath(dataGUID);
+            AssetDatabase.CopyAsset(dataPath, path);
+            AssetDatabase.SetLabels(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path), new string[] { });
+        }
     }
 }

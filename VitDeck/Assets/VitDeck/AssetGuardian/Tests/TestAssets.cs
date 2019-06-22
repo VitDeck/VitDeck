@@ -230,8 +230,9 @@ namespace VitDeck.AssetGuardian.Tests
         public TestAnimatiorControllerAsset(string parentPath)
         {
             Path = GeneratePath(parentPath, "TestAnimatiorController.controller");
-            Instance = new AnimatorController();
-            AssetDatabase.CreateAsset(Instance, Path);
+            TestDataBinary.WriteAnimatorController(Path);
+            AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path);
         }
     }
 
