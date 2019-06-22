@@ -2,11 +2,11 @@ using UnityEditor;
 using System.Linq;
 using System.IO;
 
-namespace VitDeck.AssetGuardian.Tests
+namespace VitDeck.TestUtilities
 {
     public static class TestDataBinary
     {
-        private const string testDataLabel = "VitDeck.AssetGuardian.TestData";
+        private const string testDataLabel = "VitDeck.TestData";
         private const string testDataSearchFilter = "l:" + testDataLabel + " ";
 
         public static void WriteAudio(string path)
@@ -76,6 +76,14 @@ namespace VitDeck.AssetGuardian.Tests
         public static void WriteScene(string path)
         {
             var dataGUID = AssetDatabase.FindAssets(testDataSearchFilter + "Test Scene").FirstOrDefault();
+            var dataPath = AssetDatabase.GUIDToAssetPath(dataGUID);
+            AssetDatabase.CopyAsset(dataPath, path);
+            AssetDatabase.SetLabels(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path), new string[] { });
+        }
+
+        public static void WriteAnimatorController(string path)
+        {
+            var dataGUID = AssetDatabase.FindAssets(testDataSearchFilter + "Test AnimatorController").FirstOrDefault();
             var dataPath = AssetDatabase.GUIDToAssetPath(dataGUID);
             AssetDatabase.CopyAsset(dataPath, path);
             AssetDatabase.SetLabels(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path), new string[] { });

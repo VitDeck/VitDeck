@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
 using VitDeck.Utilities;
 
@@ -64,6 +65,9 @@ namespace VitDeck.AssetGuardian
             restoreTools.Add(
                 new AssetTypeIdentifier(typeof(SceneAsset)),
                 new SimpleRestorer(HideFlags.NotEditable));
+            restoreTools.Add(
+                new AssetTypeIdentifier(typeof(AnimatorController)),
+                new SimpleRestorer(HideFlags.None, HideFlags.HideInHierarchy));
         }
 
         private interface IRestorer

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: d43eb4f798e4e94438249508b66b8599
 labels:
-- VitDeck.AssetGuardian.TestData
+- VitDeck.TestData
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: b25adebe5dc746a419b115e1297c0207
 labels:
-- VitDeck.AssetGuardian.TestData
+- VitDeck.TestData
 TextScriptImporter:
   externalObjects: {}
   userData: 
