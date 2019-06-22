@@ -41,10 +41,10 @@ namespace VitDeck.Validator
             }
         }
 
-        private string GetProhibitionPattern(string path, string permissionPattern)
+        private string GetProhibitionPattern(string assetName, string permissionPattern)
         {
-            string prohibition = path;
-            foreach (Match match in Regex.Matches(path, permissionPattern))
+            string prohibition = assetName;
+            foreach (Match match in Regex.Matches(assetName, permissionPattern))
             {
                 prohibition = Regex.Replace(prohibition, match.Value, "");
             }
