@@ -64,7 +64,7 @@ namespace VitDeck.Validator.Test
             var result = invalidRule.Validate(target);
             Assert.That(result.Issues.Count, Is.EqualTo(4));
             var failResult = invalidRule2.Validate(target);
-            Assert.That(result.Issues.Count, Is.EqualTo(4));
+            Assert.That(failResult.Issues.Count, Is.EqualTo(4));
         }
     }
 }
