@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: fb925b90dc0819342b868080dc34ad5a
+guid: d83b0a62cba4afa49aa9f0f3f7d6bdb3
 labels:
-- VitDeck.AssetGuardian.TestData
+- VitDeck.TestData
 TextureImporter:
   fileIDToRecycleName:
     8900000: generatedCubemap

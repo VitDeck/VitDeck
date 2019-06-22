@@ -1,8 +1,6 @@
 fileFormatVersion: 2
-guid: 3067020020284954e8c7bad8122d1d81
-labels:
-- VitDeck.AssetGuardian.TestData
-DefaultImporter:
+guid: dff7b6902afdf3e42bf5e9e0c8429a63
+AssemblyDefinitionImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 

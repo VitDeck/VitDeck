@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 7089e85d965cb5149a83f9fd15e52c59
+guid: 0903a27fd1df65942a1a6e82c2288414
 labels:
-- VitDeck.AssetGuardian.TestData
+- VitDeck.TestData
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
@@ -9,7 +9,7 @@ TextureImporter:
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
-    sRGBTexture: 1
+    sRGBTexture: 0
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -48,10 +48,10 @@ TextureImporter:
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
-  alphaUsage: 0
+  alphaUsage: 1
   alphaIsTransparency: 0
   spriteTessellationDetail: -1
-  textureType: 6
+  textureType: 0
   textureShape: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0

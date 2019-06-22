@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 51600e88e661910449e9fdd6a8360200
 labels:
-- VitDeck.AssetGuardian.TestData
+- VitDeck.TestData
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

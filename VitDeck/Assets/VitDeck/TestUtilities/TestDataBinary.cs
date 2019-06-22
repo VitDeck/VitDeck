@@ -2,11 +2,11 @@ using UnityEditor;
 using System.Linq;
 using System.IO;
 
-namespace VitDeck.AssetGuardian.Tests
+namespace VitDeck.TestUtilities
 {
     public static class TestDataBinary
     {
-        private const string testDataLabel = "VitDeck.AssetGuardian.TestData";
+        private const string testDataLabel = "VitDeck.TestData";
         private const string testDataSearchFilter = "l:" + testDataLabel + " ";
 
         public static void WriteAudio(string path)

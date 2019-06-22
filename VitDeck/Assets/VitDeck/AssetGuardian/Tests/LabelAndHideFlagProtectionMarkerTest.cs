@@ -8,6 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
 using VitDeck.Utilities;
+using VitDeck.TestUtilities;
 
 namespace VitDeck.AssetGuardian.Tests
 {
@@ -27,10 +28,27 @@ namespace VitDeck.AssetGuardian.Tests
 
         public static object[] SourceOfTestMarking()
         {
-            return Assembly.GetExecutingAssembly()
-                .GetTypes()
-                .Where(type => type.IsSubclassOf(typeof(TestAsset)))
-                .ToArray();
+            return new object[] 
+            {
+                typeof(TestFolderAsset),
+                typeof(TestPrefabAsset),
+                typeof(TestAnimationClipAsset),
+                typeof(TestAnimationOverrideControllerAsset),
+                typeof(TestAudioClipAsset),
+                typeof(TestModelAsset),
+                typeof(TestLightMapDataAsset),
+                typeof(TestMaterialAsset),
+                typeof(TestMeshAsset),
+                typeof(TestReflectionProbeAsset),
+                typeof(TestScriptableObjectAsset<TestScriptableObject>),
+                typeof(TestShaderAsset),
+                typeof(TestSkyboxAsset),
+                typeof(TestSpriteAsset),
+                typeof(TestTextAsset),
+                typeof(TestTextureAsset),
+                typeof(TestAnimatiorControllerAsset),
+                typeof(TestSceneAsset),
+            };
         }
 
         [TestCaseSource("SourceOfTestMarking")]
