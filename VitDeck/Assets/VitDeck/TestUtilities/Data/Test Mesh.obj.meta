@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 692c60c32108e5849a3c2d2eb526950f
 labels:
-- VitDeck.AssetGuardian.TestData
+- VitDeck.TestData
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VitDeck.AssetGuardian.Tests
+namespace VitDeck.TestUtilities
 {
     public class TestScriptableObject : ScriptableObject
     {

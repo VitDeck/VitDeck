@@ -8,7 +8,7 @@ using UnityEditor.SceneManagement;
 using System.Linq;
 using UnityEditor.Animations;
 
-namespace VitDeck.AssetGuardian.Tests
+namespace VitDeck.TestUtilities
 {
     public interface ITestAsset : IDisposable
     {
@@ -161,12 +161,13 @@ namespace VitDeck.AssetGuardian.Tests
         }
     }
 
-    public class TestScriptableObjectAsset : TestAsset
+    public class TestScriptableObjectAsset<T> : TestAsset
+        where T: ScriptableObject
     {
         public TestScriptableObjectAsset(string parentPath)
         {
             Path = GeneratePath(parentPath, "TestScriptableObject.asset");
-            Instance = ScriptableObject.CreateInstance<TestScriptableObject>();
+            Instance = ScriptableObject.CreateInstance<T>();
             AssetDatabase.CreateAsset(Instance, Path);
         }
     }
