@@ -32,6 +32,9 @@ namespace VitDeck.TemplateLoader
             var copyRootPath = templateFolderPath + separatorChar + templateAssetsFolder;
             var property = GetTemplateProperty(templateFolderName);
 
+            if (UnityEditor.EditorSettings.serializationMode == SerializationMode.ForceBinary)
+                Debug.LogWarning("Asset serialization mode is ForceBinary. Template will load incompletely.");
+
             Debug.Log("Load:" + templateFolderPath);
             var assetGuids = AssetDatabase.FindAssets("", new string[] { copyRootPath });
             if (assetGuids.Length == 0)
