@@ -28,13 +28,21 @@ namespace VitDeck.Validator
                 {
                     if (material == null)
                     {
+                        AddIssue(new Issue(obj, IssueLevel.Error, string.Format("オブジェクト({0})のRendererにマテリアルの参照がありません。", obj.name), string.Empty, string.Empty));
                         continue;
                     }
 
-                    if (material.shader.name == "Hidden/InternalErrorShader" || material.shader.name == string.Empty || material.shader.name == null)
+                    if (material.shader.name == "Hidden/InternalErrorShader")
                     {
-                        AddIssue(new Issue(obj, IssueLevel.Error, string.Format("シェーダエラーが存在するオブジェクト({0})があります。", obj.name), string.Empty, string.Empty));
+                        AddIssue(new Issue(obj, IssueLevel.Error, string.Format("オブジェクト({0})のマテリアルで正しいシェーダーが参照されていません。", obj.name), string.Empty, string.Empty));
+                        continue;
                     }
+
+                    if (material.shader.name == string.Empty || material.shader.name == null)
+                    {
+                        AddIssue(new Issue(obj, IssueLevel.Error, string.Format("オブジェクト({0})でシェーダーエラーが検出されました。", obj.name), string.Empty, string.Empty));
+                    }
+
                 }
             }
         }
