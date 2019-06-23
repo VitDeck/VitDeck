@@ -57,21 +57,25 @@ namespace VitDeck.Validator
                 if (PrefabUtility.GetPrefabType(unityObject) == PrefabType.MissingPrefabInstance)
                 {
                     missingPrefabInstances.Add(unityObject as GameObject);
+                    return;
                 }
-                else
+
+                foreach (var component in gameObject.GetComponents<Component>())
                 {
-                    foreach (var component in gameObject.GetComponents<Component>())
+                    // GetComponents<Component>()がnullを含んでいた場合、GUI上ではMissingコンポーネントとして扱われる。
+                    // nullはエラーメッセージで活用できない為、親のgameObjectを記録する。
+                    if (component == null)
                     {
-                        // GetComponents<Component>()がnullを含んでいた場合、GUI上ではMissingコンポーネントとして扱われる。
-                        // nullはエラーメッセージで活用できない為、親のgameObjectを記録する。
-                        if (component == null)
-                            missingComponentContainers.Add(gameObject);
+                        missingComponentContainers.Add(gameObject);
+                    }
+                    else
+                    {
                         FindRecursive(component);
                     }
                 }
                 return;
             }
-            
+
             // その他のObjectの場合の対応。
             var serializedObject = new SerializedObject(unityObject);
             var iterator = serializedObject.GetIterator();
@@ -84,19 +88,22 @@ namespace VitDeck.Validator
                 {
                     missingProperties.Add(current);
                 }
-                else if (
-                    current.propertyType == SerializedPropertyType.ObjectReference &&
-                    current.objectReferenceValue != null)
+                else if (HasValidObjectReference(current))
                 {
                     FindRecursive(current.objectReferenceValue);
                 }
             }
         }
 
-        static bool IsMissng(SerializedProperty serializedProperty)
+        private static bool HasValidObjectReference(SerializedProperty serializedProperty)
         {
-            if (serializedProperty.propertyType != SerializedPropertyType.ObjectReference ||
-                serializedProperty.objectReferenceValue != null ||
+            return serializedProperty.propertyType == SerializedPropertyType.ObjectReference &&
+                   serializedProperty.objectReferenceValue != null;
+        }
+
+        private static bool IsMissng(SerializedProperty serializedProperty)
+        {
+            if (HasValidObjectReference(serializedProperty) ||
                 !serializedProperty.hasChildren)
             {
                 return false;
