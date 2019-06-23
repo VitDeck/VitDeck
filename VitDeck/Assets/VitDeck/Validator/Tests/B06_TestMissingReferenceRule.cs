@@ -11,13 +11,13 @@ namespace VitDeck.Validator.Test
     {
         TestFolderAsset rootFolder = null;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void SetUp()
         {
             rootFolder = new TestFolderAsset();
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void TearDown()
         {
             rootFolder.Dispose();
