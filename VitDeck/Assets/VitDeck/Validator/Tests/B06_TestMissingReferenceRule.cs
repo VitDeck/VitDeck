@@ -53,7 +53,7 @@ namespace VitDeck.Validator.Test
 
             Assert.NotNull(result.Issues.Find(issue => 
                 issue.message == "missingフィールドが含まれています！（B06_MissingTestMaterial > Texture）" && 
-                issue.target == AssetDatabase.LoadAssetAtPath<Material>(testData + "/B06_MissingTestMaterial")));
+                issue.target == AssetDatabase.LoadAssetAtPath<Material>(testData + "/B06_MissingTestMaterial.mat")));
             Assert.NotNull(result.Issues.Find(issue => 
                 issue.message == "missingプレハブが含まれています！（Missing Prefab）" &&
                 issue.target == GameObject.Find("Missing Prefab")));

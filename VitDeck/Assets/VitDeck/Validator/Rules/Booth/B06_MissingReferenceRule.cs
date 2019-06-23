@@ -42,7 +42,7 @@ namespace VitDeck.Validator
                         targetObject.name,
                         missingProperty.displayName);
                 }
-                AddIssue(new Issue(targetComponent, IssueLevel.Error, message));
+                AddIssue(new Issue(targetObject, IssueLevel.Error, message));
             }
         }
 
