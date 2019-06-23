@@ -4,6 +4,7 @@ using UnityEngine;
 using NUnit.Framework;
 using VitDeck.TestUtilities;
 using UnityEditor;
+using System.Linq;
 
 namespace VitDeck.Validator.Test
 {
@@ -52,16 +53,32 @@ namespace VitDeck.Validator.Test
 
             var result = rule.Validate(target);
 
-            Assert.That(result.Issues.Count, Is.EqualTo(3));
+            foreach (var issue in result.Issues)
+            {
+                Debug.Log(issue.message + "\n" + AssetDatabase.GetAssetPath(issue.target), issue.target);
+            }
+
+            Assert.That(result.Issues.Count, Is.EqualTo(5));
+
             Assert.NotNull(result.Issues.Find(issue =>
                 issue.message == "missingプレハブが含まれています！（Missing Prefab）" &&
                 issue.target == GameObject.Find("Missing Prefab")));
+
             Assert.NotNull(result.Issues.Find(issue =>
                 issue.message == "missingコンポーネントが含まれています！（MissingScriptObject）" &&
                 issue.target == GameObject.Find("MissingScriptObject")));
+
             Assert.NotNull(result.Issues.Find(issue =>
                 issue.message == "missingフィールドが含まれています！（B06_MissingTestMaterial > Texture）" &&
-                issue.target == AssetDatabase.LoadAssetAtPath<Material>(testData + "/B06_MissingTestMaterial.mat")));
+                issue.target == AssetDatabase.LoadMainAssetAtPath(testData + "/B06_MissingTestMaterial.mat")));
+
+            Assert.NotNull(result.Issues.Find(issue =>
+                issue.message == "missingフィールドが含まれています！（B06_RecursiveMissingTestPrefabChild > EventTrigger > Target）" &&
+                issue.target == AssetDatabase.LoadMainAssetAtPath(testData + "/B06_RecursiveMissingTestPrefabChild.prefab")));
+
+            Assert.NotNull(result.Issues.Find(issue =>
+                issue.message == "missingコンポーネントが含まれています！（B06_RecursiveMissingTestPrefabChild）" &&
+                issue.target == AssetDatabase.LoadMainAssetAtPath(testData + "/B06_RecursiveMissingTestPrefabChild.prefab")));
         }
     }
 }

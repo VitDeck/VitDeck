@@ -24,5 +24,7 @@ namespace VitDeck.Validator
         public IRule assetExtentionBlacklistRule = new AssetExtentionBlacklistRule("[A04]アセット拡張子ルール", new string[] { ".txt", ".md" });
         [Validation]
         public IRule boothBoundsRule = new BoothBoundsRule("[B01]ブースBounds超過検証ルール", new UnityEngine.Vector3(4.0f, 5.0f, 4.0f), 0.01f);
+        [Validation]
+        public IRule missingReferenceRule = new MissingReferenceRule("[B06]missing参照ルール");
     }
 }

@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace VitDeck.Validator
 {
+    /// <summary>
+    /// シーンから参照を辿れる全てのオブジェクト、Asset内にMissing参照が無い事を強制するルール。
+    /// </summary>
     public class MissingReferenceRule : BaseRule
     {
         public MissingReferenceRule(string name) : base(name)
@@ -13,36 +16,27 @@ namespace VitDeck.Validator
 
         protected override void Logic(ValidationTarget target)
         {
-            var missingPrefabs = target.GetAllObjects()
-                .Where(IsMissingPrefab);
+            var finder = new MissingFinder(target.GetAllObjects());
 
-            foreach (var missingPrefab in missingPrefabs)
+            foreach (var missingPrefabInstance in finder.MissingPrefabInstances)
             {
-                var targetGameObject = missingPrefab;
-                var errorMessage = string.Format("missingプレハブが含まれています！（{0}）", targetGameObject.name);
-                AddIssue(new Issue(targetGameObject, IssueLevel.Error, errorMessage));
+                var errorMessage = string.Format("missingプレハブが含まれています！（{0}）", missingPrefabInstance.name);
+                AddIssue(new Issue(missingPrefabInstance, IssueLevel.Error, errorMessage));
+                continue;
             }
 
-            var missingComponentSets = target.GetAllObjects()
-                .Where(IsNotMissingPrefab)
-                .SelectMany(EnumerateComponentSets)
-                .Where(set => set.component == null);
-
-            foreach (var missingComponentSet in missingComponentSets)
+            foreach (var missingComponentContainer in finder.MissingComponentContainers)
             {
-                var targetGameObject = missingComponentSet.gameObject;
-                var errorMessage = string.Format("missingコンポーネントが含まれています！（{0}）", missingComponentSet.gameObject.name);
-                AddIssue(new Issue(targetGameObject, IssueLevel.Error, errorMessage));
+                var errorMessage = string.Format("missingコンポーネントが含まれています！（{0}）", missingComponentContainer.name);
+                var mainAsset = GetMainAsset(missingComponentContainer);
+                AddIssue(new Issue(mainAsset, IssueLevel.Error, errorMessage));
+                continue;
             }
 
-            var missingProperties = 
-                AllPropertiesEnumerator.From(target.GetAllObjects().Where(IsNotMissingPrefab))
-                .Where(IsMissng);
-
-            foreach (var missingProperty in missingProperties)
+            foreach (var missingProperty in finder.MissingProperties)
             {
-                string message;
                 var targetObject = missingProperty.serializedObject.targetObject;
+                string message;
                 var targetComponent = targetObject as Component;
                 if (targetComponent != null)
                 {
@@ -57,56 +51,15 @@ namespace VitDeck.Validator
                         targetObject.name,
                         missingProperty.displayName);
                 }
-                AddIssue(new Issue(targetObject, IssueLevel.Error, message));
+
+                var mainAsset = GetMainAsset(targetObject);
+                AddIssue(new Issue(mainAsset, IssueLevel.Error, message));
             }
         }
 
-        struct ObjectComponentSet
+        static Object GetMainAsset(Object targetObject)
         {
-            public readonly GameObject gameObject;
-            public readonly Component component;
-
-            public ObjectComponentSet(GameObject gameObject, Component component)
-            {
-                this.gameObject = gameObject;
-                this.component = component;
-            }
-        }
-
-        private static IEnumerable<ObjectComponentSet> EnumerateComponentSets(GameObject gameObject)
-        {
-            return gameObject
-                .GetComponents<Component>()
-                .Select(cp => new ObjectComponentSet(gameObject, cp));
-        }
-
-        static bool IsMissingPrefab(GameObject gameObject)
-        {
-            return PrefabUtility.GetPrefabType(gameObject) == PrefabType.MissingPrefabInstance;
-        }
-
-        static bool IsNotMissingPrefab(GameObject gameObject)
-        {
-            return !IsMissingPrefab(gameObject);
-        }
-
-        static bool IsMissng(SerializedProperty serializedProperty)
-        {
-            if (serializedProperty.propertyType != SerializedPropertyType.ObjectReference ||
-                serializedProperty.objectReferenceValue != null ||
-                !serializedProperty.hasChildren)
-            {
-                return false;
-            }
-
-            var fileId = serializedProperty.FindPropertyRelative("m_FileID");
-            if (fileId == null ||
-                fileId.intValue == 0)
-            {
-                return false;
-            }
-
-            return true;
+            return AssetDatabase.LoadMainAssetAtPath(AssetDatabase.GetAssetPath(targetObject)) ?? targetObject;
         }
     }
 }
