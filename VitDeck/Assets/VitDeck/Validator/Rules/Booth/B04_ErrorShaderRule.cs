@@ -34,7 +34,7 @@ namespace VitDeck.Validator
 
                     if (material.shader.name == "Hidden/InternalErrorShader")
                     {
-                        AddIssue(new Issue(obj, IssueLevel.Error, string.Format("オブジェクト({0})のマテリアルで正しいシェーダーが参照されていません。", obj.name), string.Empty, string.Empty));
+                        AddIssue(new Issue(obj, IssueLevel.Error, "オブジェクトのマテリアルで正しいシェーダーが参照されていません。", string.Empty, string.Empty));
                         continue;
                     }
 
