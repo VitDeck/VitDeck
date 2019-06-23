@@ -43,24 +43,6 @@ namespace VitDeck.Validator.Test
         }
 
         [Test]
-        public void TestPrefabReferenceMissing()
-        {
-            var rule = new MissingReferenceRule("missing検出ルール");
-            var prefabAsset = new TestPrefabAsset(rootFolder.Path);
-            var gameObject = (GameObject)PrefabUtility.InstantiatePrefab(prefabAsset.Instance);
-            AssetDatabase.SaveAssets();
-
-            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", allObjects: new GameObject[] { gameObject });
-            prefabAsset.Dispose();
-
-            var result = rule.Validate(target);
-            Assert.That(result.Issues.Count, Is.EqualTo(1));
-            Assert.That(result.Issues[0].message,
-                Is.EqualTo(string.Format("missingプレハブが含まれています！（{0}）", gameObject.name)));
-            Assert.That(result.Issues[0].target, Is.EqualTo(gameObject));
-        }
-
-        [Test]
         public void TestBySampleData()
         {
             var testData = "Assets/VitDeck/Validator/Tests/Data/B06_MissingReferenceRule";
