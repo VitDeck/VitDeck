@@ -24,18 +24,6 @@ namespace VitDeck.Validator.Test
         }
 
         [Test]
-        public void TestValidation()
-        {
-            var rule = new MissingReferenceRule("missing検出ルール");
-            var gameObject = new GameObject("TestObject");
-            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", allObjects: new GameObject[] { gameObject });
-
-            var result = rule.Validate(target);
-
-            Assert.That(result.Issues.Count, Is.Zero);
-        }
-
-        [Test]
         public void TestAssetReferenceMissing()
         {
             var rule = new MissingReferenceRule("missing検出ルール");
@@ -73,25 +61,20 @@ namespace VitDeck.Validator.Test
         }
 
         [Test]
-        public void TestRecursiveReferenceTest()
+        public void TestBySampleData()
         {
+            var testData = "Assets/VitDeck/Validator/Tests/Data/B06_MissingReferenceRule";
             var rule = new MissingReferenceRule("missing検出ルール");
+            var target = new ValidationTargetFinder().Find(testData, true);
 
-            var prefabAsset = new TestPrefabAsset(rootFolder.Path);
-            var parentGameObject = new GameObject("TestParentObject", typeof(Rigidbody), typeof(FixedJoint));
-            var childGameObject = new GameObject("TestChildObject", typeof(Rigidbody), typeof(FixedJoint));
-            childGameObject.GetComponent<FixedJoint>().connectedBody = parentGameObject.GetComponent<Rigidbody>();
-            var materialAsset = new TestMaterialAsset(rootFolder.Path);
-            childGameObject.AddComponent<TrailRenderer>().material = materialAsset.Instance;
-
-            AssetDatabase.SaveAssets();
-
-            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", allObjects: new GameObject[] { parentGameObject, childGameObject });
-            materialAsset.Dispose();
             var result = rule.Validate(target);
-            Assert.That(result.Issues.Count, Is.EqualTo(1));
-            Assert.That(result.Issues[0].message,
-                Is.EqualTo("missingフィールドが含まれています！（TestChildObject > TrailRenderer > Element 0）"));
+
+            Assert.NotNull(result.Issues.Find(issue => 
+                issue.message == "missingフィールドが含まれています！（B06_MissingTestMaterial > Texture）" && 
+                issue.target == AssetDatabase.LoadAssetAtPath<Material>(testData + "/B06_MissingTestMaterial")));
+            Assert.NotNull(result.Issues.Find(issue => 
+                issue.message == "missingプレハブが含まれています！（Missing Prefab）" &&
+                issue.target == GameObject.Find("Missing Prefab")));
         }
     }
 }
