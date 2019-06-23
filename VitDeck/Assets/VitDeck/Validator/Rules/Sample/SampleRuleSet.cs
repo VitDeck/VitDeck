@@ -36,6 +36,9 @@ namespace VitDeck.Validator
         public IRule componentBlacklistRule = new ComponentBlacklistRule("[B03]コンポーネントブラックリストルール",
                             new ComponentReference[] { new ComponentReference("AudioListerner", new string[] { "UnityEngine.AudioListener" }, ValidationLevel.DISALLOW),
                                                        new ComponentReference("Animator", new string[] { "UnityEngine.Animator" }, ValidationLevel.NEGOTIABLE)});
+        [Validation]
+        public IRule errorShaderRule = new ErrorShaderRule("[B04]エラーシェーダールール");
+        [Validation]
         public IRule missingReferenceRule = new MissingReferenceRule("[B06]missing参照ルール");
     }
 }
