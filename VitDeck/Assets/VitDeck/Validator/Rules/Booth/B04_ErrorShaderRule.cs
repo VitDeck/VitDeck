@@ -40,7 +40,7 @@ namespace VitDeck.Validator
 
                     if (material.shader.name == string.Empty || material.shader.name == null)
                     {
-                        AddIssue(new Issue(obj, IssueLevel.Error, string.Format("オブジェクト({0})でシェーダーエラーが検出されました。", obj.name), string.Empty, string.Empty));
+                        AddIssue(new Issue(obj, IssueLevel.Error, "オブジェクトでシェーダーエラーが検出されました。", string.Empty, string.Empty));
                     }
                 }
             }
