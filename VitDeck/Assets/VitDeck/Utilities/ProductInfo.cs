@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace VitDeck.Utilities
 {
-    [CreateAssetMenu]
     public class ProductInfo : ScriptableObject
     {
         [SerializeField]
