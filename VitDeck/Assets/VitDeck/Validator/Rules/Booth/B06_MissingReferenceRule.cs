@@ -26,10 +26,23 @@ namespace VitDeck.Validator
 
             foreach (var missingProperty in missingProperties)
             {
-                var targetComponent = missingProperty.serializedObject.targetObject as Component;
-                var errorMessage = string.Format("missingフィールドが含まれています！（{0} > {1} > {2}）",
-                    targetComponent.gameObject.name, targetComponent.GetType().Name, missingProperty.displayName);
-                AddIssue(new Issue(targetComponent, IssueLevel.Error, errorMessage));
+                string message;
+                var targetObject = missingProperty.serializedObject.targetObject;
+                var targetComponent = targetObject as Component;
+                if (targetComponent != null)
+                {
+                    message = string.Format("missingフィールドが含まれています！（{0} > {1} > {2}）",
+                        targetComponent.gameObject.name,
+                        targetComponent.GetType().Name,
+                        missingProperty.displayName);
+                }
+                else
+                {
+                    message = string.Format("missingフィールドが含まれています！（{0} > {1}）",
+                        targetObject.name,
+                        missingProperty.displayName);
+                }
+                AddIssue(new Issue(targetComponent, IssueLevel.Error, message));
             }
         }
 
