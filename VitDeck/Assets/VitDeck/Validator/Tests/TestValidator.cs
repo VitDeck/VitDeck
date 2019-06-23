@@ -34,7 +34,7 @@ namespace VitDeck.Validator.Test
             Assert.That(results[0].Issues[0].solution, Is.EqualTo(""));
             Assert.That(results[0].Issues[0].solutionURL, Is.EqualTo(""));
             //Validate中の例外
-            results = Validator.Validate(ruleSet, "Assets/VitDeck/Validator/Tests/Validate");
+            results = Validator.Validate(ruleSet, "Assets/VitDeck/Validator/Tests/Validate", true);
             LogAssert.Expect(LogType.Error, new Regex(@"ルールチェックを中断しました:テスト用の例外"));
         }
         [Test]

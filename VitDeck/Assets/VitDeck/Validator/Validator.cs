@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 using VitDeck.Utilities;
 
@@ -23,6 +24,7 @@ namespace VitDeck.Validator
             try
             {
                 target = ruleSet.TargetFinder.Find(baseFolder, forceOpenScene);
+                RegisterUndo(target);
             }
             catch (FatalValidationErrorException e)
             {
@@ -46,7 +48,14 @@ namespace VitDeck.Validator
                     break;
                 }
             }
+            Undo.RevertAllInCurrentGroup();
             return results.ToArray();
+        }
+
+        private static void RegisterUndo(ValidationTarget target)
+        {
+            foreach (var rootObject in target.GetRootObjects())
+                Undo.RegisterFullObjectHierarchyUndo(rootObject, "Validate");
         }
 
         public static IRuleSet[] GetRuleSets()
