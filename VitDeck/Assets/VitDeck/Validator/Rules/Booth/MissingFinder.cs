@@ -11,7 +11,7 @@ namespace VitDeck.Validator
     /// </summary>
     public class MissingFinder
     {
-        HashSet<Object> uniqueObjects = new HashSet<Object>();
+        HashSet<Object> uniqueObjectHashSet = new HashSet<Object>();
 
         HashSet<GameObject> missingPrefabInstances = new HashSet<GameObject>();
         HashSet<GameObject> missingComponentContainers = new HashSet<GameObject>();
@@ -38,18 +38,19 @@ namespace VitDeck.Validator
             {
                 FindRecursive(obj);
             }
-            uniqueObjects.Clear();
-            uniqueObjects = null;
+            uniqueObjectHashSet.Clear();
+            uniqueObjectHashSet = null;
         }
 
         private void FindRecursive(Object unityObject)
         {
             if (unityObject == null)
                 return;
-            if (uniqueObjects.Contains(unityObject))
+            if (uniqueObjectHashSet.Contains(unityObject))
                 return;
-            uniqueObjects.Add(unityObject);
+            uniqueObjectHashSet.Add(unityObject);
 
+            // GameObjectの場合の対応。
             var gameObject = unityObject as GameObject;
             if (gameObject != null)
             {
@@ -61,6 +62,8 @@ namespace VitDeck.Validator
                 {
                     foreach (var component in gameObject.GetComponents<Component>())
                     {
+                        // GetComponents<Component>()がnullを含んでいた場合、GUI上ではMissingコンポーネントとして扱われる。
+                        // nullはエラーメッセージで活用できない為、親のgameObjectを記録する。
                         if (component == null)
                             missingComponentContainers.Add(gameObject);
                         FindRecursive(component);
@@ -68,7 +71,8 @@ namespace VitDeck.Validator
                 }
                 return;
             }
-
+            
+            // その他のObjectの場合の対応。
             var serializedObject = new SerializedObject(unityObject);
             var iterator = serializedObject.GetIterator();
 
