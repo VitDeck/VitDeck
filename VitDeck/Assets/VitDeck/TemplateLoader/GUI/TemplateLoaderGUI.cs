@@ -104,6 +104,11 @@ namespace VitDeck.TemplateLoader.GUI
                 EditorGUI.BeginDisabledGroup(!CheckAllReplaceFieldFilled(replaceStringList));
                 if (GUILayout.Button("作成"))
                 {
+                    if (UnityEditor.EditorSettings.serializationMode == SerializationMode.ForceBinary &&
+                        !EditorUtility.DisplayDialog("Template Loader", "Asset Serializationの設定がForceBinaryになっています。ロードが不完全になる可能性があります。続行しますか？","Load","Cancel"))
+                    {
+                        return;
+                    }
                     messages = new List<Message>();
                     var folderName = templateFolders[popupIndex];
                     var templateName = templateOptions[popupIndex];
