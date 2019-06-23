@@ -28,7 +28,7 @@ namespace VitDeck.Validator
                 {
                     if (material == null)
                     {
-                        AddIssue(new Issue(obj, IssueLevel.Error, string.Format("オブジェクト({0})のRendererにマテリアルの参照がありません。", obj.name), string.Empty, string.Empty));
+                        AddIssue(new Issue(obj, IssueLevel.Info, "オブジェクトのRendererにマテリアルの参照がありません。", string.Empty, string.Empty));
                         continue;
                     }
 
