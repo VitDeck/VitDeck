@@ -8,7 +8,7 @@ if "%1"=="" (
  set  VERSION=%1
 )
 echo VERSION: %VERSION% >> %BAT_LOG% 2>&1
-set UNITY_PATH="C:\Program Files\Unity\Hub\Editor\2017.4.15f1\Editor\Unity.exe"
+set UNITY_PATH="C:\Program Files\Unity\Hub\Editor\2017.4.28f1\Editor\Unity.exe"
 set LOG_FILE="release-unity.log"
 set PACKAGE_NAME="VitDeck-%VERSION%.unitypackage"
 set RELEASE_INFO_JSON="latest.json"
