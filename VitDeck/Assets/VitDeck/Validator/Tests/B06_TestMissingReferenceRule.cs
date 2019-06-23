@@ -7,6 +7,7 @@ using UnityEditor;
 
 namespace VitDeck.Validator.Test
 {
+    [TestFixture(TestOf = typeof(MissingReferenceRule))]
     public class TestMissingReferenceRule
     {
         TestFolderAsset rootFolder = null;
@@ -51,12 +52,16 @@ namespace VitDeck.Validator.Test
 
             var result = rule.Validate(target);
 
-            Assert.NotNull(result.Issues.Find(issue => 
-                issue.message == "missingフィールドが含まれています！（B06_MissingTestMaterial > Texture）" && 
-                issue.target == AssetDatabase.LoadAssetAtPath<Material>(testData + "/B06_MissingTestMaterial.mat")));
-            Assert.NotNull(result.Issues.Find(issue => 
+            Assert.That(result.Issues.Count, Is.EqualTo(3));
+            Assert.NotNull(result.Issues.Find(issue =>
                 issue.message == "missingプレハブが含まれています！（Missing Prefab）" &&
                 issue.target == GameObject.Find("Missing Prefab")));
+            Assert.NotNull(result.Issues.Find(issue =>
+                issue.message == "missingコンポーネントが含まれています！（MissingScriptObject）" &&
+                issue.target == GameObject.Find("MissingScriptObject")));
+            Assert.NotNull(result.Issues.Find(issue =>
+                issue.message == "missingフィールドが含まれています！（B06_MissingTestMaterial > Texture）" &&
+                issue.target == AssetDatabase.LoadAssetAtPath<Material>(testData + "/B06_MissingTestMaterial.mat")));
         }
     }
 }

@@ -9,12 +9,35 @@ namespace VitDeck.Validator
     public class AllPropertiesEnumerator : IEnumerable<SerializedProperty>
     {
         HashSet<Object> uniqueSet;
-        IEnumerable<GameObject> gameObjects;
+        IEnumerator<SerializedProperty> enumerator;
 
-        public AllPropertiesEnumerator(IEnumerable<GameObject> gameObjects)
+        public static IEnumerable<SerializedProperty> From(IEnumerable<GameObject> gameObjects)
+        {
+            return new AllPropertiesEnumerator(gameObjects);
+        }
+
+        private AllPropertiesEnumerator(IEnumerable<GameObject> gameObjects)
         {
             this.uniqueSet = new HashSet<Object>();
-            this.gameObjects = gameObjects;
+            this.enumerator = gameObjects
+                .SelectMany(GetComponents)
+                .SelectMany(GetProperties)
+                .SelectMany(AggregateReferencedObject)
+                .GetEnumerator();
+        }
+
+        public static IEnumerable<SerializedProperty> From(IEnumerable<Component> components)
+        {
+            return new AllPropertiesEnumerator(components);
+        }
+
+        private AllPropertiesEnumerator(IEnumerable<Component> components)
+        {
+            this.uniqueSet = new HashSet<Object>();
+            this.enumerator = components
+                .SelectMany(GetProperties)
+                .SelectMany(AggregateReferencedObject)
+                .GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -24,11 +47,7 @@ namespace VitDeck.Validator
 
         public IEnumerator<SerializedProperty> GetEnumerator()
         {
-            return gameObjects
-                .SelectMany(GetComponents)
-                .SelectMany(GetProperties)
-                .SelectMany(AggregateReferencedObject)
-                .GetEnumerator();
+            return enumerator;
         }
 
         private IEnumerable<Component> GetComponents(GameObject gameObject)
@@ -39,12 +58,16 @@ namespace VitDeck.Validator
             uniqueSet.Add(gameObject);
 
             foreach (var component in gameObject.GetComponents<Component>())
+            {
+                if (component == null)
+                    continue;
                 yield return component;
+            }
         }
 
         private IEnumerable<SerializedProperty> GetProperties(Object target)
         {
-            if (uniqueSet.Contains(target))
+            if (target == null || uniqueSet.Contains(target))
                 yield break;
 
             uniqueSet.Add(target);

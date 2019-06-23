@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Linq;
 using UnityEditor;
+using System.Collections.Generic;
 
 namespace VitDeck.Validator
 {
@@ -14,6 +15,7 @@ namespace VitDeck.Validator
         {
             var missingPrefabs = target.GetAllObjects()
                 .Where(IsMissingPrefab);
+
             foreach (var missingPrefab in missingPrefabs)
             {
                 var targetGameObject = missingPrefab;
@@ -21,8 +23,21 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(targetGameObject, IssueLevel.Error, errorMessage));
             }
 
-            var noMissingPrefabs = target.GetAllObjects().Where(IsNotMissingPrefab);
-            var missingProperties = new AllPropertiesEnumerator(noMissingPrefabs).Where(IsMissng);
+            var missingComponentSets = target.GetAllObjects()
+                .Where(IsNotMissingPrefab)
+                .SelectMany(EnumerateComponentSets)
+                .Where(set => set.component == null);
+
+            foreach (var missingComponentSet in missingComponentSets)
+            {
+                var targetGameObject = missingComponentSet.gameObject;
+                var errorMessage = string.Format("missingコンポーネントが含まれています！（{0}）", missingComponentSet.gameObject.name);
+                AddIssue(new Issue(targetGameObject, IssueLevel.Error, errorMessage));
+            }
+
+            var missingProperties = 
+                AllPropertiesEnumerator.From(target.GetAllObjects().Where(IsNotMissingPrefab))
+                .Where(IsMissng);
 
             foreach (var missingProperty in missingProperties)
             {
@@ -44,6 +59,25 @@ namespace VitDeck.Validator
                 }
                 AddIssue(new Issue(targetObject, IssueLevel.Error, message));
             }
+        }
+
+        struct ObjectComponentSet
+        {
+            public readonly GameObject gameObject;
+            public readonly Component component;
+
+            public ObjectComponentSet(GameObject gameObject, Component component)
+            {
+                this.gameObject = gameObject;
+                this.component = component;
+            }
+        }
+
+        private static IEnumerable<ObjectComponentSet> EnumerateComponentSets(GameObject gameObject)
+        {
+            return gameObject
+                .GetComponents<Component>()
+                .Select(cp => new ObjectComponentSet(gameObject, cp));
         }
 
         static bool IsMissingPrefab(GameObject gameObject)
