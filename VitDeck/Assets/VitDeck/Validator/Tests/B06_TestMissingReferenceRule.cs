@@ -53,11 +53,6 @@ namespace VitDeck.Validator.Test
 
             var result = rule.Validate(target);
 
-            foreach (var issue in result.Issues)
-            {
-                Debug.Log(issue.message + "\n" + AssetDatabase.GetAssetPath(issue.target), issue.target);
-            }
-
             Assert.That(result.Issues.Count, Is.EqualTo(5));
 
             Assert.NotNull(result.Issues.Find(issue =>
