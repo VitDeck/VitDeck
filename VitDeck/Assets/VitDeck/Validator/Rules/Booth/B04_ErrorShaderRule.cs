@@ -42,7 +42,6 @@ namespace VitDeck.Validator
                     {
                         AddIssue(new Issue(obj, IssueLevel.Error, string.Format("オブジェクト({0})でシェーダーエラーが検出されました。", obj.name), string.Empty, string.Empty));
                     }
-
                 }
             }
         }
