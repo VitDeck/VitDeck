@@ -48,6 +48,7 @@ namespace VitDeck.Validator
                     break;
                 }
             }
+            Undo.RevertAllInCurrentGroup();
             return results.ToArray();
         }
 
