@@ -21,7 +21,7 @@ namespace VitDeck.TemplateLoader.GUI
         private static Dictionary<string, string> replaceStringList = new Dictionary<string, string>();
 
         [MenuItem(prefix + "Load Template", priority = 100)]
-        static void Ooen()
+        static void Open()
         {
             window = GetWindow<TemplateLoaderWindow>(false, "VitDeck");
             Init();
