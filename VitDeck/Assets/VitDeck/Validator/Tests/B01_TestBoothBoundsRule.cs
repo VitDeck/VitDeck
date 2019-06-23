@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NUnit.Framework;
 
-namespace VitDeck.Validator
+namespace VitDeck.Validator.Test
 {
     public class B01_TestBoothBoundsRule
     {
