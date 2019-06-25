@@ -68,6 +68,15 @@ namespace VitDeck.AssetGuardian
             restoreTools.Add(
                 new AssetTypeIdentifier(typeof(AnimatorController)),
                 new SimpleRestorer(HideFlags.None, HideFlags.HideInHierarchy));
+            restoreTools.Add(
+                new AssetTypeIdentifier(typeof(UnityEngine.ComputeShader)),
+                new SimpleRestorer(HideFlags.NotEditable));
+            restoreTools.Add(
+                new AssetTypeIdentifier(typeof(UnityEngine.Video.VideoClip)),
+                new SimpleRestorer(HideFlags.NotEditable));
+            restoreTools.Add(
+                new AssetTypeIdentifier(typeof(UnityEngine.AvatarMask)),
+                new SimpleRestorer(HideFlags.NotEditable));
         }
 
         private interface IRestorer
