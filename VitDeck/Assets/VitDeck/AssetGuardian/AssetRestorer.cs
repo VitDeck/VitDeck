@@ -69,6 +69,9 @@ namespace VitDeck.AssetGuardian
                 new AssetTypeIdentifier(typeof(AnimatorController)),
                 new SimpleRestorer(HideFlags.None, HideFlags.HideInHierarchy));
             restoreTools.Add(
+                new AssetTypeIdentifier(AudioMixerRestorer.AudioMixerMainAssetType),
+                new AudioMixerRestorer());
+            restoreTools.Add(
                 new AssetTypeIdentifier(typeof(UnityEngine.ComputeShader)),
                 new SimpleRestorer(HideFlags.NotEditable));
             restoreTools.Add(
@@ -143,6 +146,38 @@ namespace VitDeck.AssetGuardian
                     subAssets.hideFlags = defaultSubHideFlags;
                 }
                 asset.hideFlags = defaultMainHideFlags;
+            }
+        }
+
+        private class AudioMixerRestorer : IRestorer
+        {
+            public static readonly System.Type AudioMixerMainAssetType;
+            public static readonly System.Type AudioMixerHiddenAssetType;
+
+            static AudioMixerRestorer()
+            {
+                // Internalなのでリフレクションで取得する。
+                var assembly = System.Reflection.Assembly.Load("UnityEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
+                AudioMixerMainAssetType = assembly.GetType("UnityEditor.Audio.AudioMixerController");
+                AudioMixerHiddenAssetType = assembly.GetType("UnityEditor.Audio.AudioMixerEffectController");
+            }
+
+            public void Restore(Object mainAsset)
+            {
+                var path = AssetDatabase.GetAssetPath(mainAsset);
+                var allassets = AssetDatabase.LoadAllAssetsAtPath(path);
+
+                foreach (var asset in allassets)
+                {
+                    if (asset.GetType() == AudioMixerHiddenAssetType)
+                    {
+                        asset.hideFlags = HideFlags.HideInHierarchy | HideFlags.HideInInspector;
+                    }
+                    else
+                    {
+                        asset.hideFlags = HideFlags.None;
+                    }
+                }
             }
         }
     }

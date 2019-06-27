@@ -88,5 +88,14 @@ namespace VitDeck.TestUtilities
             AssetDatabase.CopyAsset(dataPath, path);
             AssetDatabase.SetLabels(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path), new string[] { });
         }
+
+        public static void WriteAudioMixer(string path)
+        {
+            var dataGUID = AssetDatabase.FindAssets(testDataSearchFilter + "Test Audio Mixer").FirstOrDefault();
+            var dataPath = AssetDatabase.GUIDToAssetPath(dataGUID);
+            AssetDatabase.CopyAsset(dataPath, path);
+            AssetDatabase.SetLabels(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path), new string[] { });
+
+        }
     }
 }

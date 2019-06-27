@@ -252,5 +252,16 @@ namespace VitDeck.TestUtilities
             Instance = AssetDatabase.LoadMainAssetAtPath(Path) as SceneAsset;
         }
     }
+
+    public class TestAudioMixerAsset : TestAsset<UnityEngine.Object>
+    {
+        public TestAudioMixerAsset(string parentPath)
+        {
+            Path = GeneratePath(parentPath, "Test Audio Mixer.mixer");
+            TestDataBinary.WriteAudioMixer(Path);
+            AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path);
+        }
+    }
 }
 #pragma warning restore SA1402 // FileMayOnlyContainASingleType
