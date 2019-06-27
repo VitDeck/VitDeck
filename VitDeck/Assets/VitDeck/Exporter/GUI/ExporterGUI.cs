@@ -10,10 +10,10 @@ namespace VitDeck.Exporter.GUI
     /// <summary>
     /// エクスポート機能のGUI
     /// </summary>
-    public class ValidatorWindow : EditorWindow
+    public class ExporterWindow : EditorWindow
     {
         const string prefix = "VitDeck/";
-        private static ValidatorWindow window;
+        private static ExporterWindow window;
         private static ExportSetting[] settings;
         private static string[] settingNames;
         private static ExportSetting[] Settings
@@ -51,7 +51,7 @@ namespace VitDeck.Exporter.GUI
         [MenuItem(prefix + "Export Booth", priority = 102)]
         static void Open()
         {
-            window = GetWindow<ValidatorWindow>(false, "VitDeck");
+            window = GetWindow<ExporterWindow>(false, "VitDeck");
             window.Init();
             window.Show();
         }
