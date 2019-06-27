@@ -9,5 +9,7 @@ namespace VitDeck.Utilities
         public string validatorFolderPath = "";
         [SerializeField]
         public string validatorRuleSetType = "";
+        [SerializeField]
+        public string exporterSettingFileName = "";
     }
 }
