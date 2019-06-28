@@ -1,6 +1,7 @@
 using UnityEditor;
 using System.Linq;
 using System.IO;
+using System;
 
 namespace VitDeck.TestUtilities
 {
@@ -95,7 +96,29 @@ namespace VitDeck.TestUtilities
             var dataPath = AssetDatabase.GUIDToAssetPath(dataGUID);
             AssetDatabase.CopyAsset(dataPath, path);
             AssetDatabase.SetLabels(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path), new string[] { });
+        }
 
+        public static void WriteComputeShader(string path)
+        {
+            var dataGUID = AssetDatabase.FindAssets(testDataSearchFilter + "Test ComputeShader").FirstOrDefault();
+            var dataPath = AssetDatabase.GUIDToAssetPath(dataGUID);
+            System.IO.File.Copy(dataPath, path);
+        }
+
+        public static void WriteVideo(string path)
+        {
+            var dataGUID = AssetDatabase.FindAssets(testDataSearchFilter + "Test Movie").FirstOrDefault();
+            var dataPath = AssetDatabase.GUIDToAssetPath(dataGUID);
+            AssetDatabase.CopyAsset(dataPath, path);
+            AssetDatabase.SetLabels(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path), new string[] { });
+        }
+
+        public static void WriteAvatarMask(string path)
+        {
+            var dataGUID = AssetDatabase.FindAssets(testDataSearchFilter + "Test Avatar Mask").FirstOrDefault();
+            var dataPath = AssetDatabase.GUIDToAssetPath(dataGUID);
+            AssetDatabase.CopyAsset(dataPath, path);
+            AssetDatabase.SetLabels(AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path), new string[] { });
         }
     }
 }
