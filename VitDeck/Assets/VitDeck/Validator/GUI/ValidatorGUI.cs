@@ -115,7 +115,7 @@ namespace VitDeck.Validator.GUI
             if (isOpenResultLogArea)
             {
                 resultLogAreaScroll = EditorGUILayout.BeginScrollView(resultLogAreaScroll);
-                validationLog = GUILayout.TextArea(validationLog, GUILayout.ExpandHeight(true));
+                GUILayout.TextArea(validationLog, GUILayout.ExpandHeight(true));
                 EditorGUILayout.EndScrollView();
             }
             //Help message
