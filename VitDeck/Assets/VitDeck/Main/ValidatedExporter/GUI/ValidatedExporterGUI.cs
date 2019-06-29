@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using VitDeck.Utilities;
-using VitDeck.Main;
 using VitDeck.Exporter;
-using VitDeck.Main.ValidatedExporter;
+using VitDeck.Utilities;
+using VitDeck.Validator;
 
 namespace VitDeck.Main.ValidatedExporter.GUI
 {
@@ -174,7 +173,7 @@ namespace VitDeck.Main.ValidatedExporter.GUI
             var header = string.Format("- version:{0}", VersionUtility.GetVersion()) + Environment.NewLine;
             header += string.Format("- Rule set:{0}", selectedSetting.SettingName) + Environment.NewLine;
             header += string.Format("- Base folder:{0}", baseFolderPath) + Environment.NewLine;
-            var log = header + result.log;
+            var log = header + result.GetValidationLog() + result.GetExportLog() + result.log;
             SetMessages(header, result);
             OutLog(log);
             OutLog("Export completed.");
@@ -187,7 +186,22 @@ namespace VitDeck.Main.ValidatedExporter.GUI
 
         private void GetMessageBox(Message msg)
         {
+            GUILayout.BeginHorizontal();
+
+            var helpBoxRect = EditorGUILayout.BeginHorizontal();
+            if (Event.current.type == EventType.MouseUp && helpBoxRect.Contains(Event.current.mousePosition) && msg.issue != null)
+                EditorGUIUtility.PingObject(msg.issue.target);
             EditorGUILayout.HelpBox(msg.message, msg.type, true);
+            EditorGUILayout.EndHorizontal();
+            if (msg.issue != null && !string.IsNullOrEmpty(msg.issue.solutionURL))
+            {
+                CustomGUILayout.URLButton("Help", msg.issue.solutionURL, GUILayout.Width(50));
+            }
+            else
+            {
+                GUILayout.Space(55);
+            }
+            GUILayout.EndHorizontal();
         }
 
         #region Log
@@ -203,25 +217,54 @@ namespace VitDeck.Main.ValidatedExporter.GUI
             exportLog += log + System.Environment.NewLine;
         }
 
-        private void SetMessages(string header, ValidatedExportResult result)
+        private MessageType GetMessageType(IssueLevel level)
         {
-            if (result.IsExportSuccess)
+            switch (level)
+            {
+                case IssueLevel.Info: return MessageType.Info;
+                case IssueLevel.Warning: return MessageType.Warning;
+                case IssueLevel.Error: return MessageType.Error;
+                case IssueLevel.Fatal: return MessageType.Error;
+                default: return MessageType.None;
+            }
+        }
+
+        private void SetMessages(string header, ValidatedExportResult exportResult)
+        {
+            if (exportResult != null && exportResult.validationResults != null)
+            {
+                foreach (var result in exportResult.validationResults)
+                {
+                    var ruleResultLog = result.GetResultLog(false);
+                    if (!string.IsNullOrEmpty(ruleResultLog))
+                        messages.Add(new Message(ruleResultLog, MessageType.Info, null));
+                    foreach (var issue in result.Issues)
+                    {
+                        var txt = result.RuleName + Environment.NewLine;
+                        if (issue.target != null)
+                            txt += issue.target.name + Environment.NewLine;
+                        txt += issue.message + Environment.NewLine + issue.solution;
+                        messages.Add(new Message(txt, GetMessageType(issue.level), issue));
+                    }
+                }
+            }
+            if (exportResult.IsExportSuccess)
             {
                 messages.Add(new Message("エクスポートが完了しました。" + Environment.NewLine + header, MessageType.Info));
-                if (result.GetValidationLog() != "")
-                    messages.Add(new Message(result.GetValidationLog(), MessageType.Info));
-                if (result.GetExportLog() != "")
-                    messages.Add(new Message(result.GetExportLog(), MessageType.Info));
-                messages.Add(new Message("以下のunitypackageをエクスポートしました。" + Environment.NewLine + result.exportResult.exportFilePath, MessageType.Info));
+                if (exportResult.GetValidationLog() != "")
+                    messages.Add(new Message(exportResult.GetValidationLog(), MessageType.Info));
+                if (exportResult.GetExportLog() != "")
+                    messages.Add(new Message(exportResult.GetExportLog(), MessageType.Info));
+                var package = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(exportResult.exportResult.exportFilePath);
+                var result = new Issue(package,IssueLevel.Info,"エクスポートが完了しました。");
+                messages.Add(new Message("以下のunitypackageをエクスポートしました。" + Environment.NewLine + exportResult.exportResult.exportFilePath, MessageType.Info, result));
             }
             else
             {
                 messages.Add(new Message("エクスポートを中断しました。" + Environment.NewLine + header, MessageType.Error));
-                messages.Add(new Message(result.log, MessageType.Info));
-                if (result.GetValidationLog() != "")
-                    messages.Add(new Message(result.GetValidationLog(), MessageType.Error));
-                if (result.GetExportLog() != "")
-                    messages.Add(new Message(result.GetExportLog(), MessageType.Error));
+                messages.Add(new Message(exportResult.log, MessageType.Info));
+                if (exportResult.GetExportLog() != "")
+                    messages.Add(new Message(exportResult.GetExportLog(), MessageType.Error));
             }
         }
         #endregion
@@ -231,11 +274,13 @@ namespace VitDeck.Main.ValidatedExporter.GUI
         /// </summary>
         private class Message
         {
-            public Message(string message, MessageType type)
+            public Message(string message, MessageType type, Issue issue = null)
             {
                 this.message = message;
                 this.type = type;
+                this.issue = issue;
             }
+            public Issue issue;
             public string message;
             public MessageType type;
         }
