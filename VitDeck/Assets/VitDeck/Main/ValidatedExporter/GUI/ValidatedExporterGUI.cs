@@ -4,16 +4,19 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using VitDeck.Utilities;
+using VitDeck.Main;
+using VitDeck.Exporter;
+using VitDeck.Main.ValidatedExporter;
 
-namespace VitDeck.Exporter.GUI
+namespace VitDeck.Main.ValidatedExporter.GUI
 {
     /// <summary>
-    /// エクスポート機能のGUI
+    /// ルールチェック付きエクスポート機能のGUI
     /// </summary>
-    public class ExporterWindow : EditorWindow
+    public class ValidatedExporterWindow : EditorWindow
     {
         const string prefix = "VitDeck/";
-        private static ExporterWindow window;
+        private static ValidatedExporterWindow window;
         private static ExportSetting[] settings;
         private static string[] settingNames;
         private static ExportSetting[] Settings
@@ -22,7 +25,7 @@ namespace VitDeck.Exporter.GUI
             {
                 if (settings == null)
                 {
-                    settings = Exporter.GetExportSettings();
+                    settings = Exporter.Exporter.GetExportSettings();
                 }
                 return settings;
             }
@@ -41,9 +44,22 @@ namespace VitDeck.Exporter.GUI
                 return settingNames;
             }
         }
+        private string ruleSetName = "";
+        private string RuleSetName
+        {
+            get
+            {
+                if (ruleSetName == "" && selectedSetting != null)
+                {
+                    ruleSetName = Validator.Validator.GetRuleSet(selectedSetting.ruleSetName).RuleSetName;
+                }
+                return ruleSetName;
+            }
+        }
         private ExportSetting selectedSetting;
         private DefaultAsset baseFolder;
-        private ExportResult result;
+        private bool forceExport;
+        private ValidatedExportResult result;
         private string exportLog;
         private List<Message> messages;
         private Vector2 msaageAreaScroll;
@@ -51,7 +67,7 @@ namespace VitDeck.Exporter.GUI
         [MenuItem(prefix + "Export Booth", priority = 102)]
         static void Open()
         {
-            window = GetWindow<ExporterWindow>(false, "VitDeck");
+            window = GetWindow<ValidatedExporterWindow>(false, "VitDeck");
             window.Init();
             window.Show();
         }
@@ -61,6 +77,8 @@ namespace VitDeck.Exporter.GUI
         {
             settings = null;
             settingNames = null;
+            forceExport = false;
+            ruleSetName = "";
             exportLog = "";
             result = null;
             messages = new List<Message>();
@@ -100,15 +118,23 @@ namespace VitDeck.Exporter.GUI
             DefaultAsset newFolder = (DefaultAsset)EditorGUILayout.ObjectField("Base Folder:", baseFolder, typeof(DefaultAsset), true);
             var path = AssetDatabase.GetAssetPath(newFolder);
             baseFolder = AssetDatabase.IsValidFolder(path) ? newFolder : null;
-            //Export Setting fields
-            //ToDo
-
-            //Check button
+            if (selectedSetting != null)
+            {
+                if (!string.IsNullOrEmpty(RuleSetName))
+                    EditorGUILayout.LabelField("Rule set:", RuleSetName);
+                //Setting fields
+                GUILayout.TextArea(selectedSetting.Description);
+            }
+            //ForceExportCheck
+            if (result != null && !result.IsExportSuccess)
+                forceExport = GUILayout.Toggle(forceExport, "エラーを無視して再エクスポートする");
+            //Export button
             EditorGUI.BeginDisabledGroup(selectedSetting == null || baseFolder == null);
             if (GUILayout.Button("Export"))
             {
                 OnExport();
             }
+            EditorGUI.EndDisabledGroup();
             //Help message
             if (messages != null)
             {
@@ -140,9 +166,11 @@ namespace VitDeck.Exporter.GUI
                 return;
             ClearLogs();
             SaveSettings();
-            OutLog("Start exporting");
+            OutLog("Start exporting with validation.");
             var baseFolderPath = AssetDatabase.GetAssetPath(baseFolder);
-            result = Exporter.Export(new string[] { baseFolderPath }, selectedSetting);
+            result = ValidatedExporter.ValidatedExport(baseFolderPath, selectedSetting, forceExport);
+            AssetDatabase.Refresh();
+            forceExport = false;
             var header = string.Format("- version:{0}", VersionUtility.GetVersion()) + Environment.NewLine;
             header += string.Format("- Rule set:{0}", selectedSetting.SettingName) + Environment.NewLine;
             header += string.Format("- Base folder:{0}", baseFolderPath) + Environment.NewLine;
@@ -175,21 +203,26 @@ namespace VitDeck.Exporter.GUI
             exportLog += log + System.Environment.NewLine;
         }
 
-        private void SetMessages(string header, ExportResult result)
+        private void SetMessages(string header, ValidatedExportResult result)
         {
-            if (!HasFatalError(result))
+            if (result.IsExportSuccess)
             {
                 messages.Add(new Message("エクスポートが完了しました。" + Environment.NewLine + header, MessageType.Info));
+                if (result.GetValidationLog() != "")
+                    messages.Add(new Message(result.GetValidationLog(), MessageType.Info));
+                if (result.GetExportLog() != "")
+                    messages.Add(new Message(result.GetExportLog(), MessageType.Info));
+                messages.Add(new Message("以下のunitypackageをエクスポートしました。" + Environment.NewLine + result.exportResult.exportFilePath, MessageType.Info));
             }
             else
             {
                 messages.Add(new Message("エクスポートを中断しました。" + Environment.NewLine + header, MessageType.Error));
+                messages.Add(new Message(result.log, MessageType.Info));
+                if (result.GetValidationLog() != "")
+                    messages.Add(new Message(result.GetValidationLog(), MessageType.Error));
+                if (result.GetExportLog() != "")
+                    messages.Add(new Message(result.GetExportLog(), MessageType.Error));
             }
-        }
-
-        private bool HasFatalError(ExportResult result)
-        {
-            return false;
         }
         #endregion
 

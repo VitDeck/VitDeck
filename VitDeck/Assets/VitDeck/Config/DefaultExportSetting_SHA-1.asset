@@ -9,11 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a780f2801beb823448f3c902970fc314, type: 3}
-  m_Name: DefaultExportSetting
+  m_Name: DefaultExportSetting_SHA-1
   m_EditorClassIdentifier: 
-  SettingName: Default Setting
-  Description: "\u30A8\u30AF\u30B9\u30DD\u30FC\u30C8\u306E\u8AAC\u660E\n\u30EB\u30FC\u30EB\u3084\u4F1D\u9054\u4E8B\u9805\u306A\u3069\u3092\u8A18\u5165"
+  SettingName: Default Setting (SHA-1 file name)
+  Description: "\u8AAC\u660E"
   ExportFolderPath: Assets/Exports
-  fileNameFormat: export_package.unitypackage
+  fileNameFormat: '{SHA-1}.unitypackage'
   ruleSetName: SampleRuleSet
-  ignoreValidationWarning: 1
+  ignoreValidationWarning: 0

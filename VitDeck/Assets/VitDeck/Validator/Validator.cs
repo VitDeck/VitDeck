@@ -79,5 +79,14 @@ namespace VitDeck.Validator
             }
             return ruleSets.ToArray();
         }
+
+        public static IRuleSet GetRuleSet(string ruleSetName)
+        {
+            var result = GetRuleSets()
+                .Where(ruleSet => ruleSet.GetType().Name == ruleSetName);
+            if (result == null || result.Count() == 0)
+                throw new FatalValidationErrorException("ルールセットが見つかりませんでした。:" + ruleSetName);
+            return result.First();
+        }
     }
 }
