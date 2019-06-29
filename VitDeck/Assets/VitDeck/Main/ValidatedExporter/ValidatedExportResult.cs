@@ -5,9 +5,15 @@ namespace VitDeck.Main.ValidatedExporter
 {
     public class ValidatedExportResult
     {
+        public bool forceExport;
         public string log;
         public ValidationResult[] validationResults;
         public ExportResult exportResult;
+
+        public ValidatedExportResult(bool forceExport)
+        {
+            this.forceExport = forceExport;
+        }
 
         /// <summary>
         /// ルールチェック結果に指定されたレベル以上のIssueが存在するかチェックする。

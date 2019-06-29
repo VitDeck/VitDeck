@@ -15,7 +15,7 @@ namespace VitDeck.Main.ValidatedExporter
                 throw new ArgumentNullException("Invalid export folder path:" + exportFolderPath);
             if (setting == null)
                 throw new ArgumentNullException("Argument `setting` is null.");
-            var result = new ValidatedExportResult();
+            var result = new ValidatedExportResult(forceExport);
             //validate
             if (!forceExport)
             {
