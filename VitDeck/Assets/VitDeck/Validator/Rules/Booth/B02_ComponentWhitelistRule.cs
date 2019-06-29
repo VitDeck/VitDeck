@@ -27,7 +27,7 @@ namespace VitDeck.Validator
                 var components = obj.GetComponents<Component>();
                 foreach (var cmp in components)
                 {
-                    if (cmp.GetType() == typeof(Transform))
+                    if (cmp == null || cmp.GetType() == typeof(Transform))
                         continue;
                     var findFlg = false;
                     var message = "";
