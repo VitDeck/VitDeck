@@ -45,7 +45,6 @@ namespace VitDeck.Main.ValidatedExporter
             var log = "";
             if (validationResults != null)
             {
-
                 foreach (var result in validationResults)
                 {
                     log += result.GetResultLog() + System.Environment.NewLine;
