@@ -1,0 +1,14 @@
+{
+    "name": "VitDeck.Main.ValidatedExporter.Tests",
+    "references": [
+        "VitDeck.Main",
+        "VitDeck.Utilities",
+        "VitDeck.Main.ValidatedExporter",
+        "VitDeck.Exporter",
+        "VitDeck.Validator.Components"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

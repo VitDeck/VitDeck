@@ -172,7 +172,7 @@ namespace VitDeck.Main.ValidatedExporter.GUI
             var header = string.Format("- version:{0}", VersionUtility.GetVersion()) + Environment.NewLine;
             header += string.Format("- Rule set:{0}", selectedSetting.SettingName) + Environment.NewLine;
             header += string.Format("- Base folder:{0}", baseFolderPath) + Environment.NewLine;
-            if(forceExport)
+            if (forceExport)
                 header += string.Format("- Force export:{0}", forceExport) + Environment.NewLine;
             var log = header + result.GetValidationLog() + result.GetExportLog() + result.log;
             forceExport = false;
@@ -258,7 +258,7 @@ namespace VitDeck.Main.ValidatedExporter.GUI
                 if (exportResult.GetExportLog() != "")
                     messages.Add(new Message(exportResult.GetExportLog(), MessageType.Info));
                 var package = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(exportResult.exportResult.exportFilePath);
-                var result = new Issue(package,IssueLevel.Info,"エクスポートが完了しました。");
+                var result = new Issue(package, IssueLevel.Info, "エクスポートが完了しました。");
                 messages.Add(new Message("以下のunitypackageをエクスポートしました。" + Environment.NewLine + exportResult.exportResult.exportFilePath, MessageType.Info, result));
             }
             else
