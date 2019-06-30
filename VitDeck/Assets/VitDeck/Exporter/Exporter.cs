@@ -13,15 +13,22 @@ namespace VitDeck.Exporter
     /// </summary>
     public static class Exporter
     {
+        /// <summary>
+        /// 指定したベースフォルダをunitypackageにエクスポートする。
+        /// </summary>
+        /// <param name="baseFolderPath">ベースフォルダパス</param>
+        /// <param name="setting">エクスポートに使用する設定</param>
+        /// <param name="forceExport">ファイルが既に存在していた場合に上書きするかどうか</param>
+        /// <returns>エクスポート結果</returns>
         public static ExportResult Export(string baseFolderPath, ExportSetting setting, bool forceExport = false)
         {
+            if (setting == null)
+                throw new ArgumentNullException("Argument `setting` is null.");
             if (baseFolderPath == null)
                 throw new ArgumentNullException("Argument `baseFolderPath` is null.");
             var exportFolderPath = setting.ExportFolderPath;
             if (string.IsNullOrEmpty(exportFolderPath) || !exportFolderPath.StartsWith("Assets"))
                 throw new ArgumentNullException("Invalid export folder path:" + exportFolderPath);
-            if (setting == null)
-                throw new ArgumentNullException("Argument `setting` is null.");
 
             var fileName = string.IsNullOrEmpty(setting.fileNameFormat) ? "export.unitypackage" : setting.fileNameFormat;
             var outputPath = exportFolderPath + Path.AltDirectorySeparatorChar + fileName;
@@ -87,6 +94,10 @@ namespace VitDeck.Exporter
             return paths.ToArray();
         }
 
+        /// <summary>
+        /// Configフォルダに存在するエクスポート設定オブジェクトを取得する。
+        /// </summary>
+        /// <returns>エクスポート設定の配列</returns>
         public static ExportSetting[] GetExportSettings()
         {
             var filter = "t:ExportSetting";
