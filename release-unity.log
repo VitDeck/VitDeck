@@ -1,0 +1,158 @@
+
+LICENSE SYSTEM [2019630 23:36:23] Next license update check is after 2019-07-01T01:34:28
+
+Built from '2017.4/staging' branch; Version is '2017.4.28f1 (e3a0f7dd2097) revision 14917879'; Using compiler version '160040219'
+OS: 'Windows 10  (10.0.0) 64bit' Language: 'ja' Physical Memory: 16318 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+[Package Manager] Server::Start -- Port 60143 was selected
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2017.4.28f1\Editor\Unity.exe
+-exportPackage
+Assets\VitDeck
+VitDeck-1.0.0-vketB_beta.unitypackage
+-projectPath
+Z:\VitDeck
+-batchmode
+-nographics
+-logfile
+release-unity.log
+-quit
+Successfully changed project path to: Z:\VitDeck
+Z:/VitDeck
+Loading GUID <-> Path mappings...0.000061 seconds
+Loading Asset Database...0.005829 seconds
+Audio: FMOD Profiler initialized on port 54900
+AssetDatabase consistency checks...0.034457 seconds
+Refreshing native plugins compatible for Editor in 6.36 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+DisplayProgressbar: Unity Package Manager
+[Package Manager] Resolving 4 packages:
+[Package Manager]  * Package :  com.unity.ads@2.0.8
+    (location: C:\Users\Kozu\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.ads@2.0.8)
+[Package Manager]  * Package :  com.unity.analytics@2.0.13
+    (location: C:\Users\Kozu\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.analytics@2.0.13)
+[Package Manager]  * Package :  com.unity.purchasing@0.0.19
+    (location: C:\Users\Kozu\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.purchasing@0.0.19)
+[Package Manager]  * Package :  com.unity.standardevents@1.0.10
+    (location: C:\Users\Kozu\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.standardevents@1.0.10)
+[Package Manager] Resolve completed
+Initialize engine version: 2017.4.28f1 (e3a0f7dd2097)
+Forcing GfxDevice: Null
+GfxDevice: creating device client; threaded=0
+NullGfxDevice:
+    Version:  NULL 1.0 [1.0]
+    Renderer: Null Device
+    Vendor:   Unity Technologies
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/Mono/lib/mono/2.0'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/Mono/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,defer=y,address=127.0.0.1:56108
+Begin MonoManager ReloadAssembly
+Refreshing native plugins compatible for Editor in 0.36 ms, found 4 plugins.
+Initializing Unity.PackageManager (PackageManager) v2017.4.28 for Unity v2017.4.28f1
+Registering precompiled unity dll's ...
+Register platform support module: C:\Program Files\Unity\Hub\Editor\2017.4.28f1\Editor\Data\PlaybackEngines\windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001452 seconds.
+Registering platform support modules:
+Registered platform support modules in: 0.0861852s.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.44 ms, found 4 plugins.
+Preloading 2 native plugins for Editor in 1.41 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.705 seconds
+Platform modules already initialized, skipping
+Begin MonoManager ReloadAssembly
+Registering precompiled user dll's ...
+Registered in 0.012730 seconds.
+Initializing Unity.PackageManager (PackageManager) v2017.4.28 for Unity v2017.4.28f1
+Registering platform support modules:
+Registered platform support modules in: 0.0595882s.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.40 ms, found 4 plugins.
+Preloading 2 native plugins for Editor in 0.19 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.685 seconds
+Platform modules already initialized, skipping
+Validating Project structure ... 0.002766 seconds.
+Refresh: detecting if any assets need to be imported or removed ... Removing Assets/VitDeck/AssetGuardian/Tests because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+Removing Assets/VitDeck/Exporter/Tests because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+Removing Assets/VitDeck/Main/Tests because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+Removing Assets/VitDeck/Main/ValidatedExporter/Tests because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+Removing Assets/VitDeck/TemplateLoader/Tests because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+Removing Assets/VitDeck/TestUtilities because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+Removing Assets/VitDeck/Utilities/Tests because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+Removing Assets/VitDeck/Validator/Tests because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+Refresh: elapses 0.046066 seconds
+Refreshing native plugins compatible for Editor in 0.41 ms, found 4 plugins.
+Preloading 2 native plugins for Editor in 0.20 ms.
+
+----- Total AssetImport time: 0.099665s, AssetImport time: 0.057931s, Asset hashing: 0.000000s [0 B, 0.000000 mb/s]
+
+Warming cache for 271 main assets: 0.000456 seconds elapsed
+Initializing Unity extensions:
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Editor/UnityEditor.HoloLens.dll'  GUID: 12fd8a0055b84bb59e84c9835a37e333
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Timeline/Runtime/UnityEngine.Timeline.dll'  GUID: 6a10b2909283487f913b00d94cd3faf5
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/portable/nunit.framework.dll'  GUID: 405b9b51bb344a128608d968297df79c
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/GUISystem/Standalone/UnityEngine.UI.dll'  GUID: f70555f144d8491a825f0804e09c671c
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll'  GUID: f5f67c52d1564df4a8936ccd202a3bd8
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll'  GUID: 844f815391db42d49455cbf1a7bfc434
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Networking/Standalone/UnityEngine.Networking.dll'  GUID: dc443db3e92b4983b9738c1131f555cb
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Runtime/UnityEngine.SpatialTracking.dll'  GUID: ed7343f30e3843b3afda8f8b02669cea
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Editor/UnityEditor.GoogleAudioSpatializer.dll'  GUID: 4a3ecb1425d14502837abea459cf2b70
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll'  GUID: 5f32cd94baa94578a686d4b9d6b660f7
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Runtime/UnityEngine.HoloLens.dll'  GUID: f7b54ff4a43d4fcf81b4538b678e0bcc
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Editor/UnityEditor.SpatialTracking.dll'  GUID: b5da970776034f77a070d99423d68791
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll'  GUID: adebbd281f1a4ef3a30be7f21937e02f
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll'  GUID: 870353891bb340e2b2a9c8707e7419ba
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll'  GUID: 53ebcfaa2e1e4e2dbc85882cd5a73fa1
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll'  GUID: ead147da21254ff9a0a936bdd75e1680
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Runtime/UnityEngine.GoogleAudioSpatializer.dll'  GUID: e4f4cf1b9b434137a499903a7a1d651a
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll'  GUID: 4ba2329b63d54f0187bcaa12486b1b0f
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll'  GUID: 1c6d1fbb51834b64847b1b73a75bfc77
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll'  GUID: 3a84de5cd0624681b6b6dcd8921d912a
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll'  GUID: 80a3616ca19596e4da0f10f14d241e9f
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll'  GUID: c768acbc9cf24d398488bb4c93b91288
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/Editor/UnityEditor.TestRunner.dll'  GUID: 4113173d5e95493ab8765d7b08371de4
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll'  GUID: 4b3fa4bde7f1451a8218c03ee6a8ded8
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UIAutomation/Editor/UnityEditor.UIAutomation.dll'  GUID: b8a0574e92bd43a59e19d6c3c6ae54c7
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Timeline/Editor/UnityEditor.Timeline.dll'  GUID: 7668179ede524d6396c8b7d84461ea29
+Unloading 170 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 25.6 MB.
+System memory in use after: 25.5 MB.
+
+Unloading 82 unused Assets to reduce memory usage. Loaded Objects now: 737.
+Total: 0.968900 ms (FindLiveObjects: 0.160100 ms CreateObjectMapping: 0.011500 ms MarkObjects: 0.777200 ms  DeleteObjects: 0.017200 ms)
+
+Export package Assets\VitDeck to VitDeck-1.0.0-vketB_beta.unitypackage
+Batchmode quit successfully invoked - shutting down!
+Refresh: detecting if any assets need to be imported or removed ... Refresh: elapses 0.005793 seconds (Nothing changed)
+Refresh: detecting if any assets need to be imported or removed ... Refresh: elapses 0.005561 seconds (Nothing changed)
+[Package Manager] Server::Kill -- Server was shutdown
+Cleanup mono
+Exiting batchmode successfully now!
