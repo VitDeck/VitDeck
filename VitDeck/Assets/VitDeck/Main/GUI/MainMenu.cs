@@ -15,12 +15,6 @@ namespace VitDeck.Main.GUI
             // グローバルな設定画面を開く
         }
 
-        [MenuItem(prefix + "Export Booth", priority = 102)]
-        static void ExportBooth()
-        {
-            // ブースのエクスポートプロセスを実行する
-        }
-
         [MenuItem(prefix + "Info", priority = 200)]
         static void Information()
         {
