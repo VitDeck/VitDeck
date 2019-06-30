@@ -18,6 +18,7 @@ set RELEASE_PATH=Release\VitDeck
 echo Remove Test folder >> %BAT_LOG% 2>&1
 call :DelFolder "VitDeck\%VITDECK_ROOT%\AssetGuardian\Tests" "%BAT_LOG%"
 call :DelFolder "VitDeck\%VITDECK_ROOT%\Exporter\Tests" "%BAT_LOG%"
+call :DelFolder "VitDeck\%VITDECK_ROOT%\Main\ValidatedExporter\Tests" "%BAT_LOG%"
 call :DelFolder "VitDeck\%VITDECK_ROOT%\Main\Tests" "%BAT_LOG%"
 call :DelFolder "VitDeck\%VITDECK_ROOT%\TemplateLoader\Tests" "%BAT_LOG%"
 call :DelFolder "VitDeck\%VITDECK_ROOT%\Utilities\Tests" "%BAT_LOG%"
