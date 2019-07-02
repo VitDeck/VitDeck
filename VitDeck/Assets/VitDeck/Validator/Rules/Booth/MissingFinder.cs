@@ -103,8 +103,8 @@ namespace VitDeck.Validator
 
         private static bool IsMissng(SerializedProperty serializedProperty)
         {
-            if (HasValidObjectReference(serializedProperty) ||
-                !serializedProperty.hasChildren)
+            if (serializedProperty.propertyType != SerializedPropertyType.ObjectReference ||
+                serializedProperty.objectReferenceValue != null )
             {
                 return false;
             }
