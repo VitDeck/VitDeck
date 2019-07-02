@@ -252,5 +252,49 @@ namespace VitDeck.TestUtilities
             Instance = AssetDatabase.LoadMainAssetAtPath(Path) as SceneAsset;
         }
     }
+
+    public class TestAudioMixerAsset : TestAsset<UnityEngine.Object>
+    {
+        public TestAudioMixerAsset(string parentPath)
+        {
+            Path = GeneratePath(parentPath, "Test Audio Mixer.mixer");
+            TestDataBinary.WriteAudioMixer(Path);
+            AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path);
+        }
+    }
+
+    public class TestComputeShaderAsset : TestAsset<ComputeShader>
+    {
+        public TestComputeShaderAsset(string parentPath)
+        {
+            Path = GeneratePath(parentPath, "TestComputeShader.compute");
+            TestDataBinary.WriteComputeShader(Path);
+            AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path) as ComputeShader;
+        }
+    }
+
+    public class TestVideoClipAsset : TestAsset<UnityEngine.Video.VideoClip>
+    {
+        public TestVideoClipAsset(string parentPath)
+        {
+            Path = GeneratePath(parentPath, "TestMovie.mp4");
+            TestDataBinary.WriteVideo(Path);
+            AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path) as UnityEngine.Video.VideoClip;
+        }
+    }
+
+    public class TestAvatarMaskAsset : TestAsset<AvatarMask>
+    {
+        public TestAvatarMaskAsset(string parentPath)
+        {
+            Path = GeneratePath(parentPath, "Test Avatar Mask.mask");
+            TestDataBinary.WriteAvatarMask(Path);
+            AssetDatabase.ImportAsset(Path, ImportAssetOptions.ForceSynchronousImport);
+            Instance = AssetDatabase.LoadMainAssetAtPath(Path) as AvatarMask;
+        }
+    }
 }
 #pragma warning restore SA1402 // FileMayOnlyContainASingleType
