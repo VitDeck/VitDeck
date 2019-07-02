@@ -50,7 +50,8 @@ namespace VitDeck.Main.ValidatedExporter.GUI
             {
                 if (ruleSetName == "" && selectedSetting != null)
                 {
-                    ruleSetName = Validator.Validator.GetRuleSet(selectedSetting.ruleSetName).RuleSetName;
+                    var ruleSet = Validator.Validator.GetRuleSet(selectedSetting.ruleSetName);
+                    ruleSetName = ruleSet != null ? ruleSet.RuleSetName : "";
                 }
                 return ruleSetName;
             }
