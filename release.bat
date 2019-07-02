@@ -30,7 +30,9 @@ del /s /q "VitDeck\%VITDECK_ROOT%\Config\UserSettings.asset"
 
 echo Copy documents >> %BAT_LOG% 2>&1
 copy /Y LICENSE VitDeck\%VITDECK_ROOT%\LICENSE.txt >> %BAT_LOG% 2>&1
+copy /Y releaseAssets\LICENSE.txt.meta VitDeck\%VITDECK_ROOT%\LICENSE.txt.meta >> %BAT_LOG% 2>&1
 copy /Y README.md VitDeck\%VITDECK_ROOT%\README.txt >> %BAT_LOG% 2>&1
+copy /Y releaseAssets\README.txt.meta VitDeck\%VITDECK_ROOT%\README.txt.meta >> %BAT_LOG% 2>&1
 
 
 echo Mount >> %BAT_LOG% 2>&1
