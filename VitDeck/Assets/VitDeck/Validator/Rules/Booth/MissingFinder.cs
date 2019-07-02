@@ -84,7 +84,7 @@ namespace VitDeck.Validator
             {
                 var current = iterator.Copy();
 
-                if (IsMissng(current))
+                if (IsMissing(current))
                 {
                     missingProperties.Add(current);
                 }
@@ -101,7 +101,7 @@ namespace VitDeck.Validator
                    serializedProperty.objectReferenceValue != null;
         }
 
-        private static bool IsMissng(SerializedProperty serializedProperty)
+        private static bool IsMissing(SerializedProperty serializedProperty)
         {
             if (serializedProperty.propertyType != SerializedPropertyType.ObjectReference ||
                 serializedProperty.objectReferenceValue != null )
