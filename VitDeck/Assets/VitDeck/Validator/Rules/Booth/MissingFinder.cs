@@ -76,6 +76,14 @@ namespace VitDeck.Validator
                 return;
             }
 
+            // Materialの場合の対応。
+            var material = unityObject as Material;
+            if (material != null)
+            {
+                CheckMaterial(material);
+                return;
+            }
+
             // その他のObjectの場合の対応。
             var serializedObject = new SerializedObject(unityObject);
             var iterator = serializedObject.GetIterator();
@@ -95,6 +103,39 @@ namespace VitDeck.Validator
             }
         }
 
+        private void CheckMaterial(Material material)
+        {
+            if (material.shader != null)
+            {
+                //設定中のシェーダーに存在するプロパティの取得
+                var shaderProperties = new HashSet<string>();
+                var count = ShaderUtil.GetPropertyCount(material.shader);
+                for (int i = 0; i < count; i++)
+                {
+                    string propName = ShaderUtil.GetPropertyName(material.shader, i);
+                    shaderProperties.Add(propName);
+                }
+
+                var matSo = new SerializedObject(material);
+                var matSp = matSo.FindProperty("m_SavedProperties");
+                var texEnvsSp = matSp.FindPropertyRelative("m_TexEnvs");
+                for (int i = 0; i < texEnvsSp.arraySize; i++)
+                {
+                    var prop = texEnvsSp.GetArrayElementAtIndex(i);
+                    var propName = prop.FindPropertyRelative("first").stringValue;
+                    //設定中のシェーダーに存在するテクスチャ指定プロパティのみmissing検証
+                    if (shaderProperties.Contains(propName))
+                    {
+                        var tex = prop.FindPropertyRelative("second.m_Texture");
+                        if (tex != null && IsMissing(tex))
+                        {
+                            missingProperties.Add(prop);
+                        }
+                    }
+                }
+            }
+        }
+
         private static bool HasValidObjectReference(SerializedProperty serializedProperty)
         {
             return serializedProperty.propertyType == SerializedPropertyType.ObjectReference &&
@@ -104,7 +145,7 @@ namespace VitDeck.Validator
         private static bool IsMissing(SerializedProperty serializedProperty)
         {
             if (serializedProperty.propertyType != SerializedPropertyType.ObjectReference ||
-                serializedProperty.objectReferenceValue != null )
+                serializedProperty.objectReferenceValue != null)
             {
                 return false;
             }
