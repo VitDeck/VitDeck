@@ -10,6 +10,7 @@ VitDeckは多人数がUnityを使用して特定のルールに沿った制作�
 # ツール構成方法
 - [テンプレートの作成方法](https://github.com/vkettools/VitDeck/wiki/MakingTemplate)
 - [ルールセットの作成方法](https://github.com/vkettools/VitDeck/wiki/MakingRuleSet)
+- [エクスポート設定の作成方法](https://github.com/vkettools/VitDeck/wiki/MakingExportSetting)
 - [アップデート通知の構成](https://github.com/vkettools/VitDeck/wiki/ConfiguringUpdateNortification)
 
 # 汎用ルール
