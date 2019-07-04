@@ -116,6 +116,8 @@ namespace VitDeck.AssetGuardian
                 var components = gameObject.GetComponentsInChildren<Component>(true);
                 foreach (var component in components)
                 {
+                    if (component == null)
+                        continue;
                     component.hideFlags = baseHideFlags | HideFlags.HideInHierarchy;
                 }
             }
