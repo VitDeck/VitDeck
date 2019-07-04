@@ -80,35 +80,7 @@ namespace VitDeck.Validator
             var material = unityObject as Material;
             if (material != null)
             {
-                if (material.shader != null)
-                {
-                    //設定中のシェーダーに存在するプロパティの取得
-                    var shaderProperties = new HashSet<string>();
-                    var count = ShaderUtil.GetPropertyCount(material.shader);
-                    for (int i = 0; i < count; i++)
-                    {
-                        string propName = ShaderUtil.GetPropertyName(material.shader, i);
-                        shaderProperties.Add(propName);
-                    }
-
-                    var matSo = new SerializedObject(material);
-                    var matSp = matSo.FindProperty("m_SavedProperties");
-                    var texEnvsSp = matSp.FindPropertyRelative("m_TexEnvs");
-                    for (int i = 0; i < texEnvsSp.arraySize; i++)
-                    {
-                        var prop = texEnvsSp.GetArrayElementAtIndex(i);
-                        var propName = prop.FindPropertyRelative("first").stringValue;
-                        //設定中のシェーダーに存在するテクスチャ指定プロパティのみmissing検証
-                        if (shaderProperties.Contains(propName))
-                        {
-                            var tex = prop.FindPropertyRelative("second.m_Texture");
-                            if (tex != null && IsMissing(tex))
-                            {
-                                missingProperties.Add(tex);
-                            }
-                        }
-                    }
-                }
+                CheckMaterial(material);
                 return;
             }
 
@@ -127,6 +99,39 @@ namespace VitDeck.Validator
                 else if (HasValidObjectReference(current))
                 {
                     FindRecursive(current.objectReferenceValue);
+                }
+            }
+        }
+
+        private void CheckMaterial(Material material)
+        {
+            if (material.shader != null)
+            {
+                //設定中のシェーダーに存在するプロパティの取得
+                var shaderProperties = new HashSet<string>();
+                var count = ShaderUtil.GetPropertyCount(material.shader);
+                for (int i = 0; i < count; i++)
+                {
+                    string propName = ShaderUtil.GetPropertyName(material.shader, i);
+                    shaderProperties.Add(propName);
+                }
+
+                var matSo = new SerializedObject(material);
+                var matSp = matSo.FindProperty("m_SavedProperties");
+                var texEnvsSp = matSp.FindPropertyRelative("m_TexEnvs");
+                for (int i = 0; i < texEnvsSp.arraySize; i++)
+                {
+                    var prop = texEnvsSp.GetArrayElementAtIndex(i);
+                    var propName = prop.FindPropertyRelative("first").stringValue;
+                    //設定中のシェーダーに存在するテクスチャ指定プロパティのみmissing検証
+                    if (shaderProperties.Contains(propName))
+                    {
+                        var tex = prop.FindPropertyRelative("second.m_Texture");
+                        if (tex != null && IsMissing(tex))
+                        {
+                            missingProperties.Add(tex);
+                        }
+                    }
                 }
             }
         }
