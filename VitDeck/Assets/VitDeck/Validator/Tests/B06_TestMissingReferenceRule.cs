@@ -64,7 +64,7 @@ namespace VitDeck.Validator.Test
                 issue.target == GameObject.Find("MissingScriptObject")));
 
             Assert.NotNull(result.Issues.Find(issue =>
-                issue.message == "missingフィールドが含まれています！（B06_MissingTestMaterial > Texture）" &&
+                issue.message == "missingフィールドが含まれています！（B06_MissingTestMaterial > _MainTex）" &&
                 issue.target == AssetDatabase.LoadMainAssetAtPath(testData + "/B06_MissingTestMaterial.mat")));
 
             Assert.NotNull(result.Issues.Find(issue =>
