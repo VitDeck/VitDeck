@@ -129,7 +129,7 @@ namespace VitDeck.Validator
                         var tex = prop.FindPropertyRelative("second.m_Texture");
                         if (tex != null && IsMissing(tex))
                         {
-                            missingProperties.Add(tex);
+                            missingProperties.Add(prop);
                         }
                     }
                 }
