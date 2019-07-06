@@ -39,6 +39,8 @@ namespace VitDeck.Validator
         [Validation]
         public IRule errorShaderRule = new ErrorShaderRule("[B04]エラーシェーダールール");
         [Validation]
+        public IRule noneMeshRule = new NoneMeshRule("[B05]None meshルール");
+        [Validation]
         public IRule missingReferenceRule = new MissingReferenceRule("[B06]missing参照ルール");
     }
 }
