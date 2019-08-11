@@ -156,6 +156,7 @@ namespace VitDeck.TemplateLoader
 
         private static void ReplaceAssetFileName(Dictionary<string, TemplateAsset> assetDictionary, TemplateProperty property, Dictionary<string, string> replaceList)
         {
+            var log = "Loading (ReplaceAssetFileName)" + Environment.NewLine;
             //置換中一時パスのリスト
             var tempPathDictionary = new Dictionary<string, string>();
             foreach (var ta in assetDictionary.Values)
@@ -177,8 +178,10 @@ namespace VitDeck.TemplateLoader
                 var before = tempPathDictionary[ta.destinationPath];
                 //最終パス
                 var after = ta.replacedDestinationPath;
-                AssetDatabase.MoveAsset(before, after);
-                Debug.Log("from:" + ta.destinationPath + " to:" + ta.replacedDestinationPath);
+                var moveResult = AssetDatabase.MoveAsset(before, after);
+                log += "from:" + ta.destinationPath + " to:" + ta.replacedDestinationPath + Environment.NewLine;
+                if (!string.IsNullOrEmpty(moveResult))
+                    log += moveResult + Environment.NewLine;
                 //一時パスの置換
                 if (ta.IsFolder)
                 {
@@ -193,6 +196,7 @@ namespace VitDeck.TemplateLoader
                     }
                 }
             }
+            Debug.Log(log);
         }
 
         private static void ReplaceObjectReference(Dictionary<string, TemplateAsset> assetDictionary, TemplateProperty property, Dictionary<string, string> replaceList)
@@ -219,7 +223,7 @@ namespace VitDeck.TemplateLoader
             {
                 modifier = new AnimationClipReferenceModifier(replaceNamePairDictionary);
             }
-            else if(Path.GetExtension(ta.templatePath).Equals(".fbx", StringComparison.OrdinalIgnoreCase))
+            else if (Path.GetExtension(ta.templatePath).Equals(".fbx", StringComparison.OrdinalIgnoreCase))
             {
                 modifier = new FbxReferenceModifier(replaceGuidPairDictionary);
             }
@@ -292,16 +296,17 @@ namespace VitDeck.TemplateLoader
         private static Dictionary<string, string> CreateReplaceGuidPairDictionary(Dictionary<string, TemplateAsset> assetDictionary)
         {
             var dic = new Dictionary<string, string>();
+            var log = "Loading (CreateReplaceGuidPairDictionary)" + Environment.NewLine;
             foreach (var ta in assetDictionary.Values)
             {
                 if (ta.IsDummyAsset || ta.IsFolder)
                     continue;
                 var searchStr = ta.guid;
                 var replaceStr = AssetDatabase.AssetPathToGUID(ta.destinationPath);
-                Debug.Log(ta.templatePath + " to " + ta.destinationPath);
-                //Debug.Log("replace:" + searchStr + " : " + replaceStr);
+                log += string.Format("{0}({1}) to {2}({3})", ta.templatePath, ta.guid, ta.destinationPath, replaceStr) + Environment.NewLine;
                 dic.Add(searchStr, replaceStr);
             }
+            Debug.Log(log);
             return dic;
         }
 
