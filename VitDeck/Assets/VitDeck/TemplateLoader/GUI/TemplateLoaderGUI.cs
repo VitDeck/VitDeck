@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using VitDeck.Utilities;
@@ -26,6 +27,16 @@ namespace VitDeck.TemplateLoader.GUI
             window = GetWindow<TemplateLoaderWindow>(false, "VitDeck");
             Init();
             window.Show();
+        }
+
+        [UnityEditor.Callbacks.DidReloadScripts]
+        static void DidReloadScripts()
+        {
+            window = Resources.FindObjectsOfTypeAll<TemplateLoaderWindow>().FirstOrDefault();
+            if (window != null)
+            {
+                Init();
+            }
         }
 
         static void Init()
