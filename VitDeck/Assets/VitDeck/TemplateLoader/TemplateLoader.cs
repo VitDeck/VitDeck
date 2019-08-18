@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -27,6 +28,7 @@ namespace VitDeck.TemplateLoader
         public static bool Load(string templateFolderName, Dictionary<string, string> replaceLsit, string copyDistinationPath = "Assets")
         {
             const string templateAssetsFolder = "TemplateAssets";
+            const string temporaryFolderPath = "Assets/VitDeck/Temporary";
             var separatorChar = Path.AltDirectorySeparatorChar;
             var templateFolderPath = GetTemplatesFolderPath() + separatorChar + templateFolderName;
             var copyRootPath = templateFolderPath + separatorChar + templateAssetsFolder;
@@ -49,10 +51,15 @@ namespace VitDeck.TemplateLoader
             foreach (var guid in assetGuids.Distinct())
             {
                 var assetPath = AssetDatabase.GUIDToAssetPath(guid);
-                var destinationPath = CreateDistinationPath(assetPath, copyRootPath, copyDistinationPath);
+                var destinationPath = CreateDistinationPath(assetPath, copyRootPath, temporaryFolderPath);
                 var replacedDestinationPath = CreateReplacedDistinationPath(property, destinationPath, replaceLsit);
                 assetDictionary.Add(guid, new TemplateAsset(guid, assetPath, destinationPath, replacedDestinationPath));
             }
+
+            //Create temporary folder
+            if (AssetDatabase.IsValidFolder(temporaryFolderPath))
+                AssetDatabase.DeleteAsset(temporaryFolderPath);
+            AssetDatabase.CreateFolder("Assets/VitDeck", "Temporary");
 
             //Check distination path
             if (CheckDestinationExists(assetDictionary, copyRootPath) ||
@@ -79,6 +86,28 @@ namespace VitDeck.TemplateLoader
             }
 
             ModifyCopiedAssets(assetDictionary, property, replaceLsit);
+
+            //Move to Final destination path
+            var guids = AssetDatabase.FindAssets("t:Object", new string[] { temporaryFolderPath });
+            //Regex mathes child assets directly under temporaryFolderPath
+            var regex = new Regex("^" + temporaryFolderPath + "/[^/]*$");
+            if (guids.Length > 0)
+            {
+                var targetAssetPaths = guids.Select(guid => AssetDatabase.GUIDToAssetPath(guid))
+                    .Where(path => regex.IsMatch(path) == true)
+                    .ToArray();
+                foreach (var path in targetAssetPaths)
+                {
+                    var finalDestinationPath = path.Replace(temporaryFolderPath, copyDistinationPath);
+                    var validateMoveAssetResult = AssetDatabase.ValidateMoveAsset(path, finalDestinationPath);
+                    if (!string.IsNullOrEmpty(validateMoveAssetResult))
+                    {
+                        Debug.LogError(string.Format("Template load failed.{0} to {1}:{2}", path, finalDestinationPath, validateMoveAssetResult));
+                        return false;
+                    }
+                    AssetDatabase.MoveAsset(path, finalDestinationPath);
+                }
+            }
             AssetDatabase.Refresh();
             return true;
         }
