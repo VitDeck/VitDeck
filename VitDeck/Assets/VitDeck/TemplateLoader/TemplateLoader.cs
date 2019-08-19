@@ -28,7 +28,7 @@ namespace VitDeck.TemplateLoader
         public static bool Load(string templateFolderName, Dictionary<string, string> replaceLsit, string copyDistinationPath = "Assets")
         {
             const string templateAssetsFolder = "TemplateAssets";
-            const string temporaryFolderPath = "Assets/VitDeck/Temporary";
+            string temporaryFolderPath = AssetUtility.RootFolderPath + Path.AltDirectorySeparatorChar + "Temporary";
             var separatorChar = Path.AltDirectorySeparatorChar;
             var templateFolderPath = GetTemplatesFolderPath() + separatorChar + templateFolderName;
             var copyRootPath = templateFolderPath + separatorChar + templateAssetsFolder;
@@ -59,7 +59,7 @@ namespace VitDeck.TemplateLoader
             //Create temporary folder
             if (AssetDatabase.IsValidFolder(temporaryFolderPath))
                 AssetDatabase.DeleteAsset(temporaryFolderPath);
-            AssetDatabase.CreateFolder("Assets/VitDeck", "Temporary");
+            AssetDatabase.CreateFolder(AssetUtility.RootFolderPath, "Temporary");
 
             //Check distination path
             if (CheckDestinationExists(assetDictionary, copyRootPath) ||
