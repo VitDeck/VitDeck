@@ -22,9 +22,12 @@ namespace VitDeck.TemplateLoader
         {
             if (replaceGuidPairDictionary == null)
                 return;
-            StreamReader sr = new StreamReader(Path.GetFullPath(path));
-            string s = sr.ReadToEnd();
-            sr.Close();
+            string s = string.Empty;
+            using (StreamReader sr = new StreamReader(Path.GetFullPath(path)))
+            {
+                s = sr.ReadToEnd();
+                sr.Close();
+            }
             string replaced = s;
             foreach (var guid in replaceGuidPairDictionary.Keys)
             {
@@ -32,9 +35,11 @@ namespace VitDeck.TemplateLoader
             }
             if (s != replaced)
             {
-                StreamWriter sw = new StreamWriter(Path.GetFullPath(path));
-                sw.Write(replaced);
-                sw.Close();
+                using (StreamWriter sw = new StreamWriter(Path.GetFullPath(path)))
+                {
+                    sw.Write(replaced);
+                    sw.Close();
+                }
             }
         }
     }
