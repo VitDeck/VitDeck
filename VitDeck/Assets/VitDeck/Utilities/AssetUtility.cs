@@ -12,6 +12,7 @@ namespace VitDeck.Utilities
     {
         private static string _imageFolderPath;
         private static string _configFolderPath;
+        private static string _rootFolderPath;
         /// <summary>
         /// VitDeck用画像フォルダのパス
         /// </summary>
@@ -46,6 +47,25 @@ namespace VitDeck.Utilities
                     _configFolderPath = GetFolderPath("VitDeck.ConfigFolder");
                 }
                 return _configFolderPath;
+            }
+        }
+
+        /// <summary>
+        /// VitDeckルートフォルダのパス
+        /// </summary>
+        /// <remarks>
+        /// Unityでラベルが付与されているアセットの一つ目のパスを返す。
+        /// 存在しない場合はDirectoryNotFoundExceptionを返す。
+        /// </remarks>
+        public static string RootFolderPath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_rootFolderPath))
+                {
+                    _rootFolderPath = GetFolderPath("VitDeck.RootFolder");
+                }
+                return _rootFolderPath;
             }
         }
 

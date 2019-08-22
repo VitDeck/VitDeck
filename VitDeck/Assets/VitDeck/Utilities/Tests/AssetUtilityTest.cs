@@ -14,5 +14,10 @@ namespace VitDeck.Utilities.Tests
         {
             Assert.That(AssetUtility.ConfigFolderPath, Is.EqualTo("Assets/VitDeck/Config"));
         }
+        [Test]
+        public void TestRootFolderPath()
+        {
+            Assert.That(AssetUtility.RootFolderPath, Is.EqualTo("Assets/VitDeck"));
+        }
     }
 }
