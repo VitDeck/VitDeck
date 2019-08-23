@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections;
 using VitDeck.Utilities;
@@ -11,7 +11,7 @@ namespace VitDeck.Main
     /// <summary>
     public static class JsonReleaseInfo
     {
-        private static string releaseUrl = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
+        private static string releaseUrl = "";
         private static string version = null;
         private static string packageName = null;
         private static string downloadUrl = null;

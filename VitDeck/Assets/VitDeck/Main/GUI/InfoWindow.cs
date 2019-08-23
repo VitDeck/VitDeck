@@ -38,17 +38,19 @@ namespace VitDeck.Main.GUI
         private void Init()
         {
             versionLabel = "Version : " + VersionUtility.GetVersion();
-
-            JsonReleaseInfo.FetchInfo(releaseURL);
-            if (JsonReleaseInfo.GetVersion() == null)
+            if (UpdateCheck.Enabled)
             {
-                version = "None";
+                JsonReleaseInfo.FetchInfo(releaseURL);
+                if (JsonReleaseInfo.GetVersion() == null)
+                {
+                    version = "None";
+                }
+                else
+                {
+                    version = JsonReleaseInfo.GetVersion();
+                }
+                latestVersionLabel = "Latest Version : " + version;
             }
-            else
-            {
-                version = JsonReleaseInfo.GetVersion();
-            }
-            latestVersionLabel = "Latest Version : " + version;
         }
 
         private void OnEnable()
@@ -58,9 +60,15 @@ namespace VitDeck.Main.GUI
 
         private void OnGUI()
         {
+            //Version
             EditorGUILayout.LabelField(versionLabel);
-            EditorGUILayout.LabelField(latestVersionLabel);
-            VersionCheckLabelField();
+            //Updater
+            if (UpdateCheck.Enabled)
+            {
+                EditorGUILayout.LabelField(latestVersionLabel);
+                VersionCheckLabelField();
+            }
+            //Developer info
             CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
         }
 

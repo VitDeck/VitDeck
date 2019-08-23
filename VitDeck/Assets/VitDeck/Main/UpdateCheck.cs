@@ -10,6 +10,14 @@ namespace VitDeck.Main
     /// </summary>
     public static class UpdateCheck
     {
+        public static bool Enabled
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(JsonReleaseInfo.GetReleaseUrl());
+            }
+        }
+
         public static void UpdatePackage(string tag)
         {
             string downloadUrl = JsonReleaseInfo.GetDownloadURL();
