@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 using VitDeck.Utilities;
@@ -23,9 +24,18 @@ namespace VitDeck.Main.GUI
         public static void ShowWindow()
         {
             GetWindow<InfoWindow>(true, "VitDeck");
+            AssetDatabase.importPackageCompleted -= ImportCallback;
+            AssetDatabase.importPackageCompleted += ImportCallback;
         }
 
-        private void OnEnable()
+        private static void ImportCallback(string packageName)
+        {
+            var window = GetWindow<InfoWindow>(true, "VitDeck");
+            if (window != null)
+                window.Init();
+        }
+
+        private void Init()
         {
             versionLabel = "Version : " + VersionUtility.GetVersion();
 
@@ -39,6 +49,11 @@ namespace VitDeck.Main.GUI
                 version = JsonReleaseInfo.GetVersion();
             }
             latestVersionLabel = "Latest Version : " + version;
+        }
+
+        private void OnEnable()
+        {
+            Init();
         }
 
         private void OnGUI()
