@@ -38,13 +38,17 @@ namespace VitDeck.Main
 
         public static void FetchInfo(string releaseUrl)
         {
+            if (string.IsNullOrEmpty(releaseUrl))
+                return;
             var release = ReleaseEnumerator(releaseUrl);
             while (release.MoveNext()) { }
-            var info = JsonUtility.FromJson<ReleaseInfo>(release.Current.ToString());
-
-            version = info.version;
-            packageName = info.package_name;
-            downloadUrl = info.download_url;
+            if (release != null && release.Current != null)
+            {
+                var info = JsonUtility.FromJson<ReleaseInfo>(release.Current.ToString());
+                version = info.version;
+                packageName = info.package_name;
+                downloadUrl = info.download_url;
+            }
         }
 
         static IEnumerator ReleaseEnumerator(string releaseUrl)
