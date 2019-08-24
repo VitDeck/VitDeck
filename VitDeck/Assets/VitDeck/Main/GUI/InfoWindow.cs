@@ -15,9 +15,7 @@ namespace VitDeck.Main.GUI
         [SerializeField]
         string latestVersionLabel = null;
         [SerializeField]
-        string version = null;
-
-        private static readonly string releaseURL = JsonReleaseInfo.GetReleaseUrl();
+        string latestVersion = null;
 
         private GUILayoutOption[] buttonStyle = new GUILayoutOption[] { GUILayout.Width(130) };
 
@@ -40,16 +38,16 @@ namespace VitDeck.Main.GUI
             versionLabel = "Version : " + VersionUtility.GetVersion();
             if (UpdateCheck.Enabled)
             {
-                JsonReleaseInfo.FetchInfo(releaseURL);
-                if (JsonReleaseInfo.GetVersion() == null)
+                var version = UpdateCheck.GetLatestVersion();
+                if (version == null)
                 {
-                    version = "None";
+                    latestVersion = "None";
                 }
                 else
                 {
-                    version = JsonReleaseInfo.GetVersion();
+                    latestVersion = version;
                 }
-                latestVersionLabel = "Latest Version : " + version;
+                latestVersionLabel = "Latest Version : " + latestVersion;
             }
         }
 
@@ -74,12 +72,12 @@ namespace VitDeck.Main.GUI
 
         private void VersionCheckLabelField()
         {
-            if (version == "None")
+            if (latestVersion == "None")
             {
                 EditorGUILayout.LabelField("現在、最新のバージョンを取得できません。");
                 EditorGUILayout.LabelField("ネットワーク接続を確認し、しばらく待ってやり直してください。");
             }
-            else if (UpdateCheck.IsLatest(releaseURL))
+            else if (UpdateCheck.IsLatest())
             {
                 EditorGUILayout.LabelField("最新のバージョンです");
             }
@@ -87,7 +85,7 @@ namespace VitDeck.Main.GUI
             {
                 EditorGUILayout.LabelField("最新のバージョンにアップデートしてください");
                 if (GUILayout.Button("Update"))
-                    UpdateCheck.UpdatePackage(version);
+                    UpdateCheck.UpdatePackage(latestVersion);
             }
         }
     }

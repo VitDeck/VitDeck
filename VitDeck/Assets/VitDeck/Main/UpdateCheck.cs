@@ -18,6 +18,12 @@ namespace VitDeck.Main
             }
         }
 
+        public static string GetLatestVersion()
+        {
+            JsonReleaseInfo.FetchInfo(JsonReleaseInfo.GetReleaseUrl());
+            return JsonReleaseInfo.GetVersion();
+        }
+
         public static void UpdatePackage(string tag)
         {
             string downloadUrl = JsonReleaseInfo.GetDownloadURL();
@@ -29,7 +35,7 @@ namespace VitDeck.Main
             downloader.Settlement(packageName);
         }
 
-        public static bool IsLatest(string releaseUrl)
+        public static bool IsLatest()
         {
             string localVersion = VersionUtility.GetVersion();
             string latestVersion = JsonReleaseInfo.GetVersion();
