@@ -9,12 +9,6 @@ namespace VitDeck.Main.GUI
     {
         const string prefix = "VitDeck/";
 
-        [MenuItem(prefix + "Settings", priority = 0)]
-        static void ProjectSettings()
-        {
-            // グローバルな設定画面を開く
-        }
-
         [MenuItem(prefix + "Info", priority = 200)]
         static void Information()
         {
