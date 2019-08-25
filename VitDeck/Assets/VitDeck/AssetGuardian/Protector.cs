@@ -35,35 +35,6 @@ namespace VitDeck.AssetGuardian
             set { active = value; }
         }
 
-        //TODO: MenuItemAttributeが付いたデバッグ用関数をリリース前に削除する。
-        [MenuItem("Assets/Protect")]
-        static void Protect()
-        {
-            var assets = Selection.objects
-                .Select(obj => AssetDatabase.GetAssetPath(obj))
-                .Where(obj => obj != null)
-                .SelectMany(path => Utilities.AssetUtility.EnumerateAssets(path))
-                .Distinct();
-            foreach (var asset in assets)
-            {
-                Protect(asset);
-            }
-        }
-
-        [MenuItem("Assets/Unprotect")]
-        static void Unprotect()
-        {
-            var assets = Selection.objects
-                .Select(obj => AssetDatabase.GetAssetPath(obj))
-                .Where(obj => obj != null)
-                .SelectMany(path => Utilities.AssetUtility.EnumerateAssets(path))
-                .Distinct();
-            foreach (var asset in assets)
-            {
-                Unprotect(asset);
-            }
-        }
-
         /// <summary>
         /// アセットを保護する。
         /// </summary>

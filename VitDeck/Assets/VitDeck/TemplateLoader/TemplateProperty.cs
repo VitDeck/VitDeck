@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace VitDeck.TemplateLoader
 {
-    [CreateAssetMenu(fileName = "Property.asset", menuName = "VitDeck/Template Property")]
     public class TemplateProperty : ScriptableObject
     {
         [SerializeField]
