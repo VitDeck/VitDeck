@@ -168,13 +168,11 @@ namespace VitDeck.Utilities
                 {
                     targetFolder = System.IO.Path.GetDirectoryName(selectedAssetPath);
                 }
-
             }
             else
             {
                 targetFolder = "Assets";
             }
-
 
             var path = AssetDatabase.GenerateUniqueAssetPath(targetFolder + "/" + defaultAssetName);
 
