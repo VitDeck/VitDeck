@@ -17,6 +17,7 @@ namespace VitDeck.Main.GUI
         [SerializeField]
         string latestVersion = null;
 
+        private static ProductInfo productInfo = null;
         private GUILayoutOption[] buttonStyle = new GUILayoutOption[] { GUILayout.Width(130) };
 
         public static void ShowWindow()
@@ -36,6 +37,7 @@ namespace VitDeck.Main.GUI
         private void Init()
         {
             versionLabel = "Version : " + VersionUtility.GetVersion();
+            productInfo = ProductInfoUtility.GetProductInfo();
             if (UpdateCheck.Enabled)
             {
                 var version = UpdateCheck.GetLatestVersion();
@@ -67,7 +69,12 @@ namespace VitDeck.Main.GUI
                 VersionCheckLabelField();
             }
             //Developer info
-            CustomGUILayout.URLButton("VitDeck on GitHub", "https://github.com/vkettools/VitDeck", buttonStyle);
+            if (productInfo != null &&
+                !string.IsNullOrEmpty(productInfo.developerLinkTitle) &&
+                !string.IsNullOrEmpty(productInfo.developerLinkURL))
+            {
+                CustomGUILayout.URLButton(productInfo.developerLinkTitle, productInfo.developerLinkURL, buttonStyle);
+            }
         }
 
         private void VersionCheckLabelField()
