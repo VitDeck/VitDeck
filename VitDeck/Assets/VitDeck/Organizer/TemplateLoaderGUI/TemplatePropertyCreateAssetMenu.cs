@@ -4,6 +4,9 @@ using VitDeck.Utilities;
 
 namespace VitDeck.TemplateLoader
 {
+    /// <summary>
+    /// <see cref="TemplateProperty"/>アセットを生成するMenuItemを登録するクラス。
+    /// </summary>
     public static class TemplatePropertyCreateAssetMenu
     {
         [MenuItem("Assets/Create/VitDeck/Template Property")]

@@ -151,7 +151,7 @@ namespace VitDeck.Utilities
         /// - リネーム処理中にEscキーを押すことで生成をキャンセルする事が出来ます。
         /// </remarks>
         /// <param name="instance">Assetを生成するインスタンス。</param>
-        /// <param name="defaultAssetName"></param>
+        /// <param name="defaultAssetName">Assetの基本名。既存のアセットとパスが重複する場合は連番が振られます。</param>
         public static void CreateAssetInteractivity(UnityEngine.Object instance, string defaultAssetName)
         {
             string targetFolder;
