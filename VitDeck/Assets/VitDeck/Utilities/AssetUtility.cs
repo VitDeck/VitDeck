@@ -140,5 +140,45 @@ namespace VitDeck.Utilities
                 allInstances = AssetDatabase.LoadAllAssetsAtPath(path);
             return allInstances;
         }
+
+        /// <summary>
+        /// メニューの`Assets/Create/`内の項目を選んだ時と同じ結果になるアセット生成処理。
+        /// </summary>
+        /// <remarks>
+        /// このメソッドでアセット生成を行った場合、
+        /// - アセット生成時にユーザーが選択していたフォルダ、もしくは選択していたアセットを含むフォルダ内にアセットが生成されます。
+        /// - また、アセット生成後に生成アセットにフォーカスが移り、リネーム処理が始まります。
+        /// - リネーム処理中にEscキーを押すことで生成をキャンセルする事が出来ます。
+        /// </remarks>
+        /// <param name="instance">Assetを生成するインスタンス。</param>
+        /// <param name="defaultAssetName"></param>
+        public static void CreateAssetInteractivity(UnityEngine.Object instance, string defaultAssetName)
+        {
+            string targetFolder;
+            if (Selection.assetGUIDs.Length > 0)
+            {
+                var selectedAssetGUID = Selection.assetGUIDs.Last();
+                var selectedAssetPath = AssetDatabase.GUIDToAssetPath(selectedAssetGUID);
+
+                if (AssetDatabase.IsValidFolder(selectedAssetPath))
+                {
+                    targetFolder = selectedAssetPath;
+                }
+                else
+                {
+                    targetFolder = System.IO.Path.GetDirectoryName(selectedAssetPath);
+                }
+
+            }
+            else
+            {
+                targetFolder = "Assets";
+            }
+
+
+            var path = AssetDatabase.GenerateUniqueAssetPath(targetFolder + "/" + defaultAssetName);
+
+            ProjectWindowUtil.CreateAsset(instance, path);
+        }
     }
 }
