@@ -1,39 +1,52 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
-using UnityEngine;
 
 namespace VitDeck.AssetGuardian
 {
     public static class AssetGuardianContextMenu
     {
-        [MenuItem("Assets/Protect Selected Asset")]
+        [MenuItem("Assets/AssetGuardian/Protect")]
         static void Protect()
         {
-            var assets = Selection.objects
-                .Select(obj => AssetDatabase.GetAssetPath(obj))
-                .Where(obj => obj != null)
-                .SelectMany(path => Utilities.AssetUtility.EnumerateAssets(path))
-                .Distinct();
-            foreach (var asset in assets)
+            foreach (var asset in EnumerateSelectedAssets())
             {
                 Protector.Protect(asset);
             }
         }
 
-        [MenuItem("Assets/Unprotect Selected Asset")]
+        [MenuItem("Assets/AssetGuardian/Protect", validate = true)]
+        static bool ProtectValidate()
+        {
+            return IsSelectedAnyAssets();
+        }
+
+        [MenuItem("Assets/AssetGuardian/Unprotect")]
         static void Unprotect()
         {
-            var assets = Selection.objects
-                .Select(obj => AssetDatabase.GetAssetPath(obj))
-                .Where(obj => obj != null)
-                .SelectMany(path => Utilities.AssetUtility.EnumerateAssets(path))
-                .Distinct();
-            foreach (var asset in assets)
+            foreach (var asset in EnumerateSelectedAssets())
             {
                 Protector.Unprotect(asset);
             }
+        }
+
+        [MenuItem("Assets/AssetGuardian/Unprotect", validate = true)]
+        static bool UnprotectValidate()
+        {
+            return IsSelectedAnyAssets();
+        }
+
+        private static bool IsSelectedAnyAssets()
+        {
+            return Selection.assetGUIDs.Length > 0;
+        }
+
+        private static IEnumerable<UnityEngine.Object> EnumerateSelectedAssets()
+        {
+            return Selection.assetGUIDs
+                .Select(guid => AssetDatabase.GUIDToAssetPath(guid))
+                .SelectMany(path => Utilities.AssetUtility.EnumerateAssets(path))
+                .Distinct();
         }
     }
 }
