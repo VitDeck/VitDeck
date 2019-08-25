@@ -1,0 +1,11 @@
+{
+    "name": "VitDeck.Organizer.TemplateLoaderGUI",
+    "references": [
+        "VitDeck.TemplateLoader",
+        "VitDeck.Utilities"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}
