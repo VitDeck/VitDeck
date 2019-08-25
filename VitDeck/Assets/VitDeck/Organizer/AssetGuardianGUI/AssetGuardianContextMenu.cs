@@ -4,6 +4,9 @@ using UnityEditor;
 
 namespace VitDeck.AssetGuardian
 {
+    /// <summary>
+    /// <see cref="AssetGuardian"/>の、選択中のアセットの保護/保護解除を行うMenuItemを登録するクラス。
+    /// </summary>
     public static class AssetGuardianContextMenu
     {
         [MenuItem("Assets/AssetGuardian/Protect")]
