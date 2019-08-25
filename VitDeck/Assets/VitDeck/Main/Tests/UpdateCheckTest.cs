@@ -6,7 +6,7 @@ namespace VitDeck.Main.Tests
     public class UpdateCheckTest
     {
         private static readonly string testURL = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
-        
+
         [Test]
         public void TestLatestVersioning()
         {
@@ -14,6 +14,13 @@ namespace VitDeck.Main.Tests
             string version = JsonReleaseInfo.GetVersion();
             Assert.That(VersionUtility.IsSemanticVersioning(version), Is.True);
             Assert.That(version, Is.EqualTo("1.0.0"));
+        }
+        [Test]
+        public void TestGetLatestVersion()
+        {
+            var version = UpdateCheck.GetLatestVersion();
+            if(version != null)
+                Assert.That(version, Is.Not.Empty);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections;
 using VitDeck.Utilities;
@@ -11,7 +11,7 @@ namespace VitDeck.Main
     /// <summary>
     public static class JsonReleaseInfo
     {
-        private static string releaseUrl = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
+        private static string releaseUrl = "";
         private static string version = null;
         private static string packageName = null;
         private static string downloadUrl = null;
@@ -38,13 +38,17 @@ namespace VitDeck.Main
 
         public static void FetchInfo(string releaseUrl)
         {
+            if (string.IsNullOrEmpty(releaseUrl))
+                return;
             var release = ReleaseEnumerator(releaseUrl);
             while (release.MoveNext()) { }
-            var info = JsonUtility.FromJson<ReleaseInfo>(release.Current.ToString());
-
-            version = info.version;
-            packageName = info.package_name;
-            downloadUrl = info.download_url;
+            if (release != null && release.Current != null)
+            {
+                var info = JsonUtility.FromJson<ReleaseInfo>(release.Current.ToString());
+                version = info.version;
+                packageName = info.package_name;
+                downloadUrl = info.download_url;
+            }
         }
 
         static IEnumerator ReleaseEnumerator(string releaseUrl)
