@@ -170,7 +170,7 @@ namespace VitDeck.Main.ValidatedExporter.GUI
             var baseFolderPath = AssetDatabase.GetAssetPath(baseFolder);
             result = ValidatedExporter.ValidatedExport(baseFolderPath, selectedSetting, forceExport);
             AssetDatabase.Refresh();
-            var header = string.Format("- version:{0}", VersionUtility.GetVersion()) + Environment.NewLine;
+            var header = string.Format("- version:{0}", ProductInfoUtility.GetVersion()) + Environment.NewLine;
             header += string.Format("- Rule set:{0}", selectedSetting.SettingName) + Environment.NewLine;
             header += string.Format("- Base folder:{0}", baseFolderPath) + Environment.NewLine;
             if (forceExport)

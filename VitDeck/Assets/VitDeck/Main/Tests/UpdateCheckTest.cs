@@ -12,7 +12,6 @@ namespace VitDeck.Main.Tests
         {
             JsonReleaseInfo.FetchInfo(testURL);
             string version = JsonReleaseInfo.GetVersion();
-            Assert.That(VersionUtility.IsSemanticVersioning(version), Is.True);
             Assert.That(version, Is.EqualTo("1.0.0"));
         }
         [Test]
