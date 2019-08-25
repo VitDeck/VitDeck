@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace VitDeck.Utilities
@@ -7,5 +6,9 @@ namespace VitDeck.Utilities
     {
         [SerializeField]
         public string version = "";
+        [SerializeField]
+        public string developerLinkTitle = "VitDeck on GitHub";
+        [SerializeField]
+        public string developerLinkURL = "https://github.com/vkettools/VitDeck";
     }
 }
