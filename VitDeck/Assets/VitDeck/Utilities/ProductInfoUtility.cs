@@ -24,6 +24,16 @@ namespace VitDeck.Utilities
         }
 
         /// <summary>
+        /// バージョン番号を取得する。取得できなかった場合は空文字を返す。
+        /// </summary>
+        /// <returns>バージョン番号</returns>
+        public static string GetVersion()
+        {
+            var productInfo = GetProductInfo();
+            return productInfo != null ? productInfo.version : string.Empty; ;
+        }
+
+        /// <summary>
         /// 開発者リンクのタイトル文字列を取得する
         /// </summary>
         /// <returns>開発者リンクのタイトル文字列</returns>

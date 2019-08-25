@@ -37,7 +37,7 @@ namespace VitDeck.Main.GUI
 
         private void Init()
         {
-            versionLabel = "Version : " + VersionUtility.GetVersion();
+            versionLabel = "Version : " + ProductInfoUtility.GetVersion();
             developerLinkTitle = ProductInfoUtility.GetDeveloperLinkTitle();
             developerLinkURL = ProductInfoUtility.GetDeveloperLinkURL();
             if (UpdateCheck.Enabled)

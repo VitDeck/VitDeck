@@ -37,7 +37,7 @@ namespace VitDeck.Main
 
         public static bool IsLatest()
         {
-            string localVersion = VersionUtility.GetVersion();
+            string localVersion = ProductInfoUtility.GetVersion();
             string latestVersion = JsonReleaseInfo.GetVersion();
 
             return string.Equals(localVersion, latestVersion);

@@ -5,6 +5,12 @@ namespace VitDeck.Utilities.Tests
     public class ProductInfoUtilityTest
     {
         [Test]
+        public void TestGetVersion()
+        {
+            var version = ProductInfoUtility.GetVersion();
+            Assert.That(version, Is.EqualTo("1.0.0-dev"));
+        }
+        [Test]
         public void TestGetDeveloperLinkTitle()
         {
             var title = ProductInfoUtility.GetDeveloperLinkTitle();
