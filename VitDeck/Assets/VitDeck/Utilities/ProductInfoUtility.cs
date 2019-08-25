@@ -30,33 +30,27 @@ namespace VitDeck.Utilities
         public static string GetVersion()
         {
             var productInfo = GetProductInfo();
-            return productInfo != null ? productInfo.version : string.Empty; ;
+            return productInfo != null ? productInfo.version : string.Empty;
         }
 
         /// <summary>
-        /// 開発者リンクのタイトル文字列を取得する
+        /// 開発者リンクのタイトル文字列を取得する。取得できなかった場合は空文字を返す。
         /// </summary>
         /// <returns>開発者リンクのタイトル文字列</returns>
         public static string GetDeveloperLinkTitle()
         {
-            var title = "";
             var productInfo = GetProductInfo();
-            if (productInfo != null)
-                title = productInfo.developerLinkTitle;
-            return title;
+            return productInfo != null ? productInfo.developerLinkTitle : string.Empty;
         }
 
         /// <summary>
-        /// 開発者リンクのURL文字列を取得する
+        /// 開発者リンクのURL文字列を取得する。取得できなかった場合は空文字を返す。
         /// </summary>
         /// <returns>開発者リンクのURL文字列</returns>
         public static string GetDeveloperLinkURL()
         {
-            var url = "";
             var productInfo = GetProductInfo();
-            if (productInfo != null)
-                url = productInfo.developerLinkURL;
-            return url;
+            return productInfo != null ? productInfo.developerLinkURL : string.Empty;
         }
     }
 }
