@@ -17,7 +17,8 @@ namespace VitDeck.Main.GUI
         [SerializeField]
         string latestVersion = null;
 
-        private static ProductInfo productInfo = null;
+        private static string developerLinkTitle = null;
+        private static string developerLinkURL = null;
         private GUILayoutOption[] buttonStyle = new GUILayoutOption[] { GUILayout.Width(130) };
 
         public static void ShowWindow()
@@ -37,7 +38,8 @@ namespace VitDeck.Main.GUI
         private void Init()
         {
             versionLabel = "Version : " + VersionUtility.GetVersion();
-            productInfo = ProductInfoUtility.GetProductInfo();
+            developerLinkTitle = ProductInfoUtility.GetDeveloperLinkTitle();
+            developerLinkURL = ProductInfoUtility.GetDeveloperLinkURL();
             if (UpdateCheck.Enabled)
             {
                 var version = UpdateCheck.GetLatestVersion();
@@ -69,11 +71,10 @@ namespace VitDeck.Main.GUI
                 VersionCheckLabelField();
             }
             //Developer info
-            if (productInfo != null &&
-                !string.IsNullOrEmpty(productInfo.developerLinkTitle) &&
-                !string.IsNullOrEmpty(productInfo.developerLinkURL))
+            if (!string.IsNullOrEmpty(developerLinkTitle) &&
+                !string.IsNullOrEmpty(developerLinkURL))
             {
-                CustomGUILayout.URLButton(productInfo.developerLinkTitle, productInfo.developerLinkURL, buttonStyle);
+                CustomGUILayout.URLButton(developerLinkTitle, developerLinkURL, buttonStyle);
             }
         }
 
