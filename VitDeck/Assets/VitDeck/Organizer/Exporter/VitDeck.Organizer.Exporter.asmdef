@@ -1,7 +1,7 @@
 {
-    "name": "VitDeck.Organizer.AssetGuardianGUI",
+    "name": "VitDeck.Organizer.Exporter",
     "references": [
-        "VitDeck.AssetGuardian",
+        "VitDeck.Exporter",
         "VitDeck.Utilities"
     ],
     "includePlatforms": [

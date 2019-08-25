@@ -1,7 +1,7 @@
 {
-    "name": "VitDeck.Organizer.TemplateLoaderGUI",
+    "name": "VitDeck.Organizer.AssetGuardian",
     "references": [
-        "VitDeck.TemplateLoader",
+        "VitDeck.AssetGuardian",
         "VitDeck.Utilities"
     ],
     "includePlatforms": [
