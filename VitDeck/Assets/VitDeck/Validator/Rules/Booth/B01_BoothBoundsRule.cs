@@ -40,7 +40,6 @@ namespace VitDeck.Validator
         {
             var oversizes = target
                 .GetAllObjects()
-                .Where(gameObject => gameObject.activeSelf && gameObject.activeInHierarchy)
                 .SelectMany(GetObjectBounds)
                 .Where(data => !LimitContains(data.bounds));
 
