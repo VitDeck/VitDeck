@@ -35,8 +35,19 @@ namespace VitDeck.Validator
             var limit = new Bounds(center, size);
             limit.Expand(margin);
             this.limit = limit;
-            //marginの小数点以下の桁数+1桁の表示精度を指定
-            accuracy = string.Format("f{0}", (margin % 1).ToString().Length - "0.".Length + 1);
+            //size, marginのうち最小の桁数が指定されたものの小数点以下の桁数+1桁の表示精度を指定
+            var settingValues = new float[] { size.x, size.y, size.z, margin };
+            var DigitsCount = settingValues.Select(val => GetDigitCountUnderPoint(val)).Max<int>();
+            accuracy = string.Format("f{0}", DigitsCount + 1);
+        }
+
+        private int GetDigitCountUnderPoint(float val)
+        {
+            var pointIndex = val.ToString().IndexOf(".");
+            if (pointIndex == -1)
+                return 0;
+            else
+                return val.ToString().Substring(pointIndex).Length - 1;
         }
 
         protected override void Logic(ValidationTarget target)
