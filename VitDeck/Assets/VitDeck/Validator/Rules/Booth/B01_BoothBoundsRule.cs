@@ -115,6 +115,17 @@ namespace VitDeck.Validator
 
             public static BoundsData FromRenderer(Renderer renderer)
             {
+                //Recalculate bounds for ParticleSystem
+                var particleSystem = renderer.gameObject.GetComponent<ParticleSystem>();
+                if (particleSystem != null)
+                    particleSystem.Simulate(0f);
+                //Reculculate bounds for TrailRenderer
+                if (renderer is TrailRenderer)
+                {
+                    var originalFlag = renderer.enabled;
+                    renderer.enabled = !originalFlag;
+                    renderer.enabled = originalFlag;
+                }
                 return new BoundsData(renderer, renderer.bounds);
             }
         }
