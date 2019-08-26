@@ -11,6 +11,7 @@ namespace VitDeck.Validator
     public class BoothBoundsRule : BaseRule
     {
         private readonly Bounds limit;
+        private readonly string accuracy;
 
         /// <summary>
         /// コンストラクタ。
@@ -34,6 +35,8 @@ namespace VitDeck.Validator
             var limit = new Bounds(center, size);
             limit.Expand(margin);
             this.limit = limit;
+            //marginの小数点以下の桁数+1桁の表示精度を指定
+            accuracy = string.Format("f{0}", (margin % 1).ToString().Length - "0.".Length + 1);
         }
 
         protected override void Logic(ValidationTarget target)
@@ -46,7 +49,7 @@ namespace VitDeck.Validator
             foreach (var oversize in oversizes)
             {
                 var limitSize = limit.size.ToString();
-                var message = string.Format("オブジェクトがブースサイズ制限{0}の外に出ています。{4}制限={1}{4}対象={2}{4}オブジェクトの種類={3}", limitSize, limit, oversize.bounds, oversize.objectReference.GetType().Name, System.Environment.NewLine);
+                var message = string.Format("オブジェクトがブースサイズ制限{0}の外に出ています。{4}制限={1}{4}対象={2}{4}オブジェクトの種類={3}", limitSize, limit.ToString(accuracy), oversize.bounds.ToString(accuracy), oversize.objectReference.GetType().Name, System.Environment.NewLine);
                 AddIssue(new Issue(oversize.objectReference, IssueLevel.Error, message));
             }
         }
