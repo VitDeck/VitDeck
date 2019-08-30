@@ -11,6 +11,7 @@ namespace VitDeck.Validator
     public class BoothBoundsRule : BaseRule
     {
         private readonly Bounds limit;
+        private readonly string accuracy;
 
         /// <summary>
         /// コンストラクタ。
@@ -34,20 +35,32 @@ namespace VitDeck.Validator
             var limit = new Bounds(center, size);
             limit.Expand(margin);
             this.limit = limit;
+            //size, marginのうち最小の桁数が指定されたものの小数点以下の桁数+1桁の表示精度を指定
+            var settingValues = new float[] { size.x, size.y, size.z, margin };
+            var DigitsCount = settingValues.Select(val => GetDigitCountUnderPoint(val)).Max<int>();
+            accuracy = string.Format("f{0}", DigitsCount + 1);
+        }
+
+        private int GetDigitCountUnderPoint(float val)
+        {
+            var pointIndex = val.ToString().IndexOf(".");
+            if (pointIndex == -1)
+                return 0;
+            else
+                return val.ToString().Substring(pointIndex).Length - 1;
         }
 
         protected override void Logic(ValidationTarget target)
         {
             var oversizes = target
                 .GetAllObjects()
-                .Where(gameObject => gameObject.activeSelf && gameObject.activeInHierarchy)
                 .SelectMany(GetObjectBounds)
                 .Where(data => !LimitContains(data.bounds));
 
             foreach (var oversize in oversizes)
             {
                 var limitSize = limit.size.ToString();
-                var message = string.Format("オブジェクトがブースサイズ制限{0}の外に出ています。{4}制限={1}{4}対象={2}{4}オブジェクトの種類={3}", limitSize, limit, oversize.bounds, oversize.objectReference.GetType().Name, System.Environment.NewLine);
+                var message = string.Format("オブジェクトがブースサイズ制限{0}の外に出ています。{4}制限={1}{4}対象={2}{4}オブジェクトの種類={3}", limitSize, limit.ToString(accuracy), oversize.bounds.ToString(accuracy), oversize.objectReference.GetType().Name, System.Environment.NewLine);
                 AddIssue(new Issue(oversize.objectReference, IssueLevel.Error, message));
             }
         }
@@ -115,6 +128,17 @@ namespace VitDeck.Validator
 
             public static BoundsData FromRenderer(Renderer renderer)
             {
+                //Recalculate bounds for ParticleSystem
+                var particleSystem = renderer.gameObject.GetComponent<ParticleSystem>();
+                if (particleSystem != null)
+                    particleSystem.Simulate(0f);
+                //Reculculate bounds for TrailRenderer
+                if (renderer is TrailRenderer)
+                {
+                    var originalFlag = renderer.enabled;
+                    renderer.enabled = !originalFlag;
+                    renderer.enabled = originalFlag;
+                }
                 return new BoundsData(renderer, renderer.bounds);
             }
         }

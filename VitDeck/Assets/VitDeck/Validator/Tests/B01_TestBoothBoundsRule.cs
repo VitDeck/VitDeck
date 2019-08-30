@@ -20,7 +20,7 @@ namespace VitDeck.Validator.Test
                 CreateRendererGameObject("TestTargetObject3", true, new Vector3(0, 1, 0), new Vector3(2, 2, 2)),
                 CreateRendererGameObject("TestTargetObject4", false, new Vector3(0, 100, 0), new Vector3(200, 200, 200)),
                 CreateRectGameObject("TestTargetObject5", true, new Vector3(0, 1, 0), new Vector2(2, 2) ),
-                CreateRectGameObject("TestTargetObject6", false, new Vector3(0, 1, 0), new Vector2(2, 2) ),
+                CreateRectGameObject("TestTargetObject6", false, new Vector3(1000, 1, 0), new Vector2(2, 2) ),
             };
 
             targetContainer = new ValidationTarget("Assets/VitDeck/Validator/Tests", allObjects: targetObjects);
@@ -28,10 +28,10 @@ namespace VitDeck.Validator.Test
 
         public static readonly object[] TestCases =
         {
-            CreateTestCase( "TestRule0", Vector3.zero, new Vector3(3, 5, 4), 0f, FailedTargetObjectIndices(null) ),
-            CreateTestCase( "TestRule1", Vector3.zero, new Vector3(2, 5, 4), 0f, FailedTargetObjectIndices(null) ),
-            CreateTestCase( "TestRule2", Vector3.zero, new Vector3(1.9f, 5, 4), 0f, FailedTargetObjectIndices(1, 3, 5) ),
-            CreateTestCase( "TestRule3", Vector3.zero, new Vector3(1.9f, 5, 4), 0.1f, FailedTargetObjectIndices(null) ),
+            CreateTestCase( "TestRule0", Vector3.zero, new Vector3(3, 5, 4), 0f, FailedTargetObjectIndices(2, 4, 6) ),
+            CreateTestCase( "TestRule1", Vector3.zero, new Vector3(2, 5, 4), 0f, FailedTargetObjectIndices(2, 4, 6) ),
+            CreateTestCase( "TestRule2", Vector3.zero, new Vector3(1.9f, 5, 4), 0f, FailedTargetObjectIndices(1, 3, 5, 6) ),
+            CreateTestCase( "TestRule3", Vector3.zero, new Vector3(1.9f, 5, 4), 0.1f, FailedTargetObjectIndices(2, 4, 6) ),
         };
 
         [TestCaseSource("TestCases")]
