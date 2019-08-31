@@ -1,0 +1,309 @@
+
+LICENSE SYSTEM [2019831 17:46:4] Next license update check is after 2019-09-01T04:31:41
+
+Built from '2017.4/staging' branch; Version is '2017.4.28f1 (e3a0f7dd2097) revision 14917879'; Using compiler version '160040219'
+OS: 'Windows 10  (10.0.0) 64bit' Language: 'ja' Physical Memory: 16318 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+[Package Manager] Server::Start -- Port 55502 was selected
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2017.4.28f1\Editor\Unity.exe
+-exportPackage
+Assets\VitDeck
+VitDeck-1.0.0.unitypackage
+-projectPath
+Z:\VitDeck
+-batchmode
+-nographics
+-logfile
+release-unity.log
+-quit
+Successfully changed project path to: Z:\VitDeck
+Z:/VitDeck
+Loading GUID <-> Path mappings...0.000066 seconds
+Loading Asset Database...0.006467 seconds
+Audio: FMOD Profiler initialized on port 54900
+AssetDatabase consistency checks...0.032391 seconds
+Refreshing native plugins compatible for Editor in 7.71 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+DisplayProgressbar: Unity Package Manager
+[Package Manager] Resolving 4 packages:
+[Package Manager]  * Package :  com.unity.ads@2.0.8
+    (location: C:\Users\Kozu\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.ads@2.0.8)
+[Package Manager]  * Package :  com.unity.analytics@2.0.13
+    (location: C:\Users\Kozu\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.analytics@2.0.13)
+[Package Manager]  * Package :  com.unity.purchasing@0.0.19
+    (location: C:\Users\Kozu\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.purchasing@0.0.19)
+[Package Manager]  * Package :  com.unity.standardevents@1.0.10
+    (location: C:\Users\Kozu\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.standardevents@1.0.10)
+[Package Manager] Resolve completed
+Initialize engine version: 2017.4.28f1 (e3a0f7dd2097)
+Forcing GfxDevice: Null
+GfxDevice: creating device client; threaded=0
+NullGfxDevice:
+    Version:  NULL 1.0 [1.0]
+    Renderer: Null Device
+    Vendor:   Unity Technologies
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/Mono/lib/mono/2.0'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/Mono/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,defer=y,address=127.0.0.1:56564
+Begin MonoManager ReloadAssembly
+Refreshing native plugins compatible for Editor in 0.38 ms, found 4 plugins.
+Initializing Unity.PackageManager (PackageManager) v2017.4.28 for Unity v2017.4.28f1
+Registering precompiled unity dll's ...
+Register platform support module: C:\Program Files\Unity\Hub\Editor\2017.4.28f1\Editor\Data\PlaybackEngines\AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:\Program Files\Unity\Hub\Editor\2017.4.28f1\Editor\Data\PlaybackEngines\windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.002256 seconds.
+Registering platform support modules:
+Registered platform support modules in: 0.0904717s.
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 0.44 ms, found 4 plugins.
+Preloading 2 native plugins for Editor in 1.53 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.730 seconds
+Platform modules already initialized, skipping
+Begin MonoManager ReloadAssembly
+Registering precompiled user dll's ...
+Registered in 0.013353 seconds.
+Initializing Unity.PackageManager (PackageManager) v2017.4.28 for Unity v2017.4.28f1
+Registering platform support modules:
+Registered platform support modules in: 0.0661858s.
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 0.48 ms, found 4 plugins.
+Preloading 2 native plugins for Editor in 0.24 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.731 seconds
+Platform modules already initialized, skipping
+Validating Project structure ... 0.002375 seconds.
+Refresh: detecting if any assets need to be imported or removed ... 
+Hashing assets ... 0.005 seconds
+  file open: 0.004 seconds (4 files)
+  file read: 0.000 seconds (0.005 MB)
+  hash: 0.000 seconds
+----- Compute hash(es) for 2 asset(s).
+
+*** f96676051e7fb7645893f98d2f6adc4c replaces b2fa90216ba981a45863fd0da3db7d44 at path assets/vitdeck/license.txt 
+*** ce9eb8d4dc599db45abf775e3bfb3f1a replaces 665a1146b58b22e45a53ba82ebf20f4a at path assets/vitdeck/readme.txt 
+Refresh: elapses 0.056664 seconds
+Refresh: trashing asset 3067020020284954e8c7bad8122d1d81
+Refresh: trashing asset 810d5b20305b9864c8d5167e6485e982
+Refresh: trashing asset 04b9b050cd5b97a43884ae9479947b74
+Refresh: trashing asset 7adcee5076d4ae34eb3fb64b99b18869
+Refresh: trashing asset 11734a6098a2eec42994b832f2252d09
+Refresh: trashing asset dff7b6902afdf3e42bf5e9e0c8429a63
+Refresh: trashing asset fb925b90dc0819342b868080dc34ad5a
+Refresh: trashing asset c7494ea063971b142a44302cd86f6e17
+Refresh: trashing asset 6e4211e09c4956c46a637f0bbf827e83
+Refresh: trashing asset 71487af0fa5f70e44b7a58e032e1e2db
+Refresh: trashing asset b2fa90216ba981a45863fd0da3db7d44
+Refresh: trashing asset a6f13721c2dc9fe4098aeb90c650d7fc
+Refresh: trashing asset a4b03051a833cca449d86b3821e3079f
+Refresh: trashing asset 74a7d7b161582c14ba1bb47812aae182
+Refresh: trashing asset d64400e17066a634c99fa872d4856a75
+Refresh: trashing asset 8570a80239f7781498e53307ce86ef89
+Refresh: trashing asset 17d9b222f4a94634f80586f188a8076d
+Refresh: trashing asset 0b51ba421c514a04db430ad7fb6c18d6
+Refresh: trashing asset d83b0a62cba4afa49aa9f0f3f7d6bdb3
+Refresh: trashing asset 52ceae726485ef84c95fddf9d8b2dea8
+Refresh: trashing asset 1fa721b22cf47de47a87f2e08e08f01b
+Refresh: trashing asset 649253b2ec2aa364da658e2c27fc9104
+Refresh: trashing asset f1f69f0382468de4284c5b19f5d367e5
+Refresh: trashing asset d7c23913ea8a08441a2d71c1b7554771
+Refresh: trashing asset 5b2078339731bbe43accf3f38e51012c
+Refresh: trashing asset c526bc5389b918e4680160cad61ca7fe
+Refresh: trashing asset 7e4a0173054431443bf66723bbc5dd86
+Refresh: trashing asset 06f685732685ac34abd881ea51000010
+Refresh: trashing asset 564e9f93bb66a1c4b8e8ffabba860b7d
+Refresh: trashing asset 692c60c32108e5849a3c2d2eb526950f
+Refresh: trashing asset c10deae356eb575449879b0b007e9733
+Refresh: trashing asset fc787a34466d54a46bafcf9b8d6e6651
+Refresh: trashing asset f71da37437cb3564ab53c58fa950cddb
+Refresh: trashing asset a95c299452f7efc45896e5880769a7dc
+Refresh: trashing asset 068dc3056368a43488efe92a2c772309
+Refresh: trashing asset bd1301153fbb80c438fa49a43a95def8
+Refresh: trashing asset de218765854f6bf4ba69502dfe9b1e86
+Refresh: trashing asset a849df7577b026b4f91b20374cfb7af2
+Refresh: trashing asset 7cc37885cb4f02544bccc6a0012ed79a
+Refresh: trashing asset ac59eab5bea340b4c984a5b4f73b7ee0
+Refresh: trashing asset 66a013e59a48e6148b93eead39287525
+Refresh: trashing asset 23083f267ba60d94dbdfbfaa9ca75292
+Refresh: trashing asset 91c21136ec0404449bb34ac1fbb2eb05
+Refresh: trashing asset 665a1146b58b22e45a53ba82ebf20f4a
+Refresh: trashing asset 36f9ca46998fbfc408390f5aa93b9874
+Refresh: trashing asset 1476855601c248a4ca59991e45d58f60
+Refresh: trashing asset bc38aa664d9d7aa4a947a00a8777c5b9
+Refresh: trashing asset 62a63686928cfc54e9c05e9d5b8ee21f
+Refresh: trashing asset ae68339621fb41b4f9905188526120ea
+Refresh: trashing asset 1f145ee644fb7f34191766d102498576
+Refresh: trashing asset 740112f6e77ca914d9c26eef5d68accd
+Refresh: trashing asset fbabebf65f2ed3342843a41b896a38bc
+Refresh: trashing asset 6e3cad17f0949f6478dde55f7b37ff8d
+Refresh: trashing asset e4429aa77a810ae4b8355e8032ece5b3
+Refresh: trashing asset ca23ddb765f502c4b926715dc44b3b16
+Refresh: trashing asset a467a1d7b46931a4fbedb3a0bfa0dd56
+Refresh: trashing asset 9a229ae7e49eb184abe1d6f7a83d809a
+Refresh: trashing asset d43eb4f798e4e94438249508b66b8599
+Refresh: trashing asset 61c59e181f521054fb52653d8142f392
+Refresh: trashing asset b0de1648c7736894e9476976950a894b
+Refresh: trashing asset 7ac43e68ccba1be4185dd9df071d899a
+Refresh: trashing asset 51600e88e661910449e9fdd6a8360200
+Refresh: trashing asset bb5396989e4f7724580db4d47a17532f
+Refresh: trashing asset 22912df88ceaf494996f0e6ab9348b6b
+Refresh: trashing asset 3197fa3965320484e87f19f1ed5adf47
+Refresh: trashing asset 321485694770a1e47afefcccb0016cf8
+Refresh: trashing asset cafaae8912f70a64095c9ec7f7664a2d
+Refresh: trashing asset d05f84a968b29f243a93596ec0dca278
+Refresh: trashing asset 2de171b9b5b1fcb4dae3847f5ac9cde2
+Refresh: trashing asset b6c5fd1a2d346a84995f2c1ed01b4d25
+Refresh: trashing asset c21e7b5a18120374bb35be6707b61d64
+Refresh: trashing asset e1faac7ae5375174eb95c35eb5520046
+Refresh: trashing asset b7fc1a9a2e9bb5e4c96c36f953f3c167
+Refresh: trashing asset 8ded05da957f20d49a043f16e0e81b10
+Refresh: trashing asset 96a64ddaefdcd4141909bf0f88d9ccaa
+Refresh: trashing asset 279678fa7ebbba045a5158f012d9e424
+Refresh: trashing asset 8aa4c8faeffb7314e84e88619c07447d
+Refresh: trashing asset ba71b63bde1aa0f4983af8032215c032
+Refresh: trashing asset 13c5126bb1fb1394392dcc778382f7d4
+Refresh: trashing asset 0cdb2a7b784a9974c8cdc68f77b1cde1
+Refresh: trashing asset e024028b83118f747b8746bd7f1e8f88
+Refresh: trashing asset 5e0b37ab062e20d4fb6549901641de32
+Refresh: trashing asset 75fa601c99592104eb5ea69f641b73a7
+Refresh: trashing asset 4b51a43c4c2543c45becc3a479cddd8c
+Refresh: trashing asset 3981485c20638df418ea7d513c88bf50
+Refresh: trashing asset 4404337c3a675c641b659464a83500fb
+Refresh: trashing asset 00b620bc0483bf045a4e7cbf4c051f27
+Refresh: trashing asset c1b619ecf4a140b41b3fbfd69b97eb94
+Refresh: trashing asset 574d9f0da0ccfb24e971d8ae0632fa97
+Refresh: trashing asset e41cae2d580b3704e9ebf621371f83b0
+Refresh: trashing asset 3311924d4ab762442a4ae21e9de96ccd
+Refresh: trashing asset 7089e85d965cb5149a83f9fd15e52c59
+Refresh: trashing asset e0c82b5da1ead7b4fa67cb4084f405c8
+Refresh: trashing asset 027bdc8dee9529e498d3199c30746ae4
+Refresh: trashing asset 42fc4c9d6a6b1ac4fb66e6f7b678da25
+Refresh: trashing asset 2486a3bdea7683c4bb528e240ffaee4f
+Refresh: trashing asset 6e2c1cbdc697fc34ab3689dba6b276bb
+Refresh: trashing asset 594ad1edb507a424894fe8f68b0be8c6
+Refresh: trashing asset c4457ffd16f525c4ea4058e4915638e2
+Refresh: trashing asset 40579a3e451274743a5e5746dd096b29
+Refresh: trashing asset 685f374eff40df845b511bb62493f6f9
+Refresh: trashing asset d5066a4ee1ccb5e489995bb9fa44c581
+Refresh: trashing asset dded8c5e20167ab4c8294c1327737e88
+Refresh: trashing asset 730d358ee3e0ab84ba699fd5698f93da
+Refresh: trashing asset b71fe49e9d4fb154dad657ed2f1022d4
+Refresh: trashing asset 0397c0bed99360848b907823339bb80b
+Refresh: trashing asset b25adebe5dc746a419b115e1297c0207
+Refresh: trashing asset 1c4796fed81af554a9724b57e2c9699b
+Refresh: trashing asset 0041c54f09589624194b22e7575881d0
+Refresh: trashing asset a683a56f7bea26945980e741c7efdf4a
+Refresh: trashing asset 0903a27fd1df65942a1a6e82c2288414
+Refresh: trashing asset 1e39b6afc2068884b8916e4ba5710137
+Refresh: trashing asset 849c42cfeeacf3941b0dab05c168516d
+Refresh: trashing asset 08491ecf6a282ab4d83d9156bbb8712b
+Refresh: trashing asset 6796a4ff7d7ceed4aa0c5be0dbc5e30c
+Updating Assets/VitDeck/README.txt - GUID: ce9eb8d4dc599db45abf775e3bfb3f1a...
+ done. [Time: 51.206500 ms] 
+Updating Assets/VitDeck/LICENSE.txt - GUID: f96676051e7fb7645893f98d2f6adc4c...
+ done. [Time: 14.165900 ms] 
+- Starting compile Library/ScriptAssemblies/VitDeck.Utilities.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Validator.Components.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Utilities.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.TemplateLoader.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Exporter.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.AssetGuardian.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Validator.Components.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Validator.Rules.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Validator.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Exporter.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Organizer.Exporter.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.TemplateLoader.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.TemplateLoader.GUI.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Organizer.TemplateLoader.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Validator.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Main.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.AssetGuardian.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Validator.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Validator.Rules.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Main.ValidatedExporter.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Organizer.Exporter.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Organizer.AssetGuardian.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Organizer.TemplateLoader.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.AssetGuardian.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.TemplateLoader.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Main.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Main.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Validator.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Main.ValidatedExporter.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Main.ValidatedExporter.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Organizer.AssetGuardian.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.AssetGuardian.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Main.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Main.ValidatedExporter.GUI.dll
+- Starting compile Library/ScriptAssemblies/Assembly-CSharp.dll
+- Finished compile Library/ScriptAssemblies/Assembly-CSharp.dll
+Symbols will be read from Temp\Assembly-CSharp.dll.mdb
+Script Module: Assembly-CSharp.dll
+Pass: 0 took 4 milliseconds
+Pass: 1 took 3 milliseconds
+Reloading assemblies after script compilation.
+Begin MonoManager ReloadAssembly
+Initializing Unity.PackageManager (PackageManager) v2017.4.28 for Unity v2017.4.28f1
+Registering platform support modules:
+Registered platform support modules in: 0.0611043s.
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 0.42 ms, found 4 plugins.
+Preloading 2 native plugins for Editor in 0.27 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.875 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.42 ms, found 4 plugins.
+Preloading 2 native plugins for Editor in 0.30 ms.
+
+----- Total AssetImport time: 5.628978s, AssetImport time: 5.501610s, Asset hashing: 0.004896s [5.4 KB, 1.067278 mb/s]
+
+Warming cache for 283 main assets: 0.000423 seconds elapsed
+Initializing Unity extensions:
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Editor/UnityEditor.HoloLens.dll'  GUID: 12fd8a0055b84bb59e84c9835a37e333
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Timeline/Runtime/UnityEngine.Timeline.dll'  GUID: 6a10b2909283487f913b00d94cd3faf5
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/portable/nunit.framework.dll'  GUID: 405b9b51bb344a128608d968297df79c
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/GUISystem/Standalone/UnityEngine.UI.dll'  GUID: f70555f144d8491a825f0804e09c671c
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll'  GUID: f5f67c52d1564df4a8936ccd202a3bd8
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll'  GUID: 844f815391db42d49455cbf1a7bfc434
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Networking/Standalone/UnityEngine.Networking.dll'  GUID: dc443db3e92b4983b9738c1131f555cb
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Runtime/UnityEngine.SpatialTracking.dll'  GUID: ed7343f30e3843b3afda8f8b02669cea
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Editor/UnityEditor.GoogleAudioSpatializer.dll'  GUID: 4a3ecb1425d14502837abea459cf2b70
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll'  GUID: 5f32cd94baa94578a686d4b9d6b660f7
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Runtime/UnityEngine.HoloLens.dll'  GUID: f7b54ff4a43d4fcf81b4538b678e0bcc
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Editor/UnityEditor.SpatialTracking.dll'  GUID: b5da970776034f77a070d99423d68791
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll'  GUID: adebbd281f1a4ef3a30be7f21937e02f
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll'  GUID: 870353891bb340e2b2a9c8707e7419ba
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll'  GUID: 53ebcfaa2e1e4e2dbc85882cd5a73fa1
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll'  GUID: ead147da21254ff9a0a936bdd75e1680
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Runtime/UnityEngine.GoogleAudioSpatializer.dll'  GUID: e4f4cf1b9b434137a499903a7a1d651a
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll'  GUID: 4ba2329b63d54f0187bcaa12486b1b0f
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll'  GUID: 1c6d1fbb51834b64847b1b73a75bfc77
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll'  GUID: 3a84de5cd0624681b6b6dcd8921d912a
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll'  GUID: 80a3616ca19596e4da0f10f14d241e9f
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll'  GUID: c768acbc9cf24d398488bb4c93b91288
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/Editor/UnityEditor.TestRunner.dll'  GUID: 4113173d5e95493ab8765d7b08371de4
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll'  GUID: 4b3fa4bde7f1451a8218c03ee6a8ded8
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UIAutomation/Editor/UnityEditor.UIAutomation.dll'  GUID: b8a0574e92bd43a59e19d6c3c6ae54c7
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Timeline/Editor/UnityEditor.Timeline.dll'  GUID: 7668179ede524d6396c8b7d84461ea29
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 22.3 MB.
+System memory in use after: 22.3 MB.
+
+Unloading 78 unused Assets to reduce memory usage. Loaded Objects now: 743.
+Total: 1.164000 ms (FindLiveObjects: 0.220900 ms CreateObjectMapping: 0.013300 ms MarkObjects: 0.904500 ms  DeleteObjects: 0.020800 ms)
+
+Export package Assets\VitDeck to VitDeck-1.0.0.unitypackage
+Batchmode quit successfully invoked - shutting down!
+Refresh: detecting if any assets need to be imported or removed ... Refresh: elapses 0.005900 seconds (Nothing changed)
+Refresh: detecting if any assets need to be imported or removed ... Refresh: elapses 0.005867 seconds (Nothing changed)
+[Package Manager] Server::Kill -- Server was shutdown
+Cleanup mono
+Exiting batchmode successfully now!
