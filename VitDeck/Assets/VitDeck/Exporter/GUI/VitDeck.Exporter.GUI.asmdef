@@ -1,0 +1,11 @@
+{
+    "name": "VitDeck.Exporter.GUI",
+    "references": [
+        "VitDeck.Exporter",
+        "VitDeck.Utilities"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

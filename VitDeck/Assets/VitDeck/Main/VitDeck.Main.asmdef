@@ -1,0 +1,13 @@
+{
+    "name": "VitDeck.Main",
+    "references": [
+        "VitDeck.TemplateLoader",
+        "VitDeck.Validator",
+        "VitDeck.Exporter",
+        "VitDeck.Utilities"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

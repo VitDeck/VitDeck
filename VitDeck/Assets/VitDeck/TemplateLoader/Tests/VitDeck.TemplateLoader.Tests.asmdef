@@ -1,0 +1,10 @@
+{
+    "name": "VitDeck.TemplateLoader.Tests",
+    "references": [
+        "VitDeck.TemplateLoader"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

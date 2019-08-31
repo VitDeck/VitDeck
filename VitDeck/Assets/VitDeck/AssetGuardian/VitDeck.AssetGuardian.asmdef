@@ -1,0 +1,10 @@
+{
+    "name": "VitDeck.AssetGuardian",
+    "references": [
+        "VitDeck.Utilities"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

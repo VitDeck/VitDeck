@@ -3,7 +3,7 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
-Assets/AssetStoreTools*
+VitDeck/Assets/AssetStoreTools*
 
 # Visual Studio cache directory
 .vs/
@@ -34,3 +34,12 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Templates assets
+VitDeck/Assets/VitDeck/Templates/*
+!Sample_template
+VitDeck/Assets/VitDeck/Config/UserSettings.asset
+VitDeck/Assets/VitDeck/Config/UserSettings.asset.meta
+
+#Template loader temporary folder
+VitDeck/Assets/VitDeck/Temporary*
