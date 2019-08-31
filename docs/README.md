@@ -1,37 +1,91 @@
-## Welcome to GitHub Pages
+# VitDeckについて
+VitDeckは多人数で特定のルールに沿ったUnityのアセットを同時に制作するプロジェクトを支援するツールです。
+![about](/images/about_vitdeck.png)
 
-You can use the [editor on GitHub](https://github.com/vkettools/VitDeck/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+以下の機能を持っています。
+- テンプレートから作成：
+  - 管理者が事前に準備したテンプレート（フォルダ構成やモデル、シーンファイル等）を複製し、提出用アセットの作成を開始する
+- ルールチェック：
+  - シーン内のオブジェクトが管理者が構成したルールに沿っているかチェックする
+- 提出パッケージ作成：
+  - 提出用のUnitypackageを作成する
+- ツールアップデート：
+  - テンプレートやルールの最新版を管理者のサーバーからダウンロードして更新する
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+作業管理者が事前にテンプレートおよびチェック用のルールを構成した上で作業者に配布することを前提にしています。
+# インストール方法
+[最新のリリース](https://github.com/vkettools/VitDeck/releases/latest)のunitypackageをダウンロードし、VitDeckを使用したいUnityプロジェクトにインポートしてください。
+正しくインポートされるとUnityのメニューバーに`VitDeck`が表示されます。
 
-### Markdown
+# 各機能の使い方
+## テンプレートから作成 (Load template)
+テンプレートを選んで必要事項を入力し、`Load`ボタンを押すとプロジェクトのAssetsフォルダ直下にテンプレートの複製が作成されます。
+![TemplateLoader](/images/TemplateLoader.gif)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## ルールチェック (Check rule)
+検証用のルールセットとベースフォルダ（提出用のルートフォルダ）を指定して`Check`ボタンを押すとベースフォルダ内のシーンファイルがチェックされます。（※複数シーンファイルには対応していません）
+![Validator](/images/Validator.gif)
 
-```markdown
-Syntax highlighted code block
+## 提出パッケージ作成 (Export Booth)
+提出用のベースフォルダを指定して`Export`ボタンを押すと運営が設定したルールに沿っているか検証した後、フォルダ以下のアセットを全て含むunitypackageが作成されます。
+![Expoter](/images/Expoter.gif)
 
-# Header 1
-## Header 2
-### Header 3
+## ツールアップデート
+管理者がアップデートを構成している場合、Unityメニューバーの`VitDeck＞Info`からアップデートがあるか確認できます。
+![Updater](/images/Updater.png)
 
-- Bulleted
-- List
+# ツール構成方法
+VitDeckを配布する前に管理者が各機能を構成する方法は以下を参照してください。
+- [テンプレートの作成方法](https://github.com/vkettools/VitDeck/wiki/MakingTemplate)
+- [ルールセットの作成方法](https://github.com/vkettools/VitDeck/wiki/MakingRuleSet)
+- [エクスポート設定の作成方法](https://github.com/vkettools/VitDeck/wiki/MakingExportSetting)
+- [アップデート通知の構成](https://github.com/vkettools/VitDeck/wiki/ConfiguringUpdateNortification)
 
-1. Numbered
-2. List
+# 検証可能なルール
+VitDeckでは検証したいルールの組み合わせとその設定をルールセットと呼ばれる単位で管理します。
+管理者は最初に[ルールセットを構成](https://github.com/vkettools/VitDeck/wiki/MakingRuleSet)してください。
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```csharp
+namespace VitDeck.Validator
+{
+    public class SampleRuleSet : BaseRuleSet
+    {
+        public override string RuleSetName
+        {
+            get { return "サンプルルールセット"; }
+        }
+        [Validation]
+        public IRule unityVersionRule = new UnityVersionRule("[U01]Unityバージョンルール", "2017.4.28f1");
+        [Validation]
+        public IRule assetNamingRule = new AssetNamingRule("[A01]アセット名の使用禁止文字ルール", @"[a-zA-Z0-9 _\.\-]+");
+        [Validation]
+        public IRule assetGuidBlacklistRule = new AssetGuidBlacklistRule("[A02]特定のGUIDを持つアセットの検出ルール",
+            new string[] { "740112f6e77ca914d9c26eef5d68accd", "ae68339621fb41b4f9905188526120ea" });
+        ...
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+以下のルールが最初から利用でき、独自ルール（C#で記述）も定義可能です。
+- 指定のUnityバージョンで動作しているか検証
+- アセット名の使用禁止文字の検出
+- 特定のGUIDを持つアセットの検出
+- アセットの長すぎるパスの検出
+- 特定の拡張子を持つアセットの検出
+- ブースがBounds内に収まっているかの検証
+- コンポーネントのホワイトリスト検証
+- コンポーネントのブラックリスト検証
+- エラーシェーダーの検出
+- Noneになっているメッシュの検出
+- missingになっている参照の検出
 
-### Jekyll Themes
+# アンインストール方法
+プロジェクトの`Assets`フォルダ内の`VitDeck`フォルダをまるごと削除してください。
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/vkettools/VitDeck/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+# 動作環境
+以下の環境でテストしています。
+- Windows 10
+- Unity 2017.4.28f1
 
-### Support or Contact
+# License
+Copyright (c) 2019 VitDeck
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Released under the MIT license.
