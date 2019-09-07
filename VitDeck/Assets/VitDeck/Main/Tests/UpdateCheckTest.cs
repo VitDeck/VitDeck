@@ -5,7 +5,7 @@ namespace VitDeck.Main.Tests
 {
     public class UpdateCheckTest
     {
-        private static readonly string testURL = "https://vkettools.github.io/VitDeckTest/releases/latest.json";
+        private static readonly string testURL = "https://vitdeck.github.io/VitDeckTest/releases/latest.json";
 
         [Test]
         public void TestLatestVersioning()

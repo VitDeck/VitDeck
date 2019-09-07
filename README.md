@@ -13,7 +13,7 @@ VitDeckは多人数で特定のルールに沿ったUnityのアセットを同�
 作業管理者が事前にテンプレートおよびチェック用のルールを構成した上で作業者に配布することを前提にしています。
 
 # インストール方法
-[最新のリリース](https://github.com/vkettools/VitDeck/releases/latest)のunitypackageをダウンロードし、VitDeckを使用したいUnityプロジェクトにインポートしてください。
+[最新のリリース](https://github.com/vitdeck/VitDeck/releases/latest)のunitypackageをダウンロードし、VitDeckを使用したいUnityプロジェクトにインポートしてください。
 正しくインポートされるとUnityのメニューバーに`VitDeck`が表示されます。
 
 # 各機能の使い方
@@ -32,10 +32,10 @@ VitDeckは多人数で特定のルールに沿ったUnityのアセットを同�
 
 # ツール構成方法
 VitDeckを配布する前に管理者が各機能を構成する方法は以下を参照してください。
-- [テンプレートの作成方法](https://github.com/vkettools/VitDeck/wiki/MakingTemplate)
-- [ルールセットの作成方法](https://github.com/vkettools/VitDeck/wiki/MakingRuleSet)
-- [エクスポート設定の作成方法](https://github.com/vkettools/VitDeck/wiki/MakingExportSetting)
-- [アップデート通知の構成](https://github.com/vkettools/VitDeck/wiki/ConfiguringUpdateNortification)
+- [テンプレートの作成方法](https://github.com/vitdeck/VitDeck/wiki/MakingTemplate)
+- [ルールセットの作成方法](https://github.com/vitdeck/VitDeck/wiki/MakingRuleSet)
+- [エクスポート設定の作成方法](https://github.com/vitdeck/VitDeck/wiki/MakingExportSetting)
+- [アップデート通知の構成](https://github.com/vitdeck/VitDeck/wiki/ConfiguringUpdateNortification)
 
 # 検証可能なルール
 VitDeckでは検証したいルールの組み合わせとその設定をルールセットと呼ばれる単位で管理します。

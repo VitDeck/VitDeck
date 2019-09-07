@@ -51,7 +51,7 @@ echo Generate json file >> "%BAT_LOG%" 2>&1
 echo { > %RELEASE_INFO_JSON% 2>&1
 echo  "version": "%VERSION%", >> %RELEASE_INFO_JSON% 2>&1
 echo  "package_name": "VitDeck-%VERSION%.unitypackage", >> %RELEASE_INFO_JSON% 2>&1
-echo  "download_url": "https://github.com/vkettools/VitDeck/releases/download/%VERSION%/VitDeck-%VERSION%.unitypackage" >> %RELEASE_INFO_JSON% 2>&1
+echo  "download_url": "https://github.com/vitdeck/VitDeck/releases/download/%VERSION%/VitDeck-%VERSION%.unitypackage" >> %RELEASE_INFO_JSON% 2>&1
 echo } >> %RELEASE_INFO_JSON% 2>&1
 
 echo Move to Release folder >> "%BAT_LOG%" 2>&1
