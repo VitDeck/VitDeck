@@ -1,0 +1,1225 @@
+
+LICENSE SYSTEM [201997 16:14:47] Next license update check is after 2019-09-08T04:59:00
+
+Built from '2017.4/staging' branch; Version is '2017.4.28f1 (e3a0f7dd2097) revision 14917879'; Using compiler version '160040219'
+OS: 'Windows 10  (10.0.0) 64bit' Language: 'ja' Physical Memory: 16318 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+[Package Manager] Server::Start -- Port 57019 was selected
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2017.4.28f1\Editor\Unity.exe
+-exportPackage
+Assets\VitDeck
+VitDeck-1.0.1.unitypackage
+-projectPath
+Z:\VitDeck
+-batchmode
+-nographics
+-logfile
+release-unity.log
+-quit
+Successfully changed project path to: Z:\VitDeck
+Z:/VitDeck
+Rebuilding Library because the asset database could not be found!
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/Shared/AssetDatabaseInitialization.cpp Line: 169)
+
+Audio: FMOD Profiler initialized on port 54900
+Loading GUID <-> Path mappings...0.000063 seconds
+Loading Asset Database...0.000020 seconds
+AssetDatabase consistency checks...0.000276 seconds
+Refreshing native plugins compatible for Editor in 0.01 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+DisplayProgressbar: Unity Package Manager
+[Package Manager] Resolving 4 packages:
+[Package Manager]  * Package :  com.unity.ads@2.0.8
+    (location: C:\Users\Kozu\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.ads@2.0.8)
+[Package Manager]  * Package :  com.unity.analytics@2.0.13
+    (location: C:\Users\Kozu\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.analytics@2.0.13)
+[Package Manager]  * Package :  com.unity.purchasing@0.0.19
+    (location: C:\Users\Kozu\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.purchasing@0.0.19)
+[Package Manager]  * Package :  com.unity.standardevents@1.0.10
+    (location: C:\Users\Kozu\AppData\Local\Unity\cache\packages\packages.unity.com\com.unity.standardevents@1.0.10)
+[Package Manager] Resolve completed
+Initialize engine version: 2017.4.28f1 (e3a0f7dd2097)
+Forcing GfxDevice: Null
+GfxDevice: creating device client; threaded=0
+NullGfxDevice:
+    Version:  NULL 1.0 [1.0]
+    Renderer: Null Device
+    Vendor:   Unity Technologies
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/Mono/lib/mono/2.0'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/Mono/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,defer=y,address=127.0.0.1:56436
+Begin MonoManager ReloadAssembly
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Initializing Unity.PackageManager (PackageManager) v2017.4.28 for Unity v2017.4.28f1
+Registering precompiled unity dll's ...
+Register platform support module: C:\Program Files\Unity\Hub\Editor\2017.4.28f1\Editor\Data\PlaybackEngines\AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:\Program Files\Unity\Hub\Editor\2017.4.28f1\Editor\Data\PlaybackEngines\windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.002214 seconds.
+Registering platform support modules:
+Registered platform support modules in: 0.0971882s.
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.719 seconds
+Platform modules already initialized, skipping
+Begin MonoManager ReloadAssembly
+Registering precompiled user dll's ...
+Registered in 0.013035 seconds.
+Initializing Unity.PackageManager (PackageManager) v2017.4.28 for Unity v2017.4.28f1
+Registering platform support modules:
+Registered platform support modules in: 0.063209s.
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 0.00 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.660 seconds
+Platform modules already initialized, skipping
+Validating Project structure ... 0.002391 seconds.
+Shader import version has changed; will reimport all shaders...
+Upgrading shader files ...0.003478 seconds.
+Refresh: detecting if any assets need to be imported or removed ... Removing Assets/VitDeck/AssetGuardian/Tests because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+Removing Assets/VitDeck/Exporter/Tests because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+Removing Assets/VitDeck/Main/Tests because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+Removing Assets/VitDeck/Main/ValidatedExporter/Tests because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+Removing Assets/VitDeck/TemplateLoader/Tests because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+Removing Assets/VitDeck/TestUtilities because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+Removing Assets/VitDeck/Utilities/Tests because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+Removing Assets/VitDeck/Validator/Tests because the asset does not exist
+ 
+(Filename: C:\buildslave\unity\build\Modules/AssetDatabase/Editor/V1/AssetInterface.cpp Line: 703)
+
+
+Hashing assets ... 0.323 seconds
+  file open: 0.260 seconds (360 files)
+  file read: 0.014 seconds (38.299 MB)
+  hash: 0.046 seconds
+----- Compute hash(es) for 180 asset(s).
+
+*** 4d6f38f2c27c57e49949300446619bc4 replaces 0858d4237a215b041bb1ec263efd1092 at path assets/new scene.unity 
+*** 778a64800f39491489e705a5adaeea67 replaces b9ca725148a9bdf439bb22eac39dfef9 at path assets/vitdeck/assetguardian/assetrestorer.cs 
+*** 71fbe6dac15ea684b9a83ce971b0af33 replaces 1b432236294cb3947b8a7315420333bd at path assets/vitdeck/assetguardian/assettypeidentifier.cs 
+*** 80b52708fc4f5434b9ef312c1b79c23d replaces 3169fd3f00d15de48b5b991507ff664a at path assets/vitdeck/assetguardian/editoreventhooks/editordelayedaction.cs 
+*** d99c652b31b252a479f708431fb5c6b4 replaces d78536ab63d77c740bf53ca6d86b3ec2 at path assets/vitdeck/assetguardian/editoreventhooks/unityassetduplicationevent.cs 
+*** ed11a5d849deb5f4f862c81f7f0ae1e3 replaces 8302607ba348f9f40bb70f343959ac1e at path assets/vitdeck/assetguardian/editoreventhooks/unityassetmodificationevent.cs 
+*** edcba6ca642891b4baec5157e7ab3b45 replaces 21c2d1ca8ebc6584abbe194a20ac1820 at path assets/vitdeck/assetguardian/editoreventhooks/unityassetpostprocessevent.cs 
+*** 79fecabf72064e44aaf9fefdf052a175 replaces e38b6c1e9e75d0c4db1ad79dd5440f08 at path assets/vitdeck/assetguardian/gui/notificator.cs 
+*** 7ddb48e98d1dfd94f9e3d9207a36086d replaces c528bbef36a6d7344863cdba87a62535 at path assets/vitdeck/assetguardian/gui/vitdeck.assetguardian.gui.asmdef 
+*** 5e1d12467f0db4d48ae613857933399e replaces d2b70ddcb06367545a294646d36072a7 at path assets/vitdeck/assetguardian/iassetprotectionmarker.cs 
+*** 469367ec720a31844b03fa249685dc53 replaces 08aa6801342e54940b2943a404a5503f at path assets/vitdeck/assetguardian/labelandhideflagprotectionmarker.cs 
+*** 93b8b1e7819b6a1439f21bb3ac20c818 replaces 4a90373f9433cd840be02b503b60840d at path assets/vitdeck/assetguardian/linqextensions.cs 
+*** 98903bbc5876ac1469a1f939882ebdd7 replaces 90beaef763b347b4ca47c5d68b95ba45 at path assets/vitdeck/assetguardian/protector.cs 
+*** 97abb040e822c024ba086eef0ae1b1c9 replaces e0a306ae4fad21f4da7a7718d8f87b55 at path assets/vitdeck/assetguardian/vitdeck.assetguardian.asmdef 
+*** f9a7c21573dad094eb21d501e052c252 replaces bbd829b3cd2cb27408fcfe760956b54c at path assets/vitdeck/config/defaultexportsetting.asset 
+*** 815e007e9647f9c43bd6d83cc643b17d replaces e1356c8ea78098046ac259775a0ed742 at path assets/vitdeck/config/defaultexportsetting_sha-1.asset 
+*** bac4bb3ff22830b418a8dea9a67747ce replaces 50cdf4eb7afb2194db469308911feaeb at path assets/vitdeck/config/productinfo.asset 
+*** a6b2979b491f8eb44a5433e8f81d5797 replaces 099a54c56c7691c4e8fc512fc9d21bd4 at path assets/vitdeck/exporter/exportresult.cs 
+*** a780f2801beb823448f3c902970fc314 replaces 0c7eb7939f7ddf6479fbed958d468c51 at path assets/vitdeck/exporter/exportsetting.cs 
+*** ada806fc6a0622743af8c574ae1ffbf3 replaces 7b45fc2c3bbc12c40966c1450623ff16 at path assets/vitdeck/exporter/exporter.cs 
+*** f3effe4cefc767e4b8799c43570fd0d7 replaces 3656ad519ebc08848ad9518070d004eb at path assets/vitdeck/exporter/gui/vitdeck.exporter.gui.asmdef 
+*** 405d78d1bd498cc44a0f9b3ef728e864 replaces 006860d10f1243443ab645a21f6f8e6e at path assets/vitdeck/exporter/vitdeck.exporter.asmdef 
+*** 3c50f3debb140d1439e5efbc9a548cec replaces 82b359efd4ef3e74ca91e053e8640cc1 at path assets/vitdeck/images/link_icon.png 
+*** f96676051e7fb7645893f98d2f6adc4c replaces 761ea13907735d84fa420f4aaf6e74e0 at path assets/vitdeck/license.txt 
+*** 815972ddc3bd70948a1263d5cd3e044b replaces 5eb01d4a2b074f346874c30f6e9d71cd at path assets/vitdeck/main/gui/infowindow.cs 
+*** 31fa395ce9620854b817e24bfb235518 replaces 5fea84c72f0cb064a99bd67d0ae96c6e at path assets/vitdeck/main/gui/mainmenu.cs 
+*** 4ea7f69acf660a348b794c099782a226 replaces 96d93653f23f5144e967081452f6684e at path assets/vitdeck/main/gui/vitdeck.main.gui.asmdef 
+*** 5451a9ed39306a24ca083676ed65ca6b replaces 0048ce45e5dc80644af9f4b268e41d8e at path assets/vitdeck/main/jsonreleaseinfo.cs 
+*** b656777d1a503bd4a9c65f224e4e8366 replaces 2b86ff81abb08be4787f32c29d44c629 at path assets/vitdeck/main/packagedownloader.cs 
+*** d49736b0978fd0b47b050a54c6444d04 replaces d7ca37b7de6c47e4d917eba6dafdabca at path assets/vitdeck/main/updatecheck.cs 
+*** 1d0d176ac469c1e48ba749ce18b65301 replaces f8ee8222502ddf5498d21f4de75affad at path assets/vitdeck/main/validatedexporter/gui/validatedexportergui.cs 
+*** 0cbaba0ed0b1bc34da09cd89cf16c757 replaces 3d3c13e9fde175d42bd5cf9d455c313b at path assets/vitdeck/main/validatedexporter/gui/vitdeck.main.validatedexporter.gui.asmdef 
+*** 15cca052d0905214db528d1b77ac4f17 replaces aec2fb50218a7b64f9e632aea535954b at path assets/vitdeck/main/validatedexporter/validatedexportresult.cs 
+*** 61574dd23174335418a4dae8d6829cb0 replaces 313b968f01c1b584ab65d6b6348ddc3e at path assets/vitdeck/main/validatedexporter/validatedexporter.cs 
+*** 44193d7aa1118c747b02befe32cf1e82 replaces d74900ee1a3e2c94aa854b412026e5d4 at path assets/vitdeck/main/validatedexporter/vitdeck.main.validatedexporter.asmdef 
+*** 0dc8fcc8b4dfa104299bab414b7a16e1 replaces e3a89b0fc14d73449a882623e4693658 at path assets/vitdeck/main/vitdeck.main.asmdef 
+*** 6b39b323d17ae6d42b017381059952a8 replaces 9ab75bbc19c38a945bb415af194f0430 at path assets/vitdeck/main/vitdeck.cs 
+*** 3dc81285b602f7f4da1d60c9e894c8cb replaces ef592d87abeb44644b48f7a8ae916de5 at path assets/vitdeck/organizer/assetguardian/assetguardiancontextmenu.cs 
+*** 9018f4748dfe14f479da519849c0716c replaces dd46c8e48ec38bf46a02acbe4cde291c at path assets/vitdeck/organizer/assetguardian/vitdeck.organizer.assetguardian.asmdef 
+*** f7c8c6c89ea9f5748be371dbd2d6fabc replaces 3c1b8365995121444bb14d40848be520 at path assets/vitdeck/organizer/exporter/exportsettingcreateassetmenu.cs 
+*** c20158785255dcc40adb48cc73f0424a replaces 365b48db22aed1a43a9c65d6aee4703b at path assets/vitdeck/organizer/exporter/vitdeck.organizer.exporter.asmdef 
+*** 603d26fd65a8b224483153c5326da95e replaces 7be189f75e8b0094194ba1e9a36ad1d0 at path assets/vitdeck/organizer/templateloader/templatepropertycreateassetmenu.cs 
+*** bd0238473fd9ac94fab1f3ce279c734a replaces 3c6e5792ebda2c046a220da905d6bd54 at path assets/vitdeck/organizer/templateloader/vitdeck.organizer.templateloader.asmdef 
+*** f9bb28f6b0e4a6e459ffe881bf410463 replaces d776ae6b67d37a54e984f47f316e8d78 at path assets/vitdeck/organizer/templateloader/vitdeckdummycreateassetmenu.cs 
+*** ce9eb8d4dc599db45abf775e3bfb3f1a replaces b9ed4e1d3bfdf4c42a577934dce90232 at path assets/vitdeck/readme.txt 
+*** bf5c2a145ae2e9348ba59adc09545fe8 replaces 8116a22e5fda19c4f818973163eb4a75 at path assets/vitdeck/templateloader/animationclipreferencemodifier.cs 
+*** 2c1921fc4f5b51f499782babe619b1cd replaces 27016843316e19b459deb12f86dc0a23 at path assets/vitdeck/templateloader/fbxreferencemodifier.cs 
+*** 5cf8de0402ca62b4fb6775dc166e03b0 replaces 7ffe856a752fd904b9d62654b34b38ea at path assets/vitdeck/templateloader/gui/templateloadergui.cs 
+*** 1acea4bf85bbbe341874a0a30637798b replaces 30ed46d83cc020742b2a1b0fb8b37496 at path assets/vitdeck/templateloader/gui/vitdeck.templateloader.gui.asmdef 
+*** e9a3f6655dcd5044e95a94b8370dc7d7 replaces bc0a2c9156f82784a901a7f624126605 at path assets/vitdeck/templateloader/guidreferencemodifier.cs 
+*** 822225f7629266746989bba44bc61ddb replaces fcbd5282ad473734b85875961d96efea at path assets/vitdeck/templateloader/ireferencemodifier.cs 
+*** db507e0454c38da45b4dd6892a6753a6 replaces ff26e5db414a936489dbf4794dfcf983 at path assets/vitdeck/templateloader/replacementdefinition.cs 
+*** c2a17aad758a2ed4e81dd4b45df6db6f replaces b6eb97fefbf8b3c4189a0a3681d4f73f at path assets/vitdeck/templateloader/templateloader.cs 
+*** 8791441c2e8fe6e4dac55f7b669808d5 replaces f60bf8422cc07aa448fcf1ab8da70f79 at path assets/vitdeck/templateloader/templateproperty.cs 
+*** 1e102de2e25c8d94e9eaba75e2768891 replaces cf6b400a2b6792d4894ec947562244c5 at path assets/vitdeck/templateloader/vitdeck.templateloader.asmdef 
+*** 84a3024049742bf4e8af449d015248a6 replaces 2c0055275f6fdf94c9b61ae04cc725d2 at path assets/vitdeck/templateloader/vitdeckdummy.cs 
+*** 2c5e4f38eb7e35447b696a1c5229aaff replaces 49eb544c629bd6846b85c0d4e35811d8 at path assets/vitdeck/templates/sample_template/license.txt 
+*** 7dd89a7a0282f5f47a7993cef0a7e413 replaces cb767ce3b654b6348a3f0ce3397e1ce8 at path assets/vitdeck/templates/sample_template/property.asset 
+*** 4046b15c4d594c145b559bddc1257413 replaces 80c9909a1dd79e3419cd8bfc955f3037 at path assets/vitdeck/templates/sample_template/sharedassets/newsurfaceshader.shader 
+*** 90823c296c5c82b47ae62f2bd463f4e7 replaces 74efe862bcf9aa3429898ece89a48128 at path assets/vitdeck/templates/sample_template/sharedassets/shared_asset_a.prefab 
+*** 1a82553471d99534ea32ddbbeecd1044 replaces 0da42a70f9f469d4587b8b602712f373 at path assets/vitdeck/templates/sample_template/sharedassets/shared_asset_a/shared_asset.fbx 
+*** 3c010df6cb2c96b4aaad25516d628e3b replaces 1ac026c1aae4d7642a2ec06467a74271 at path assets/vitdeck/templates/sample_template/sharedassets/shared_asset_a/shared_asset_material.mat 
+*** 575fc205f75ed7849bacac6ff656c1dc replaces 37597b85ace185f4fb94264bdedc530b at path assets/vitdeck/templates/sample_template/sharedassets/shared_asset_a/shared_asset_texture.png 
+*** 8b892c6f104b2c24c98896d5cec9aef9 replaces 5a9d204e2ceb74d46a73c8c9007bc0c4 at path assets/vitdeck/templates/sample_template/sharedassets/support_object/noteditablecomponent.cs 
+*** 414c1e5eb90f7f143a52b2cdfda76d32 replaces 3e5360232589acb4dad3b908552aaaa5 at path assets/vitdeck/templates/sample_template/sharedassets/support_object/scalelimitvisualizer.cs 
+*** a876d881254ac0e41abaff8a85963cc4 replaces d8b39925f0f5ece4fac6252d6419fd97 at path assets/vitdeck/templates/sample_template/sharedassets/support_object/support_objects.prefab 
+*** bc8fd7c341a098b4a9e852b9b5d61fb1 replaces 34c392d8b7606a94ea833fb45fc4cba0 at path assets/vitdeck/templates/sample_template/templateassets/{boothid}_{name}/animations/new animation override.anim 
+*** e0a7817fcc107ef4d833feb56961d8de replaces ebefc221a15cc0a429acc80485b69221 at path assets/vitdeck/templates/sample_template/templateassets/{boothid}_{name}/animations/new animation.anim 
+*** 00e7bd765877c1a4db82f3f66bb130b4 replaces 08f1c885a58aeac4198c1c108afafbb8 at path assets/vitdeck/templates/sample_template/templateassets/{boothid}_{name}/animations/new animator controller.controller 
+*** 64c00848704531c4392be4826faa4f75 replaces 7df4da3960112634fbf7c5797966d41d at path assets/vitdeck/templates/sample_template/templateassets/{boothid}_{name}/animations/new animator override controller.overridecontroller 
+*** 6fc67e5f6016fb641b63de0e93340915 replaces 087a1875a8fac7d489e0556643d56de8 at path assets/vitdeck/templates/sample_template/templateassets/{boothid}_{name}/emptyfolder/dummy.asset 
+*** e9115a14465af3541a37d00fd436469b replaces c692818d4faac5a479518a07679ba544 at path assets/vitdeck/templates/sample_template/templateassets/{boothid}_{name}/materials/sample material.mat 
+*** 3bcc760afcb0523468eed4f6f9a1a7e1 replaces e8b5c6c2b059be449abf07aebc9ee8de at path assets/vitdeck/templates/sample_template/templateassets/{boothid}_{name}/materials/sample texture.png 
+*** bcb0f116dd2863a44a4c098e70c44d52 replaces df58876e65b783f448991009fc2a730d at path assets/vitdeck/templates/sample_template/templateassets/{boothid}_{name}/models/sample_object.fbx 
+*** e9ae1b5bb4d3c0241a5316d100606fc8 replaces 29c1d01ec3aadb54d8ec9cd94e765925 at path assets/vitdeck/templates/sample_template/templateassets/{boothid}_{name}/sample_object_prefab.prefab 
+*** a88be259af1904b4f8d10d8ef441623c replaces 63edff91ea826854cad66cf2e86c8af2 at path assets/vitdeck/templates/sample_template/templateassets/{boothid}_{name}/scene_{boothid}_{name}.unity 
+*** 0ecd76fc15c7d9e4a9cb914c3df5f3d9 replaces d51f24cc58621874f98043673f3cad97 at path assets/vitdeck/utilities/assetutility.cs 
+*** 560bfb9a9792128439419aa00cbb1caf replaces a8bcedfba82d68247a6591f7f65d620a at path assets/vitdeck/utilities/customguilayout.cs 
+*** 41437640cbfab4a40b9a3cd78700bd06 replaces a91eda3d36339a248bc49919385e05b6 at path assets/vitdeck/utilities/ioutility.cs 
+*** a424079e73ca2ce4e91c6c9f0d62cf81 replaces f56cce363e5b1bc42a91ff3b576ec3af at path assets/vitdeck/utilities/productinfo.cs 
+*** 09871b0cfb14d49458f96dcf00e77cc5 replaces 97c62712683ae84429d3702dee052f0a at path assets/vitdeck/utilities/productinfoutility.cs 
+*** 3e443a2628bb2e843a1f67be9a15f633 replaces 9cfec561d5303ee41b01be474431fec5 at path assets/vitdeck/utilities/urlutility.cs 
+*** 71f92a35df2e4af478028e7848da0bbc replaces 8f962996cb3c8f94c82cb73ac22571c6 at path assets/vitdeck/utilities/usersettingutility.cs 
+*** 83709077c9abd5041ae517cd48be1c9f replaces aebad027bddce6940803f740e05c8339 at path assets/vitdeck/utilities/usersettings.cs 
+*** b921f40c1e696ff43b28e8fed5801326 replaces d5d1814b1ea4e2b4e8ec34279c689058 at path assets/vitdeck/utilities/vitdeck.utilities.asmdef 
+*** b966bc02a75c0d6479f73aeb4a1d8c66 replaces d10f7ef6dc461394aad36d76e0b0d113 at path assets/vitdeck/validator/components/fatalvalidationerrorexception.cs 
+*** 8f5823958f6133544bc6f71c7af052f0 replaces 7b65fcbcbf045dc41b2ff88fc8b31ffe at path assets/vitdeck/validator/components/irule.cs 
+*** 64fc0343f10cbb041951352bfdaf6cf3 replaces c93357087a8223247b90e38feef67390 at path assets/vitdeck/validator/components/iruleset.cs 
+*** 2b17812c96b317b4084724312e0142b0 replaces 1bf1878579722b9469be571c11fa6095 at path assets/vitdeck/validator/components/ivalidationtargetfinder.cs 
+*** 4127ad6201a6a1646bd785812f20ef26 replaces 3a76ceef6d79c734bb67ca999dcd449a at path assets/vitdeck/validator/components/issue.cs 
+*** 2ba2b14496da0404cb6dcf6033563b0b replaces 31930f5b553e9984b92392d36d337dba at path assets/vitdeck/validator/components/validationattribute.cs 
+*** 4b476ce0d21797146b922db1475ec37a replaces fe630c6d4cd4252459dc39a626a25ea2 at path assets/vitdeck/validator/components/validationresult.cs 
+*** ca42b8add57cb6e40bc46b51d84a6837 replaces 587f0e6f3f8351145b71e52cf87c24a6 at path assets/vitdeck/validator/components/validationtarget.cs 
+*** 8724b5dbe1aee464e916f6cee37b0c18 replaces 77aefac329f5ec740b5a3f8d71ba53b0 at path assets/vitdeck/validator/components/validationtargetfinder.cs 
+*** 681f9e21762d829448c510a8e57609f7 replaces c6d22ad13563a2d49b396aa2a68deb8e at path assets/vitdeck/validator/components/vitdeck.validator.components.asmdef 
+*** 761cabe19276fb34c92436b7e04e676f replaces 18e87486dcc5f8049b8c840f3e38adfe at path assets/vitdeck/validator/gui/validatorgui.cs 
+*** 15668d47acad7384c803b48459e4a57d replaces c33f0536f9abf53489aaf9b144572ab0 at path assets/vitdeck/validator/gui/vitdeck.validator.gui.asmdef 
+*** 188214825eecdca4ba7e90f5a45c03df replaces 395dbef5a7aa6a147a673888e7b54a7e at path assets/vitdeck/validator/rules/asset/a01_assetnamingrule.cs 
+*** ff86afac766b83d4bab9fb6b283591f0 replaces faf26ae225a2ea94a85978512d0f7b75 at path assets/vitdeck/validator/rules/asset/a02_assetguidblacklistrule.cs 
+*** 6445fd215e724814f9f5dc9bf8a629e6 replaces a85bd9d19086c8d40a731d25fae39b44 at path assets/vitdeck/validator/rules/asset/a03_assetpathlengthrule.cs 
+*** 891a8db77a1dddb45b5c832b3293ea56 replaces 95975b4b962ef544390c22eccd6e4ec2 at path assets/vitdeck/validator/rules/asset/a04_assetextentionblacklistrule.cs 
+*** 3b9e6c0bdd2c8f84eab2eb79011c00e2 replaces 6de56a2602b4c8a419ca089058802938 at path assets/vitdeck/validator/rules/baserule.cs 
+*** 6f5950649e8749c44a52b8dfd28ce066 replaces 5356e8a4d231dca48a82e05624cadaf9 at path assets/vitdeck/validator/rules/baseruleset.cs 
+*** 4d9a9bffa9b484445834900967460471 replaces d86b50043d939c2498f87f24ccc3ad83 at path assets/vitdeck/validator/rules/booth/b01_boothboundsrule.cs 
+*** 6471c5681864ba645ab340a9e388acc9 replaces 960b5868b6df8154d90de96a24d47a4b at path assets/vitdeck/validator/rules/booth/b02_componentwhitelistrule.cs 
+*** 1c619dd56904f004393087b28abf8105 replaces 1c3574ca07640454fa9fba3ad53bb698 at path assets/vitdeck/validator/rules/booth/b03_componentblacklistrule.cs 
+*** 09d992155ae59f542b1dbdce2feb3fc2 replaces 608f6447daa1461488f0550d6f0c9c41 at path assets/vitdeck/validator/rules/booth/b04_errorshaderrule.cs 
+*** 5ded8acf6e7b1024f833d87a201534bd replaces 427d08fe37681654aafef6ac34afef87 at path assets/vitdeck/validator/rules/booth/b05_nonemeshrule.cs 
+*** b3ff40593d0d3b8419a7d5c1b73c6a9c replaces 4fec045d3a8137f44844a1cb8b22d546 at path assets/vitdeck/validator/rules/booth/b06_missingreferencerule.cs 
+*** ebc4c5559e7406e4e9d8a497f5bffd71 replaces 95fb2e8efb8eb7c4b8e590119eea6d4c at path assets/vitdeck/validator/rules/booth/componentreference.cs 
+*** 5d7e72fd3e23e44448b38a1896eca225 replaces e6d77f87cab2fc7498af9e36f8aacf22 at path assets/vitdeck/validator/rules/booth/missingfinder.cs 
+*** 6f7defc41e40a9744ab5fd7a9bc16675 replaces 579bde255a94e3a4fb185f02f3f3353d at path assets/vitdeck/validator/rules/sample/samplerule.cs 
+*** f331eff3d9a13494484ef0725f5cdf00 replaces fa1d70b3f979ea449bb2022a0bc26889 at path assets/vitdeck/validator/rules/sample/sampleruleset.cs 
+*** af0f91ea9bdc6b14c97b76abc958695b replaces 1823e7af1de6685469c3b1aadd4df94e at path assets/vitdeck/validator/rules/unity/u01_unityversionrule.cs 
+*** c65a8d4e037a1ea4f86eef76259f3452 replaces 57f2fe4c6453ba24989784f34de64302 at path assets/vitdeck/validator/rules/vitdeck.validator.rules.asmdef 
+*** 219765037bac0fb4aa007ae5ef25331b replaces 5770943bcb045e0478e0d96c00b19502 at path assets/vitdeck/validator/validator.cs 
+*** 578ed3dd1675a3a418654c5ead6a7f73 replaces a6be8912bc7989c40865f09d372dd8d6 at path assets/vitdeck/validator/vitdeck.validator.asmdef 
+*** 35b4e72ca46f44581b85082c4dc21d13 replaces 8d52be3fac5d22b45bdaff6a9a54dc61 at path packages/com.unity.ads/changelog.md 
+*** b32abd1c9d73a4cce8389f084ac12b11 replaces 028a5a878c097b8489fa3ea9c56b7c6b at path packages/com.unity.ads/editor/resources/android/builds/unity-ads.aar 
+*** 10bf81265ad87424d946598c575f45a0 replaces 5c6cce7533941f349a6124bfbf7a16db at path packages/com.unity.ads/editor/resources/editor/landscape.jpg 
+*** 1b32bcce201b4494ea8848326290c5d5 replaces ff24c4b621d1d3444bf743f0b03de527 at path packages/com.unity.ads/editor/resources/editor/portrait.jpg 
+*** 7927683d1fc5848b5abfb54ebb1028ec replaces a3aa592abcad3c0499c58599cf33a4aa at path packages/com.unity.ads/editor/resources/ios/builds/unityads.framework/headers/uadsinapppurchasemetadata.h 
+*** 1322fd896bbb15bb6e335591b766ae62 replaces a6e498b5fc905274ca40f3c1a8cce534 at path packages/com.unity.ads/editor/resources/ios/builds/unityads.framework/headers/uadsjsonstorage.h 
+*** b52e557db2c2b4eebb10444f1d582029 replaces bd9590b9f0cbb3e4da173ab4e9ec3dec at path packages/com.unity.ads/editor/resources/ios/builds/unityads.framework/headers/uadsmediationmetadata.h 
+*** 86c008322e7c647149878156c5b81940 replaces d48a319bf2967684992d8b87c314561a at path packages/com.unity.ads/editor/resources/ios/builds/unityads.framework/headers/uadsmetadata.h 
+*** 453f100e6bdae4dfd9e655927819dc85 replaces 08d0e7a5237f9da44908830ccaea9457 at path packages/com.unity.ads/editor/resources/ios/builds/unityads.framework/headers/uadsplayermetadata.h 
+*** c99bfe4fc4e5c4dc3917c14075acd117 replaces 0ab8c0f39790fc047bac2effa57230fc at path packages/com.unity.ads/editor/resources/ios/builds/unityads.framework/headers/unityads.h 
+*** a6842a74831964edc8fefa1c0aed89dc replaces 6fef59c804f77214383e26c699e186b9 at path packages/com.unity.ads/editor/resources/ios/builds/unityads.framework/headers/unityadsextended.h 
+*** ce4395ccdb12cf62fca756358be1a892 replaces 213e5386a0389be4fa2e5b1d3a3a7627 at path packages/com.unity.ads/editor/resources/ios/builds/unityads.framework/headers/unityadsunitydelegate.h 
+*** cc1b50b5501f748da8bec762294d9136 replaces fd9cf492f6c8d224391c061650875970 at path packages/com.unity.ads/editor/resources/ios/builds/unityads.framework/info.plist 
+*** c5ba7626a737840ff88a3bd84b100482 replaces 6704c03b0c96bee40b46d4d6007fa082 at path packages/com.unity.ads/editor/resources/ios/builds/unityads.framework/modules/module.modulemap 
+*** d1c1a2d988f5148fd9ab17b2460d271e replaces eee8ff1df569fa34681368b779cd37b8 at path packages/com.unity.ads/editor/resources/ios/builds/unityads.framework/unityads 
+*** a342381d77833427fa10621e38fbae10 replaces 9977de6c3d92f144a989af69bff87768 at path packages/com.unity.ads/editor/unityeditor.advertisements.dll 
+*** 6597c6ea86d36477081342001145d8d9 replaces 413539dd0ae3a624d9aa7509f4ece1e4 at path packages/com.unity.ads/editor/unityeditor.advertisements.dll.mdb 
+*** 4c6fe94acbb24417c988bab18cbd5209 replaces 120f6c1f1d8fb7c4686bab8988cc53ed at path packages/com.unity.ads/license.md 
+*** 62772aad98ed04f0d955b7d20de61f7f replaces c46b2ed30597e404abf77ddfb3484c96 at path packages/com.unity.ads/readme.md 
+*** 3b07d432cba2a4c4f8a2fdea984620b8 replaces 03c2ec93736db4d47904310268f3decd at path packages/com.unity.ads/unityengine.advertisements.dll 
+*** 5e57a6c62c1ec47d0bceb70495845164 replaces b905e237a9c2bb14090e109460ef9337 at path packages/com.unity.ads/unityengine.advertisements.dll.mdb 
+*** dced8f6ea9f964e8e8e61574ea889d21 replaces 72fd6a12735af9e4caadef61de4e7475 at path packages/com.unity.ads/package.json 
+*** bcd27da1c9ae94d2cafe094482a20792 replaces 26ff444e2fe9e514eb38836f3d5532ee at path packages/com.unity.analytics/changelog.md 
+*** 4e7c9ab97e5884e4eaa5967e9024f39c replaces e88f6fb9564814a4b802469685e8b743 at path packages/com.unity.analytics/editor/analyticseventtracker icon.png 
+*** 224ede67b4f3a4109bfec4d5cb161b05 replaces ffddff37489d171429f9fcce48dc03e6 at path packages/com.unity.analytics/editor/unityeditor.analytics.dll 
+*** fec197bad419341558f81f2ec8a05e18 replaces ce79e575d02fc6446a6e2ae7633dd025 at path packages/com.unity.analytics/editor/unityeditor.analytics.dll.mdb 
+*** 15bf9c691b85b41a39c18bee2f87e21b replaces 9ad4958ac22dcef49a8785315bd6b2c7 at path packages/com.unity.analytics/license.md 
+*** 884f8f0e4025a420893d3a8d1d3063e1 replaces ffecd1c78ab67cf49af81d0c1f801d62 at path packages/com.unity.analytics/readme.md 
+*** 220224b43fc464c28bc0e8de8f54a432 replaces ece76dabd5558564b837e8808d22e4b8 at path packages/com.unity.analytics/unityengine.analytics.dll 
+*** d607a67dc772b484da060e66a3d61a4e replaces 3dd47d01b89fbae41b7bf6bb6159c60e at path packages/com.unity.analytics/unityengine.analytics.dll.mdb 
+*** 510d1d319d2754ea4a47c6dd8c421ea0 replaces 94151fcacd7a57e489de74f18185042e at path packages/com.unity.analytics/package.json 
+*** f1045c695c5bf4fb7b8509687bc60fc0 replaces 11f01083b0078154f8d72519145984c7 at path packages/com.unity.purchasing/editor/unityeditor.purchasing.dll 
+*** 9de9e8523c82543c5b3e40a4b51aa2c9 replaces d200ba10f6f4d4c49a7669bc905aa8e1 at path packages/com.unity.purchasing/editor/unityeditor.purchasing.dll.mdb 
+*** 90791303b72ec4ae198f99d637dfdf6c replaces 662a2e61099213241a1c1d26a6fbff2b at path packages/com.unity.purchasing/readme.md 
+*** b5f4343795a0e4626ac1fe4a9e6fce59 replaces a3ed78725b4f17b4591efefc7d0f3860 at path packages/com.unity.purchasing/unityengine.purchasing.dll 
+*** 86c18994495874297b469aaa57ef9b44 replaces 20282ee879e9c6345bc14b42446270ec at path packages/com.unity.purchasing/unityengine.purchasing.dll.mdb 
+*** 44f39a74ca5ee4bf5936b17e901f251c replaces 669b69011e6ce714a8c99fd505075d83 at path packages/com.unity.purchasing/package.json 
+*** 76349cec627454d3a80423a2eeaf0e63 replaces 2175c644cd73669479e05bd869f4ed29 at path packages/com.unity.standardevents/changelog.md 
+*** 15be9c691b85a41a39c18beeff87e21b replaces 8f26727822761494b80f63f9d7e79b05 at path packages/com.unity.standardevents/license.md 
+*** 0621b4aab2236437592f1f292cb81d20 replaces 34285740bcf6f5d41943762774021473 at path packages/com.unity.standardevents/readme.md 
+*** dce91326f102345f3ba2f0987c0679c2 replaces 1302323017f928d4b8f5feedcd792e5f at path packages/com.unity.standardevents/unityengine.standardevents.dll 
+*** 36e8bb3feb5e6402185947b817a6ed8d replaces c23bb2911801c3f4bb116ddd71745032 at path packages/com.unity.standardevents/unityengine.standardevents.dll.mdb 
+*** 84aec3c9054b3402293139f2c0bc1029 replaces e6e51088616d32146b079b187e5762c9 at path packages/com.unity.standardevents/package.json 
+Refresh: elapses 0.741165 seconds
+Refresh: trashing asset d200ba10f6f4d4c49a7669bc905aa8e1
+Refresh: trashing asset 1302323017f928d4b8f5feedcd792e5f
+Refresh: trashing asset 34285740bcf6f5d41943762774021473
+Refresh: trashing asset aec2fb50218a7b64f9e632aea535954b
+Refresh: trashing asset 0da42a70f9f469d4587b8b602712f373
+Refresh: trashing asset 08aa6801342e54940b2943a404a5503f
+Refresh: trashing asset 669b69011e6ce714a8c99fd505075d83
+Refresh: trashing asset 3dd47d01b89fbae41b7bf6bb6159c60e
+Refresh: trashing asset ebefc221a15cc0a429acc80485b69221
+Refresh: trashing asset b9ca725148a9bdf439bb22eac39dfef9
+Refresh: trashing asset 3656ad519ebc08848ad9518070d004eb
+Refresh: trashing asset 9cfec561d5303ee41b01be474431fec5
+Refresh: trashing asset 662a2e61099213241a1c1d26a6fbff2b
+Refresh: trashing asset 2b86ff81abb08be4787f32c29d44c629
+Refresh: trashing asset c23bb2911801c3f4bb116ddd71745032
+Refresh: trashing asset bc0a2c9156f82784a901a7f624126605
+Refresh: trashing asset 63edff91ea826854cad66cf2e86c8af2
+Refresh: trashing asset 1ac026c1aae4d7642a2ec06467a74271
+Refresh: trashing asset 006860d10f1243443ab645a21f6f8e6e
+Refresh: trashing asset a85bd9d19086c8d40a731d25fae39b44
+Refresh: trashing asset c6d22ad13563a2d49b396aa2a68deb8e
+Refresh: trashing asset 97c62712683ae84429d3702dee052f0a
+Refresh: trashing asset a6be8912bc7989c40865f09d372dd8d6
+Refresh: trashing asset 72fd6a12735af9e4caadef61de4e7475
+Refresh: trashing asset f8ee8222502ddf5498d21f4de75affad
+Refresh: trashing asset f60bf8422cc07aa448fcf1ab8da70f79
+Refresh: trashing asset 74efe862bcf9aa3429898ece89a48128
+Refresh: trashing asset a3ed78725b4f17b4591efefc7d0f3860
+Refresh: trashing asset fcbd5282ad473734b85875961d96efea
+Refresh: trashing asset fd9cf492f6c8d224391c061650875970
+Refresh: trashing asset 3c6e5792ebda2c046a220da905d6bd54
+Refresh: trashing asset e8b5c6c2b059be449abf07aebc9ee8de
+Refresh: trashing asset faf26ae225a2ea94a85978512d0f7b75
+Refresh: trashing asset 3e5360232589acb4dad3b908552aaaa5
+Refresh: trashing asset 0858d4237a215b041bb1ec263efd1092
+Refresh: trashing asset 27016843316e19b459deb12f86dc0a23
+Refresh: trashing asset 96d93653f23f5144e967081452f6684e
+Refresh: trashing asset 11f01083b0078154f8d72519145984c7
+Refresh: trashing asset 0c7eb7939f7ddf6479fbed958d468c51
+Refresh: trashing asset 03c2ec93736db4d47904310268f3decd
+Refresh: trashing asset fa1d70b3f979ea449bb2022a0bc26889
+Refresh: trashing asset bbd829b3cd2cb27408fcfe760956b54c
+Refresh: trashing asset 77aefac329f5ec740b5a3f8d71ba53b0
+Refresh: trashing asset c46b2ed30597e404abf77ddfb3484c96
+Refresh: trashing asset cb767ce3b654b6348a3f0ce3397e1ce8
+Refresh: trashing asset 0ab8c0f39790fc047bac2effa57230fc
+Refresh: trashing asset d86b50043d939c2498f87f24ccc3ad83
+Refresh: trashing asset 2175c644cd73669479e05bd869f4ed29
+Refresh: trashing asset 5356e8a4d231dca48a82e05624cadaf9
+Refresh: trashing asset dd46c8e48ec38bf46a02acbe4cde291c
+Refresh: trashing asset d8b39925f0f5ece4fac6252d6419fd97
+Refresh: trashing asset 579bde255a94e3a4fb185f02f3f3353d
+Refresh: trashing asset 0048ce45e5dc80644af9f4b268e41d8e
+Refresh: trashing asset 3c1b8365995121444bb14d40848be520
+Refresh: trashing asset ce79e575d02fc6446a6e2ae7633dd025
+Refresh: trashing asset 087a1875a8fac7d489e0556643d56de8
+Refresh: trashing asset 5c6cce7533941f349a6124bfbf7a16db
+Refresh: trashing asset 1bf1878579722b9469be571c11fa6095
+Refresh: trashing asset 08f1c885a58aeac4198c1c108afafbb8
+Refresh: trashing asset 37597b85ace185f4fb94264bdedc530b
+Refresh: trashing asset 08d0e7a5237f9da44908830ccaea9457
+Refresh: trashing asset a6e498b5fc905274ca40f3c1a8cce534
+Refresh: trashing asset 099a54c56c7691c4e8fc512fc9d21bd4
+Refresh: trashing asset 395dbef5a7aa6a147a673888e7b54a7e
+Refresh: trashing asset 6de56a2602b4c8a419ca089058802938
+Refresh: trashing asset 1b432236294cb3947b8a7315420333bd
+Refresh: trashing asset c33f0536f9abf53489aaf9b144572ab0
+Refresh: trashing asset f56cce363e5b1bc42a91ff3b576ec3af
+Refresh: trashing asset 213e5386a0389be4fa2e5b1d3a3a7627
+Refresh: trashing asset 18e87486dcc5f8049b8c840f3e38adfe
+Refresh: trashing asset 8f962996cb3c8f94c82cb73ac22571c6
+Refresh: trashing asset ff24c4b621d1d3444bf743f0b03de527
+Refresh: trashing asset d10f7ef6dc461394aad36d76e0b0d113
+Refresh: trashing asset aebad027bddce6940803f740e05c8339
+Refresh: trashing asset 2c0055275f6fdf94c9b61ae04cc725d2
+Refresh: trashing asset b905e237a9c2bb14090e109460ef9337
+Refresh: trashing asset ffddff37489d171429f9fcce48dc03e6
+Refresh: trashing asset 608f6447daa1461488f0550d6f0c9c41
+Refresh: trashing asset 028a5a878c097b8489fa3ea9c56b7c6b
+Refresh: trashing asset ef592d87abeb44644b48f7a8ae916de5
+Refresh: trashing asset e6d77f87cab2fc7498af9e36f8aacf22
+Refresh: trashing asset d7ca37b7de6c47e4d917eba6dafdabca
+Refresh: trashing asset ffecd1c78ab67cf49af81d0c1f801d62
+Refresh: trashing asset 5fea84c72f0cb064a99bd67d0ae96c6e
+Refresh: trashing asset 7be189f75e8b0094194ba1e9a36ad1d0
+Refresh: trashing asset 90beaef763b347b4ca47c5d68b95ba45
+Refresh: trashing asset c93357087a8223247b90e38feef67390
+Refresh: trashing asset 960b5868b6df8154d90de96a24d47a4b
+Refresh: trashing asset 8f26727822761494b80f63f9d7e79b05
+Refresh: trashing asset e6e51088616d32146b079b187e5762c9
+Refresh: trashing asset 6fef59c804f77214383e26c699e186b9
+Refresh: trashing asset 34c392d8b7606a94ea833fb45fc4cba0
+Refresh: trashing asset 30ed46d83cc020742b2a1b0fb8b37496
+Refresh: trashing asset 20282ee879e9c6345bc14b42446270ec
+Refresh: trashing asset 761ea13907735d84fa420f4aaf6e74e0
+Refresh: trashing asset 7df4da3960112634fbf7c5797966d41d
+Refresh: trashing asset bd9590b9f0cbb3e4da173ab4e9ec3dec
+Refresh: trashing asset e88f6fb9564814a4b802469685e8b743
+Refresh: trashing asset 3d3c13e9fde175d42bd5cf9d455c313b
+Refresh: trashing asset cf6b400a2b6792d4894ec947562244c5
+Refresh: trashing asset a3aa592abcad3c0499c58599cf33a4aa
+Refresh: trashing asset 5eb01d4a2b074f346874c30f6e9d71cd
+Refresh: trashing asset 7ffe856a752fd904b9d62654b34b38ea
+Refresh: trashing asset 9ad4958ac22dcef49a8785315bd6b2c7
+Refresh: trashing asset 80c9909a1dd79e3419cd8bfc955f3037
+Refresh: trashing asset 21c2d1ca8ebc6584abbe194a20ac1820
+Refresh: trashing asset 1c3574ca07640454fa9fba3ad53bb698
+Refresh: trashing asset 94151fcacd7a57e489de74f18185042e
+Refresh: trashing asset 6704c03b0c96bee40b46d4d6007fa082
+Refresh: trashing asset 5770943bcb045e0478e0d96c00b19502
+Refresh: trashing asset d5d1814b1ea4e2b4e8ec34279c689058
+Refresh: trashing asset 95975b4b962ef544390c22eccd6e4ec2
+Refresh: trashing asset 31930f5b553e9984b92392d36d337dba
+Refresh: trashing asset d776ae6b67d37a54e984f47f316e8d78
+Refresh: trashing asset 8302607ba348f9f40bb70f343959ac1e
+Refresh: trashing asset d48a319bf2967684992d8b87c314561a
+Refresh: trashing asset d78536ab63d77c740bf53ca6d86b3ec2
+Refresh: trashing asset ece76dabd5558564b837e8808d22e4b8
+Refresh: trashing asset ff26e5db414a936489dbf4794dfcf983
+Refresh: trashing asset 365b48db22aed1a43a9c65d6aee4703b
+Refresh: trashing asset 50cdf4eb7afb2194db469308911feaeb
+Refresh: trashing asset a8bcedfba82d68247a6591f7f65d620a
+Refresh: trashing asset 7b45fc2c3bbc12c40966c1450623ff16
+Refresh: trashing asset 49eb544c629bd6846b85c0d4e35811d8
+Refresh: trashing asset 57f2fe4c6453ba24989784f34de64302
+Refresh: trashing asset 9977de6c3d92f144a989af69bff87768
+Refresh: trashing asset 9ab75bbc19c38a945bb415af194f0430
+Refresh: trashing asset 7b65fcbcbf045dc41b2ff88fc8b31ffe
+Refresh: trashing asset d51f24cc58621874f98043673f3cad97
+Refresh: trashing asset d2b70ddcb06367545a294646d36072a7
+Refresh: trashing asset b9ed4e1d3bfdf4c42a577934dce90232
+Refresh: trashing asset eee8ff1df569fa34681368b779cd37b8
+Refresh: trashing asset a91eda3d36339a248bc49919385e05b6
+Refresh: trashing asset 4fec045d3a8137f44844a1cb8b22d546
+Refresh: trashing asset fe630c6d4cd4252459dc39a626a25ea2
+Refresh: trashing asset c692818d4faac5a479518a07679ba544
+Refresh: trashing asset 413539dd0ae3a624d9aa7509f4ece1e4
+Refresh: trashing asset 29c1d01ec3aadb54d8ec9cd94e765925
+Refresh: trashing asset e38b6c1e9e75d0c4db1ad79dd5440f08
+Refresh: trashing asset 8116a22e5fda19c4f818973163eb4a75
+Refresh: trashing asset 5a9d204e2ceb74d46a73c8c9007bc0c4
+Refresh: trashing asset 26ff444e2fe9e514eb38836f3d5532ee
+Refresh: trashing asset df58876e65b783f448991009fc2a730d
+Refresh: trashing asset e1356c8ea78098046ac259775a0ed742
+Refresh: trashing asset 95fb2e8efb8eb7c4b8e590119eea6d4c
+Refresh: trashing asset e0a306ae4fad21f4da7a7718d8f87b55
+Refresh: trashing asset d74900ee1a3e2c94aa854b412026e5d4
+Refresh: trashing asset b6eb97fefbf8b3c4189a0a3681d4f73f
+Refresh: trashing asset 427d08fe37681654aafef6ac34afef87
+Refresh: trashing asset e3a89b0fc14d73449a882623e4693658
+Refresh: trashing asset 120f6c1f1d8fb7c4686bab8988cc53ed
+Refresh: trashing asset 4a90373f9433cd840be02b503b60840d
+Refresh: trashing asset 3169fd3f00d15de48b5b991507ff664a
+Refresh: trashing asset 8d52be3fac5d22b45bdaff6a9a54dc61
+Refresh: trashing asset 587f0e6f3f8351145b71e52cf87c24a6
+Refresh: trashing asset 313b968f01c1b584ab65d6b6348ddc3e
+Refresh: trashing asset 1823e7af1de6685469c3b1aadd4df94e
+Refresh: trashing asset 82b359efd4ef3e74ca91e053e8640cc1
+Refresh: trashing asset c528bbef36a6d7344863cdba87a62535
+Refresh: trashing asset 3a76ceef6d79c734bb67ca999dcd449a
+Server Came alive after 379.9848 ms
+Connect to CacheServer localhost:52392
+Updating Assets - GUID: 00000000000000001000000000000000...
+ done. [Time: 42.177300 ms] 
+Updating ProjectSettings/InputManager.asset - GUID: 00000000000000002000000000000000...
+ done. [Time: 11.769200 ms] 
+Updating ProjectSettings/TagManager.asset - GUID: 00000000000000003000000000000000...
+ done. [Time: 12.019600 ms] 
+Updating ProjectSettings/ProjectSettings.asset - GUID: 00000000000000004000000000000000...
+ done. [Time: 12.404700 ms] 
+Updating ProjectSettings/NavMeshAreas.asset - GUID: 00000000000000004100000000000000...
+ done. [Time: 11.009900 ms] 
+Updating Library/BuildPlayer.prefs - GUID: 00000000000000005000000000000000...
+ done. [Time: 11.320600 ms] 
+Updating ProjectSettings/Physics2DSettings.asset - GUID: 00000000000000005100000000000000...
+ done. [Time: 11.499000 ms] 
+Updating ProjectSettings/AudioManager.asset - GUID: 00000000000000006000000000000000...
+Audio: FMOD Profiler initialized on port 54901
+ done. [Time: 115.502900 ms] 
+Updating ProjectSettings/GraphicsSettings.asset - GUID: 00000000000000006100000000000000...
+ done. [Time: 18.125500 ms] 
+Updating ProjectSettings/TimeManager.asset - GUID: 00000000000000007000000000000000...
+ done. [Time: 22.643400 ms] 
+Updating ProjectSettings/ClusterInputManager.asset - GUID: 00000000000000007100000000000000...
+ done. [Time: 28.804000 ms] 
+Updating ProjectSettings/DynamicsManager.asset - GUID: 00000000000000008000000000000000...
+ done. [Time: 23.040500 ms] 
+Updating ProjectSettings/QualitySettings.asset - GUID: 00000000000000009000000000000000...
+ done. [Time: 30.972200 ms] 
+Updating ProjectSettings/NetworkManager.asset - GUID: 0000000000000000a000000000000000...
+ done. [Time: 26.884700 ms] 
+Updating ProjectSettings/UnityConnectSettings.asset - GUID: 0000000000000000a100000000000000...
+ done. [Time: 11.724100 ms] 
+Updating ProjectSettings/EditorBuildSettings.asset - GUID: 0000000000000000b000000000000000...
+ done. [Time: 11.549700 ms] 
+Updating ProjectSettings/EditorSettings.asset - GUID: 0000000000000000c000000000000000...
+ done. [Time: 12.189800 ms] 
+Updating Assets/VitDeck - GUID: 0b9cd90d6c2ac9545a9c918d21b032fa...
+ done. [Time: 15.968200 ms] 
+Updating Packages/com.unity.ads - GUID: 3c90f4f10e141e84eb5dd6aecd1e9f90...
+ done. [Time: 11.381700 ms] 
+Updating Assets/New Scene.unity - GUID: 4d6f38f2c27c57e49949300446619bc4...
+ done. [Time: 17.885300 ms] 
+Updating Packages/com.unity.purchasing - GUID: 643cf3ff61fd4a14fa482d08ae19bfd4...
+ done. [Time: 13.612000 ms] 
+Updating Packages/com.unity.analytics - GUID: 697adc0aef237554c97de3436864bedb...
+ done. [Time: 13.776400 ms] 
+Updating Packages/com.unity.standardevents - GUID: e84b1076654d93647aba00d014ee1d83...
+ done. [Time: 10.865000 ms] 
+Updating Packages/com.unity.analytics/Documentation - GUID: 04287cdf92934b047be6b7773fb2be26...
+ done. [Time: 11.800500 ms] 
+Updating Packages/com.unity.standardevents/UnityEngine.StandardEvents.dll.mdb - GUID: 36e8bb3feb5e6402185947b817a6ed8d...
+ done. [Time: 43.010800 ms] 
+Updating Assets/VitDeck/Main - GUID: 490421528ab45194e92a733291d0d547...
+ done. [Time: 17.337500 ms] 
+Updating Packages/com.unity.ads/UnityEngine.Advertisements.dll.mdb - GUID: 5e57a6c62c1ec47d0bceb70495845164...
+ done. [Time: 14.583200 ms] 
+Updating Assets/VitDeck/Validator - GUID: 6ff10c0aea9b42d4abd7568d07bf81d6...
+ done. [Time: 27.669500 ms] 
+Updating Packages/com.unity.standardevents/Documentation - GUID: 706fadc1b0a0d8341902b80709bf0f00...
+ done. [Time: 14.863600 ms] 
+Updating Packages/com.unity.analytics/Editor - GUID: 7fd5e77e7e7ea4eea8198138cd9cc814...
+ done. [Time: 24.129300 ms] 
+Updating Packages/com.unity.purchasing/UnityEngine.Purchasing.dll.mdb - GUID: 86c18994495874297b469aaa57ef9b44...
+ done. [Time: 27.823200 ms] 
+Updating Assets/VitDeck/Config - GUID: 942c41123f54e2f40b017e2d4dbd4589...
+ done. [Time: 26.799300 ms] 
+Updating Assets/VitDeck/Utilities - GUID: 97499241808a5034b9aede7af3a85ea9...
+ done. [Time: 39.980000 ms] 
+Updating Assets/VitDeck/Templates - GUID: 9cc74956ce0789345b947a4210714572...
+ done. [Time: 27.071900 ms] 
+Updating Packages/com.unity.ads/Editor - GUID: a37e18887fa954edf92bc36bc353b879...
+ done. [Time: 18.168100 ms] 
+Updating Assets/VitDeck/Organizer - GUID: b838f827962d8c04eb7d5a915ebc3f40...
+ done. [Time: 26.774900 ms] 
+Updating Assets/VitDeck/Images - GUID: b8cd476a60aeaec4c844abe1719ccecb...
+ done. [Time: 17.263400 ms] 
+Updating Assets/VitDeck/AssetGuardian - GUID: c40ec3ded49245d4b9a7f085aafb004e...
+ done. [Time: 30.141000 ms] 
+Updating Packages/com.unity.analytics/UnityEngine.Analytics.dll.mdb - GUID: d607a67dc772b484da060e66a3d61a4e...
+ done. [Time: 22.532700 ms] 
+Updating Assets/VitDeck/Exporter - GUID: d6fe484e224f75c42bd3de7f3cd1afab...
+ done. [Time: 32.140000 ms] 
+Updating Packages/com.unity.purchasing/Editor - GUID: d929147d9f78c487397abb40f2c257b0...
+ done. [Time: 29.285000 ms] 
+Updating Assets/VitDeck/TemplateLoader - GUID: e437174bb84b6b34fb945dd02bf4e6da...
+ done. [Time: 24.847900 ms] 
+Updating Assets/VitDeck/Main/GUI - GUID: 2e3d92c6f83ccd5459fbc51679060f70...
+ done. [Time: 31.134600 ms] 
+Updating Assets/VitDeck/Exporter/GUI - GUID: 35641dffc97e7ee44b7dfb2bdc26ae53...
+ done. [Time: 30.825200 ms] 
+Updating Assets/VitDeck/Organizer/AssetGuardian - GUID: 50078d4d055c34645a3c4e0b683b9b19...
+ done. [Time: 33.426700 ms] 
+Updating Packages/com.unity.ads/Editor/UnityEditor.Advertisements.dll.mdb - GUID: 6597c6ea86d36477081342001145d8d9...
+ done. [Time: 17.726700 ms] 
+Updating Packages/com.unity.ads/Editor/Resources - GUID: 7c3a5d6e39b874f468b2691537168513...
+ done. [Time: 16.627300 ms] 
+Updating Assets/VitDeck/Organizer/TemplateLoader - GUID: 8192879c102b56a4e87870c86ec0e90d...
+ done. [Time: 23.322000 ms] 
+Updating Assets/VitDeck/Organizer/Exporter - GUID: 8684969e4f0d18c4f8cfe272819ffb1e...
+ done. [Time: 23.370700 ms] 
+Updating Assets/VitDeck/AssetGuardian/EditorEventHooks - GUID: 99ed9d14aebd27940b72ab15c2aa6c39...
+ done. [Time: 18.430600 ms] 
+Updating Packages/com.unity.purchasing/Editor/UnityEditor.Purchasing.dll.mdb - GUID: 9de9e8523c82543c5b3e40a4b51aa2c9...
+ done. [Time: 13.808300 ms] 
+Updating Assets/VitDeck/TemplateLoader/GUI - GUID: ac08373d20c5e3a4c8c80f7090896c9f...
+ done. [Time: 24.745500 ms] 
+Updating Assets/VitDeck/Validator/Rules - GUID: b29213cc72fdad34792aaa2c1f321d82...
+ done. [Time: 15.788400 ms] 
+Updating Assets/VitDeck/Validator/GUI - GUID: cdf087e77a5746a4cb34d06c80f95568...
+ done. [Time: 14.229800 ms] 
+Updating Assets/VitDeck/Templates/Sample_template - GUID: d242a4f92aeef4c429139ddb80dcc19f...
+ done. [Time: 14.244500 ms] 
+Updating Assets/VitDeck/Validator/Components - GUID: eeadae5ea53f7d74fa7eb0be94c5fac6...
+ done. [Time: 14.972500 ms] 
+Updating Assets/VitDeck/AssetGuardian/GUI - GUID: f37802c861f567d459e5a74e38e24f17...
+ done. [Time: 13.942900 ms] 
+Updating Assets/VitDeck/Main/ValidatedExporter - GUID: faf572692550bca469293203381159d1...
+ done. [Time: 14.274600 ms] 
+Updating Packages/com.unity.analytics/Editor/UnityEditor.Analytics.dll.mdb - GUID: fec197bad419341558f81f2ec8a05e18...
+ done. [Time: 11.820600 ms] 
+Updating Assets/VitDeck/Validator/Rules/Asset - GUID: 0db1f38415f631b4a9bd367700a9dec8...
+ done. [Time: 15.322600 ms] 
+Updating Assets/VitDeck/Validator/Rules/Booth - GUID: 2f7a81ff01d9eca46ba21a85cd343f18...
+ done. [Time: 14.489400 ms] 
+Updating Assets/VitDeck/Main/ValidatedExporter/GUI - GUID: 31f38ce8a2e9c8941b35dfd551e1396a...
+ done. [Time: 15.332400 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/Android - GUID: 48986928cc2a449dbaecdd1654bc9bf6...
+ done. [Time: 22.304700 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS - GUID: 4f234578336894dc081edf696f2ff5f2...
+ done. [Time: 17.200400 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/Editor - GUID: 99ddb49592ff84811804420a1910cb89...
+ done. [Time: 16.189000 ms] 
+Updating Assets/VitDeck/Templates/Sample_template/TemplateAssets - GUID: 9c3c47c1f0d34104caafe92b6bd9c70c...
+ done. [Time: 47.317400 ms] 
+Updating Assets/VitDeck/Templates/Sample_template/SharedAssets - GUID: 9c89912967f635245a18d69866287f6e...
+ done. [Time: 40.744300 ms] 
+Updating Assets/VitDeck/Validator/Rules/Unity - GUID: c56dee10e7abe484cbed29882c4f8f74...
+ done. [Time: 28.447300 ms] 
+Updating Assets/VitDeck/Validator/Rules/Sample - GUID: e6bb049eaa11f9548b32c371ebacae45...
+ done. [Time: 20.041600 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS/builds - GUID: 2d4d46c70fdd242668a56e99799e8540...
+ done. [Time: 17.008600 ms] 
+Updating Assets/VitDeck/Templates/Sample_template/SharedAssets/Shared_asset_A - GUID: 547616f7261fb4445bfb8af8686d6ccf...
+ done. [Time: 19.451800 ms] 
+Updating Assets/VitDeck/Templates/Sample_template/SharedAssets/Support_object - GUID: 548e4aa360685764e90ffccf7b4f56e0...
+ done. [Time: 21.631100 ms] 
+Updating Assets/VitDeck/Templates/Sample_template/TemplateAssets/{BOOTHID}_{NAME} - GUID: 54f6f1d6188943f4698ac936ce8f8920...
+ done. [Time: 46.327200 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/Android/builds - GUID: f28fcced5af094cf78eb4e1109a71981...
+ done. [Time: 23.316300 ms] 
+Updating Assets/VitDeck/Templates/Sample_template/TemplateAssets/{BOOTHID}_{NAME}/EmptyFolder - GUID: 21ce9940c41d71a48b5ccbc1e0c88c50...
+ done. [Time: 32.541400 ms] 
+Updating Assets/VitDeck/Templates/Sample_template/TemplateAssets/{BOOTHID}_{NAME}/Materials - GUID: 8c890c90df061854a8646387a7504468...
+ done. [Time: 35.442500 ms] 
+Updating Assets/VitDeck/Templates/Sample_template/TemplateAssets/{BOOTHID}_{NAME}/Models - GUID: a6d9197ffc5e9e646a00b969d5ffb83f...
+ done. [Time: 30.434800 ms] 
+Updating Assets/VitDeck/Templates/Sample_template/TemplateAssets/{BOOTHID}_{NAME}/Scene_{BOOTHID}_{NAME}.unity - GUID: a88be259af1904b4f8d10d8ef441623c...
+ done. [Time: 25.424300 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS/builds/UnityAds.framework - GUID: eeed6954b3c264ca0b28a92aa6289bf0...
+ done. [Time: 16.929700 ms] 
+Updating Assets/VitDeck/Templates/Sample_template/TemplateAssets/{BOOTHID}_{NAME}/Animations - GUID: f193afbf7be798246aa0c0bd2a3f6058...
+ done. [Time: 25.321700 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS/builds/UnityAds.framework/Modules - GUID: 3cebe1a96232b44388b30b2f72dde434...
+ done. [Time: 16.158800 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS/builds/UnityAds.framework/Headers - GUID: 6e7c8cfeedae74eb3a562055e069e441...
+ done. [Time: 17.840100 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS/builds/UnityAds.framework/Info.plist - GUID: cc1b50b5501f748da8bec762294d9136...
+ done. [Time: 23.081300 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS/builds/UnityAds.framework/UnityAds - GUID: d1c1a2d988f5148fd9ab17b2460d271e...
+ done. [Time: 23.453700 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS/builds/UnityAds.framework/Headers/UADSJsonStorage.h - GUID: 1322fd896bbb15bb6e335591b766ae62...
+ done. [Time: 18.945700 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS/builds/UnityAds.framework/Headers/UADSPlayerMetaData.h - GUID: 453f100e6bdae4dfd9e655927819dc85...
+ done. [Time: 20.414200 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS/builds/UnityAds.framework/Headers/UADSInAppPurchaseMetaData.h - GUID: 7927683d1fc5848b5abfb54ebb1028ec...
+ done. [Time: 19.141700 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS/builds/UnityAds.framework/Headers/UADSMetaData.h - GUID: 86c008322e7c647149878156c5b81940...
+ done. [Time: 15.182900 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS/builds/UnityAds.framework/Headers/UnityAdsExtended.h - GUID: a6842a74831964edc8fefa1c0aed89dc...
+ done. [Time: 13.651800 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS/builds/UnityAds.framework/Headers/UADSMediationMetaData.h - GUID: b52e557db2c2b4eebb10444f1d582029...
+ done. [Time: 15.116000 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS/builds/UnityAds.framework/Modules/module.modulemap - GUID: c5ba7626a737840ff88a3bd84b100482...
+ done. [Time: 14.037700 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS/builds/UnityAds.framework/Headers/UnityAds.h - GUID: c99bfe4fc4e5c4dc3917c14075acd117...
+ done. [Time: 11.652700 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/iOS/builds/UnityAds.framework/Headers/UnityAdsUnityDelegate.h - GUID: ce4395ccdb12cf62fca756358be1a892...
+ done. [Time: 11.569900 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/OSXUniversal/AudioPluginOculusSpatializer.bundle - GUID: 32188fd89022c154c81befa2f0e00be0...
+ done. [Time: 13.468500 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/OSXUniversal/OVRPlugin.bundle - GUID: 5782f9e9e6e0bb94bac99aeea24814fc...
+ done. [Time: 13.634200 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/OSXUniversal/openvr_api.bundle - GUID: d33d54853fd0f48e0ac8a63ea91e6626...
+ done. [Time: 14.604600 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Editor/UnityEditor.HoloLens.dll - GUID: 12fd8a0055b84bb59e84c9835a37e333...
+ done. [Time: 94.500400 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll - GUID: 1c6d1fbb51834b64847b1b73a75bfc77...
+ done. [Time: 36.934000 ms] 
+Updating Packages/com.unity.analytics/UnityEngine.Analytics.dll - GUID: 220224b43fc464c28bc0e8de8f54a432...
+ done. [Time: 68.808800 ms] 
+Updating Packages/com.unity.analytics/Editor/UnityEditor.Analytics.dll - GUID: 224ede67b4f3a4109bfec4d5cb161b05...
+ done. [Time: 90.173700 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll - GUID: 3a84de5cd0624681b6b6dcd8921d912a...
+ done. [Time: 26.376000 ms] 
+Updating Packages/com.unity.ads/UnityEngine.Advertisements.dll - GUID: 3b07d432cba2a4c4f8a2fdea984620b8...
+ done. [Time: 81.492200 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/Editor/UnityEditor.TestRunner.dll - GUID: 4113173d5e95493ab8765d7b08371de4...
+ done. [Time: 89.209700 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Editor/UnityEditor.GoogleAudioSpatializer.dll - GUID: 4a3ecb1425d14502837abea459cf2b70...
+ done. [Time: 77.548100 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll - GUID: 4b3fa4bde7f1451a8218c03ee6a8ded8...
+ done. [Time: 49.657300 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll - GUID: 4ba2329b63d54f0187bcaa12486b1b0f...
+ done. [Time: 24.752300 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll - GUID: 53ebcfaa2e1e4e2dbc85882cd5a73fa1...
+ done. [Time: 56.084600 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll - GUID: 5f32cd94baa94578a686d4b9d6b660f7...
+ done. [Time: 62.488400 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Timeline/Runtime/UnityEngine.Timeline.dll - GUID: 6a10b2909283487f913b00d94cd3faf5...
+ done. [Time: 62.663900 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Timeline/Editor/UnityEditor.Timeline.dll - GUID: 7668179ede524d6396c8b7d84461ea29...
+ done. [Time: 104.022600 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll - GUID: 80a3616ca19596e4da0f10f14d241e9f...
+ done. [Time: 71.182900 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll - GUID: 844f815391db42d49455cbf1a7bfc434...
+ done. [Time: 67.977900 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll - GUID: 870353891bb340e2b2a9c8707e7419ba...
+ done. [Time: 51.878400 ms] 
+Updating Packages/com.unity.ads/Editor/UnityEditor.Advertisements.dll - GUID: a342381d77833427fa10621e38fbae10...
+ done. [Time: 18.039700 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll - GUID: adebbd281f1a4ef3a30be7f21937e02f...
+ done. [Time: 62.829400 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Editor/UnityEditor.SpatialTracking.dll - GUID: b5da970776034f77a070d99423d68791...
+ done. [Time: 41.518800 ms] 
+Updating Packages/com.unity.purchasing/UnityEngine.Purchasing.dll - GUID: b5f4343795a0e4626ac1fe4a9e6fce59...
+ done. [Time: 28.207700 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UIAutomation/Editor/UnityEditor.UIAutomation.dll - GUID: b8a0574e92bd43a59e19d6c3c6ae54c7...
+ done. [Time: 52.631200 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll - GUID: c768acbc9cf24d398488bb4c93b91288...
+ done. [Time: 17.561800 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Networking/Standalone/UnityEngine.Networking.dll - GUID: dc443db3e92b4983b9738c1131f555cb...
+ done. [Time: 47.249700 ms] 
+Updating Packages/com.unity.standardevents/UnityEngine.StandardEvents.dll - GUID: dce91326f102345f3ba2f0987c0679c2...
+ done. [Time: 38.290400 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Runtime/UnityEngine.GoogleAudioSpatializer.dll - GUID: e4f4cf1b9b434137a499903a7a1d651a...
+ done. [Time: 87.233100 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll - GUID: ead147da21254ff9a0a936bdd75e1680...
+ done. [Time: 63.634300 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Runtime/UnityEngine.SpatialTracking.dll - GUID: ed7343f30e3843b3afda8f8b02669cea...
+ done. [Time: 35.969900 ms] 
+Updating Packages/com.unity.purchasing/Editor/UnityEditor.Purchasing.dll - GUID: f1045c695c5bf4fb7b8509687bc60fc0...
+ done. [Time: 24.159600 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll - GUID: f5f67c52d1564df4a8936ccd202a3bd8...
+ done. [Time: 102.726200 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/GUISystem/Standalone/UnityEngine.UI.dll - GUID: f70555f144d8491a825f0804e09c671c...
+ done. [Time: 112.199700 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Runtime/UnityEngine.HoloLens.dll - GUID: f7b54ff4a43d4fcf81b4538b678e0bcc...
+ done. [Time: 63.962100 ms] 
+Reloading assemblies after forced synchronous recompile.
+Begin MonoManager ReloadAssembly
+Initializing Unity.PackageManager (PackageManager) v2017.4.28 for Unity v2017.4.28f1
+Registering platform support modules:
+Registered platform support modules in: 0.1408807s.
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 16.94 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.320 seconds
+Platform modules already initialized, skipping
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/portable/nunit.framework.dll - GUID: 405b9b51bb344a128608d968297df79c...
+ done. [Time: 39.060100 ms] 
+Updating Assets/VitDeck/Main/ValidatedExporter/GUI/VitDeck.Main.ValidatedExporter.GUI.asmdef - GUID: 0cbaba0ed0b1bc34da09cd89cf16c757...
+ done. [Time: 14.576200 ms] 
+Updating Assets/VitDeck/Main/VitDeck.Main.asmdef - GUID: 0dc8fcc8b4dfa104299bab414b7a16e1...
+ done. [Time: 14.870900 ms] 
+Updating Assets/VitDeck/Validator/GUI/VitDeck.Validator.GUI.asmdef - GUID: 15668d47acad7384c803b48459e4a57d...
+ done. [Time: 16.239400 ms] 
+Updating Assets/VitDeck/TemplateLoader/GUI/VitDeck.TemplateLoader.GUI.asmdef - GUID: 1acea4bf85bbbe341874a0a30637798b...
+ done. [Time: 15.297500 ms] 
+Updating Assets/VitDeck/TemplateLoader/VitDeck.TemplateLoader.asmdef - GUID: 1e102de2e25c8d94e9eaba75e2768891...
+ done. [Time: 15.214300 ms] 
+Updating Assets/VitDeck/Exporter/VitDeck.Exporter.asmdef - GUID: 405d78d1bd498cc44a0f9b3ef728e864...
+ done. [Time: 14.875800 ms] 
+Updating Assets/VitDeck/Main/ValidatedExporter/VitDeck.Main.ValidatedExporter.asmdef - GUID: 44193d7aa1118c747b02befe32cf1e82...
+ done. [Time: 16.722800 ms] 
+Updating Assets/VitDeck/Main/GUI/VitDeck.Main.GUI.asmdef - GUID: 4ea7f69acf660a348b794c099782a226...
+ done. [Time: 15.032200 ms] 
+Updating Assets/VitDeck/Validator/VitDeck.Validator.asmdef - GUID: 578ed3dd1675a3a418654c5ead6a7f73...
+ done. [Time: 15.325000 ms] 
+Updating Assets/VitDeck/Validator/Components/VitDeck.Validator.Components.asmdef - GUID: 681f9e21762d829448c510a8e57609f7...
+ done. [Time: 16.533500 ms] 
+Updating Assets/VitDeck/AssetGuardian/GUI/VitDeck.AssetGuardian.GUI.asmdef - GUID: 7ddb48e98d1dfd94f9e3d9207a36086d...
+ done. [Time: 16.747800 ms] 
+Updating Assets/VitDeck/Organizer/AssetGuardian/VitDeck.Organizer.AssetGuardian.asmdef - GUID: 9018f4748dfe14f479da519849c0716c...
+ done. [Time: 15.781600 ms] 
+Updating Assets/VitDeck/AssetGuardian/VitDeck.AssetGuardian.asmdef - GUID: 97abb040e822c024ba086eef0ae1b1c9...
+ done. [Time: 15.091700 ms] 
+Updating Assets/VitDeck/Utilities/VitDeck.Utilities.asmdef - GUID: b921f40c1e696ff43b28e8fed5801326...
+ done. [Time: 15.007800 ms] 
+Updating Assets/VitDeck/Organizer/TemplateLoader/VitDeck.Organizer.TemplateLoader.asmdef - GUID: bd0238473fd9ac94fab1f3ce279c734a...
+ done. [Time: 16.876900 ms] 
+Updating Assets/VitDeck/Organizer/Exporter/VitDeck.Organizer.Exporter.asmdef - GUID: c20158785255dcc40adb48cc73f0424a...
+ done. [Time: 15.302300 ms] 
+Updating Assets/VitDeck/Validator/Rules/VitDeck.Validator.Rules.asmdef - GUID: c65a8d4e037a1ea4f86eef76259f3452...
+ done. [Time: 15.165000 ms] 
+Updating Assets/VitDeck/Exporter/GUI/VitDeck.Exporter.GUI.asmdef - GUID: f3effe4cefc767e4b8799c43570fd0d7...
+ done. [Time: 15.449400 ms] 
+Updating Assets/VitDeck/Utilities/ProductInfoUtility.cs - GUID: 09871b0cfb14d49458f96dcf00e77cc5...
+ done. [Time: 66.944300 ms] 
+Updating Assets/VitDeck/Validator/Rules/Booth/B04_ErrorShaderRule.cs - GUID: 09d992155ae59f542b1dbdce2feb3fc2...
+ done. [Time: 28.834200 ms] 
+Updating Assets/VitDeck/Utilities/AssetUtility.cs - GUID: 0ecd76fc15c7d9e4a9cb914c3df5f3d9...
+ done. [Time: 40.507100 ms] 
+Updating Assets/VitDeck/Main/ValidatedExporter/ValidatedExportResult.cs - GUID: 15cca052d0905214db528d1b77ac4f17...
+ done. [Time: 33.260600 ms] 
+Updating Assets/VitDeck/Validator/Rules/Asset/A01_AssetNamingRule.cs - GUID: 188214825eecdca4ba7e90f5a45c03df...
+ done. [Time: 24.690200 ms] 
+Updating Assets/VitDeck/Validator/Rules/Booth/B03_ComponentBlacklistRule.cs - GUID: 1c619dd56904f004393087b28abf8105...
+ done. [Time: 38.239800 ms] 
+Updating Assets/VitDeck/Main/ValidatedExporter/GUI/ValidatedExporterGUI.cs - GUID: 1d0d176ac469c1e48ba749ce18b65301...
+ done. [Time: 35.721600 ms] 
+Updating Assets/VitDeck/Validator/Validator.cs - GUID: 219765037bac0fb4aa007ae5ef25331b...
+ done. [Time: 16.648200 ms] 
+Updating Assets/VitDeck/Validator/Components/IValidationTargetFinder.cs - GUID: 2b17812c96b317b4084724312e0142b0...
+ done. [Time: 15.791000 ms] 
+Updating Assets/VitDeck/Validator/Components/ValidationAttribute.cs - GUID: 2ba2b14496da0404cb6dcf6033563b0b...
+ done. [Time: 14.149500 ms] 
+Updating Assets/VitDeck/TemplateLoader/FbxReferenceModifier.cs - GUID: 2c1921fc4f5b51f499782babe619b1cd...
+ done. [Time: 16.255000 ms] 
+Updating Assets/VitDeck/Main/GUI/MainMenu.cs - GUID: 31fa395ce9620854b817e24bfb235518...
+ done. [Time: 15.696600 ms] 
+Updating Assets/VitDeck/Validator/Rules/BaseRule.cs - GUID: 3b9e6c0bdd2c8f84eab2eb79011c00e2...
+ done. [Time: 19.019000 ms] 
+Updating Assets/VitDeck/Organizer/AssetGuardian/AssetGuardianContextMenu.cs - GUID: 3dc81285b602f7f4da1d60c9e894c8cb...
+ done. [Time: 16.155700 ms] 
+Updating Assets/VitDeck/Utilities/URLUtility.cs - GUID: 3e443a2628bb2e843a1f67be9a15f633...
+ done. [Time: 16.335400 ms] 
+Updating Assets/VitDeck/Validator/Components/Issue.cs - GUID: 4127ad6201a6a1646bd785812f20ef26...
+ done. [Time: 15.225500 ms] 
+Updating Assets/VitDeck/Utilities/IOUtility.cs - GUID: 41437640cbfab4a40b9a3cd78700bd06...
+ done. [Time: 16.229700 ms] 
+Updating Assets/VitDeck/Templates/Sample_template/SharedAssets/Support_object/ScaleLimitVisualizer.cs - GUID: 414c1e5eb90f7f143a52b2cdfda76d32...
+ done. [Time: 16.378500 ms] 
+Updating Assets/VitDeck/AssetGuardian/LabelAndHideFlagProtectionMarker.cs - GUID: 469367ec720a31844b03fa249685dc53...
+ done. [Time: 14.854700 ms] 
+Updating Assets/VitDeck/Validator/Components/ValidationResult.cs - GUID: 4b476ce0d21797146b922db1475ec37a...
+ done. [Time: 14.255000 ms] 
+Updating Assets/VitDeck/Validator/Rules/Booth/B01_BoothBoundsRule.cs - GUID: 4d9a9bffa9b484445834900967460471...
+ done. [Time: 16.397000 ms] 
+Updating Assets/VitDeck/Main/JsonReleaseInfo.cs - GUID: 5451a9ed39306a24ca083676ed65ca6b...
+ done. [Time: 15.972100 ms] 
+Updating Assets/VitDeck/Utilities/CustomGUILayout.cs - GUID: 560bfb9a9792128439419aa00cbb1caf...
+ done. [Time: 13.959000 ms] 
+Updating Assets/VitDeck/TemplateLoader/GUI/TemplateLoaderGUI.cs - GUID: 5cf8de0402ca62b4fb6775dc166e03b0...
+ done. [Time: 15.435700 ms] 
+Updating Assets/VitDeck/Validator/Rules/Booth/MissingFinder.cs - GUID: 5d7e72fd3e23e44448b38a1896eca225...
+ done. [Time: 17.267000 ms] 
+Updating Assets/VitDeck/Validator/Rules/Booth/B05_NoneMeshRule.cs - GUID: 5ded8acf6e7b1024f833d87a201534bd...
+ done. [Time: 14.612800 ms] 
+Updating Assets/VitDeck/AssetGuardian/IAssetProtectionMarker.cs - GUID: 5e1d12467f0db4d48ae613857933399e...
+ done. [Time: 12.293800 ms] 
+Updating Assets/VitDeck/Organizer/TemplateLoader/TemplatePropertyCreateAssetMenu.cs - GUID: 603d26fd65a8b224483153c5326da95e...
+ done. [Time: 21.679600 ms] 
+Updating Assets/VitDeck/Main/ValidatedExporter/ValidatedExporter.cs - GUID: 61574dd23174335418a4dae8d6829cb0...
+ done. [Time: 21.799500 ms] 
+Updating Assets/VitDeck/Validator/Rules/Asset/A03_AssetPathLengthRule.cs - GUID: 6445fd215e724814f9f5dc9bf8a629e6...
+ done. [Time: 29.182500 ms] 
+Updating Assets/VitDeck/Validator/Rules/Booth/B02_ComponentWhitelistRule.cs - GUID: 6471c5681864ba645ab340a9e388acc9...
+ done. [Time: 38.165900 ms] 
+Updating Assets/VitDeck/Validator/Components/IRuleSet.cs - GUID: 64fc0343f10cbb041951352bfdaf6cf3...
+ done. [Time: 31.357200 ms] 
+Updating Assets/VitDeck/Main/VitDeck.cs - GUID: 6b39b323d17ae6d42b017381059952a8...
+ done. [Time: 23.365900 ms] 
+Updating Assets/VitDeck/Validator/Rules/BaseRuleSet.cs - GUID: 6f5950649e8749c44a52b8dfd28ce066...
+ done. [Time: 26.479600 ms] 
+Updating Assets/VitDeck/Validator/Rules/Sample/SampleRule.cs - GUID: 6f7defc41e40a9744ab5fd7a9bc16675...
+ done. [Time: 22.011400 ms] 
+Updating Assets/VitDeck/Utilities/UserSettingUtility.cs - GUID: 71f92a35df2e4af478028e7848da0bbc...
+ done. [Time: 23.991500 ms] 
+Updating Assets/VitDeck/AssetGuardian/AssetTypeIdentifier.cs - GUID: 71fbe6dac15ea684b9a83ce971b0af33...
+ done. [Time: 28.171400 ms] 
+Updating Assets/VitDeck/Validator/GUI/ValidatorGUI.cs - GUID: 761cabe19276fb34c92436b7e04e676f...
+ done. [Time: 34.015300 ms] 
+Updating Assets/VitDeck/AssetGuardian/AssetRestorer.cs - GUID: 778a64800f39491489e705a5adaeea67...
+ done. [Time: 36.058200 ms] 
+Updating Assets/VitDeck/AssetGuardian/GUI/Notificator.cs - GUID: 79fecabf72064e44aaf9fefdf052a175...
+ done. [Time: 34.444200 ms] 
+Updating Assets/VitDeck/AssetGuardian/EditorEventHooks/EditorDelayedAction.cs - GUID: 80b52708fc4f5434b9ef312c1b79c23d...
+ done. [Time: 25.523200 ms] 
+Updating Assets/VitDeck/Main/GUI/InfoWindow.cs - GUID: 815972ddc3bd70948a1263d5cd3e044b...
+ done. [Time: 14.998200 ms] 
+Updating Assets/VitDeck/TemplateLoader/IReferenceModifier.cs - GUID: 822225f7629266746989bba44bc61ddb...
+ done. [Time: 12.683900 ms] 
+Updating Assets/VitDeck/Utilities/UserSettings.cs - GUID: 83709077c9abd5041ae517cd48be1c9f...
+ done. [Time: 14.030900 ms] 
+Updating Assets/VitDeck/TemplateLoader/VitDeckDummy.cs - GUID: 84a3024049742bf4e8af449d015248a6...
+ done. [Time: 13.621300 ms] 
+Updating Assets/VitDeck/Validator/Components/ValidationTargetFinder.cs - GUID: 8724b5dbe1aee464e916f6cee37b0c18...
+ done. [Time: 15.867400 ms] 
+Updating Assets/VitDeck/TemplateLoader/TemplateProperty.cs - GUID: 8791441c2e8fe6e4dac55f7b669808d5...
+ done. [Time: 13.615300 ms] 
+Updating Assets/VitDeck/Validator/Rules/Asset/A04_AssetExtentionBlacklistRule.cs - GUID: 891a8db77a1dddb45b5c832b3293ea56...
+ done. [Time: 18.989500 ms] 
+Updating Assets/VitDeck/Templates/Sample_template/SharedAssets/Support_object/NotEditableComponent.cs - GUID: 8b892c6f104b2c24c98896d5cec9aef9...
+ done. [Time: 15.200600 ms] 
+Updating Assets/VitDeck/Validator/Components/IRule.cs - GUID: 8f5823958f6133544bc6f71c7af052f0...
+ done. [Time: 14.289000 ms] 
+Updating Assets/VitDeck/AssetGuardian/LinqExtensions.cs - GUID: 93b8b1e7819b6a1439f21bb3ac20c818...
+ done. [Time: 15.332600 ms] 
+Updating Assets/VitDeck/AssetGuardian/Protector.cs - GUID: 98903bbc5876ac1469a1f939882ebdd7...
+ done. [Time: 19.008500 ms] 
+Updating Assets/VitDeck/Utilities/ProductInfo.cs - GUID: a424079e73ca2ce4e91c6c9f0d62cf81...
+ done. [Time: 13.803500 ms] 
+Updating Assets/VitDeck/Exporter/ExportResult.cs - GUID: a6b2979b491f8eb44a5433e8f81d5797...
+ done. [Time: 16.318800 ms] 
+Updating Assets/VitDeck/Exporter/ExportSetting.cs - GUID: a780f2801beb823448f3c902970fc314...
+ done. [Time: 23.945200 ms] 
+Updating Assets/VitDeck/Exporter/Exporter.cs - GUID: ada806fc6a0622743af8c574ae1ffbf3...
+ done. [Time: 19.523400 ms] 
+Updating Assets/VitDeck/Validator/Rules/Unity/U01_UnityVersionRule.cs - GUID: af0f91ea9bdc6b14c97b76abc958695b...
+ done. [Time: 30.691600 ms] 
+Updating Assets/VitDeck/Validator/Rules/Booth/B06_MissingReferenceRule.cs - GUID: b3ff40593d0d3b8419a7d5c1b73c6a9c...
+ done. [Time: 38.418000 ms] 
+Updating Assets/VitDeck/Main/PackageDownloader.cs - GUID: b656777d1a503bd4a9c65f224e4e8366...
+ done. [Time: 25.300700 ms] 
+Updating Assets/VitDeck/Validator/Components/FatalValidationErrorException.cs - GUID: b966bc02a75c0d6479f73aeb4a1d8c66...
+ done. [Time: 25.764700 ms] 
+Updating Assets/VitDeck/TemplateLoader/AnimationClipReferenceModifier.cs - GUID: bf5c2a145ae2e9348ba59adc09545fe8...
+ done. [Time: 22.903700 ms] 
+Updating Assets/VitDeck/TemplateLoader/TemplateLoader.cs - GUID: c2a17aad758a2ed4e81dd4b45df6db6f...
+ done. [Time: 20.451800 ms] 
+Updating Assets/VitDeck/Validator/Components/ValidationTarget.cs - GUID: ca42b8add57cb6e40bc46b51d84a6837...
+ done. [Time: 15.563800 ms] 
+Updating Assets/VitDeck/Main/UpdateCheck.cs - GUID: d49736b0978fd0b47b050a54c6444d04...
+ done. [Time: 14.541500 ms] 
+Updating Assets/VitDeck/AssetGuardian/EditorEventHooks/UnityAssetDuplicationEvent.cs - GUID: d99c652b31b252a479f708431fb5c6b4...
+ done. [Time: 18.766200 ms] 
+Updating Assets/VitDeck/TemplateLoader/ReplacementDefinition.cs - GUID: db507e0454c38da45b4dd6892a6753a6...
+ done. [Time: 15.970200 ms] 
+Updating Assets/VitDeck/TemplateLoader/GuidReferenceModifier.cs - GUID: e9a3f6655dcd5044e95a94b8370dc7d7...
+ done. [Time: 16.812000 ms] 
+Updating Assets/VitDeck/Validator/Rules/Booth/ComponentReference.cs - GUID: ebc4c5559e7406e4e9d8a497f5bffd71...
+ done. [Time: 17.237800 ms] 
+Updating Assets/VitDeck/AssetGuardian/EditorEventHooks/UnityAssetModificationEvent.cs - GUID: ed11a5d849deb5f4f862c81f7f0ae1e3...
+ done. [Time: 16.030300 ms] 
+Updating Assets/VitDeck/AssetGuardian/EditorEventHooks/UnityAssetPostProcessEvent.cs - GUID: edcba6ca642891b4baec5157e7ab3b45...
+ done. [Time: 14.252400 ms] 
+Updating Assets/VitDeck/Validator/Rules/Sample/SampleRuleSet.cs - GUID: f331eff3d9a13494484ef0725f5cdf00...
+ done. [Time: 16.864200 ms] 
+Updating Assets/VitDeck/Organizer/Exporter/ExportSettingCreateAssetMenu.cs - GUID: f7c8c6c89ea9f5748be371dbd2d6fabc...
+ done. [Time: 15.150400 ms] 
+Updating Assets/VitDeck/Organizer/TemplateLoader/VitDeckDummyCreateAssetMenu.cs - GUID: f9bb28f6b0e4a6e459ffe881bf410463...
+ done. [Time: 14.435700 ms] 
+Updating Assets/VitDeck/Validator/Rules/Asset/A02_AssetGuidBlacklistRule.cs - GUID: ff86afac766b83d4bab9fb6b283591f0...
+ done. [Time: 14.380600 ms] 
+- Starting compile Library/ScriptAssemblies/VitDeck.Utilities.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Validator.Components.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Utilities.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.TemplateLoader.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.AssetGuardian.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Exporter.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Validator.Components.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Validator.Rules.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Validator.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Exporter.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Organizer.Exporter.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.TemplateLoader.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Validator.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Main.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.TemplateLoader.GUI.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Organizer.TemplateLoader.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.AssetGuardian.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Organizer.AssetGuardian.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Validator.Rules.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Main.ValidatedExporter.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Organizer.Exporter.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Validator.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Organizer.TemplateLoader.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.AssetGuardian.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Main.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Main.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.TemplateLoader.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Organizer.AssetGuardian.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Main.ValidatedExporter.dll
+- Starting compile Library/ScriptAssemblies/VitDeck.Main.ValidatedExporter.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.AssetGuardian.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Validator.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Main.GUI.dll
+- Finished compile Library/ScriptAssemblies/VitDeck.Main.ValidatedExporter.GUI.dll
+- Starting compile Library/ScriptAssemblies/Assembly-CSharp.dll
+- Finished compile Library/ScriptAssemblies/Assembly-CSharp.dll
+Symbols will be read from Temp\Assembly-CSharp.dll.mdb
+Script Module: Assembly-CSharp.dll
+Pass: 0 took 8 milliseconds
+Pass: 1 took 3 milliseconds
+Reloading assemblies after script compilation.
+Begin MonoManager ReloadAssembly
+Initializing Unity.PackageManager (PackageManager) v2017.4.28 for Unity v2017.4.28f1
+Registering platform support modules:
+Registered platform support modules in: 0.0620596s.
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 0.67 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.844 seconds
+Platform modules already initialized, skipping
+ -- No matching cache server file found on server 'Packages/com.unity.standardevents/Documentation/standardevents.md' (GUID: 66a3bec422582c04e943c7979340684e HASH: cd2a66d5f28f70115c780c31659c7bbe)
+ -- No matching cache server file found on server 'Packages/com.unity.analytics/Documentation/analytics.md' (GUID: 68f1302b891e64b4bba64d309c880b14 HASH: 3db525806ca4b0ff0e357a79caf10c7b)
+Updating Assets/VitDeck/Templates/Sample_template/SharedAssets/NewSurfaceShader.shader - GUID: 4046b15c4d594c145b559bddc1257413...
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+ done. [Time: 498.234500 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Android/libAudioPluginOculusSpatializer.so - GUID: 0d3bb855445e36e479c85976fc88383a...
+ done. [Time: 14.186100 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Win/OVRPlugin.dll - GUID: 21eff446d50eaf44a85985cd4c0b6fa1...
+ done. [Time: 14.594400 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Win64/AudioPluginOculusSpatializer.dll - GUID: 2682a692a2be7e14e901a738c7806da0...
+ done. [Time: 13.843900 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/WindowsStoreApps/uap_x86/AudioPluginMsHRTF.dll - GUID: 2fe3476eabbbb6c448e6b55a2cc471f5...
+ done. [Time: 14.335100 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Win64/openvr_api.dll - GUID: 328cc881519068e4eb7db4bb907ad2d9...
+ done. [Time: 14.888100 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Android/gvr.aar - GUID: 38c8faf1788024c02930a0c68a6e0edc...
+ done. [Time: 12.964500 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/WindowsStoreApps/uap_x64/AudioPluginMsHRTF.dll - GUID: 49f5766d0d4954f44b85d4bbd7131677...
+ done. [Time: 14.121100 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Android/OVRPlugin.aar - GUID: 517af1b5b81b93b43b9745d58f017562...
+ done. [Time: 13.686700 ms] 
+Updating Packages/com.unity.standardevents/Documentation/standardevents.md - GUID: 66a3bec422582c04e943c7979340684e...
+ [CommitTime: 0.762700 ms]  done. [Time: 12.893200 ms]  (Uploaded to cache server.)
+Updating Packages/com.unity.analytics/Documentation/analytics.md - GUID: 68f1302b891e64b4bba64d309c880b14...
+ [CommitTime: 0.483300 ms]  done. [Time: 15.074900 ms]  (Uploaded to cache server.)
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/WindowsStoreApps/uap_arm/AudioPluginMsHRTF.dll - GUID: 6981461fe431401459211818212a29cf...
+ done. [Time: 16.127900 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Tango/Android/unitygar.aar - GUID: 75799de484ac4f4cadc268d2cbea830a...
+ done. [Time: 23.215500 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Win64/AudioPluginMsHRTF.dll - GUID: 84ca94c19f25ae14d83aa41bb3654390...
+ done. [Time: 17.114400 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Win/AudioPluginOculusSpatializer.dll - GUID: 8e7066e382b0fc749b25dbb1a3004dfe...
+ done. [Time: 52.674700 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Linux64/libopenvr_api.so - GUID: 9078b7128e594410d9b89e5b24cffd01...
+ done. [Time: 40.067600 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Android/libprotobuf-java-nano.jar - GUID: b2b693dffac3a4433b3114fea0b7fd4e...
+ done. [Time: 34.028300 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Win64/OVRPlugin.dll - GUID: b2bead50dbf86924f8e51f03ddbebf70...
+ done. [Time: 22.247700 ms] 
+Updating Packages/com.unity.ads/Editor/Resources/Android/builds/unity-ads.aar - GUID: b32abd1c9d73a4cce8389f084ac12b11...
+ done. [Time: 23.517000 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Win/AudioPluginMsHRTF.dll - GUID: d05b96cee66e14240838de167097537a...
+ done. [Time: 21.787000 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Win/openvr_api.dll - GUID: d91035c548f23744c9bfb107348ed1c0...
+ done. [Time: 17.736100 ms] 
+Updating C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Android/unitygvr.aar - GUID: e1007cd261c84053beb0c3537782908d...
+ done. [Time: 21.409000 ms] 
+Invalid AssetDatabase path: C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Android/gvr.aar. Use path relative to the project folder.
+UnityEditor.AssetDatabase:LoadAssetAtPath(String, Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath(String) (at C:\buildslave\unity\build\artifacts\generated\common\editor\AssetDatabaseBindings.gen.cs:251)
+VitDeck.AssetGuardian.<LoadAssetFromPath>c__Iterator0`1:MoveNext() (at Assets\VitDeck\AssetGuardian\LinqExtensions.cs:16)
+VitDeck.AssetGuardian.Protector:OnAssetsImported(String[]) (at Assets\VitDeck\AssetGuardian\Protector.cs:80)
+VitDeck.AssetGuardian.UnityAssetPostProcessEvent:OnPostprocessAllAssets(String[], String[], String[], String[]) (at Assets\VitDeck\AssetGuardian\EditorEventHooks\UnityAssetPostProcessEvent.cs:23)
+System.Reflection.MonoMethod:InternalInvoke(Object, Object[], Exception&)
+System.Reflection.MonoMethod:Invoke(Object, BindingFlags, Binder, Object[], CultureInfo) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:222)
+System.Reflection.MethodBase:Invoke(Object, Object[]) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MethodBase.cs:115)
+UnityEditor.AssetPostprocessingInternal:PostprocessAllAssets(String[], String[], String[], String[], String[]) (at C:\buildslave\unity\build\Editor\Mono\AssetPostprocessor.cs:27)
+
+[C:\buildslave\unity\build\artifacts/generated/common/editor/AssetDatabaseBindings.gen.cpp line 26] 
+(Filename: Assets/VitDeck/AssetGuardian/LinqExtensions.cs Line: 16)
+
+Invalid AssetDatabase path: C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Linux64/libopenvr_api.so. Use path relative to the project folder.
+UnityEditor.AssetDatabase:LoadAssetAtPath(String, Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath(String) (at C:\buildslave\unity\build\artifacts\generated\common\editor\AssetDatabaseBindings.gen.cs:251)
+VitDeck.AssetGuardian.<LoadAssetFromPath>c__Iterator0`1:MoveNext() (at Assets\VitDeck\AssetGuardian\LinqExtensions.cs:16)
+VitDeck.AssetGuardian.Protector:OnAssetsImported(String[]) (at Assets\VitDeck\AssetGuardian\Protector.cs:80)
+VitDeck.AssetGuardian.UnityAssetPostProcessEvent:OnPostprocessAllAssets(String[], String[], String[], String[]) (at Assets\VitDeck\AssetGuardian\EditorEventHooks\UnityAssetPostProcessEvent.cs:23)
+System.Reflection.MonoMethod:InternalInvoke(Object, Object[], Exception&)
+System.Reflection.MonoMethod:Invoke(Object, BindingFlags, Binder, Object[], CultureInfo) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:222)
+System.Reflection.MethodBase:Invoke(Object, Object[]) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MethodBase.cs:115)
+UnityEditor.AssetPostprocessingInternal:PostprocessAllAssets(String[], String[], String[], String[], String[]) (at C:\buildslave\unity\build\Editor\Mono\AssetPostprocessor.cs:27)
+
+[C:\buildslave\unity\build\artifacts/generated/common/editor/AssetDatabaseBindings.gen.cpp line 26] 
+(Filename: Assets/VitDeck/AssetGuardian/LinqExtensions.cs Line: 16)
+
+Invalid AssetDatabase path: C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Android/unitygvr.aar. Use path relative to the project folder.
+UnityEditor.AssetDatabase:LoadAssetAtPath(String, Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath(String) (at C:\buildslave\unity\build\artifacts\generated\common\editor\AssetDatabaseBindings.gen.cs:251)
+VitDeck.AssetGuardian.<LoadAssetFromPath>c__Iterator0`1:MoveNext() (at Assets\VitDeck\AssetGuardian\LinqExtensions.cs:16)
+VitDeck.AssetGuardian.Protector:OnAssetsImported(String[]) (at Assets\VitDeck\AssetGuardian\Protector.cs:80)
+VitDeck.AssetGuardian.UnityAssetPostProcessEvent:OnPostprocessAllAssets(String[], String[], String[], String[]) (at Assets\VitDeck\AssetGuardian\EditorEventHooks\UnityAssetPostProcessEvent.cs:23)
+System.Reflection.MonoMethod:InternalInvoke(Object, Object[], Exception&)
+System.Reflection.MonoMethod:Invoke(Object, BindingFlags, Binder, Object[], CultureInfo) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:222)
+System.Reflection.MethodBase:Invoke(Object, Object[]) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MethodBase.cs:115)
+UnityEditor.AssetPostprocessingInternal:PostprocessAllAssets(String[], String[], String[], String[], String[]) (at C:\buildslave\unity\build\Editor\Mono\AssetPostprocessor.cs:27)
+
+[C:\buildslave\unity\build\artifacts/generated/common/editor/AssetDatabaseBindings.gen.cpp line 26] 
+(Filename: Assets/VitDeck/AssetGuardian/LinqExtensions.cs Line: 16)
+
+Invalid AssetDatabase path: C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Tango/Android/unitygar.aar. Use path relative to the project folder.
+UnityEditor.AssetDatabase:LoadAssetAtPath(String, Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath(String) (at C:\buildslave\unity\build\artifacts\generated\common\editor\AssetDatabaseBindings.gen.cs:251)
+VitDeck.AssetGuardian.<LoadAssetFromPath>c__Iterator0`1:MoveNext() (at Assets\VitDeck\AssetGuardian\LinqExtensions.cs:16)
+VitDeck.AssetGuardian.Protector:OnAssetsImported(String[]) (at Assets\VitDeck\AssetGuardian\Protector.cs:80)
+VitDeck.AssetGuardian.UnityAssetPostProcessEvent:OnPostprocessAllAssets(String[], String[], String[], String[]) (at Assets\VitDeck\AssetGuardian\EditorEventHooks\UnityAssetPostProcessEvent.cs:23)
+System.Reflection.MonoMethod:InternalInvoke(Object, Object[], Exception&)
+System.Reflection.MonoMethod:Invoke(Object, BindingFlags, Binder, Object[], CultureInfo) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:222)
+System.Reflection.MethodBase:Invoke(Object, Object[]) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MethodBase.cs:115)
+UnityEditor.AssetPostprocessingInternal:PostprocessAllAssets(String[], String[], String[], String[], String[]) (at C:\buildslave\unity\build\Editor\Mono\AssetPostprocessor.cs:27)
+
+[C:\buildslave\unity\build\artifacts/generated/common/editor/AssetDatabaseBindings.gen.cpp line 26] 
+(Filename: Assets/VitDeck/AssetGuardian/LinqExtensions.cs Line: 16)
+
+Invalid AssetDatabase path: C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Android/libAudioPluginOculusSpatializer.so. Use path relative to the project folder.
+UnityEditor.AssetDatabase:LoadAssetAtPath(String, Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath(String) (at C:\buildslave\unity\build\artifacts\generated\common\editor\AssetDatabaseBindings.gen.cs:251)
+VitDeck.AssetGuardian.<LoadAssetFromPath>c__Iterator0`1:MoveNext() (at Assets\VitDeck\AssetGuardian\LinqExtensions.cs:16)
+VitDeck.AssetGuardian.Protector:OnAssetsImported(String[]) (at Assets\VitDeck\AssetGuardian\Protector.cs:80)
+VitDeck.AssetGuardian.UnityAssetPostProcessEvent:OnPostprocessAllAssets(String[], String[], String[], String[]) (at Assets\VitDeck\AssetGuardian\EditorEventHooks\UnityAssetPostProcessEvent.cs:23)
+System.Reflection.MonoMethod:InternalInvoke(Object, Object[], Exception&)
+System.Reflection.MonoMethod:Invoke(Object, BindingFlags, Binder, Object[], CultureInfo) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:222)
+System.Reflection.MethodBase:Invoke(Object, Object[]) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MethodBase.cs:115)
+UnityEditor.AssetPostprocessingInternal:PostprocessAllAssets(String[], String[], String[], String[], String[]) (at C:\buildslave\unity\build\Editor\Mono\AssetPostprocessor.cs:27)
+
+[C:\buildslave\unity\build\artifacts/generated/common/editor/AssetDatabaseBindings.gen.cpp line 26] 
+(Filename: Assets/VitDeck/AssetGuardian/LinqExtensions.cs Line: 16)
+
+Invalid AssetDatabase path: C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/OSXUniversal/openvr_api.bundle. Use path relative to the project folder.
+UnityEditor.AssetDatabase:LoadAssetAtPath(String, Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath(String) (at C:\buildslave\unity\build\artifacts\generated\common\editor\AssetDatabaseBindings.gen.cs:251)
+VitDeck.AssetGuardian.<LoadAssetFromPath>c__Iterator0`1:MoveNext() (at Assets\VitDeck\AssetGuardian\LinqExtensions.cs:16)
+VitDeck.AssetGuardian.Protector:OnAssetsImported(String[]) (at Assets\VitDeck\AssetGuardian\Protector.cs:80)
+VitDeck.AssetGuardian.UnityAssetPostProcessEvent:OnPostprocessAllAssets(String[], String[], String[], String[]) (at Assets\VitDeck\AssetGuardian\EditorEventHooks\UnityAssetPostProcessEvent.cs:23)
+System.Reflection.MonoMethod:InternalInvoke(Object, Object[], Exception&)
+System.Reflection.MonoMethod:Invoke(Object, BindingFlags, Binder, Object[], CultureInfo) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:222)
+System.Reflection.MethodBase:Invoke(Object, Object[]) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MethodBase.cs:115)
+UnityEditor.AssetPostprocessingInternal:PostprocessAllAssets(String[], String[], String[], String[], String[]) (at C:\buildslave\unity\build\Editor\Mono\AssetPostprocessor.cs:27)
+
+[C:\buildslave\unity\build\artifacts/generated/common/editor/AssetDatabaseBindings.gen.cpp line 26] 
+(Filename: Assets/VitDeck/AssetGuardian/LinqExtensions.cs Line: 16)
+
+Invalid AssetDatabase path: C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Android/OVRPlugin.aar. Use path relative to the project folder.
+UnityEditor.AssetDatabase:LoadAssetAtPath(String, Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath(String) (at C:\buildslave\unity\build\artifacts\generated\common\editor\AssetDatabaseBindings.gen.cs:251)
+VitDeck.AssetGuardian.<LoadAssetFromPath>c__Iterator0`1:MoveNext() (at Assets\VitDeck\AssetGuardian\LinqExtensions.cs:16)
+VitDeck.AssetGuardian.Protector:OnAssetsImported(String[]) (at Assets\VitDeck\AssetGuardian\Protector.cs:80)
+VitDeck.AssetGuardian.UnityAssetPostProcessEvent:OnPostprocessAllAssets(String[], String[], String[], String[]) (at Assets\VitDeck\AssetGuardian\EditorEventHooks\UnityAssetPostProcessEvent.cs:23)
+System.Reflection.MonoMethod:InternalInvoke(Object, Object[], Exception&)
+System.Reflection.MonoMethod:Invoke(Object, BindingFlags, Binder, Object[], CultureInfo) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:222)
+System.Reflection.MethodBase:Invoke(Object, Object[]) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MethodBase.cs:115)
+UnityEditor.AssetPostprocessingInternal:PostprocessAllAssets(String[], String[], String[], String[], String[]) (at C:\buildslave\unity\build\Editor\Mono\AssetPostprocessor.cs:27)
+
+[C:\buildslave\unity\build\artifacts/generated/common/editor/AssetDatabaseBindings.gen.cpp line 26] 
+(Filename: Assets/VitDeck/AssetGuardian/LinqExtensions.cs Line: 16)
+
+Invalid AssetDatabase path: C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/OSXUniversal/AudioPluginOculusSpatializer.bundle. Use path relative to the project folder.
+UnityEditor.AssetDatabase:LoadAssetAtPath(String, Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath(String) (at C:\buildslave\unity\build\artifacts\generated\common\editor\AssetDatabaseBindings.gen.cs:251)
+VitDeck.AssetGuardian.<LoadAssetFromPath>c__Iterator0`1:MoveNext() (at Assets\VitDeck\AssetGuardian\LinqExtensions.cs:16)
+VitDeck.AssetGuardian.Protector:OnAssetsImported(String[]) (at Assets\VitDeck\AssetGuardian\Protector.cs:80)
+VitDeck.AssetGuardian.UnityAssetPostProcessEvent:OnPostprocessAllAssets(String[], String[], String[], String[]) (at Assets\VitDeck\AssetGuardian\EditorEventHooks\UnityAssetPostProcessEvent.cs:23)
+System.Reflection.MonoMethod:InternalInvoke(Object, Object[], Exception&)
+System.Reflection.MonoMethod:Invoke(Object, BindingFlags, Binder, Object[], CultureInfo) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:222)
+System.Reflection.MethodBase:Invoke(Object, Object[]) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MethodBase.cs:115)
+UnityEditor.AssetPostprocessingInternal:PostprocessAllAssets(String[], String[], String[], String[], String[]) (at C:\buildslave\unity\build\Editor\Mono\AssetPostprocessor.cs:27)
+
+[C:\buildslave\unity\build\artifacts/generated/common/editor/AssetDatabaseBindings.gen.cpp line 26] 
+(Filename: Assets/VitDeck/AssetGuardian/LinqExtensions.cs Line: 16)
+
+Invalid AssetDatabase path: C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/OSXUniversal/OVRPlugin.bundle. Use path relative to the project folder.
+UnityEditor.AssetDatabase:LoadAssetAtPath(String, Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath(String) (at C:\buildslave\unity\build\artifacts\generated\common\editor\AssetDatabaseBindings.gen.cs:251)
+VitDeck.AssetGuardian.<LoadAssetFromPath>c__Iterator0`1:MoveNext() (at Assets\VitDeck\AssetGuardian\LinqExtensions.cs:16)
+VitDeck.AssetGuardian.Protector:OnAssetsImported(String[]) (at Assets\VitDeck\AssetGuardian\Protector.cs:80)
+VitDeck.AssetGuardian.UnityAssetPostProcessEvent:OnPostprocessAllAssets(String[], String[], String[], String[]) (at Assets\VitDeck\AssetGuardian\EditorEventHooks\UnityAssetPostProcessEvent.cs:23)
+System.Reflection.MonoMethod:InternalInvoke(Object, Object[], Exception&)
+System.Reflection.MonoMethod:Invoke(Object, BindingFlags, Binder, Object[], CultureInfo) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:222)
+System.Reflection.MethodBase:Invoke(Object, Object[]) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MethodBase.cs:115)
+UnityEditor.AssetPostprocessingInternal:PostprocessAllAssets(String[], String[], String[], String[], String[]) (at C:\buildslave\unity\build\Editor\Mono\AssetPostprocessor.cs:27)
+
+[C:\buildslave\unity\build\artifacts/generated/common/editor/AssetDatabaseBindings.gen.cpp line 26] 
+(Filename: Assets/VitDeck/AssetGuardian/LinqExtensions.cs Line: 16)
+
+Invalid AssetDatabase path: C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/VR/Android/libprotobuf-java-nano.jar. Use path relative to the project folder.
+UnityEditor.AssetDatabase:LoadAssetAtPath(String, Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath(String) (at C:\buildslave\unity\build\artifacts\generated\common\editor\AssetDatabaseBindings.gen.cs:251)
+VitDeck.AssetGuardian.<LoadAssetFromPath>c__Iterator0`1:MoveNext() (at Assets\VitDeck\AssetGuardian\LinqExtensions.cs:16)
+VitDeck.AssetGuardian.Protector:OnAssetsImported(String[]) (at Assets\VitDeck\AssetGuardian\Protector.cs:80)
+VitDeck.AssetGuardian.UnityAssetPostProcessEvent:OnPostprocessAllAssets(String[], String[], String[], String[]) (at Assets\VitDeck\AssetGuardian\EditorEventHooks\UnityAssetPostProcessEvent.cs:23)
+System.Reflection.MonoMethod:InternalInvoke(Object, Object[], Exception&)
+System.Reflection.MonoMethod:Invoke(Object, BindingFlags, Binder, Object[], CultureInfo) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:222)
+System.Reflection.MethodBase:Invoke(Object, Object[]) (at /Users/builduser/buildslave/mono/build/mcs/class/corlib/System.Reflection/MethodBase.cs:115)
+UnityEditor.AssetPostprocessingInternal:PostprocessAllAssets(String[], String[], String[], String[], String[]) (at C:\buildslave\unity\build\Editor\Mono\AssetPostprocessor.cs:27)
+
+[C:\buildslave\unity\build\artifacts/generated/common/editor/AssetDatabaseBindings.gen.cpp line 26] 
+(Filename: Assets/VitDeck/AssetGuardian/LinqExtensions.cs Line: 16)
+
+Unloading 191 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 44.6 MB.
+System memory in use after: 44.2 MB.
+
+Unloading 264 unused Assets to reduce memory usage. Loaded Objects now: 706.
+Total: 1.683100 ms (FindLiveObjects: 0.190200 ms CreateObjectMapping: 0.022700 ms MarkObjects: 1.024500 ms  DeleteObjects: 0.442700 ms)
+
+Disconnect from CacheServer
+Refreshing native plugins compatible for Editor in 23.30 ms, found 4 plugins.
+Preloading 2 native plugins for Editor in 2.13 ms.
+
+----- Total AssetImport time: 15.595311s, AssetImport time: 14.361924s, Asset hashing: 0.322740s [38.3 MB, 118.668678 mb/s]
+----- Cache Server detail: CacheServerIntegrate time: 0.055185s, CacheServer download: 0.316907s [16.5 MB, 52.067066 mb/s]
+----- Cache Server detail: Total assets requested: 282, Cached Assets: 39, Not available: 2, Not supported: 241.
+----- Cache Server detail: CacheMove: 0.046209s, CacheDelete: 0.000000s.
+
+Refresh: detecting if any assets need to be imported or removed ... Refresh: elapses 0.006360 seconds (Nothing changed)
+Determining assets that need to be reimported for target platform ... Connect to CacheServer localhost:52392
+Disconnect from CacheServer
+0.079390 seconds.
+
+Hashing assets ... 0.000 seconds
+  file open: 0.000 seconds (0 files)
+  file read: 0.000 seconds (0.000 MB)
+  hash: 0.000 seconds
+
+Hashing assets ... 0.001 seconds
+  file open: 0.000 seconds (6 files)
+  file read: 0.000 seconds (0.023 MB)
+  hash: 0.000 seconds
+Connect to CacheServer localhost:52392
+Disconnect from CacheServer
+Refreshing native plugins compatible for Editor in 0.47 ms, found 4 plugins.
+Preloading 2 native plugins for Editor in 0.25 ms.
+
+----- Total AssetImport time: 0.173377s, AssetImport time: 0.032785s, Asset hashing: 0.001299s [23.1 KB, 17.361557 mb/s]
+----- Cache Server detail: CacheServerIntegrate time: 0.004332s, CacheServer download: 0.027523s [211.6 KB, 7.508929 mb/s]
+----- Cache Server detail: Total assets requested: 3, Cached Assets: 3, Not available: 0, Not supported: 0.
+----- Cache Server detail: CacheMove: 0.003614s, CacheDelete: 0.000000s.
+
+Warming cache for 283 main assets: 0.000406 seconds elapsed
+Initializing Unity extensions:
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Editor/UnityEditor.HoloLens.dll'  GUID: 12fd8a0055b84bb59e84c9835a37e333
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Timeline/Runtime/UnityEngine.Timeline.dll'  GUID: 6a10b2909283487f913b00d94cd3faf5
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/portable/nunit.framework.dll'  GUID: 405b9b51bb344a128608d968297df79c
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/GUISystem/Standalone/UnityEngine.UI.dll'  GUID: f70555f144d8491a825f0804e09c671c
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll'  GUID: f5f67c52d1564df4a8936ccd202a3bd8
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll'  GUID: 844f815391db42d49455cbf1a7bfc434
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Networking/Standalone/UnityEngine.Networking.dll'  GUID: dc443db3e92b4983b9738c1131f555cb
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Runtime/UnityEngine.SpatialTracking.dll'  GUID: ed7343f30e3843b3afda8f8b02669cea
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Editor/UnityEditor.GoogleAudioSpatializer.dll'  GUID: 4a3ecb1425d14502837abea459cf2b70
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll'  GUID: 5f32cd94baa94578a686d4b9d6b660f7
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Runtime/UnityEngine.HoloLens.dll'  GUID: f7b54ff4a43d4fcf81b4538b678e0bcc
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Editor/UnityEditor.SpatialTracking.dll'  GUID: b5da970776034f77a070d99423d68791
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll'  GUID: adebbd281f1a4ef3a30be7f21937e02f
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll'  GUID: 870353891bb340e2b2a9c8707e7419ba
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll'  GUID: 53ebcfaa2e1e4e2dbc85882cd5a73fa1
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll'  GUID: ead147da21254ff9a0a936bdd75e1680
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Runtime/UnityEngine.GoogleAudioSpatializer.dll'  GUID: e4f4cf1b9b434137a499903a7a1d651a
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll'  GUID: 4ba2329b63d54f0187bcaa12486b1b0f
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll'  GUID: 1c6d1fbb51834b64847b1b73a75bfc77
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll'  GUID: 3a84de5cd0624681b6b6dcd8921d912a
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll'  GUID: 80a3616ca19596e4da0f10f14d241e9f
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll'  GUID: c768acbc9cf24d398488bb4c93b91288
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/Editor/UnityEditor.TestRunner.dll'  GUID: 4113173d5e95493ab8765d7b08371de4
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll'  GUID: 4b3fa4bde7f1451a8218c03ee6a8ded8
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/UIAutomation/Editor/UnityEditor.UIAutomation.dll'  GUID: b8a0574e92bd43a59e19d6c3c6ae54c7
+ 'C:/Program Files/Unity/Hub/Editor/2017.4.28f1/Editor/Data/UnityExtensions/Unity/Timeline/Editor/UnityEditor.Timeline.dll'  GUID: 7668179ede524d6396c8b7d84461ea29
+Unloading 210 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 27.2 MB.
+System memory in use after: 27.3 MB.
+
+Unloading 164 unused Assets to reduce memory usage. Loaded Objects now: 749.
+Total: 1.168000 ms (FindLiveObjects: 0.189800 ms CreateObjectMapping: 0.016600 ms MarkObjects: 0.924100 ms  DeleteObjects: 0.036500 ms)
+
+Export package Assets\VitDeck to VitDeck-1.0.1.unitypackage
+Batchmode quit successfully invoked - shutting down!
+Refresh: detecting if any assets need to be imported or removed ... Refresh: elapses 0.006501 seconds (Nothing changed)
+Refresh: detecting if any assets need to be imported or removed ... Refresh: elapses 0.006398 seconds (Nothing changed)
+[Package Manager] Server::Kill -- Server was shutdown
+Cleanup mono
+Exiting batchmode successfully now!

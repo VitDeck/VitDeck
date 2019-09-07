@@ -1,0 +1,25 @@
+Build VitDeck release files. 
+2019/09/07 16:14:43.13 
+VERSION: 1.0.1 
+Remove Test folder 
+Success rmdir /s /q "VitDeck\Assets\VitDeck\AssetGuardian\Tests" 
+Success rmdir /s /q "VitDeck\Assets\VitDeck\Exporter\Tests" 
+Success rmdir /s /q "VitDeck\Assets\VitDeck\Main\ValidatedExporter\Tests" 
+Success rmdir /s /q "VitDeck\Assets\VitDeck\Main\Tests" 
+Success rmdir /s /q "VitDeck\Assets\VitDeck\TemplateLoader\Tests" 
+Success rmdir /s /q "VitDeck\Assets\VitDeck\Utilities\Tests" 
+Success rmdir /s /q "VitDeck\Assets\VitDeck\Validator\Tests" 
+Success rmdir /s /q "VitDeck\Assets\VitDeck\TestUtilities" 
+Delete UserSettings.asset 
+Copy documents 
+        1 個のファイルをコピーしました。
+        1 個のファイルをコピーしました。
+        1 個のファイルをコピーしました。
+        1 個のファイルをコピーしました。
+Mount 
+Export unitypackage 
+Generate json file 
+Move to Release folder 
+        1 個のファイルを移動しました。
+        1 個のファイルを移動しました。
+Unmount 
