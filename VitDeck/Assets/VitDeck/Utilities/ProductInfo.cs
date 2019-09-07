@@ -9,6 +9,6 @@ namespace VitDeck.Utilities
         [SerializeField]
         public string developerLinkTitle = "VitDeck on GitHub";
         [SerializeField]
-        public string developerLinkURL = "https://github.com/vkettools/VitDeck";
+        public string developerLinkURL = "https://github.com/vitdeck/VitDeck";
     }
 }
