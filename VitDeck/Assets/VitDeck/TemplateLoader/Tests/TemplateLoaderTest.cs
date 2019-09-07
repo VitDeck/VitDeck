@@ -72,7 +72,7 @@ namespace VitDeck.TemplateLoader.Test
             Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").templateName, Is.EqualTo("Sample Template"));
             Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").description, Is.EqualTo("This is VitDeck sample template"));
             Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").developer, Is.EqualTo("VitDeck"));
-            Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").developerUrl, Is.EqualTo("https://github.com/vkettools/VitDeck"));
+            Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").developerUrl, Is.EqualTo("https://github.com/vitdeck/VitDeck"));
             Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").lisenseFile.name, Is.EqualTo("LICENSE"));
         }
         [TearDown]

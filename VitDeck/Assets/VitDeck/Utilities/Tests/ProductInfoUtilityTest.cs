@@ -20,7 +20,7 @@ namespace VitDeck.Utilities.Tests
         public void TestGetDeveloperLinkURL()
         {
             var url = ProductInfoUtility.GetDeveloperLinkURL();
-            Assert.That(url, Is.EqualTo("https://github.com/vkettools/VitDeck"));
+            Assert.That(url, Is.EqualTo("https://github.com/vitdeck/VitDeck"));
         }
     }
 }
