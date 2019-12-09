@@ -25,7 +25,7 @@ namespace VitDeck.Validator
         {
             if (!Directory.Exists(baseFolder))
             {
-                throw new DirectoryNotFoundException("BaseDirectory is not found.");
+                throw new FatalValidationErrorException("入稿フォルダが存在しません。");
             }
 
             var exhibitorID = Path.GetFileName(baseFolder);
@@ -34,11 +34,7 @@ namespace VitDeck.Validator
             targetScene = OpenScene(targetScene);
 
             scenes = new Scene[] { targetScene };
-
-            var exhibitRootObject = targetScene
-                .GetRootGameObjects()
-                .Where(obj => obj.name == exhibitorID)
-                .Single();
+            var exhibitRootObject = GetExhibitRootObject(exhibitorID, targetScene);
 
             rootObjects = new GameObject[] { exhibitRootObject };
 
@@ -47,7 +43,7 @@ namespace VitDeck.Validator
                 .Select(tf => tf.gameObject)
                 .ToArray();
 
-            assetObjects = GetAllReferredAssets(baseFolder, allObjects);
+            assetObjects = GetContainsAndReferredAssets(baseFolder, allObjects);
 
             assetPaths = assetObjects
                 .Select(asset => AssetDatabase.GetAssetPath(asset))
@@ -56,7 +52,6 @@ namespace VitDeck.Validator
             assetGUIDs = assetPaths
                 .Select(path => AssetDatabase.AssetPathToGUID(path))
                 .ToArray();
-
 
             target = new ValidationTarget(
                 baseFolder,
@@ -70,7 +65,29 @@ namespace VitDeck.Validator
             finded = true;
         }
 
-        private static Object[] GetAllReferredAssets(string baseFolder, GameObject[] gameObjects)
+        private static GameObject GetExhibitRootObject(string exhibitorID, Scene targetScene)
+        {
+            var exhibitRootObjects = targetScene
+                .GetRootGameObjects()
+                .Where(obj => obj.name == exhibitorID)
+                .ToArray();
+
+            if(exhibitRootObjects.Length == 0)
+            {
+                throw new FatalValidationErrorException("入稿物が見つかりません。");
+
+            }
+            else if (exhibitRootObjects.Length > 1)
+            {
+                throw new FatalValidationErrorException("入稿物が複数存在します。");
+            }
+            else
+            {
+                return exhibitRootObjects[0];
+            }
+        }
+
+        private static Object[] GetContainsAndReferredAssets(string baseFolder, GameObject[] gameObjects)
         {
             var searcher = UnityObjectReferenceChain
                 .ExploreFrom(
@@ -82,14 +99,12 @@ namespace VitDeck.Validator
             return searcher.Where(obj => AssetDatabase.IsMainAsset(obj)).ToArray();
         }
 
-
-
         private static Scene GetPackageScene(string exhibitorID)
         {
             var scenePath = string.Format("Assets/{0}/{0}.unity", exhibitorID);
             if (!File.Exists(scenePath))
             {
-                throw new FileNotFoundException(string.Format("BaseScene({0})が見つかりません。", scenePath));
+                throw new FatalValidationErrorException(string.Format("入稿シーン({0})が見つかりません。", scenePath));
             }
             var targetScene = EditorSceneManager.GetSceneByPath(scenePath);
 
