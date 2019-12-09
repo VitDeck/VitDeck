@@ -1,9 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-
 namespace VitDeck.Validator
 {
+    /// <summary>
+    /// Vket4の基本ルールセット。
+    /// </summary>
+    /// <remarks>
+    /// 変数をabstractまたはvirtualプロパティで宣言し、継承先で上書きすることでワールドによる制限の違いを表現する。
+    /// </remarks>
     public abstract class Vket4RuleSetBase : IRuleSet
     {
         public abstract string RuleSetName
@@ -15,44 +17,15 @@ namespace VitDeck.Validator
 
         public IRule[] GetRules()
         {
-            return new IRule[] { new DebugEnumerateRule("Enumerate") };
-        }
-    }
+            // デフォルトで使っていたAttribute式は宣言時にconst以外のメンバーが利用できない。
+            // 継承したプロパティを参照して挙動を変えることが出来ない為、直接リストを返す方式に変更した。
 
-    public class DebugEnumerateRule : BaseRule
-    {
-        public DebugEnumerateRule(string name) : base(name)
-        {
-        }
-
-        protected override void Logic(ValidationTarget target)
-        {
-            AddIssue(new Issue(
-                null,
-                IssueLevel.Info,
-                "gameObjects = " + ArrayToString(target.GetAllObjects())
-                ));
-
-            AddIssue(new Issue(
-                null,
-                IssueLevel.Info,
-                "assets = " + ArrayToString(target.GetAllAssets())
-                ));
-        }
-
-        private string ArrayToString(object[] objects)
-        {
-            var builder = new StringBuilder();
-
-            builder.Append("{");
-            foreach (var obj in objects)
+            return new IRule[]
             {
-                builder.Append(obj.ToString());
-                builder.Append(", ");
-            }
-            builder.Append("}");
 
-            return builder.ToString();
+                new DebugTargetEnumerationRule("Debug Enumerate"),
+
+            };
         }
     }
 }
