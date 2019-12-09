@@ -25,6 +25,8 @@ namespace VitDeck.Validator
 
                 new DebugTargetEnumerationRule("Debug Enumerate"),
 
+                new UnityVersionRule("[A-1]Unity 2017.4.28f1で作成すること","2017.4.28f1"),
+
             };
         }
     }
