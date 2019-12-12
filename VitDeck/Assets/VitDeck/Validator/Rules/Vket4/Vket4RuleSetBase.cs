@@ -27,6 +27,8 @@ namespace VitDeck.Validator
 
                 new UnityVersionRule("[A-1]Unity 2017.4.28f1で作成すること","2017.4.28f1"),
 
+                new A02_VRCSDKVersionRule("[A-2]VRCSDKは提出時点の最新バージョンを使うこと", new VRCSDKVersion("2019.09.18.12.05")),
+
             };
         }
     }
