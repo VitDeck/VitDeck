@@ -27,6 +27,8 @@ namespace VitDeck.Validator
 
                 new UnityVersionRule("[A-1]Unity 2017.4.28f1で作成すること","2017.4.28f1"),
 
+                new C02_ExhibitStructureRule("[C-2]Static,Dynamicの2つのEmptyオブジェクトを作り、すべてのオブジェクトはこのどちらかの階層下に入れること"),
+
             };
         }
     }
