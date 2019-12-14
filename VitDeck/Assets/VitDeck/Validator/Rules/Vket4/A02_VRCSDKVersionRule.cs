@@ -28,7 +28,7 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(null,
                     IssueLevel.Error,
                     "VRCSDKがインポートされていません。",
-                    "公式サイトからダウンロードして下さい。",
+                    "公式サイトからダウンロードし、インポートして下さい。",
                     solutionURL: "https://www.vrchat.net/download/sdk"
                     ));
                 return;
@@ -41,7 +41,7 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(null,
                     IssueLevel.Error,
                     "VRCSDKが最新バージョンではありません。",
-                    "公式サイトからダウンロードして下さい。",
+                    "公式サイトからダウンロードし、インポートして下さい。",
                     solutionURL: "https://www.vrchat.net/download/sdk"
                     ));
             }
