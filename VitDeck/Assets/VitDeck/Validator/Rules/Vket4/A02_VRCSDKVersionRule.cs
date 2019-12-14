@@ -9,7 +9,6 @@ namespace VitDeck.Validator
 {
     public class A02_VRCSDKVersionRule : BaseRule
     {
-        const string versionFilePath = "Assets/VRCSDK/version.txt";
         const string versionFileGUID = "fd020b1f1669bad4199457b1a193a93a";
 
         const string sdkDownloadURL = "https://www.vrchat.net/download/sdk";
