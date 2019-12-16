@@ -29,6 +29,9 @@ namespace VitDeck.Validator
 
                 new A02_VRCSDKVersionRule("[A-2]VRCSDKは提出時点の最新バージョンを使うこと", new VRCSDKVersion("2019.09.18.12.05")),
 
+                new AssetPathLengthRule("[B-3]ファイルパスはAsset/から数えて184文字以内に収まっていること", 184),
+
+
             };
         }
     }
