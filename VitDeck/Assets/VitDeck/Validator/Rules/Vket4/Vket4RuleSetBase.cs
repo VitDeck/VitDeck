@@ -31,6 +31,7 @@ namespace VitDeck.Validator
 
                 new AssetPathLengthRule("[B-3]ファイルパスはAsset/から数えて184文字以内に収まっていること", 184),
 
+                new C02_StaticFlagRule("[C-2]Staticオブジェクト以下は特定のStatic設定を行うこと"),
 
             };
         }
