@@ -31,6 +31,9 @@ namespace VitDeck.Validator
 
                 new AssetPathLengthRule("[B-3]ファイルパスはAsset/から数えて184文字以内に収まっていること", 184),
 
+                new AssetExtentionBlacklistRule("[B-4]メッシュアセットのファイル形式で特定のものが含まれていないこと",
+                                                new string[]{".ma", ".mb", "max", "c4d", ".blend"}
+                ),
 
             };
         }
