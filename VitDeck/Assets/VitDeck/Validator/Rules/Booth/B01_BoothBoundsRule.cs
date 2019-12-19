@@ -10,8 +10,11 @@ namespace VitDeck.Validator
     /// </summary>
     public class BoothBoundsRule : BaseRule
     {
+        private const HideFlags DefaultFlagsForIndicator = HideFlags.DontSave | HideFlags.HideInInspector;
+
         private readonly Bounds limit;
-        private readonly string accuracy;
+        private readonly string floatToStringArgument;
+        private BoundsIndicators.ResetTokenSource indicatorResetter = null;
 
         /// <summary>
         /// コンストラクタ。
@@ -35,13 +38,14 @@ namespace VitDeck.Validator
             var limit = new Bounds(center, size);
             limit.Expand(margin);
             this.limit = limit;
-            //size, marginのうち最小の桁数が指定されたものの小数点以下の桁数+1桁の表示精度を指定
-            var settingValues = new float[] { size.x, size.y, size.z, margin };
-            var DigitsCount = settingValues.Select(val => GetDigitCountUnderPoint(val)).Max<int>();
-            accuracy = string.Format("f{0}", DigitsCount + 1);
+
+            var maxDecimalPlaces = new float[] { size.x, size.y, size.z, margin }
+                .Select(ToDecimalPlaces)
+                .Max();
+            floatToStringArgument = string.Format("f{0}", maxDecimalPlaces + 1);
         }
 
-        private int GetDigitCountUnderPoint(float val)
+        private int ToDecimalPlaces(float val)
         {
             var pointIndex = val.ToString().IndexOf(".");
             if (pointIndex == -1)
@@ -52,22 +56,72 @@ namespace VitDeck.Validator
 
         protected override void Logic(ValidationTarget target)
         {
-            var oversizes = target
-                .GetAllObjects()
-                .SelectMany(GetObjectBounds)
-                .Where(data => !LimitContains(data.bounds));
-
-            foreach (var oversize in oversizes)
+            if (indicatorResetter != null)
             {
-                var limitSize = limit.size.ToString();
-                var message = string.Format("オブジェクトがブースサイズ制限{0}の外に出ています。{4}制限={1}{4}対象={2}{4}オブジェクトの種類={3}", limitSize, limit.ToString(accuracy), oversize.bounds.ToString(accuracy), oversize.objectReference.GetType().Name, System.Environment.NewLine);
-                AddIssue(new Issue(oversize.objectReference, IssueLevel.Error, message));
+                indicatorResetter.Reset();
+            }
+            indicatorResetter = new BoundsIndicators.ResetTokenSource();
+
+            var rootObjects = target.GetRootObjects();
+
+            foreach (var rootObject in rootObjects)
+            {
+                LogicForRootObject(rootObject);
             }
         }
 
-        private bool LimitContains(Bounds bounds)
+        private void LogicForRootObject(GameObject rootObject)
         {
-            return limit.Contains(bounds.min) && limit.Contains(bounds.max);
+            var rootTransform = rootObject.transform;
+            var limitFromRoot = new Bounds(limit.center + rootTransform.position, limit.size);
+
+            var exceeds = rootObject
+                .GetComponentsInChildren<Transform>(true)
+                .Select(transform => transform.gameObject)
+                .SelectMany(GetObjectBounds)
+                .Where(data => IsExceeded(data.bounds, limitFromRoot));
+
+            var boundsIndicator = rootObject.AddComponent<BoundsIndicators.BoothRangeIndicator>();
+            boundsIndicator.hideFlags = DefaultFlagsForIndicator;
+            boundsIndicator.Initialize(limitFromRoot, indicatorResetter.Token);
+
+            foreach (var exceed in exceeds)
+            {
+                var transform = exceed.objectReference as Transform;
+                if (transform != null)
+                {
+                    var indicator = transform.gameObject.AddComponent<BoundsIndicators.TransformRangeOutIndicator>();
+                    indicator.hideFlags = DefaultFlagsForIndicator;
+                    indicator.Initialize(boundsIndicator, indicatorResetter.Token);
+                }
+
+                var renderer = exceed.objectReference as Renderer;
+                if (renderer != null)
+                {
+                    var indicator = renderer.gameObject.AddComponent<BoundsIndicators.RendererRangeOutIndicator>();
+                    indicator.hideFlags = DefaultFlagsForIndicator;
+                    indicator.Initialize(boundsIndicator, renderer, indicatorResetter.Token);
+                }
+
+                var limitSize = limit.size.ToString();
+                var message = string.Format("オブジェクトがブースサイズ制限{0}の外に出ています。\n" +
+                    "制限={1}\n" +
+                    "対象={2}\n" +
+                    "オブジェクトの種類={3}",
+                    limitSize,
+                    limit.ToString(floatToStringArgument),
+                    exceed.bounds.ToString(floatToStringArgument),
+                    exceed.objectReference.GetType().Name);
+
+                AddIssue(new Issue(exceed.objectReference, IssueLevel.Error, message));
+            }
+        }
+
+        private bool IsExceeded(Bounds bounds, Bounds limit)
+        {
+            return
+                !limit.Contains(bounds.min) ||
+                !limit.Contains(bounds.max);
         }
 
         private static IEnumerable<BoundsData> GetObjectBounds(GameObject gameObject)
