@@ -37,6 +37,8 @@ namespace VitDeck.Validator
                                                 new string[]{".ma", ".mb", "max", "c4d", ".blend"}
                 ),
 
+                new C02_ExhibitStructureRule("[C-2]Static,Dynamicの2つのEmptyオブジェクトを作り、すべてのオブジェクトはこのどちらかの階層下に入れること"),
+
                 new C02_StaticFlagRule("[C-2]Staticオブジェクト以下は特定のStatic設定を行うこと"),
 
                 new UseMeshColliderRule("[F-1]MeshCollider以外のColliderを使用すること"),
