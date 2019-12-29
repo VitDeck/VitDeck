@@ -13,5 +13,13 @@ namespace VitDeck.Validator
                 return "Vket4 - ConceptWorld";
             }
         }
+
+        protected override Vector3 BoothSizeLimit
+        {
+            get
+            {
+                return new Vector3(4, 5, 4);
+            }
+        }
     }
 }

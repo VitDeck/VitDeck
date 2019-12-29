@@ -13,5 +13,13 @@ namespace VitDeck.Validator
                 return "Vket4 - AvatarShowcase";
             }
         }
+
+        protected override Vector3 BoothSizeLimit
+        {
+            get
+            {
+                return new Vector3(2, 2.5f, 2);
+            }
+        }
     }
 }

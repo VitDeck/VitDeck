@@ -13,5 +13,13 @@ namespace VitDeck.Validator
                 return "Vket4 - DefaultCube";
             }
         }
+
+        protected override Vector3 BoothSizeLimit
+        {
+            get
+            {
+                return new Vector3(10, 10, 10);
+            }
+        }
     }
 }
