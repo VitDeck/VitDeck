@@ -11,22 +11,22 @@ namespace VitDeck.Validator.BoundsIndicators
         bool initialized = false;
 
         Renderer targetRenderer;
-        private IBoothBoundsProvider booth;
+        private IBoothRoot booth;
 
-        public void Initialize(IBoothBoundsProvider booth, Renderer targetRenderer, ResetToken token)
+        public void Initialize(IBoothRoot booth, Renderer targetRenderer, ResetToken token)
         {
-            if(booth == null)
+            if (booth == null)
             {
                 throw new System.ArgumentNullException("booth");
             }
-            if(targetRenderer == null)
+            if (targetRenderer == null)
             {
                 throw new System.ArgumentNullException("targetRenderer");
             }
 
             this.booth = booth;
             this.targetRenderer = targetRenderer;
-            if(token != null)
+            if (token != null)
             {
                 token.Reset += Token_Reset;
             }
@@ -40,7 +40,7 @@ namespace VitDeck.Validator.BoundsIndicators
 
         private void Update()
         {
-            if(!initialized)
+            if (!initialized || targetRenderer == null)
             {
                 SafeDestroy();
             }
@@ -65,7 +65,9 @@ namespace VitDeck.Validator.BoundsIndicators
                 return;
             }
 
+            booth.ClearTransformTemporarily();
             var bounds = targetRenderer.bounds;
+            booth.RestorePosition();
 
             DrawBoundsGizmos(ref bounds);
             DrawOverhangGizmos(ref bounds);
@@ -73,6 +75,7 @@ namespace VitDeck.Validator.BoundsIndicators
 
         private void DrawBoundsGizmos(ref Bounds bounds)
         {
+            Gizmos.matrix = booth.GetLocalToWorld();
             Gizmos.color = Color.green;
             Gizmos.DrawWireCube(bounds.center, bounds.size);
         }
@@ -80,6 +83,7 @@ namespace VitDeck.Validator.BoundsIndicators
         private void DrawOverhangGizmos(ref Bounds bounds)
         {
             var limit = booth.GetBounds();
+            Gizmos.matrix = booth.GetLocalToWorld();
             Gizmos.color = Color.red;
 
             if (limit.max.x < bounds.max.x)
@@ -128,7 +132,7 @@ namespace VitDeck.Validator.BoundsIndicators
                 var overedMax = overed.max;
                 overedMax.y = Mathf.Min(limit.min.y, bounds.max.y);
                 overed.max = overedMax;
-                
+
                 Gizmos.DrawCube(overed.center, overed.size);
             }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace VitDeck.Validator.BoundsIndicators
 {
     [ExecuteInEditMode]
-    public class BoothRangeIndicator : MonoBehaviour, IBoothBoundsProvider
+    public class BoothRangeIndicator : MonoBehaviour, IBoothRoot
     {
         [System.NonSerialized]
         bool initialized = false;
@@ -56,14 +56,41 @@ namespace VitDeck.Validator.BoundsIndicators
         {
             var activeBounds = GetActiveBounds();
             Gizmos.color = Color.green;
+            Gizmos.matrix = GetLocalToWorld();
             Gizmos.DrawWireCube(activeBounds.center, activeBounds.size);
         }
 
         Bounds GetActiveBounds()
         {
-            var activeBounds = bounds;
-            activeBounds.center = activeBounds.center + transform.position;
-            return activeBounds;
+            //var activeBounds = bounds;
+            //activeBounds.center = activeBounds.center + transform.position;
+            return bounds;
+        }
+
+        public Matrix4x4 GetWorldToLocal()
+        {
+            return transform.worldToLocalMatrix;
+        }
+
+        public Matrix4x4 GetLocalToWorld()
+        {
+            return transform.localToWorldMatrix;
+        }
+
+        private TransformMemory memory = null;
+
+        public void ClearTransformTemporarily()
+        {
+            if (memory == null)
+            {
+                memory = TransformMemory.SaveAndReset(transform);
+            }
+        }
+
+        public void RestorePosition()
+        {
+            memory.Apply(transform);
+            memory = null;
         }
     }
 }

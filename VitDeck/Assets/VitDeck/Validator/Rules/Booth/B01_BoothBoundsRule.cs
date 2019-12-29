@@ -73,6 +73,9 @@ namespace VitDeck.Validator
         private void LogicForRootObject(GameObject rootObject)
         {
             var rootTransform = rootObject.transform;
+
+            var rootTransformMemory = BoundsIndicators.TransformMemory.SaveAndReset(rootTransform);
+
             var limitFromRoot = new Bounds(limit.center + rootTransform.position, limit.size);
 
             var exceeds = rootObject
@@ -115,6 +118,8 @@ namespace VitDeck.Validator
 
                 AddIssue(new Issue(exceed.objectReference, IssueLevel.Error, message));
             }
+
+            rootTransformMemory.Apply(rootTransform);
         }
 
         private bool IsExceeded(Bounds bounds, Bounds limit)

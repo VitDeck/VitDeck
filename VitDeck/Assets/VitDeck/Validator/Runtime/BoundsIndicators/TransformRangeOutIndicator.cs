@@ -10,9 +10,9 @@ namespace VitDeck.Validator.BoundsIndicators
         [System.NonSerialized]
         private bool initialized = false;
 
-        private IBoothBoundsProvider booth;
+        private IBoothRoot booth;
 
-        public void Initialize(IBoothBoundsProvider booth, ResetToken token)
+        public void Initialize(IBoothRoot booth, ResetToken token)
         {
             if (booth == null)
             {
@@ -20,7 +20,7 @@ namespace VitDeck.Validator.BoundsIndicators
             }
 
             this.booth = booth;
-            if(token != null)
+            if (token != null)
             {
                 token.Reset += Token_Reset;
             }
@@ -60,13 +60,13 @@ namespace VitDeck.Validator.BoundsIndicators
             }
 
             var limit = booth.GetBounds();
-            if (limit.Contains(transform.position))
+            var localPosition = booth.GetWorldToLocal().MultiplyPoint3x4(transform.position);
+            if (limit.Contains(localPosition))
             {
                 return;
             }
 
             Gizmos.color = Color.red;
-
             Gizmos.DrawSphere(transform.position, 0.1f);
         }
     }
