@@ -10,7 +10,7 @@ namespace VitDeck.Validator.Test
     public class TestResetTokenSource
     {
         [Test]
-        private void Test()
+        public void Test()
         {
             var tokenSource = new ResetTokenSource();
 
