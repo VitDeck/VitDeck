@@ -21,7 +21,7 @@ namespace VitDeck.Language
 
             var keyColumn = new MultiColumnHeaderState.Column()
             {
-                headerContent = new GUIContent("Key"),
+                headerContent = new GUIContent("MessageID"),
                 headerTextAlignment = TextAlignment.Center,
                 canSort = false,
                 width = 100,
@@ -32,7 +32,7 @@ namespace VitDeck.Language
 
             var valueColumn = new MultiColumnHeaderState.Column()
             {
-                headerContent = new GUIContent("Value"),
+                headerContent = new GUIContent("Text"),
                 headerTextAlignment = TextAlignment.Center,
                 canSort = false,
                 width = 150,
