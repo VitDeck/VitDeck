@@ -5,7 +5,7 @@ using UnityEngine.TestTools;
 
 namespace VitDeck.Validator.Test
 {
-    public class TestVRCTriggerLimitRule
+    public class TestVRCTriggerCountLimitRule
     {
         [Test]
         public void TestValidate()
