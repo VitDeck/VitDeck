@@ -1,0 +1,74 @@
+using NUnit.Framework;
+using System.Text.RegularExpressions;
+using UnityEngine;
+using UnityEngine.TestTools;
+using VRCSDK2;
+
+namespace VitDeck.Validator.Test
+{
+    public class TestVRCTriggerConfigRule
+    {
+        [Test]
+        public void TestValidateError()
+        {
+            var rule = new VRCTriggerConfigRule(
+                            "VRC_Triggerコンポーネントの設定を検証するルール",
+                            new VRC_EventHandler.VrcBroadcastType []{
+                                VRC_EventHandler.VrcBroadcastType.Local },
+                            new VRC_Trigger.TriggerType[] {
+                                VRC_Trigger.TriggerType.Custom,
+                                VRC_Trigger.TriggerType.OnInteract,
+                                VRC_Trigger.TriggerType.OnEnterTrigger,
+                                VRC_Trigger.TriggerType.OnExitTrigger,
+                                VRC_Trigger.TriggerType.OnPickup,
+                                VRC_Trigger.TriggerType.OnDrop,
+                                VRC_Trigger.TriggerType.OnPickupUseDown,
+                                VRC_Trigger.TriggerType.OnPickupUseUp   },
+                            new VRC_EventHandler.VrcEventType[] {
+                                VRC_EventHandler.VrcEventType.ActivateCustomTrigger,
+                                VRC_EventHandler.VrcEventType.AudioTrigger,
+                                VRC_EventHandler.VrcEventType.PlayAnimation,
+                                VRC_EventHandler.VrcEventType.SetComponentActive,
+                                VRC_EventHandler.VrcEventType.SetGameObjectActive,
+                                VRC_EventHandler.VrcEventType.AnimationBool,
+                                VRC_EventHandler.VrcEventType.AnimationFloat,
+                                VRC_EventHandler.VrcEventType.AnimationInt,
+                                VRC_EventHandler.VrcEventType.AnimationIntAdd,
+                                VRC_EventHandler.VrcEventType.AnimationIntDivide,
+                                VRC_EventHandler.VrcEventType.AnimationIntMultiply,
+                                VRC_EventHandler.VrcEventType.AnimationIntSubtract,
+                                VRC_EventHandler.VrcEventType.AnimationTrigger});
+            var finder = new ValidationTargetFinder();
+            var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/F01_VRCTriggerConfigRule", true);
+            var result = rule.Validate(target);
+            Assert.That(result.RuleName,Is.EqualTo("VRC_Triggerコンポーネントの設定を検証するルール"));
+            Assert.That(result.Issues.Count, Is.EqualTo(7));
+
+            Assert.That(result.Issues[0].level, Is.EqualTo(IssueLevel.Error));
+            Assert.That(result.Issues[0].message, Is.EqualTo(string.Format("このTriggerは使用できません。Type:{0}", VRC_Trigger.TriggerType.OnEnable.ToString())));
+            Assert.That(result.Issues[0].solution, Is.EqualTo("申請して下さい。"));
+
+            Assert.That(result.Issues[1].level, Is.EqualTo(IssueLevel.Error));
+            Assert.That(result.Issues[1].message, Is.EqualTo(string.Format("このActionは使用できません。Type:{0}", VRC_EventHandler.VrcEventType.SendRPC.ToString())));
+            Assert.That(result.Issues[1].solution, Is.EqualTo("申請して下さい。"));
+
+            Assert.That(result.Issues[2].level, Is.EqualTo(IssueLevel.Error));
+            Assert.That(result.Issues[2].message, Is.EqualTo(string.Format("このBroadcastTypeは使用できません。Type:{0}", VRC_EventHandler.VrcBroadcastType.AlwaysUnbuffered.ToString())));
+            Assert.That(result.Issues[2].solution, Is.EqualTo("申請して下さい。"));
+
+            Assert.That(result.Issues[3].level, Is.EqualTo(IssueLevel.Error));
+            Assert.That(result.Issues[3].message, Is.EqualTo(string.Format("このBroadcastTypeは使用できません。Type:{0}", VRC_EventHandler.VrcBroadcastType.Always.ToString())));
+            Assert.That(result.Issues[3].solution, Is.EqualTo("申請して下さい。"));
+            Assert.That(result.Issues[4].level, Is.EqualTo(IssueLevel.Error));
+            Assert.That(result.Issues[4].message, Is.EqualTo(string.Format("このTriggerは使用できません。Type:{0}", VRC_Trigger.TriggerType.OnTimer.ToString())));
+            Assert.That(result.Issues[4].solution, Is.EqualTo("申請して下さい。"));
+            Assert.That(result.Issues[5].level, Is.EqualTo(IssueLevel.Error));
+            Assert.That(result.Issues[5].message, Is.EqualTo(string.Format("このActionは使用できません。Type:{0}", VRC_EventHandler.VrcEventType.SpawnObject.ToString())));
+            Assert.That(result.Issues[5].solution, Is.EqualTo("申請して下さい。"));
+
+            Assert.That(result.Issues[6].level, Is.EqualTo(IssueLevel.Error));
+            Assert.That(result.Issues[6].message, Is.EqualTo(string.Format("このActionは使用できません。Type:{0}", VRC_EventHandler.VrcEventType.TeleportPlayer.ToString())));
+            Assert.That(result.Issues[6].solution, Is.EqualTo("申請して下さい。"));
+        }
+    }
+}
