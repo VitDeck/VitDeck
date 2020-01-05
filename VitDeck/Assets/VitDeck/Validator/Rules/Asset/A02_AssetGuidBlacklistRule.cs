@@ -30,7 +30,7 @@ namespace VitDeck.Validator
             {
                 var obj = AssetDatabase.LoadMainAssetAtPath(path);
                 var message = String.Format("次のアセットを入稿フォルダ内に配置することは出来ません:{0}", path);
-                var solution = "未編集編もしくは編集禁止アセットの場合は入稿フォルダ外へ移動して下さい。それ以外の場合はCtrl+Dで複製したアセットを使用してください。";
+                var solution = "未編集もしくは編集禁止アセットの場合は入稿フォルダ外へ移動して下さい。それ以外の場合はCtrl+Dで複製したアセットを使用してください。";
                 AddIssue(new Issue(obj, IssueLevel.Error, message, solution, string.Empty));
             }
         }
