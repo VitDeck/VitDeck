@@ -13,5 +13,13 @@ namespace VitDeck.Validator
                 return "Vket4 - AvatarShowcase";
             }
         }
+
+        protected override int VRCTriggerCountLimit
+        {
+            get
+            {
+                return 12;
+            }
+        }
     }
 }

@@ -42,8 +42,12 @@ namespace VitDeck.Validator
                 new C02_StaticFlagRule("[C-2]Staticオブジェクト以下は特定のStatic設定を行うこと"),
 
                 new UseMeshColliderRule("[F-1]MeshCollider以外のColliderを使用すること"),
+
+                new VRCTriggerCountLimitRule("[F-1]VRC_Triggerの使用数が制限に収まっていること", VRCTriggerCountLimit),
                 
             };
         }
+
+        protected abstract int VRCTriggerCountLimit { get; }
     }
 }
