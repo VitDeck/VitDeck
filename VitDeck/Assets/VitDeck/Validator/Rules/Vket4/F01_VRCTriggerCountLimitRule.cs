@@ -7,10 +7,10 @@ namespace VitDeck.Validator
     /// <summary>
     /// VRC_Triggerコンポーネントの数が制限を超えていることを検出するルール
     /// </summary>
-    public class VRCTriggerLimitRule : BaseRule
+    public class VRCTriggerCountLimitRule : BaseRule
     {
         private int limit;
-        public VRCTriggerLimitRule(string name, int limit) : base(name)
+        public VRCTriggerCountLimitRule(string name, int limit) : base(name)
         {
             this.limit = limit;
         }

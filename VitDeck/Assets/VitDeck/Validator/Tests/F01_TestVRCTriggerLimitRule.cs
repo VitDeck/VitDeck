@@ -12,9 +12,9 @@ namespace VitDeck.Validator.Test
         {
             var limit = 5;
 
-            var rule = new VRCTriggerLimitRule("VRC_Triggerコンポーネントの数が制限を超えていることを検出するルール", limit);
+            var rule = new VRCTriggerCountLimitRule("VRC_Triggerコンポーネントの数が制限を超えていることを検出するルール", limit);
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/F01_VRCTriggerLimitRule", true);
+            var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/F01_VRCTriggerCountLimitRule", true);
             var result = rule.Validate(target);
             Assert.That(result.RuleName,Is.EqualTo("VRC_Triggerコンポーネントの数が制限を超えていることを検出するルール"));
             Assert.That(result.Issues.Count, Is.EqualTo(0));
@@ -25,9 +25,9 @@ namespace VitDeck.Validator.Test
         {
             var limit = 3;
 
-            var rule = new VRCTriggerLimitRule("VRC_Triggerコンポーネントの数が制限を超えていることを検出するルール", limit);
+            var rule = new VRCTriggerCountLimitRule("VRC_Triggerコンポーネントの数が制限を超えていることを検出するルール", limit);
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/F01_VRCTriggerLimitRule", true);
+            var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/F01_VRCTriggerCountLimitRule", true);
             var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("VRC_Triggerコンポーネントの数が制限を超えていることを検出するルール"));
             Assert.That(result.Issues.Count, Is.EqualTo(1));
