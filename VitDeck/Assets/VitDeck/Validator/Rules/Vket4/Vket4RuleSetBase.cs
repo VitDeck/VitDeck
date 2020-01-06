@@ -1,3 +1,5 @@
+using VRCSDK2;
+
 namespace VitDeck.Validator
 {
     /// <summary>
@@ -42,6 +44,34 @@ namespace VitDeck.Validator
                 new C02_ExhibitStructureRule("[C-2]Static,Dynamicの2つのEmptyオブジェクトを作り、すべてのオブジェクトはこのどちらかの階層下に入れること"),
 
                 new C02_StaticFlagRule("[C-2]Staticオブジェクト以下は特定のStatic設定を行うこと"),
+
+                new VRCTriggerConfigRule("[F-1]配布Prefab以外のVRC_Triggerは許可された設定のみ使うこと",
+                            new VRC_EventHandler.VrcBroadcastType []{
+                                VRC_EventHandler.VrcBroadcastType.Local },
+                            new VRC_Trigger.TriggerType[] {
+                                VRC_Trigger.TriggerType.Custom,
+                                VRC_Trigger.TriggerType.OnInteract,
+                                VRC_Trigger.TriggerType.OnEnterTrigger,
+                                VRC_Trigger.TriggerType.OnExitTrigger,
+                                VRC_Trigger.TriggerType.OnPickup,
+                                VRC_Trigger.TriggerType.OnDrop,
+                                VRC_Trigger.TriggerType.OnPickupUseDown,
+                                VRC_Trigger.TriggerType.OnPickupUseUp   },
+                            new VRC_EventHandler.VrcEventType[] {
+                                VRC_EventHandler.VrcEventType.ActivateCustomTrigger,
+                                VRC_EventHandler.VrcEventType.AudioTrigger,
+                                VRC_EventHandler.VrcEventType.PlayAnimation,
+                                VRC_EventHandler.VrcEventType.SetComponentActive,
+                                VRC_EventHandler.VrcEventType.SetGameObjectActive,
+                                VRC_EventHandler.VrcEventType.AnimationBool,
+                                VRC_EventHandler.VrcEventType.AnimationFloat,
+                                VRC_EventHandler.VrcEventType.AnimationInt,
+                                VRC_EventHandler.VrcEventType.AnimationIntAdd,
+                                VRC_EventHandler.VrcEventType.AnimationIntDivide,
+                                VRC_EventHandler.VrcEventType.AnimationIntMultiply,
+                                VRC_EventHandler.VrcEventType.AnimationIntSubtract,
+                                VRC_EventHandler.VrcEventType.AnimationTrigger},
+                            Vket4OfficialAssetData.GUIDs),
 
                 new UseMeshColliderRule("[F-1]MeshCollider以外のColliderを使用すること"),
                 
