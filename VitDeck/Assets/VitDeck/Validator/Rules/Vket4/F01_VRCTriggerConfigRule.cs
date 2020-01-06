@@ -11,9 +11,10 @@ namespace VitDeck.Validator
     /// </summary>
     public class VRCTriggerConfigRule : BaseRule
     {
-        private VRC_EventHandler.VrcBroadcastType[] broadcastTypesWhitelist;
-        private VRC_Trigger.TriggerType[] triggerWhitelist;
-        private VRC_EventHandler.VrcEventType[] actionWhitelist;
+        private readonly VRC_EventHandler.VrcBroadcastType[] broadcastTypesWhitelist;
+        private readonly VRC_Trigger.TriggerType[] triggerWhitelist;
+        private readonly VRC_EventHandler.VrcEventType[] actionWhitelist;
+
         public VRCTriggerConfigRule(string name, 
             VRC_EventHandler.VrcBroadcastType[] broadcastTypesWhitelist,
             VRC_Trigger.TriggerType[] triggerWhitelist,
@@ -49,7 +50,7 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         obj, 
                         IssueLevel.Error, 
-                        string.Format("このBroadcastTypeは使用できません。Type:{0}", triggerEvent.BroadcastType.ToString()),
+                        string.Format("このBroadcastTypeは使用できません。Type:{0}", triggerEvent.BroadcastType),
                         "申請して下さい。",
                         ""));
                 }
@@ -59,7 +60,7 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         obj,
                         IssueLevel.Error,
-                        string.Format("このTriggerは使用できません。Type:{0}", triggerEvent.TriggerType.ToString()),
+                        string.Format("このTriggerは使用できません。Type:{0}", triggerEvent.TriggerType),
                         "申請して下さい。",
                         ""));
                 }
@@ -72,7 +73,7 @@ namespace VitDeck.Validator
                         AddIssue(new Issue(
                             obj,
                             IssueLevel.Error,
-                            string.Format("このActionは使用できません。Type:{0}", action.EventType.ToString()),
+                            string.Format("このActionは使用できません。Type:{0}", action.EventType),
                             "申請して下さい。",
                             ""));
                     }
