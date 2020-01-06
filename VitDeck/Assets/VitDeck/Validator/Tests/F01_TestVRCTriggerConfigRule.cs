@@ -38,39 +38,53 @@ namespace VitDeck.Validator.Test
                                 VRC_EventHandler.VrcEventType.AnimationIntMultiply,
                                 VRC_EventHandler.VrcEventType.AnimationIntSubtract,
                                 VRC_EventHandler.VrcEventType.AnimationTrigger},
-                            new string[] { });
+                            new string[] {
+                                "0f0f1424d69ba1f4bb125329dde4d15f",
+                                "6584b33cb63ec934495c6115c2686f2a" });
 
             var finder = new ValidationTargetFinder();
             var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/F01_VRCTriggerConfigRule", true);
             var result = rule.Validate(target);
             Assert.That(result.RuleName,Is.EqualTo("VRC_Triggerコンポーネントの設定を検証するルール"));
-            Assert.That(result.Issues.Count, Is.EqualTo(7));
+            Assert.That(result.Issues.Count, Is.EqualTo(8));
 
+            Assert.That(result.Issues[0].target.name, Is.EqualTo("Cube (13)"));
             Assert.That(result.Issues[0].level, Is.EqualTo(IssueLevel.Error));
             Assert.That(result.Issues[0].message, Is.EqualTo(string.Format("このTriggerは使用できません。Type:{0}", "OnEnable")));
             Assert.That(result.Issues[0].solution, Is.EqualTo("申請して下さい。"));
 
+            Assert.That(result.Issues[1].target.name, Is.EqualTo("Cube (14)"));
             Assert.That(result.Issues[1].level, Is.EqualTo(IssueLevel.Error));
             Assert.That(result.Issues[1].message, Is.EqualTo(string.Format("このActionは使用できません。Type:{0}", "SendRPC")));
             Assert.That(result.Issues[1].solution, Is.EqualTo("申請して下さい。"));
 
+            Assert.That(result.Issues[2].target.name, Is.EqualTo("Cube (15)"));
             Assert.That(result.Issues[2].level, Is.EqualTo(IssueLevel.Error));
             Assert.That(result.Issues[2].message, Is.EqualTo(string.Format("このBroadcastTypeは使用できません。Type:{0}", "AlwaysUnbuffered")));
             Assert.That(result.Issues[2].solution, Is.EqualTo("申請して下さい。"));
 
+            Assert.That(result.Issues[3].target.name, Is.EqualTo("Cube (16)"));
             Assert.That(result.Issues[3].level, Is.EqualTo(IssueLevel.Error));
             Assert.That(result.Issues[3].message, Is.EqualTo(string.Format("このBroadcastTypeは使用できません。Type:{0}", "Always")));
             Assert.That(result.Issues[3].solution, Is.EqualTo("申請して下さい。"));
+            Assert.That(result.Issues[4].target.name, Is.EqualTo("Cube (16)"));
             Assert.That(result.Issues[4].level, Is.EqualTo(IssueLevel.Error));
             Assert.That(result.Issues[4].message, Is.EqualTo(string.Format("このTriggerは使用できません。Type:{0}", "OnTimer")));
             Assert.That(result.Issues[4].solution, Is.EqualTo("申請して下さい。"));
+            Assert.That(result.Issues[5].target.name, Is.EqualTo("Cube (16)"));
             Assert.That(result.Issues[5].level, Is.EqualTo(IssueLevel.Error));
             Assert.That(result.Issues[5].message, Is.EqualTo(string.Format("このActionは使用できません。Type:{0}", "SpawnObject")));
             Assert.That(result.Issues[5].solution, Is.EqualTo("申請して下さい。"));
 
+            Assert.That(result.Issues[6].target.name, Is.EqualTo("Cube (17)"));
             Assert.That(result.Issues[6].level, Is.EqualTo(IssueLevel.Error));
             Assert.That(result.Issues[6].message, Is.EqualTo(string.Format("このActionは使用できません。Type:{0}", "TeleportPlayer")));
             Assert.That(result.Issues[6].solution, Is.EqualTo("申請して下さい。"));
+
+            Assert.That(result.Issues[7].target.name, Is.EqualTo("Cube (20)"));
+            Assert.That(result.Issues[7].level, Is.EqualTo(IssueLevel.Error));
+            Assert.That(result.Issues[7].message, Is.EqualTo(string.Format("このActionは使用できません。Type:{0}", "SetVelocity")));
+            Assert.That(result.Issues[7].solution, Is.EqualTo("申請して下さい。"));
         }
     }
 }
