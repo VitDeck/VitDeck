@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace VitDeck.Validator
 {
     /// <summary>
@@ -43,9 +45,17 @@ namespace VitDeck.Validator
 
                 new C02_StaticFlagRule("[C-2]Staticオブジェクト以下は特定のStatic設定を行うこと"),
 
+                new D04_AssetTypeLimitRule(
+                    string.Format("[D-4]Material使用数が{0}個以下であること", MaterialUsesLimit),
+                    typeof(Material),
+                    MaterialUsesLimit,
+                    Vket4OfficialAssetData.MaterialGUIDs),
+
                 new UseMeshColliderRule("[F-1]MeshCollider以外のColliderを使用すること"),
                 
             };
         }
+
+        protected abstract int MaterialUsesLimit { get; }
     }
 }
