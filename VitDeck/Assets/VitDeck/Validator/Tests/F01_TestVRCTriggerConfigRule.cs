@@ -37,7 +37,9 @@ namespace VitDeck.Validator.Test
                                 VRC_EventHandler.VrcEventType.AnimationIntDivide,
                                 VRC_EventHandler.VrcEventType.AnimationIntMultiply,
                                 VRC_EventHandler.VrcEventType.AnimationIntSubtract,
-                                VRC_EventHandler.VrcEventType.AnimationTrigger});
+                                VRC_EventHandler.VrcEventType.AnimationTrigger},
+                            new string[] { });
+
             var finder = new ValidationTargetFinder();
             var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/F01_VRCTriggerConfigRule", true);
             var result = rule.Validate(target);

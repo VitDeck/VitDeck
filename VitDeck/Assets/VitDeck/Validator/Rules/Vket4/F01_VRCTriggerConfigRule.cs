@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -14,16 +15,19 @@ namespace VitDeck.Validator
         private readonly VRC_EventHandler.VrcBroadcastType[] broadcastTypesWhitelist;
         private readonly VRC_Trigger.TriggerType[] triggerWhitelist;
         private readonly VRC_EventHandler.VrcEventType[] actionWhitelist;
+        private readonly HashSet<string> excludedAssetGUIDs;
 
         public VRCTriggerConfigRule(string name, 
             VRC_EventHandler.VrcBroadcastType[] broadcastTypesWhitelist,
             VRC_Trigger.TriggerType[] triggerWhitelist,
-            VRC_EventHandler.VrcEventType[] actionWhitelist
+            VRC_EventHandler.VrcEventType[] actionWhitelist,
+            string[] excludedAssetGUIDs
         ) : base(name)
         {
             this.broadcastTypesWhitelist = broadcastTypesWhitelist;
             this.triggerWhitelist = triggerWhitelist;
             this.actionWhitelist = actionWhitelist;
+            this.excludedAssetGUIDs = new HashSet<string>(excludedAssetGUIDs);
         }
 
         protected override void Logic(ValidationTarget target)
@@ -38,6 +42,11 @@ namespace VitDeck.Validator
 
         private void LogicForObject(GameObject obj)
         {
+            if (IsExcludedAsset(obj))
+            {
+                return;
+            }
+
             var trigger = obj.GetComponent<VRC_Trigger>();
             if (trigger == null) return;
 
@@ -79,6 +88,21 @@ namespace VitDeck.Validator
                     }
                 }
             }
+        }
+
+        private bool IsExcludedAsset(GameObject obj)
+        {
+            var prefabAsset = PrefabUtility.GetPrefabParent(obj);
+
+            if (prefabAsset == null)
+            {
+                return false;
+            }
+
+            var path = AssetDatabase.GetAssetPath(prefabAsset);
+            var guid = AssetDatabase.AssetPathToGUID(path);
+
+            return excludedAssetGUIDs.Contains(guid);
         }
     }
 }
