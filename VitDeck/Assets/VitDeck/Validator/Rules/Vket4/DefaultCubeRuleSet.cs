@@ -21,5 +21,13 @@ namespace VitDeck.Validator
                 return 60;
             }
         }
+
+        protected override int AreaLightUsesLimit
+        {
+            get
+            {
+                return 3;
+            }
+        }
     }
 }
