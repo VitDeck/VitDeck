@@ -50,41 +50,41 @@ namespace VitDeck.Validator.Test
 
             Assert.That(result.Issues[0].target.name, Is.EqualTo("Cube (13)"));
             Assert.That(result.Issues[0].level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(result.Issues[0].message, Is.EqualTo(string.Format("このTriggerは使用できません。Type:{0}", "OnEnable")));
-            Assert.That(result.Issues[0].solution, Is.EqualTo("申請して下さい。"));
+            Assert.That(result.Issues[0].message, Is.EqualTo(string.Format("VRC_Triggerコンポーネントで次のTriggerは使用できません:{0}", "OnEnable")));
+            Assert.That(result.Issues[0].solution, Is.EqualTo("使用可能なTriggerに変更するか、使用申請をして下さい。"));
 
             Assert.That(result.Issues[1].target.name, Is.EqualTo("Cube (14)"));
             Assert.That(result.Issues[1].level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(result.Issues[1].message, Is.EqualTo(string.Format("このActionは使用できません。Type:{0}", "SendRPC")));
-            Assert.That(result.Issues[1].solution, Is.EqualTo("申請して下さい。"));
+            Assert.That(result.Issues[1].message, Is.EqualTo(string.Format("VRC_Triggerコンポーネントで次のActionは使用できません:{0}", "SendRPC")));
+            Assert.That(result.Issues[1].solution, Is.EqualTo("使用可能なActionに変更するか、使用申請をして下さい。"));
 
             Assert.That(result.Issues[2].target.name, Is.EqualTo("Cube (15)"));
             Assert.That(result.Issues[2].level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(result.Issues[2].message, Is.EqualTo(string.Format("このBroadcastTypeは使用できません。Type:{0}", "AlwaysUnbuffered")));
-            Assert.That(result.Issues[2].solution, Is.EqualTo("申請して下さい。"));
+            Assert.That(result.Issues[2].message, Is.EqualTo(string.Format("VRC_Triggerコンポーネントで次のBroadcastTypeは使用できません:{0}", "AlwaysUnbuffered")));
+            Assert.That(result.Issues[2].solution, Is.EqualTo("使用可能なBroadcastTypeに変更するか、使用申請をして下さい。"));
 
             Assert.That(result.Issues[3].target.name, Is.EqualTo("Cube (16)"));
             Assert.That(result.Issues[3].level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(result.Issues[3].message, Is.EqualTo(string.Format("このBroadcastTypeは使用できません。Type:{0}", "Always")));
-            Assert.That(result.Issues[3].solution, Is.EqualTo("申請して下さい。"));
+            Assert.That(result.Issues[3].message, Is.EqualTo(string.Format("VRC_Triggerコンポーネントで次のBroadcastTypeは使用できません:{0}", "Always")));
+            Assert.That(result.Issues[3].solution, Is.EqualTo("使用可能なBroadcastTypeに変更するか、使用申請をして下さい。"));
             Assert.That(result.Issues[4].target.name, Is.EqualTo("Cube (16)"));
             Assert.That(result.Issues[4].level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(result.Issues[4].message, Is.EqualTo(string.Format("このTriggerは使用できません。Type:{0}", "OnTimer")));
-            Assert.That(result.Issues[4].solution, Is.EqualTo("申請して下さい。"));
+            Assert.That(result.Issues[4].message, Is.EqualTo(string.Format("VRC_Triggerコンポーネントで次のTriggerは使用できません:{0}", "OnTimer")));
+            Assert.That(result.Issues[4].solution, Is.EqualTo("使用可能なTriggerに変更するか、使用申請をして下さい。"));
             Assert.That(result.Issues[5].target.name, Is.EqualTo("Cube (16)"));
             Assert.That(result.Issues[5].level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(result.Issues[5].message, Is.EqualTo(string.Format("このActionは使用できません。Type:{0}", "SpawnObject")));
-            Assert.That(result.Issues[5].solution, Is.EqualTo("申請して下さい。"));
+            Assert.That(result.Issues[5].message, Is.EqualTo(string.Format("VRC_Triggerコンポーネントで次のActionは使用できません:{0}", "SpawnObject")));
+            Assert.That(result.Issues[5].solution, Is.EqualTo("使用可能なActionに変更するか、使用申請をして下さい。"));
 
             Assert.That(result.Issues[6].target.name, Is.EqualTo("Cube (17)"));
             Assert.That(result.Issues[6].level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(result.Issues[6].message, Is.EqualTo(string.Format("このActionは使用できません。Type:{0}", "TeleportPlayer")));
-            Assert.That(result.Issues[6].solution, Is.EqualTo("申請して下さい。"));
+            Assert.That(result.Issues[6].message, Is.EqualTo(string.Format("VRC_Triggerコンポーネントで次のActionは使用できません:{0}", "TeleportPlayer")));
+            Assert.That(result.Issues[6].solution, Is.EqualTo("使用可能なActionに変更するか、使用申請をして下さい。"));
 
             Assert.That(result.Issues[7].target.name, Is.EqualTo("Cube (20)"));
             Assert.That(result.Issues[7].level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(result.Issues[7].message, Is.EqualTo(string.Format("このActionは使用できません。Type:{0}", "SetVelocity")));
-            Assert.That(result.Issues[7].solution, Is.EqualTo("申請して下さい。"));
+            Assert.That(result.Issues[7].message, Is.EqualTo(string.Format("VRC_Triggerコンポーネントで次のActionは使用できません:{0}", "SetVelocity")));
+            Assert.That(result.Issues[7].solution, Is.EqualTo("使用可能なActionに変更するか、使用申請をして下さい。"));
         }
     }
 }

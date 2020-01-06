@@ -59,9 +59,8 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         obj, 
                         IssueLevel.Error, 
-                        string.Format("このBroadcastTypeは使用できません。Type:{0}", triggerEvent.BroadcastType),
-                        "申請して下さい。",
-                        ""));
+                        string.Format("VRC_Triggerコンポーネントで次のBroadcastTypeは使用できません:{0}", triggerEvent.BroadcastType),
+                        "使用可能なBroadcastTypeに変更するか、使用申請をして下さい。"));
                 }
 
                 if (!triggerWhitelist.Contains(triggerEvent.TriggerType))
@@ -69,9 +68,8 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         obj,
                         IssueLevel.Error,
-                        string.Format("このTriggerは使用できません。Type:{0}", triggerEvent.TriggerType),
-                        "申請して下さい。",
-                        ""));
+                        string.Format("VRC_Triggerコンポーネントで次のTriggerは使用できません:{0}", triggerEvent.TriggerType),
+                        "使用可能なTriggerに変更するか、使用申請をして下さい。"));
                 }
 
                 var actions = triggerEvent.Events;
@@ -82,9 +80,8 @@ namespace VitDeck.Validator
                         AddIssue(new Issue(
                             obj,
                             IssueLevel.Error,
-                            string.Format("このActionは使用できません。Type:{0}", action.EventType),
-                            "申請して下さい。",
-                            ""));
+                            string.Format("VRC_Triggerコンポーネントで次のActionは使用できません:{0}", action.EventType),
+                            "使用可能なActionに変更するか、使用申請をして下さい。"));
                     }
                 }
             }
