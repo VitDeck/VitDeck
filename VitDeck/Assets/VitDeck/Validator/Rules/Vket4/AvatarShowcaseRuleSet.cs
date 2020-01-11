@@ -29,5 +29,13 @@ namespace VitDeck.Validator
                 return 0;
             }
         }
+
+        protected override ValidationLevel AdvancedObjectValidationLevel
+        {
+            get
+            {
+                return ValidationLevel.DISALLOW;
+            }
+        }
     }
 }
