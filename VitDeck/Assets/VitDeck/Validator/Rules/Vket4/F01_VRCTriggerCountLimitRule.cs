@@ -31,11 +31,14 @@ namespace VitDeck.Validator
 
             if (triggers.Length > limit)
             {
-                AddIssue(new Issue(
-                    null,
-                    IssueLevel.Error,
-                    string.Format("VRC_Triggerコンポーネントの数が使用可能な制限を超えています。制限:{0}, 使用:{1}", limit, triggers.Length),
-                    string.Format("使用するVRCコンポーネントを{0}個以下にして下さい。", limit)));
+                foreach (var trigger in triggers)
+                {
+                    AddIssue(new Issue(
+                        trigger.gameObject,
+                        IssueLevel.Error,
+                        string.Format("VRC_Triggerコンポーネントの数が{0}個を超えています。({1}個)", limit, triggers.Length),
+                        string.Format("使用個数を減らして下さい。")));
+                }
             }
         }
     }

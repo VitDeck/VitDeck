@@ -43,7 +43,7 @@ namespace VitDeck.Validator
 
                 new UseMeshColliderRule("[F-1]MeshCollider以外のColliderを使用すること"),
 
-                new VRCTriggerCountLimitRule("[F-1]VRC_Triggerの使用数が制限に収まっていること", VRCTriggerCountLimit),
+                new VRCTriggerCountLimitRule(string.Format("[F-1]VRC_Triggerの使用数が{0}個以下であること", VRCTriggerCountLimit), VRCTriggerCountLimit),
                 
             };
         }
