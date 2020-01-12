@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace VitDeck.Validator
 {
-    public class F02_AudioSourceRule : BasePrefabRule
+    public class F02_AudioSourcePrefabRule : BasePrefabRule
     {
 
         protected override string[] TargetPrefabGUIDs
@@ -19,7 +19,7 @@ namespace VitDeck.Validator
             }
         }
 
-        public F02_AudioSourceRule(string name) : base(name)
+        public F02_AudioSourcePrefabRule(string name) : base(name)
         {
         }
 

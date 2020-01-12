@@ -7,7 +7,7 @@ using VRCSDK2;
 
 namespace VitDeck.Validator
 {
-    public class F02_PickupObjectSyncRule : BasePrefabRule
+    public class F02_PickupObjectSyncPrefabRule : BasePrefabRule
     {
 
         protected override string[] TargetPrefabGUIDs
@@ -26,7 +26,7 @@ namespace VitDeck.Validator
             }
         }
 
-        public F02_PickupObjectSyncRule(string name) : base(name)
+        public F02_PickupObjectSyncPrefabRule(string name) : base(name)
         {
         }
 

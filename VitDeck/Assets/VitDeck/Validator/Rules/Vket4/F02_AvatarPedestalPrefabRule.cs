@@ -4,7 +4,7 @@ using VRCSDK2;
 
 namespace VitDeck.Validator
 {
-    public class F02_AvatarPedestalRule : BasePrefabRule
+    public class F02_AvatarPedestalPrefabRule : BasePrefabRule
     {
 
         protected override string[] TargetPrefabGUIDs
@@ -26,7 +26,7 @@ namespace VitDeck.Validator
             }
         }
 
-        public F02_AvatarPedestalRule(string name) : base(name)
+        public F02_AvatarPedestalPrefabRule(string name) : base(name)
         {
         }
 
