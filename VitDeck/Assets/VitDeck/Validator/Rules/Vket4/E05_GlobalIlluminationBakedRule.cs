@@ -19,7 +19,8 @@ namespace VitDeck.Validator
 				var isNotBaked = referenceObject
 					.GetComponents<Renderer>()
 					.Select(x => x.sharedMaterial)
-					.Where(x => x.shader.name == "Standard" && x.name != "Default-Material")
+					.Where(x => x.shader.name == "Standard")
+					.Where(x => !AssetDatabase.GetAssetPath(x).StartsWith("Resources/unity_builtin_extra"))
 					.Where(x => x.IsKeywordEnabled("_EMISSION"))
 					.Any(x => x.globalIlluminationFlags != MaterialGlobalIlluminationFlags.BakedEmissive);
 
