@@ -108,6 +108,10 @@ namespace VitDeck.Validator
                     UnityEngine.LightType.Area,
                     AreaLightUsesLimit),
 
+                new UseLightModeRule("[F-1]DefaultCubeにてPointLightで許可されていないModeを使用しないこと", UnityEngine.LightType.Point, unusablePointLightModes),
+
+                new UseLightModeRule("[F-1]DefaultCubeにてSpotLightで許可されていないModeを使用しないこと", UnityEngine.LightType.Spot, unusableSpotLightModes),
+
                 new F02_PickupObjectSyncPrefabRule("PickupObjectSyncの設定が規定に従っていること", Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs),
 
                 new F02_AvatarPedestalPrefabRule("AvatarPedestalの設定が規定に従っていること", Vket4OfficialAssetData.AvatarPedestalPrefabGUIDs),
@@ -188,6 +192,10 @@ namespace VitDeck.Validator
         protected abstract LightConfigRule.LightConfig ApprovedSpotLightConfig { get; }
 
         protected abstract LightConfigRule.LightConfig ApprovedAreaLightConfig { get; }
+
+        protected abstract LightmapBakeType[] unusablePointLightModes { get; }
+
+        protected abstract LightmapBakeType[] unusableSpotLightModes { get; }
 
         protected abstract int AreaLightUsesLimit { get; }
 

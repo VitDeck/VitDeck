@@ -81,6 +81,22 @@ namespace VitDeck.Validator
                 return 3;
             }
         }
+        
+        protected override LightmapBakeType[] unusablePointLightModes
+        {
+            get
+            {
+                return new LightmapBakeType[] { };
+            }
+        }
+
+        protected override LightmapBakeType[] unusableSpotLightModes
+        {
+            get
+            {
+                return new LightmapBakeType[] { };
+            }
+        }
 
         protected override int ChairPrefabUsesLimit
         {

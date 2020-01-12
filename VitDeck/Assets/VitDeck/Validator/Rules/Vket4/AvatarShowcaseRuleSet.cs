@@ -69,6 +69,22 @@ namespace VitDeck.Validator
             }
         }
 
+        protected override LightmapBakeType[] unusablePointLightModes
+        {
+            get
+            {
+                return new LightmapBakeType[] { };
+            }
+        }
+
+        protected override LightmapBakeType[] unusableSpotLightModes
+        {
+            get
+            {
+                return new LightmapBakeType[] { };
+            }
+        }
+
         protected override ValidationLevel AdvancedObjectValidationLevel
         {
             get
