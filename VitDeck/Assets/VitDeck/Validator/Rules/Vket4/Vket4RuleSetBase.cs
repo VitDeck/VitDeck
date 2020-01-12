@@ -53,6 +53,8 @@ namespace VitDeck.Validator
 
                 new UseMeshColliderRule("[F-1]MeshCollider以外のColliderを使用すること"),
 
+                new VRCTriggerCountLimitRule(string.Format("[F-1]VRC_Triggerの使用数が{0}個以下であること", VRCTriggerCountLimit), VRCTriggerCountLimit),
+
                 new LightCountLimitRule("[F-1]DirectionalLightを使用しないこと", UnityEngine.LightType.Directional, 0),
 
                 new LightCountLimitRule(
@@ -62,10 +64,11 @@ namespace VitDeck.Validator
 
             };
         }
-        
+
+        protected abstract int VRCTriggerCountLimit { get; }
+
         protected abstract int AreaLightUsesLimit { get; }
-        
+
         protected abstract int MaterialUsesLimit { get; }
-        
     }
 }
