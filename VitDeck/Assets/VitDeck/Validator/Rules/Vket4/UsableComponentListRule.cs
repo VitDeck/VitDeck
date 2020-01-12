@@ -54,6 +54,11 @@ namespace VitDeck.Validator
                         component is Transform)
                         continue;
 
+                    if ((component.hideFlags & HideFlags.DontSaveInEditor) == HideFlags.DontSaveInEditor)
+                    {
+                        continue;
+                    }
+
                     if (isIgnorePrefabInstance &&
                         !PrefabUtility.IsComponentAddedToPrefabInstance(component))
                     {
