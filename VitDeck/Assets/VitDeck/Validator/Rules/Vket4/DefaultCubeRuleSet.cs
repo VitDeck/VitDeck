@@ -37,5 +37,21 @@ namespace VitDeck.Validator
                 return 3;
             }
         }
+
+        protected override int ChairPrefabUsesLimit
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
+        protected override int PickupObjectSyncUsesLimit
+        {
+            get
+            {
+                return 8;
+            }
+        }
     }
 }

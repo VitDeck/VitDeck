@@ -91,6 +91,17 @@ namespace VitDeck.Validator
                     UnityEngine.LightType.Area,
                     AreaLightUsesLimit),
 
+                new F02_PrefabLimitRule(
+                    string.Format("[F-2]Chairの使用数は{0}個に収めること", ChairPrefabUsesLimit),
+                    Vket4OfficialAssetData.ChairPrefabGUIDs,
+                    ChairPrefabUsesLimit),
+
+                new F02_PrefabLimitRule(
+                    string.Format("[F-2]PickupObjectSyncの使用数は{0}個に収めること", PickupObjectSyncUsesLimit),
+                    Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs,
+                    PickupObjectSyncUsesLimit,
+                    negotiable: true),
+
             };
         }
 
@@ -99,5 +110,14 @@ namespace VitDeck.Validator
         protected abstract int AreaLightUsesLimit { get; }
 
         protected abstract int MaterialUsesLimit { get; }
+
+        protected abstract int AreaLightUsesLimit { get; }
+
+        protected abstract int MaterialUsesLimit { get; }
+
+        protected abstract int ChairPrefabUsesLimit { get; }
+
+        protected abstract int PickupObjectSyncUsesLimit { get; }
+
     }
 }
