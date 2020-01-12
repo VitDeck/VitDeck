@@ -34,27 +34,21 @@ namespace VitDeck.Validator
         {
             get
             {
-                // エラー項目がでないダミー検証
-                return new LightConfigRule.LightConfig(
-                            new[] { LightmapBakeType.Baked, LightmapBakeType.Realtime, LightmapBakeType.Mixed });
+                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
             }
         }
         protected override LightConfigRule.LightConfig ApprovedSpotLightConfig
         {
             get
             {
-                // エラー項目がでないダミー検証
-                return new LightConfigRule.LightConfig(
-                            new[] { LightmapBakeType.Baked, LightmapBakeType.Realtime, LightmapBakeType.Mixed });
+                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
             }
         }
         protected override LightConfigRule.LightConfig ApprovedAreaLightConfig
         {
             get
             {
-                // エラー項目がでないダミー検証
-                return new LightConfigRule.LightConfig(
-                            new[] { LightmapBakeType.Baked, LightmapBakeType.Realtime, LightmapBakeType.Mixed });
+                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
             }
         }
     }
