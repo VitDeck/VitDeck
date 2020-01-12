@@ -83,7 +83,7 @@ namespace VitDeck.Validator
                     light.gameObject,
                     IssueLevel.Error,
                     string.Format("{0}Lightは使用できません。", light.type),
-                    "削除するかModeを変更して他のLightを使用して下さい。"));
+                    "削除するかTypeを変更して他のLightを使用して下さい。"));
 
                 return;
             }
