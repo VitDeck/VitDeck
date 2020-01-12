@@ -13,5 +13,29 @@ namespace VitDeck.Validator
                 return "Vket4 - DefaultCube";
             }
         }
+
+        protected override int MaterialUsesLimit
+        {
+            get
+            {
+                return 60;
+            }
+        }
+
+        protected override int VRCTriggerCountLimit
+        {
+            get
+            {
+                return 25;
+            }
+        }
+
+        protected override int AreaLightUsesLimit
+        {
+            get
+            {
+                return 3;
+            }
+        }
     }
 }

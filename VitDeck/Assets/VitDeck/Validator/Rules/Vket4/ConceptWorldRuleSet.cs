@@ -13,5 +13,29 @@ namespace VitDeck.Validator
                 return "Vket4 - ConceptWorld";
             }
         }
+
+        protected override int MaterialUsesLimit
+        {
+            get
+            {
+                return 20;
+            }
+        }
+
+        protected override int VRCTriggerCountLimit
+        {
+            get
+            {
+                return 20;
+            }
+        }
+
+        protected override int AreaLightUsesLimit
+        {
+            get
+            {
+                return 3;
+            }
+        }
     }
 }
