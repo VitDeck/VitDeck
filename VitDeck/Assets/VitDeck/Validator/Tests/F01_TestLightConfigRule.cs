@@ -10,7 +10,7 @@ namespace VitDeck.Validator.Test
     {
         [TestCase(LightType.Point, new[] { LightmapBakeType.Baked, LightmapBakeType.Mixed })]
         [TestCase(LightType.Spot, new[] { LightmapBakeType.Baked, LightmapBakeType.Mixed })]
-        [TestCase(LightType.Area, new [] { LightmapBakeType.Baked })]
+        [TestCase(LightType.Area, new[] { LightmapBakeType.Baked })]
         public void TestValidate(LightType type, LightmapBakeType[] bakeTypes)
         {
             var rule = new LightConfigRule(string.Format("{0}Lightの設定が制限に従っていることを検証するルール", type), type, bakeTypes);
@@ -48,22 +48,22 @@ namespace VitDeck.Validator.Test
             Debug.Log(result.Issues[0].solution);
         }
 
-        [TestCase(LightType.Point, new [] { LightmapBakeType.Baked }, 0, 7, 0, 10, 0, 15)]
-        [TestCase(LightType.Spot, new [] { LightmapBakeType.Baked }, 0, 7, 0, 10, 0, 15)]
+        [TestCase(LightType.Point, new[] { LightmapBakeType.Baked }, 0, 7, 0, 10, 0, 15)]
+        [TestCase(LightType.Spot, new[] { LightmapBakeType.Baked }, 0, 7, 0, 10, 0, 15)]
         public void TestValidateErrorDetail(
-            LightType type, 
-            LightmapBakeType[] bakeTypes, 
-            float minRange, float maxRange, 
-            float minIntensity, float maxIntensity, 
+            LightType type,
+            LightmapBakeType[] bakeTypes,
+            float minRange, float maxRange,
+            float minIntensity, float maxIntensity,
             float minBounceIntensity, float maxBounceIntensity)
         {
-            var rule = new LightConfigRule(string.Format("{0}Lightの設定が制限に従っていることを検証するルール", type), 
+            var rule = new LightConfigRule(string.Format("{0}Lightの設定が制限に従っていることを検証するルール", type),
                     type, bakeTypes, minRange, maxRange, minIntensity, maxIntensity, minBounceIntensity, maxBounceIntensity);
             var finder = new ValidationTargetFinder();
             var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/F01_LightConfigRule", true);
             var result = rule.Validate(target);
 
-            Assert.That(result.RuleName,Is.EqualTo(string.Format("{0}Lightの設定が制限に従っていることを検証するルール", type)));
+            Assert.That(result.RuleName, Is.EqualTo(string.Format("{0}Lightの設定が制限に従っていることを検証するルール", type)));
             Debug.Log(string.Format("{0}Lightの設定が制限に従っていることを検証するルール", type));
             Assert.That(result.Issues.Count, Is.EqualTo(4));
 
@@ -72,7 +72,7 @@ namespace VitDeck.Validator.Test
             var light = obj.GetComponent<Light>();
             var bakeTypeListString = string.Join(", ", bakeTypes.Select(x => x.ToString()).ToArray());
             Assert.That(result.Issues[0].level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(result.Issues[0].message, Is.EqualTo(string.Format("{0}LightのModeが{1}以外に設定されています。({2})", 
+            Assert.That(result.Issues[0].message, Is.EqualTo(string.Format("{0}LightのModeが{1}以外に設定されています。({2})",
                                                                 type, bakeTypeListString, light.lightmapBakeType)));
             Assert.That(result.Issues[0].solution, Is.EqualTo(string.Format("Modeを{0}に設定して下さい。", bakeTypeListString)));
             Debug.Log(result.Issues[0].message);
@@ -158,6 +158,30 @@ namespace VitDeck.Validator.Test
             Assert.That(result.Issues[2].solution, Is.EqualTo("Indirect Multiplierを範囲内になるように設定して下さい。"));
             Debug.Log(result.Issues[2].message);
             Debug.Log(result.Issues[2].solution);
+        }
+
+        [Test]
+        public void TestValidateErrorUnavailable()
+        {
+            var type = LightType.Spot;
+
+            var rule = new LightConfigRule(string.Format("{0}Lightが使用されていないことを検証するルール", type), type, new LightmapBakeType[] { });
+            var finder = new ValidationTargetFinder();
+            var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/F01_LightConfigRule", true);
+            var result = rule.Validate(target);
+
+            Assert.That(result.RuleName, Is.EqualTo(string.Format("{0}Lightが使用されていないことを検証するルール", type)));
+            Debug.Log(string.Format("{0}Lightが使用されていないことを検証するルール", type));
+            Assert.That(result.Issues.Count, Is.EqualTo(2));
+
+            foreach (var issue in result.Issues)
+            {
+                Assert.That(issue.level, Is.EqualTo(IssueLevel.Error));
+                Assert.That(issue.message, Is.EqualTo(string.Format("{0}Lightは使用できません。", type)));
+                Assert.That(issue.solution, Is.EqualTo("削除するかModeを変更して他のLightを使用して下さい。"));
+                Debug.Log(issue.message);
+                Debug.Log(issue.solution);
+            }
         }
     }
 }
