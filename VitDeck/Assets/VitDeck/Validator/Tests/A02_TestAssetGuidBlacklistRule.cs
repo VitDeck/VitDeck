@@ -23,9 +23,7 @@ namespace VitDeck.Validator.Test
             Assert.That(result.Issues[0].target, Is.EqualTo(AssetDatabase.LoadMainAssetAtPath(AssetDatabase.GUIDToAssetPath("740112f6e77ca914d9c26eef5d68accd"))));
             Assert.That(result.Issues[1].target, Is.EqualTo(AssetDatabase.LoadMainAssetAtPath(AssetDatabase.GUIDToAssetPath("ae68339621fb41b4f9905188526120ea"))));
             Assert.That(result.Issues[0].level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(result.Issues[0].message, Is.EqualTo("該当するアセットが検出されました。" + Environment.NewLine + "Assets/VitDeck/Validator/Tests/Data/A02_AssetGuidBlacklistRule/Prohibited material.mat"));
-            Assert.That(result.Issues[0].solution, Is.Empty);
-            Assert.That(result.Issues[0].solutionURL, Is.Empty);
+            Assert.That(result.Issues[0].message, Does.Contain("Assets/VitDeck/Validator/Tests/Data/A02_AssetGuidBlacklistRule/Prohibited material.mat"));
         }
         [Test]
         public void TestValidateNoObject()
