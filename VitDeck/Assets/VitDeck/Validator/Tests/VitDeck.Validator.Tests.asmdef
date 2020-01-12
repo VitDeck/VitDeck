@@ -4,7 +4,8 @@
         "VitDeck.Validator",
         "VitDeck.TestUtilities",
         "VitDeck.Validator.Components",
-        "VitDeck.Validator.Rules"
+        "VitDeck.Validator.Rules",
+        "VitDeck.Validator.Runtime"
     ],
     "includePlatforms": [
         "Editor"
