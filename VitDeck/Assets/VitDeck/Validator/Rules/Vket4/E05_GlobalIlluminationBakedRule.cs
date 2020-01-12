@@ -18,15 +18,14 @@ namespace VitDeck.Validator
 			{
 				var isNotBaked = referenceObject
 					.GetComponents<Renderer>()
-					.Select(x => x.material)
+					.Select(x => x.sharedMaterial)
 					.Where(x => x.shader.name == "Standard")
 					.Where(x => x.IsKeywordEnabled("_EMISSION"))
 					.Any(x => x.globalIlluminationFlags != MaterialGlobalIlluminationFlags.BakedEmissive);
 				
 				if (isNotBaked)
 				{
-					var assetPath = AssetDatabase.GetAssetPath(referenceObject);
-                    var message = String.Format("アセット{0}でGlobal IlluminationがBakedに設定されていません。", assetPath);
+					var message = String.Format("アセット{0}でGlobal IlluminationがBakedに設定されていません。", referenceObject);
                     var solution = String.Format("Standard ShaderでEmissionを利用する場合はGlobal Illuminationの設定をBakedにしてください。");
                     AddIssue(new Issue(referenceObject, IssueLevel.Error, message, solution));
 				}		
