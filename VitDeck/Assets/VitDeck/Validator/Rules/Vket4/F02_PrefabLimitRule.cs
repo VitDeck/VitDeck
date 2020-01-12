@@ -30,7 +30,7 @@ namespace VitDeck.Validator
 
             if (objects.Length > limit)
             {
-                var message = string.Format("上限を超えています。{0}/{1}", objects.Length, limit);
+                var message = string.Format("Prefabの使用数制限（{1}個）を超えています。（{0}個）", objects.Length, limit);
                 var solution = negotiable ?
                     "申請することで上限突破が可能です。" : "";
 
