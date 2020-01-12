@@ -56,6 +56,8 @@ namespace VitDeck.Validator
                     MaterialUsesLimit,
                     Vket4OfficialAssetData.MaterialGUIDs),
 
+                new E05_GlobalIlluminationBakedRule("[E-5]StandardシェーダでEmissionを使用する場合、Global IlluminationはBakedを設定すること"),
+
                 new UsableComponentListRule("[F-1]コンポーネントの使用可否",
                     GetComponentReferences(),
                     ignorePrefabGUIDs: Vket4OfficialAssetData.GUIDs,
