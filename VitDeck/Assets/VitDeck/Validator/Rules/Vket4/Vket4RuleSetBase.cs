@@ -55,6 +55,10 @@ namespace VitDeck.Validator
 
                 new LightCountLimitRule("[F-1]DirectionalLightを使用しないこと", UnityEngine.LightType.Directional, 0),
 
+                new UseLightModeRule("[F-1]DefaultCubeにてPointLightでRealTimeModeを使用しないこと", UnityEngine.LightType.Point, unusablePointLightModes),
+
+                new UseLightModeRule("[F-1]DefaultCubeにてSpotLightでRealTimeModeを使用しないこと", UnityEngine.LightType.Spot, unusableSpotLightModes),
+
                 new LightCountLimitRule(
                     string.Format("[F-1]AreaLightの使用数が{0}個以下であること", AreaLightUsesLimit),
                     UnityEngine.LightType.Area,
@@ -66,6 +70,10 @@ namespace VitDeck.Validator
         protected abstract int AreaLightUsesLimit { get; }
         
         protected abstract int MaterialUsesLimit { get; }
-        
+
+        protected abstract LightmapBakeType[] unusablePointLightModes { get; }
+
+        protected abstract LightmapBakeType[] unusableSpotLightModes { get; }
+
     }
 }
