@@ -34,7 +34,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new LightmapBakeType[] { LightmapBakeType.Realtime };
+                return new LightmapBakeType[] { LightmapBakeType.Realtime, LightmapBakeType.Mixed };
             }
         }
 
@@ -42,7 +42,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new LightmapBakeType[] { LightmapBakeType.Realtime };
+                return new LightmapBakeType[] { LightmapBakeType.Realtime, LightmapBakeType.Mixed };
             }
         }
     }
