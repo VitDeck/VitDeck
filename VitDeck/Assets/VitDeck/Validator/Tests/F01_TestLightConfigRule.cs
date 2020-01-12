@@ -178,7 +178,7 @@ namespace VitDeck.Validator.Test
             {
                 Assert.That(issue.level, Is.EqualTo(IssueLevel.Error));
                 Assert.That(issue.message, Is.EqualTo(string.Format("{0}Lightは使用できません。", type)));
-                Assert.That(issue.solution, Is.EqualTo("削除するかModeを変更して他のLightを使用して下さい。"));
+                Assert.That(issue.solution, Is.EqualTo("削除するかTypeを変更して他のLightを使用して下さい。"));
                 Debug.Log(issue.message);
                 Debug.Log(issue.solution);
             }
