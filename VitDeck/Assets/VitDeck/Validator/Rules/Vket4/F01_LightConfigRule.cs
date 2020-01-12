@@ -77,6 +77,17 @@ namespace VitDeck.Validator
 
         private void LogicForLight(Light light)
         {
+            if (approvedLightmapBakeTypes.Length <= 0)
+            {
+                AddIssue(new Issue(
+                    light.gameObject,
+                    IssueLevel.Error,
+                    string.Format("{0}Lightは使用できません。", light.type),
+                    "削除するかModeを変更して他のLightを使用して下さい。"));
+
+                return;
+            }
+
             if (!approvedLightmapBakeTypes.Contains(light.lightmapBakeType))
             {
                 AddIssue(new Issue(
