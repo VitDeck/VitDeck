@@ -19,10 +19,10 @@ namespace VitDeck.Validator
 				var isNotBaked = referenceObject
 					.GetComponents<Renderer>()
 					.Select(x => x.sharedMaterial)
-					.Where(x => x.shader.name == "Standard")
+					.Where(x => x.shader.name == "Standard" && x.name != "Default-Material")
 					.Where(x => x.IsKeywordEnabled("_EMISSION"))
 					.Any(x => x.globalIlluminationFlags != MaterialGlobalIlluminationFlags.BakedEmissive);
-				
+
 				if (isNotBaked)
 				{
 					var message = String.Format("アセット{0}でGlobal IlluminationがBakedに設定されていません。", referenceObject);
