@@ -14,11 +14,42 @@ namespace VitDeck.Validator
             }
         }
 
+        protected override int VRCTriggerCountLimit
+        {
+            get
+            {
+                return 12;
+            }
+        }
         protected override int MaterialUsesLimit
         {
             get
             {
                 return 10;
+            }
+        }
+
+        protected override LightConfigRule.LightConfig ApprovedPointLightConfig
+        {
+            get
+            {
+                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
+            }
+        }
+
+        protected override LightConfigRule.LightConfig ApprovedSpotLightConfig
+        {
+            get
+            {
+                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
+            }
+        }
+
+        protected override LightConfigRule.LightConfig ApprovedAreaLightConfig
+        {
+            get
+            {
+                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
             }
         }
 
@@ -29,26 +60,20 @@ namespace VitDeck.Validator
                 return 0;
             }
         }
-        
-        protected override LightConfigRule.LightConfig ApprovedPointLightConfig
+
+        protected override int ChairPrefabUsesLimit
         {
             get
             {
-                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
+                return 0;
             }
         }
-        protected override LightConfigRule.LightConfig ApprovedSpotLightConfig
+
+        protected override int PickupObjectSyncUsesLimit
         {
             get
             {
-                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
-            }
-        }
-        protected override LightConfigRule.LightConfig ApprovedAreaLightConfig
-        {
-            get
-            {
-                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
+                return 3;
             }
         }
     }

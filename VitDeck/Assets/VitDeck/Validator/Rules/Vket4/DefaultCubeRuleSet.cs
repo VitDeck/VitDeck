@@ -15,19 +15,19 @@ namespace VitDeck.Validator
             }
         }
 
+        protected override int VRCTriggerCountLimit
+        {
+            get
+            {
+                return 25;
+            }
+        }
+
         protected override int MaterialUsesLimit
         {
             get
             {
                 return 60;
-            }
-        }
-
-        protected override int AreaLightUsesLimit
-        {
-            get
-            {
-                return 3;
             }
         }
 
@@ -55,6 +55,30 @@ namespace VitDeck.Validator
             {
                 return new LightConfigRule.LightConfig(
                             new[] { LightmapBakeType.Baked });
+            }
+        }
+
+        protected override int AreaLightUsesLimit
+        {
+            get
+            {
+                return 3;
+            }
+        }
+
+        protected override int ChairPrefabUsesLimit
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
+        protected override int PickupObjectSyncUsesLimit
+        {
+            get
+            {
+                return 8;
             }
         }
     }
