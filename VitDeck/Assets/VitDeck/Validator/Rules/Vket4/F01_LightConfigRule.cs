@@ -43,6 +43,22 @@ namespace VitDeck.Validator
             this.maxBounceIntensity = maxBounceIntensity;
         }
 
+        public LightConfigRule(
+            string name,
+            LightType type,
+            LightConfig approvedConfig
+        ) : base(name)
+        {
+            this.type = type;
+            this.approvedLightmapBakeTypes = approvedConfig.bakeTypes;
+            this.minRange = approvedConfig.minRange;
+            this.maxRange = approvedConfig.maxRange;
+            this.minIntensity = approvedConfig.minIntensity;
+            this.maxIntensity = approvedConfig.maxIntensity;
+            this.minBounceIntensity = approvedConfig.minBounceIntensity;
+            this.maxBounceIntensity = approvedConfig.maxBounceIntensity;
+        }
+
         protected override void Logic(ValidationTarget target)
         {
             var objs = target.GetAllObjects();
@@ -112,6 +128,32 @@ namespace VitDeck.Validator
                         string.Format("Indirect Multiplierを範囲内になるように設定して下さい。")
                         ));
                 }
+            }
+        }
+
+        public class LightConfig
+        {
+            public LightmapBakeType[] bakeTypes { get; private set; }
+            public float minRange { get; private set; }
+            public float maxRange { get; private set; }
+            public float minIntensity { get; private set; }
+            public float maxIntensity { get; private set; }
+            public float minBounceIntensity { get; private set; }
+            public float maxBounceIntensity { get; private set; }
+
+            public LightConfig(
+                LightmapBakeType[] bakeTypes,
+                float minRange = NO_LIMIT, float maxRange = NO_LIMIT, 
+                float minIntensity = NO_LIMIT, float maxIntensity = NO_LIMIT, 
+                float minBounceIntensity = NO_LIMIT, float maxBounceIntensity = NO_LIMIT)
+            {
+                this.bakeTypes = bakeTypes;
+                this.minRange = minRange;
+                this.maxRange = maxRange;
+                this.minIntensity = minIntensity;
+                this.maxIntensity = maxIntensity;
+                this.minBounceIntensity = minBounceIntensity;
+                this.maxBounceIntensity = maxBounceIntensity;
             }
         }
     }
