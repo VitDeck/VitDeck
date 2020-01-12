@@ -60,7 +60,7 @@ namespace VitDeck.Validator
                     UnityEngine.LightType.Area,
                     AreaLightUsesLimit),
 
-                new F02_VideoPlayerComponentRule("VidePlayerを使用する際は制限に従うこと"),
+                new F02_VideoPlayerComponentRule("VideoPlayerを使用する際は制限に従うこと"),
             };
         }
         
