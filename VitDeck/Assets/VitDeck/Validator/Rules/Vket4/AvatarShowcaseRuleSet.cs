@@ -22,6 +22,15 @@ namespace VitDeck.Validator
             }
         }
 
+        protected override int VRCTriggerCountLimit
+        {
+            get
+            {
+                return 12;
+            }
+        }
+        
+
         protected override int AreaLightUsesLimit
         {
             get
