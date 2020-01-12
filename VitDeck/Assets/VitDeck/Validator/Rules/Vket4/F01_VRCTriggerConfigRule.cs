@@ -42,13 +42,20 @@ namespace VitDeck.Validator
 
         private void LogicForObject(GameObject obj)
         {
-            if (IsExcludedAsset(obj))
+            var triggers = obj.GetComponents<VRC_Trigger>();
+
+            foreach (var trigger in triggers)
+            {
+                LogicForTrigger(trigger, obj);
+            }
+        }
+
+        private void LogicForTrigger(VRC_Trigger trigger, GameObject obj)
+        {
+            if (IsExcludedAsset(trigger))
             {
                 return;
             }
-
-            var trigger = obj.GetComponent<VRC_Trigger>();
-            if (trigger == null) return;
 
             var triggerEvents = trigger.Triggers;
 
@@ -87,7 +94,7 @@ namespace VitDeck.Validator
             }
         }
 
-        private bool IsExcludedAsset(GameObject obj)
+        private bool IsExcludedAsset(UnityEngine.Object obj)
         {
             var prefabAsset = PrefabUtility.GetPrefabParent(obj);
 
