@@ -135,6 +135,11 @@ namespace VitDeck.Validator
 
         };
 
+        public static string[] ChairPrefabGUIDs = new string[]
+        {
+            "331165ef1ce1fc04d926554c5ca706e9"
+        };
+
         public static string[] PickupObjectSyncPrefabGUIDs = new string[]
         {
             "2ddf6495f088e214894068e967b329a6",

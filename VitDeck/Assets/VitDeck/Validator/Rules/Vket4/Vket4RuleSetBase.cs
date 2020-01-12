@@ -1,4 +1,5 @@
 using UnityEngine;
+using VRCSDK2;
 
 namespace VitDeck.Validator
 {
@@ -51,9 +52,45 @@ namespace VitDeck.Validator
                     MaterialUsesLimit,
                     Vket4OfficialAssetData.MaterialGUIDs),
 
+                new VRCTriggerConfigRule("[F-1]配布Prefab以外のVRC_Triggerは許可された設定のみ使うこと",
+                            new VRC_EventHandler.VrcBroadcastType []{
+                                VRC_EventHandler.VrcBroadcastType.Local },
+                            new VRC_Trigger.TriggerType[] {
+                                VRC_Trigger.TriggerType.Custom,
+                                VRC_Trigger.TriggerType.OnInteract,
+                                VRC_Trigger.TriggerType.OnEnterTrigger,
+                                VRC_Trigger.TriggerType.OnExitTrigger,
+                                VRC_Trigger.TriggerType.OnPickup,
+                                VRC_Trigger.TriggerType.OnDrop,
+                                VRC_Trigger.TriggerType.OnPickupUseDown,
+                                VRC_Trigger.TriggerType.OnPickupUseUp   },
+                            new VRC_EventHandler.VrcEventType[] {
+                                VRC_EventHandler.VrcEventType.ActivateCustomTrigger,
+                                VRC_EventHandler.VrcEventType.AudioTrigger,
+                                VRC_EventHandler.VrcEventType.PlayAnimation,
+                                VRC_EventHandler.VrcEventType.SetComponentActive,
+                                VRC_EventHandler.VrcEventType.SetGameObjectActive,
+                                VRC_EventHandler.VrcEventType.AnimationBool,
+                                VRC_EventHandler.VrcEventType.AnimationFloat,
+                                VRC_EventHandler.VrcEventType.AnimationInt,
+                                VRC_EventHandler.VrcEventType.AnimationIntAdd,
+                                VRC_EventHandler.VrcEventType.AnimationIntDivide,
+                                VRC_EventHandler.VrcEventType.AnimationIntMultiply,
+                                VRC_EventHandler.VrcEventType.AnimationIntSubtract,
+                                VRC_EventHandler.VrcEventType.AnimationTrigger},
+                            Vket4OfficialAssetData.GUIDs),
+
                 new UseMeshColliderRule("[F-1]MeshCollider以外のColliderを使用すること"),
 
+                new VRCTriggerCountLimitRule(string.Format("[F-1]VRC_Triggerの使用数が{0}個以下であること", VRCTriggerCountLimit), VRCTriggerCountLimit),
+
                 new LightCountLimitRule("[F-1]DirectionalLightを使用しないこと", UnityEngine.LightType.Directional, 0),
+
+                new LightConfigRule("[F-1]PointLightの設定が制限に従っていること", UnityEngine.LightType.Point, ApprovedPointLightConfig),
+
+                new LightConfigRule("[F-1]SpotLightの設定が制限に従っていること", UnityEngine.LightType.Spot, ApprovedSpotLightConfig),
+
+                new LightConfigRule("[F-1]AreaLightの設定が制限に従っていること", UnityEngine.LightType.Area, ApprovedAreaLightConfig),
 
                 new LightCountLimitRule(
                     string.Format("[F-1]AreaLightの使用数が{0}個以下であること", AreaLightUsesLimit),
@@ -65,12 +102,38 @@ namespace VitDeck.Validator
                 new F02_AvatarPedestalPrefabRule("AvatarPedestalの設定が規定に従っていること", Vket4OfficialAssetData.AvatarPedestalPrefabGUIDs),
 
                 new F02_AudioSourcePrefabRule("AudioSourceの設定が規定に従っていること",  Vket4OfficialAssetData.AudioSourcePrefabGUIDs),
+
+                new F02_PrefabLimitRule(
+                    string.Format("[F-2]Chairの使用数は{0}個に収めること", ChairPrefabUsesLimit),
+                    Vket4OfficialAssetData.ChairPrefabGUIDs,
+                    ChairPrefabUsesLimit),
+
+                new F02_PrefabLimitRule(
+                    string.Format("[F-2]PickupObjectSyncの使用数は{0}個に収めること", PickupObjectSyncUsesLimit),
+                    Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs,
+                    PickupObjectSyncUsesLimit,
+                    negotiable: true),
+
+                new F02_VideoPlayerComponentRule("VideoPlayerを使用する際は制限に従うこと"),
+
             };
         }
-        
-        protected abstract int AreaLightUsesLimit { get; }
-        
+
+        protected abstract int VRCTriggerCountLimit { get; }
+
         protected abstract int MaterialUsesLimit { get; }
-        
+
+        protected abstract LightConfigRule.LightConfig ApprovedPointLightConfig { get; }
+
+        protected abstract LightConfigRule.LightConfig ApprovedSpotLightConfig { get; }
+
+        protected abstract LightConfigRule.LightConfig ApprovedAreaLightConfig { get; }
+
+        protected abstract int AreaLightUsesLimit { get; }
+
+        protected abstract int ChairPrefabUsesLimit { get; }
+
+        protected abstract int PickupObjectSyncUsesLimit { get; }
+
     }
 }
