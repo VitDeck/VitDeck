@@ -62,6 +62,9 @@ namespace VitDeck.Validator
 
                 new F02_PickupObjectSyncPrefabRule("PickupObjectSyncの設定が規定に従っていること", Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs),
 
+                new F02_AvatarPedestalPrefabRule("AvatarPedestalの設定が規定に従っていること", Vket4OfficialAssetData.AvatarPedestalPrefabGUIDs),
+
+                new F02_AudioSourcePrefabRule("AudioSourceの設定が規定に従っていること",  Vket4OfficialAssetData.AudioSourcePrefabGUIDs),
             };
         }
         

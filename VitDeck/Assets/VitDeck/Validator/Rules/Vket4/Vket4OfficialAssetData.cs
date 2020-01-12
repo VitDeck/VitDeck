@@ -144,5 +144,24 @@ namespace VitDeck.Validator
             "bc67edeb6db9ffb438e33ad436221244",
             "1c13412f710ee6f429cde5858575c225",
         };
+
+        public static string[] AvatarPedestalPrefabGUIDs = new string[]
+        {
+            "f53a92f1d91eefd48b170b20927d33f6",
+            "e07be743236e7dc4596cfaeb69b0cec8",
+            "2420262520fe2b143a9d3413b70574db",
+            "90a359274811fae47831f33279efad2d",
+            "fe945fa7fd2c9054c8cb2d4b81699e29",
+            "649adcdb08990e34fbc373863359df2b",
+            "8f1ab25d540d48745985106efdf88b32",
+            "d1aad97f348bb4440a5edc6a3fa7fcf0",
+            "fbca34af6d486cb42ac14f5604789b7d",
+        };
+
+        public static string[] AudioSourcePrefabGUIDs = new string[]
+        {
+            "e4309533ddcc0af4d90979c8c9e4f4d4",
+            "30766b1bee81dc84789f758f8ccafc3c",
+        };
     }
 }
