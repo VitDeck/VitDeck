@@ -60,6 +60,8 @@ namespace VitDeck.Validator
                     UnityEngine.LightType.Area,
                     AreaLightUsesLimit),
 
+                new F02_PickupObjectSyncRule("PickupObjectSyncが規定に従っていること"),
+
             };
         }
         
