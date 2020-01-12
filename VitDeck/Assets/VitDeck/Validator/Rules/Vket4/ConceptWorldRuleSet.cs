@@ -14,6 +14,14 @@ namespace VitDeck.Validator
             }
         }
 
+        protected override Vector3 BoothSizeLimit
+        {
+            get
+            {
+                return new Vector3(4, 5, 4);
+            }
+        }
+
         protected override int VRCTriggerCountLimit
         {
             get

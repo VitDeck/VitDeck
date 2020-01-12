@@ -38,6 +38,10 @@ namespace VitDeck.Validator
 
                 new AssetPathLengthRule("[B-3]ファイルパスはAsset/から数えて184文字以内に収まっていること", 184),
 
+                new BoothBoundsRule("[D-1,2]ブースサイズは規定の範囲内に収めること",
+                    size: BoothSizeLimit,
+                    margin: 0.01f),
+
                 new AssetExtentionBlacklistRule("[B-4]メッシュアセットのファイル形式で特定のものが含まれていないこと",
                                                 new string[]{".ma", ".mb", "max", "c4d", ".blend"}
                 ),
@@ -118,6 +122,8 @@ namespace VitDeck.Validator
 
             };
         }
+
+        protected abstract Vector3 BoothSizeLimit { get; }
 
         protected abstract int VRCTriggerCountLimit { get; }
 
