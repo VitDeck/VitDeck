@@ -70,6 +70,11 @@ namespace VitDeck.Validator
                 case VRC_EventHandler.VrcEventType.AnimationFloat:
                 case VRC_EventHandler.VrcEventType.AnimationBool:
                 case VRC_EventHandler.VrcEventType.AnimationTrigger:
+                case VRC_EventHandler.VrcEventType.AnimationInt:
+                case VRC_EventHandler.VrcEventType.AnimationIntAdd:
+                case VRC_EventHandler.VrcEventType.AnimationIntDivide:
+                case VRC_EventHandler.VrcEventType.AnimationIntMultiply:
+                case VRC_EventHandler.VrcEventType.AnimationIntSubtract:
                 case VRC_EventHandler.VrcEventType.ActivateCustomTrigger:
                 case VRC_EventHandler.VrcEventType.AudioTrigger:
                 case VRC_EventHandler.VrcEventType.PlayAnimation:
