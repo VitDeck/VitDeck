@@ -108,6 +108,8 @@ namespace VitDeck.Validator
                     PickupObjectSyncUsesLimit,
                     negotiable: true),
 
+                new F02_VideoPlayerComponentRule("VideoPlayerを使用する際は制限に従うこと"),
+
             };
         }
 
