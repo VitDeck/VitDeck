@@ -59,7 +59,7 @@ namespace VitDeck.Validator
 
                 new LightConfigRule("[F-1]SpotLightの設定が制限に従っていること", UnityEngine.LightType.Spot, ApprovedSpotLightConfig),
 
-                new LightConfigRule("[F-1]AreaLightの設定が制限に従っていること", UnityEngine.LightType.Point, ApprovedAreaLightConfig),
+                new LightConfigRule("[F-1]AreaLightの設定が制限に従っていること", UnityEngine.LightType.Area, ApprovedAreaLightConfig),
 
                 new LightCountLimitRule(
                     string.Format("[F-1]AreaLightの使用数が{0}個以下であること", AreaLightUsesLimit),
