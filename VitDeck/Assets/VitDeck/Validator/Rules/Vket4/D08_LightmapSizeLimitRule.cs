@@ -91,8 +91,8 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         null,
                         IssueLevel.Error,
-                        string.Format("LightMapがサイズ上限({0}px)を超えています。({1}px*{2}px)", lightmapResolutionLimit, texture.width, texture.height),
-                        "以下の操作を行い、LightMapの解像度を下げてください。\n" +
+                        string.Format("LightMapの解像度が上限({0}px)を超えています。({1}px*{2}px)", lightmapResolutionLimit, texture.width, texture.height),
+                        "以下の操作を行い、最大解像度を下げてください。\n" +
                         "1. Unityメニュー→Window→Lighting→SettingでLightingウィンドウを開く。\n" +
                         "2. ウィンドウの上部にある、[Scene][Global Maps][Object Maps]の中の[Scene]を選択する。\n" +
                         "3. 下にスクロールし、▼Lightmapping Settings を開く。\n" +
