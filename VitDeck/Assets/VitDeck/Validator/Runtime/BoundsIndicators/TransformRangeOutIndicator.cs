@@ -66,7 +66,7 @@ namespace VitDeck.Validator.BoundsIndicators
                 return;
             }
 
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.Lerp(Color.red, Color.yellow, Mathf.PingPong(System.DateTime.Now.Millisecond * 0.002f, 1));
             Gizmos.DrawSphere(transform.position, 0.1f);
         }
     }

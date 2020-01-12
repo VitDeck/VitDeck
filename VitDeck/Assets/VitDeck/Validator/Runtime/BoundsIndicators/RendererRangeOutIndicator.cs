@@ -73,18 +73,20 @@ namespace VitDeck.Validator.BoundsIndicators
             DrawOverhangGizmos(ref bounds);
         }
 
+        Vector3 rangeOutIndicatorPadding = Vector3.one * 0.0005f;
+
         private void DrawBoundsGizmos(ref Bounds bounds)
         {
             Gizmos.matrix = booth.GetLocalToWorld();
             Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(bounds.center, bounds.size);
+            Gizmos.DrawWireCube(bounds.center, bounds.size + rangeOutIndicatorPadding);
         }
 
         private void DrawOverhangGizmos(ref Bounds bounds)
         {
             var limit = booth.GetBounds();
             Gizmos.matrix = booth.GetLocalToWorld();
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.Lerp(Color.red, Color.yellow, Mathf.PingPong(System.DateTime.Now.Millisecond * 0.002f, 1));
 
             if (limit.max.x < bounds.max.x)
             {
@@ -93,7 +95,7 @@ namespace VitDeck.Validator.BoundsIndicators
                 overedMin.x = Mathf.Max(limit.max.x, bounds.min.x);
                 overed.min = overedMin;
 
-                Gizmos.DrawCube(overed.center, overed.size);
+                Gizmos.DrawCube(overed.center, overed.size + rangeOutIndicatorPadding);
             }
 
             if (limit.max.y < bounds.max.y)
@@ -103,7 +105,7 @@ namespace VitDeck.Validator.BoundsIndicators
                 overedMin.y = Mathf.Max(limit.max.y, bounds.min.y);
                 overed.min = overedMin;
 
-                Gizmos.DrawCube(overed.center, overed.size);
+                Gizmos.DrawCube(overed.center, overed.size + rangeOutIndicatorPadding);
             }
 
             if (limit.max.z < bounds.max.z)
@@ -113,7 +115,7 @@ namespace VitDeck.Validator.BoundsIndicators
                 overedMin.z = Mathf.Max(limit.max.z, bounds.min.z);
                 overed.min = overedMin;
 
-                Gizmos.DrawCube(overed.center, overed.size);
+                Gizmos.DrawCube(overed.center, overed.size + rangeOutIndicatorPadding);
             }
 
             if (limit.min.x > bounds.min.x)
@@ -123,7 +125,7 @@ namespace VitDeck.Validator.BoundsIndicators
                 overedMax.x = Mathf.Min(limit.min.x, bounds.max.x);
                 overed.max = overedMax;
 
-                Gizmos.DrawCube(overed.center, overed.size);
+                Gizmos.DrawCube(overed.center, overed.size + rangeOutIndicatorPadding);
             }
 
             if (limit.min.y > bounds.min.y)
@@ -133,7 +135,7 @@ namespace VitDeck.Validator.BoundsIndicators
                 overedMax.y = Mathf.Min(limit.min.y, bounds.max.y);
                 overed.max = overedMax;
 
-                Gizmos.DrawCube(overed.center, overed.size);
+                Gizmos.DrawCube(overed.center, overed.size + rangeOutIndicatorPadding);
             }
 
             if (limit.min.z > bounds.min.z)
@@ -143,7 +145,7 @@ namespace VitDeck.Validator.BoundsIndicators
                 overedMax.z = Mathf.Min(limit.min.z, bounds.max.z);
                 overed.max = overedMax;
 
-                Gizmos.DrawCube(overed.center, overed.size);
+                Gizmos.DrawCube(overed.center, overed.size + rangeOutIndicatorPadding);
             }
         }
     }
