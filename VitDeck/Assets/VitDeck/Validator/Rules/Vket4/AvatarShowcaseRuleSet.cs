@@ -69,6 +69,14 @@ namespace VitDeck.Validator
             }
         }
 
+        protected override ValidationLevel AdvancedObjectValidationLevel
+        {
+            get
+            {
+                return ValidationLevel.DISALLOW;
+            }
+        }
+
         protected override int ChairPrefabUsesLimit
         {
             get
