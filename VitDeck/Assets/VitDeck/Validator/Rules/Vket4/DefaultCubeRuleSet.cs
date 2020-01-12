@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace VitDeck.Validator
 {
@@ -14,6 +15,14 @@ namespace VitDeck.Validator
             }
         }
 
+        protected override int VRCTriggerCountLimit
+        {
+            get
+            {
+                return 25;
+            }
+        }
+
         protected override int MaterialUsesLimit
         {
             get
@@ -22,11 +31,30 @@ namespace VitDeck.Validator
             }
         }
 
-        protected override int VRCTriggerCountLimit
+        protected override LightConfigRule.LightConfig ApprovedPointLightConfig
         {
             get
             {
-                return 25;
+                return new LightConfigRule.LightConfig(
+                            new [] { LightmapBakeType.Baked, LightmapBakeType.Realtime });
+            }
+        }
+
+        protected override LightConfigRule.LightConfig ApprovedSpotLightConfig
+        {
+            get
+            {
+                return new LightConfigRule.LightConfig(
+                            new[] { LightmapBakeType.Baked, LightmapBakeType.Realtime });
+            }
+        }
+
+        protected override LightConfigRule.LightConfig ApprovedAreaLightConfig
+        {
+            get
+            {
+                return new LightConfigRule.LightConfig(
+                            new[] { LightmapBakeType.Baked });
             }
         }
 

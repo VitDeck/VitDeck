@@ -14,6 +14,13 @@ namespace VitDeck.Validator
             }
         }
 
+        protected override int VRCTriggerCountLimit
+        {
+            get
+            {
+                return 12;
+            }
+        }
         protected override int MaterialUsesLimit
         {
             get
@@ -22,14 +29,29 @@ namespace VitDeck.Validator
             }
         }
 
-        protected override int VRCTriggerCountLimit
+        protected override LightConfigRule.LightConfig ApprovedPointLightConfig
         {
             get
             {
-                return 12;
+                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
             }
         }
-        
+
+        protected override LightConfigRule.LightConfig ApprovedSpotLightConfig
+        {
+            get
+            {
+                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
+            }
+        }
+
+        protected override LightConfigRule.LightConfig ApprovedAreaLightConfig
+        {
+            get
+            {
+                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
+            }
+        }
 
         protected override int AreaLightUsesLimit
         {
