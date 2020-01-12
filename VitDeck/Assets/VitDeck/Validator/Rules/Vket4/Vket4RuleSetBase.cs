@@ -97,6 +97,12 @@ namespace VitDeck.Validator
                     UnityEngine.LightType.Area,
                     AreaLightUsesLimit),
 
+                new F02_PickupObjectSyncPrefabRule("PickupObjectSyncの設定が規定に従っていること", Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs),
+
+                new F02_AvatarPedestalPrefabRule("AvatarPedestalの設定が規定に従っていること", Vket4OfficialAssetData.AvatarPedestalPrefabGUIDs),
+
+                new F02_AudioSourcePrefabRule("AudioSourceの設定が規定に従っていること",  Vket4OfficialAssetData.AudioSourcePrefabGUIDs),
+
                 new F02_PrefabLimitRule(
                     string.Format("[F-2]Chairの使用数は{0}個に収めること", ChairPrefabUsesLimit),
                     Vket4OfficialAssetData.ChairPrefabGUIDs,
