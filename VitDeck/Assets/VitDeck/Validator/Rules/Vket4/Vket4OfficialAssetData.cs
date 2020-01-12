@@ -135,5 +135,14 @@ namespace VitDeck.Validator
 
         };
 
+        public static string[] PickupObjectSyncPrefabGUIDs = new string[]
+        {
+            "2ddf6495f088e214894068e967b329a6",
+            "d6df6cb557aadb34db36e3e1f504a4db",
+            "e92515ba689fb0b4f8d45b7f2e3e8f46",
+            "29904c5b13768154bb4056beab9fa3d1",
+            "bc67edeb6db9ffb438e33ad436221244",
+            "1c13412f710ee6f429cde5858575c225",
+        };
     }
 }

@@ -7,19 +7,7 @@ namespace VitDeck.Validator
     public class F02_AudioSourcePrefabRule : BasePrefabRule
     {
 
-        protected override string[] TargetPrefabGUIDs
-        {
-            get
-            {
-                return new string[]
-                {
-                    "e4309533ddcc0af4d90979c8c9e4f4d4",
-                    "30766b1bee81dc84789f758f8ccafc3c",
-                };
-            }
-        }
-
-        public F02_AudioSourcePrefabRule(string name) : base(name)
+        public F02_AudioSourcePrefabRule(string name, string[] targetPrefabGUIDs) : base(name, targetPrefabGUIDs)
         {
         }
 

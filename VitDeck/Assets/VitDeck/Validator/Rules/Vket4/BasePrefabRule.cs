@@ -8,13 +8,11 @@ namespace VitDeck.Validator
     public abstract class BasePrefabRule : BaseRule
     {
 
-        protected abstract string[] TargetPrefabGUIDs { get; }
-
         private readonly HashSet<string> targetGUIDs;
 
-        public BasePrefabRule(string name) : base(name)
+        public BasePrefabRule(string name, string[] targetPrefabGUIDs) : base(name)
         {
-            targetGUIDs = new HashSet<string>(TargetPrefabGUIDs);
+            targetGUIDs = new HashSet<string>(targetPrefabGUIDs);
         }
 
         protected override void Logic(ValidationTarget target)

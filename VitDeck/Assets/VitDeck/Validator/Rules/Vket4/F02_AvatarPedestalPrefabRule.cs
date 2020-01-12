@@ -7,26 +7,7 @@ namespace VitDeck.Validator
     public class F02_AvatarPedestalPrefabRule : BasePrefabRule
     {
 
-        protected override string[] TargetPrefabGUIDs
-        {
-            get
-            {
-                return new string[]
-                {
-                    "f53a92f1d91eefd48b170b20927d33f6",
-                    "e07be743236e7dc4596cfaeb69b0cec8",
-                    "2420262520fe2b143a9d3413b70574db",
-                    "90a359274811fae47831f33279efad2d",
-                    "fe945fa7fd2c9054c8cb2d4b81699e29",
-                    "649adcdb08990e34fbc373863359df2b",
-                    "8f1ab25d540d48745985106efdf88b32",
-                    "d1aad97f348bb4440a5edc6a3fa7fcf0",
-                    "fbca34af6d486cb42ac14f5604789b7d",
-                };
-            }
-        }
-
-        public F02_AvatarPedestalPrefabRule(string name) : base(name)
+        public F02_AvatarPedestalPrefabRule(string name, string[] targetPrefabGUIDs) : base(name, targetPrefabGUIDs)
         {
         }
 
