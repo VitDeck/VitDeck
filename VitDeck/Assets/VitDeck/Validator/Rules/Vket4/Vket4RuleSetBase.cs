@@ -55,6 +55,12 @@ namespace VitDeck.Validator
 
                 new LightCountLimitRule("[F-1]DirectionalLightを使用しないこと", UnityEngine.LightType.Directional, 0),
 
+                new LightConfigRule("[F-1]PointLightの設定が制限に従っていること", UnityEngine.LightType.Point, ApprovedPointLightConfig),
+
+                new LightConfigRule("[F-1]SpotLightの設定が制限に従っていること", UnityEngine.LightType.Spot, ApprovedSpotLightConfig),
+
+                new LightConfigRule("[F-1]AreaLightの設定が制限に従っていること", UnityEngine.LightType.Point, ApprovedAreaLightConfig),
+
                 new LightCountLimitRule(
                     string.Format("[F-1]AreaLightの使用数が{0}個以下であること", AreaLightUsesLimit),
                     UnityEngine.LightType.Area,
@@ -67,5 +73,10 @@ namespace VitDeck.Validator
         
         protected abstract int MaterialUsesLimit { get; }
         
+        protected abstract LightConfigRule.LightConfig ApprovedPointLightConfig { get; }
+
+        protected abstract LightConfigRule.LightConfig ApprovedSpotLightConfig { get; }
+
+        protected abstract LightConfigRule.LightConfig ApprovedAreaLightConfig { get; }
     }
 }
