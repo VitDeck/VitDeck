@@ -3,7 +3,7 @@
     "references": [
         "VitDeck.Utilities",
         "VitDeck.Validator.Components",
-        "VitDeck.Language"
+        "VitDeck.Validator.Runtime"
     ],
     "includePlatforms": [
         "Editor"
