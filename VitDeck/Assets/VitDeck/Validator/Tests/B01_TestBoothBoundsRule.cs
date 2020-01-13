@@ -22,8 +22,16 @@ namespace VitDeck.Validator.Test
                 CreateRectGameObject("TestTargetObject5", true, new Vector3(0, 1, 0), new Vector2(2, 2) ),
                 CreateRectGameObject("TestTargetObject6", false, new Vector3(1000, 1, 0), new Vector2(2, 2) ),
             };
+            var rootObject = CreateSimpleGameObject("TestTargetRootObject", true, Vector3.zero);
+            foreach (var target in targetObjects)
+            {
+                target.transform.SetParent(rootObject.transform, false);
+            }
 
-            targetContainer = new ValidationTarget("Assets/VitDeck/Validator/Tests", allObjects: targetObjects);
+            targetContainer = new ValidationTarget(
+                "Assets/VitDeck/Validator/Tests",
+                allObjects: targetObjects,
+                rootObjects: new GameObject[] { rootObject });
         }
 
         public static readonly object[] TestCases =

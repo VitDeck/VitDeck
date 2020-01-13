@@ -27,9 +27,14 @@ namespace VitDeck.Validator
         {
             var paths = target.GetAllAssetPaths();
             var matchPattern = string.Format("^{0}$", permissionPattern);
+            var rootFolderPath = target.GetBaseFolderPath();
 
             foreach (var path in paths)
             {
+                if (!path.StartsWith(rootFolderPath))
+                {
+                    continue;
+                }
                 var assetName = Path.GetFileName(path);
                 if (!Regex.IsMatch(assetName, matchPattern))
                 {
