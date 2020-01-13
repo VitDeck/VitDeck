@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Language;
 using VRCSDK2;
 
 namespace VitDeck.Validator
@@ -66,8 +67,8 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         obj, 
                         IssueLevel.Error, 
-                        string.Format("VRC_Triggerコンポーネントで次のBroadcastTypeは使用できません:{0}", triggerEvent.BroadcastType),
-                        "使用可能なBroadcastTypeに変更するか、使用申請をして下さい。"));
+                        LocalizedMessage.Get("VRCTriggerConfigRule.UnauthorizedBroadcastType", triggerEvent.BroadcastType),
+                        LocalizedMessage.Get("VRCTriggerConfigRule.UnauthorizedBroadcastType.Solution")));
                 }
 
                 if (!triggerWhitelist.Contains(triggerEvent.TriggerType))
@@ -75,8 +76,8 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         obj,
                         IssueLevel.Error,
-                        string.Format("VRC_Triggerコンポーネントで次のTriggerは使用できません:{0}", triggerEvent.TriggerType),
-                        "使用可能なTriggerに変更するか、使用申請をして下さい。"));
+                        LocalizedMessage.Get("VRCTriggerConfigRule.UnauthorizedTriggerType", triggerEvent.TriggerType),
+                        LocalizedMessage.Get("VRCTriggerConfigRule.UnauthorizedTriggerType.Solution")));
                 }
 
                 var actions = triggerEvent.Events;
@@ -87,8 +88,8 @@ namespace VitDeck.Validator
                         AddIssue(new Issue(
                             obj,
                             IssueLevel.Error,
-                            string.Format("VRC_Triggerコンポーネントで次のActionは使用できません:{0}", action.EventType),
-                            "使用可能なActionに変更するか、使用申請をして下さい。"));
+                            LocalizedMessage.Get("VRCTriggerConfigRule.UnauthorizedActionType", action.EventType),
+                            LocalizedMessage.Get("VRCTriggerConfigRule.UnauthorizedActionType.Solution")));
                     }
                 }
             }

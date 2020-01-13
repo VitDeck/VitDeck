@@ -1,4 +1,5 @@
 using UnityEngine;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -23,8 +24,8 @@ namespace VitDeck.Validator
         {
             if (Application.unityVersion != version)
             {
-                var message = string.Format("実行中のUnityのバージョン({0})が指定されたバージョンと異なっています。", Application.unityVersion);
-                var solution = string.Format("バージョン({0})を使用してください。", version);
+                var message = LocalizedMessage.Get("UnityVersionRule.InvalidVersion", Application.unityVersion);
+                var solution = LocalizedMessage.Get("UnityVersionRule.InvalidVersion.Solution", version);
                 AddIssue(new Issue(null, IssueLevel.Error, message, solution, string.Empty));
             }
         }

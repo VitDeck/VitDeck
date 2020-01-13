@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using VitDeck.Language;
 using VRCSDK2;
 
 namespace VitDeck.Validator
@@ -36,8 +37,8 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         trigger.gameObject,
                         IssueLevel.Error,
-                        string.Format("VRC_Triggerコンポーネントの数が{0}個を超えています。({1}個)", limit, triggers.Length),
-                        string.Format("使用個数を減らして下さい。")));
+                        LocalizedMessage.Get("VRCTriggerCountLimitRule.Overuse", limit, triggers.Length),
+                        LocalizedMessage.Get("VRCTriggerCountLimitRule.Overuse.Solution")));
                 }
             }
         }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -45,8 +46,8 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         gameObject,
                         IssueLevel.Error,
-                        "Static設定のOccludeeStaticが有効になっていません。",
-                        "必ずOccludeeStaticを有効にして下さい。"));
+                        LocalizedMessage.Get("C02_StaticFlagRule.OccludeeStaticNotSet"),
+                        LocalizedMessage.Get("C02_StaticFlagRule.OccludeeStaticNotSet.Solution")));
                 }
 
                 if ((flag & StaticEditorFlags.ReflectionProbeStatic) == 0)
@@ -54,8 +55,8 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         gameObject,
                         IssueLevel.Error,
-                        "Static設定のReflectionProbeStaticが有効になっていません。",
-                        "必ずReflectionProbeStaticを有効にして下さい。"));
+                        LocalizedMessage.Get("C02_StaticFlagRule.ReflectionProveStaticNotSet"),
+                        LocalizedMessage.Get("C02_StaticFlagRule.ReflectionProveStaticNotSet.Solution")));
                 }
 
                 if ((flag & StaticEditorFlags.BatchingStatic) == 0)
@@ -63,8 +64,8 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         gameObject,
                         IssueLevel.Warning,
-                        "Static設定のBatchingStaticが有効になっていません。",
-                        "有効にしてブースの見た目に問題が出る場合は、そのままで問題ありません。"));
+                        LocalizedMessage.Get("C02_StaticFlagRule.BatchingStaticNotSet"),
+                        LocalizedMessage.Get("C02_StaticFlagRule.BatchingStaticNotSet.Solution")));
                 }
             }
         }

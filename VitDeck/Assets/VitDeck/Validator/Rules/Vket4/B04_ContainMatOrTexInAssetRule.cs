@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using System.Linq;
 using System.IO;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -49,8 +50,8 @@ namespace VitDeck.Validator
                         AddIssue(new Issue(
                             material,
                             IssueLevel.Error,
-                            "アセット内に埋め込まれているMaterialが使用されています。",
-                            "ExtractMaterialsをおこなって出力されたMaterialを使用してください。"));
+                            LocalizedMessage.Get("ContainMatOrTexInAssetRule.EmbeddedMaterial"),
+                            LocalizedMessage.Get("ContainMatOrTexInAssetRule.EmbeddedMaterial.Solution")));
                     }
 
                     var textures = GetTexturesInMaterial(material);
@@ -64,8 +65,8 @@ namespace VitDeck.Validator
                             AddIssue(new Issue(
                                 texture,
                                 IssueLevel.Error,
-                                "アセット内に埋め込まれているTextureが使用されています。",
-                                "ExtractTexturesをおこなって出力されたTextureを使用してください。"));
+                                LocalizedMessage.Get("ContainMatOrTexInAssetRule.EmbeddedTexture"),
+                                LocalizedMessage.Get("ContainMatOrTexInAssetRule.EmbeddedTexture.Solution")));
                         }
                     }
                 }

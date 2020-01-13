@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -117,10 +118,7 @@ namespace VitDeck.Validator
                 }
 
                 var limitSize = limit.size.ToString();
-                var message = string.Format("オブジェクトがブースサイズ制限{0}の外に出ています。\n" +
-                    "制限={1}\n" +
-                    "対象={2}\n" +
-                    "オブジェクトの種類={3}",
+                var message = LocalizedMessage.Get("BoothBoundsRule.Exceeded",
                     limitSize,
                     limit.ToString(floatToStringArgument),
                     exceed.bounds.ToString(floatToStringArgument),

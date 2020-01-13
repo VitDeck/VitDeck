@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -34,7 +35,8 @@ namespace VitDeck.Validator
 
             if (foundLights.Count > limit)
             {
-                var message = string.Format("{0} Lightが{1}個を超えています。({2}個)", type, limit, foundLights.Count);
+                var message = LocalizedMessage.Get("LightCountLimitRule.Overuse", type, limit, foundLights.Count);
+                var solution = LocalizedMessage.Get("LightCountLimitRule.Overuse.Solution");
 
                 foreach (var light in foundLights)
                 {
@@ -43,7 +45,7 @@ namespace VitDeck.Validator
                         light,
                         IssueLevel.Error,
                         message,
-                        "別のLightを使用するか、削除して個数を減らして下さい。"));
+                        solution));
                 }
             }
         }
