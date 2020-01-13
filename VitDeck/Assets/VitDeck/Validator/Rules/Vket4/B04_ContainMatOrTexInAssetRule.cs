@@ -22,14 +22,6 @@ namespace VitDeck.Validator
 
             foreach (var rootObject in rootObjects)
             {
-                var staticObject = rootObject.transform.Find("Static");
-                var dynamicObject = rootObject.transform.Find("Dynamic");
-
-                if (staticObject == null && dynamicObject == null)
-                {
-                    continue;
-                }
-
                 LogicForRoot(rootObject);
             }
         }
@@ -38,51 +30,44 @@ namespace VitDeck.Validator
         {
             var renderers = obj.GetComponentsInChildren<Renderer>(true);
 
-            var materials = new List<Material>();
-            var textures = new List<Texture>();
-
             foreach (var renderer in renderers)
             {
-                materials.AddRange(renderer.sharedMaterials);
-            }
-
-            materials = materials.Distinct().ToList();
-
-            string path, ext;
-            foreach (var material in materials)
-            {
-                path = AssetDatabase.GetAssetPath(material);
-                ext = Path.GetExtension(path).ToLower();
-
-                Debug.Log(path);
-
-                if (!ext.Equals(".mat"))
+                if (PrefabUtility.GetPrefabType(renderer.gameObject) == PrefabType.None)
                 {
-                    AddIssue(new Issue(
-                        material, 
-                        IssueLevel.Error, 
-                        "アセット内に埋め込まれているMaterialを使用しています。",
-                        "ExtractMaterialsを選択して出力されたMaterialを使用してください。"));
+                    continue;
                 }
 
-                textures.AddRange(GetTexturesInMaterial(material));
-            }
+                var prefabAsset = PrefabUtility.GetPrefabParent(renderer.gameObject);
+                var prefabAssetPath = AssetDatabase.GetAssetPath(prefabAsset);
 
-            textures = textures.Distinct().ToList();
-
-            var textureExtensions = new string[]{ ".psd", ".tiff", ".jpg", ".jpeg", ".tga", ".png", "gif", "bmp", "iff", "pict" };
-            foreach (var texture in textures)
-            {
-                path = AssetDatabase.GetAssetPath(texture);
-                ext = Path.GetExtension(path).ToLower();
-
-                if (textureExtensions.Contains(ext))
+                foreach (var material in renderer.sharedMaterials)
                 {
-                    AddIssue(new Issue(
-                        texture, 
-                        IssueLevel.Error, 
-                        "アセット内に埋め込まれているTextureを使用しています。",
-                        "ExtractTexturesを選択して出力されたTextureを使用してください。"));
+                    var matAssetPath = AssetDatabase.GetAssetPath(material);
+
+                    if (matAssetPath.Equals(prefabAssetPath))
+                    {
+                        AddIssue(new Issue(
+                            material,
+                            IssueLevel.Error,
+                            "アセット内に埋め込まれているMaterialが使用されています。",
+                            "ExtractMaterialsをおこなって出力されたMaterialを使用してください。"));
+                    }
+
+                    var textures = GetTexturesInMaterial(material);
+
+                    foreach (var texture in textures)
+                    {
+                        var texAssetPath = AssetDatabase.GetAssetPath(texture);
+
+                        if (texAssetPath.Equals(prefabAssetPath))
+                        {
+                            AddIssue(new Issue(
+                                texture,
+                                IssueLevel.Error,
+                                "アセット内に埋め込まれているTextureが使用されています。",
+                                "ExtractTexturesをおこなって出力されたTextureを使用してください。"));
+                        }
+                    }
                 }
             }
         }
