@@ -14,7 +14,9 @@ namespace VitDeck.Validator
 
         private readonly Bounds limit;
         private readonly string floatToStringArgument;
-        private BoundsIndicators.ResetTokenSource indicatorResetter = null;
+
+        // ルールをValidation毎に生成する場合indicatorResetter.Reset()が叩かれなくなってしまう為、staticに設定
+        private static BoundsIndicators.ResetTokenSource indicatorResetter = null;
 
         /// <summary>
         /// コンストラクタ。
