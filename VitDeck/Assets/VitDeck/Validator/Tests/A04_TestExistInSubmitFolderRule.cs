@@ -18,7 +18,6 @@ namespace VitDeck.Validator.Test
 			Assert.That(result.Issues.Count, Is.EqualTo(2));
 			
 			var issues = result.Issues;
-			var assetPaths = target.GetAllAssetPaths();
  			Assert.That(result.RuleName, Is.EqualTo("ExistInSubmitFolderRule"));
 			
 			Assert.That(issues[0].level, Is.EqualTo(IssueLevel.Error));
