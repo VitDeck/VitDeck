@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEditor;
 using UnityEngine;
+using System.Linq;
 
 namespace VitDeck.Validator
 {
@@ -17,17 +18,22 @@ namespace VitDeck.Validator
         {
             // 入稿フォルダ内および出展物から参照されるすべてのアセットのパス
             var allAssetPaths = target.GetAllAssetPaths();
+            var submitDirectory = target.GetBaseFolderPath();
 
-            foreach(var assetPath in allAssetPaths)
+            foreach (var assetPath in allAssetPaths)
             {
-                // assetPathが入稿フォルダ内かチェック
-                var submitDirectory = target.GetBaseFolderPath();
-                if (!assetPath.StartsWith(submitDirectory))
+                var dependencies = AssetDatabase
+                    .GetDependencies(assetPath);
+
+                foreach (var dependency in dependencies)
                 {
-                    var referenceObject = AssetDatabase.LoadMainAssetAtPath(assetPath);
-                    var message = String.Format("アセット{0}が入稿フォルダ内に含まれていません。", assetPath);
-                    var solution = String.Format("入稿するアセットは(運営から配布されたアセットを除いて)すべてAssetsフォルダ直下の「出展者ID」フォルダ({0})以下に配置してください。", submitDirectory);
-                    AddIssue(new Issue(referenceObject, IssueLevel.Error, message, solution));
+                    if (!dependency.StartsWith(submitDirectory))
+                    {   
+                        var referenceObject = AssetDatabase.LoadMainAssetAtPath(dependency);
+                        var message = String.Format("アセット{0}が入稿フォルダ内に含まれていません。", dependency);
+                        var solution = String.Format("入稿するアセットは(運営から配布されたアセットを除いて)すべてAssetsフォルダ直下の「出展者ID」フォルダ以下に配置してください。");
+                        AddIssue(new Issue(referenceObject, IssueLevel.Error, message, solution));
+                    }
                 }
             }
         }
