@@ -119,14 +119,22 @@ namespace VitDeck.Validator
                 {
                     throw new FatalValidationErrorException("検証を中止しました。");
                 }
+
+                DoSaveIfNecessary();
+
+                targetScene = EditorSceneManager.OpenScene(scenePath);
+                EditorSceneManager.SetActiveScene(targetScene);
             }
+
+            return targetScene;
+        }
+
+        private static void DoSaveIfNecessary()
+        {
             if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
             {
                 throw new FatalValidationErrorException("編集中のシーンファイルをセーブして再実行してください。");
             }
-            targetScene = EditorSceneManager.OpenScene(scenePath);
-            EditorSceneManager.SetActiveScene(targetScene);
-            return targetScene;
         }
 
 
