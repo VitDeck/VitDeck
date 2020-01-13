@@ -3,6 +3,7 @@ using UnityEditor;
 using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
+using System.IO;
 
 namespace VitDeck.Validator
 {
@@ -28,8 +29,15 @@ namespace VitDeck.Validator
             var allAssetPaths = target.GetAllAssetPaths();
             var submitDirectory = target.GetBaseFolderPath();
 
+            // 入稿フォルダ内に配置されているファイルのパス
+            // GetFilesで取得したパス名にはバックスラッシュが混在するためスラッシュに変換
+            var filePathsInSubmitDirectory = Directory
+                .GetFiles(submitDirectory, "*", SearchOption.AllDirectories)
+                .Select(x => x.Replace("\\", "/"));
+
             foreach (var assetPath in allAssetPaths)
             {
+                // 入稿フォルダおよび出展物と依存関係にあるすべてのアセットのパス
                 var dependencyPaths = AssetDatabase
                     .GetDependencies(assetPath);
 
@@ -37,9 +45,9 @@ namespace VitDeck.Validator
                 {
                     if (excludePaths.Contains(dependencyPath))
                         continue;
-
-                    if (!dependencyPath.StartsWith(submitDirectory))
-                    {   
+                    
+                    if (!filePathsInSubmitDirectory.Contains(dependencyPath) && dependencyPath != submitDirectory)
+                    { 
                         var referenceObject = AssetDatabase.LoadMainAssetAtPath(dependencyPath);
                         var message = String.Format("アセット{0}が入稿フォルダ内に含まれていません。", dependencyPath);
                         var solution = String.Format("入稿するアセットは(運営から配布されたアセットを除いて)すべてAssetsフォルダ直下の「出展者ID」フォルダ以下に配置してください。");
