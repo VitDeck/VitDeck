@@ -90,12 +90,22 @@ namespace VitDeck.Validator
 
             foreach (var exceed in exceeds)
             {
-                var transform = exceed.objectReference as Transform;
-                if (transform != null)
+                var rectTransform = exceed.objectReference as RectTransform;
+                if (rectTransform != null)
                 {
-                    var indicator = transform.gameObject.AddComponent<BoundsIndicators.TransformRangeOutIndicator>();
+                    var indicator = rectTransform.gameObject.AddComponent<BoundsIndicators.RectTransformRangeOutIndicator>();
                     indicator.hideFlags = DefaultFlagsForIndicator;
-                    indicator.Initialize(boundsIndicator, indicatorResetter.Token);
+                    indicator.Initialize(boundsIndicator, rectTransform, indicatorResetter.Token);
+                }
+                else
+                {
+                    var transform = exceed.objectReference as Transform;
+                    if (transform != null)
+                    {
+                        var indicator = transform.gameObject.AddComponent<BoundsIndicators.TransformRangeOutIndicator>();
+                        indicator.hideFlags = DefaultFlagsForIndicator;
+                        indicator.Initialize(boundsIndicator, indicatorResetter.Token);
+                    }
                 }
 
                 var renderer = exceed.objectReference as Renderer;
