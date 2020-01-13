@@ -11,7 +11,7 @@ namespace VitDeck.Validator.Test
 		public void TestValidateInSubmitFolder()
 		{
 			var baseFolder = "Assets/VitDeck/Validator/Tests/Data/A04_ExistInSubmitFolderRule/0001";
-			var rule = new A04_ExistInSubmitFolderRule("ExistInSubmitFolderRule");
+			var rule = new A04_ExistInSubmitFolderRule("ExistInSubmitFolderRule", Vket4OfficialAssetData.GUIDs);
 			var finder = new ValidationTargetFinder();
 			var target = finder.Find(baseFolder, true);
 			var result = rule.Validate(target);
