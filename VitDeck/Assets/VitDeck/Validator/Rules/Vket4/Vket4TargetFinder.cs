@@ -30,8 +30,7 @@ namespace VitDeck.Validator
 
             var exhibitorID = Path.GetFileName(baseFolder);
 
-            var targetScene = GetPackageScene(exhibitorID);
-            targetScene = OpenScene(targetScene);
+            var targetScene = OpenPackageScene(exhibitorID);
 
             scenes = new Scene[] { targetScene };
             var exhibitRootObject = GetExhibitRootObject(exhibitorID, targetScene);
@@ -72,7 +71,7 @@ namespace VitDeck.Validator
                 .Where(obj => obj.name == exhibitorID)
                 .ToArray();
 
-            if(exhibitRootObjects.Length == 0)
+            if (exhibitRootObjects.Length == 0)
             {
                 throw new FatalValidationErrorException("入稿物が見つかりません。");
 
@@ -99,20 +98,17 @@ namespace VitDeck.Validator
             return searcher.Where(obj => AssetDatabase.IsMainAsset(obj)).ToArray();
         }
 
-        private static Scene GetPackageScene(string exhibitorID)
+        private static Scene OpenPackageScene(string exhibitorID)
         {
             var scenePath = string.Format("Assets/{0}/{0}.unity", exhibitorID);
+            Debug.Log(scenePath);
             if (!File.Exists(scenePath))
             {
                 throw new FatalValidationErrorException(string.Format("入稿シーン({0})が見つかりません。", scenePath));
             }
             var targetScene = EditorSceneManager.GetSceneByPath(scenePath);
+            Debug.Log(targetScene.name);
 
-            return targetScene;
-        }
-
-        private static Scene OpenScene(Scene targetScene)
-        {
             if (!targetScene.isLoaded)
             {
                 if (!EditorUtility.DisplayDialog(
@@ -123,14 +119,22 @@ namespace VitDeck.Validator
                 {
                     throw new FatalValidationErrorException("検証を中止しました。");
                 }
+
+                DoSaveIfNecessary();
+
+                targetScene = EditorSceneManager.OpenScene(scenePath);
+                EditorSceneManager.SetActiveScene(targetScene);
             }
+
+            return targetScene;
+        }
+
+        private static void DoSaveIfNecessary()
+        {
             if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
             {
                 throw new FatalValidationErrorException("編集中のシーンファイルをセーブして再実行してください。");
             }
-            targetScene = EditorSceneManager.OpenScene(targetScene.path);
-            EditorSceneManager.SetActiveScene(targetScene);
-            return targetScene;
         }
 
 
