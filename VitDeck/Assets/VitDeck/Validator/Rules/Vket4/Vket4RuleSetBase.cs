@@ -31,12 +31,11 @@ namespace VitDeck.Validator
 
                 new A02_VRCSDKVersionRule(LocalizedMessage.Get("Vket4RuleSetBase.VRCSDKVersionRule.Title"), new VRCSDKVersion("2019.09.18.12.05")),
 
+                new A04_ExistInSubmitFolderRule(LocalizedMessage.Get("Vket4RuleSetBase.ExistInSubmitFolderRule.Title"), Vket4OfficialAssetData.GUIDs),
+
                 new AssetGuidBlacklistRule(LocalizedMessage.Get("Vket4RuleSetBase.OfficialAssetDontContainRule.Title"), Vket4OfficialAssetData.GUIDs),
 
                 new AssetNamingRule(LocalizedMessage.Get("Vket4RuleSetBase.NameOfFileAndFolderRule.Title"), @"[a-zA-Z0-9 _\.\-\(\)]+"),
-
-                new A04_ExistInSubmitFolderRule("配布物以外の全てのオブジェクト参照が入稿フォルダ内に存在すること", Vket4OfficialAssetData.GUIDs),
-
 
                 new AssetPathLengthRule(LocalizedMessage.Get("Vket4RuleSetBase.FilePathLengthLimitRule.Title", 184), 184),
 
@@ -61,7 +60,7 @@ namespace VitDeck.Validator
                     Vket4OfficialAssetData.MaterialGUIDs),
                 
                 new D08_LightmapSizeLimitRule(
-                    "[D-8]LightMapの使用枚数を制限以内に収めること",
+                    LocalizedMessage.Get("Vket4RuleSetBase.LightMapsLimitRule.Title"),
                     lightmapCountLimit: LightmapCountLimit,
                     lightmapResolutionLimit: 512),
 
