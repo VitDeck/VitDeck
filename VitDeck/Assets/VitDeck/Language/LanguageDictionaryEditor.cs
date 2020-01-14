@@ -86,6 +86,7 @@ namespace VitDeck.Language
             }
 
             dictionary.SetTranslations(translations.ToArray());
+            EditorUtility.SetDirty(target);
             treeView.Reload();
         }
 
