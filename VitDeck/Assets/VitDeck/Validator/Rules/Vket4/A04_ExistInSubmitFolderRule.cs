@@ -34,6 +34,11 @@ namespace VitDeck.Validator
             var filePathsInSubmitDirectory = Directory
                 .GetFiles(submitDirectory, "*", SearchOption.AllDirectories)
                 .Select(x => x.Replace("\\", "/"));
+            
+            // 入稿フォルダ内のディレクトリのパス
+            var folderPathInSubmitDirectory = Directory
+                .GetDirectories(submitDirectory, "*", SearchOption.AllDirectories)
+                .Select(x => x.Replace("\\", "/"));
 
             foreach (var assetPath in allAssetPaths)
             {
@@ -43,10 +48,16 @@ namespace VitDeck.Validator
 
                 foreach (var dependencyPath in dependencyPaths)
                 {
+                    // 運営からの配布物を検証対象から除外
                     if (excludePaths.Contains(dependencyPath))
                         continue;
                     
-                    if (!filePathsInSubmitDirectory.Contains(dependencyPath) && dependencyPath != submitDirectory)
+                    // 入稿フォルダ内のサブディレクトリ(アセット含まない)を検証対象から除外
+                    if (folderPathInSubmitDirectory.Contains(dependencyPath) || dependencyPath == submitDirectory)
+                        continue;
+                    
+                    // 入稿フォルダ内にパスがあるアセットなのか検証
+                    if (!filePathsInSubmitDirectory.Contains(dependencyPath))
                     { 
                         var referenceObject = AssetDatabase.LoadMainAssetAtPath(dependencyPath);
                         var message = String.Format("アセット{0}が入稿フォルダ内に含まれていません。", dependencyPath);
