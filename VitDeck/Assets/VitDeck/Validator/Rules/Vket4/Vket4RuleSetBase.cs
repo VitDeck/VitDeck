@@ -32,6 +32,8 @@ namespace VitDeck.Validator
 
                 new AssetGuidBlacklistRule("配布アセットを入稿フォルダ内に入れないこと", Vket4OfficialAssetData.GUIDs),
 
+                new A04_ExistInSubmitFolderRule("配布物以外の全てのオブジェクト参照が入稿フォルダ内に存在すること", Vket4OfficialAssetData.GUIDs),
+
                 new AssetNamingRule("[B-1]ファイル名とフォルダ名の使用禁止文字ルール", @"[a-zA-Z0-9 _\.\-\(\)]+"),
 
                 new AssetPathLengthRule("[B-3]ファイルパスはAsset/から数えて184文字以内に収まっていること", 184),
