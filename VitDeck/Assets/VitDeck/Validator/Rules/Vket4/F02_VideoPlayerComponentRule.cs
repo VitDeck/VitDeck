@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -18,7 +19,7 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     component,
                     IssueLevel.Error,
-                    "VideoPlayerはURLを使用することは出来ません。"
+                    LocalizedMessage.Get("F02_VideoPlayerComponentRule.DontUseURL")
                     ));
             }
         }

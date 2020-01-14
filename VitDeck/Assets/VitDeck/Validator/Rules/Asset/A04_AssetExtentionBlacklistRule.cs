@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
+using UnityEngine;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -38,7 +40,8 @@ namespace VitDeck.Validator
                 }
                 else
                 {
-                    AddIssue(new Issue(null, IssueLevel.Warning, "設定された拡張子は空文字のため無視されます。", string.Empty, string.Empty));
+                    // ユーザーが対処できるメッセージではないのでコメントアウト
+                    //AddIssue(new Issue(null, IssueLevel.Warning, "設定された拡張子は空文字のため無視されます。", string.Empty, string.Empty));
                 }
             }
             var hitPaths = target.GetAllAssetPaths()
@@ -48,7 +51,7 @@ namespace VitDeck.Validator
                 if (AssetDatabase.IsValidFolder(path))
                     continue;
                 var obj = AssetDatabase.LoadMainAssetAtPath(path);
-                var message = string.Format("拡張子が`{0}`のアセットが検出されました。", Path.GetExtension(path)) + Environment.NewLine + path;
+                var message = LocalizedMessage.Get("AssetExtentionBlacklistRule.UnauthorizedExtention", Path.GetExtension(path)) + Environment.NewLine + path;
                 AddIssue(new Issue(obj, IssueLevel.Error, message, string.Empty, string.Empty));
             }
         }

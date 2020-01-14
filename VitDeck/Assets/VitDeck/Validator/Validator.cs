@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Language;
 using VitDeck.Utilities;
 
 namespace VitDeck.Validator
@@ -29,7 +30,7 @@ namespace VitDeck.Validator
             catch (FatalValidationErrorException e)
             {
                 Debug.LogError(e.Message);
-                var result = new ValidationResult("検証対象の検索");
+                var result = new ValidationResult(LocalizedMessage.Get("Validator.SerchingValidationTarget"));
                 result.AddIssue(new Issue(null, IssueLevel.Fatal, e.Message));
                 results.Add(result);
                 return results.ToArray();
@@ -43,7 +44,7 @@ namespace VitDeck.Validator
                 }
                 catch (FatalValidationErrorException e)
                 {
-                    Debug.LogError("ルールチェックを中断しました:" + e.Message);
+                    Debug.LogError(LocalizedMessage.Get("Validator.AbortWithException", e.Message));
                     results.Add(rule.GetResult());
                     break;
                 }

@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VitDeck.Language;
 using Object = UnityEngine.Object;
 
 namespace VitDeck.Validator
@@ -25,7 +26,7 @@ namespace VitDeck.Validator
         {
             if (!Directory.Exists(baseFolder))
             {
-                throw new FatalValidationErrorException("入稿フォルダが存在しません。");
+                throw new FatalValidationErrorException(LocalizedMessage.Get("Vket4TargetFinder.PackageFolderNotFound"));
             }
 
             var exhibitorID = Path.GetFileName(baseFolder);
@@ -73,12 +74,12 @@ namespace VitDeck.Validator
 
             if (exhibitRootObjects.Length == 0)
             {
-                throw new FatalValidationErrorException("入稿物が見つかりません。");
+                throw new FatalValidationErrorException(LocalizedMessage.Get("Vket4TargetFinder.ExhibitNotFound"));
 
             }
             else if (exhibitRootObjects.Length > 1)
             {
-                throw new FatalValidationErrorException("入稿物が複数存在します。");
+                throw new FatalValidationErrorException(LocalizedMessage.Get("Vket4TargetFinder.ManyExhibits"));
             }
             else
             {
@@ -104,7 +105,7 @@ namespace VitDeck.Validator
             Debug.Log(scenePath);
             if (!File.Exists(scenePath))
             {
-                throw new FatalValidationErrorException(string.Format("入稿シーン({0})が見つかりません。", scenePath));
+                throw new FatalValidationErrorException(LocalizedMessage.Get("Vket4TargetFinder.SceneNotFound", scenePath));
             }
             var targetScene = EditorSceneManager.GetSceneByPath(scenePath);
             Debug.Log(targetScene.name);
@@ -112,12 +113,12 @@ namespace VitDeck.Validator
             if (!targetScene.isLoaded)
             {
                 if (!EditorUtility.DisplayDialog(
-                    "検証対象のシーンが開かれていません。",
-                    "検証を続行する為には検証対象のシーンを開く必要があります。" + Environment.NewLine + targetScene.path,
-                    "続行",
-                    "中止"))
+                    LocalizedMessage.Get("Vket4TargetFinder.SceneOpenDialog.Title"),
+                    LocalizedMessage.Get("Vket4TargetFinder.SceneOpenDialog") + Environment.NewLine + targetScene.path,
+                    LocalizedMessage.Get("Vket4TargetFinder.SceneOpenDialog.Continue"),
+                    LocalizedMessage.Get("Vket4TargetFinder.SceneOpenDialog.Abort")))
                 {
-                    throw new FatalValidationErrorException("検証を中止しました。");
+                    throw new FatalValidationErrorException(LocalizedMessage.Get("Vket4TargetFinder.ValidationAborted"));
                 }
 
                 DoSaveIfNecessary();
@@ -133,7 +134,7 @@ namespace VitDeck.Validator
         {
             if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
             {
-                throw new FatalValidationErrorException("編集中のシーンファイルをセーブして再実行してください。");
+                throw new FatalValidationErrorException(LocalizedMessage.Get("Vket4TargetFinder.UserDidntSave"));
             }
         }
 

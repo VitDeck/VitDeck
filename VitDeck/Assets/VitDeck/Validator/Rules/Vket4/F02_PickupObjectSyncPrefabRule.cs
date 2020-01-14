@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Language;
 using VRCSDK2;
 
 namespace VitDeck.Validator
@@ -24,7 +25,7 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         objectSync,
                         IssueLevel.Error,
-                        "VRC_ObjectSyncを非アクティブにすることは出来ません。"));
+                        LocalizedMessage.Get("F02_PickupObjectSyncPrefabRule.DontDeactivate")));
                 }
 
                 if (objectSync.AllowCollisionTransfer)
@@ -32,7 +33,7 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         objectSync,
                         IssueLevel.Error,
-                        "VRC_ObjectSyncのAllowCollisionTransferを使用することは出来ません。"));
+                        LocalizedMessage.Get("F02_PickupObjectSyncPrefabRule.DontAllowCollisionTransfer")));
                 }
             }
 
@@ -44,7 +45,7 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         rigidbody,
                         IssueLevel.Error,
-                        "RigidbodyのIsKinematicは必ず有効にして下さい。"));
+                        LocalizedMessage.Get("F02_PickupObjectSyncPrefabRule.UseIsKinematic")));
                 }
             }
 
@@ -69,7 +70,7 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     targetGameObject,
                     IssueLevel.Error,
-                    "PickupObjectSyncを入れ子にすることは出来ません。"));
+                    LocalizedMessage.Get("F02_PickupObjectSyncPrefabRule.DontNest")));
             }
         }
     }

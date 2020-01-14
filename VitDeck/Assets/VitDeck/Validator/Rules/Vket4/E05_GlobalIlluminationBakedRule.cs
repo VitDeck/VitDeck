@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using UnityEditor;
 using UnityEngine;
 using System.Linq;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -26,8 +27,8 @@ namespace VitDeck.Validator
 
 				if (isNotBaked)
 				{
-					var message = String.Format("アセット{0}でGlobal IlluminationがBakedに設定されていません。", referenceObject);
-                    var solution = String.Format("Standard ShaderでEmissionを利用する場合はGlobal Illuminationの設定をBakedにしてください。");
+					var message = LocalizedMessage.Get("E05_GlobalIlluminationBakedRule.NotBaked", referenceObject);
+                    var solution = String.Format("E05_GlobalIlluminationBakedRule.NotBaked.Solution");
                     AddIssue(new Issue(referenceObject, IssueLevel.Error, message, solution));
 				}		
 			}

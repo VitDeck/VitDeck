@@ -4,6 +4,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -29,8 +30,8 @@ namespace VitDeck.Validator
             {
                 AddIssue(new Issue(null,
                     IssueLevel.Error,
-                    "VRCSDKがインポートされていません。",
-                    "公式サイトからダウンロードし、インポートして下さい。",
+                    LocalizedMessage.Get("A02_VRCSDKVersionRule.NotInstalled"),
+                    LocalizedMessage.Get("A02_VRCSDKVersionRule.NotInstalled.Solution"),
                     solutionURL: "https://www.vrchat.net/download/sdk"
                     ));
                 return;
@@ -42,8 +43,8 @@ namespace VitDeck.Validator
             {
                 AddIssue(new Issue(null,
                     IssueLevel.Error,
-                    "VRCSDKが最新バージョンではありません。",
-                    "公式サイトからダウンロードし、インポートして下さい。",
+                    LocalizedMessage.Get("A02_VRCSDKVersionRule.PreviousVersion"),
+                    LocalizedMessage.Get("A02_VRCSDKVersionRule.PreviousVersion.Solution"),
                     solutionURL: "https://www.vrchat.net/download/sdk"
                     ));
             }

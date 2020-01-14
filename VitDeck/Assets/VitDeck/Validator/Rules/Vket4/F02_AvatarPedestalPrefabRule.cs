@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using VitDeck.Language;
 using VRCSDK2;
 
 namespace VitDeck.Validator
@@ -25,7 +26,7 @@ namespace VitDeck.Validator
                         AddIssue(new Issue(
                             triggerCompoent,
                             IssueLevel.Error,
-                            "VRC_Triggerが持つBroadcastTypeはlocalでなければなりません。"
+                            LocalizedMessage.Get("F02_AvatarPedestalPrefabRule.BroadcastTypeMustLocal")
                             ));
                     }
 
@@ -56,8 +57,7 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         context,
                         IssueLevel.Error,
-                        "VRC_TriggerのTriggerTypeは、[Custom, OnInteract, OnEnterTrigger, OnExitTrigger, OnPickup, OnDrop, OnPickupUseDown, OnPickupUseUp]のいずれかである必要があります。" +
-                        String.Format("{0}は使えません。", triggerType)
+                        LocalizedMessage.Get("F02_AvatarPedestalPrefabRule.UnauthorizedTriggerType", triggerType)
                         ));
                     break;
             }
@@ -87,7 +87,7 @@ namespace VitDeck.Validator
                         AddIssue(new Issue(
                             context,
                             IssueLevel.Error,
-                            "VRC_TriggerのSendRPCはSetAvataUse以外使用できません。"
+                            LocalizedMessage.Get("F02_AvatarPedestalPrefabRule.RPCMustSetAvatarUse")
                             ));
                     }
                     break;
@@ -95,8 +95,7 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         context,
                         IssueLevel.Error,
-                        "VRC_TriggerのActionは、[AnimationFloat, AnimationBool, AnimationTrigger, ActivateCustomTrigger, AudioTrigger, PlayAnimation, SetComponentActive, SetGameObjectActive, SendRPC(SetAvatarUse)]のいずれかである必要があります。" +
-                        String.Format("{0}は使えません。", action.EventType)
+                        LocalizedMessage.Get("F02_AvatarPedestalPrefabRule.UnauthorizedActionType", action.EventType)
                         ));
                     break;
             }

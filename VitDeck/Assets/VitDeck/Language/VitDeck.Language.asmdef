@@ -1,0 +1,10 @@
+{
+    "name": "VitDeck.Language",
+    "references": [
+        "VitDeck.Utilities"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

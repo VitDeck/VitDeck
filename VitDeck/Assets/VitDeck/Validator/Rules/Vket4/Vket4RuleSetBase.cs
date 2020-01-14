@@ -1,4 +1,5 @@
 using UnityEngine;
+using VitDeck.Language;
 using VRCSDK2;
 
 namespace VitDeck.Validator
@@ -26,51 +27,51 @@ namespace VitDeck.Validator
             return new IRule[]
             {
 
-                new UnityVersionRule("[A-1]Unity 2017.4.28f1で作成すること","2017.4.28f1"),
+                new UnityVersionRule(LocalizedMessage.Get("Vket4RuleSetBase.UnityVersionRule.Title", "2017.4.28f1"), "2017.4.28f1"),
 
-                new A02_VRCSDKVersionRule("[A-2]VRCSDKは提出時点の最新バージョンを使うこと", new VRCSDKVersion("2019.09.18.12.05")),
+                new A02_VRCSDKVersionRule(LocalizedMessage.Get("Vket4RuleSetBase.VRCSDKVersionRule.Title"), new VRCSDKVersion("2019.09.18.12.05")),
 
-                new AssetGuidBlacklistRule("配布アセットを入稿フォルダ内に入れないこと", Vket4OfficialAssetData.GUIDs),
+                new A04_ExistInSubmitFolderRule(LocalizedMessage.Get("Vket4RuleSetBase.ExistInSubmitFolderRule.Title"), Vket4OfficialAssetData.GUIDs),
 
-                new A04_ExistInSubmitFolderRule("配布物以外の全てのオブジェクト参照が入稿フォルダ内に存在すること", Vket4OfficialAssetData.GUIDs),
+                new AssetGuidBlacklistRule(LocalizedMessage.Get("Vket4RuleSetBase.OfficialAssetDontContainRule.Title"), Vket4OfficialAssetData.GUIDs),
 
-                new AssetNamingRule("[B-1]ファイル名とフォルダ名の使用禁止文字ルール", @"[a-zA-Z0-9 _\.\-\(\)]+"),
+                new AssetNamingRule(LocalizedMessage.Get("Vket4RuleSetBase.NameOfFileAndFolderRule.Title"), @"[a-zA-Z0-9 _\.\-\(\)]+"),
 
-                new AssetPathLengthRule("[B-3]ファイルパスはAsset/から数えて184文字以内に収まっていること", 184),
+                new AssetPathLengthRule(LocalizedMessage.Get("Vket4RuleSetBase.FilePathLengthLimitRule.Title", 184), 184),
 
-                new BoothBoundsRule("[D-1,2]ブースサイズは規定の範囲内に収めること",
-                    size: BoothSizeLimit,
-                    margin: 0.01f),
-
-                new AssetExtentionBlacklistRule("[B-4]メッシュアセットのファイル形式で特定のものが含まれていないこと",
+                new AssetExtentionBlacklistRule(LocalizedMessage.Get("Vket4RuleSetBase.MeshFileTypeBlacklistRule.Title"),
                                                 new string[]{".ma", ".mb", "max", "c4d", ".blend"}
                 ),
 
-                new ContainMatOrTexInAssetRule("[B-4]アセットに埋め込まれたMaterialもしくはTextureを使っていないこと"),
+                new ContainMatOrTexInAssetRule(LocalizedMessage.Get("Vket4RuleSetBase.ContainMatOrTexInAssetRule.Title")),
 
-                new C02_ExhibitStructureRule("[C-2]Static,Dynamicの2つのEmptyオブジェクトを作り、すべてのオブジェクトはこのどちらかの階層下に入れること"),
+                new C02_ExhibitStructureRule(LocalizedMessage.Get("Vket4RuleSetBase.ExhibitStructureRule.Title")),
 
-                new C02_StaticFlagRule("[C-2]Staticオブジェクト以下は特定のStatic設定を行うこと"),
+                new C02_StaticFlagRule(LocalizedMessage.Get("Vket4RuleSetBase.StaticFlagsRule.Title")),
+
+                new BoothBoundsRule(LocalizedMessage.Get("Vket4RuleSetBase.BoothBoundsRule.Title"),
+                    size: BoothSizeLimit,
+                    margin: 0.01f),
 
                 new D04_AssetTypeLimitRule(
-                    string.Format("[D-4]Material使用数が{0}個以下であること", MaterialUsesLimit),
+                    LocalizedMessage.Get("Vket4RuleSetBase.MaterialLimitRule.Title", MaterialUsesLimit),
                     typeof(Material),
                     MaterialUsesLimit,
                     Vket4OfficialAssetData.MaterialGUIDs),
-
+                
                 new D08_LightmapSizeLimitRule(
-                    "[D-8]LightMapの使用枚数を制限以内に収めること",
+                    LocalizedMessage.Get("Vket4RuleSetBase.LightMapsLimitRule.Title"),
                     lightmapCountLimit: LightmapCountLimit,
                     lightmapResolutionLimit: 512),
 
-                new E05_GlobalIlluminationBakedRule("[E-5]StandardシェーダでEmissionを使用する場合、Global IlluminationはBakedを設定すること"),
+                new E05_GlobalIlluminationBakedRule(LocalizedMessage.Get("Vket4RuleSetBase.GlobalIlluminationBakedRule.Title")),
 
-                new UsableComponentListRule("[F-1]コンポーネントの使用可否",
+                new UsableComponentListRule(LocalizedMessage.Get("Vket4RuleSetBase.UsableComponentListRule.Title"),
                     GetComponentReferences(),
                     ignorePrefabGUIDs: Vket4OfficialAssetData.GUIDs,
                     unregisteredComponent: ValidationLevel.NEGOTIABLE),
 
-                new VRCTriggerConfigRule("[F-1]配布Prefab以外のVRC_Triggerは許可された設定のみ使うこと",
+                new VRCTriggerConfigRule(LocalizedMessage.Get("Vket4RuleSetBase.VRCTriggerConfigRule.Title"),
                             new VRC_EventHandler.VrcBroadcastType []{
                                 VRC_EventHandler.VrcBroadcastType.Local },
                             new VRC_Trigger.TriggerType[] {
@@ -98,45 +99,45 @@ namespace VitDeck.Validator
                                 VRC_EventHandler.VrcEventType.AnimationTrigger},
                             Vket4OfficialAssetData.GUIDs),
 
-                new UseMeshColliderRule("[F-1]MeshCollider以外のColliderを使用すること"),
+                new UseMeshColliderRule(LocalizedMessage.Get("Vket4RuleSetBase.UseMeshColliderRule.Title")),
 
-                new VRCTriggerCountLimitRule(string.Format("[F-1]VRC_Triggerの使用数が{0}個以下であること", VRCTriggerCountLimit), VRCTriggerCountLimit),
+                new VRCTriggerCountLimitRule(LocalizedMessage.Get("Vket4RuleSetBase.VRCTriggerCountLimitRule.Title", VRCTriggerCountLimit), VRCTriggerCountLimit),
 
-                new LightCountLimitRule("[F-1]DirectionalLightを使用しないこと", UnityEngine.LightType.Directional, 0),
+                new LightCountLimitRule(LocalizedMessage.Get("Vket4RuleSetBase.DirectionalLightLimitRule.Title"), UnityEngine.LightType.Directional, 0),
 
-                new LightConfigRule("[F-1]PointLightの設定が制限に従っていること", UnityEngine.LightType.Point, ApprovedPointLightConfig),
+                new LightConfigRule(LocalizedMessage.Get("Vket4RuleSetBase.PointLightConfigRule.Title"), UnityEngine.LightType.Point, ApprovedPointLightConfig),
 
-                new LightConfigRule("[F-1]SpotLightの設定が制限に従っていること", UnityEngine.LightType.Spot, ApprovedSpotLightConfig),
+                new LightConfigRule(LocalizedMessage.Get("Vket4RuleSetBase.SpotLightConfigRule.Title"), UnityEngine.LightType.Spot, ApprovedSpotLightConfig),
 
-                new LightConfigRule("[F-1]AreaLightの設定が制限に従っていること", UnityEngine.LightType.Area, ApprovedAreaLightConfig),
+                new LightConfigRule(LocalizedMessage.Get("Vket4RuleSetBase.AreaLightConfigRule.Title"), UnityEngine.LightType.Area, ApprovedAreaLightConfig),
 
                 new LightCountLimitRule(
-                    string.Format("[F-1]AreaLightの使用数が{0}個以下であること", AreaLightUsesLimit),
+                    LocalizedMessage.Get("Vket4RuleSetBase.AreaLightLimitRule.Title", AreaLightUsesLimit),
                     UnityEngine.LightType.Area,
                     AreaLightUsesLimit),
 
-                new UseLightModeRule("[F-1]DefaultCubeにてPointLightで許可されていないModeを使用しないこと", UnityEngine.LightType.Point, unusablePointLightModes),
+                new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.PointLightModeRule.Title"), UnityEngine.LightType.Point, unusablePointLightModes),
 
-                new UseLightModeRule("[F-1]DefaultCubeにてSpotLightで許可されていないModeを使用しないこと", UnityEngine.LightType.Spot, unusableSpotLightModes),
+                new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.SpotLightModeRule.Title"), UnityEngine.LightType.Spot, unusableSpotLightModes),
 
-                new F02_PickupObjectSyncPrefabRule("PickupObjectSyncの設定が規定に従っていること", Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs),
+                new F02_PickupObjectSyncPrefabRule(LocalizedMessage.Get("Vket4RuleSetBase.PickupObjectSyncRule.Title"), Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs),
 
-                new F02_AvatarPedestalPrefabRule("AvatarPedestalの設定が規定に従っていること", Vket4OfficialAssetData.AvatarPedestalPrefabGUIDs),
+                new F02_AvatarPedestalPrefabRule(LocalizedMessage.Get("Vket4RuleSetBase.AvatarPedestalPrefabRule.Title"), Vket4OfficialAssetData.AvatarPedestalPrefabGUIDs),
 
-                new F02_AudioSourcePrefabRule("AudioSourceの設定が規定に従っていること",  Vket4OfficialAssetData.AudioSourcePrefabGUIDs),
+                new F02_AudioSourcePrefabRule(LocalizedMessage.Get("Vket4RuleSetBase.AudioSourcePrefabRule.Title"),  Vket4OfficialAssetData.AudioSourcePrefabGUIDs),
 
                 new F02_PrefabLimitRule(
-                    string.Format("[F-2]Chairの使用数は{0}個に収めること", ChairPrefabUsesLimit),
+                    LocalizedMessage.Get("Vket4RuleSetBase.ChairPrefabLimitRule.Title", ChairPrefabUsesLimit),
                     Vket4OfficialAssetData.ChairPrefabGUIDs,
                     ChairPrefabUsesLimit),
 
                 new F02_PrefabLimitRule(
-                    string.Format("[F-2]PickupObjectSyncの使用数は{0}個に収めること", PickupObjectSyncUsesLimit),
+                    LocalizedMessage.Get("Vket4RuleSetBase.PickupObjectSyncPrefabLimitRule.Title", PickupObjectSyncUsesLimit),
                     Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs,
                     PickupObjectSyncUsesLimit,
                     negotiable: true),
 
-                new F02_VideoPlayerComponentRule("VideoPlayerを使用する際は制限に従うこと"),
+                new F02_VideoPlayerComponentRule(LocalizedMessage.Get("Vket4RuleSetBase.VideoPlayerComponentRule.Title")),
 
             };
         }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -40,8 +41,8 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         child,
                         IssueLevel.Error,
-                        "出展物ルートオブジェクト直下に許可されていないオブジェクトが存在します。",
-                        "出展物ルートオブジェクト直下には「Dynamic」「Static」という名前のオブジェクトを各1つずつ配置し、他の全てのオブジェクトはその中に入れて下さい。"
+                        LocalizedMessage.Get("C02_ExhibitStructureRule.UnauthorizedObject"),
+                        LocalizedMessage.Get("C02_ExhibitStructureRule.UnauthorizedObject.Solution")
                         ));
                 }
             }
@@ -57,8 +58,8 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                         rootObject,
                         IssueLevel.Error,
-                        string.Format("{0}ルートオブジェクトが存在しません。", instanceName),
-                        string.Format("出展物ルートオブジェクト直下に、「{0}」という名前のオブジェクトを作成してください。", instanceName)
+                        LocalizedMessage.Get("C02_ExhibitStructureRule.RootObjectNotFound", instanceName),
+                        LocalizedMessage.Get("C02_ExhibitStructureRule.RootObjectNotFound.Solution", instanceName)
                         ));
                 return;
             }
@@ -70,8 +71,8 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                         instance,
                         IssueLevel.Error,
-                        string.Format("{0}ルートオブジェクトにコンポーネントがアタッチされています。", instanceName),
-                        string.Format("{0}ルートオブジェクトにはTransform以外のコンポーネントをアタッチしないでください。", instanceName)
+                        LocalizedMessage.Get("C02_ExhibitStructureRule.UnauthorizedComponent", instanceName),
+                        LocalizedMessage.Get("C02_ExhibitStructureRule.UnauthorizedComponent.Solution", instanceName)
                         ));
             }
         }

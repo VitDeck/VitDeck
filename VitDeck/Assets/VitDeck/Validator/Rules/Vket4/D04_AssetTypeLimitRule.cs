@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -35,8 +36,8 @@ namespace VitDeck.Validator
 
             if (foundAssets.Count > limit)
             {
-                var message = string.Format("{0}の使用数が{1}個を超えています。({2}個)", type.Name, limit, foundAssets.Count);
-                var solution = string.Format("使用個数を減らすか、公式から提供されている{0}を使用してください。", type.Name);
+                var message = LocalizedMessage.Get("D04_AssetTypeLimitRule.Overuse", type.Name, limit, foundAssets.Count);
+                var solution = LocalizedMessage.Get("D04_AssetTypeLimitRule.Overuse.Solution", type.Name);
 
                 foreach (var asset in foundAssets)
                 {

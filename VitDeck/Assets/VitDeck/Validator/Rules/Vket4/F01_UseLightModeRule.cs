@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -39,8 +40,8 @@ namespace VitDeck.Validator
                         AddIssue(new Issue(
                             obj, 
                             IssueLevel.Error, 
-                            string.Format("{0}Lightの{1} Modeは使用できません。", type, light.lightmapBakeType), 
-                            "使用申請をするかModeを変更して下さい。"
+                            LocalizedMessage.Get("UseLightModeRule.MustNotUse", type, light.lightmapBakeType),
+                            LocalizedMessage.Get("UseLightModeRule.MustNotUse.Solution")
                             ));
                     }
                 }
