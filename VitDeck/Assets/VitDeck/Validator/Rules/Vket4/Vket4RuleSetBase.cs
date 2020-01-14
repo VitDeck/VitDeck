@@ -35,6 +35,9 @@ namespace VitDeck.Validator
 
                 new AssetNamingRule(LocalizedMessage.Get("Vket4RuleSetBase.NameOfFileAndFolderRule.Title"), @"[a-zA-Z0-9 _\.\-\(\)]+"),
 
+                new A04_ExistInSubmitFolderRule("配布物以外の全てのオブジェクト参照が入稿フォルダ内に存在すること", Vket4OfficialAssetData.GUIDs),
+
+
                 new AssetPathLengthRule(LocalizedMessage.Get("Vket4RuleSetBase.FilePathLengthLimitRule.Title", 184), 184),
 
                 new AssetExtentionBlacklistRule(LocalizedMessage.Get("Vket4RuleSetBase.MeshFileTypeBlacklistRule.Title"),
@@ -56,6 +59,11 @@ namespace VitDeck.Validator
                     typeof(Material),
                     MaterialUsesLimit,
                     Vket4OfficialAssetData.MaterialGUIDs),
+                
+                new D08_LightmapSizeLimitRule(
+                    "[D-8]LightMapの使用枚数を制限以内に収めること",
+                    lightmapCountLimit: LightmapCountLimit,
+                    lightmapResolutionLimit: 512),
 
                 new E05_GlobalIlluminationBakedRule(LocalizedMessage.Get("Vket4RuleSetBase.GlobalIlluminationBakedRule.Title")),
 
@@ -140,6 +148,8 @@ namespace VitDeck.Validator
         protected abstract int VRCTriggerCountLimit { get; }
 
         protected abstract int MaterialUsesLimit { get; }
+
+        protected abstract int LightmapCountLimit { get; }
 
         private ComponentReference[] GetComponentReferences()
         {

@@ -38,6 +38,14 @@ namespace VitDeck.Validator
             }
         }
 
+        protected override int LightmapCountLimit
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
         protected override LightConfigRule.LightConfig ApprovedPointLightConfig
         {
             get
