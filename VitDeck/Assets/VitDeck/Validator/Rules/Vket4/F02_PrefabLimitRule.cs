@@ -16,6 +16,7 @@ namespace VitDeck.Validator
         {
             this.prefabGUIDs = new HashSet<string>(prefabGUIDs);
             this.limit = limit;
+            this.negotiable = negotiable;
         }
 
         protected override void Logic(ValidationTarget target)
