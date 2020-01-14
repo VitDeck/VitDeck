@@ -13,6 +13,7 @@ namespace VitDeck.Validator
         private const HideFlags DefaultFlagsForIndicator = HideFlags.DontSave | HideFlags.HideInInspector;
 
         private readonly Bounds limit;
+        private readonly float margin;
         private readonly string floatToStringArgument;
 
         // ルールをValidation毎に生成する場合indicatorResetter.Reset()が叩かれなくなってしまう為、staticに設定
@@ -38,8 +39,8 @@ namespace VitDeck.Validator
         {
             var center = pivot + (Vector3.up * size.y * 0.5f);
             var limit = new Bounds(center, size);
-            limit.Expand(margin);
             this.limit = limit;
+            this.margin = margin;
 
             var maxDecimalPlaces = new float[] { size.x, size.y, size.z, margin }
                 .Select(ToDecimalPlaces)
@@ -78,17 +79,18 @@ namespace VitDeck.Validator
 
             var rootTransformMemory = BoundsIndicators.TransformMemory.SaveAndReset(rootTransform);
 
-            var limitFromRoot = new Bounds(limit.center + rootTransform.position, limit.size);
+            var validationLimit = new Bounds(limit.center + rootTransform.position, limit.size);
+            validationLimit.Expand(margin);
 
             var exceeds = rootObject
                 .GetComponentsInChildren<Transform>(true)
                 .Select(transform => transform.gameObject)
                 .SelectMany(GetObjectBounds)
-                .Where(data => IsExceeded(data.bounds, limitFromRoot));
+                .Where(data => IsExceeded(data.bounds, validationLimit));
 
             var boundsIndicator = rootObject.AddComponent<BoundsIndicators.BoothRangeIndicator>();
             boundsIndicator.hideFlags = DefaultFlagsForIndicator;
-            boundsIndicator.Initialize(limitFromRoot, indicatorResetter.Token);
+            boundsIndicator.Initialize(validationLimit, indicatorResetter.Token);
 
             foreach (var exceed in exceeds)
             {
