@@ -7,7 +7,6 @@ namespace VitDeck.Language
     public class LanguageDictionaryTreeView : TreeView
     {
         private readonly LanguageDictionary dictionary;
-        private readonly MultiColumnHeader header;
 
         public static LanguageDictionaryTreeView CreateInstance(
             LanguageDictionary dictionary,
@@ -64,7 +63,6 @@ namespace VitDeck.Language
             : base(state, multiColumnHeader)
         {
             this.dictionary = dictionary;
-            this.header = multiColumnHeader;
 
             showAlternatingRowBackgrounds = true;
             showBorder = true;
