@@ -1,6 +1,7 @@
 using UnityEditor;
 using System.Text.RegularExpressions;
 using System.IO;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -33,7 +34,7 @@ namespace VitDeck.Validator
             if (folderSize > limit)
             {
                 var reference = AssetDatabase.LoadMainAssetAtPath(path);
-                var message = string.Format("入稿フォルダに含まれるファイルサイズの合計が{0}バイトを超えています。", limit);
+                var message = LocalizedMessage.Get("FolderSizeRule.Exceeded", limit);
                 AddIssue(new Issue(reference, IssueLevel.Error, message, string.Empty));
             }
         }

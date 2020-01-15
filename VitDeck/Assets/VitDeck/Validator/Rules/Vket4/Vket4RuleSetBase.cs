@@ -17,6 +17,8 @@ namespace VitDeck.Validator
             get;
         }
 
+        protected readonly long MegaByte = 1048576;
+
         public IValidationTargetFinder TargetFinder { get { return new Vket4TargetFinder(); } }
 
         public IRule[] GetRules()
@@ -44,6 +46,8 @@ namespace VitDeck.Validator
                 ),
 
                 new ContainMatOrTexInAssetRule(LocalizedMessage.Get("Vket4RuleSetBase.ContainMatOrTexInAssetRule.Title")),
+
+                new FolderSizeRule(LocalizedMessage.Get("Vket4RuleSetBase.FolderSizeRule.Title"), FolderSizeLimit),
 
                 new C02_ExhibitStructureRule(LocalizedMessage.Get("Vket4RuleSetBase.ExhibitStructureRule.Title")),
 
@@ -141,6 +145,8 @@ namespace VitDeck.Validator
 
             };
         }
+
+        protected abstract long FolderSizeLimit { get; }
 
         protected abstract Vector3 BoothSizeLimit { get; }
 
