@@ -12,6 +12,14 @@ namespace VitDeck.Validator
             }
         }
 
+        protected override long FolderSizeLimit
+        {
+            get
+            {
+                return base.FolderSizeLimit * 4;
+            }
+        }
+
         protected override Vector3 BoothSizeLimit
         {
             get
