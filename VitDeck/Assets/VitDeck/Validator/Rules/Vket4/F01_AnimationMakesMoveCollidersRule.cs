@@ -52,7 +52,7 @@ namespace VitDeck.Validator
                         movableCollider.collider,
                         IssueLevel.Error,
                         string.Format("親オブジェく({0})が持つAnimationによってColliderが動く可能性があります。", movableCollider.rootObject.name),
-                        "Colliderを削除するか、オブジェクトをAnimationの対象から外すか、どうしても必要な場合は申請を行ってください。"));
+                        "Colliderを削除するか、オブジェクトをAnimationの対象から外すか、どうしてもアニメーションするColliderが必要な場合は申請を行ってください。"));
             }
         }
 
