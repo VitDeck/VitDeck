@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Language;
 using VitDeck.Utilities;
 
 namespace VitDeck.Validator.GUI
@@ -267,11 +268,11 @@ namespace VitDeck.Validator.GUI
         {
             if (!HasFatalError(results))
             {
-                messages.Add(new Message("ルールチェックが完了しました。" + Environment.NewLine + header, MessageType.Info));
+                messages.Add(new Message(LocalizedMessage.Get("ValidatorWindow.ValidationCompleted") + Environment.NewLine + header, MessageType.Info));
             }
             else
             {
-                messages.Add(new Message("ルールチェックを中断しました。" + Environment.NewLine + header, MessageType.Error));
+                messages.Add(new Message(LocalizedMessage.Get("ValidatorWindow.ValidationAborted") + Environment.NewLine + header, MessageType.Error));
             }
             foreach (var result in results)
             {

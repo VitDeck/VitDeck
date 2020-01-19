@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -29,8 +30,8 @@ namespace VitDeck.Validator
             foreach (var path in hitObjectPaths)
             {
                 var obj = AssetDatabase.LoadMainAssetAtPath(path);
-                var message = String.Format("次のアセットを入稿フォルダ内に配置することは出来ません:{0}", path);
-                var solution = "未編集もしくは編集禁止アセットの場合は入稿フォルダ外へ移動して下さい。それ以外の場合はCtrl+Dで複製したアセットを使用してください。";
+                var message = LocalizedMessage.Get("AssetGuidBlacklistRule.UnauthorizedAssetDetected", path);
+                var solution = LocalizedMessage.Get("AssetGuidBlacklistRule.UnauthorizedAssetDetected.Solution");
                 AddIssue(new Issue(obj, IssueLevel.Error, message, solution, string.Empty));
             }
         }

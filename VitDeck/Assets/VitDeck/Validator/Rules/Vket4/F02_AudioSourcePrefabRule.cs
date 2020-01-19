@@ -1,6 +1,7 @@
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -38,7 +39,7 @@ namespace VitDeck.Validator
                         AddIssue(new Issue(
                         prefabInstance,
                         IssueLevel.Error,
-                        "loop設定をオンに変更することは出来ません。"
+                        LocalizedMessage.Get("F02_AudioSourcePrefabRule.DontLoop")
                         ));
                     }
                 }
@@ -53,7 +54,7 @@ namespace VitDeck.Validator
                         AddIssue(new Issue(
                             prefabInstance,
                             IssueLevel.Error,
-                            string.Format("MaxDistanceの値をPrefabの値({0})より大きい値({1})にすることは出来ません。", defaultValue, moddedValue)
+                            LocalizedMessage.Get("F02_AudioSourcePrefabRule.DontIncreaseMaxDistance", defaultValue, moddedValue)
                             ));
                     }
                 }

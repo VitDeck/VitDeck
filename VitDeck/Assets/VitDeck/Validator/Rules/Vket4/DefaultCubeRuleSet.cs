@@ -15,6 +15,14 @@ namespace VitDeck.Validator
             }
         }
 
+        protected override long FolderSizeLimit
+        {
+            get
+            {
+                return 100 * MegaByte;
+            }
+        }
+
         protected override Vector3 BoothSizeLimit
         {
             get
@@ -36,6 +44,14 @@ namespace VitDeck.Validator
             get
             {
                 return 60;
+            }
+        }
+
+        protected override int LightmapCountLimit
+        {
+            get
+            {
+                return 2;
             }
         }
 

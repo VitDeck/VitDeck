@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -77,7 +78,7 @@ namespace VitDeck.Validator
 
                     if (!found)
                     {
-                        AddComponentIssue("指定されていないコンポーネント", gameObject, component, unregisteredComponentValidationLevel);
+                        AddComponentIssue(LocalizedMessage.Get("UsableComponentListRule.DefaultComponentGroupName"), gameObject, component, unregisteredComponentValidationLevel);
                     }
                 }
             }
@@ -112,11 +113,11 @@ namespace VitDeck.Validator
                 case ValidationLevel.ALLOW:
                     break;
                 case ValidationLevel.NEGOTIABLE:
-                    message = string.Format("{0}:{1}を使用する場合は申請が必要です。", name, component.GetType().Name);
+                    message = LocalizedMessage.Get("UsableComponentListRule.Negotiable", name, component.GetType().Name);
                     AddIssue(new Issue(obj, IssueLevel.Error, message, string.Empty, string.Empty));
                     break;
                 case ValidationLevel.DISALLOW:
-                    message = string.Format("{0}:{1}の使用は許可されていません。", name, component.GetType().Name);
+                    message = LocalizedMessage.Get("UsableComponentListRule.Disallow", name, component.GetType().Name);
                     AddIssue(new Issue(obj, IssueLevel.Error, message, string.Empty, string.Empty));
                     break;
             }

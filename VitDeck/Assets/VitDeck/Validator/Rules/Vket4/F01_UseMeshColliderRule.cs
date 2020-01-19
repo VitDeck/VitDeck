@@ -1,6 +1,7 @@
 using System;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -27,8 +28,8 @@ namespace VitDeck.Validator
                         new Issue(
                             obj, 
                             IssueLevel.Warning,
-                            "MeshColliderは非推奨です。",
-                            "他のColliderを使用してください。"
+                            LocalizedMessage.Get("UseMeshColliderRule.ShouldNotUse"),
+                            LocalizedMessage.Get("UseMeshColliderRule.ShouldNotUse.Solution")
                         ));
                 }
             }

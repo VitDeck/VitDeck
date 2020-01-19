@@ -1,6 +1,7 @@
 using UnityEditor;
 using System.Text.RegularExpressions;
 using System.IO;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -40,7 +41,7 @@ namespace VitDeck.Validator
                 {
                     string prohibition = GetProhibitionPattern(assetName, permissionPattern);
                     var reference = AssetDatabase.LoadMainAssetAtPath(path);
-                    var message = string.Format("アセット名({0})に使用禁止文字({1})が含まれています。", path, prohibition);
+                    var message = LocalizedMessage.Get("AssetNamingRule.UnauthorizedTextDetected", path, prohibition);
                     AddIssue(new Issue(reference, IssueLevel.Error, message, string.Empty));
                 }
             }

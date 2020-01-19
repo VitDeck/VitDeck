@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using System.Linq;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -16,6 +17,7 @@ namespace VitDeck.Validator
         {
             this.prefabGUIDs = new HashSet<string>(prefabGUIDs);
             this.limit = limit;
+            this.negotiable = negotiable;
         }
 
         protected override void Logic(ValidationTarget target)
@@ -30,9 +32,9 @@ namespace VitDeck.Validator
 
             if (objects.Length > limit)
             {
-                var message = string.Format("Prefabの使用数制限（{1}個）を超えています。（{0}個）", objects.Length, limit);
+                var message = LocalizedMessage.Get("F02_PrefabLimitRule.Overuse", limit, objects.Length);
                 var solution = negotiable ?
-                    "申請することで上限突破が可能です。" : "";
+                    "F02_PrefabLimitRule.Overuse.NegotiableSolution" : "";
 
                 foreach (var obj in objects)
                 {
