@@ -124,6 +124,8 @@ namespace VitDeck.Validator
 
                 new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.SpotLightModeRule.Title"), UnityEngine.LightType.Spot, unusableSpotLightModes),
 
+                new AnimationMakesMoveCollidersRule("ColliderをAnimationで動かす際は申請を行うこと"),
+
                 new F02_PickupObjectSyncPrefabRule(LocalizedMessage.Get("Vket4RuleSetBase.PickupObjectSyncRule.Title"), Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs),
 
                 new F02_AvatarPedestalPrefabRule(LocalizedMessage.Get("Vket4RuleSetBase.AvatarPedestalPrefabRule.Title"), Vket4OfficialAssetData.AvatarPedestalPrefabGUIDs),
