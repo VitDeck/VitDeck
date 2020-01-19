@@ -44,14 +44,15 @@ namespace VitDeck.Validator
             var movableColliders = target.GetAllObjects()
                 .SelectMany(EnumerateAttachedAnimationClips)
                 .Distinct()
-                .SelectMany(FindColliderReferenceInAnimationClip);
+                .SelectMany(FindColliderReferenceInAnimationClip)
+                .Distinct();
 
             foreach (var movableCollider in movableColliders)
             {
                 AddIssue(new Issue(
                         movableCollider.collider,
                         IssueLevel.Error,
-                        string.Format("親オブジェく({0})が持つAnimationによってColliderが動く可能性があります。", movableCollider.rootObject.name),
+                        string.Format("親オブジェクト({0})が持つAnimationによってColliderが動く可能性があります。", movableCollider.rootObject.name),
                         "Colliderを削除するか、オブジェクトをAnimationの対象から外すか、どうしてもアニメーションするColliderが必要な場合は申請を行ってください。"));
             }
         }
@@ -61,43 +62,41 @@ namespace VitDeck.Validator
             AnimationClipContext context)
         {
             var rootObject = context.rootObject;
-            var motionSerialized = new SerializedObject(context.clip);
+            var animationClip = context.clip;
 
-            var list = FindColliderReferenceInCurve(rootObject, motionSerialized.FindProperty("m_PositionCurves"))
-                .Concat(FindColliderReferenceInCurve(rootObject, motionSerialized.FindProperty("m_EulerCurves")))
-                .Concat(FindColliderReferenceInCurve(rootObject, motionSerialized.FindProperty("m_ScaleCurves")));
-
-            foreach (var collider in list)
+            var bindings = AnimationUtility.GetCurveBindings(animationClip);
+            foreach (var binding in bindings)
             {
-                yield return new ColliderContext(collider, context.rootObject, context.clip);
+                if (binding.type == typeof(Transform))
+                {
+                    var target = rootObject.transform.Find(binding.path);
+                    if (target == null)
+                    {
+                        continue;
+                    }
+
+                    var colliders = target.GetComponentsInChildren<Collider>(true);
+                    foreach (var collider in colliders)
+                    {
+                        yield return new ColliderContext(collider, rootObject, animationClip); ;
+                    }
+                }
+                else if (binding.type.IsSubclassOf(typeof(Collider)))
+                {
+                    var target = rootObject.transform.Find(binding.path);
+                    if (target == null)
+                    {
+                        continue;
+                    }
+
+                    var colliders = target.GetComponents<Collider>();
+                    foreach (var collider in colliders)
+                    {
+                        yield return new ColliderContext(collider, rootObject, animationClip);
+                    }
+                }
             }
         }
-
-        private static IEnumerable<Collider> FindColliderReferenceInCurve(
-            GameObject rootObject,
-            SerializedProperty positionCurves)
-        {
-            for (var i = 0; i < positionCurves.arraySize; i++)
-            {
-                var curve = positionCurves.GetArrayElementAtIndex(i);
-
-                var path = curve.FindPropertyRelative("path");
-
-                var target = rootObject.transform.Find(path.stringValue);
-
-                if (target == null)
-                {
-                    yield break;
-                }
-
-                var colliders = target.GetComponentsInChildren<Collider>();
-                foreach (var collider in colliders)
-                {
-                    yield return collider;
-                }
-            }
-        }
-
 
         private static IEnumerable<AnimationClipContext> EnumerateAttachedAnimationClips(GameObject gameObject)
         {
@@ -107,7 +106,7 @@ namespace VitDeck.Validator
             }
 
             return EnumerateAllAnimationClips(gameObject)
-                .Select(motion => new AnimationClipContext(gameObject, motion));
+                .Select(animationClip => new AnimationClipContext(gameObject, animationClip));
         }
 
         private static IEnumerable<AnimationClip> EnumerateAllAnimationClips(GameObject gameObject)
@@ -119,17 +118,17 @@ namespace VitDeck.Validator
 
             foreach (var animator in gameObject.GetComponents<Animator>())
             {
-                foreach (var motion in EnumerateAllAnimationClips(animator))
+                foreach (var animationClip in EnumerateAllAnimationClips(animator))
                 {
-                    yield return motion;
+                    yield return animationClip;
                 }
             }
 
             foreach (var animation in gameObject.GetComponents<Animation>())
             {
-                foreach (var motion in EnumerateAllAnimationClips(animation))
+                foreach (var animationClip in EnumerateAllAnimationClips(animation))
                 {
-                    yield return motion;
+                    yield return animationClip;
                 }
             }
         }

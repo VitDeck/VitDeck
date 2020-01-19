@@ -52,7 +52,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: New State 0
+  m_Name: MovableState
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -65,7 +65,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ec8ad008116f41c4fa8be15a4ba3907f, type: 2}
+  m_Motion: {fileID: 7400000, guid: 56b807cc336170947997b75668cb8716, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
