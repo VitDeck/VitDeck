@@ -20,6 +20,7 @@ namespace VitDeck.Validator.Test
             var errors = result.Issues.Where(issue => issue.level == IssueLevel.Error);
 
             Assert.That(errors.Count(DetectedDontMoveCollider), Is.Zero);
+            Assert.That(errors.Count(DetectedTransformWithoutCollider), Is.Zero);
             Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animator")), Is.EqualTo(5));
             Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animator (OverrideController)")), Is.EqualTo(1));
             Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animator (No Node Connection)")), Is.EqualTo(1));
@@ -33,6 +34,11 @@ namespace VitDeck.Validator.Test
         private bool DetectedDontMoveCollider(Issue issue)
         {
             return issue.target.name.Contains("FixedCollider");
+        }
+
+        private bool DetectedTransformWithoutCollider(Issue issue)
+        {
+            return issue.target.name.Contains("NoCollider");
         }
 
         private bool IsRootGameobjectNameOf(Issue issue, string expectedName)
