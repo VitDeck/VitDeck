@@ -1,14 +1,12 @@
 using NUnit.Framework;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace VitDeck.Validator
+namespace VitDeck.Validator.Test
 {
     public class F01_TestAnimationClipRule
     {
-        const string BaseFolder = "Assets/VitDeck/Validator/Tests/Data/F01_AnimationRule";
+        const string BaseFolder = "Assets/VitDeck/Validator/Tests/Data/F01_AnimationClipRule";
 
         [Test]
         public void MaterialChangeAnimationTest()
