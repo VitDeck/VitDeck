@@ -51,7 +51,7 @@ namespace VitDeck.Validator
                     targetObject,
                     IssueLevel.Error,
                     string.Format("Animatorと{0}を併用することは出来ません。", mustSeparatedType),
-                    "親子関係を付けるなどして同じGameObject上に存在する事を避けて下さい。"
+                    "親子関係を付けるなどして同じGameObject上に存在する事を避けて下さい。どうしても必要な場合は入稿ルール外申請をしてください。"
                     ));
             }
         }

@@ -38,7 +38,8 @@ namespace VitDeck.Validator
                         AddIssue(new Issue(
                             clip,
                             IssueLevel.Error,
-                            "AnimationClip内でMaterialの変更は出来ません。"
+                            "AnimationClip内でMaterialの変更は出来ません。",
+                            "どうしても必要な場合は入稿ルール外申請申請を行ってください。"
                             ));
                     }
                     // エラーは1個出せば十分なのでbreakでループを抜ける
@@ -61,7 +62,8 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     clip,
                     IssueLevel.Error,
-                    "AnimationClip内で../を含んだパスを利用する事は出来ません。"
+                    "AnimationClip内で../を含んだパスを利用する事は出来ません。",
+                    "どうしても必要な場合は入稿ルール外申請申請を行ってください。"
                     ));
             }
         }
