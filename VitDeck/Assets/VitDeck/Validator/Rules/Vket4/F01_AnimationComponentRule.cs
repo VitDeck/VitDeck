@@ -15,7 +15,7 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     component,
                     IssueLevel.Warning,
-                    "不具合が出る場合を除き、CullingModeはAlwaysを避けて下さい。"
+                    "不具合が出る場合を除き、CullingTypeはAlwaysを避けて下さい。"
                     ));
             }
         }

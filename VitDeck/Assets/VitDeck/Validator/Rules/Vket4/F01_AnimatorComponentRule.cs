@@ -23,6 +23,14 @@ namespace VitDeck.Validator
                     "Humanoidの場合は代わりにAnimationClipのBake Into Poseを使用してください。"
                     ));
             }
+            if (component.cullingMode == AnimatorCullingMode.AlwaysAnimate)
+            {
+                AddIssue(new Issue(
+                    component,
+                    IssueLevel.Warning,
+                    "不具合が出る場合を除き、CullingModeはAlwaysを避けて下さい。"
+                    ));
+            }
         }
 
         protected override void HasComponentObjectLogic(GameObject hasComponentObject)
