@@ -124,13 +124,13 @@ namespace VitDeck.Validator
 
                 new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.SpotLightModeRule.Title"), UnityEngine.LightType.Spot, unusableSpotLightModes),
 
-                new AnimationMakesMoveCollidersRule("ColliderをAnimationで動かす際は申請を行うこと"),
+                new AnimationMakesMoveCollidersRule(LocalizedMessage.Get("Vket4RuleSetBase.AnimationMakesMoveCollidersRule.Title")),
                 
-                new F01_AnimationClipRule("[F-1]AnimationClipは既定の制限に従うこと"),
+                new F01_AnimationClipRule(LocalizedMessage.Get("Vket4RuleSetBase.F01_AnimationClipRule.Title")),
 
-                new F01_AnimationComponentRule("[F-1]AnimationComponentは既定の制限に従うこと"),
+                new F01_AnimationComponentRule(LocalizedMessage.Get("Vket4RuleSetBase.F01_AnimationComponentRule.Title")),
 
-                new F01_AnimatorComponentRule("[F-1]AnimatorComponentは既定の制限に従うこと",
+                new F01_AnimatorComponentRule(LocalizedMessage.Get("Vket4RuleSetBase.F01_AnimatorComponentRule.Title"),
                     new System.Type[]{
                         typeof(VRC_Pickup),
                         typeof(VRC_ObjectSync)
