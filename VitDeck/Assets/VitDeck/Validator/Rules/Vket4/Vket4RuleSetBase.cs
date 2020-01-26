@@ -124,6 +124,8 @@ namespace VitDeck.Validator
 
                 new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.SpotLightModeRule.Title"), UnityEngine.LightType.Spot, unusableSpotLightModes),
 
+                new AnimationMakesMoveCollidersRule("ColliderをAnimationで動かす際は申請を行うこと"),
+                
                 new F01_AnimationClipRule("[F-1]AnimationClipは既定の制限に従うこと"),
 
                 new F01_AnimationComponentRule("[F-1]AnimationComponentは既定の制限に従うこと"),
