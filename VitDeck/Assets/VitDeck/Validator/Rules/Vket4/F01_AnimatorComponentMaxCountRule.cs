@@ -1,6 +1,7 @@
-﻿using System.Linq;
+using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -24,8 +25,8 @@ namespace VitDeck.Validator
 
 			if (animatorCount > limit)
 			{
-				var message = string.Format("Animatorコンポーネントの使用数が{0}個を超えています。({1}個)", limit, animatorCount);
-				var solution = "Animatorコンポーネントの使用数を減らしてください。";
+				var message = LocalizedMessage.Get("F01_AnimatorComponentMaxCountRule.Exceeded", limit, animatorCount);
+				var solution = "F01_AnimatorComponentMaxCountRule.Exceeded.Solution";
 
 				foreach (var animatorObject in animatorObjects)
 				{
