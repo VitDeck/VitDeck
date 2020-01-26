@@ -18,7 +18,7 @@ namespace VitDeck.Validator.Test
             Assert.That(issues.Count, Is.EqualTo(ANIMATOR_LIMIT_COUNT + 1));
             for (int i = 0; i < issues.Count; i++)
             {
-                Assert.That(issues[0].level, Is.EqualTo(IssueLevel.Error));
+                Assert.That(issues[i].level, Is.EqualTo(IssueLevel.Error));
                 if (i == 0)
                 {
                     Assert.That(result.Issues[i].target.name, Is.EqualTo(string.Format("AnimatorObject")));
