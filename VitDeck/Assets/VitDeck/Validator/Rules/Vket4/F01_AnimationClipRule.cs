@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -38,8 +39,8 @@ namespace VitDeck.Validator
                         AddIssue(new Issue(
                             clip,
                             IssueLevel.Error,
-                            "AnimationClip内でMaterialの変更は出来ません。",
-                            "どうしても必要な場合は入稿ルール外申請申請を行ってください。"
+                            LocalizedMessage.Get("F01_AnimationClipRule.DontChangeMaterialInAnimation"),
+                            LocalizedMessage.Get("F01_AnimationClipRule.DontChangeMaterialInAnimation.Solution")
                             ));
                     }
                     // エラーは1個出せば十分なのでbreakでループを抜ける
@@ -62,8 +63,8 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     clip,
                     IssueLevel.Error,
-                    "AnimationClip内で../を含んだパスを利用する事は出来ません。",
-                    "どうしても必要な場合は入稿ルール外申請申請を行ってください。"
+                    LocalizedMessage.Get("F01_AnimationClipRule.DontAccessParentObject"),
+                    LocalizedMessage.Get("F01_AnimationClipRule.DontAccessParentObject.Solution")
                     ));
             }
         }

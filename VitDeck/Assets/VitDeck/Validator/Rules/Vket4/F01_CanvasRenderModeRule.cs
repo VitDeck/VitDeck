@@ -1,7 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -24,7 +25,7 @@ namespace VitDeck.Validator
 			
 				if (isWorldSpaceRenderMode)
 				{
-					var message = string.Format("{0}においてCanvasのRenderModeがWorldSpaceになっていません。", referenceObject);
+					var message = LocalizedMessage.Get("F01_CanvasRenderModeRule.CanvasIsNotInWorldSpace", referenceObject);
 					AddIssue(new Issue(referenceObject, IssueLevel.Error, message, string.Empty));
 				}
 			}

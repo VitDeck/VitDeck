@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -19,8 +20,8 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     component,
                     IssueLevel.Error,
-                    "Apply Root Motionは使用できません。",
-                    "Humanoidの場合は代わりにAnimationClipのBake Into Poseを使用してください。"
+                    LocalizedMessage.Get("F01_AnimatorComponentRule.ShouldNotUseApplyRootMotion"),
+                    LocalizedMessage.Get("F01_AnimatorComponentRule.ShouldNotUseApplyRootMotion.Solution")
                     ));
             }
             if (component.cullingMode == AnimatorCullingMode.AlwaysAnimate)
@@ -28,7 +29,7 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     component,
                     IssueLevel.Warning,
-                    "不具合が出る場合を除き、CullingModeはAlwaysを避けて下さい。"
+                    LocalizedMessage.Get("F01_AnimatorComponentRule.ShouldNotUseAlwaysAnimate")
                     ));
             }
         }
@@ -50,8 +51,8 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     targetObject,
                     IssueLevel.Error,
-                    string.Format("Animatorと{0}を併用することは出来ません。", mustSeparatedType),
-                    "親子関係を付けるなどして同じGameObject上に存在する事を避けて下さい。どうしても必要な場合は入稿ルール外申請をしてください。"
+                    LocalizedMessage.Get("F01_AnimatorComponentRule.MustUseComponentsSeparately", mustSeparatedType),
+                    LocalizedMessage.Get("F01_AnimatorComponentRule.MustUseComponentsSeparately.Solution")
                     ));
             }
         }

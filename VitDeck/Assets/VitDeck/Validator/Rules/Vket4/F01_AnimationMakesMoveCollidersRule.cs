@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Animations;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -52,8 +53,8 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                         movableCollider.collider,
                         IssueLevel.Error,
-                        string.Format("親オブジェクト({0})が持つAnimationによってColliderが動く可能性があります。", movableCollider.rootObject.name),
-                        "Colliderを削除するか、オブジェクトをAnimationの対象から外すか、どうしてもアニメーションするColliderが必要な場合は申請を行ってください。"));
+                        LocalizedMessage.Get("AnimationMakesMoveCollidersRule.WillMakesMove", movableCollider.rootObject.name),
+                        LocalizedMessage.Get("AnimationMakesMoveCollidersRule.WillMakesMove.Solution")));
             }
         }
 
