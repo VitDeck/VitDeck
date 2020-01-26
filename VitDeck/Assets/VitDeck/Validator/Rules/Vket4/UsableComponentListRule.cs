@@ -59,9 +59,13 @@ namespace VitDeck.Validator
                     {
                         continue;
                     }
-
+#if UNITY_2018_3_OR_NEWER
+                    var isPrefabComponent = !PrefabUtility.IsAddedComponentOverride(component);
+#else
+                    var isPrefabComponent = !PrefabUtility.IsComponentAddedToPrefabInstance(component);
+#endif
                     if (isIgnorePrefabInstance &&
-                        !PrefabUtility.IsComponentAddedToPrefabInstance(component))
+                        isPrefabComponent)
                     {
                         continue;
                     }
