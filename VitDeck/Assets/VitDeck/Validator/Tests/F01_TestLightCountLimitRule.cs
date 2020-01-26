@@ -43,8 +43,8 @@ namespace VitDeck.Validator.Test
             Assert.That(result.Issues.Count, Is.EqualTo(count));
             Assert.That(result.Issues[0].target.name, Is.EqualTo(string.Format("{0}Light", type)));
             Assert.That(result.Issues[0].level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(result.Issues[0].message, Is.EqualTo(string.Format("{0} Lightが{1}個を超えています。({2}個)", type, limit, count)));
-            Assert.That(result.Issues[0].solution, Is.EqualTo("別のLightを使用するか、削除して個数を減らして下さい。"));
+            //Assert.That(result.Issues[0].message, Is.EqualTo(string.Format("{0} Lightが{1}個を超えています。({2}個)", type, limit, count)));
+            //Assert.That(result.Issues[0].solution, Is.EqualTo("別のLightを使用するか、削除して個数を減らして下さい。"));
         }
     }
 }
