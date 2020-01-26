@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace VitDeck.Language
 {
@@ -22,7 +24,14 @@ namespace VitDeck.Language
                 return messageID;
             }
 
-            return string.Format(translated, args);
+            try
+            {
+                return string.Format(translated, args);
+            }
+            catch (FormatException e)
+            {
+                throw new InvalidOperationException(String.Format("翻訳文のフォーマットが一致しません。\nMessageID={0}\nMessage{1}", messageID, translated), e);
+            }
         }
 
         public static void SetDictionary(LanguageDictionary dictionary)
