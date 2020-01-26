@@ -28,8 +28,8 @@ namespace VitDeck.Validator.Test
             Assert.That(result.Issues.Count, Is.EqualTo(1));
             Assert.That(result.Issues[0].target, Is.EqualTo(null));
             Assert.That(result.Issues[0].level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(result.Issues[0].message, Is.EqualTo(string.Format("実行中のUnityのバージョン({0})が指定されたバージョンと異なっています。", version)));
-            Assert.That(result.Issues[0].solution, Is.EqualTo(string.Format("バージョン({0})を使用してください。", "invalidVersion")));
+            //Assert.That(result.Issues[0].message, Is.EqualTo(string.Format("実行中のUnityのバージョン({0})が指定されたバージョンと異なっています。", version)));
+            //Assert.That(result.Issues[0].solution, Is.EqualTo(string.Format("バージョン({0})を使用してください。", "invalidVersion")));
             Assert.That(result.Issues[0].solutionURL, Is.EqualTo(""));
         }
     }

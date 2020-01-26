@@ -126,6 +126,18 @@ namespace VitDeck.Validator
 
                 new AnimationMakesMoveCollidersRule("ColliderをAnimationで動かす際は申請を行うこと"),
 
+                new F01_AnimationClipRule("[F-1]AnimationClipは既定の制限に従うこと"),
+
+                new F01_AnimationComponentRule("[F-1]AnimationComponentは既定の制限に従うこと"),
+
+                new F01_AnimatorComponentRule("[F-1]AnimatorComponentは既定の制限に従うこと",
+                    new System.Type[]{
+                        typeof(VRC_Pickup),
+                        typeof(VRC_ObjectSync)
+                    }),
+
+                new F01_CanvasRenderModeRule(LocalizedMessage.Get("Vket4RuleSetBase.CanvasRenderModeRule.Title")),
+
                 new F02_PickupObjectSyncPrefabRule(LocalizedMessage.Get("Vket4RuleSetBase.PickupObjectSyncRule.Title"), Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs),
 
                 new F02_AvatarPedestalPrefabRule(LocalizedMessage.Get("Vket4RuleSetBase.AvatarPedestalPrefabRule.Title"), Vket4OfficialAssetData.AvatarPedestalPrefabGUIDs),
@@ -145,6 +157,7 @@ namespace VitDeck.Validator
 
                 new F02_VideoPlayerComponentRule(LocalizedMessage.Get("Vket4RuleSetBase.VideoPlayerComponentRule.Title")),
 
+                new F01_AnimatorComponentMaxCountRule(LocalizedMessage.Get("Vket4RuleSetBase.AnimatorComponentMaxCountRule.Title"), limit: 50)
             };
         }
 
