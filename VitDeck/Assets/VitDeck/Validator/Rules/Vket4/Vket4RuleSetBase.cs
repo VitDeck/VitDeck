@@ -145,6 +145,7 @@ namespace VitDeck.Validator
 
                 new F02_VideoPlayerComponentRule(LocalizedMessage.Get("Vket4RuleSetBase.VideoPlayerComponentRule.Title")),
 
+                new F01_AnimatorComponentMaxCountRule(LocalizedMessage.Get("Vket4RuleSetBase.AnimatorComponentMaxCountRule.Title"), limit: 50)
             };
         }
 
