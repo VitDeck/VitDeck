@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using UnityEngine;
 
 namespace VitDeck.Validator.Test
@@ -9,7 +9,7 @@ namespace VitDeck.Validator.Test
 		public void TestValidate()
 		{
 			var finder = new ValidationTargetFinder();
-			var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/F01_CanvasRenderModeRule");
+			var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/F01_CanvasRenderModeRule", true);
 			var rule = new F01_CanvasRenderModeRule("RenderMode.WorldSpaceテスト");
 			var result = rule.Validate(target);
 			Assert.That(result.RuleName, Is.EqualTo("RenderMode.WorldSpaceテスト"));
