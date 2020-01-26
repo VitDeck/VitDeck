@@ -1,4 +1,5 @@
 using UnityEngine;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -15,7 +16,7 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     component,
                     IssueLevel.Warning,
-                    "不具合が出る場合を除き、CullingTypeはAlwaysを避けて下さい。"
+                    LocalizedMessage.Get("F01_AnimationComponentRule.ShouldNotUseAlwaysAnimate")
                     ));
             }
         }
