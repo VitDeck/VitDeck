@@ -21,6 +21,19 @@ namespace VitDeck.Validator
 
         public IValidationTargetFinder TargetFinder { get { return new Vket4TargetFinder(); } }
 
+        private readonly IObjectDetector officialPrefabsDetector;
+
+        public Vket4RuleSetBase() : base()
+        {
+            officialPrefabsDetector = new PrefabPartsDetector(
+                Vket4OfficialAssetData.AudioSourcePrefabGUIDs,
+                Vket4OfficialAssetData.AvatarPedestalPrefabGUIDs,
+                Vket4OfficialAssetData.ChairPrefabGUIDs,
+                Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs,
+                Vket4OfficialAssetData.CanvasPrefabGUIDs,
+                Vket4OfficialAssetData.PointLightProbeGUIDs);
+        }
+
         public IRule[] GetRules()
         {
             // デフォルトで使っていたAttribute式は宣言時にconst以外のメンバーが利用できない。
@@ -128,13 +141,13 @@ namespace VitDeck.Validator
                 
                 new F01_AnimationClipRule(LocalizedMessage.Get("Vket4RuleSetBase.F01_AnimationClipRule.Title")),
 
-                new F01_AnimationComponentRule(LocalizedMessage.Get("Vket4RuleSetBase.F01_AnimationComponentRule.Title")),
+                new F01_AnimationComponentRule(LocalizedMessage.Get("Vket4RuleSetBase.F01_AnimationComponentRule.Title"), officialPrefabsDetector),
 
                 new F01_AnimatorComponentRule(LocalizedMessage.Get("Vket4RuleSetBase.F01_AnimatorComponentRule.Title"),
                     new System.Type[]{
                         typeof(VRC_Pickup),
                         typeof(VRC_ObjectSync)
-                    }),
+                    },officialPrefabsDetector),
 
                 new F01_CanvasRenderModeRule(LocalizedMessage.Get("Vket4RuleSetBase.CanvasRenderModeRule.Title")),
 

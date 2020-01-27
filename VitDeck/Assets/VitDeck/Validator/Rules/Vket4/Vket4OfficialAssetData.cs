@@ -3199,5 +3199,15 @@ namespace VitDeck.Validator
             "e4309533ddcc0af4d90979c8c9e4f4d4",
             "30766b1bee81dc84789f758f8ccafc3c",
         };
+
+        public static string[] CanvasPrefabGUIDs = new string[]
+        {
+            "727203c3dc70fb64ca97c25804554dd1",
+        };
+
+        public static string[] PointLightProbeGUIDs = new string[]
+        {
+            "84a3dfcb7e1c0644c9618e91e2fe71d7",
+        };
     }
 }
