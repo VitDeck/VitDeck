@@ -75,7 +75,7 @@ namespace VitDeck.Validator
                     typeof(Material),
                     MaterialUsesLimit,
                     Vket4OfficialAssetData.MaterialGUIDs),
-                
+
                 new D08_LightmapSizeLimitRule(
                     LocalizedMessage.Get("Vket4RuleSetBase.LightMapsLimitRule.Title"),
                     lightmapCountLimit: LightmapCountLimit,
@@ -138,7 +138,7 @@ namespace VitDeck.Validator
                 new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.SpotLightModeRule.Title"), UnityEngine.LightType.Spot, unusableSpotLightModes),
 
                 new AnimationMakesMoveCollidersRule(LocalizedMessage.Get("Vket4RuleSetBase.AnimationMakesMoveCollidersRule.Title")),
-                
+
                 new F01_AnimationClipRule(LocalizedMessage.Get("Vket4RuleSetBase.F01_AnimationClipRule.Title")),
 
                 new F01_AnimationComponentRule(LocalizedMessage.Get("Vket4RuleSetBase.F01_AnimationComponentRule.Title"), officialPrefabsDetector),
