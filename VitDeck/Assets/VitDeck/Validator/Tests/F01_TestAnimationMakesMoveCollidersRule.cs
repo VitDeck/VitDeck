@@ -29,6 +29,8 @@ namespace VitDeck.Validator.Test
             Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animator (Blending)")), Is.EqualTo(2));
             Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animation")), Is.EqualTo(1));
             Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animation (Has In Array)")), Is.EqualTo(1));
+            Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animator (With Rigidbody)")), Is.EqualTo(0));
+
         }
 
         private bool DetectedDontMoveCollider(Issue issue)

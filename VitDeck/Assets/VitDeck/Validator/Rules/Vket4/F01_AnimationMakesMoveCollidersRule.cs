@@ -76,6 +76,12 @@ namespace VitDeck.Validator
                         continue;
                     }
 
+                    var parentRigid = target.GetComponentInParent<Rigidbody>();
+                    if (parentRigid != null)
+                    {
+                        continue;
+                    }
+
                     var colliders = target.GetComponentsInChildren<Collider>(true);
                     foreach (var collider in colliders)
                     {
@@ -86,6 +92,12 @@ namespace VitDeck.Validator
                 {
                     var target = rootObject.transform.Find(binding.path);
                     if (target == null)
+                    {
+                        continue;
+                    }
+
+                    var parentRigid = target.GetComponentInParent<Rigidbody>();
+                    if (parentRigid != null)
                     {
                         continue;
                     }
