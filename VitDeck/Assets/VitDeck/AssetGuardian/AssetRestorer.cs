@@ -98,7 +98,7 @@ namespace VitDeck.AssetGuardian
                 var rootTransform = rootGameObject.transform;
                 foreach (Transform transform in rootGameObject.GetComponentsInChildren<Transform>(true))
                 {
-                    if (transform == rootTransform || transform.parent == rootTransform)
+                    if (IsShownInProjectView(rootTransform, transform))
                     {
                         transform.gameObject.hideFlags = baseHideFlags;
                     }
@@ -109,6 +109,15 @@ namespace VitDeck.AssetGuardian
                 }
                 // コンポーネントのHideFlagsのセットは後でやらないとGameObject側に対する処理で上書きされてしまう。
                 HideAllComponents(rootGameObject);
+            }
+
+            private static bool IsShownInProjectView(Transform rootTransform, Transform transform)
+            {
+#if UNITY_2018_3_OR_NEWER
+                return transform == rootTransform;
+#else
+                return transform == rootTransform || transform.parent == rootTransform;
+#endif
             }
 
             private void HideAllComponents(GameObject gameObject)
