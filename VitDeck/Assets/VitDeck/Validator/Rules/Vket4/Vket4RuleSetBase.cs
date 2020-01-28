@@ -42,7 +42,7 @@ namespace VitDeck.Validator
             return new IRule[]
             {
 
-                new UnityVersionRule(LocalizedMessage.Get("Vket4RuleSetBase.UnityVersionRule.Title", "2017.4.28f1"), "2017.4.28f1"),
+                new UnityVersionRule(LocalizedMessage.Get("Vket4RuleSetBase.UnityVersionRule.Title", "2018.4.14f1"), "2018.4.14f1"),
 
                 new A02_VRCSDKVersionRule(LocalizedMessage.Get("Vket4RuleSetBase.VRCSDKVersionRule.Title"), new VRCSDKVersion("2019.09.18.12.05")),
 
