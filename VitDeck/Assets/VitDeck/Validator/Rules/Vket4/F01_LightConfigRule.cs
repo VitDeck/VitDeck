@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -82,8 +83,8 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     light.gameObject,
                     IssueLevel.Error,
-                    string.Format("{0}Lightは使用できません。", light.type),
-                    "削除するかTypeを変更して他のLightを使用して下さい。"));
+                    LocalizedMessage.Get("LightConfigRule.UnauthorizedLightType", light.type),
+                    LocalizedMessage.Get("LightConfigRule.UnauthorizedLightType.Solution")));
 
                 return;
             }
@@ -92,10 +93,10 @@ namespace VitDeck.Validator
             {
                 AddIssue(new Issue(
                     light.gameObject, 
-                    IssueLevel.Error, 
-                    string.Format("{0}LightのModeが{1}以外に設定されています。({2})", 
+                    IssueLevel.Error,
+                    LocalizedMessage.Get("LightConfigRule.UnauthorizedLightMode", 
                         light.type, bakeTypeListString, light.lightmapBakeType),
-                    string.Format("Modeを{0}に設定して下さい。", bakeTypeListString)
+                    LocalizedMessage.Get("LightConfigRule.UnauthorizedLightMode.Solution", bakeTypeListString)
                     ));
             }
 
@@ -106,9 +107,9 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         light.gameObject,
                         IssueLevel.Error,
-                        string.Format("{0}LightのRangeが{1}～{2}の範囲を超えています。(設定値：{3})", 
+                        LocalizedMessage.Get("LightConfigRule.OverRange", 
                             light.type, minRange, maxRange, light.range),
-                        string.Format("Rangeを範囲内になるように設定して下さい。")
+                        LocalizedMessage.Get("LightConfigRule.OverRange.Solution")
                         ));
                 }
             }
@@ -120,9 +121,9 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         light.gameObject,
                         IssueLevel.Error,
-                        string.Format("{0}LightのIntensityが{1}～{2}の範囲を超えています。(設定値：{3})", 
+                        LocalizedMessage.Get("LightConfigRule.OverIntensity", 
                             light.type, minIntensity, maxIntensity, light.intensity),
-                        string.Format("Intensityを範囲内になるように設定して下さい。")
+                        LocalizedMessage.Get("LightConfigRule.OverIntensity.Solution")
                         ));
                 }
             }
@@ -134,9 +135,9 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         light.gameObject,
                         IssueLevel.Error,
-                        string.Format("{0}LightのIndirect Multiplierが{1}～{2}の範囲を超えています。(設定値：{3})",
+                        LocalizedMessage.Get("LightConfigRule.OverIndirectMultiplier",
                             light.type, minBounceIntensity, maxBounceIntensity, light.bounceIntensity),
-                        string.Format("Indirect Multiplierを範囲内になるように設定して下さい。")
+                        LocalizedMessage.Get("LightConfigRule.OverIndirectMultiplier.Solution")
                         ));
                 }
             }

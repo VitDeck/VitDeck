@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using UnityEditor;
 using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -60,8 +61,8 @@ namespace VitDeck.Validator
                     if (!filePathsInSubmitDirectory.Contains(dependencyPath))
                     { 
                         var referenceObject = AssetDatabase.LoadMainAssetAtPath(dependencyPath);
-                        var message = String.Format("アセット{0}が入稿フォルダ内に含まれていません。", dependencyPath);
-                        var solution = String.Format("入稿するアセットは(運営から配布されたアセットを除いて)すべてAssetsフォルダ直下の「出展者ID」フォルダ以下に配置してください。");
+                        var message = LocalizedMessage.Get("A04_ExistInSubmitFolderRule.AssetOutOfPackage", dependencyPath);
+                        var solution = LocalizedMessage.Get("A04_ExistInSubmitFolderRule.AssetOutOfPackage");
                         AddIssue(new Issue(referenceObject, IssueLevel.Error, message, solution));
                     }
                 }

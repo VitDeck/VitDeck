@@ -3,6 +3,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
@@ -42,15 +43,8 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     null,
                     IssueLevel.Error,
-                    "LightMapのベイク方法をAuto Generateにしている場合、正常な検証が行えません。",
-                    "以下の操作を行ってください。\n" +
-                    "1. Unityメニュー→Window→Lighting→SettingでLightingウィンドウを開く。\n" +
-                    "2. ウィンドウの下部にある、Auto Generateトグルをオフにする\n" +
-                    "3. Generate Lightingボタンをクリックする。\n" +
-                    "4. ライトのベイクが行われるので、終了を待つ。進捗はエディタウィンドウ右下で確認する。\n" +
-                    "5. 終了を確認してから再度検証を行う。" +
-                    "オブジェクトの追加や配置を変えた後に再度検証する場合は、3以降の手順を繰り返してください。"
-                    ));
+                    LocalizedMessage.Get("D08_LightmapSizeLimitRule.MustLightmapBakingManually"),
+                    LocalizedMessage.Get("D08_LightmapSizeLimitRule.MustLightmapBakingManually.Solution")));
             }
         }
 
@@ -78,8 +72,8 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     null,
                     IssueLevel.Error,
-                    string.Format("LightMapの生成枚数が上限({0})を超えています。（{1}枚）", lightmapCountLimit, lightmaps.Length),
-                    "制限内に収まるよう、オブジェクトの数を減らしたり、MeshRendererのScale In Lightmapの設定を下げてください。"
+                    LocalizedMessage.Get("D08_LightmapSizeLimitRule.Overuse", lightmapCountLimit, lightmaps.Length),
+                    LocalizedMessage.Get("D08_LightmapSizeLimitRule.Overuse.Solution")
                     ));
             }
 
@@ -91,12 +85,8 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         null,
                         IssueLevel.Error,
-                        string.Format("LightMapの解像度が上限({0}px)を超えています。({1}px*{2}px)", lightmapResolutionLimit, texture.width, texture.height),
-                        "以下の操作を行い、最大解像度を下げてください。\n" +
-                        "1. Unityメニュー→Window→Lighting→SettingでLightingウィンドウを開く。\n" +
-                        "2. ウィンドウの上部にある、[Scene][Global Maps][Object Maps]の中の[Scene]を選択する。\n" +
-                        "3. 下にスクロールし、▼Lightmapping Settings を開く。\n" +
-                        "4. Lightmap Sizeの項目を512に設定する。"));
+                        LocalizedMessage.Get("D08_LightmapSizeLimitRule.Overresolution", lightmapResolutionLimit, texture.width, texture.height),
+                        LocalizedMessage.Get("D08_LightmapSizeLimitRule.Overresolution.Solution", lightmapResolutionLimit)));
                 }
             }
         }

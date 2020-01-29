@@ -26,7 +26,7 @@ namespace VitDeck.Validator
 			if (animatorCount > limit)
 			{
 				var message = LocalizedMessage.Get("F01_AnimatorComponentMaxCountRule.Exceeded", limit, animatorCount);
-				var solution = "F01_AnimatorComponentMaxCountRule.Exceeded.Solution";
+				var solution = LocalizedMessage.Get("F01_AnimatorComponentMaxCountRule.Exceeded.Solution");
 
 				foreach (var animatorObject in animatorObjects)
 				{
