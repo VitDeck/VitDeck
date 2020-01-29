@@ -16,8 +16,7 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     component,
                     IssueLevel.Error,
-                    LocalizedMessage.Get("SkinnedMeshRendererRule.MustTurnOffUpdateWhenOffscreen"),
-                    LocalizedMessage.Get("SkinnedMeshRendererRule.MustTurnOffUpdateWhenOffscreen.Solution")));
+                    LocalizedMessage.Get("SkinnedMeshRendererRule.MustTurnOffUpdateWhenOffscreen")));
             }
 
             if (component.sharedMaterials.Length == 0)
@@ -25,8 +24,7 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                        component,
                        IssueLevel.Error,
-                       LocalizedMessage.Get("SkinnedMeshRendererRule.MustAttachMaterial"),
-                       LocalizedMessage.Get("SkinnedMeshRendererRule.MustAttachMaterial.Solution")));
+                       LocalizedMessage.Get("SkinnedMeshRendererRule.MustAttachMaterial")));
             }
         }
 

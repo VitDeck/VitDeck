@@ -16,8 +16,7 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     component,
                     IssueLevel.Error,
-                    LocalizedMessage.Get("ReflectionProbeRule.MustUseCustomTexture", component.mode),
-                    LocalizedMessage.Get("ReflectionProbeRule.MustUseCustomTexture.Solution")));
+                    LocalizedMessage.Get("ReflectionProbeRule.MustUseCustomTexture", component.mode)));
             }
         }
 

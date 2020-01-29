@@ -23,8 +23,7 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     hasComponentObject,
                     IssueLevel.Error,
-                    LocalizedMessage.Get("MeshRendererRule.StaticMeshMustPutInEnvironmentLayer"),
-                    LocalizedMessage.Get("MeshRendererRule.StaticMeshMustPutInEnvironmentLayer.Solution")));
+                    LocalizedMessage.Get("MeshRendererRule.StaticMeshMustPutInEnvironmentLayer")));
             }
         }
 
