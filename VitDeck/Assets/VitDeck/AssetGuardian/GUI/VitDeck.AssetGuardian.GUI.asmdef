@@ -1,7 +1,8 @@
 {
     "name": "VitDeck.AssetGuardian.GUI",
     "references": [
-        "VitDeck.AssetGuardian"
+        "VitDeck.AssetGuardian",
+        "VitDeck.Language"
     ],
     "includePlatforms": [
         "Editor"

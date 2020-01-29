@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Language;
 using VitDeck.Utilities;
 
 namespace VitDeck.TemplateLoader.GUI
@@ -53,7 +54,7 @@ namespace VitDeck.TemplateLoader.GUI
             }
             else
             {
-                messages.Add(new Message("テンプレートがありません。", MessageType.Warning));
+                messages.Add(new Message(LocalizedMessage.Get("TemplateLoaderWindow.TemplatesAreNotExists"), MessageType.Warning));
             }
         }
 
@@ -116,7 +117,10 @@ namespace VitDeck.TemplateLoader.GUI
                 if (GUILayout.Button("Load"))
                 {
                     if (UnityEditor.EditorSettings.serializationMode == SerializationMode.ForceBinary &&
-                        !EditorUtility.DisplayDialog("Template Loader", "Asset Serializationの設定がForceBinaryになっています。ロードが不完全になる可能性があります。続行しますか？","Load","Cancel"))
+                        !EditorUtility.DisplayDialog("Template Loader", 
+                            LocalizedMessage.Get("TemplateLoaderWindow.ForceBinaryDetected"),
+                            LocalizedMessage.Get("TemplateLoaderWindow.ForceBinaryDetected.Continue"),
+                            LocalizedMessage.Get("TemplateLoaderWindow.ForceBinaryDetected.Cancel")))
                     {
                         return;
                     }
@@ -125,11 +129,11 @@ namespace VitDeck.TemplateLoader.GUI
                     var templateName = templateOptions[popupIndex];
                     if (TemplateLoader.Load(folderName, replaceStringList))
                     {
-                        messages.Add(new Message(string.Format("テンプレート`{0}`をコピーしました。", templateName), MessageType.Info));
+                        messages.Add(new Message(LocalizedMessage.Get("TemplateLoaderWindow.Succeeded", templateName), MessageType.Info));
                     }
                     else
                     {
-                        messages.Add(new Message(string.Format("テンプレート`{0}`のコピーに失敗しました。", templateName), MessageType.Error));
+                        messages.Add(new Message(LocalizedMessage.Get("TemplateLoaderWindow.Failed", templateName), MessageType.Error));
                     }
                 }
                 EditorGUI.EndDisabledGroup();

@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using VitDeck.Language;
 using VitDeck.Utilities;
 
 namespace VitDeck.TemplateLoader
@@ -119,7 +120,7 @@ namespace VitDeck.TemplateLoader
             {
                 if (str.IndexOfAny(invalidChars) >= 0)
                 {
-                    Debug.LogError(string.Format("入力した文字列に使えない文字が含まれています。{0}", str));
+                    Debug.LogError(LocalizedMessage.Get("TemplateLoader.InvalitCharsDetected", str));
                     return true;
                 }
             }
@@ -294,7 +295,7 @@ namespace VitDeck.TemplateLoader
                 pathList.Add(asset.replacedDestinationPath);
             if (pathList.Count != pathList.Distinct<string>().Count<string>())
             {
-                Debug.Log("重複する作成先パスが存在します。");
+                LocalizedMessage.Get("TemplateLoader.DestinationAlreadyExists");
                 return true;
             }
             return false;
@@ -310,7 +311,7 @@ namespace VitDeck.TemplateLoader
                 var pathLength = projectPath.Length + ta.replacedDestinationPath.Length - "Assets".Length;
                 if (pathLength > maxPathLength)
                 {
-                    Debug.LogError(string.Format("長すぎるパスが存在します。:{0}", ta.replacedDestinationPath));
+                    Debug.LogError(LocalizedMessage.Get("TemplateLoader.OverlengthPathDetected", ta.replacedDestinationPath));
                     return true;
                 }
             }
@@ -462,7 +463,7 @@ namespace VitDeck.TemplateLoader
             TemplateProperty property = null;
             if (guids.Length >= 2)
             {
-                Debug.LogWarning("複数のテンプレート情報ファイルが存在します。");
+                Debug.LogWarning(LocalizedMessage.Get("TemplateLoader.InformationFileDuplicated"));
             }
             else if (guids.Length == 1)
             {
@@ -471,7 +472,7 @@ namespace VitDeck.TemplateLoader
             }
             else
             {
-                Debug.LogWarning("テンプレート情報ファイルがみつかりませんでした。");
+                Debug.LogWarning(LocalizedMessage.Get("TemplateLoader.InformationFileNotFound"));
             }
             return property ?? ScriptableObject.CreateInstance<TemplateProperty>();
         }

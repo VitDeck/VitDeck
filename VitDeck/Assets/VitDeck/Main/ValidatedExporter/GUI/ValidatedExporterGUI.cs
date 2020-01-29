@@ -6,6 +6,7 @@ using UnityEngine;
 using VitDeck.Exporter;
 using VitDeck.Utilities;
 using VitDeck.Validator;
+using VitDeck.Language;
 
 namespace VitDeck.Main.ValidatedExporter.GUI
 {
@@ -127,7 +128,7 @@ namespace VitDeck.Main.ValidatedExporter.GUI
             }
             //ForceExportCheck
             if (result != null && !result.IsExportSuccess)
-                forceExport = GUILayout.Toggle(forceExport, "エラーを無視して再エクスポートする");
+                forceExport = GUILayout.Toggle(forceExport, LocalizedMessage.Get("ValidatedExporterWindow.ForceExport"));
             //Export button
             EditorGUI.BeginDisabledGroup(selectedSetting == null || baseFolder == null);
             if (GUILayout.Button("Export"))
@@ -253,18 +254,18 @@ namespace VitDeck.Main.ValidatedExporter.GUI
             }
             if (exportResult.IsExportSuccess)
             {
-                messages.Add(new Message("エクスポートが完了しました。" + Environment.NewLine + header, MessageType.Info));
+                messages.Add(new Message(LocalizedMessage.Get("ValidatedExporterWindow.Succeeded") + Environment.NewLine + header, MessageType.Info));
                 if (exportResult.GetValidationLog() != "")
                     messages.Add(new Message(exportResult.GetValidationLog(), MessageType.Info));
                 if (exportResult.GetExportLog() != "")
                     messages.Add(new Message(exportResult.GetExportLog(), MessageType.Info));
                 var package = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(exportResult.exportResult.exportFilePath);
-                var result = new Issue(package, IssueLevel.Info, "エクスポートが完了しました。");
-                messages.Add(new Message("以下のunitypackageをエクスポートしました。" + Environment.NewLine + exportResult.exportResult.exportFilePath, MessageType.Info, result));
+                var result = new Issue(package, IssueLevel.Info, LocalizedMessage.Get("ValidatedExporterWindow.Succeeded"));
+                messages.Add(new Message(LocalizedMessage.Get("ValidatedExporterWindow.SucceededDetail") + Environment.NewLine + exportResult.exportResult.exportFilePath, MessageType.Info, result));
             }
             else
             {
-                messages.Add(new Message("エクスポートを中断しました。" + Environment.NewLine + header, MessageType.Error));
+                messages.Add(new Message(LocalizedMessage.Get("ValidatedExporterWindow.Aborted") + Environment.NewLine + header, MessageType.Error));
                 messages.Add(new Message(exportResult.log, MessageType.Info));
                 if (exportResult.GetExportLog() != "")
                     messages.Add(new Message(exportResult.GetExportLog(), MessageType.Error));

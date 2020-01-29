@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using VitDeck.Exporter;
 using VitDeck.Validator;
+using VitDeck.Language;
 
 namespace VitDeck.Main.ValidatedExporter
 {
@@ -26,7 +27,8 @@ namespace VitDeck.Main.ValidatedExporter
                     var ruleSet = GetRuleSet(setting.ruleSetName);
                     if (ruleSet == null)
                     {
-                        result.log += string.Format("ルールチェック中に問題が発生しました。" + "ルール{0}が見つかりませんでした。", setting.ruleSetName);
+                        result.log += LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileValidating") +
+                            LocalizedMessage.Get("ValidatedExporter.RuleNotFound", setting.ruleSetName);
                         return result;
                     }
                     try
@@ -35,18 +37,19 @@ namespace VitDeck.Main.ValidatedExporter
                     }
                     catch (FatalValidationErrorException e)
                     {
-                        result.log += "ルールチェック中に問題が発生しました。" + System.Environment.NewLine + e.Message;
+                        result.log += LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileValidating")
+                            + System.Environment.NewLine + e.Message;
                         return result;
                     }
                     if (!result.HasValidationIssues(setting.ignoreValidationWarning ? IssueLevel.Error : IssueLevel.Warning))
                     {
-                        result.log += "ルールチェックで問題が発見されました。" + System.Environment.NewLine;
+                        result.log += LocalizedMessage.Get("ValidatedExporter.IssueFound") + System.Environment.NewLine;
                         return result;
                     }
                 }
                 else
                 {
-                    result.log += "ルールセット指定がないため事前チェックを省略します。" + System.Environment.NewLine;
+                    result.log += LocalizedMessage.Get("ValidatedExporter.SkipValidation") + System.Environment.NewLine;
                 }
             }
 
@@ -54,7 +57,7 @@ namespace VitDeck.Main.ValidatedExporter
             result.exportResult = Exporter.Exporter.Export(baseFolderPath, settingStock.GetSetting(), forceExport);
             if (!result.IsExportSuccess)
             {
-                result.log += "エクスポートに失敗しました。" + System.Environment.NewLine;
+                result.log += LocalizedMessage.Get("ValidatedExporter.Failed") + System.Environment.NewLine;
             }
             return result;
         }
@@ -67,7 +70,7 @@ namespace VitDeck.Main.ValidatedExporter
         private class ExportSettingStock
         {
             public string SettingName = "";
-            public string Description = "説明";
+            public string Description = "";
             public string ExportFolderPath = "Assets/Exports";
             public string fileNameFormat = "export_file.unitypackage";
             public string ruleSetName = "";

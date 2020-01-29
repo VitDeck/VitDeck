@@ -1,7 +1,8 @@
 {
     "name": "VitDeck.TemplateLoader",
     "references": [
-        "VitDeck.Utilities"
+        "VitDeck.Utilities",
+        "VitDeck.Language"
     ],
     "includePlatforms": [
         "Editor"

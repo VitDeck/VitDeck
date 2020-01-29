@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using UnityEditor;
 using UnityEngine;
 using VitDeck.Utilities;
+using VitDeck.Language;
 
 namespace VitDeck.Exporter
 {
@@ -41,13 +42,13 @@ namespace VitDeck.Exporter
             //export
             Debug.Log(string.Format("Export base folder:{0} export file:{1}", baseFolderPath, outputPath));
             var assetPaths = GetExportAssetPaths(baseFolderPath);
-            var assetList = "# 対象アセット" + System.Environment.NewLine + String.Join(System.Environment.NewLine, assetPaths);
+            var assetList = "# " + LocalizedMessage.Get("Exporter.TargetAsset") + System.Environment.NewLine + String.Join(System.Environment.NewLine, assetPaths);
             Debug.Log(assetList);
             result.log += assetList + System.Environment.NewLine;
             try
             {
                 if (!forceExport && File.Exists(outputPath))
-                    throw new IOException("既にファイルが存在しています。:" + outputPath);
+                    throw new IOException(LocalizedMessage.Get("Exporter.DestinationAlreadyExists", outputPath));
                 AssetDatabase.ExportPackage(assetPaths, outputPath);
                 //SHA-1 string rename
                 if (fileName.IndexOf("{SHA-1}") != -1)
@@ -60,18 +61,18 @@ namespace VitDeck.Exporter
                     }
                     else
                     {
-                        throw new IOException("リネーム先のファイルが存在しています。");
+                        throw new IOException(LocalizedMessage.Get("Exporter.RenameDestinationAlreadyExists"));
                     }
                     outputPath = newPath;
                 }
-                result.log += "以下のunitypackageをエクスポートしました。" + System.Environment.NewLine + outputPath;
+                result.log += LocalizedMessage.Get("Exporter.Succeeded") + System.Environment.NewLine + outputPath;
                 result.exportFilePath = outputPath;
                 result.exportResult = true;
             }
             catch (Exception e)
             {
                 Debug.LogError(e);
-                result.log += "エクスポート中に問題が発生しました。:" + e.Message + System.Environment.NewLine;
+                result.log += LocalizedMessage.Get("Exporter.Failed", e.Message) + System.Environment.NewLine;
                 result.exportResult = false;
             }
             return result;

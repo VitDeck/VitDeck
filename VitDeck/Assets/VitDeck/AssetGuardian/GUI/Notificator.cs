@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System;
 using System.Text;
+using VitDeck.Language;
 
 namespace VitDeck.AssetGuardian.GUI
 {
@@ -23,18 +24,27 @@ namespace VitDeck.AssetGuardian.GUI
         {
             if (SaveCancelledAssetList.Count > 0)
             {
-                EditorUtility.DisplayDialog("VitDeck Asset Guardian", "以下のアセットの変更は許可されていません。\n" + Digest(SaveCancelledAssetList), "ok");
+                EditorUtility.DisplayDialog(
+                    "VitDeck Asset Guardian", 
+                    LocalizedMessage.Get("AssetGuardian.Notificator.ModificationNotAllowed") + "\n" + Digest(SaveCancelledAssetList), 
+                    LocalizedMessage.Get("AssetGuardian.Notificator.CloseDialog"));
 
                 SaveCancelledAssetList.Clear();
             }
             if (DeleteCancelledAssetList.Count > 0)
             {
-                EditorUtility.DisplayDialog("VitDeck Asset Guardian", "以下のアセットの削除は許可されていません。\n" + Digest(DeleteCancelledAssetList), "ok");
+                EditorUtility.DisplayDialog(
+                    "VitDeck Asset Guardian",
+                    LocalizedMessage.Get("AssetGuardian.Notificator.DeleteNotAllowed") + "\n" + Digest(DeleteCancelledAssetList),
+                    LocalizedMessage.Get("AssetGuardian.Notificator.CloseDialog"));
                 DeleteCancelledAssetList.Clear();
             }
             if (MoveCancelledAssetList.Count > 0)
             {
-                EditorUtility.DisplayDialog("VitDeck Asset Guardian", "以下のアセットの移動または名前の変更は許可されていません。\n" + Digest(MoveCancelledAssetList), "ok");
+                EditorUtility.DisplayDialog(
+                    "VitDeck Asset Guardian",
+                    LocalizedMessage.Get("AssetGuardian.Notificator.MoveOrRenameNotAllowed") + "\n" + Digest(MoveCancelledAssetList),
+                    LocalizedMessage.Get("AssetGuardian.Notificator.CloseDialog"));
                 MoveCancelledAssetList.Clear();
             }
         }
