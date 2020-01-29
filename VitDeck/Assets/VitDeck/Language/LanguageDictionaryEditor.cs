@@ -59,30 +59,18 @@ namespace VitDeck.Language
 
         private void ReadFromTSV(string tsvText)
         {
-            var sepalator = '\t';
+            var translations = new List<LanguageDictionary.Pair>();
 
-            var rows = tsvText.Split('\n');
-
-            var translations = new List<LanguageDictionary.Pair>(rows.Length);
-
-            foreach (var row in rows)
+            for (int i = 0; i < tsvText.Length;)
             {
-                var columns = row.Split(sepalator);
+                var keyCell = new Cell(tsvText, i);
+                i = keyCell.EndIndex + 1;
+                if (i >= tsvText.Length)
+                    break;
+                var valueCell = new Cell(tsvText, i);
+                i = valueCell.EndIndex + 1;
 
-                if (columns.Length < 2)
-                {
-                    continue;
-                }
-
-                if (string.IsNullOrEmpty(columns[0]))
-                {
-                    continue;
-                }
-
-                var key = columns[0];
-                var value = columns[1];
-
-                translations.Add(new LanguageDictionary.Pair() { Key = key, Value = value });
+                translations.Add(new LanguageDictionary.Pair() { Key = keyCell.Content, Value = valueCell.Content });
             }
 
             dictionary.SetTranslations(translations.ToArray());
@@ -101,6 +89,92 @@ namespace VitDeck.Language
             }
 
             return builder.ToString();
+        }
+
+        private class Cell
+        {
+            private readonly string csv;
+            private readonly int start;
+            private readonly int end;
+            private readonly string content;
+
+            public Cell(string csv, int start)
+            {
+                this.csv = csv;
+                this.start = start;
+
+                bool multiLine = false;
+                bool escaped = false;
+                int i = start;
+                for (; i < csv.Length; i++)
+                {
+                    var c = csv[i];
+
+                    if (c == '"')
+                    {
+                        if (i == start)
+                        {
+                            multiLine = true;
+                            escaped = true;
+                        }
+                        else
+                        {
+                            escaped = false;
+                        }
+                    }
+
+                    if (c == '\n')
+                    {
+                        if (escaped)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+
+                    if (c == '\t')
+                    {
+                        break;
+                    }
+                }
+                end = i;
+
+                if (multiLine)
+                {
+                    content = csv.Substring(start + 1, end - start - 3).Trim();
+                }
+                else
+                {
+                    content = csv.Substring(start, end - start).Trim();
+                }
+            }
+
+            public string Content
+            {
+                get
+                {
+                    return content;
+                }
+            }
+
+            public int StartIndex
+            {
+                get
+                {
+                    return start;
+                }
+            }
+
+            public int EndIndex
+            {
+                get
+                {
+                    return end;
+                }
+            }
         }
     }
 }
