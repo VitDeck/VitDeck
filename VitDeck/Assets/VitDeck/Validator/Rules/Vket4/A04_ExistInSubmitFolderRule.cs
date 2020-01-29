@@ -62,7 +62,7 @@ namespace VitDeck.Validator
                     { 
                         var referenceObject = AssetDatabase.LoadMainAssetAtPath(dependencyPath);
                         var message = LocalizedMessage.Get("A04_ExistInSubmitFolderRule.AssetOutOfPackage", dependencyPath);
-                        var solution = LocalizedMessage.Get("A04_ExistInSubmitFolderRule.AssetOutOfPackage");
+                        var solution = LocalizedMessage.Get("A04_ExistInSubmitFolderRule.AssetOutOfPackage.Solution");
                         AddIssue(new Issue(referenceObject, IssueLevel.Error, message, solution));
                     }
                 }
