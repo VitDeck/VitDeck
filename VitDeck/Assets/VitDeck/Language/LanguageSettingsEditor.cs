@@ -12,11 +12,12 @@ namespace VitDeck.Language
         {
             var property = serializedObject.FindProperty("language");
 
-            var changed = EditorGUILayout.PropertyField(property);
-
-            if (changed)
+            EditorGUI.BeginChangeCheck();
+            EditorGUILayout.PropertyField(property);
+            if (EditorGUI.EndChangeCheck())
             {
                 var target = property.objectReferenceValue as LanguageDictionary;
+                Debug.Log("Set " + target);
                 LocalizedMessage.SetDictionary(target);
             }
 
