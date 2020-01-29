@@ -77,7 +77,7 @@ namespace VitDeck.Validator
                     Vket4OfficialAssetData.MaterialGUIDs),
 
                 new D08_LightmapSizeLimitRule(
-                    LocalizedMessage.Get("Vket4RuleSetBase.LightMapsLimitRule.Title"),
+                    LocalizedMessage.Get("Vket4RuleSetBase.LightMapsLimitRule.Title", LightmapCountLimit, 512),
                     lightmapCountLimit: LightmapCountLimit,
                     lightmapResolutionLimit: 512),
 
