@@ -88,6 +88,12 @@ namespace VitDeck.Validator
                     ignorePrefabGUIDs: Vket4OfficialAssetData.GUIDs,
                     unregisteredComponent: ValidationLevel.NEGOTIABLE),
 
+                new SkinnedMeshRendererRule(LocalizedMessage.Get("Vket4RuleSetBase.SkinnedMeshRendererRule.Title")),
+
+                new MeshRendererRule(LocalizedMessage.Get("Vket4RuleSetBase.MeshRendererRule.Title")),
+
+                new ReflectionProbeRule(LocalizedMessage.Get("Vket4RuleSetBase.ReflectionProbeRule.Title")),
+
                 new VRCTriggerConfigRule(LocalizedMessage.Get("Vket4RuleSetBase.VRCTriggerConfigRule.Title"),
                             new VRC_EventHandler.VrcBroadcastType []{
                                 VRC_EventHandler.VrcBroadcastType.Local },
