@@ -15,6 +15,12 @@ namespace VitDeck.Language
         {
             var settings = FindLanguageSettingsInstance();
 
+            if (settings == null)
+            {
+                EditorApplication.update += DelayedInitialize;
+                return;
+            }
+
             LocalizedMessage.SetDictionary(settings.language);
         }
 
@@ -33,6 +39,12 @@ namespace VitDeck.Language
             }
 
             return asset;
+        }
+
+        private static void DelayedInitialize()
+        {
+            EditorApplication.update -= DelayedInitialize;
+            Initialize();
         }
     }
 }
