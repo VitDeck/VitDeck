@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using VitDeck.Language;
+using VitDeck.Validator.BoundsIndicators;
 
 namespace VitDeck.Validator
 {
@@ -18,7 +19,7 @@ namespace VitDeck.Validator
         private readonly string floatToStringArgument;
 
         // ルールをValidation毎に生成する場合indicatorResetter.Reset()が叩かれなくなってしまう為、staticに設定
-        private static BoundsIndicators.ResetTokenSource indicatorResetter = null;
+        private static ResetTokenSource indicatorResetter = null;
 
         /// <summary>
         /// コンストラクタ。
@@ -64,7 +65,7 @@ namespace VitDeck.Validator
             {
                 indicatorResetter.Reset();
             }
-            indicatorResetter = new BoundsIndicators.ResetTokenSource();
+            indicatorResetter = new ResetTokenSource();
 
             var rootObjects = target.GetRootObjects();
 
@@ -89,7 +90,7 @@ namespace VitDeck.Validator
                 .SelectMany(GetObjectBounds)
                 .Where(data => IsExceeded(data.bounds, validationLimit));
 
-            var boundsIndicator = rootObject.AddComponent<BoundsIndicators.BoothRangeIndicator>();
+            var boundsIndicator = rootObject.AddComponent<BoothRangeIndicator>();
             boundsIndicator.hideFlags = DefaultFlagsForIndicator;
             boundsIndicator.Initialize(validationLimit, indicatorResetter.Token);
 
@@ -98,7 +99,7 @@ namespace VitDeck.Validator
                 var rectTransform = exceed.objectReference as RectTransform;
                 if (rectTransform != null)
                 {
-                    var indicator = rectTransform.gameObject.AddComponent<BoundsIndicators.RectTransformRangeOutIndicator>();
+                    var indicator = rectTransform.gameObject.AddComponent<RectTransformRangeOutIndicator>();
                     indicator.hideFlags = DefaultFlagsForIndicator;
                     indicator.Initialize(boundsIndicator, rectTransform, indicatorResetter.Token);
                 }
@@ -107,7 +108,7 @@ namespace VitDeck.Validator
                     var transform = exceed.objectReference as Transform;
                     if (transform != null)
                     {
-                        var indicator = transform.gameObject.AddComponent<BoundsIndicators.TransformRangeOutIndicator>();
+                        var indicator = transform.gameObject.AddComponent<TransformRangeOutIndicator>();
                         indicator.hideFlags = DefaultFlagsForIndicator;
                         indicator.Initialize(boundsIndicator, indicatorResetter.Token);
                     }
@@ -116,9 +117,17 @@ namespace VitDeck.Validator
                 var renderer = exceed.objectReference as Renderer;
                 if (renderer != null)
                 {
-                    var indicator = renderer.gameObject.AddComponent<BoundsIndicators.RendererRangeOutIndicator>();
+                    var indicator = renderer.gameObject.AddComponent<BoundsRangeOutIndicator>();
                     indicator.hideFlags = DefaultFlagsForIndicator;
-                    indicator.Initialize(boundsIndicator, renderer, indicatorResetter.Token);
+                    indicator.Initialize(boundsIndicator, new RendererBoundsSource(renderer), indicatorResetter.Token);
+                }
+
+                var probe = exceed.objectReference as LightProbeGroup;
+                if(probe != null)
+                {
+                    var indicator = probe.gameObject.AddComponent<BoundsRangeOutIndicator>();
+                    indicator.hideFlags = DefaultFlagsForIndicator;
+                    indicator.Initialize(boundsIndicator, new LightProbeBoundsSource(probe), indicatorResetter.Token);
                 }
 
                 var limitSize = limit.size.ToString();
@@ -156,6 +165,17 @@ namespace VitDeck.Validator
             foreach (var renderer in gameObject.GetComponents<Renderer>())
             {
                 yield return BoundsData.FromRenderer(renderer);
+            }
+
+            foreach (var lightProbe in gameObject.GetComponents<LightProbeGroup>())
+            {
+                BoundsData data;
+                if (!BoundsData.TryCreateFromLightProbe(lightProbe, out data))
+                {
+                    continue;
+                }
+
+                yield return data;
             }
         }
 
@@ -211,6 +231,34 @@ namespace VitDeck.Validator
                     renderer.enabled = originalFlag;
                 }
                 return new BoundsData(renderer, renderer.bounds);
+            }
+
+            internal static bool TryCreateFromLightProbe(LightProbeGroup lightProbe, out BoundsData boundsData)
+            {
+                var positions = lightProbe.probePositions;
+                if (positions.Length == 0)
+                {
+                    boundsData = default(BoundsData);
+                    return false;
+                }
+
+                var transformer = lightProbe.transform.localToWorldMatrix;
+
+                var first = transformer.MultiplyPoint3x4(positions[0]);
+                Vector3 min = first;
+                Vector3 max = first;
+                for (int i = 1; i < positions.Length; i++)
+                {
+                    var worldPosition = transformer.MultiplyPoint3x4(positions[i]);
+                    min = Vector3.Min(min, worldPosition);
+                    max = Vector3.Max(max, worldPosition);
+                }
+
+                var center = (min + max) * 0.5f;
+                var size = max - min;
+                boundsData = new BoundsData(lightProbe, new Bounds(center, size));
+
+                return true;
             }
         }
     }

@@ -5,27 +5,27 @@ using UnityEngine;
 namespace VitDeck.Validator.BoundsIndicators
 {
     [ExecuteInEditMode]
-    public class RendererRangeOutIndicator : MonoBehaviour
+    public class BoundsRangeOutIndicator : MonoBehaviour
     {
         [System.NonSerialized]
         bool initialized = false;
 
-        Renderer targetRenderer;
+        IBoundsSource boundsSource;
         private IBoothRoot booth;
 
-        public void Initialize(IBoothRoot booth, Renderer targetRenderer, ResetToken token)
+        public void Initialize(IBoothRoot booth, IBoundsSource boundsSource, ResetToken token)
         {
             if (booth == null)
             {
                 throw new System.ArgumentNullException("booth");
             }
-            if (targetRenderer == null)
+            if (boundsSource == null)
             {
                 throw new System.ArgumentNullException("targetRenderer");
             }
 
             this.booth = booth;
-            this.targetRenderer = targetRenderer;
+            this.boundsSource = boundsSource;
             if (token != null)
             {
                 token.Reset += Token_Reset;
@@ -40,7 +40,7 @@ namespace VitDeck.Validator.BoundsIndicators
 
         private void Update()
         {
-            if (!initialized || targetRenderer == null)
+            if (!initialized || boundsSource == null)
             {
                 SafeDestroy();
             }
@@ -60,13 +60,13 @@ namespace VitDeck.Validator.BoundsIndicators
 
         private void OnDrawGizmosSelected()
         {
-            if (booth == null || targetRenderer == null)
+            if (booth == null || boundsSource == null)
             {
                 return;
             }
 
             booth.ClearTransformTemporarily();
-            var bounds = targetRenderer.bounds;
+            var bounds = boundsSource.Bounds;
             booth.RestorePosition();
 
             DrawBoundsGizmos(ref bounds);
