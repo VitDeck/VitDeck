@@ -113,8 +113,13 @@ namespace VitDeck.Main.ValidatedExporter.GUI
             EditorGUIUtility.labelWidth = 80;
             EditorGUILayout.LabelField("Exporter");
             //Rule set dropdown
+            EditorGUI.BeginChangeCheck();
             var index = EditorGUILayout.Popup("Setting:", GetPopupIndex(selectedSetting), SettingNames);
             selectedSetting = Settings.Count() > 0 ? Settings[index] : null;
+            if(EditorGUI.EndChangeCheck())
+            {
+                ruleSetName = "";
+            }
             //Base folder field
             DefaultAsset newFolder = (DefaultAsset)EditorGUILayout.ObjectField("Base Folder:", baseFolder, typeof(DefaultAsset), true);
             var path = AssetDatabase.GetAssetPath(newFolder);
