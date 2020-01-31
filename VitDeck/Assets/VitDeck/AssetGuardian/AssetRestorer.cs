@@ -113,7 +113,7 @@ namespace VitDeck.AssetGuardian
                 HideAllComponents(rootGameObject);
             }
 
-            private static bool IsShownInProjectView(Transform rootTransform, Transform transform)
+            private bool IsShownInProjectView(Transform rootTransform, Transform transform)
             {
 #if UNITY_2018_3_OR_NEWER
                 if (isModel)
