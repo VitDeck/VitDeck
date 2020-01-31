@@ -20,7 +20,7 @@ namespace VitDeck.Validator
 
         private readonly HashSet<string> ignorePrefabs;
 
-        private readonly HashSet<System.Type> ignoredTypes;
+        private readonly ICustomComponentIgnorer customIgnore;
 
         /// <summary>
         /// コンストラクタ。
@@ -33,7 +33,7 @@ namespace VitDeck.Validator
             ComponentReference[] references,
             string[] ignorePrefabGUIDs = null,
             ValidationLevel unregisteredComponent = ValidationLevel.ALLOW,
-            System.Type[] ignoredTypes = null)
+            ICustomComponentIgnorer customIgnore = null)
             : base(name)
         {
             this.references = references ?? new ComponentReference[] { };
@@ -42,10 +42,7 @@ namespace VitDeck.Validator
                 ignorePrefabGUIDs = new string[0];
             }
             ignorePrefabs = new HashSet<string>(ignorePrefabGUIDs);
-            if (ignoredTypes != null)
-            {
-                this.ignoredTypes = new HashSet<System.Type>(ignoredTypes);
-            }
+            this.customIgnore = customIgnore ?? new DummyComponentIgnorer();
             unregisteredComponentValidationLevel = unregisteredComponent;
         }
 
@@ -62,8 +59,7 @@ namespace VitDeck.Validator
                         component is Transform)
                         continue;
 
-                    if (ignoredTypes != null &&
-                        ignoredTypes.Contains(component.GetType()))
+                    if (customIgnore.IsIgnored(component))
                     {
                         continue;
                     }

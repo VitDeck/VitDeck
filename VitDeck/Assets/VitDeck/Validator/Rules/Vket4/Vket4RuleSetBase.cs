@@ -5,6 +5,7 @@ using VRCSDK2;
 
 namespace VitDeck.Validator
 {
+
     /// <summary>
     /// Vket4の基本ルールセット。
     /// </summary>
@@ -41,7 +42,12 @@ namespace VitDeck.Validator
         {
             // デフォルトで使っていたAttribute式は宣言時にconst以外のメンバーが利用できない。
             // 継承したプロパティを参照して挙動を変えることが出来ない為、直接リストを返す方式に変更した。
-            var requested = requestComponent ?? new DefaultRequestComponent();
+            var requested = requestComponent ?? new DummyRequestComponent();
+            var pickupObjectSyncUsesLimit = requested.PickupObjectSync > -1 ? requested.PickupObjectSync : PickupObjectSyncUsesLimit;
+            var vrcTriggerUsesLimit = requested.VrcTrigger > -1 ? requested.VrcTrigger : VRCTriggerCountLimit;
+            var componentIgnorer = new Vket4ComponentIgnorer(requested);
+            var propertyIgnorer = new Vket4PropertyIgnorer(requested);
+
             return new IRule[]
             {
 
@@ -89,7 +95,7 @@ namespace VitDeck.Validator
                 new UsableComponentListRule(LocalizedMessage.Get("Vket4RuleSetBase.UsableComponentListRule.Title"),
                     GetComponentReferences(),
                     ignorePrefabGUIDs: Vket4OfficialAssetData.GUIDs,
-                    ignoredTypes: requested.Components,
+                    customIgnore: componentIgnorer,
                     unregisteredComponent: ValidationLevel.NEGOTIABLE),
 
                 new SkinnedMeshRendererRule(LocalizedMessage.Get("Vket4RuleSetBase.SkinnedMeshRendererRule.Title")),
@@ -124,11 +130,12 @@ namespace VitDeck.Validator
                                 VRC_EventHandler.VrcEventType.AnimationIntMultiply,
                                 VRC_EventHandler.VrcEventType.AnimationIntSubtract,
                                 VRC_EventHandler.VrcEventType.AnimationTrigger},
-                            Vket4OfficialAssetData.GUIDs),
+                            Vket4OfficialAssetData.GUIDs,
+                            propertyIgnorer),
 
                 new UseMeshColliderRule(LocalizedMessage.Get("Vket4RuleSetBase.UseMeshColliderRule.Title")),
 
-                new VRCTriggerCountLimitRule(LocalizedMessage.Get("Vket4RuleSetBase.VRCTriggerCountLimitRule.Title", VRCTriggerCountLimit), VRCTriggerCountLimit),
+                new VRCTriggerCountLimitRule(LocalizedMessage.Get("Vket4RuleSetBase.VRCTriggerCountLimitRule.Title", vrcTriggerUsesLimit), vrcTriggerUsesLimit),
 
                 new LightCountLimitRule(LocalizedMessage.Get("Vket4RuleSetBase.DirectionalLightLimitRule.Title"), UnityEngine.LightType.Directional, 0),
 
@@ -147,6 +154,7 @@ namespace VitDeck.Validator
 
                 new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.SpotLightModeRule.Title"), UnityEngine.LightType.Spot, unusableSpotLightModes),
 
+                requested.DynamicCollider ? DummyRule.Get(LocalizedMessage.Get("Vket4RuleSetBase.AnimationMakesMoveCollidersRule.Title")) :
                 new AnimationMakesMoveCollidersRule(LocalizedMessage.Get("Vket4RuleSetBase.AnimationMakesMoveCollidersRule.Title")),
 
                 new F01_AnimationClipRule(LocalizedMessage.Get("Vket4RuleSetBase.F01_AnimationClipRule.Title")),
@@ -167,15 +175,17 @@ namespace VitDeck.Validator
 
                 new F02_AudioSourcePrefabRule(LocalizedMessage.Get("Vket4RuleSetBase.AudioSourcePrefabRule.Title"),  Vket4OfficialAssetData.AudioSourcePrefabGUIDs),
 
+                new F02_RigidbodyRule(LocalizedMessage.Get("Vket4RuleSetBase.F02_RigidbodyRule.Title"), propertyIgnorer),
+
                 new F02_PrefabLimitRule(
                     LocalizedMessage.Get("Vket4RuleSetBase.ChairPrefabLimitRule.Title", ChairPrefabUsesLimit),
                     Vket4OfficialAssetData.ChairPrefabGUIDs,
                     ChairPrefabUsesLimit),
 
                 new F02_PrefabLimitRule(
-                    LocalizedMessage.Get("Vket4RuleSetBase.PickupObjectSyncPrefabLimitRule.Title", PickupObjectSyncUsesLimit),
+                    LocalizedMessage.Get("Vket4RuleSetBase.PickupObjectSyncPrefabLimitRule.Title", pickupObjectSyncUsesLimit),
                     Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs,
-                    PickupObjectSyncUsesLimit,
+                    pickupObjectSyncUsesLimit,
                     negotiable: true),
 
                 new F02_VideoPlayerComponentRule(LocalizedMessage.Get("Vket4RuleSetBase.VideoPlayerComponentRule.Title")),

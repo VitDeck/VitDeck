@@ -3,7 +3,7 @@ using VketTools.Utilities;
 
 namespace VitDeck.Validator
 {
-    internal class DefaultRequestComponent : RequestComponent
+    internal class DummyRequestComponent : RequestComponent
     {
         public Type[] Components
         {
@@ -21,7 +21,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return false;
+                return true;
             }
 
             set
@@ -54,7 +54,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return false;
+                return true;
             }
 
             set
@@ -66,7 +66,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new string[0];
+                return new string[] { };
             }
 
             set

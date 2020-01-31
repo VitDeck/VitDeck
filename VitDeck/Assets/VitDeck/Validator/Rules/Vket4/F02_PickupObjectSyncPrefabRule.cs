@@ -36,19 +36,7 @@ namespace VitDeck.Validator
                         LocalizedMessage.Get("F02_PickupObjectSyncPrefabRule.DontAllowCollisionTransfer")));
                 }
             }
-
-            var rigidbodies = GetComponentsInChildrenSamePrefabInstance<Rigidbody>(gameObject, true);
-            foreach (var rigidbody in rigidbodies)
-            {
-                if (!rigidbody.isKinematic)
-                {
-                    AddIssue(new Issue(
-                        rigidbody,
-                        IssueLevel.Error,
-                        LocalizedMessage.Get("F02_PickupObjectSyncPrefabRule.UseIsKinematic")));
-                }
-            }
-
+            
             ValidateParent(gameObject.transform.parent, gameObject);
         }
 
