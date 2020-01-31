@@ -1,5 +1,6 @@
 using UnityEngine;
 using VitDeck.Language;
+using VketTools.Utilities;
 using VRCSDK2;
 
 namespace VitDeck.Validator
@@ -21,6 +22,8 @@ namespace VitDeck.Validator
 
         public IValidationTargetFinder TargetFinder { get { return new Vket4TargetFinder(); } }
 
+        public static RequestComponent requestComponent;
+
         private readonly IObjectDetector officialPrefabsDetector;
 
         public Vket4RuleSetBase() : base()
@@ -38,7 +41,7 @@ namespace VitDeck.Validator
         {
             // デフォルトで使っていたAttribute式は宣言時にconst以外のメンバーが利用できない。
             // 継承したプロパティを参照して挙動を変えることが出来ない為、直接リストを返す方式に変更した。
-
+            var requested = requestComponent ?? new DefaultRequestComponent();
             return new IRule[]
             {
 
