@@ -89,6 +89,7 @@ namespace VitDeck.Validator
                 new UsableComponentListRule(LocalizedMessage.Get("Vket4RuleSetBase.UsableComponentListRule.Title"),
                     GetComponentReferences(),
                     ignorePrefabGUIDs: Vket4OfficialAssetData.GUIDs,
+                    ignoredTypes: requested.Components,
                     unregisteredComponent: ValidationLevel.NEGOTIABLE),
 
                 new SkinnedMeshRendererRule(LocalizedMessage.Get("Vket4RuleSetBase.SkinnedMeshRendererRule.Title")),

@@ -20,6 +20,8 @@ namespace VitDeck.Validator
 
         private readonly HashSet<string> ignorePrefabs;
 
+        private readonly HashSet<System.Type> ignoredTypes;
+
         /// <summary>
         /// コンストラクタ。
         /// </summary>
@@ -30,7 +32,8 @@ namespace VitDeck.Validator
         public UsableComponentListRule(string name,
             ComponentReference[] references,
             string[] ignorePrefabGUIDs = null,
-            ValidationLevel unregisteredComponent = ValidationLevel.ALLOW)
+            ValidationLevel unregisteredComponent = ValidationLevel.ALLOW,
+            System.Type[] ignoredTypes = null)
             : base(name)
         {
             this.references = references ?? new ComponentReference[] { };
@@ -39,6 +42,10 @@ namespace VitDeck.Validator
                 ignorePrefabGUIDs = new string[0];
             }
             ignorePrefabs = new HashSet<string>(ignorePrefabGUIDs);
+            if (ignoredTypes != null)
+            {
+                this.ignoredTypes = new HashSet<System.Type>(ignoredTypes);
+            }
             unregisteredComponentValidationLevel = unregisteredComponent;
         }
 
@@ -54,6 +61,12 @@ namespace VitDeck.Validator
                     if (component == null ||
                         component is Transform)
                         continue;
+
+                    if (ignoredTypes != null &&
+                        ignoredTypes.Contains(component.GetType()))
+                    {
+                        continue;
+                    }
 
                     if ((component.hideFlags & HideFlags.DontSaveInEditor) == HideFlags.DontSaveInEditor)
                     {
