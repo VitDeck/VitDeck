@@ -53,7 +53,7 @@ namespace VitDeck.Validator
 
                 new UnityVersionRule(LocalizedMessage.Get("Vket4RuleSetBase.UnityVersionRule.Title", "2018.4.14f1"), "2018.4.14f1"),
 
-                new A02_VRCSDKVersionRule(LocalizedMessage.Get("Vket4RuleSetBase.VRCSDKVersionRule.Title"), new VRCSDKVersion("2019.09.18.12.05")),
+                new A02_VRCSDKVersionRule(LocalizedMessage.Get("Vket4RuleSetBase.VRCSDKVersionRule.Title"), new VRCSDKVersion("2020.01.14.10.39")),
 
                 new A04_ExistInSubmitFolderRule(LocalizedMessage.Get("Vket4RuleSetBase.ExistInSubmitFolderRule.Title"), Vket4OfficialAssetData.GUIDs),
 
