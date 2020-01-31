@@ -10,7 +10,7 @@ namespace VitDeck.Validator
 {
     public class A02_VRCSDKVersionRule : BaseRule
     {
-        const string versionFileGUID = "fd020b1f1669bad4199457b1a193a93a";
+        const string VRCSDKFolderGUID = "40895a3d0d3ec475c8ff555d0c40f7cb";
 
         const string sdkDownloadURL = "https://www.vrchat.net/download/sdk";
 
@@ -23,10 +23,12 @@ namespace VitDeck.Validator
 
         protected override void Logic(ValidationTarget target)
         {
+            var rootFolderPath = AssetDatabase.GUIDToAssetPath(VRCSDKFolderGUID);
+            var versionFilePath = rootFolderPath + "/version.txt";
 
-            var versionFilePath = AssetDatabase.GUIDToAssetPath(versionFileGUID);
-
-            if (string.IsNullOrEmpty(versionFilePath) || !File.Exists(versionFilePath))
+            if (string.IsNullOrEmpty(rootFolderPath) ||
+                string.IsNullOrEmpty(versionFilePath) ||
+                !File.Exists(versionFilePath))
             {
                 AddIssue(new Issue(null,
                     IssueLevel.Error,
