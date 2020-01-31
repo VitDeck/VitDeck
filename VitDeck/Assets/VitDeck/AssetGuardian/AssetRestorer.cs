@@ -45,13 +45,13 @@ namespace VitDeck.AssetGuardian
                 new AssetTypeIdentifier(typeof(DefaultAsset)),
                 new SimpleRestorer(HideFlags.NotEditable));
             restoreTools.Add(
-                new AssetTypeIdentifier(typeof(GameObject), PrefabType.Prefab),
+                new AssetTypeIdentifier(typeof(GameObject), true),
                 new PrefabRestorer(HideFlags.None));
             restoreTools.Add(
                 new AssetTypeIdentifier(typeof(AudioClip)),
                 new SimpleRestorer(HideFlags.NotEditable));
             restoreTools.Add(
-                new AssetTypeIdentifier(typeof(GameObject), PrefabType.ModelPrefab),
+                new AssetTypeIdentifier(typeof(GameObject), false),
                 new PrefabRestorer(HideFlags.NotEditable));
             restoreTools.Add(
                 new AssetTypeIdentifier(typeof(Shader)),
