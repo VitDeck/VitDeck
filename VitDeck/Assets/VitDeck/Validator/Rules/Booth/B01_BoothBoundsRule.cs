@@ -122,8 +122,16 @@ namespace VitDeck.Validator
                     indicator.Initialize(boundsIndicator, new RendererBoundsSource(renderer), indicatorResetter.Token);
                 }
 
+                var collider = exceed.objectReference as Collider;
+                if (collider != null)
+                {
+                    var indicator = collider.gameObject.AddComponent<BoundsRangeOutIndicator>();
+                    indicator.hideFlags = DefaultFlagsForIndicator;
+                    indicator.Initialize(boundsIndicator, new ColliderBoundsSource(collider), indicatorResetter.Token);
+                }
+
                 var probe = exceed.objectReference as LightProbeGroup;
-                if(probe != null)
+                if (probe != null)
                 {
                     var indicator = probe.gameObject.AddComponent<BoundsRangeOutIndicator>();
                     indicator.hideFlags = DefaultFlagsForIndicator;
@@ -165,6 +173,11 @@ namespace VitDeck.Validator
             foreach (var renderer in gameObject.GetComponents<Renderer>())
             {
                 yield return BoundsData.FromRenderer(renderer);
+            }
+
+            foreach (var collider in gameObject.GetComponents<Collider>())
+            {
+                yield return BoundsData.FromCollider(collider);
             }
 
             foreach (var lightProbe in gameObject.GetComponents<LightProbeGroup>())
@@ -259,6 +272,11 @@ namespace VitDeck.Validator
                 boundsData = new BoundsData(lightProbe, new Bounds(center, size));
 
                 return true;
+            }
+
+            internal static BoundsData FromCollider(Collider collider)
+            {
+                return new BoundsData(collider, collider.bounds);
             }
         }
     }

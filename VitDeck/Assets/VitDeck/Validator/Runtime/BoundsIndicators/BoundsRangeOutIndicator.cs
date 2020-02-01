@@ -40,7 +40,7 @@ namespace VitDeck.Validator.BoundsIndicators
 
         private void Update()
         {
-            if (!initialized || boundsSource == null)
+            if (!initialized || boundsSource == null || boundsSource.IsRemoved)
             {
                 SafeDestroy();
             }
@@ -60,7 +60,7 @@ namespace VitDeck.Validator.BoundsIndicators
 
         private void OnDrawGizmosSelected()
         {
-            if (booth == null || boundsSource == null)
+            if (booth == null || boundsSource == null || boundsSource.IsRemoved)
             {
                 return;
             }
