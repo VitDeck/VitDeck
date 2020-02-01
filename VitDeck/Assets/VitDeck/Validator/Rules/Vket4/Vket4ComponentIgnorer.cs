@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using VketTools.Utilities;
 using VRCSDK2;
@@ -25,7 +25,10 @@ namespace VitDeck.Validator
                 }
                 else if (component is Rigidbody)
                 {
-                    return component.GetComponent<VRC_Pickup>() != null;
+                    if(component.GetComponent<VRC_Pickup>() != null)
+                    {
+                        return true;
+                    }
                 }
             }
             return customIgnoredTypes.Contains(component.GetType());

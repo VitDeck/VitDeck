@@ -9,7 +9,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new Type[0];
+                return new Type[] { };
             }
 
             set
@@ -21,7 +21,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return true;
+                return false;
             }
 
             set
@@ -54,7 +54,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return true;
+                return false;
             }
 
             set
