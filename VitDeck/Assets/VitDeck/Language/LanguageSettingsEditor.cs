@@ -21,6 +21,7 @@ namespace VitDeck.Language
                 LocalizedMessage.SetDictionary(target);
             }
 
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }
