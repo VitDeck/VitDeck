@@ -43,28 +43,21 @@ namespace VitDeck.Validator
 
             foreach (var assetPath in allAssetPaths)
             {
-                // 入稿フォルダおよび出展物と依存関係にあるすべてのアセットのパス
-                var dependencyPaths = AssetDatabase
-                    .GetDependencies(assetPath);
+                // 運営からの配布物を検証対象から除外
+                if (excludePaths.Contains(assetPath))
+                    continue;
 
-                foreach (var dependencyPath in dependencyPaths)
+                // 入稿フォルダ内のサブディレクトリ(アセット含まない)を検証対象から除外
+                if (folderPathInSubmitDirectory.Contains(assetPath) || assetPath == submitDirectory)
+                    continue;
+
+                // 入稿フォルダ内にパスがあるアセットなのか検証
+                if (!filePathsInSubmitDirectory.Contains(assetPath))
                 {
-                    // 運営からの配布物を検証対象から除外
-                    if (excludePaths.Contains(dependencyPath))
-                        continue;
-                    
-                    // 入稿フォルダ内のサブディレクトリ(アセット含まない)を検証対象から除外
-                    if (folderPathInSubmitDirectory.Contains(dependencyPath) || dependencyPath == submitDirectory)
-                        continue;
-                    
-                    // 入稿フォルダ内にパスがあるアセットなのか検証
-                    if (!filePathsInSubmitDirectory.Contains(dependencyPath))
-                    { 
-                        var referenceObject = AssetDatabase.LoadMainAssetAtPath(dependencyPath);
-                        var message = LocalizedMessage.Get("A04_ExistInSubmitFolderRule.AssetOutOfPackage", dependencyPath);
-                        var solution = LocalizedMessage.Get("A04_ExistInSubmitFolderRule.AssetOutOfPackage.Solution");
-                        AddIssue(new Issue(referenceObject, IssueLevel.Error, message, solution));
-                    }
+                    var referenceObject = AssetDatabase.LoadMainAssetAtPath(assetPath);
+                    var message = LocalizedMessage.Get("A04_ExistInSubmitFolderRule.AssetOutOfPackage", assetPath);
+                    var solution = LocalizedMessage.Get("A04_ExistInSubmitFolderRule.AssetOutOfPackage.Solution");
+                    AddIssue(new Issue(referenceObject, IssueLevel.Error, message, solution));
                 }
             }
         }
