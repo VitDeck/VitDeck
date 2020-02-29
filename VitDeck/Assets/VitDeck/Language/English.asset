@@ -422,3 +422,5 @@ MonoBehaviour:
     Value: '[F-2]Rigidbody parameters must meet the allowed values'
   - Key: F02_RigidbodyRule.UseIsKinematic
     Value: Please enable IsKinematic on RigidBody objects
+  - Key: Vket4RuleSetBase.UnusabePrefabRule.Title
+    Value: '[F-4]Unallowed prefabs in use'
