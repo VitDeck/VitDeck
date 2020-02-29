@@ -2968,5 +2968,16 @@ namespace VitDeck.Validator
         {
             "84a3dfcb7e1c0644c9618e91e2fe71d7",
         };
+
+        public static string[] VRCSDKPrefabGUIDs = new string[]
+        {
+            "c69cd4a2c56f32148888dab01592a615",
+            "bab118b2f449fef458e2cb9d7d7dfbd6",
+            "3c381b53d760c4286af1030278412a6c",
+            "9cb1e183d39ba432db5c583c4548819c",
+            "98173f743947d38499a6573aafa81f02",
+            "1f6e5fea7e3764b4684edf284ad9b5ed",
+            "7dbf6d2eb6a2ce14a8d11b4e2cd1c0f3",
+        };
     }
 }

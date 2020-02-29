@@ -183,6 +183,11 @@ namespace VitDeck.Validator
                     ChairPrefabUsesLimit),
 
                 new F02_PrefabLimitRule(
+                    LocalizedMessage.Get("Vket4RuleSetBase.UnusabePrefabRule.Title", ChairPrefabUsesLimit),
+                    Vket4OfficialAssetData.VRCSDKPrefabGUIDs,
+                    0),
+
+                new F02_PrefabLimitRule(
                     LocalizedMessage.Get("Vket4RuleSetBase.PickupObjectSyncPrefabLimitRule.Title", pickupObjectSyncUsesLimit),
                     Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs,
                     pickupObjectSyncUsesLimit,
