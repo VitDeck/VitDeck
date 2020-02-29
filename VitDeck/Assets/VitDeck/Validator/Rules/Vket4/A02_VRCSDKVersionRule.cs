@@ -12,13 +12,14 @@ namespace VitDeck.Validator
     {
         const string VRCSDKFolderGUID = "40895a3d0d3ec475c8ff555d0c40f7cb";
 
-        const string sdkDownloadURL = "https://www.vrchat.net/download/sdk";
-
         private VRCSDKVersion targetVersion;
 
-        public A02_VRCSDKVersionRule(string name, VRCSDKVersion version) : base(name)
+        private readonly string downloadURL;
+
+        public A02_VRCSDKVersionRule(string name, VRCSDKVersion version, string downloadURL) : base(name)
         {
             targetVersion = version;
+            this.downloadURL = downloadURL;
         }
 
         protected override void Logic(ValidationTarget target)
@@ -34,7 +35,7 @@ namespace VitDeck.Validator
                     IssueLevel.Error,
                     LocalizedMessage.Get("A02_VRCSDKVersionRule.NotInstalled"),
                     LocalizedMessage.Get("A02_VRCSDKVersionRule.NotInstalled.Solution"),
-                    solutionURL: "https://www.vrchat.net/download/sdk"
+                    solutionURL: downloadURL
                     ));
                 return;
             }
@@ -47,7 +48,7 @@ namespace VitDeck.Validator
                     IssueLevel.Error,
                     LocalizedMessage.Get("A02_VRCSDKVersionRule.PreviousVersion"),
                     LocalizedMessage.Get("A02_VRCSDKVersionRule.PreviousVersion.Solution"),
-                    solutionURL: "https://www.vrchat.net/download/sdk"
+                    solutionURL: downloadURL
                     ));
             }
         }
