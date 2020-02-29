@@ -10,7 +10,7 @@ namespace VitDeck.Validator
 {
     public class A02_VRCSDKVersionRule : BaseRule
     {
-        const string VRCSDKFolderGUID = "40895a3d0d3ec475c8ff555d0c40f7cb";
+        const string VRCSDKDependenciesFolderGUID = "23868bd667cf64b479fbd8d1039e2cd2";
 
         private VRCSDKVersion targetVersion;
 
@@ -24,8 +24,9 @@ namespace VitDeck.Validator
 
         protected override void Logic(ValidationTarget target)
         {
-            var rootFolderPath = AssetDatabase.GUIDToAssetPath(VRCSDKFolderGUID);
-            var versionFilePath = rootFolderPath + "/version.txt";
+            var dependenciesFolderPath = AssetDatabase.GUIDToAssetPath(VRCSDKDependenciesFolderGUID);
+            var rootFolderPath = Path.GetDirectoryName(dependenciesFolderPath);
+            var versionFilePath = Path.Combine(rootFolderPath, "version.txt");
 
             if (string.IsNullOrEmpty(rootFolderPath) ||
                 string.IsNullOrEmpty(versionFilePath) ||
