@@ -43,6 +43,10 @@ namespace VitDeck.Validator
 
             foreach (var assetPath in allAssetPaths)
             {
+                // Unityのビルトインアセットを除外
+                if(assetPath == "Resources/unity_builtin_extra")
+                    continue;
+
                 // 運営からの配布物を検証対象から除外
                 if (excludePaths.Contains(assetPath))
                     continue;

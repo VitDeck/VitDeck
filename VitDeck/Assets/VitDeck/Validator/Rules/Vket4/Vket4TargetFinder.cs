@@ -96,7 +96,7 @@ namespace VitDeck.Validator
                         gameObjects
                     ));
 
-            return searcher.Where(obj => AssetDatabase.IsMainAsset(obj)).ToArray();
+            return searcher.ToArray();
         }
 
         private static Scene OpenPackageScene(string exhibitorID)
