@@ -80,6 +80,10 @@ namespace VitDeck.Validator
             foreach (var lightmap in lightmaps)
             {
                 var texture = lightmap.lightmapDir;
+                if (texture == null)
+                {
+                    continue;
+                }
                 if (texture.width > lightmapResolutionLimit || texture.height > lightmapResolutionLimit)
                 {
                     AddIssue(new Issue(
