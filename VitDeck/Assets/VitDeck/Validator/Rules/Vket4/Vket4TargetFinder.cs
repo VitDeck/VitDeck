@@ -96,7 +96,9 @@ namespace VitDeck.Validator
                         gameObjects
                     ));
 
-            return searcher.ToArray();
+            return searcher
+                .Where(asset => AssetDatabase.GetAssetPath(asset).StartsWith("Assets/"))
+                .ToArray();
         }
 
         private static Scene OpenPackageScene(string exhibitorID)
