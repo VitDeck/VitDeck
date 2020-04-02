@@ -152,9 +152,9 @@ namespace VitDeck.Validator
                     UnityEngine.LightType.Area,
                     AreaLightUsesLimit),
 
-                new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.PointLightModeRule.Title"), UnityEngine.LightType.Point, unusablePointLightModes),
+                new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.PointLightModeRule.Title"), UnityEngine.LightType.Point, unusablePointLightModes, propertyIgnorer),
 
-                new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.SpotLightModeRule.Title"), UnityEngine.LightType.Spot, unusableSpotLightModes),
+                new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.SpotLightModeRule.Title"), UnityEngine.LightType.Spot, unusableSpotLightModes, propertyIgnorer),
 
                 requested.DynamicCollider ? DummyRule.Get(LocalizedMessage.Get("Vket4RuleSetBase.AnimationMakesMoveCollidersRule.Title")) :
                 new AnimationMakesMoveCollidersRule(LocalizedMessage.Get("Vket4RuleSetBase.AnimationMakesMoveCollidersRule.Title")),
