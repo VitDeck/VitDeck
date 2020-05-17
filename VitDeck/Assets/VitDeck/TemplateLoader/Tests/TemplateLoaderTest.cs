@@ -16,6 +16,8 @@ namespace VitDeck.TemplateLoader.Test
             replaceList.Add("BOOTHID", "id");
             replaceList.Add("NAME", "name");
             Assert.That(TemplateLoader.Load("Sample_template", replaceList, "Assets"), Is.True);
+            Assert.That(AssetDatabase.LoadAssetAtPath<SceneAsset>("Assets/id_name/Scene_id_name.unity"), Is.Not.Null);
+
             AssetDatabase.CreateFolder("Assets", "TestTemplateLoad");
             Assert.That(TemplateLoader.Load("Sample_template", replaceList, "Assets/TestTemplateLoad"), Is.True);
             LogAssert.Expect(LogType.Error, new Regex("^Template load failed.*"));
