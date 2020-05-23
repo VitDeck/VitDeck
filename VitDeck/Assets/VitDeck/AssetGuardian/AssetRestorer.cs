@@ -45,14 +45,14 @@ namespace VitDeck.AssetGuardian
                 new AssetTypeIdentifier(typeof(DefaultAsset)),
                 new SimpleRestorer(HideFlags.NotEditable));
             restoreTools.Add(
-                new AssetTypeIdentifier(typeof(GameObject), PrefabType.Prefab),
-                new PrefabRestorer(HideFlags.None));
+                new AssetTypeIdentifier(typeof(GameObject), true),
+                new PrefabRestorer(HideFlags.None, false));
             restoreTools.Add(
                 new AssetTypeIdentifier(typeof(AudioClip)),
                 new SimpleRestorer(HideFlags.NotEditable));
             restoreTools.Add(
-                new AssetTypeIdentifier(typeof(GameObject), PrefabType.ModelPrefab),
-                new PrefabRestorer(HideFlags.NotEditable));
+                new AssetTypeIdentifier(typeof(GameObject), false),
+                new PrefabRestorer(HideFlags.NotEditable, true));
             restoreTools.Add(
                 new AssetTypeIdentifier(typeof(Shader)),
                 new SimpleRestorer(HideFlags.NotEditable));
@@ -87,9 +87,11 @@ namespace VitDeck.AssetGuardian
         private class PrefabRestorer : IRestorer
         {
             private readonly HideFlags baseHideFlags;
-            public PrefabRestorer(HideFlags baseHideFlags)
+            private bool isModel;
+            public PrefabRestorer(HideFlags baseHideFlags, bool isModel)
             {
                 this.baseHideFlags = baseHideFlags;
+                this.isModel = isModel;
             }
 
             public void Restore(Object asset)
@@ -98,7 +100,7 @@ namespace VitDeck.AssetGuardian
                 var rootTransform = rootGameObject.transform;
                 foreach (Transform transform in rootGameObject.GetComponentsInChildren<Transform>(true))
                 {
-                    if (transform == rootTransform || transform.parent == rootTransform)
+                    if (IsShownInProjectView(transform, rootTransform))
                     {
                         transform.gameObject.hideFlags = baseHideFlags;
                     }
@@ -109,6 +111,22 @@ namespace VitDeck.AssetGuardian
                 }
                 // コンポーネントのHideFlagsのセットは後でやらないとGameObject側に対する処理で上書きされてしまう。
                 HideAllComponents(rootGameObject);
+            }
+
+            private bool IsShownInProjectView(Transform transform, Transform rootTransform)
+            {
+#if UNITY_2018_3_OR_NEWER
+                if (isModel)
+                {
+                    return transform == rootTransform || transform.parent == rootTransform;
+                }
+                else
+                {
+                    return transform == rootTransform;
+                }
+#else
+                return transform == rootTransform || transform.parent == rootTransform;
+#endif
             }
 
             private void HideAllComponents(GameObject gameObject)

@@ -9,22 +9,28 @@ namespace VitDeck.AssetGuardian
     public class AssetTypeIdentifier
     {
         public readonly Type assetType;
-        public readonly PrefabType prefabType;
+        public readonly bool isPrefab;
 
-        public AssetTypeIdentifier(Type assetType) : this(assetType, PrefabType.None) { }
+        public AssetTypeIdentifier(Type assetType) : this(assetType, false) { }
 
-        public AssetTypeIdentifier(Type assetType, PrefabType prefabType)
+        public AssetTypeIdentifier(Type assetType, bool isPrefab)
         {
             this.assetType = assetType;
-            this.prefabType = prefabType;
+            this.isPrefab = isPrefab;
         }
 
         public static AssetTypeIdentifier Of(UnityEngine.Object asset)
         {
-            var prefabType = PrefabUtility.GetPrefabType(asset);
             var assetType = asset.GetType();
-
-            return new AssetTypeIdentifier(assetType, prefabType);
+#if UNITY_2018_3_OR_NEWER
+            var prefabType = PrefabUtility.GetPrefabAssetType(asset);
+            var isPrefab =
+                prefabType == PrefabAssetType.Regular ||
+                prefabType == PrefabAssetType.Variant;
+#else
+            var isPrefab = PrefabUtility.GetPrefabType(asset) == PrefabType.Prefab;
+#endif
+            return new AssetTypeIdentifier(assetType, isPrefab);
         }
 
         public override bool Equals(object obj)
@@ -37,12 +43,17 @@ namespace VitDeck.AssetGuardian
             }
 
             return assetType == detail.assetType
-                && prefabType == detail.prefabType;
+                && isPrefab == detail.isPrefab;
         }
 
         public override int GetHashCode()
         {
             return assetType.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + "type:" + assetType + "|isPrefab:" + isPrefab;
         }
     }
 }

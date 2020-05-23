@@ -208,6 +208,7 @@ namespace VitDeck.TemplateLoader
                 //最終パス
                 var after = ta.replacedDestinationPath;
                 var moveResult = AssetDatabase.MoveAsset(before, after);
+                AssetDatabase.Refresh();
                 log += "from:" + ta.destinationPath + " to:" + ta.replacedDestinationPath + Environment.NewLine;
                 if (!string.IsNullOrEmpty(moveResult))
                     log += moveResult + Environment.NewLine;
@@ -504,7 +505,8 @@ namespace VitDeck.TemplateLoader
             }
             internal bool IsAssetInFolder(string path)
             {
-                return Path.GetDirectoryName(templatePath) == path;
+                // .NET4.0環境ではGetDirectoryName()はパス区切りを\に変換してしまう為回避する。
+                return Path.GetDirectoryName(templatePath).Replace('\\', '/') == path;
             }
             //テンプレート内GUID
             internal string guid;
