@@ -1,16 +1,14 @@
-using System;
 using System.IO;
-using System.Net;
-using System.Text.RegularExpressions;
-using UnityEditor;
-using UnityEngine;
 using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
     public class A02_VRCSDKVersionRule : BaseRule
     {
-        const string VRCSDKDependenciesFolderGUID = "23868bd667cf64b479fbd8d1039e2cd2";
+        /* VRCSDKのフォルダGUIDが変わったみたい？
+           ファイルパスが変わる可能性とGUIDが変わる可能性ならファイルパスが変わる可能性の方が低い気がするのでパスを直接指定。*/
+        //const string VRCSDKDependenciesFolderGUID = "23868bd667cf64b479fbd8d1039e2cd2";
+        const string versionFilePath = "Assets/VRCSDK/version.txt";
 
         private VRCSDKVersion targetVersion;
 
@@ -24,13 +22,14 @@ namespace VitDeck.Validator
 
         protected override void Logic(ValidationTarget target)
         {
-            var dependenciesFolderPath = AssetDatabase.GUIDToAssetPath(VRCSDKDependenciesFolderGUID);
-            var rootFolderPath = Path.GetDirectoryName(dependenciesFolderPath);
-            var versionFilePath = Path.Combine(rootFolderPath, "version.txt");
+            //var dependenciesFolderPath = AssetDatabase.GUIDToAssetPath(VRCSDKDependenciesFolderGUID);
+            //var rootFolderPath = Path.GetDirectoryName(dependenciesFolderPath);
+            //var versionFilePath = Path.Combine(rootFolderPath, "version.txt");
 
-            if (string.IsNullOrEmpty(rootFolderPath) ||
+            /*if (string.IsNullOrEmpty(rootFolderPath) ||
                 string.IsNullOrEmpty(versionFilePath) ||
-                !File.Exists(versionFilePath))
+                !File.Exists(versionFilePath))*/
+            if (!File.Exists(versionFilePath))
             {
                 AddIssue(new Issue(null,
                     IssueLevel.Error,

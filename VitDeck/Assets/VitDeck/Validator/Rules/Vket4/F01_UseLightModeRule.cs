@@ -13,23 +13,16 @@ namespace VitDeck.Validator
     {
         private readonly LightType type;
         private readonly LightmapBakeType[] unusableBakeTypes;
-        private readonly ICustomPropertyIgnorer propertyIgnorer;
 
-        public UseLightModeRule(string name, LightType type, LightmapBakeType[] unusableBakeTypes, ICustomPropertyIgnorer propertyIgnorer = null) : base(name)
+        public UseLightModeRule(string name, LightType type, LightmapBakeType[] unusableBakeTypes) : base(name)
         {
             this.type = type;
             this.unusableBakeTypes = unusableBakeTypes;
-            this.propertyIgnorer = propertyIgnorer ?? new DummyPropertyIgnorer();
         }
 
         protected override void Logic(ValidationTarget target)
         {
             if (unusableBakeTypes.Length <= 0)
-            {
-                return;
-            }
-
-            if(propertyIgnorer.IsIgnored(typeof(Light), "m_Lightmapping"))
             {
                 return;
             }

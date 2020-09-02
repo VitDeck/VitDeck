@@ -146,7 +146,9 @@ namespace VitDeck.TemplateLoader
             ReplaceObjectReference(assetDictionary, property, replaceList);
 
             //Replace Asset file names
-            ReplaceAssetFileName(assetDictionary, property, replaceList);
+            //ReplaceAssetFileName(assetDictionary, property, replaceList);
+            //使用していない引数を削除
+            ReplaceAssetFileName(assetDictionary);
 
             //Replace Scene object names
             ReplaceSceneObjectNames(assetDictionary, property, replaceList);
@@ -184,7 +186,9 @@ namespace VitDeck.TemplateLoader
             }
         }
 
-        private static void ReplaceAssetFileName(Dictionary<string, TemplateAsset> assetDictionary, TemplateProperty property, Dictionary<string, string> replaceList)
+        //private static void ReplaceAssetFileName(Dictionary<string, TemplateAsset> assetDictionary, TemplateProperty property, Dictionary<string, string> replaceList)
+        //使用していない引数を削除
+        private static void ReplaceAssetFileName(Dictionary<string, TemplateAsset> assetDictionary)
         {
             var log = "Loading (ReplaceAssetFileName)" + Environment.NewLine;
             //置換中一時パスのリスト
@@ -226,6 +230,7 @@ namespace VitDeck.TemplateLoader
                     }
                 }
             }
+
             Debug.Log(log);
         }
 

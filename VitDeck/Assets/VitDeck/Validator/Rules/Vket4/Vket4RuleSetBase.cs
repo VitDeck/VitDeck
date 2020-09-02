@@ -51,7 +51,7 @@ namespace VitDeck.Validator
             return new IRule[]
             {
 
-                new UnityVersionRule(LocalizedMessage.Get("Vket4RuleSetBase.UnityVersionRule.Title", "2018.4.14f1"), "2018.4.14f1"),
+                new UnityVersionRule(LocalizedMessage.Get("Vket4RuleSetBase.UnityVersionRule.Title", "2018.4.20f1"), "2018.4.20f1"),
 
                 new A02_VRCSDKVersionRule(LocalizedMessage.Get("Vket4RuleSetBase.VRCSDKVersionRule.Title"),
                     new VRCSDKVersion("2020.01.14.10.39"),
@@ -152,9 +152,9 @@ namespace VitDeck.Validator
                     UnityEngine.LightType.Area,
                     AreaLightUsesLimit),
 
-                new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.PointLightModeRule.Title"), UnityEngine.LightType.Point, unusablePointLightModes, propertyIgnorer),
+                new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.PointLightModeRule.Title"), UnityEngine.LightType.Point, unusablePointLightModes),
 
-                new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.SpotLightModeRule.Title"), UnityEngine.LightType.Spot, unusableSpotLightModes, propertyIgnorer),
+                new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.SpotLightModeRule.Title"), UnityEngine.LightType.Spot, unusableSpotLightModes),
 
                 requested.DynamicCollider ? DummyRule.Get(LocalizedMessage.Get("Vket4RuleSetBase.AnimationMakesMoveCollidersRule.Title")) :
                 new AnimationMakesMoveCollidersRule(LocalizedMessage.Get("Vket4RuleSetBase.AnimationMakesMoveCollidersRule.Title")),

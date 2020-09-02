@@ -77,6 +77,10 @@ namespace VitDeck.Validator
         {
             var textures = new List<Texture>();
 
+            if (material == null)
+            {
+                return textures;
+            }
             var shader = material.shader;
             var shaderPropertyCount = ShaderUtil.GetPropertyCount(material.shader);
 

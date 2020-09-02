@@ -22,7 +22,7 @@ namespace VitDeck.TemplateLoader.GUI
         private static List<Message> messages = new List<Message>();
         private static Dictionary<string, string> replaceStringList = new Dictionary<string, string>();
 
-        [MenuItem(prefix + "Load Template", priority = 100)]
+        //[MenuItem(prefix + "Load Template", priority = 100)]
         static void Open()
         {
             window = GetWindow<TemplateLoaderWindow>(false, "VitDeck");

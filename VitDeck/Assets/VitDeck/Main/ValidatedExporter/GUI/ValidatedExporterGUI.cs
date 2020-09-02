@@ -65,7 +65,7 @@ namespace VitDeck.Main.ValidatedExporter.GUI
         private List<Message> messages;
         private Vector2 msaageAreaScroll;
 
-        [MenuItem(prefix + "Export Booth", priority = 102)]
+        //[MenuItem(prefix + "Export Booth", priority = 102)]
         static void Open()
         {
             window = GetWindow<ValidatedExporterWindow>(false, "VitDeck");
@@ -136,10 +136,12 @@ namespace VitDeck.Main.ValidatedExporter.GUI
                 forceExport = GUILayout.Toggle(forceExport, LocalizedMessage.Get("ValidatedExporterWindow.ForceExport"));
             //Export button
             EditorGUI.BeginDisabledGroup(selectedSetting == null || baseFolder == null);
+
             if (GUILayout.Button("Export"))
             {
                 OnExport();
             }
+
             EditorGUI.EndDisabledGroup();
             //Help message
             if (messages != null)
