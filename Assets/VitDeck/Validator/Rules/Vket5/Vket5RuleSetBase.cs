@@ -113,6 +113,7 @@ namespace VitDeck.Validator
                                 VRC_EventHandler.VrcEventType.ActivateCustomTrigger,
                                 VRC_EventHandler.VrcEventType.AudioTrigger,
                                 VRC_EventHandler.VrcEventType.PlayAnimation,
+                                VRC_EventHandler.VrcEventType.SetParticlePlaying,
                                 VRC_EventHandler.VrcEventType.SetComponentActive,
                                 VRC_EventHandler.VrcEventType.SetGameObjectActive,
                                 VRC_EventHandler.VrcEventType.AnimationBool,
