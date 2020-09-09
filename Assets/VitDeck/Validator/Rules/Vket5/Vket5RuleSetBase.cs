@@ -98,8 +98,7 @@ namespace VitDeck.Validator
                 new ReflectionProbeRule(LocalizedMessage.Get("Vket5RuleSetBase.ReflectionProbeRule.Title")),
 
                 new VRCTriggerConfigRule(LocalizedMessage.Get("Vket5RuleSetBase.VRCTriggerConfigRule.Title"),
-                            new VRC_EventHandler.VrcBroadcastType []{
-                                VRC_EventHandler.VrcBroadcastType.Local },
+                            VRCTriggerBroadcastTypesWhitelist,
                             new VRC_Trigger.TriggerType[] {
                                 VRC_Trigger.TriggerType.Custom,
                                 VRC_Trigger.TriggerType.OnInteract,
@@ -193,6 +192,15 @@ namespace VitDeck.Validator
         protected abstract long FolderSizeLimit { get; }
 
         protected abstract Vector3 BoothSizeLimit { get; }
+
+        protected virtual VRC_EventHandler.VrcBroadcastType[] VRCTriggerBroadcastTypesWhitelist
+        {
+            get
+            {
+                return new VRC_EventHandler.VrcBroadcastType[]{
+                    VRC_EventHandler.VrcBroadcastType.Local };
+            }
+        }
 
         protected abstract int VRCTriggerCountLimit { get; }
 

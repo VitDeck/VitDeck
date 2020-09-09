@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using VRC.SDKBase;
 
 namespace VitDeck.Validator
 {
@@ -28,6 +29,15 @@ namespace VitDeck.Validator
             get
             {
                 return new Vector3(10, 10, 10);
+            }
+        }
+
+        protected override VRC_EventHandler.VrcBroadcastType[] VRCTriggerBroadcastTypesWhitelist
+        {
+            get
+            {
+                return base.VRCTriggerBroadcastTypesWhitelist.Concat(new[] {
+                    VRC_EventHandler.VrcBroadcastType.AlwaysUnbuffered }).ToArray();
             }
         }
 
