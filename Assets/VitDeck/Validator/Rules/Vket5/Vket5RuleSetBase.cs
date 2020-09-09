@@ -108,21 +108,7 @@ namespace VitDeck.Validator
                                 VRC_Trigger.TriggerType.OnDrop,
                                 VRC_Trigger.TriggerType.OnPickupUseDown,
                                 VRC_Trigger.TriggerType.OnPickupUseUp   },
-                            new VRC_EventHandler.VrcEventType[] {
-                                VRC_EventHandler.VrcEventType.ActivateCustomTrigger,
-                                VRC_EventHandler.VrcEventType.AudioTrigger,
-                                VRC_EventHandler.VrcEventType.PlayAnimation,
-                                VRC_EventHandler.VrcEventType.SetParticlePlaying,
-                                VRC_EventHandler.VrcEventType.SetComponentActive,
-                                VRC_EventHandler.VrcEventType.SetGameObjectActive,
-                                VRC_EventHandler.VrcEventType.AnimationBool,
-                                VRC_EventHandler.VrcEventType.AnimationFloat,
-                                VRC_EventHandler.VrcEventType.AnimationInt,
-                                VRC_EventHandler.VrcEventType.AnimationIntAdd,
-                                VRC_EventHandler.VrcEventType.AnimationIntDivide,
-                                VRC_EventHandler.VrcEventType.AnimationIntMultiply,
-                                VRC_EventHandler.VrcEventType.AnimationIntSubtract,
-                                VRC_EventHandler.VrcEventType.AnimationTrigger},
+                            VRCTriggerActionWhitelist,
                             Vket5OfficialAssetData.GUIDs),
 
                 new UseMeshColliderRule(LocalizedMessage.Get("Vket5RuleSetBase.UseMeshColliderRule.Title")),
@@ -199,6 +185,28 @@ namespace VitDeck.Validator
             {
                 return new VRC_EventHandler.VrcBroadcastType[]{
                     VRC_EventHandler.VrcBroadcastType.Local };
+            }
+        }
+
+        protected virtual VRC_EventHandler.VrcEventType[] VRCTriggerActionWhitelist
+        {
+            get
+            {
+                return new VRC_EventHandler.VrcEventType[] {
+                    VRC_EventHandler.VrcEventType.ActivateCustomTrigger,
+                    VRC_EventHandler.VrcEventType.AudioTrigger,
+                    VRC_EventHandler.VrcEventType.PlayAnimation,
+                    VRC_EventHandler.VrcEventType.SetParticlePlaying,
+                    VRC_EventHandler.VrcEventType.SetComponentActive,
+                    VRC_EventHandler.VrcEventType.SetGameObjectActive,
+                    VRC_EventHandler.VrcEventType.AnimationBool,
+                    VRC_EventHandler.VrcEventType.AnimationFloat,
+                    VRC_EventHandler.VrcEventType.AnimationInt,
+                    VRC_EventHandler.VrcEventType.AnimationIntAdd,
+                    VRC_EventHandler.VrcEventType.AnimationIntDivide,
+                    VRC_EventHandler.VrcEventType.AnimationIntMultiply,
+                    VRC_EventHandler.VrcEventType.AnimationIntSubtract,
+                    VRC_EventHandler.VrcEventType.AnimationTrigger};
             }
         }
 

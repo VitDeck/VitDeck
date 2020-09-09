@@ -41,6 +41,15 @@ namespace VitDeck.Validator
             }
         }
 
+        protected override VRC_EventHandler.VrcEventType[] VRCTriggerActionWhitelist
+        {
+            get
+            {
+                return base.VRCTriggerActionWhitelist.Concat(new[] {
+                    VRC_EventHandler.VrcEventType.TeleportPlayer }).ToArray();
+            }
+        }
+
         protected override int VRCTriggerCountLimit
         {
             get
