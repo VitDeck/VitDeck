@@ -24,9 +24,6 @@ namespace VitDeck.Validator
         private readonly Vket5TargetFinder targetFinder = new Vket5TargetFinder();
         public IValidationTargetFinder TargetFinder => targetFinder;
 
-        
-        public static RequestComponent requestComponent;
-
         private readonly IObjectDetector officialPrefabsDetector;
 
         public Vket5RuleSetBase() : base()
@@ -44,12 +41,6 @@ namespace VitDeck.Validator
         {
             // デフォルトで使っていたAttribute式は宣言時にconst以外のメンバーが利用できない。
             // 継承したプロパティを参照して挙動を変えることが出来ない為、直接リストを返す方式に変更した。
-            var requested = requestComponent ?? new DummyRequestComponent();
-            var pickupObjectSyncUsesLimit = requested.PickupObjectSync > -1 ? requested.PickupObjectSync : PickupObjectSyncUsesLimit;
-            var vrcTriggerUsesLimit = requested.VrcTrigger > -1 ? requested.VrcTrigger : VRCTriggerCountLimit;
-            var componentIgnorer = new Vket5ComponentIgnorer(requested);
-            var propertyIgnorer = new Vket5PropertyIgnorer(requested);
-
             return new IRule[]
             {
 
@@ -98,9 +89,7 @@ namespace VitDeck.Validator
 
                 new UsableComponentListRule(LocalizedMessage.Get("Vket5RuleSetBase.UsableComponentListRule.Title"),
                     GetComponentReferences(),
-                    ignorePrefabGUIDs: Vket5OfficialAssetData.GUIDs,
-                    customIgnore: componentIgnorer,
-                    unregisteredComponent: ValidationLevel.NEGOTIABLE),
+                    ignorePrefabGUIDs: Vket5OfficialAssetData.GUIDs),
 
                 new SkinnedMeshRendererRule(LocalizedMessage.Get("Vket5RuleSetBase.SkinnedMeshRendererRule.Title")),
 
@@ -134,12 +123,11 @@ namespace VitDeck.Validator
                                 VRC_EventHandler.VrcEventType.AnimationIntMultiply,
                                 VRC_EventHandler.VrcEventType.AnimationIntSubtract,
                                 VRC_EventHandler.VrcEventType.AnimationTrigger},
-                            Vket5OfficialAssetData.GUIDs,
-                            propertyIgnorer),
+                            Vket5OfficialAssetData.GUIDs),
 
                 new UseMeshColliderRule(LocalizedMessage.Get("Vket5RuleSetBase.UseMeshColliderRule.Title")),
 
-                new VRCTriggerCountLimitRule(LocalizedMessage.Get("Vket5RuleSetBase.VRCTriggerCountLimitRule.Title", vrcTriggerUsesLimit), vrcTriggerUsesLimit),
+                new VRCTriggerCountLimitRule(LocalizedMessage.Get("Vket5RuleSetBase.VRCTriggerCountLimitRule.Title", VRCTriggerCountLimit), VRCTriggerCountLimit),
 
                 new LightCountLimitRule(LocalizedMessage.Get("Vket5RuleSetBase.DirectionalLightLimitRule.Title"), UnityEngine.LightType.Directional, 0),
 
@@ -158,7 +146,6 @@ namespace VitDeck.Validator
 
                 new UseLightModeRule(LocalizedMessage.Get("Vket5RuleSetBase.SpotLightModeRule.Title"), UnityEngine.LightType.Spot, unusableSpotLightModes),
 
-                requested.DynamicCollider ? DummyRule.Get(LocalizedMessage.Get("Vket5RuleSetBase.AnimationMakesMoveCollidersRule.Title")) :
                 new AnimationMakesMoveCollidersRule(LocalizedMessage.Get("Vket5RuleSetBase.AnimationMakesMoveCollidersRule.Title")),
 
                 new F01_AnimationClipRule(LocalizedMessage.Get("Vket5RuleSetBase.F01_AnimationClipRule.Title")),
@@ -179,7 +166,7 @@ namespace VitDeck.Validator
 
                 new F02_AudioSourcePrefabRule(LocalizedMessage.Get("Vket5RuleSetBase.AudioSourcePrefabRule.Title"),  Vket5OfficialAssetData.AudioSourcePrefabGUIDs),
 
-                new F02_RigidbodyRule(LocalizedMessage.Get("Vket5RuleSetBase.F02_RigidbodyRule.Title"), propertyIgnorer),
+                new F02_RigidbodyRule(LocalizedMessage.Get("Vket5RuleSetBase.F02_RigidbodyRule.Title")),
 
                 new F02_PrefabLimitRule(
                     LocalizedMessage.Get("Vket5RuleSetBase.ChairPrefabLimitRule.Title", ChairPrefabUsesLimit),
@@ -192,10 +179,9 @@ namespace VitDeck.Validator
                     0),
 
                 new F02_PrefabLimitRule(
-                    LocalizedMessage.Get("Vket5RuleSetBase.PickupObjectSyncPrefabLimitRule.Title", pickupObjectSyncUsesLimit),
+                    LocalizedMessage.Get("Vket5RuleSetBase.PickupObjectSyncPrefabLimitRule.Title", PickupObjectSyncUsesLimit),
                     Vket5OfficialAssetData.PickupObjectSyncPrefabGUIDs,
-                    pickupObjectSyncUsesLimit,
-                    negotiable: true),
+                    PickupObjectSyncUsesLimit),
 
                 new F02_VideoPlayerComponentRule(LocalizedMessage.Get("Vket5RuleSetBase.VideoPlayerComponentRule.Title")),
 
@@ -219,11 +205,11 @@ namespace VitDeck.Validator
                 new ComponentReference("VRC_Trigger", new string[]{"VRCSDK2.VRC_Trigger", "VRCSDK2.VRC_EventHandler"}, AdvancedObjectValidationLevel),
                 new ComponentReference("VRC_Object Sync", new string[]{"VRCSDK2.VRC_ObjectSync"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC_Pickup", new string[]{"VRCSDK2.VRC_Pickup"}, ValidationLevel.DISALLOW),
-                new ComponentReference("VRC_Audio Bank", new string[]{"VRCSDK2.VRC_AudioBank"}, ValidationLevel.NEGOTIABLE),
+                new ComponentReference("VRC_Audio Bank", new string[]{"VRCSDK2.VRC_AudioBank"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC_Avatar Pedestal", new string[]{"VRCSDK2.VRC_AvatarPedestal"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC_Ui Shape", new string[]{"VRCSDK2.VRC_UiShape"}, AdvancedObjectValidationLevel),
                 new ComponentReference("Rigidbody", new string[]{"UnityEngine.Rigidbody"}, ValidationLevel.DISALLOW),
-                new ComponentReference("Cloth", new string[]{"UnityEngine.Cloth"}, ValidationLevel.NEGOTIABLE),
+                new ComponentReference("Cloth", new string[]{"UnityEngine.Cloth"}, ValidationLevel.DISALLOW),
                 new ComponentReference("Collider", new string[]{"UnityEngine.SphereCollider", "UnityEngine.BoxCollider", "UnityEngine.SphereCollider", "UnityEngine.CapsuleCollider", "UnityEngine.MeshCollider", "UnityEngine.WheelCollider"}, ValidationLevel.ALLOW),
                 new ComponentReference("Dynamic Bone", new string[]{"DynamicBone"}, ValidationLevel.ALLOW),
                 new ComponentReference("Dynamic Bone Collider", new string[]{"DynamicBoneCollider"}, ValidationLevel.ALLOW),
@@ -245,7 +231,7 @@ namespace VitDeck.Validator
                 new ComponentReference("VRC_PlayerAudioOverride", new string[]{"VRCSDK2.VRC_PlayerAudioOverride"}, ValidationLevel.DISALLOW),
                 new ComponentReference("EventSystem", new string[]{"UnityEngine.EventSystems.EventSystem", "UnityEngine.EventSystems.StandaloneInputModule"}, ValidationLevel.DISALLOW),
                 new ComponentReference("StandaloneInputModule", new string[]{"UnityEngine.EventSystems.StandaloneInputModule"}, ValidationLevel.DISALLOW),
-                new ComponentReference("VRC_SceneResetPosition", new string[]{"VRCSDK2.VRC_SceneResetPosition"}, ValidationLevel.NEGOTIABLE),
+                new ComponentReference("VRC_SceneResetPosition", new string[]{"VRCSDK2.VRC_SceneResetPosition"}, ValidationLevel.DISALLOW),
                 new ComponentReference("PlayableDirector", new string[]{"UnityEngine.Playables.PlayableDirector" }, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC_Panorama", new string[]{"VRCSDK2.scripts.Scenes.VRC_Panorama" }, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC_SyncVideoPlayer", new string[]{"VRCSDK2.VRC_SyncVideoPlayer", "VRCSDK2.VRC_SyncVideoStream" }, ValidationLevel.DISALLOW),

@@ -237,9 +237,6 @@ MonoBehaviour:
       Emissions
   - Key: UsableComponentListRule.DefaultComponentGroupName
     Value: Component not defined
-  - Key: UsableComponentListRule.Negotiable
-    Value: '{0}: Usage of {1} requires special permission. Please apply from the Virtual
-      Market website'
   - Key: UsableComponentListRule.Disallow
     Value: '{0}: Usage of {1} is not allowed'
   - Key: UsableComponentListRule.Disallow.Solution
@@ -249,18 +246,15 @@ MonoBehaviour:
   - Key: VRCTriggerConfigRule.UnauthorizedBroadcastType
     Value: BroadcastType {0} not supported in component VRC_Trigger
   - Key: VRCTriggerConfigRule.UnauthorizedBroadcastType.Solution
-    Value: Please change to a supported broadcast type or apply for usage on the Virtual
-      Market website
+    Value: Please change to a supported broadcast type
   - Key: VRCTriggerConfigRule.UnauthorizedTriggerType
     Value: TriggerType {0} not supported in component VRC_Trigger
   - Key: VRCTriggerConfigRule.UnauthorizedTriggerType.Solution
-    Value: Please change to a supported trigger type or apply for usage on the Virtual
-      Market website
+    Value: Please change to a supported trigger type
   - Key: VRCTriggerConfigRule.UnauthorizedActionType
     Value: ActionType {0} not supported in component VRC_Trigger
   - Key: VRCTriggerConfigRule.UnauthorizedActionType.Solution
-    Value: Please change to a supported action type or apply for usage on the Virtual
-      Market website
+    Value: Please change to a supported action type
   - Key: UseMeshColliderRule.ShouldNotUse
     Value: MeshCollider usage is discouraged
   - Key: UseMeshColliderRule.ShouldNotUse.Solution
@@ -276,7 +270,7 @@ MonoBehaviour:
   - Key: UseLightModeRule.MustNotUse
     Value: Usage of {0} light's {1} mode is not supported
   - Key: UseLightModeRule.MustNotUse.Solution
-    Value: Please change the bake mode or apply for usage on the Virtual Market site
+    Value: Please change the bake mode
   - Key: F02_PickupObjectSyncPrefabRule.DontDeactivate
     Value: VRC_ObjectSync objects must be kept active at all times
   - Key: F02_PickupObjectSyncPrefabRule.DontAllowCollisionTransfer
@@ -301,8 +295,6 @@ MonoBehaviour:
     Value: 'MaxDistance value of Prefab must not exceed {0}. (Current value: {1})'
   - Key: F02_PrefabLimitRule.Overuse
     Value: 'Prefab''s usage limit of {0} exceeded. (Current count: {1})'
-  - Key: F02_PrefabLimitRule.Overuse.NegotiableSolution
-    Value: Usage limit can be increased by applying on the Virtual Market site
   - Key: F02_PrefabLimitRule.Overuse.Solution
     Value: 
   - Key: F02_PrefabLimitRule.Overuse.SolutionURL
@@ -319,25 +311,16 @@ MonoBehaviour:
     Value: Total animator count({1}) exceeded the maximum allowed number of {0}.
   - Key: F01_AnimatorComponentMaxCountRule.Exceeded.Solution
     Value: Please reduce your animator component count
-  - Key: Vket5RuleSetBase.AnimationMakesMoveCollidersRule.Title
-    Value: '[F-1]Animated colliders must be applied for from the VKet homepage'
   - Key: AnimationMakesMoveCollidersRule.WillMakesMove
     Value: The animated object {0} contains a collider within its' children
   - Key: AnimationMakesMoveCollidersRule.WillMakesMove.Solution
-    Value: Please remove either the animator or the collider. If both components must
-      be used in this configuration, please apply for the usage on the VKet homepage.
+    Value: Please remove either the animator or the collider.
   - Key: Vket5RuleSetBase.F01_AnimationClipRule.Title
     Value: '[F-1]Please conform to the limitation of AnimationClip''s usage'
   - Key: F01_AnimationClipRule.DontChangeMaterialInAnimation
     Value: Switching of materials using AnimationClips is not allowed
-  - Key: F01_AnimationClipRule.DontChangeMaterialInAnimation.Solution
-    Value: If this configuration is mandatory, please apply for the usage on the VKet
-      homepage.
   - Key: F01_AnimationClipRule.DontAccessParentObject
     Value: AnimationClips must not contain paths containing ../
-  - Key: F01_AnimationClipRule.DontAccessParentObject.Solution
-    Value: If this configuration is mandatory, please apply for the usage on the VKet
-      homepage.
   - Key: Vket5RuleSetBase.F01_AnimationComponentRule.Title
     Value: '[F-1]Please conform to the limitation of AnimationComponent''s usage'
   - Key: F01_AnimationComponentRule.ShouldNotUseAlwaysAnimate
@@ -354,8 +337,7 @@ MonoBehaviour:
     Value: Animator components can not be used in combination with {0}
   - Key: F01_AnimatorComponentRule.MustUseComponentsSeparately.Solution
     Value: Please avoid having the combination of the two components within the same
-      or parented objects. If both components must be used in this configuration,
-      please apply for the usage on the VKet homepage.
+      or parented objects.
   - Key: TemplateLoaderWindow.TemplatesAreNotExists
     Value: Template not found
   - Key: TemplateLoaderWindow.ForceBinaryDetected

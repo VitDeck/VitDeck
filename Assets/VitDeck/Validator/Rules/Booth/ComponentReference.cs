@@ -37,13 +37,11 @@ namespace VitDeck.Validator
     /// <summary>
     ///使用可能コンポーネントの判定
     /// ALLOW：許可
-    /// NEGOTIABLE：要相談
     /// DISALLOW：禁止
     /// </summary>
     public enum ValidationLevel
     {
         ALLOW,
-        NEGOTIABLE,
         DISALLOW
     }
 }

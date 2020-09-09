@@ -229,8 +229,6 @@ MonoBehaviour:
       Illumination\u306E\u8A2D\u5B9A\u3092Baked\u306B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
   - Key: UsableComponentListRule.DefaultComponentGroupName
     Value: "\u6307\u5B9A\u3055\u308C\u3066\u3044\u306A\u3044\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8"
-  - Key: UsableComponentListRule.Negotiable
-    Value: "{0}:{1}\u3092\u4F7F\u7528\u3059\u308B\u5834\u5408\u306F\u7533\u8ACB\u304C\u5FC5\u8981\u3067\u3059\u3002"
   - Key: UsableComponentListRule.Disallow
     Value: "{0}:{1}\u306E\u4F7F\u7528\u306F\u8A31\u53EF\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002"
   - Key: UsableComponentListRule.Disallow.Solution
@@ -240,15 +238,15 @@ MonoBehaviour:
   - Key: VRCTriggerConfigRule.UnauthorizedBroadcastType
     Value: "VRC_Trigger\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u3067\u6B21\u306EBroadcastType\u306F\u4F7F\u7528\u3067\u304D\u307E\u305B\u3093:{0}"
   - Key: VRCTriggerConfigRule.UnauthorizedBroadcastType.Solution
-    Value: "\u4F7F\u7528\u53EF\u80FD\u306ABroadcastType\u306B\u5909\u66F4\u3059\u308B\u304B\u3001\u4F7F\u7528\u7533\u8ACB\u3092\u3057\u3066\u4E0B\u3055\u3044\u3002"
+    Value: "\u4F7F\u7528\u53EF\u80FD\u306ABroadcastType\u306B\u5909\u66F4\u3057\u3066\u4E0B\u3055\u3044\u3002"
   - Key: VRCTriggerConfigRule.UnauthorizedTriggerType
     Value: "VRC_Trigger\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u3067\u6B21\u306ETrigger\u306F\u4F7F\u7528\u3067\u304D\u307E\u305B\u3093:{0}"
   - Key: VRCTriggerConfigRule.UnauthorizedTriggerType.Solution
-    Value: "\u4F7F\u7528\u53EF\u80FD\u306ATrigger\u306B\u5909\u66F4\u3059\u308B\u304B\u3001\u4F7F\u7528\u7533\u8ACB\u3092\u3057\u3066\u4E0B\u3055\u3044\u3002"
+    Value: "\u4F7F\u7528\u53EF\u80FD\u306ATrigger\u306B\u5909\u66F4\u3057\u3066\u4E0B\u3055\u3044\u3002"
   - Key: VRCTriggerConfigRule.UnauthorizedActionType
     Value: "VRC_Trigger\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u3067\u6B21\u306EAction\u306F\u4F7F\u7528\u3067\u304D\u307E\u305B\u3093:{0}"
   - Key: VRCTriggerConfigRule.UnauthorizedActionType.Solution
-    Value: "\u4F7F\u7528\u53EF\u80FD\u306AAction\u306B\u5909\u66F4\u3059\u308B\u304B\u3001\u4F7F\u7528\u7533\u8ACB\u3092\u3057\u3066\u4E0B\u3055\u3044\u3002"
+    Value: "\u4F7F\u7528\u53EF\u80FD\u306AAction\u306B\u5909\u66F4\u3057\u3066\u4E0B\u3055\u3044\u3002"
   - Key: UseMeshColliderRule.ShouldNotUse
     Value: "MeshCollider\u306F\u975E\u63A8\u5968\u3067\u3059\u3002"
   - Key: UseMeshColliderRule.ShouldNotUse.Solution
@@ -264,7 +262,7 @@ MonoBehaviour:
   - Key: UseLightModeRule.MustNotUse
     Value: "{0}Light\u306E{1} Mode\u306F\u4F7F\u7528\u3067\u304D\u307E\u305B\u3093\u3002"
   - Key: UseLightModeRule.MustNotUse.Solution
-    Value: "\u4F7F\u7528\u7533\u8ACB\u3092\u3059\u308B\u304BMode\u3092\u5909\u66F4\u3057\u3066\u4E0B\u3055\u3044\u3002"
+    Value: "Mode\u3092\u5909\u66F4\u3057\u3066\u4E0B\u3055\u3044\u3002"
   - Key: F02_PickupObjectSyncPrefabRule.DontDeactivate
     Value: "VRC_ObjectSync\u3092\u975E\u30A2\u30AF\u30C6\u30A3\u30D6\u306B\u3059\u308B\u3053\u3068\u306F\u51FA\u6765\u307E\u305B\u3093\u3002"
   - Key: F02_PickupObjectSyncPrefabRule.DontAllowCollisionTransfer
@@ -288,8 +286,6 @@ MonoBehaviour:
     Value: "MaxDistance\u306E\u5024\u3092Prefab\u306E\u5024({0})\u3088\u308A\u5927\u304D\u3044\u5024({1})\u306B\u3059\u308B\u3053\u3068\u306F\u51FA\u6765\u307E\u305B\u3093\u3002"
   - Key: F02_PrefabLimitRule.Overuse
     Value: "Prefab\u306E\u4F7F\u7528\u6570\u5236\u9650\uFF08{0}\u500B\uFF09\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002\uFF08{1}\u500B\uFF09"
-  - Key: F02_PrefabLimitRule.Overuse.NegotiableSolution
-    Value: "\u7533\u8ACB\u3059\u308B\u3053\u3068\u3067\u4E0A\u9650\u7A81\u7834\u304C\u53EF\u80FD\u3067\u3059\u3002"
   - Key: F02_PrefabLimitRule.Overuse.Solution
     Value: "\u4F7F\u7528\u500B\u6570\u3092\u6E1B\u3089\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
   - Key: F02_PrefabLimitRule.Overuse.SolutionURL
@@ -306,22 +302,16 @@ MonoBehaviour:
     Value: "Animator\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u304C{0}\u500B\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002({1}\u500B)"
   - Key: F01_AnimatorComponentMaxCountRule.Exceeded.Solution
     Value: "Animator\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u3092\u6E1B\u3089\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
-  - Key: Vket5RuleSetBase.AnimationMakesMoveCollidersRule.Title
-    Value: "[F-1]Collider\u3092animation\u3067\u52D5\u304B\u3059\u969B\u306F\u7533\u8ACB\u3092\u884C\u3046\u3053\u3068"
   - Key: AnimationMakesMoveCollidersRule.WillMakesMove
     Value: "\u89AA\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8({0})\u304C\u6301\u3064Animation\u306B\u3088\u3063\u3066Collider\u304C\u52D5\u304F\u53EF\u80FD\u6027\u304C\u3042\u308A\u307E\u3059\u3002"
   - Key: AnimationMakesMoveCollidersRule.WillMakesMove.Solution
-    Value: "Collider\u3092\u524A\u9664\u3059\u308B\u304B\u3001\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3092Animation\u306E\u5BFE\u8C61\u304B\u3089\u5916\u3059\u304B\u3001\u3069\u3046\u3057\u3066\u3082\u30A2\u30CB\u30E1\u30FC\u30B7\u30E7\u30F3\u3059\u308BCollider\u304C\u5FC5\u8981\u306A\u5834\u5408\u306F\u7533\u8ACB\u3092\u884C\u3063\u3066\u304F\u3060\u3055\u3044\u3002"
+    Value: "Collider\u3092\u524A\u9664\u3059\u308B\u304B\u3001\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3092Animation\u306E\u5BFE\u8C61\u304B\u3089\u5916\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
   - Key: Vket5RuleSetBase.F01_AnimationClipRule.Title
     Value: "[F-1]AnimationClip\u306F\u65E2\u5B9A\u306E\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
   - Key: F01_AnimationClipRule.DontChangeMaterialInAnimation
     Value: "AnimationClip\u5185\u3067Material\u306E\u5909\u66F4\u306F\u51FA\u6765\u307E\u305B\u3093\u3002"
-  - Key: F01_AnimationClipRule.DontChangeMaterialInAnimation.Solution
-    Value: "\u3069\u3046\u3057\u3066\u3082\u5FC5\u8981\u306A\u5834\u5408\u306F\u5165\u7A3F\u30EB\u30FC\u30EB\u5916\u7533\u8ACB\u7533\u8ACB\u3092\u884C\u3063\u3066\u304F\u3060\u3055\u3044\u3002"
   - Key: F01_AnimationClipRule.DontAccessParentObject
     Value: "AnimationClip\u5185\u3067../\u3092\u542B\u3093\u3060\u30D1\u30B9\u3092\u5229\u7528\u3059\u308B\u4E8B\u306F\u51FA\u6765\u307E\u305B\u3093\u3002"
-  - Key: F01_AnimationClipRule.DontAccessParentObject.Solution
-    Value: "\u3069\u3046\u3057\u3066\u3082\u5FC5\u8981\u306A\u5834\u5408\u306F\u5165\u7A3F\u30EB\u30FC\u30EB\u5916\u7533\u8ACB\u7533\u8ACB\u3092\u884C\u3063\u3066\u304F\u3060\u3055\u3044\u3002"
   - Key: Vket5RuleSetBase.F01_AnimationComponentRule.Title
     Value: "[F-1]AnimationComponent\u306F\u65E2\u5B9A\u306E\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
   - Key: F01_AnimationComponentRule.ShouldNotUseAlwaysAnimate
@@ -338,7 +328,7 @@ MonoBehaviour:
   - Key: F01_AnimatorComponentRule.MustUseComponentsSeparately
     Value: "Animator\u3068{0}\u3092\u4F75\u7528\u3059\u308B\u3053\u3068\u306F\u51FA\u6765\u307E\u305B\u3093\u3002"
   - Key: F01_AnimatorComponentRule.MustUseComponentsSeparately.Solution
-    Value: "\u89AA\u5B50\u95A2\u4FC2\u3092\u4ED8\u3051\u308B\u306A\u3069\u3057\u3066\u540C\u3058GameObject\u4E0A\u306B\u5B58\u5728\u3059\u308B\u4E8B\u3092\u907F\u3051\u3066\u4E0B\u3055\u3044\u3002\u3069\u3046\u3057\u3066\u3082\u5FC5\u8981\u306A\u5834\u5408\u306F\u5165\u7A3F\u30EB\u30FC\u30EB\u5916\u7533\u8ACB\u3092\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
+    Value: "\u89AA\u5B50\u95A2\u4FC2\u3092\u4ED8\u3051\u308B\u306A\u3069\u3057\u3066\u540C\u3058GameObject\u4E0A\u306B\u5B58\u5728\u3059\u308B\u4E8B\u3092\u907F\u3051\u3066\u4E0B\u3055\u3044\u3002"
   - Key: TemplateLoaderWindow.TemplatesAreNotExists
     Value: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u304C\u3042\u308A\u307E\u305B\u3093\u3002"
   - Key: TemplateLoaderWindow.ForceBinaryDetected
