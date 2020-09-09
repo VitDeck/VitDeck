@@ -10,7 +10,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return "Vket5 - AvatarShowcase";
+                return "Vket5 - VirtualShowcase";
             }
         }
 
