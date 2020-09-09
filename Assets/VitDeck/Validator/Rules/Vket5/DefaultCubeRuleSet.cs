@@ -35,7 +35,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return 25;
+                return 50;
             }
         }
 
