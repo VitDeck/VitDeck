@@ -263,6 +263,14 @@ namespace VitDeck.Validator
             }
         }
 
+        protected virtual ValidationLevel MoreAdvancedObjectValidationLevel
+        {
+            get
+            {
+                return ValidationLevel.DISALLOW;
+            }
+        }
+
         protected abstract LightConfigRule.LightConfig ApprovedPointLightConfig { get; }
 
         protected abstract LightConfigRule.LightConfig ApprovedSpotLightConfig { get; }
