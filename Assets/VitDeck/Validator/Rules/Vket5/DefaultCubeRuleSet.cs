@@ -145,7 +145,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return 8;
+                return 10;
             }
         }
     }
