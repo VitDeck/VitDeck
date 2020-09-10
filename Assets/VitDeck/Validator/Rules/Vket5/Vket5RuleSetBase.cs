@@ -150,6 +150,10 @@ namespace VitDeck.Validator
 
                 new F01_CameraComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.F01_CameraComponentMaxCountRule.Title"), limit: 1),
 
+                new F01_ProjectorComponentRule(LocalizedMessage.Get("Vket5RuleSetBase.F01_ProjectorComponentRule.Title")),
+
+                new F01_ProjectorComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.F01_ProjectorComponentMaxCountRule.Title"), limit: 1),
+
                 new F02_PickupObjectSyncPrefabRule(LocalizedMessage.Get("Vket5RuleSetBase.PickupObjectSyncRule.Title"), Vket5OfficialAssetData.PickupObjectSyncPrefabGUIDs),
 
                 new F02_AvatarPedestalPrefabRule(LocalizedMessage.Get("Vket5RuleSetBase.AvatarPedestalPrefabRule.Title"), Vket5OfficialAssetData.AvatarPedestalPrefabGUIDs),
@@ -244,6 +248,7 @@ namespace VitDeck.Validator
                 new ComponentReference("LightProbeGroup", new string[]{"UnityEngine.LightProbeGroup"}, AdvancedObjectValidationLevel),
                 new ComponentReference("ReflectionProbe", new string[]{"UnityEngine.ReflectionProbe"}, AdvancedObjectValidationLevel),
                 new ComponentReference("Camera", new string[]{"UnityEngine.Camera"}, MoreAdvancedObjectValidationLevel),
+                new ComponentReference("Projector", new string[]{"UnityEngine.Projector"}, MoreAdvancedObjectValidationLevel),
                 new ComponentReference("Animator", new string[]{"UnityEngine.Animator"}, ValidationLevel.ALLOW),
                 new ComponentReference("Animation", new string[]{"UnityEngine.Animation"}, ValidationLevel.ALLOW),
                 new ComponentReference("Audio Source", new string[]{"UnityEngine.AudioSource", "ONSPAudioSource", "VRCSDK2.VRC_SpatialAudioSource"}, ValidationLevel.DISALLOW),
