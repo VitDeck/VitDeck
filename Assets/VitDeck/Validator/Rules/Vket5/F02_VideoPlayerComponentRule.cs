@@ -14,6 +14,28 @@ namespace VitDeck.Validator
 
         protected override void ComponentLogic(VideoPlayer component)
         {
+            DefaultDisabledLogic(component);
+            DontUseURLLogic(component);
+        }
+
+        private void DefaultDisabledLogic(VideoPlayer component)
+        {
+            if (component.enabled)
+            {
+
+                var message = LocalizedMessage.Get("F02_VideoPlayerComponentRule.DefaultDisabled");
+                var solution = LocalizedMessage.Get("F02_VideoPlayerComponentRule.DefaultDisabled.Solution");
+
+                AddIssue(new Issue(
+                    component,
+                    IssueLevel.Error,
+                    message,
+                    solution));
+            }
+        }
+
+        private void DontUseURLLogic(VideoPlayer component)
+        {
             if (component.source == VideoSource.Url)
             {
                 AddIssue(new Issue(
