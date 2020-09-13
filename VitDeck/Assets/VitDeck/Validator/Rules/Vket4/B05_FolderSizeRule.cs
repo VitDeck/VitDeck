@@ -1,7 +1,9 @@
 using UnityEditor;
 using System.Text.RegularExpressions;
 using System.IO;
+using UnityEngine;
 using VitDeck.Language;
+using VitDeck.Utilities;
 
 namespace VitDeck.Validator
 {
@@ -33,9 +35,15 @@ namespace VitDeck.Validator
 
             if (folderSize > limit)
             {
+                var excess = folderSize - limit;
                 var reference = AssetDatabase.LoadMainAssetAtPath(path);
-                var message = LocalizedMessage.Get("FolderSizeRule.Exceeded", limit);
-                AddIssue(new Issue(reference, IssueLevel.Error, message, string.Empty));
+                var message = LocalizedMessage.Get("FolderSizeRule.Exceeded",
+                    SIReadableNumberText.Get(limit, "B"),
+                    SIReadableNumberText.Get(folderSize, "B"),
+                    SIReadableNumberText.Get(excess, "B"));
+                var solution = LocalizedMessage.Get("FolderSizeRule.Exceeded.Solution");
+                var solutionURL = LocalizedMessage.Get("FolderSizeRule.Exceeded.SolutionURL");
+                AddIssue(new Issue(reference, IssueLevel.Error, message, solution, solutionURL));
             }
         }
 
