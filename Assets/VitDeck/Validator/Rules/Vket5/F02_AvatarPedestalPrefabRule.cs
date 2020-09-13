@@ -1,7 +1,12 @@
 using System;
 using UnityEngine;
 using VitDeck.Language;
+
+#if VRC_SDK_VRCSDK3
+using VRC.SDKBase;
+#elif VRC_SDK_VRCSDK2
 using VRCSDK2;
+#endif
 
 namespace VitDeck.Validator
 {

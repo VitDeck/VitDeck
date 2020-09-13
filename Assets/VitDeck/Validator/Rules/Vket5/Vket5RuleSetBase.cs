@@ -1,7 +1,12 @@
 using UnityEngine;
 using VitDeck.Language;
 using VketTools.Utilities;
+
+#if VRC_SDK_VRCSDK3
+using VRC.SDKBase;
+#elif VRC_SDK_VRCSDK2
 using VRCSDK2;
+#endif
 
 namespace VitDeck.Validator
 {
@@ -43,6 +48,7 @@ namespace VitDeck.Validator
             // 継承したプロパティを参照して挙動を変えることが出来ない為、直接リストを返す方式に変更した。
             return new IRule[]
             {
+#if VRC_SDK_VRCSDK2
 
                 new UnityVersionRule(LocalizedMessage.Get("Vket5RuleSetBase.UnityVersionRule.Title", "2018.4.20f1"), "2018.4.20f1"),
 
@@ -182,6 +188,7 @@ namespace VitDeck.Validator
                 new F02_VideoPlayerComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.F02_VideoPlayerComponentMaxCountRule.Title"), limit: 1),
 
                 new F01_AnimatorComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.AnimatorComponentMaxCountRule.Title"), limit: 50)
+#endif
             };
         }
 

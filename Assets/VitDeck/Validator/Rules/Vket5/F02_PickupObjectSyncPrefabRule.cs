@@ -4,7 +4,10 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using VitDeck.Language;
+
+#if VRC_SDK_VRCSDK2
 using VRCSDK2;
+#endif
 
 namespace VitDeck.Validator
 {
@@ -17,6 +20,7 @@ namespace VitDeck.Validator
 
         protected override void LogicForPrefabInstanceRoot(GameObject gameObject)
         {
+#if VRC_SDK_VRCSDK2
             var objectSyncComponents = gameObject.GetComponentsInChildren<VRC_ObjectSync>(true);
             foreach (var objectSync in objectSyncComponents)
             {
@@ -38,8 +42,10 @@ namespace VitDeck.Validator
             }
             
             ValidateParent(gameObject.transform.parent, gameObject);
+#endif
         }
 
+#if VRC_SDK_VRCSDK2
         private void ValidateParent(Transform transform, GameObject targetGameObject)
         {
             if (transform == null)
@@ -61,5 +67,6 @@ namespace VitDeck.Validator
                     LocalizedMessage.Get("F02_PickupObjectSyncPrefabRule.DontNest")));
             }
         }
+#endif
     }
 }
