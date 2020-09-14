@@ -213,6 +213,7 @@ namespace VitDeck.TemplateLoader
                 //最終パス
                 var after = ta.replacedDestinationPath;
                 var moveResult = AssetDatabase.MoveAsset(before, after);
+                AssetDatabase.Refresh();
                 log += "from:" + ta.destinationPath + " to:" + ta.replacedDestinationPath + Environment.NewLine;
                 if (!string.IsNullOrEmpty(moveResult))
                     log += moveResult + Environment.NewLine;
