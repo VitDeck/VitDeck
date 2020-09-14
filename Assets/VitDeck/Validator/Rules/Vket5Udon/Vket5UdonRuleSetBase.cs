@@ -292,7 +292,7 @@ namespace VitDeck.Validator
                 new ComponentReference("VRC_Event Handler(Obsolete)", new string[]{"VRC.SDKBase.VRC_EventHandler", "VRC.SDK3.Components.VRCEventHandler"}, ValidationLevel.DISALLOW),
 
                 // VRCSDK3 Udon
-                new ComponentReference("UdonVM", new string[]{"VRC.Udon.VM"}, MoreAdvancedObjectValidationLevel),
+                new ComponentReference("Udon Behaviour", new string[]{"VRC.Udon.UdonBehaviour"}, MoreAdvancedObjectValidationLevel),
             };
         }
 
