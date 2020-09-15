@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a780f2801beb823448f3c902970fc314, type: 3}
+  m_Name: VketExportSettingUdonCube
+  m_EditorClassIdentifier: 
+  SettingName: "\u30D0\u30FC\u30C1\u30E3\u30EB\u30DE\u30FC\u30B1\u30C3\u30C85\u5165\u7A3F\u30D1\u30C3\u30B1\u30FC\u30B8
+    (Udon Cube)"
+  Description: "\u30D0\u30FC\u30C1\u30E3\u30EB\u30DE\u30FC\u30B1\u30C3\u30C85\u306E\u5165\u7A3F\u7528\u30D1\u30C3\u30B1\u30FC\u30B8\u3092\u30A8\u30AF\u30B9\u30DD\u30FC\u30C8\u3057\u307E\u3059\u3002\n#
+    \u6CE8\u610F\u70B9\n- \u5B9F\u884C\u524D\u306B\u5FC5\u305A\u30ED\u30B0\u30A4\u30F3\u3092\u884C\u3063\u3066\u304F\u3060\u3055\u3044\u3002\n-
+    \u4E8B\u524D\u30EB\u30FC\u30EB\u30C1\u30A7\u30C3\u30AF\u3067\u30A8\u30E9\u30FC\u304C\u3042\u308B\u5834\u5408\u306F\u30D1\u30C3\u30B1\u30FC\u30B8\u304C\u4F5C\u6210\u3055\u308C\u307E\u305B\u3093\u3002\n-
+    \u30D9\u30FC\u30B9\u30D5\u30A9\u30EB\u30C0\u5185\u306E\u5168\u3066\u306E\u30D5\u30A1\u30A4\u30EB\u304C\u30D1\u30C3\u30B1\u30FC\u30B8\u5316\u3055\u308C\u307E\u3059\u3002"
+  ExportFolderPath: Assets/Vket_Exports
+  fileNameFormat: '{SHA-1}.unitypackage'
+  ruleSetName: UdonCubeRuleSet
+  ignoreValidationWarning: 1
