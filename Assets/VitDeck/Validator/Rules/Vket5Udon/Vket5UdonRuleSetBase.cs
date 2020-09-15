@@ -100,23 +100,7 @@ namespace VitDeck.Validator
 
                 new ReflectionProbeRule(LocalizedMessage.Get("Vket5RuleSetBase.ReflectionProbeRule.Title")),
 
-                new VRCTriggerConfigRule(LocalizedMessage.Get("Vket5RuleSetBase.VRCTriggerConfigRule.Title"),
-                            VRCTriggerBroadcastTypesWhitelist,
-                            new VRC_Trigger.TriggerType[] {
-                                VRC_Trigger.TriggerType.Custom,
-                                VRC_Trigger.TriggerType.OnInteract,
-                                VRC_Trigger.TriggerType.OnEnterTrigger,
-                                VRC_Trigger.TriggerType.OnExitTrigger,
-                                VRC_Trigger.TriggerType.OnPickup,
-                                VRC_Trigger.TriggerType.OnDrop,
-                                VRC_Trigger.TriggerType.OnPickupUseDown,
-                                VRC_Trigger.TriggerType.OnPickupUseUp   },
-                            VRCTriggerActionWhitelist,
-                            Vket5OfficialAssetData.GUIDs),
-
                 new UseMeshColliderRule(LocalizedMessage.Get("Vket5RuleSetBase.UseMeshColliderRule.Title")),
-
-                new VRCTriggerCountLimitRule(LocalizedMessage.Get("Vket5RuleSetBase.VRCTriggerCountLimitRule.Title", VRCTriggerCountLimit), VRCTriggerCountLimit),
 
                 new LightCountLimitRule(LocalizedMessage.Get("Vket5RuleSetBase.DirectionalLightLimitRule.Title"), UnityEngine.LightType.Directional, 0),
 
@@ -165,11 +149,13 @@ namespace VitDeck.Validator
 
                 new F02_RigidbodyRule(LocalizedMessage.Get("Vket5RuleSetBase.F02_RigidbodyRule.Title")),
 
-                new F02_PrefabLimitRule(
-                    LocalizedMessage.Get("Vket5RuleSetBase.ChairPrefabLimitRule.Title", ChairPrefabUsesLimit),
-                    Vket5OfficialAssetData.ChairPrefabGUIDs,
-                    ChairPrefabUsesLimit),
+                //// UdonCube用のChairPrefab待ち(もしくは自前で実装を許す)
+                // new F02_PrefabLimitRule(
+                //     LocalizedMessage.Get("Vket5RuleSetBase.ChairPrefabLimitRule.Title", ChairPrefabUsesLimit),
+                //     Vket5OfficialAssetData.ChairPrefabGUIDs,
+                //     ChairPrefabUsesLimit),
 
+                
                 new F02_PrefabLimitRule(
                     LocalizedMessage.Get("Vket5RuleSetBase.UnusabePrefabRule.Title", ChairPrefabUsesLimit),
                     Vket5OfficialAssetData.VRCSDKPrefabGUIDs,
@@ -180,11 +166,33 @@ namespace VitDeck.Validator
                     Vket5OfficialAssetData.PickupObjectSyncPrefabGUIDs,
                     PickupObjectSyncUsesLimit),
 
-                new F02_VideoPlayerComponentRule(LocalizedMessage.Get("Vket5RuleSetBase.VideoPlayerComponentRule.Title")),
+                //// IN SDK3 Video Player is suspended.
+                // new F02_VideoPlayerComponentRule(LocalizedMessage.Get("Vket5RuleSetBase.VideoPlayerComponentRule.Title")),
 
-                new F02_VideoPlayerComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.F02_VideoPlayerComponentMaxCountRule.Title"), limit: 1),
+                //// IN SDK3 Video Player is suspended.
+                // new F02_VideoPlayerComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.F02_VideoPlayerComponentMaxCountRule.Title"), limit: 1),
 
                 new F01_AnimatorComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.AnimatorComponentMaxCountRule.Title"), limit: 50)
+
+                // Udon Behaviour
+                // ToDo: UdonBehaviourを含むオブジェクト、UdonBehaviourによって操作を行うオブジェクトは全て入稿ルール C.Scene内階層規定におけるDynamicオブジェクトの階層下に入れてください
+                // ToDo: 全てのUdonBehaviourオブジェクトの親であるDynamicオブジェクトは初期でInactive状態にしてください
+                // ToDo: UdonBehaviourを含むオブジェクトのLayerはUserLayer23としてください
+                // ToDo: UdonBehaviourは1ブースあたり 25 まで
+                // ToDo: SynchronizePositionが有効なUdonBehaviourは1ブースあたり 10 まで
+                // ToDo: AllowOwnershipTransferOnCollisionは必ずFalseにすること
+                // ToDo: UdonBehaviourによってオブジェクトをスペース外に移動させる行為は禁止
+                // ToDo: プレイヤーの設定(移動速度等)の変更はプレイヤーがスペース内にいる場合のみ許可されます
+                // ToDo: プレイヤーの位置変更(テレポート)は、プレイヤーがスペース内にいる状態 スペース内のどこかに移動させる
+
+                // Udon Script
+                // ToDo: [UdonSynced]を付与した変数は1ブースあたり 3 まで
+                // ToDO: [UdonSynced]を付与した変数は下記の型のみ使用できます bool, sbyte, byte, ushort, short, uint, int, float
+                // ToDo: U#においては、全てのクラスは運営よりブース毎に指定するnamespaceに所属させてください
+                // ToDO: 使用禁止変数
+                // ToDo: 使用禁止関数
+                // ToDo: PhysicsクラスのCast関数 layerMaskを設定し、レイヤー23以外のコライダを無視するようにする, maxDistanceは最長で10メートルまで
+
             };
         }
 
@@ -192,38 +200,11 @@ namespace VitDeck.Validator
 
         protected abstract Vector3 BoothSizeLimit { get; }
 
-        protected virtual VRC_EventHandler.VrcBroadcastType[] VRCTriggerBroadcastTypesWhitelist
-        {
-            get
-            {
-                return new VRC_EventHandler.VrcBroadcastType[]{
-                    VRC_EventHandler.VrcBroadcastType.Local };
-            }
-        }
+        protected abstract int UdonBehaviourCountLimit { get; }
 
-        protected virtual VRC_EventHandler.VrcEventType[] VRCTriggerActionWhitelist
-        {
-            get
-            {
-                return new VRC_EventHandler.VrcEventType[] {
-                    VRC_EventHandler.VrcEventType.ActivateCustomTrigger,
-                    VRC_EventHandler.VrcEventType.AudioTrigger,
-                    VRC_EventHandler.VrcEventType.PlayAnimation,
-                    VRC_EventHandler.VrcEventType.SetParticlePlaying,
-                    VRC_EventHandler.VrcEventType.SetComponentActive,
-                    VRC_EventHandler.VrcEventType.SetGameObjectActive,
-                    VRC_EventHandler.VrcEventType.AnimationBool,
-                    VRC_EventHandler.VrcEventType.AnimationFloat,
-                    VRC_EventHandler.VrcEventType.AnimationInt,
-                    VRC_EventHandler.VrcEventType.AnimationIntAdd,
-                    VRC_EventHandler.VrcEventType.AnimationIntDivide,
-                    VRC_EventHandler.VrcEventType.AnimationIntMultiply,
-                    VRC_EventHandler.VrcEventType.AnimationIntSubtract,
-                    VRC_EventHandler.VrcEventType.AnimationTrigger};
-            }
-        }
+        protected abstract int UdonBehaviourSynchronizePositionCountLimit { get; }
 
-        protected abstract int VRCTriggerCountLimit { get; }
+        protected abstract int UdonScriptSyncedVariablesLimit { get; }
 
         protected abstract int MaterialUsesLimit { get; }
 
@@ -270,12 +251,13 @@ namespace VitDeck.Validator
                 new ComponentReference("VRC_Station", new string[]{"VRCSDK2.VRC_Station"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC_Mirror", new string[]{ "VRCSDK2.VRC_MirrorCamera", "VRCSDK2.VRC_MirrorReflection" }, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC_PlayerAudioOverride", new string[]{"VRCSDK2.VRC_PlayerAudioOverride"}, ValidationLevel.DISALLOW),
-                new ComponentReference("VRC_Panorama", new string[]{"VRCSDK2.scripts.Scenes.VRC_Panorama" }, ValidationLevel.DISALLOW),
-                new ComponentReference("VRC_SyncVideoPlayer", new string[]{"VRCSDK2.VRC_SyncVideoPlayer", "VRCSDK2.VRC_SyncVideoStream" }, ValidationLevel.DISALLOW),
+                new ComponentReference("VRC_Panorama", new string[]{"VRCSDK2.scripts.Scenes.VRC_Panorama", "VRC.SDKBase.VRC_Panorama" }, ValidationLevel.DISALLOW),
+                new ComponentReference("VRC_SyncVideoPlayer", new string[]{"VRCSDK2.VRC_SyncVideoPlayer", "VRCSDK2.VRC_SyncVideoStream", "VRC.SDKBase.VRC_SyncVideoPlayer", "VRC.SDKBase.VRC_SyncVideoStream" }, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC_SceneResetPosition", new string[]{"VRCSDK2.VRC_SceneResetPosition"}, ValidationLevel.DISALLOW),
 
                 // VRCSDK3
-                new ComponentReference("VRC Trigger", new string[]{"VRC.SDKBase.VRC_Trigger", "VRC.SDK3.Components.VRCTrigger"}, AdvancedObjectValidationLevel),
+                //// VRC_Trigger is obsolete. Use instead Udon Behaviour
+                new ComponentReference("VRC Trigger", new string[]{"VRC.SDKBase.VRC_Trigger", "VRC.SDK3.Components.VRCTrigger"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC Pickup", new string[]{"VRC.SDKBase.VRC_Pickup", "VRC.SDK3.Components.VRCPickup"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC Station", new string[]{"VRC.SDKBase.VRCStation", "VRC.SDK3.Components.VRCStation"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC Avatar Pedestal", new string[]{"VRC.SDKBase.VRC_AvatarPedestal", "VRC.SDK3.Components.VRCAvatarPedestal"}, ValidationLevel.DISALLOW),
@@ -290,9 +272,7 @@ namespace VitDeck.Validator
                 new ComponentReference("VRC Project Settings", new string[]{"VRCProjectSettings"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC_Sdk Builder", new string[]{"VRC.SDK3.Editor.VRC_SdkBuilder"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC_Event Handler(Obsolete)", new string[]{"VRC.SDKBase.VRC_EventHandler", "VRC.SDK3.Components.VRCEventHandler"}, ValidationLevel.DISALLOW),
-
-                // VRCSDK3 Udon
-                new ComponentReference("Udon Behaviour", new string[]{"VRC.Udon.UdonBehaviour"}, MoreAdvancedObjectValidationLevel),
+                new ComponentReference("Udon Behaviour", new string[]{"VRC.Udon.UdonBehaviour", "VRC.SDKBase.VRC_Interactable"}, MoreAdvancedObjectValidationLevel),
             };
         }
 

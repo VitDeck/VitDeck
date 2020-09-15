@@ -33,29 +33,27 @@ namespace VitDeck.Validator
             }
         }
 
-        protected override VRC_EventHandler.VrcBroadcastType[] VRCTriggerBroadcastTypesWhitelist
+        protected override int UdonBehaviourCountLimit
         {
             get
             {
-                return base.VRCTriggerBroadcastTypesWhitelist.Concat(new[] {
-                    VRC_EventHandler.VrcBroadcastType.AlwaysUnbuffered }).ToArray();
+                return 25;
             }
         }
 
-        protected override VRC_EventHandler.VrcEventType[] VRCTriggerActionWhitelist
+        protected override int UdonBehaviourSynchronizePositionCountLimit
         {
             get
             {
-                return base.VRCTriggerActionWhitelist.Concat(new[] {
-                    VRC_EventHandler.VrcEventType.TeleportPlayer }).ToArray();
+                return 10;
             }
         }
 
-        protected override int VRCTriggerCountLimit
+        protected override int UdonScriptSyncedVariablesLimit
         {
             get
             {
-                return 50;
+                return 3;
             }
         }
 
