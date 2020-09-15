@@ -32,12 +32,12 @@ namespace VitDeck.Validator
         public Vket5UdonRuleSetBase() : base()
         {
             officialPrefabsDetector = new PrefabPartsDetector(
-                Vket5OfficialAssetData.AudioSourcePrefabGUIDs,
-                Vket5OfficialAssetData.AvatarPedestalPrefabGUIDs,
-                Vket5OfficialAssetData.ChairPrefabGUIDs,
-                Vket5OfficialAssetData.PickupObjectSyncPrefabGUIDs,
-                Vket5OfficialAssetData.CanvasPrefabGUIDs,
-                Vket5OfficialAssetData.PointLightProbeGUIDs);
+                Vket5UdonOfficialAssetData.AudioSourcePrefabGUIDs,
+                Vket5UdonOfficialAssetData.AvatarPedestalPrefabGUIDs,
+                Vket5UdonOfficialAssetData.ChairPrefabGUIDs,
+                Vket5UdonOfficialAssetData.PickupObjectSyncPrefabGUIDs,
+                Vket5UdonOfficialAssetData.CanvasPrefabGUIDs,
+                Vket5UdonOfficialAssetData.PointLightProbeGUIDs);
         }
 
         public IRule[] GetRules()
@@ -53,9 +53,9 @@ namespace VitDeck.Validator
                     new VRCSDKVersion("2020.05.06.12.14"),
                     "https://files.vrchat.cloud/sdk/VRCSDK3-WORLD-2020.08.07.18.18_Public.unitypackage"),
 
-                new A04_ExistInSubmitFolderRule(LocalizedMessage.Get("Vket5RuleSetBase.ExistInSubmitFolderRule.Title"), Vket5OfficialAssetData.GUIDs),
+                new A04_ExistInSubmitFolderRule(LocalizedMessage.Get("Vket5RuleSetBase.ExistInSubmitFolderRule.Title"), Vket5UdonOfficialAssetData.GUIDs),
 
-                new AssetGuidBlacklistRule(LocalizedMessage.Get("Vket5RuleSetBase.OfficialAssetDontContainRule.Title"), Vket5OfficialAssetData.GUIDs),
+                new AssetGuidBlacklistRule(LocalizedMessage.Get("Vket5RuleSetBase.OfficialAssetDontContainRule.Title"), Vket5UdonOfficialAssetData.GUIDs),
 
                 new AssetNamingRule(LocalizedMessage.Get("Vket5RuleSetBase.NameOfFileAndFolderRule.Title"), @"[a-zA-Z0-9 _\.\-\(\)]+"),
 
@@ -81,7 +81,7 @@ namespace VitDeck.Validator
                     LocalizedMessage.Get("Vket5RuleSetBase.MaterialLimitRule.Title", MaterialUsesLimit),
                     typeof(Material),
                     MaterialUsesLimit,
-                    Vket5OfficialAssetData.MaterialGUIDs),
+                    Vket5UdonOfficialAssetData.MaterialGUIDs),
 
                 new D08_LightmapSizeLimitRule(
                     LocalizedMessage.Get("Vket5RuleSetBase.LightMapsLimitRule.Title", LightmapCountLimit, 512),
@@ -92,7 +92,7 @@ namespace VitDeck.Validator
 
                 new UsableComponentListRule(LocalizedMessage.Get("Vket5RuleSetBase.UsableComponentListRule.Title"),
                     GetComponentReferences(),
-                    ignorePrefabGUIDs: Vket5OfficialAssetData.GUIDs),
+                    ignorePrefabGUIDs: Vket5UdonOfficialAssetData.GUIDs),
 
                 new SkinnedMeshRendererRule(LocalizedMessage.Get("Vket5RuleSetBase.SkinnedMeshRendererRule.Title")),
 
@@ -141,29 +141,29 @@ namespace VitDeck.Validator
 
                 new F01_ProjectorComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.F01_ProjectorComponentMaxCountRule.Title"), limit: 1),
 
-                new F02_PickupObjectSyncPrefabRule(LocalizedMessage.Get("Vket5RuleSetBase.PickupObjectSyncRule.Title"), Vket5OfficialAssetData.PickupObjectSyncPrefabGUIDs),
+                new F02_PickupObjectSyncPrefabRule(LocalizedMessage.Get("Vket5RuleSetBase.PickupObjectSyncRule.Title"), Vket5UdonOfficialAssetData.PickupObjectSyncPrefabGUIDs),
 
-                new F02_AvatarPedestalPrefabRule(LocalizedMessage.Get("Vket5RuleSetBase.AvatarPedestalPrefabRule.Title"), Vket5OfficialAssetData.AvatarPedestalPrefabGUIDs),
+                new F02_AvatarPedestalPrefabRule(LocalizedMessage.Get("Vket5RuleSetBase.AvatarPedestalPrefabRule.Title"), Vket5UdonOfficialAssetData.AvatarPedestalPrefabGUIDs),
 
-                new F02_AudioSourcePrefabRule(LocalizedMessage.Get("Vket5RuleSetBase.AudioSourcePrefabRule.Title"),  Vket5OfficialAssetData.AudioSourcePrefabGUIDs),
+                new F02_AudioSourcePrefabRule(LocalizedMessage.Get("Vket5RuleSetBase.AudioSourcePrefabRule.Title"),  Vket5UdonOfficialAssetData.AudioSourcePrefabGUIDs),
 
                 new F02_RigidbodyRule(LocalizedMessage.Get("Vket5RuleSetBase.F02_RigidbodyRule.Title")),
 
                 //// UdonCube用のChairPrefab待ち(もしくは自前で実装を許す)
                 // new F02_PrefabLimitRule(
                 //     LocalizedMessage.Get("Vket5RuleSetBase.ChairPrefabLimitRule.Title", ChairPrefabUsesLimit),
-                //     Vket5OfficialAssetData.ChairPrefabGUIDs,
+                //     Vket5UdonOfficialAssetData.ChairPrefabGUIDs,
                 //     ChairPrefabUsesLimit),
 
                 
                 new F02_PrefabLimitRule(
                     LocalizedMessage.Get("Vket5RuleSetBase.UnusabePrefabRule.Title", ChairPrefabUsesLimit),
-                    Vket5OfficialAssetData.VRCSDKPrefabGUIDs,
+                    Vket5UdonOfficialAssetData.VRCSDKPrefabGUIDs,
                     0),
 
                 new F02_PrefabLimitRule(
                     LocalizedMessage.Get("Vket5RuleSetBase.PickupObjectSyncPrefabLimitRule.Title", PickupObjectSyncUsesLimit),
-                    Vket5OfficialAssetData.PickupObjectSyncPrefabGUIDs,
+                    Vket5UdonOfficialAssetData.PickupObjectSyncPrefabGUIDs,
                     PickupObjectSyncUsesLimit),
 
                 //// IN SDK3 Video Player is suspended.
@@ -176,14 +176,18 @@ namespace VitDeck.Validator
 
                 // Udon Behaviour
                 // ToDo: UdonBehaviourを含むオブジェクト、UdonBehaviourによって操作を行うオブジェクトは全て入稿ルール C.Scene内階層規定におけるDynamicオブジェクトの階層下に入れてください
+                
                 // ToDo: 全てのUdonBehaviourオブジェクトの親であるDynamicオブジェクトは初期でInactive状態にしてください
                 // ToDo: UdonBehaviourを含むオブジェクトのLayerはUserLayer23としてください
                 // ToDo: UdonBehaviourは1ブースあたり 25 まで
                 // ToDo: SynchronizePositionが有効なUdonBehaviourは1ブースあたり 10 まで
                 // ToDo: AllowOwnershipTransferOnCollisionは必ずFalseにすること
                 // ToDo: UdonBehaviourによってオブジェクトをスペース外に移動させる行為は禁止
+                // ⇒ バリデーションで防げないのでは
                 // ToDo: プレイヤーの設定(移動速度等)の変更はプレイヤーがスペース内にいる場合のみ許可されます
+                // ⇒ 制限方法のアイデアが無い。 定型処理を入れさせる？
                 // ToDo: プレイヤーの位置変更(テレポート)は、プレイヤーがスペース内にいる状態 スペース内のどこかに移動させる
+                // ⇒ Nodeの場合 テレポート先を GameObject.Transform 参照に縛る？
 
                 // Udon Script
                 // ToDo: [UdonSynced]を付与した変数は1ブースあたり 3 まで
