@@ -5,6 +5,7 @@ using UnityEngine;
 using VRC.Udon;
 using VRC.Udon.Editor.ProgramSources;
 using VRC.Udon.Editor.ProgramSources.UdonGraphProgram;
+using VRC.Udon.Graph;
 using VRC.Udon.ProgramSources;
 using VRC.Udon.UAssembly.Disassembler;
 
@@ -18,15 +19,14 @@ namespace VitDeck.Validator
 
         protected override void ComponentLogic(UdonBehaviour component)
         {
-            var type = component.programSource.GetType();
-            Debug.Log(type.ToString());
+            // UdonProgramName
+            var name = component.programSource.name;
+            Debug.Log(name);
 
-            // ノード一覧の書き出し
-            if (component.programSource is UdonGraphProgramAsset)
+            // ノード一覧
+            var graph = GetGraphData(component);
+            if (graph != null)
             {
-                var programAsset = component.programSource as UdonGraphProgramAsset;
-                Debug.Log(programAsset.ToString());
-                var graph = programAsset.GetGraphData();
                 List<string> nodeNames = new List<string>();
                 foreach (var node in graph.nodes)
                 {
@@ -35,25 +35,50 @@ namespace VitDeck.Validator
                 Debug.Log(String.Join("\n", nodeNames));
             }
 
-            // バイトコードからのディスアセンブル
+            // コード
+            Debug.Log(GetDisassembleCode(component));
+        }
+
+        protected override void HasComponentObjectLogic(GameObject hasComponentObject)
+        {
+        }
+
+        /// <summary>
+        /// バイトコードからのディスアセンブル
+        /// </summary>
+        /// <param name="component">VRC.Udon.UdonBehaviour</param>
+        /// <returns>string</returns>
+        protected static string GetDisassembleCode(UdonBehaviour component)
+        {
             if (component.programSource is UdonAssemblyProgramAsset)
             {
                 var programAsset = component.programSource as UdonAssemblyProgramAsset;
-                Debug.Log(programAsset.ToString());
-                Debug.Log(programAsset.SerializedProgramAsset.GetType().ToString());
                 if (programAsset.SerializedProgramAsset is SerializedUdonProgramAsset)
                 {
                     var serializedProgram = programAsset.SerializedProgramAsset as SerializedUdonProgramAsset;
                     var program = serializedProgram.RetrieveProgram();
                     var disasm = new UAssemblyDisassembler();
-                    Debug.Log(String.Join("\n", disasm.DisassembleProgram(program))); ;
+                    return String.Join("\n", disasm.DisassembleProgram(program));
                 }
             }
+
+            return null;
         }
 
-        protected override void HasComponentObjectLogic(GameObject hasComponentObject)
+        /// <summary>
+        /// UdonGraphの取り出し
+        /// </summary>
+        /// <param name="component">VRC.Udon.UdonBehaviour</param>
+        /// <returns>VRC.Udon.Graph.UdonGraphData</returns>
+        protected static UdonGraphData GetGraphData(UdonBehaviour component)
         {
-            Debug.Log("UdonBehaviour Validation Test");
+            if (component.programSource is UdonGraphProgramAsset)
+            {
+                var programAsset = component.programSource as UdonGraphProgramAsset;
+                return programAsset.GetGraphData();
+            }
+
+            return null;
         }
     }
 }
