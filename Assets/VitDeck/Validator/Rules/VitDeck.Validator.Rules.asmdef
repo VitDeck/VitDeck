@@ -4,10 +4,18 @@
         "VitDeck.Utilities",
         "VitDeck.Validator.Components",
         "VitDeck.Validator.Runtime",
-        "VitDeck.Language"
+        "VitDeck.Language",
+        "VRC.Udon",
+        "VRC.Udon.Editor"
     ],
+    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
-    "excludePlatforms": []
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
 }

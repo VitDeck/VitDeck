@@ -172,9 +172,10 @@ namespace VitDeck.Validator
                 //// IN SDK3 Video Player is suspended.
                 // new F02_VideoPlayerComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.F02_VideoPlayerComponentMaxCountRule.Title"), limit: 1),
 
-                new F01_AnimatorComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.AnimatorComponentMaxCountRule.Title"), limit: 50)
+                new F01_AnimatorComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.AnimatorComponentMaxCountRule.Title"), limit: 50),
 
                 // Udon Behaviour
+                new UdonBehaviourRule("hoge"),
                 // ToDo: UdonBehaviourを含むオブジェクト、UdonBehaviourによって操作を行うオブジェクトは全て入稿ルール C.Scene内階層規定におけるDynamicオブジェクトの階層下に入れてください
                 
                 // ToDo: 全てのUdonBehaviourオブジェクトの親であるDynamicオブジェクトは初期でInactive状態にしてください
