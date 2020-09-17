@@ -19,6 +19,8 @@ namespace VitDeck.Language
         private LanguageDictionaryTreeView treeView;
         private SearchField searchField;
 
+        private GUIStyle wordWrapTextAreaStyle = default;
+
         private void OnEnable()
         {
             dictionary = (LanguageDictionary)target;
@@ -55,6 +57,36 @@ namespace VitDeck.Language
             var rect = EditorGUILayout.GetControlRect(false, 200);
             treeView.OnGUI(rect);
 
+            GUILayout.Space(10);
+
+            SelectedMessageView();
+        }
+
+        private void SelectedMessageView()
+        {
+            if (wordWrapTextAreaStyle == null)
+            {
+                wordWrapTextAreaStyle = new GUIStyle(EditorStyles.textArea);
+                wordWrapTextAreaStyle.wordWrap = true;
+            }
+
+            EditorGUI.BeginChangeCheck();
+            var selections = treeView.GetSelection();
+            var translations = dictionary.GetTranslations();
+            foreach (var selection in selections)
+            {
+                GUILayout.Space(10);
+                var selected = translations[selection];
+                GUILayout.Label(selected.Key, EditorStyles.boldLabel);
+                EditorGUI.indentLevel++;
+                translations[selection].Value = EditorGUILayout.TextArea(selected.Value, wordWrapTextAreaStyle);
+                EditorGUI.indentLevel--;
+            }
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                EditorUtility.SetDirty(dictionary);
+            }
         }
 
         private void ReadFromTSV(string tsvText)
