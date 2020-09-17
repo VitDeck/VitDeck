@@ -37,13 +37,13 @@ namespace VitDeck.Language
                 GUILayout.FlexibleSpace();
                 GUILayout.Label("Clipboard(tsv):");
 
-                if (GUILayout.Button("Copy All", EditorStyles.miniButton))
+                if (GUILayout.Button("Copy", EditorStyles.miniButton))
                 {
                     var csv = ToTSV();
                     GUIUtility.systemCopyBuffer = csv;
                 }
 
-                if (GUILayout.Button("Replace All", EditorStyles.miniButton))
+                if (GUILayout.Button("Paste", EditorStyles.miniButton))
                 {
                     var csv = GUIUtility.systemCopyBuffer;
                     ReadFromTSV(csv);
@@ -59,18 +59,19 @@ namespace VitDeck.Language
 
         private void ReadFromTSV(string tsvText)
         {
+            
             var translations = new List<LanguageDictionary.Pair>();
-
-            for (int i = 0; i < tsvText.Length;)
+            var tsv = CSVParser.LoadFromString(tsvText, CSVParser.Delimiter.Tab);
+            
+            int messageIDColumnIndex = 0;
+            int messageColumnIndex = 1;
+            
+            foreach (var row in tsv)
             {
-                var keyCell = new Cell(tsvText, i);
-                i = keyCell.EndIndex + 1;
-                if (i >= tsvText.Length)
-                    break;
-                var valueCell = new Cell(tsvText, i);
-                i = valueCell.EndIndex + 1;
-
-                translations.Add(new LanguageDictionary.Pair() { Key = keyCell.Content, Value = valueCell.Content });
+                var messageID = row[messageIDColumnIndex];
+                var message = row[messageColumnIndex];
+                
+                translations.Add(new LanguageDictionary.Pair() { Key = messageID, Value = message });
             }
 
             dictionary.SetTranslations(translations.ToArray());
@@ -85,96 +86,22 @@ namespace VitDeck.Language
 
             foreach (var translation in translations)
             {
-                builder.AppendFormat("{0}\t{1}\n", translation.Key, translation.Value);
+                var value = translation.Value;
+
+                if (IsMustQuote(value))
+                {
+                    value = $"\"{value.Replace("\"","\\\"")}\"";
+                }
+
+                builder.AppendFormat("{0}\t{1}\n", translation.Key, value);
             }
 
             return builder.ToString();
         }
 
-        private class Cell
+        private bool IsMustQuote(string value)
         {
-            private readonly string csv;
-            private readonly int start;
-            private readonly int end;
-            private readonly string content;
-
-            public Cell(string csv, int start)
-            {
-                this.csv = csv;
-                this.start = start;
-
-                bool multiLine = false;
-                bool escaped = false;
-                int i = start;
-                for (; i < csv.Length; i++)
-                {
-                    var c = csv[i];
-
-                    if (c == '"')
-                    {
-                        if (i == start)
-                        {
-                            multiLine = true;
-                            escaped = true;
-                        }
-                        else
-                        {
-                            escaped = false;
-                        }
-                    }
-
-                    if (c == '\n')
-                    {
-                        if (escaped)
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-
-                    if (c == '\t')
-                    {
-                        break;
-                    }
-                }
-                end = i;
-
-                if (multiLine)
-                {
-                    content = csv.Substring(start + 1, end - start - 3).Trim();
-                }
-                else
-                {
-                    content = csv.Substring(start, end - start).Trim();
-                }
-            }
-
-            public string Content
-            {
-                get
-                {
-                    return content;
-                }
-            }
-
-            public int StartIndex
-            {
-                get
-                {
-                    return start;
-                }
-            }
-
-            public int EndIndex
-            {
-                get
-                {
-                    return end;
-                }
-            }
+            return value.Contains("\t") || value.Contains("\n");
         }
     }
 }
