@@ -23,6 +23,8 @@ namespace VitDeck.Validator
 
         void LogicForRootObject(GameObject rootObject)
         {
+            CheckObjectIdentity(rootObject);
+            
             GameObject staticRoot = null;
             GameObject dynamicRoot = null;
 
@@ -64,6 +66,8 @@ namespace VitDeck.Validator
                 return;
             }
 
+            CheckObjectIdentity(instance);
+            
             var components = instance.GetComponents<Component>();
 
             if (components.Length > 1 || components[0] is RectTransform)
@@ -74,6 +78,41 @@ namespace VitDeck.Validator
                         LocalizedMessage.Get("C02_ExhibitStructureRule.UnauthorizedComponent", instanceName),
                         LocalizedMessage.Get("C02_ExhibitStructureRule.UnauthorizedComponent.Solution", instanceName)
                         ));
+            }
+        }
+        
+        private void CheckObjectIdentity(GameObject instance)
+        {
+            var transform = instance.transform;
+            if (transform.localPosition != Vector3.zero)
+            {
+                var message = LocalizedMessage.Get("C02_ExhibitStructureRule.NotInitialPosition");
+                var solution = LocalizedMessage.Get("C02_ExhibitStructureRule.NotInitialPosition.Solution");
+                var solutionURL = LocalizedMessage.Get("C02_ExhibitStructureRule.NotInitialPosition.SolutionURL");
+                AddIssue(new Issue(
+                    instance,
+                    IssueLevel.Error,
+                    message, solution, solutionURL));
+            }
+            if (transform.localRotation != Quaternion.identity)
+            {
+                var message = LocalizedMessage.Get("C02_ExhibitStructureRule.NotInitialRotation");
+                var solution = LocalizedMessage.Get("C02_ExhibitStructureRule.NotInitialRotation.Solution");
+                var solutionURL = LocalizedMessage.Get("C02_ExhibitStructureRule.NotInitialRotation.SolutionURL");
+                AddIssue(new Issue(
+                    instance,
+                    IssueLevel.Error,
+                    message, solution, solutionURL));
+            }
+            if (transform.localScale != Vector3.one)
+            {
+                var message = LocalizedMessage.Get("C02_ExhibitStructureRule.NotInitialScale");
+                var solution = LocalizedMessage.Get("C02_ExhibitStructureRule.NotInitialScale.Solution");
+                var solutionURL = LocalizedMessage.Get("C02_ExhibitStructureRule.NotInitialScale.SolutionURL");
+                AddIssue(new Issue(
+                    instance,
+                    IssueLevel.Error,
+                    message, solution, solutionURL));
             }
         }
     }
