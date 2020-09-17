@@ -521,3 +521,9 @@ MonoBehaviour:
     Value: Please enable IsKinematic on RigidBody objects
   - Key: Vket5RuleSetBase.UnusabePrefabRule.Title
     Value: '[F-4]Unallowed prefabs in use'
+  - Key: X05_UdonBehaviourLayerConstraintRule.Title
+    Value: '[X-05] GameObject Layer including UdonBehaviour must 23.'
+  - Key: X05_UdonBehaviourLayerConstraintRule.InvalidLayer
+    Value: 'Wrong Layer'
+  - Key: X05_UdonBehaviourLayerConstraintRule.InvalidLayer.solution
+    Value: 'GameObject including UdonBehaviour must set Later 23.'

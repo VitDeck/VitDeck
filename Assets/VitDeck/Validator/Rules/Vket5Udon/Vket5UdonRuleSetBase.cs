@@ -175,11 +175,11 @@ namespace VitDeck.Validator
                 new F01_AnimatorComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.AnimatorComponentMaxCountRule.Title"), limit: 50),
 
                 // Udon Behaviour
-                new UdonBehaviourRule("hoge"),
                 // ToDo: UdonBehaviourを含むオブジェクト、UdonBehaviourによって操作を行うオブジェクトは全て入稿ルール C.Scene内階層規定におけるDynamicオブジェクトの階層下に入れてください
                 
                 // ToDo: 全てのUdonBehaviourオブジェクトの親であるDynamicオブジェクトは初期でInactive状態にしてください
                 // ToDo: UdonBehaviourを含むオブジェクトのLayerはUserLayer23としてください
+                new X05_UdonBehaviourLayerConstraintRule(LocalizedMessage.Get("X05_UdonBehaviourLayerConstraintRule.Title")),
                 // ToDo: UdonBehaviourは1ブースあたり 25 まで
                 // ToDo: SynchronizePositionが有効なUdonBehaviourは1ブースあたり 10 まで
                 // ToDo: AllowOwnershipTransferOnCollisionは必ずFalseにすること
