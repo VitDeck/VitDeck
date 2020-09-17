@@ -49,7 +49,7 @@ namespace VitDeck.TemplateLoader.Test
                 }
             }
         }
-        [Ignore("Vket用のテンプレートが用意され、制限に一致しなくなった為")]
+        [Test, Ignore("Vket用のテンプレートが用意され、制限に一致しなくなった為")]
         public void TestGetTemplateFolders()
         {
             Assert.That(TemplateLoader.GetTemplateFolders().Length, Is.EqualTo(1));
