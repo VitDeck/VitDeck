@@ -14,7 +14,7 @@ namespace VitDeck.Language
         }
 
         [SerializeField]
-        private Pair[] language;
+        private Pair[] language = new Pair[0];
         private Dictionary<string, string> dictionary;
 
         public string this[string key]
