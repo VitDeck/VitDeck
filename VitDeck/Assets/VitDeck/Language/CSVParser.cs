@@ -62,7 +62,7 @@ namespace VitDeck.Language
 
             // TODO : コードパスがひじょーにアレなので見やすく改良
 
-            ConvertToCrlf(ref data);
+            FormatLineEnding(ref data);
 
             foreach (var character in data)
             {
@@ -86,6 +86,11 @@ namespace VitDeck.Language
                             if (character == delimiterChar)
                             {
                                 AddCell(row, cell);
+                            }
+                            else if (character == '\n')
+                            {
+                                AddCell(row, cell);
+                                AddRow(sheet, ref row);
                             }
                         }
                         else
@@ -156,9 +161,9 @@ namespace VitDeck.Language
             row = new List<string>();
         }
 
-        static void ConvertToCrlf(ref string data)
+        static void FormatLineEnding(ref string data)
         {
-            data = Regex.Replace(data, @"\r\n|\r|\n", "\r\n");
+            data = Regex.Replace(data, @"\r\n|\r|\n", "\n");
         }
     }
 }
