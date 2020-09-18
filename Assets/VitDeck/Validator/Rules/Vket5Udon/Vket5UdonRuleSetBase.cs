@@ -179,7 +179,7 @@ namespace VitDeck.Validator
 
                 // UdonBehaviourは1ブースあたり 25 まで
                 new D04_AssetTypeLimitRule(
-                    LocalizedMessage.Get("Vket5UdonRuleSetBase.UdonBehaviourLimitRule.Title", MaterialUsesLimit),
+                    LocalizedMessage.Get("Vket5UdonRuleSetBase.UdonBehaviourLimitRule.Title", UdonBehaviourCountLimit),
                     typeof(UdonBehaviour),
                     UdonBehaviourCountLimit,
                     Vket5UdonOfficialAssetData.UdonBehaviourPrefabGUIDs),
