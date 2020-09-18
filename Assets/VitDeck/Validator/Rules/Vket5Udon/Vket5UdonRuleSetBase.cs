@@ -178,24 +178,33 @@ namespace VitDeck.Validator
                 // ToDo: UdonBehaviourを含むオブジェクト、UdonBehaviourによって操作を行うオブジェクトは全て入稿ルール C.Scene内階層規定におけるDynamicオブジェクトの階層下に入れてください
                 
                 // ToDo: 全てのUdonBehaviourオブジェクトの親であるDynamicオブジェクトは初期でInactive状態にしてください
-                // ToDo: UdonBehaviourを含むオブジェクトのLayerはUserLayer23としてください
+
+                // UdonBehaviourを含むオブジェクトのLayerはUserLayer23としてください
                 new X05_UdonBehaviourLayerConstraintRule(LocalizedMessage.Get("X05_UdonBehaviourLayerConstraintRule.Title")),
+
                 // ToDo: UdonBehaviourは1ブースあたり 25 まで
                 // ToDo: SynchronizePositionが有効なUdonBehaviourは1ブースあたり 10 まで
                 // ToDo: AllowOwnershipTransferOnCollisionは必ずFalseにすること
-                // ToDo: UdonBehaviourによってオブジェクトをスペース外に移動させる行為は禁止
-                // ⇒ バリデーションで防げないのでは
-                // ToDo: プレイヤーの設定(移動速度等)の変更はプレイヤーがスペース内にいる場合のみ許可されます
-                // ⇒ 制限方法のアイデアが無い。 定型処理を入れさせる？
-                // ToDo: プレイヤーの位置変更(テレポート)は、プレイヤーがスペース内にいる状態 スペース内のどこかに移動させる
-                // ⇒ Nodeの場合 テレポート先を GameObject.Transform 参照に縛る？
+
+                // UdonBehaviourによってオブジェクトをスペース外に移動させる行為は禁止
+                // ⇒ スタッフによる目視確認
+
+                // プレイヤーの設定(移動速度等)の変更はプレイヤーがスペース内にいる場合のみ許可されます
+                // ⇒ スタッフによる目視確認
+
+                // プレイヤーの位置変更(テレポート)は、プレイヤーがスペース内にいる状態 スペース内のどこかに移動させる
+                // ⇒ スタッフによる目視確認
 
                 // Udon Script
                 // ToDo: [UdonSynced]を付与した変数は1ブースあたり 3 まで
                 // ToDO: [UdonSynced]を付与した変数は下記の型のみ使用できます bool, sbyte, byte, ushort, short, uint, int, float
                 // ToDo: U#においては、全てのクラスは運営よりブース毎に指定するnamespaceに所属させてください
-                // ToDO: 使用禁止変数
-                // ToDo: 使用禁止関数
+
+                // 使用禁止UdonAssembly
+                new X20_UsableUdonAssemblyListRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X20_UsableUdonAssemblyListRule.Title"),
+                    GetUdonAssemblyReferences(),
+                    ignorePrefabGUIDs: Vket5UdonOfficialAssetData.GUIDs), 
+
                 // ToDo: PhysicsクラスのCast関数 layerMaskを設定し、レイヤー23以外のコライダを無視するようにする, maxDistanceは最長で10メートルまで
 
             };
@@ -278,6 +287,24 @@ namespace VitDeck.Validator
                 new ComponentReference("VRC_Sdk Builder", new string[]{"VRC.SDK3.Editor.VRC_SdkBuilder"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC_Event Handler(Obsolete)", new string[]{"VRC.SDKBase.VRC_EventHandler", "VRC.SDK3.Components.VRCEventHandler"}, ValidationLevel.DISALLOW),
                 new ComponentReference("Udon Behaviour", new string[]{"VRC.Udon.UdonBehaviour", "VRC.SDKBase.VRC_Interactable"}, MoreAdvancedObjectValidationLevel),
+            };
+        }
+
+        private UdonAssemblyReference[] GetUdonAssemblyReferences()
+        {
+            return new UdonAssemblyReference[]
+            {
+                // Variables
+                new UdonAssemblyReference("Transform.root", new string[]{"__get_root__UnityEngineTransform", "__set_root__UnityEngineTransform"}, ValidationLevel.DISALLOW),
+                new UdonAssemblyReference("GameObject.Layer", new string[]{"UnityEngineGameObject.__get_layer__SystemInt32", "UnityEngineGameObject.__set_layer__SystemInt32"}, ValidationLevel.DISALLOW),
+                new UdonAssemblyReference("RenderSettings", new string[]{"UnityEngineRenderSettings"}, ValidationLevel.DISALLOW),
+
+                // Functions
+                new UdonAssemblyReference("UdonSharpBehaviour.VRCInstantiate", new string[]{"VRCInstantiate"}, ValidationLevel.DISALLOW),
+                new UdonAssemblyReference("GameObject.Find", new string[]{"__Find__SystemString__UnityEngineGameObject"}, ValidationLevel.DISALLOW),
+                new UdonAssemblyReference("Object.Destroy", new string[]{"UnityEngineObject.__Destroy__UnityEngineObject__SystemVoid"}, ValidationLevel.DISALLOW),
+                new UdonAssemblyReference("Object.DestroyImmediate", new string[]{"UnityEngineObject.__DestroyImmediate__UnityEngineObject__SystemVoid"}, ValidationLevel.DISALLOW),
+                new UdonAssemblyReference("Transform.DetachChildren", new string[]{"UnityEngineTransform.__DetachChildren__SystemVoid"}, ValidationLevel.DISALLOW),
             };
         }
 
