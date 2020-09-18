@@ -527,3 +527,9 @@ MonoBehaviour:
     Value: 'Wrong Layer'
   - Key: X05_UdonBehaviourLayerConstraintRule.InvalidLayer.solution
     Value: 'GameObject including UdonBehaviour must set Later 23.'
+  - Key: Vket5UdonRuleSetBase.X20_UsableUdonAssemblyListRule.Title
+    Value: "[X-20] Do not use forbidden Udon Assembly"
+  - Key: UsableUdonAssemblyListRule.DefaultComponentGroupName
+    Value: Udon Assembly not defined
+  - Key: UsableUdonAssemblyListRule.Disallow
+    Value: '{0}: Usage of {1} is not allowed'
