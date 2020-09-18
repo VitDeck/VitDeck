@@ -6,6 +6,7 @@ using VRC.SDK3;
 using VRC.SDK3.Components;
 using VRC.SDK3.Editor;
 using VRC.SDKBase;
+using VRC.Udon;
 
 namespace VitDeck.Validator
 {
@@ -34,10 +35,10 @@ namespace VitDeck.Validator
             officialPrefabsDetector = new PrefabPartsDetector(
                 Vket5UdonOfficialAssetData.AudioSourcePrefabGUIDs,
                 Vket5UdonOfficialAssetData.AvatarPedestalPrefabGUIDs,
-                Vket5UdonOfficialAssetData.ChairPrefabGUIDs,
                 Vket5UdonOfficialAssetData.PickupObjectSyncPrefabGUIDs,
                 Vket5UdonOfficialAssetData.CanvasPrefabGUIDs,
-                Vket5UdonOfficialAssetData.PointLightProbeGUIDs);
+                Vket5UdonOfficialAssetData.PointLightProbeGUIDs,
+                Vket5UdonOfficialAssetData.UdonBehaviourPrefabGUIDs);
         }
 
         public IRule[] GetRules()
@@ -149,13 +150,6 @@ namespace VitDeck.Validator
 
                 new F02_RigidbodyRule(LocalizedMessage.Get("Vket5RuleSetBase.F02_RigidbodyRule.Title")),
 
-                //// UdonCube用のChairPrefab待ち(もしくは自前で実装を許す)
-                // new F02_PrefabLimitRule(
-                //     LocalizedMessage.Get("Vket5RuleSetBase.ChairPrefabLimitRule.Title", ChairPrefabUsesLimit),
-                //     Vket5UdonOfficialAssetData.ChairPrefabGUIDs,
-                //     ChairPrefabUsesLimit),
-
-                
                 new F02_PrefabLimitRule(
                     LocalizedMessage.Get("Vket5RuleSetBase.UnusabePrefabRule.Title", ChairPrefabUsesLimit),
                     Vket5UdonOfficialAssetData.VRCSDKPrefabGUIDs,
@@ -182,7 +176,13 @@ namespace VitDeck.Validator
                 // UdonBehaviourを含むオブジェクトのLayerはUserLayer23としてください
                 new X05_UdonBehaviourLayerConstraintRule(LocalizedMessage.Get("X05_UdonBehaviourLayerConstraintRule.Title")),
 
-                // ToDo: UdonBehaviourは1ブースあたり 25 まで
+                // UdonBehaviourは1ブースあたり 25 まで
+                new D04_AssetTypeLimitRule(
+                    LocalizedMessage.Get("Vket5RuleSetBase.UdonBehaviourLimitRule.Title", MaterialUsesLimit),
+                    typeof(UdonBehaviour),
+                    UdonBehaviourCountLimit,
+                    Vket5UdonOfficialAssetData.UdonBehaviourPrefabGUIDs),
+
                 // ToDo: SynchronizePositionが有効なUdonBehaviourは1ブースあたり 10 まで
                 // ToDo: AllowOwnershipTransferOnCollisionは必ずFalseにすること
 
