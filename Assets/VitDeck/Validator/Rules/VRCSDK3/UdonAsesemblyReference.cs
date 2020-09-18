@@ -1,3 +1,4 @@
+#if VRC_SDK_VRCSDK3
 using System;
 
 namespace VitDeck.Validator
@@ -34,3 +35,4 @@ namespace VitDeck.Validator
         }
     }
 }
+#endif

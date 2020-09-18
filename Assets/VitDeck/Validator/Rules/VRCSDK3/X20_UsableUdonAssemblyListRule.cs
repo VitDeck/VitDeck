@@ -1,3 +1,4 @@
+#if VRC_SDK_VRCSDK3
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -110,3 +111,4 @@ namespace VitDeck.Validator
         }
     }
 }
+#endif
