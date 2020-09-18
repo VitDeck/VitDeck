@@ -171,7 +171,8 @@ namespace VitDeck.Validator
                 // Udon Behaviour
                 // ToDo: UdonBehaviourを含むオブジェクト、UdonBehaviourによって操作を行うオブジェクトは全て入稿ルール C.Scene内階層規定におけるDynamicオブジェクトの階層下に入れてください
                 
-                // ToDo: 全てのUdonBehaviourオブジェクトの親であるDynamicオブジェクトは初期でInactive状態にしてください
+                // 全てのUdonBehaviourオブジェクトの親であるDynamicオブジェクトは初期でInactive状態にしてください
+                new X02_UdonDynamicObjectInactiveRule(LocalizedMessage.Get("X02_UdonDynamicObjectInactiveRule.Title")), 
 
                 // UdonBehaviourを含むオブジェクトのLayerはUserLayer23としてください
                 new X05_UdonBehaviourLayerConstraintRule(LocalizedMessage.Get("X05_UdonBehaviourLayerConstraintRule.Title")),

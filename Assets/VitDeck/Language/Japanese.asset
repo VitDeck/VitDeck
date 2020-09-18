@@ -514,3 +514,9 @@ MonoBehaviour:
     Value: "\u6307\u5b9a\u3055\u308c\u3066\u3044\u306a\u3044\u30a2\u30bb\u30f3\u30d6\u30ea"
   - Key: Vket5UdonRuleSetBase.UdonBehaviourLimitRule.Title
     Value: "[D-4]UdonBehaviour\u306e\u6570\u304c{0}\u500b\u4ee5\u4e0b\u3067\u3042\u308b\u3053\u3068"
+  - Key: X02_UdonDynamicObjectInactiveRule.Title
+    Value: "[X-02]Dynamic\u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u304cInactive\u3067\u3042\u308b\u3053\u3068"
+  - Key: X02_UdonDynamicObjectInactiveRule.isActive
+    Value: "Dynamic\u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u304cActive\u3067\u3059"
+  - Key: X02_UdonDynamicObjectInactiveRule.isActive.Solution
+    Value: "\u5168\u3066\u306eUdonBehaviour\u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u306e\u89aa\u3067\u3042\u308bDynamic\u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u306f\u521d\u671f\u3067Inactive\u72b6\u614b\u306b\u3057\u3066\u304f\u3060\u3055\u3044"

@@ -535,3 +535,9 @@ MonoBehaviour:
     Value: '{0}: Usage of {1} is not allowed'
   - Key: Vket5UdonRuleSetBase.UdonBehaviourLimitRule.Title
     Value: '[D-4]UdonBehaviour count must be kept under {0}'
+  - Key: X02_UdonDynamicObjectInactiveRule.Title
+    Value: '[X-02]Dynamic object must be Inactive.'
+  - Key: X02_UdonDynamicObjectInactiveRule.isActive
+    Value: 'Dynamic object is Active.'
+  - Key: X02_UdonDynamicObjectInactiveRule.isActive.Solution
+    Value: 'Dynamic object make Inactive on initial state.'
