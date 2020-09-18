@@ -533,3 +533,5 @@ MonoBehaviour:
     Value: Udon Assembly not defined
   - Key: UsableUdonAssemblyListRule.Disallow
     Value: '{0}: Usage of {1} is not allowed'
+  - Key: Vket5UdonRuleSetBase.UdonBehaviourLimitRule.Title
+    Value: '[D-4]UdonBehaviour count must be kept under {0}'
