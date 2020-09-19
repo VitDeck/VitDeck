@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -120,6 +121,18 @@ MonoBehaviour:
   - Key: A02_VRCSDKVersionRule.PreviousVersion.Solution
     Value: Please download the latest version of VRCSDK from the VRChat site and import
       it
+  - Key: PostProcessingExistsRule.SearchFailed
+    Value: 
+  - Key: PostProcessingExistsRule.SearchFailed.Solution
+    Value: 
+  - Key: PostProcessingExistsRule.SearchFailed.SolutionURL
+    Value: 
+  - Key: PostProcessingExistsRule.NotInstalled
+    Value: 
+  - Key: PostProcessingExistsRule.NotInstalled.Solution
+    Value: 
+  - Key: PostProcessingExistsRule.NotInstalled.SolutionURL
+    Value: 
   - Key: AssetGuidBlacklistRule.UnauthorizedAssetDetected
     Value: 'Failed to move asset into the submissions folder: {0}'
   - Key: AssetGuidBlacklistRule.UnauthorizedAssetDetected.Solution
@@ -142,6 +155,10 @@ MonoBehaviour:
       instead
   - Key: FolderSizeRule.Exceeded
     Value: Submission folder total size exceeded {0} bytes
+  - Key: FolderSizeRule.Exceeded.Solution
+    Value: 
+  - Key: FolderSizeRule.Exceeded.SolutionURL
+    Value: 
   - Key: C02_ExhibitStructureRule.UnauthorizedObject
     Value: Unauthorized object found under the exhibit root object
   - Key: C02_ExhibitStructureRule.UnauthorizedObject.Solution
@@ -151,13 +168,43 @@ MonoBehaviour:
   - Key: C02_ExhibitStructureRule.RootObjectNotFound
     Value: Root object {0} not found
   - Key: C02_ExhibitStructureRule.RootObjectNotFound.Solution
-    Value: Please create empty gameobject named [{0}] and parent it to the exhibit
-      root object
+    Value: 'Please create empty gameobject named [{0}] and parent it to the exhibit
+      root object  '
   - Key: C02_ExhibitStructureRule.UnauthorizedComponent
     Value: Unauthorized component found attached to root object {0}
   - Key: C02_ExhibitStructureRule.UnauthorizedComponent.Solution
     Value: Please do not attach any components except the transform component under
       the root object {0}
+  - Key: C02_ExhibitStructureRule.NotInitialPosition
+    Value: 
+  - Key: C02_ExhibitStructureRule.NotInitialPosition.Solution
+    Value: 
+  - Key: C02_ExhibitStructureRule.NotInitialPosition.SolutionURL
+    Value: 
+  - Key: C02_ExhibitStructureRule.NotInitialRotation
+    Value: 
+  - Key: C02_ExhibitStructureRule.NotInitialRotation.Solution
+    Value: 
+  - Key: C02_ExhibitStructureRule.NotInitialRotation.SolutionURL
+    Value: 
+  - Key: C02_ExhibitStructureRule.NotInitialScale
+    Value: 
+  - Key: C02_ExhibitStructureRule.NotInitialScale.Solution
+    Value: 
+  - Key: C02_ExhibitStructureRule.NotInitialScale.SolutionURL
+    Value: 
+  - Key: SceneStructureRule.UnrelatedSceneDetected
+    Value: 
+  - Key: SceneStructureRule.UnrelatedSceneDetected.Solution
+    Value: 
+  - Key: SceneStructureRule.UnrelatedSceneDetected.SolutionURL
+    Value: 
+  - Key: SceneStructureRule.UnrelatedRootObjectDetected
+    Value: 
+  - Key: SceneStructureRule.UnrelatedRootObjectDetected.Solution
+    Value: 
+  - Key: SceneStructureRule.UnrelatedRootObjectDetected.SolutionURL
+    Value: 
   - Key: C02_StaticFlagRule.OccludeeStaticNotSet
     Value: OccludeeStatic is not checked in the Static settings
   - Key: C02_StaticFlagRule.OccludeeStaticNotSet.Solution
@@ -246,6 +293,10 @@ MonoBehaviour:
     Value: 'Prefab''s usage limit of {0} exceeded. (Current count: {1})'
   - Key: F02_PrefabLimitRule.Overuse.NegotiableSolution
     Value: Usage limit can be increased by applying on the Virtual Market site
+  - Key: F02_PrefabLimitRule.Overuse.Solution
+    Value: 
+  - Key: F02_PrefabLimitRule.Overuse.SolutionURL
+    Value: 
   - Key: F02_VideoPlayerComponentRule.DontUseURL
     Value: Please disallow URL input on VideoPlayers
   - Key: Vket4RuleSetBase.CanvasRenderModeRule.Title
