@@ -67,6 +67,15 @@ namespace VitDeck.Validator
                         LocalizedMessage.Get("C02_StaticFlagRule.BatchingStaticNotSet"),
                         LocalizedMessage.Get("C02_StaticFlagRule.BatchingStaticNotSet.Solution")));
                 }
+                
+                if ((flag & StaticEditorFlags.OccluderStatic) != 0)
+                {
+                    var message = LocalizedMessage.Get("C02_StaticFlagRule.OccluderStaticNotAllowed");
+                    var solution = LocalizedMessage.Get("C02_StaticFlagRule.OccluderStaticNotAllowed.Solution");
+                    var solutionURL = LocalizedMessage.Get("C02_StaticFlagRule.OccluderStaticNotAllowed.SolutionURL");
+                    
+                    AddIssue(new Issue(gameObject, IssueLevel.Error, message, solution, solutionURL));
+                }
             }
         }
     }
