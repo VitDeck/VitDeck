@@ -34,7 +34,9 @@ namespace VitDeck.Validator
             {
                 var message = LocalizedMessage.Get("F02_PrefabLimitRule.Overuse", limit, objects.Length);
                 var solution = negotiable ?
-                    LocalizedMessage.Get("F02_PrefabLimitRule.Overuse.NegotiableSolution") : "";
+                    LocalizedMessage.Get("F02_PrefabLimitRule.Overuse.NegotiableSolution") :
+                    LocalizedMessage.Get("F02_PrefabLimitRule.Overuse.Solution");
+                var solutionURL = LocalizedMessage.Get("F02_PrefabLimitRule.Overuse.SolutionURL");
 
                 foreach (var obj in objects)
                 {
@@ -42,7 +44,8 @@ namespace VitDeck.Validator
                         obj,
                         IssueLevel.Error,
                         message,
-                        solution
+                        solution,
+                        solutionURL
                         ));
                 }
             }
