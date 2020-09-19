@@ -236,6 +236,10 @@ MonoBehaviour:
       Market website'
   - Key: UsableComponentListRule.Disallow
     Value: '{0}: Usage of {1} is not allowed'
+  - Key: UsableComponentListRule.Disallow.Solution
+    Value: 
+  - Key: UsableComponentListRule.Disallow.SolutionURL
+    Value: 
   - Key: VRCTriggerConfigRule.UnauthorizedBroadcastType
     Value: BroadcastType {0} not supported in component VRC_Trigger
   - Key: VRCTriggerConfigRule.UnauthorizedBroadcastType.Solution

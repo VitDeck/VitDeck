@@ -120,7 +120,9 @@ namespace VitDeck.Validator
         private void AddComponentIssue(string name, GameObject obj, Component component, ValidationLevel level)
         {
             string message;
-
+            string solution;
+            string solutionURL;
+            
             switch (level)
             {
                 case ValidationLevel.ALLOW:
@@ -131,7 +133,10 @@ namespace VitDeck.Validator
                     break;
                 case ValidationLevel.DISALLOW:
                     message = LocalizedMessage.Get("UsableComponentListRule.Disallow", name, component.GetType().Name);
-                    AddIssue(new Issue(obj, IssueLevel.Error, message, string.Empty, string.Empty));
+                    solution = LocalizedMessage.Get("UsableComponentListRule.Disallow.Solution");
+                    solutionURL = LocalizedMessage.Get("UsableComponentListRule.Disallow.SolutionURL");
+                    
+                    AddIssue(new Issue(obj, IssueLevel.Error, message, solution, solutionURL));
                     break;
             }
         }
