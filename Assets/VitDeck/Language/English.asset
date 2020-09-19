@@ -217,6 +217,12 @@ MonoBehaviour:
     Value: BatchingStatic is not checked in the Static settings
   - Key: C02_StaticFlagRule.BatchingStaticNotSet.Solution
     Value: Please only disable BatchingStatic if it affects the exhibits visually
+  - Key: C02_StaticFlagRule.OccluderStaticNotAllowed
+    Value: 
+  - Key: C02_StaticFlagRule.OccluderStaticNotAllowed.Solution
+    Value: 
+  - Key: C02_StaticFlagRule.OccluderStaticNotAllowed.SolutionURL
+    Value: 
   - Key: BoothBoundsRule.Exceeded
     Value: Object exceeded the booth size limit by {0}. Size limit={1}, Target size={2},  Object
       type={3}
