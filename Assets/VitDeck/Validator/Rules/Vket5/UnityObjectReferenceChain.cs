@@ -9,7 +9,7 @@ namespace VitDeck.Validator
 {
     public class UnityObjectReferenceChain : IEnumerable<Object>
     {
-        private readonly ReferenceBook book;
+        private readonly ReferenceDictionary dictionary;
 
         public static UnityObjectReferenceChain ExploreFrom(IEnumerable<Object> objects)
         {
@@ -19,16 +19,16 @@ namespace VitDeck.Validator
         private UnityObjectReferenceChain(IEnumerable<Object> objects)
         {
             var hashSet = new HashSet<Object>();
-            book = new ReferenceBook();
+            dictionary = new ReferenceDictionary();
 
             foreach (var @object in objects)
             {
-                book.AddReference(@object);
-                FindAssetReferencesRecursive(@object, hashSet, book);
+                dictionary.AddReference(@object);
+                FindAssetReferencesRecursive(@object, hashSet, dictionary);
             }
         }
 
-        private static void FindAssetReferencesRecursive(Object unityObject, HashSet<Object> searchedAsset, ReferenceBook book)
+        private static void FindAssetReferencesRecursive(Object unityObject, HashSet<Object> searchedAsset, ReferenceDictionary dictionary)
         {
             if (unityObject == null)
                 return;
@@ -42,7 +42,7 @@ namespace VitDeck.Validator
             {
                 foreach (var component in gameObject.GetComponents<Component>())
                 {
-                    FindAssetReferencesRecursive(component, searchedAsset, book);
+                    FindAssetReferencesRecursive(component, searchedAsset, dictionary);
                 }
 
                 return;
@@ -51,15 +51,15 @@ namespace VitDeck.Validator
             var material = unityObject as Material;
             if (material != null)
             {
-                FindMaterialReferenceRecursive(material, book);
+                FindMaterialReferenceRecursive(material, dictionary);
 
                 return;
             }
 
-            FindSerializedObjectReferenceRecursive(unityObject, searchedAsset, book);
+            FindSerializedObjectReferenceRecursive(unityObject, searchedAsset, dictionary);
         }
 
-        private static void FindMaterialReferenceRecursive(Material material, ReferenceBook book)
+        private static void FindMaterialReferenceRecursive(Material material, ReferenceDictionary dictionary)
         {
             if (material.shader == null)
                 return;
@@ -87,11 +87,11 @@ namespace VitDeck.Validator
                 if (texture == null)
                     continue;
 
-                book.AddReference(texture, material);
+                dictionary.AddReference(material, texture);
             }
         }
 
-        private static void FindSerializedObjectReferenceRecursive(Object unityObject, HashSet<Object> searchedAsset, ReferenceBook book)
+        private static void FindSerializedObjectReferenceRecursive(Object unityObject, HashSet<Object> searchedAsset, ReferenceDictionary dictionary)
         {
             var serializedObject = new SerializedObject(unityObject);
 
@@ -113,15 +113,15 @@ namespace VitDeck.Validator
                     continue;
                 }
 
-                book.AddReference(referedAsset, unityObject);
+                dictionary.AddReference(unityObject, referedAsset);
 
-                FindAssetReferencesRecursive(referedAsset, searchedAsset, book);
+                FindAssetReferencesRecursive(referedAsset, searchedAsset, dictionary);
             }
         }
 
         public IEnumerator<Object> GetEnumerator()
         {
-            return book.GetReferredObjects().GetEnumerator();
+            return dictionary.GetReferredObjects().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -129,34 +129,34 @@ namespace VitDeck.Validator
             return GetEnumerator();
         }
 
-        private class ReferenceBook
+        private class ReferenceDictionary
         {
-            Dictionary<Object, List<Object>> book = new Dictionary<Object, List<Object>>();
+            private readonly Dictionary<Object, List<Object>> reverseDictionary = new Dictionary<Object, List<Object>>();
 
-            public void AddReference(Object referred, Object referrer)
+            public void AddReference(Object referrer, Object referred)
             {
-                List<Object> referrerList;
-                if (!book.TryGetValue(referred, out referrerList))
+                if (!reverseDictionary.TryGetValue(referred, out var referrers))
                 {
-                    referrerList = new List<Object>();
-                    book.Add(referred, referrerList);
+                    referrers = new List<Object>();
+                    reverseDictionary.Add(referred, referrers);
                 }
-
-                referrerList.Add(referrer);
+                referrers.Add(referrer);
             }
 
             public void AddReference(Object referred)
             {
-                if (!book.ContainsKey(referred))
+                if (reverseDictionary.ContainsKey(referred))
                 {
-                    var referrerList = new List<Object>();
-                    book.Add(referred, referrerList);
+                    return;
                 }
+
+                var referrerList = new List<Object>();
+                reverseDictionary.Add(referred, referrerList);
             }
 
             public IEnumerable<KeyValuePair<Object, IEnumerable<Object>>> Enumerate()
             {
-                foreach (var pair in book)
+                foreach (var pair in reverseDictionary)
                 {
                     yield return new KeyValuePair<Object, IEnumerable<Object>>(pair.Key, pair.Value.Distinct());
                 }
@@ -164,7 +164,7 @@ namespace VitDeck.Validator
 
             public IEnumerable<Object> GetReferredObjects()
             {
-                return book.Keys;
+                return reverseDictionary.Keys;
             }
         }
     }
