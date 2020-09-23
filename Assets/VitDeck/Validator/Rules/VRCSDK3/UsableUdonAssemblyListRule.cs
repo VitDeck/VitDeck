@@ -15,7 +15,7 @@ namespace VitDeck.Validator
     /// また、プレハブをGUIDで与えることで、そのプレハブに元から追加してあるコンポーネントを許可されているものとして無視します。
     /// UsableComponentListRule と同じ使い方です。
     /// </remarks>
-    internal class X20_UsableUdonAssemblyListRule : UdonBehaviourRule
+    internal class UsableUdonAssemblyListRule : BaseUdonBehaviourRule
     {
         private readonly UdonAssemblyReference[] references;
 
@@ -30,7 +30,7 @@ namespace VitDeck.Validator
         /// <param name="references">アセンブリリスト</param>
         /// <param name="ignorePrefabGUIDs">例外Prefabのリスト</param>
         /// <param name="unregisteredAssembly">リストにないアセンブリの扱い</param>
-        public X20_UsableUdonAssemblyListRule(string name,
+        public UsableUdonAssemblyListRule(string name,
             UdonAssemblyReference[] references,
             string[] ignorePrefabGUIDs = null,
             ValidationLevel unregisteredAssembly = ValidationLevel.ALLOW)

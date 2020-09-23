@@ -11,9 +11,9 @@ using VRC.Udon.UAssembly.Disassembler;
 
 namespace VitDeck.Validator
 {
-    internal class UdonBehaviourRule : ComponentBaseRule<UdonBehaviour>
+    internal class BaseUdonBehaviourRule : ComponentBaseRule<UdonBehaviour>
     {
-        public UdonBehaviourRule(string name) : base(name)
+        public BaseUdonBehaviourRule(string name) : base(name)
         {
         }
 

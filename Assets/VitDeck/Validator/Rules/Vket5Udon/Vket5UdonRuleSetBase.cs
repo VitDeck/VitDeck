@@ -172,10 +172,10 @@ namespace VitDeck.Validator
                 // ToDo: UdonBehaviourを含むオブジェクト、UdonBehaviourによって操作を行うオブジェクトは全て入稿ルール C.Scene内階層規定におけるDynamicオブジェクトの階層下に入れてください
                 
                 // 全てのUdonBehaviourオブジェクトの親であるDynamicオブジェクトは初期でInactive状態にしてください
-                new X02_UdonDynamicObjectInactiveRule(LocalizedMessage.Get("X02_UdonDynamicObjectInactiveRule.Title")), 
+                new UdonDynamicObjectInactiveRule(LocalizedMessage.Get("X02_UdonDynamicObjectInactiveRule.Title")), 
 
                 // UdonBehaviourを含むオブジェクトのLayerはUserLayer23としてください
-                new X05_UdonBehaviourLayerConstraintRule(LocalizedMessage.Get("X05_UdonBehaviourLayerConstraintRule.Title")),
+                new UdonBehaviourLayerConstraintRule(LocalizedMessage.Get("X05_UdonBehaviourLayerConstraintRule.Title")),
 
                 // UdonBehaviourは1ブースあたり 25 まで
                 new D04_AssetTypeLimitRule(
@@ -203,7 +203,7 @@ namespace VitDeck.Validator
                 // ⇒ アセンブリから情報が欠落するため何の意味もない
 
                 // 使用禁止UdonAssembly
-                new X20_UsableUdonAssemblyListRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X20_UsableUdonAssemblyListRule.Title"),
+                new UsableUdonAssemblyListRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X20_UsableUdonAssemblyListRule.Title"),
                     GetUdonAssemblyReferences(),
                     ignorePrefabGUIDs: Vket5UdonOfficialAssetData.GUIDs), 
 

@@ -523,9 +523,9 @@ MonoBehaviour:
     Value: '[F-4]Unallowed prefabs in use'
   - Key: X05_UdonBehaviourLayerConstraintRule.Title
     Value: '[X-05] GameObject Layer including UdonBehaviour must 23.'
-  - Key: X05_UdonBehaviourLayerConstraintRule.InvalidLayer
+  - Key: UdonBehaviourLayerConstraintRule.InvalidLayer
     Value: 'Wrong Layer'
-  - Key: X05_UdonBehaviourLayerConstraintRule.InvalidLayer.solution
+  - Key: UdonBehaviourLayerConstraintRule.InvalidLayer.solution
     Value: 'GameObject including UdonBehaviour must set Later 23.'
   - Key: Vket5UdonRuleSetBase.X20_UsableUdonAssemblyListRule.Title
     Value: "[X-20] Do not use forbidden Udon Assembly"
@@ -537,7 +537,7 @@ MonoBehaviour:
     Value: '[D-4]UdonBehaviour count must be kept under {0}'
   - Key: X02_UdonDynamicObjectInactiveRule.Title
     Value: '[X-02]Dynamic object must be Inactive.'
-  - Key: X02_UdonDynamicObjectInactiveRule.isActive
+  - Key: UdonDynamicObjectInactiveRule.isActive
     Value: 'Dynamic object is Active.'
-  - Key: X02_UdonDynamicObjectInactiveRule.isActive.Solution
+  - Key: UdonDynamicObjectInactiveRule.isActive.Solution
     Value: 'Dynamic object make Inactive on initial state.'

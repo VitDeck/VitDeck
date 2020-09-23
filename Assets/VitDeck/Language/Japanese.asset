@@ -502,9 +502,9 @@ MonoBehaviour:
     Value: "[F-4]\u5165\u7A3F\u30D5\u30A9\u30EB\u30C0\u30FC\u306B\u542B\u307E\u308C\u3066\u3044\u308BPrefab\u3001\u304A\u3088\u3073\u516C\u5F0FPrefab\u4EE5\u5916\u306EPrefab\u3092\u4F7F\u7528\u3057\u306A\u3044\u3053\u3068"
   - Key: X05_UdonBehaviourLayerConstraintRule.Title
     Value: "[X-05] UdonBehaviour \u3092\u542b\u3080GameOnject \u306eLayer\u306f 23 \u3068\u3059\u308b"
-  - Key: X05_UdonBehaviourLayerConstraintRule.InvalidLayer
+  - Key: UdonBehaviourLayerConstraintRule.InvalidLayer
     Value: "\u30ec\u30a4\u30e4\u30fc\u304c\u4e0d\u6b63\u3067\u3059"
-  - Key: X05_UdonBehaviourLayerConstraintRule.InvalidLayer.solution
+  - Key: UdonBehaviourLayerConstraintRule.InvalidLayer.solution
     Value: "UdonBehaviour\u3092\u542b\u3080\u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u306eLayer\u306fUserLayer23\u3068\u3057\u3066\u304f\u3060\u3055\u3044"
   - Key: Vket5UdonRuleSetBase.X20_UsableUdonAssemblyListRule.Title
     Value: "[X-20]\u8a31\u53ef\u3055\u308c\u3066\u3044\u306a\u3044UdonAssembly\u3092\u4f7f\u7528\u3057\u306a\u3044\u3053\u3068"
@@ -516,7 +516,7 @@ MonoBehaviour:
     Value: "[D-4]UdonBehaviour\u306e\u6570\u304c{0}\u500b\u4ee5\u4e0b\u3067\u3042\u308b\u3053\u3068"
   - Key: X02_UdonDynamicObjectInactiveRule.Title
     Value: "[X-02]Dynamic\u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u304cInactive\u3067\u3042\u308b\u3053\u3068"
-  - Key: X02_UdonDynamicObjectInactiveRule.isActive
+  - Key: UdonDynamicObjectInactiveRule.isActive
     Value: "Dynamic\u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u304cActive\u3067\u3059"
-  - Key: X02_UdonDynamicObjectInactiveRule.isActive.Solution
+  - Key: UdonDynamicObjectInactiveRule.isActive.Solution
     Value: "\u5168\u3066\u306eUdonBehaviour\u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u306e\u89aa\u3067\u3042\u308bDynamic\u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u306f\u521d\u671f\u3067Inactive\u72b6\u614b\u306b\u3057\u3066\u304f\u3060\u3055\u3044"

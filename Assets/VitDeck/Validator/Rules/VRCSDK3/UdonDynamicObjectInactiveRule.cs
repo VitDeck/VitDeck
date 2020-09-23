@@ -8,9 +8,9 @@ namespace VitDeck.Validator
     /// <summary>
     /// 全てのUdonBehaviourオブジェクトの親であるDynamicオブジェクトは初期でInactive状態にしてください
     /// </summary>
-    internal class X02_UdonDynamicObjectInactiveRule : BaseRule
+    internal class UdonDynamicObjectInactiveRule : BaseRule
     {
-        public X02_UdonDynamicObjectInactiveRule(string name) : base(name)
+        public UdonDynamicObjectInactiveRule(string name) : base(name)
         {
         }
 

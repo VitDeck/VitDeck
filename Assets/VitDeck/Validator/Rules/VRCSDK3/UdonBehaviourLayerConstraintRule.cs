@@ -8,9 +8,9 @@ namespace VitDeck.Validator
     /// <summary>
     /// UdonBehaviourを含むオブジェクトのLayerはUserLayer23としてください
     /// </summary>
-    internal class X05_UdonBehaviourLayerConstraintRule : UdonBehaviourRule
+    internal class UdonBehaviourLayerConstraintRule : BaseUdonBehaviourRule
     {
-        public X05_UdonBehaviourLayerConstraintRule(string name) : base(name)
+        public UdonBehaviourLayerConstraintRule(string name) : base(name)
         {
         }
 
