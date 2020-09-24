@@ -37,26 +37,46 @@ namespace VitDeck.Validator
 
             searchedAsset.Add(unityObject);
 
-            var gameObject = unityObject as GameObject;
-            if (gameObject != null)
+            if (TryFindAssetReferencesAsGameObject(unityObject, searchedAsset, dictionary))
             {
-                foreach (var component in gameObject.GetComponents<Component>())
-                {
-                    FindAssetReferencesRecursive(component, searchedAsset, dictionary);
-                }
-
                 return;
             }
-
-            var material = unityObject as Material;
-            if (material != null)
+            if (TryFindAssetReferencesAsMaterial(unityObject, dictionary))
             {
-                FindMaterialReferenceRecursive(material, dictionary);
-
                 return;
             }
 
             FindSerializedObjectReferenceRecursive(unityObject, searchedAsset, dictionary);
+        }
+
+        private static bool TryFindAssetReferencesAsMaterial(Object unityObject, ReferenceDictionary dictionary)
+        {
+            var material = unityObject as Material;
+            if (material == null)
+            {
+                return false;
+            }
+            
+            FindMaterialReferenceRecursive(material, dictionary);
+
+            return true;
+        }
+
+        private static bool TryFindAssetReferencesAsGameObject(Object unityObject, HashSet<Object> searchedAsset,
+            ReferenceDictionary dictionary)
+        {
+            var gameObject = unityObject as GameObject;
+            if (gameObject == null)
+            {
+                return false;
+            }
+            
+            foreach (var component in gameObject.GetComponents<Component>())
+            {
+                FindAssetReferencesRecursive(component, searchedAsset, dictionary);
+            }
+
+            return true;
         }
 
         private static void FindMaterialReferenceRecursive(Material material, ReferenceDictionary dictionary)
@@ -97,25 +117,23 @@ namespace VitDeck.Validator
 
             var iterator = serializedObject.GetIterator();
 
-            int count = 0;
             while (iterator.NextVisible(true))
             {
-                count++;
                 var property = iterator;
                 if (property.propertyType != SerializedPropertyType.ObjectReference)
                 {
                     continue;
                 }
 
-                var referedAsset = property.objectReferenceValue;
-                if (referedAsset == null)
+                var referredAsset = property.objectReferenceValue;
+                if (referredAsset == null)
                 {
                     continue;
                 }
 
-                dictionary.AddReference(unityObject, referedAsset);
+                dictionary.AddReference(unityObject, referredAsset);
 
-                FindAssetReferencesRecursive(referedAsset, searchedAsset, dictionary);
+                FindAssetReferencesRecursive(referredAsset, searchedAsset, dictionary);
             }
         }
 
