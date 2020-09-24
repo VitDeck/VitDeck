@@ -520,3 +520,11 @@ MonoBehaviour:
     Value: "Dynamic\u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u304cActive\u3067\u3059"
   - Key: UdonDynamicObjectInactiveRule.isActive.Solution
     Value: "\u5168\u3066\u306eUdonBehaviour\u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u306e\u89aa\u3067\u3042\u308bDynamic\u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u306f\u521d\u671f\u3067Inactive\u72b6\u614b\u306b\u3057\u3066\u304f\u3060\u3055\u3044"
+  - Key: UdonSharpScriptNamespaceRule.NotUdonSharp
+    Value: "\u30af\u30e9\u30b9 {0} \u306f UdonSharp.UdonSharpBehaviour\u3092\u7d99\u627f\u3057\u3066\u304f\u3060\u3055\u3044"
+  - Key: UdonSharpScriptNamespaceRule.InvalidNamespace
+    Value: "\u540d\u524d\u7a7a\u9593\u304c\u4e0d\u6b63"
+  - Key: UdonSharpScriptNamespaceRule.InvalidNamespace.solution
+    Value: "U# \u30af\u30e9\u30b9 {0} \u306f\u6307\u5b9a\u306e\u540d\u524d\u7a7a\u9593\u3067\u5b9a\u7fa9\u3059\u308b\u5fc5\u8981\u304c\u3042\u308a\u307e\u3059"
+  - Key: Vket5UdonRuleSetBase.X60_UdonSharpNameSpaceRule.Title
+    Value: "[X-60] UdonSharp \u30bd\u30fc\u30b9\u306e\u540d\u524d\u7a7a\u9593\u306e\u5b9a\u7fa9"

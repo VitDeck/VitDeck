@@ -541,3 +541,11 @@ MonoBehaviour:
     Value: 'Dynamic object is Active.'
   - Key: UdonDynamicObjectInactiveRule.isActive.Solution
     Value: 'Dynamic object make Inactive on initial state.'
+  - Key: UdonSharpScriptNamespaceRule.NotUdonSharp
+    Value: 'Class {0} must be child of UdonSharp.UdonSharpBehaviour.'
+  - Key: UdonSharpScriptNamespaceRule.InvalidNamespace
+    Value: 'Wrong Namespace'
+  - Key: UdonSharpScriptNamespaceRule.InvalidNamespace.solution
+    Value: 'Define U# class {0} in your namespace.'
+  - Key: Vket5UdonRuleSetBase.X60_UdonSharpNameSpaceRule.Title
+    Value: '[X-60] UdonSharp class definition rules.'

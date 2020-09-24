@@ -6,7 +6,9 @@
         "VitDeck.Validator.Runtime",
         "VitDeck.Language",
         "VRC.Udon",
-        "VRC.Udon.Editor"
+        "VRC.Udon.Editor",
+        "UdonSharp.Runtime",
+        "UdonSharp.Editor"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [
