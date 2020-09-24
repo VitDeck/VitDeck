@@ -175,7 +175,7 @@ namespace VitDeck.Validator
                 new UdonDynamicObjectInactiveRule(LocalizedMessage.Get("X02_UdonDynamicObjectInactiveRule.Title")), 
 
                 // UdonBehaviourを含むオブジェクトのLayerはUserLayer23としてください
-                new UdonBehaviourLayerConstraintRule(LocalizedMessage.Get("X05_UdonBehaviourLayerConstraintRule.Title")),
+                new UdonBehaviourLayerConstraintRule(LocalizedMessage.Get("X03_UdonBehaviourLayerConstraintRule.Title")),
 
                 // UdonBehaviourは1ブースあたり 25 まで
                 new D04_AssetTypeLimitRule(
@@ -190,7 +190,8 @@ namespace VitDeck.Validator
                     UdonBehaviourSynchronizePositionCountLimit
                 ),
 
-                // ToDo: AllowOwnershipTransferOnCollisionは必ずFalseにすること
+                // AllowOwnershipTransferOnCollisionは必ずFalseにすること
+                new UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule(LocalizedMessage.Get("X05_UdonBehaviourSynchronizePositionCountLimitRule.Title")),
 
                 // UdonBehaviourによってオブジェクトをスペース外に移動させる行為は禁止
                 // ⇒ スタッフによる目視確認

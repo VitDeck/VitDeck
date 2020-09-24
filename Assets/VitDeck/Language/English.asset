@@ -521,8 +521,8 @@ MonoBehaviour:
     Value: Please enable IsKinematic on RigidBody objects
   - Key: Vket5RuleSetBase.UnusabePrefabRule.Title
     Value: '[F-4]Unallowed prefabs in use'
-  - Key: X05_UdonBehaviourLayerConstraintRule.Title
-    Value: '[X-05] GameObject Layer including UdonBehaviour must 23.'
+  - Key: X03_UdonBehaviourLayerConstraintRule.Title
+    Value: '[X-03] GameObject Layer including UdonBehaviour must 23.'
   - Key: UdonBehaviourLayerConstraintRule.InvalidLayer
     Value: 'Wrong Layer'
   - Key: UdonBehaviourLayerConstraintRule.InvalidLayer.solution
@@ -555,3 +555,9 @@ MonoBehaviour:
     Value: Please reduce the component count.
   - Key: X04_UdonBehaviourSynchronizePositionCountLimitRule.Title
     Value: '[X-04] UdonSharp with SynchronizePosition  count must be kept under {0}'
+  - Key: X05_UdonBehaviourSynchronizePositionCountLimitRule.Title
+    Value: '[X-05] UdonBehaviour AllowOwnershipTransferOnCollision to be false.'
+  - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.isTrue
+    Value: 'AllowOwnershipTransferOnCollision is true.'
+  - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.isTrue.solution
+    Value: 'UdonBehaviour AllowOwnershipTransferOnCollision must be false.'
