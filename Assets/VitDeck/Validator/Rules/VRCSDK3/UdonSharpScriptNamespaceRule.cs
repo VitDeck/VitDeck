@@ -8,6 +8,8 @@ using VitDeck.Language;
 namespace VitDeck.Validator
 {
     /// <summary>
+    /// 特定ディレクトリ /UdonScript/ 以下の MonoScript(*.cs) はUdonSharpのスクリプトと見なす
+    /// UdonSharpのスクリプトは UdonSharpBehaviour を継承していなければならない
     /// U#においては、全てのクラスは運営よりブース毎に指定するnamespaceに所属させてください
     /// </summary>
     public class UdonSharpScriptNamespaceRule : BaseRule

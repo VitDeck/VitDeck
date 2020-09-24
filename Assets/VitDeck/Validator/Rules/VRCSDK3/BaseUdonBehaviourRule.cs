@@ -11,6 +11,10 @@ using VRC.Udon.UAssembly.Disassembler;
 
 namespace VitDeck.Validator
 {
+    /// <summary>
+    /// UdonBehaviourを探してそれぞれバリデーションするためのクラス
+    /// 詳細な規約はクラスを継承して ComponentLogic に記述する
+    /// </summary>
     internal class BaseUdonBehaviourRule : ComponentBaseRule<UdonBehaviour>
     {
         public BaseUdonBehaviourRule(string name) : base(name)
