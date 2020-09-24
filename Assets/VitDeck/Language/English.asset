@@ -549,3 +549,9 @@ MonoBehaviour:
     Value: 'Define U# class {0} in your namespace.'
   - Key: Vket5UdonRuleSetBase.X60_UdonSharpNameSpaceRule.Title
     Value: '[X-60] UdonSharp class definition rules.'
+  - Key: UdonBehaviourSynchronizePositionCountLimitRule.Overuse
+    Value: 'UdonBehaviour with synchronize position count exceeded limit of {0}. (Current count: {1})'
+  - Key: UdonBehaviourSynchronizePositionCountLimitRule.Overuse.Solution
+    Value: Please reduce the component count.
+  - Key: X04_UdonBehaviourSynchronizePositionCountLimitRule.Title
+    Value: '[X-04] UdonSharp with SynchronizePosition  count must be kept under {0}'

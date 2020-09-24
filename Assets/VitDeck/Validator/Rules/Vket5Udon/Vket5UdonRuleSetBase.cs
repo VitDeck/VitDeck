@@ -184,7 +184,12 @@ namespace VitDeck.Validator
                     UdonBehaviourCountLimit,
                     Vket5UdonOfficialAssetData.UdonBehaviourPrefabGUIDs),
 
-                // ToDo: SynchronizePositionが有効なUdonBehaviourは1ブースあたり 10 まで
+                // SynchronizePositionが有効なUdonBehaviourは1ブースあたり 10 まで
+                new UdonBehaviourSynchronizePositionCountLimitRule(
+                    LocalizedMessage.Get("X04_UdonBehaviourSynchronizePositionCountLimitRule.Title", UdonBehaviourSynchronizePositionCountLimit),
+                    UdonBehaviourSynchronizePositionCountLimit
+                ),
+
                 // ToDo: AllowOwnershipTransferOnCollisionは必ずFalseにすること
 
                 // UdonBehaviourによってオブジェクトをスペース外に移動させる行為は禁止
