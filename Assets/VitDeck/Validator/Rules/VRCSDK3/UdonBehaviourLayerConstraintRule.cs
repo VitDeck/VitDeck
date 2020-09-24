@@ -28,8 +28,8 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                             obj, 
                             IssueLevel.Error, 
-                            LocalizedMessage.Get("X05_UdonBehaviourLayerConstraintRule.InvalidLayer"),
-                            LocalizedMessage.Get("X05_UdonBehaviourLayerConstraintRule.InvalidLayer.solution")
+                            LocalizedMessage.Get("UdonBehaviourLayerConstraintRule.InvalidLayer"),
+                            LocalizedMessage.Get("UdonBehaviourLayerConstraintRule.InvalidLayer.solution")
                         )
                     );
                 }

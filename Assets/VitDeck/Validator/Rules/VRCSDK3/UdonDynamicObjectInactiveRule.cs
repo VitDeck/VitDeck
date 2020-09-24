@@ -46,8 +46,8 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     instance,
                     IssueLevel.Error,
-                    LocalizedMessage.Get("X02_UdonDynamicObjectInactiveRule.isActive", instanceName),
-                    LocalizedMessage.Get("X02_UdonDynamicObjectInactiveRule.isActive.Solution", instanceName)
+                    LocalizedMessage.Get("UdonDynamicObjectInactiveRule.isActive", instanceName),
+                    LocalizedMessage.Get("UdonDynamicObjectInactiveRule.isActive.Solution", instanceName)
                 ));
             }
         }
