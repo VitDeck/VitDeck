@@ -35,15 +35,13 @@ namespace VitDeck.Validator
             var count = 0;
             foreach (var udonBehaviour in udonBehaviours)
             {
-                // UdonAssemblyをデシリアライズする
-                udonBehaviour.InitializeUdonContent();
-                // SyncMetadataTableが無ければスキップ
-                if (udonBehaviour.SyncMetadataTable == null) continue;
-                
+                // プログラムアセットを取得する
                 var program = udonBehaviour.programSource.SerializedProgramAsset.RetrieveProgram();
+                // SyncMetadataTableが無ければスキップ
+                if (program.SyncMetadataTable == null) continue;
                 
                 // UdonSymcMetadata取得
-                var syncs = udonBehaviour.SyncMetadataTable.GetAllSyncMetadata();
+                var syncs = program.SyncMetadataTable.GetAllSyncMetadata();
                 foreach (var sync in syncs)
                 {
                     // Sync変数の型を評価
