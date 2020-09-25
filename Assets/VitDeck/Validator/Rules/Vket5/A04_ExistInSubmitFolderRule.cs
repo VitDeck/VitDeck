@@ -15,13 +15,17 @@ namespace VitDeck.Validator
     {
         // 入稿フォルダに含めることを許可されていないGUID
         private readonly HashSet<string> unauthorizedIDSet;
-        public A04_ExistInSubmitFolderRule(string name, string[] guids) : base(name)
+        private readonly Vket4TargetFinder targetFinder;
+        public A04_ExistInSubmitFolderRule(string name, string[] guids, Vket4TargetFinder targetFinder) : base(name)
         {
             unauthorizedIDSet = new HashSet<string>(guids);
+            this.targetFinder = targetFinder;
         }
 
         protected override void Logic(ValidationTarget target)
         {
+            var referenceDictionary = targetFinder.ReferenceDictionary;
+            
             // 除外する配布物アセットのパス
             var excludePaths = unauthorizedIDSet
                 .Select(guid => AssetDatabase.GUIDToAssetPath(guid));
@@ -56,13 +60,32 @@ namespace VitDeck.Validator
                     continue;
 
                 // 入稿フォルダ内にパスがあるアセットなのか検証
-                if (!filePathsInSubmitDirectory.Contains(assetPath))
+                if (filePathsInSubmitDirectory.Contains(assetPath)) 
+                    continue;
+                
+                // エラー対象である事が確定したためIssue発行
+                var targetAsset = AssetDatabase.LoadMainAssetAtPath(assetPath);
+                referenceDictionary.Reverse.TryGetValue(targetAsset, out var referrerAssets);
+
+                var referrerMessage = 
+                    LocalizedMessage.Get("A04_ExistInSubmitFolderRule.HasOutOfPackageReference", assetPath);
+                var referrerSolution =
+                    LocalizedMessage.Get("A04_ExistInSubmitFolderRule.HasOutOfPackageReference.Solution");
+                var referrerSolutionURL =
+                    LocalizedMessage.Get("A04_ExistInSubmitFolderRule.HasOutOfPackageReference.SolutionURL");
+
+                if (referrerAssets != null)
                 {
-                    var referenceObject = AssetDatabase.LoadMainAssetAtPath(assetPath);
-                    var message = LocalizedMessage.Get("A04_ExistInSubmitFolderRule.AssetOutOfPackage", assetPath);
-                    var solution = LocalizedMessage.Get("A04_ExistInSubmitFolderRule.AssetOutOfPackage.Solution");
-                    AddIssue(new Issue(referenceObject, IssueLevel.Error, message, solution));
+                    foreach (var referrerAsset in referrerAssets)
+                    {
+                        AddIssue(new Issue(referrerAsset, IssueLevel.Error, referrerMessage, referrerSolution, referrerSolutionURL));
+                    }
                 }
+                
+                var message = LocalizedMessage.Get("A04_ExistInSubmitFolderRule.AssetOutOfPackage", assetPath);
+                var solution = LocalizedMessage.Get("A04_ExistInSubmitFolderRule.AssetOutOfPackage.Solution");
+
+                AddIssue(new Issue(targetAsset, IssueLevel.Error, message, solution));
             }
         }
     }

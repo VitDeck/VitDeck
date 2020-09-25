@@ -7,9 +7,9 @@ using Object = UnityEngine.Object;
 
 namespace VitDeck.Validator
 {
-    public class UnityObjectReferenceChain : IEnumerable<Object>
+    public class UnityObjectReferenceChain
     {
-        private readonly ReferenceDictionary dictionary;
+        public readonly IReadonlyReferenceDictionary Result;
 
         public static UnityObjectReferenceChain ExploreFrom(IEnumerable<Object> objects)
         {
@@ -19,13 +19,15 @@ namespace VitDeck.Validator
         private UnityObjectReferenceChain(IEnumerable<Object> objects)
         {
             var hashSet = new HashSet<Object>();
-            dictionary = new ReferenceDictionary();
+            var dictionary = new ReferenceDictionary();
 
             foreach (var @object in objects)
             {
                 dictionary.AddReference(@object);
                 FindAssetReferencesRecursive(@object, hashSet, dictionary);
             }
+
+            Result = dictionary.CreateReadonlyDictionary();
         }
 
         private static void FindAssetReferencesRecursive(Object unityObject, HashSet<Object> searchedAsset, ReferenceDictionary dictionary)
@@ -71,6 +73,21 @@ namespace VitDeck.Validator
                 return false;
             }
             
+            dictionary.AddReference(gameObject);
+
+            var prefabStatus = PrefabUtility.GetPrefabInstanceStatus(gameObject);
+            if ( prefabStatus == PrefabInstanceStatus.Connected )
+            {
+                var prefabRoot = PrefabUtility.GetNearestPrefabInstanceRoot(gameObject);
+                if (prefabRoot == gameObject)
+                {
+                    var prefabPath = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(gameObject);
+                    var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+                    dictionary.AddReference(gameObject, prefab);
+                    FindAssetReferencesRecursive(prefab, searchedAsset, dictionary);
+                }
+            }
+
             foreach (var component in gameObject.GetComponents<Component>())
             {
                 FindAssetReferencesRecursive(component, searchedAsset, dictionary);
@@ -137,20 +154,16 @@ namespace VitDeck.Validator
             }
         }
 
-        public IEnumerator<Object> GetEnumerator()
-        {
-            return dictionary.GetReferredObjects().GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
         private class ReferenceDictionary
         {
             private readonly Dictionary<Object, List<Object>> reverseDictionary = new Dictionary<Object, List<Object>>();
+            private readonly Dictionary<Object, List<Object>> forwardDictionary = new Dictionary<Object, List<Object>>();
 
+            public ReadonlyReferenceDictionary CreateReadonlyDictionary()
+            {
+                return new ReadonlyReferenceDictionary(forwardDictionary, reverseDictionary);
+            }
+            
             public void AddReference(Object referrer, Object referred)
             {
                 if (!reverseDictionary.TryGetValue(referred, out var referrers))
@@ -159,6 +172,13 @@ namespace VitDeck.Validator
                     reverseDictionary.Add(referred, referrers);
                 }
                 referrers.Add(referrer);
+
+                if (!forwardDictionary.TryGetValue(referrer, out var referredObjects))
+                {
+                    referredObjects = new List<Object>();
+                    forwardDictionary.Add(referrer, referredObjects);
+                }
+                referredObjects.Add(referred);
             }
 
             public void AddReference(Object referred)

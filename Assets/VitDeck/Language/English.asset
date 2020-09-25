@@ -420,6 +420,12 @@ MonoBehaviour:
   - Key: A04_ExistInSubmitFolderRule.AssetOutOfPackage.Solution
     Value: All assets to be submitted (excluding distributed prefabs) must be placed
       within a folder renamed to your Exhibitor's ID located under the Assets folder.
+  - Key: A04_ExistInSubmitFolderRule.HasOutOfPackageReference
+    Value: 
+  - Key: A04_ExistInSubmitFolderRule.HasOutOfPackageReference.Solution
+    Value: 
+  - Key: A04_ExistInSubmitFolderRule.HasOutOfPackageReference.SolutionURL
+    Value: 
   - Key: D08_LightmapSizeLimitRule.MustLightmapBakingManually
     Value: LightMaps can not be examined when set to Auto Generate
   - Key: D08_LightmapSizeLimitRule.MustLightmapBakingManually.Solution

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -21,6 +22,8 @@ namespace VitDeck.Validator
         GameObject[] allObjects;
         Scene[] scenes;
         ValidationTarget target;
+        
+        public IReadonlyReferenceDictionary ReferenceDictionary { get; private set; }
 
         private void FindInternal(string baseFolder, bool forceOpenScene = false)
         {
@@ -43,7 +46,10 @@ namespace VitDeck.Validator
                 .Select(tf => tf.gameObject)
                 .ToArray();
 
-            assetObjects = GetContainsAndReferredAssets(baseFolder, allObjects);
+            ReferenceDictionary = GetContainsAndReferredAssets(baseFolder, allObjects);
+            assetObjects = ReferenceDictionary.Reverse.Keys
+                .Where(asset => AssetDatabase.GetAssetPath(asset).StartsWith("Assets/"))
+                .ToArray();
 
             assetPaths = assetObjects
                 .Select(asset => AssetDatabase.GetAssetPath(asset))
@@ -87,18 +93,16 @@ namespace VitDeck.Validator
             }
         }
 
-        private static Object[] GetContainsAndReferredAssets(string baseFolder, GameObject[] gameObjects)
+        private static IReadonlyReferenceDictionary GetContainsAndReferredAssets(string baseFolder, GameObject[] gameObjects)
         {
-            var searcher = UnityObjectReferenceChain
+            var referenceChain = UnityObjectReferenceChain
                 .ExploreFrom(
                     Enumerable.Concat(
                         VitDeck.Utilities.AssetUtility.EnumerateAssets(baseFolder),
                         gameObjects
                     ));
 
-            return searcher
-                .Where(asset => AssetDatabase.GetAssetPath(asset).StartsWith("Assets/"))
-                .ToArray();
+            return referenceChain.Result;
         }
 
         private static Scene OpenPackageScene(string exhibitorID)
@@ -145,10 +149,7 @@ namespace VitDeck.Validator
 
         public ValidationTarget Find(string baseFolder, bool forceOpenScene = false)
         {
-            if (!finded)
-            {
-                FindInternal(baseFolder, forceOpenScene);
-            }
+            FindInternal(baseFolder, forceOpenScene);
 
             return target;
         }
