@@ -11,7 +11,7 @@ namespace VitDeck.Validator
     /// </summary>
     public class UdonBehaviourSynchronizePositionCountLimitRule : BaseRule
     {
-        private int limit;
+        private readonly int limit;
         public UdonBehaviourSynchronizePositionCountLimitRule(string name, int limit) : base(name)
         {
             this.limit = limit;

@@ -14,7 +14,7 @@ namespace VitDeck.Validator
     /// </summary>
     public class UdonSharpScriptNamespaceRule : BaseRule
     {
-        private string namespaceString;
+        private readonly string namespaceString;
         public UdonSharpScriptNamespaceRule(string name, string namespaceString) : base(name)
         {
             this.namespaceString = namespaceString;
