@@ -170,13 +170,13 @@ namespace VitDeck.Validator
 
                 // Udon Behaviour
                 // UdonBehaviourを含むオブジェクト、UdonBehaviourによって操作を行うオブジェクトは全て入稿ルール C.Scene内階層規定におけるDynamicオブジェクトの階層下に入れてください
-                new UdonDynamicObjectParentRule(LocalizedMessage.Get("X01_UdonDynamicObjectParentRule.Title")), 
+                new UdonDynamicObjectParentRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X01_UdonDynamicObjectParentRule.Title")), 
                 
                 // 全てのUdonBehaviourオブジェクトの親であるDynamicオブジェクトは初期でInactive状態にしてください
-                new UdonDynamicObjectInactiveRule(LocalizedMessage.Get("X02_UdonDynamicObjectInactiveRule.Title")), 
+                new UdonDynamicObjectInactiveRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X02_UdonDynamicObjectInactiveRule.Title")), 
 
                 // UdonBehaviourを含むオブジェクトのLayerはUserLayer23としてください
-                new UdonBehaviourLayerConstraintRule(LocalizedMessage.Get("X03_UdonBehaviourLayerConstraintRule.Title")),
+                new UdonBehaviourLayerConstraintRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X03_UdonBehaviourLayerConstraintRule.Title")),
 
                 // UdonBehaviourは1ブースあたり 25 まで
                 new D04_AssetTypeLimitRule(
@@ -187,12 +187,12 @@ namespace VitDeck.Validator
 
                 // SynchronizePositionが有効なUdonBehaviourは1ブースあたり 10 まで
                 new UdonBehaviourSynchronizePositionCountLimitRule(
-                    LocalizedMessage.Get("X04_UdonBehaviourSynchronizePositionCountLimitRule.Title", UdonBehaviourSynchronizePositionCountLimit),
+                    LocalizedMessage.Get("Vket5UdonRuleSetBase.X04_UdonBehaviourSynchronizePositionCountLimitRule.Title", UdonBehaviourSynchronizePositionCountLimit),
                     UdonBehaviourSynchronizePositionCountLimit
                 ),
 
                 // AllowOwnershipTransferOnCollisionは必ずFalseにすること
-                new UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule(LocalizedMessage.Get("X05_UdonBehaviourSynchronizePositionCountLimitRule.Title")),
+                new UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X05_UdonBehaviourSynchronizePositionCountLimitRule.Title")),
 
                 // UdonBehaviourによってオブジェクトをスペース外に移動させる行為は禁止
                 // ⇒ スタッフによる目視確認
@@ -204,15 +204,17 @@ namespace VitDeck.Validator
                 // ⇒ スタッフによる目視確認
 
                 // Udon Script
-                // ToDo: [UdonSynced]を付与した変数は1ブースあたり 3 まで
-                // ToDO: [UdonSynced]を付与した変数は下記の型のみ使用できます bool, sbyte, byte, ushort, short, uint, int, float
-                // U#においては、全てのクラスは運営よりブース毎に指定するnamespaceに所属させてください
-                new UdonSharpScriptNamespaceRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X60_UdonSharpNameSpaceRule.Title"), "Vket5.Circle"), 
-
                 // 使用禁止UdonAssembly
                 new UsableUdonAssemblyListRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X20_UsableUdonAssemblyListRule.Title"),
                     GetUdonAssemblyReferences(),
                     ignorePrefabGUIDs: Vket5UdonOfficialAssetData.GUIDs), 
+
+                // [UdonSynced]を付与した変数は1ブースあたり 3 まで
+                // [UdonSynced]を付与した変数は下記の型のみ使用できます bool, sbyte, byte, ushort, short, uint, int, float
+                new UdonBehaviourSyncedVariablesRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X21_UdonBehaviourSyncedVariablesRule.Title"), UdonScriptSyncedVariablesLimit), 
+
+                // U#においては、全てのクラスは運営よりブース毎に指定するnamespaceに所属させてください
+                new UdonSharpScriptNamespaceRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X60_UdonSharpNameSpaceRule.Title"), "Vket5.Circle"), 
 
                 // ToDo: PhysicsクラスのCast関数 layerMaskを設定し、レイヤー23以外のコライダを無視するようにする, maxDistanceは最長で10メートルまで
 

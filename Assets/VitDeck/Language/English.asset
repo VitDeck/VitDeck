@@ -521,7 +521,7 @@ MonoBehaviour:
     Value: Please enable IsKinematic on RigidBody objects
   - Key: Vket5RuleSetBase.UnusabePrefabRule.Title
     Value: '[F-4]Unallowed prefabs in use'
-  - Key: X03_UdonBehaviourLayerConstraintRule.Title
+  - Key: Vket5UdonRuleSetBase.X03_UdonBehaviourLayerConstraintRule.Title
     Value: '[X-03] GameObject Layer including UdonBehaviour must 23.'
   - Key: UdonBehaviourLayerConstraintRule.InvalidLayer
     Value: 'Wrong Layer'
@@ -535,7 +535,7 @@ MonoBehaviour:
     Value: '{0}: Usage of {1} is not allowed'
   - Key: Vket5UdonRuleSetBase.UdonBehaviourLimitRule.Title
     Value: '[D-4]UdonBehaviour count must be kept under {0}'
-  - Key: X02_UdonDynamicObjectInactiveRule.Title
+  - Key: Vket5UdonRuleSetBase.X02_UdonDynamicObjectInactiveRule.Title
     Value: '[X-02]Dynamic object must be Inactive.'
   - Key: UdonDynamicObjectInactiveRule.isActive
     Value: 'Dynamic object is Active.'
@@ -553,9 +553,9 @@ MonoBehaviour:
     Value: 'UdonBehaviour with synchronize position count exceeded limit of {0}. (Current count: {1})'
   - Key: UdonBehaviourSynchronizePositionCountLimitRule.Overuse.Solution
     Value: Please reduce the component count.
-  - Key: X04_UdonBehaviourSynchronizePositionCountLimitRule.Title
+  - Key: Vket5UdonRuleSetBase.X04_UdonBehaviourSynchronizePositionCountLimitRule.Title
     Value: '[X-04] UdonSharp with SynchronizePosition  count must be kept under {0}'
-  - Key: X05_UdonBehaviourSynchronizePositionCountLimitRule.Title
+  - Key: Vket5UdonRuleSetBase.X05_UdonBehaviourSynchronizePositionCountLimitRule.Title
     Value: '[X-05] UdonBehaviour AllowOwnershipTransferOnCollision to be false.'
   - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.isTrue
     Value: 'AllowOwnershipTransferOnCollision is true.'
@@ -575,3 +575,13 @@ MonoBehaviour:
     Value: 'The object UdonBehaviour [{0}]'s public variable [{1}] is must be child of Dynamic object.'
   - Key: UdonDynamicObjectParentRule.UdonBehaviourPublicValueIsNotChildOfDynamic.Solution
     Value: 'Set it child of Dynamic object.'
+  - Key: Vket5UdonRuleSetBase.X21_UdonBehaviourSyncedVariablesRule.Title
+    Value: '[X-21] SyncedVariables limitation of UdonBehaviour.'
+  - Key: UdonBehaviourSyncedVariablesRule.Overuse
+    Value: 'Synced variables count in UdonBehaviours exceeded limit of {0}. (Current count: {1})'
+  - Key: UdonBehaviourSyncedVariablesRule.Overuse.Solution
+    Value: ' Please reduce the synced variables count.'
+  - Key: UdonBehaviourSyncedVariablesRule.InvalidType
+    Value: 'UdonBehaviour Synced variable [{0}] is invalid type ({1}).'
+  - Key: UdonBehaviourSyncedVariablesRule.InvalidType.Solution
+    Value: 'Set type bool, sbyte, byte, ushort, short, uint, int or float.'
