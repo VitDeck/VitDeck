@@ -540,3 +540,17 @@ MonoBehaviour:
     Value: "UdonBehaviour \u306e AllowOwnershipTransferOnCollision \u306fFalse\u3067\u306a\u3051\u308c\u3070\u306a\u3089\u306a\u3044"
   - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.isTrue.solution
     Value: "AllowOwnershipTransferOnCollision \u3092False\u306b\u3057\u3066\u304f\u3060\u3055\u3044"
+  - Key: X01_UdonDynamicObjectParentRule.Title
+    Value: "[X-01] UdonBehaviour \u3068 \u305d\u308c\u306b\u3088\u3063\u3066\u64cd\u4f5c\u3092\u884c\u3046\u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u306f Dynamic\u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u306e\u5b50\u306b\u914d\u7f6e\u3055\u308c\u308b\u3053\u3068"
+  - Key: UdonDynamicObjectParentRule.noDynamicObject
+    Value: "Dynamic\u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u304c\u5b58\u5728\u3057\u307e\u305b\u3093"
+  - Key: UdonDynamicObjectParentRule.noDynamicObject.Solution
+    Value: "Dynamic \u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u3092\u4f5c\u6210\u3057\u3066\u304f\u3060\u3055\u3044"
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourIsNotChildOfDynamic
+    Value: "UdonBehaviour [{0}] \u306f Dynamic \u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u306e\u5b50\u3067\u306a\u3051\u308c\u3070\u306a\u308a\u307e\u305b\u3093"
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourIsNotChildOfDynamic.Solution
+    Value: "Dynamic \u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u306e\u5b50\u306b\u79fb\u52d5\u3057\u3066\u304f\u3060\u3055\u3044"
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourPublicValueIsNotChildOfDynamic
+    Value: "UdonBehaviour [{0}] \u306e Public\u5909\u6570 [{1}] \u306f Dynamic \u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u306e\u5b50\u3067\u306a\u3051\u308c\u3070\u306a\u308a\u307e\u305b\u3093"
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourPublicValueIsNotChildOfDynamic.Solution
+    Value: "Dynamic \u30aa\u30d6\u30b8\u30a7\u30af\u30c8\u306e\u5b50\u306b\u79fb\u52d5\u3057\u3066\u304f\u3060\u3055\u3044"

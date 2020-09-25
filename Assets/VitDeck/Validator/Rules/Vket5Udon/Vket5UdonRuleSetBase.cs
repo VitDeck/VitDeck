@@ -169,7 +169,8 @@ namespace VitDeck.Validator
                 new F01_AnimatorComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.AnimatorComponentMaxCountRule.Title"), limit: 50),
 
                 // Udon Behaviour
-                // ToDo: UdonBehaviourを含むオブジェクト、UdonBehaviourによって操作を行うオブジェクトは全て入稿ルール C.Scene内階層規定におけるDynamicオブジェクトの階層下に入れてください
+                // UdonBehaviourを含むオブジェクト、UdonBehaviourによって操作を行うオブジェクトは全て入稿ルール C.Scene内階層規定におけるDynamicオブジェクトの階層下に入れてください
+                new UdonDynamicObjectParentRule(LocalizedMessage.Get("X01_UdonDynamicObjectParentRule.Title")), 
                 
                 // 全てのUdonBehaviourオブジェクトの親であるDynamicオブジェクトは初期でInactive状態にしてください
                 new UdonDynamicObjectInactiveRule(LocalizedMessage.Get("X02_UdonDynamicObjectInactiveRule.Title")), 

@@ -561,3 +561,17 @@ MonoBehaviour:
     Value: 'AllowOwnershipTransferOnCollision is true.'
   - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.isTrue.solution
     Value: 'UdonBehaviour AllowOwnershipTransferOnCollision must be false.'
+  - Key: X01_UdonDynamicObjectParentRule.Title
+    Value: '[X-01] UdonBehaviour and it's affected object are set child of Dynamic object.'
+  - Key: UdonDynamicObjectParentRule.noDynamicObject
+    Value: 'Object Dynamic is not exists.'
+  - Key: UdonDynamicObjectParentRule.noDynamicObject.Solution
+    Value: 'Create Dynamic object.'
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourIsNotChildOfDynamic
+    Value: 'UdonBehaviour [{0}] is must be child of Dynamic object.'
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourIsNotChildOfDynamic.Solution
+    Value: 'Set it child of Dynamic object.'
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourPublicValueIsNotChildOfDynamic
+    Value: 'The object UdonBehaviour [{0}]'s public variable [{1}] is must be child of Dynamic object.'
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourPublicValueIsNotChildOfDynamic.Solution
+    Value: 'Set it child of Dynamic object.'
