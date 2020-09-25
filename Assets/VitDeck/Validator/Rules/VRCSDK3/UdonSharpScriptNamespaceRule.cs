@@ -14,8 +14,10 @@ namespace VitDeck.Validator
     /// </summary>
     public class UdonSharpScriptNamespaceRule : BaseRule
     {
-        public UdonSharpScriptNamespaceRule(string name) : base(name)
+        private string namespaceString;
+        public UdonSharpScriptNamespaceRule(string name, string namespaceString) : base(name)
         {
+            this.namespaceString = namespaceString;
         }
 
         protected override void Logic(ValidationTarget target)
@@ -42,7 +44,7 @@ namespace VitDeck.Validator
                         AddIssue(new Issue(asset, IssueLevel.Error, LocalizedMessage.Get("UdonSharpScriptNamespaceRule.NotUdonSharp", src.GetClass())));
                     }
                     // U# スクリプトは 正しい名前空間で定義されなければならない
-                    if (src.GetClass().ToString().IndexOf('.') == -1)
+                    if (src.GetClass().ToString().IndexOf(namespaceString, StringComparison.Ordinal) == -1)
                     {
                         AddIssue(
                             new Issue(

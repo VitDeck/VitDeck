@@ -207,7 +207,7 @@ namespace VitDeck.Validator
                 // ToDo: [UdonSynced]を付与した変数は1ブースあたり 3 まで
                 // ToDO: [UdonSynced]を付与した変数は下記の型のみ使用できます bool, sbyte, byte, ushort, short, uint, int, float
                 // U#においては、全てのクラスは運営よりブース毎に指定するnamespaceに所属させてください
-                new UdonSharpScriptNamespaceRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X60_UdonSharpNameSpaceRule.Title")), 
+                new UdonSharpScriptNamespaceRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X60_UdonSharpNameSpaceRule.Title"), "Vket5.Circle"), 
 
                 // 使用禁止UdonAssembly
                 new UsableUdonAssemblyListRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X20_UsableUdonAssemblyListRule.Title"),
