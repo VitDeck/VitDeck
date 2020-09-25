@@ -4,10 +4,6 @@ using UnityEngine;
 using VitDeck.Language;
 
 using VRC.Udon;
-using VRC.Udon.Common.Interfaces;
-using VRC.Udon.Editor.ProgramSources;
-using VRC.Udon.ProgramSources;
-using VRC.Udon.UAssembly.Disassembler;
 
 namespace VitDeck.Validator
 {
