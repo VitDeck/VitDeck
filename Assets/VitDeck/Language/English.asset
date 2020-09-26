@@ -63,13 +63,13 @@ MonoBehaviour:
     Value: '[C-2]All Static and Dynamic objects must be parented to Gameobjects named
       Static and Dynamic respectively'
   - Key: Vket5RuleSetBase.StaticFlagsRule.Title
-    Value: '[C-2]All Static child objects must be static'
+    Value: '[C-2]Every child object inside Static must be set to static'
   - Key: Vket5RuleSetBase.BoothBoundsRule.Title
     Value: '[D-1,2]Please keep the booth size under the allocated space'
   - Key: Vket5RuleSetBase.MaterialLimitRule.Title
     Value: '[D-4]Material count must be kept under {0}'
   - Key: Vket5RuleSetBase.LightMapsLimitRule.Title
-    Value: '[D-8]Lightmap count must be kept under {0}'
+    Value: '[D-8]Lightmap count must be kept under {0}, and resolutions below {1}'
   - Key: Vket5RuleSetBase.GlobalIlluminationBakedRule.Title
     Value: '[E-5]Global Illumination must be set to Baked when using Standard shader''s
       Emission'
@@ -122,15 +122,15 @@ MonoBehaviour:
     Value: Please download the latest version of VRCSDK from the VRChat site and import
       it
   - Key: PostProcessingExistsRule.SearchFailed
-    Value: 
+    Value: Failed to check the installation of PostProcessingStack
   - Key: PostProcessingExistsRule.SearchFailed.Solution
     Value: 
   - Key: PostProcessingExistsRule.SearchFailed.SolutionURL
     Value: 
   - Key: PostProcessingExistsRule.NotInstalled
-    Value: 
+    Value: The specified PostProcessingStack is not installed
   - Key: PostProcessingExistsRule.NotInstalled.Solution
-    Value: 
+    Value: Please install from the Package Manager
   - Key: PostProcessingExistsRule.NotInstalled.SolutionURL
     Value: 
   - Key: AssetGuidBlacklistRule.UnauthorizedAssetDetected
@@ -154,9 +154,9 @@ MonoBehaviour:
     Value: Please extract the textures from your models and use the extracted materials
       instead
   - Key: FolderSizeRule.Exceeded
-    Value: Submission folder total size exceeded {0} bytes
+    Value: Submission folder total size exceeded {2} bytes. The limit is set at {0}
   - Key: FolderSizeRule.Exceeded.Solution
-    Value: 
+    Value: Please delete unneccesary data to not exceed the filesize limit
   - Key: FolderSizeRule.Exceeded.SolutionURL
     Value: 
   - Key: C02_ExhibitStructureRule.UnauthorizedObject
@@ -176,33 +176,38 @@ MonoBehaviour:
     Value: Please do not attach any components except the transform component under
       the root object {0}
   - Key: C02_ExhibitStructureRule.NotInitialPosition
-    Value: 
+    Value: The root object has been moved from the origin point
   - Key: C02_ExhibitStructureRule.NotInitialPosition.Solution
-    Value: 
+    Value: Please change the object's Position to (0, 0, 0)
   - Key: C02_ExhibitStructureRule.NotInitialPosition.SolutionURL
     Value: 
   - Key: C02_ExhibitStructureRule.NotInitialRotation
-    Value: 
+    Value: The root object has been rotated
   - Key: C02_ExhibitStructureRule.NotInitialRotation.Solution
-    Value: 
+    Value: Please change the object's Rotation to (0, 0, 0)
   - Key: C02_ExhibitStructureRule.NotInitialRotation.SolutionURL
     Value: 
   - Key: C02_ExhibitStructureRule.NotInitialScale
-    Value: 
+    Value: The root object's scale has been changed
   - Key: C02_ExhibitStructureRule.NotInitialScale.Solution
-    Value: 
+    Value: Please change the object's Scale to (1, 1, 1)
   - Key: C02_ExhibitStructureRule.NotInitialScale.SolutionURL
     Value: 
   - Key: SceneStructureRule.UnrelatedSceneDetected
-    Value: 
+    Value: A Scene that is unrelated to the Submission Scene is open
   - Key: SceneStructureRule.UnrelatedSceneDetected.Solution
-    Value: 
+    Value: 'Please close or Unload the unrelated Scene '
   - Key: SceneStructureRule.UnrelatedSceneDetected.SolutionURL
     Value: 
   - Key: SceneStructureRule.UnrelatedRootObjectDetected
-    Value: 
+    Value: An Object that is not supported or intended for submission was detected
+      on the Scene
   - Key: SceneStructureRule.UnrelatedRootObjectDetected.Solution
-    Value: 
+    Value: 'If you did intend to submit the detected object, make sure it is inside
+      the root object (the GameObject with the same name as the Scene name)
+
+      If you did not intend to submit it, make sure it is removed before any checks
+      are performed'
   - Key: SceneStructureRule.UnrelatedRootObjectDetected.SolutionURL
     Value: 
   - Key: C02_StaticFlagRule.OccludeeStaticNotSet
@@ -218,7 +223,7 @@ MonoBehaviour:
   - Key: C02_StaticFlagRule.BatchingStaticNotSet.Solution
     Value: Please only disable BatchingStatic if it affects the exhibits visually
   - Key: C02_StaticFlagRule.OccluderStaticNotAllowed
-    Value: 
+    Value: Please disable OccluderStatic
   - Key: C02_StaticFlagRule.OccluderStaticNotAllowed.Solution
     Value: 
   - Key: C02_StaticFlagRule.OccluderStaticNotAllowed.SolutionURL
@@ -240,7 +245,8 @@ MonoBehaviour:
   - Key: UsableComponentListRule.Disallow
     Value: '{0}: Usage of {1} is not allowed'
   - Key: UsableComponentListRule.Disallow.Solution
-    Value: 
+    Value: If a replacement Prefab is released by Virtual Market, you could substitute
+      it by using that instead
   - Key: UsableComponentListRule.Disallow.SolutionURL
     Value: 
   - Key: VRCTriggerConfigRule.UnauthorizedBroadcastType
@@ -296,15 +302,57 @@ MonoBehaviour:
   - Key: F02_PrefabLimitRule.Overuse
     Value: 'Prefab''s usage limit of {0} exceeded. (Current count: {1})'
   - Key: F02_PrefabLimitRule.Overuse.Solution
-    Value: 
+    Value: Please reduce the usage count
   - Key: F02_PrefabLimitRule.Overuse.SolutionURL
     Value: 
+  - Key: F02_VideoPlayerComponentRule.DefaultDisabled
+    Value: A VideoPlayer's default state must be set to Disabled
+  - Key: F02_VideoPlayerComponentRule.DefaultDisabled.Solution
+    Value: Untick the component's checkbox, and rig it so that it gets enabled by
+      other means such as Animations and VRC_Trigger's SetComponentActive
+  - Key: Vket5RuleSetBase.F02_VideoPlayerComponentMaxCountRule.Title
+    Value: Please reduce the usage of VideoPlayer components to the allowed limits
+  - Key: F02_VideoPlayerComponentMaxCountRule.Exceeded
+    Value: 'The component''s usage limit of {0} exceeded. (Current count: {1})'
+  - Key: F02_VideoPlayerComponentMaxCountRule.Exceeded.Solution
+    Value: Please reduce the component count
   - Key: F02_VideoPlayerComponentRule.DontUseURL
     Value: Please disallow URL input on VideoPlayers
   - Key: Vket5RuleSetBase.CanvasRenderModeRule.Title
     Value: '[F-1]Canvas must be set to WorldSpace'
   - Key: F01_CanvasRenderModeRule.CanvasIsNotInWorldSpace
     Value: Please set the RenderMode of the canvas located under {0} to WorldSpace
+  - Key: Vket5RuleSetBase.F01_CameraComponentRule.Title
+    Value: Please follow the set rules when using a Camera
+  - Key: F01_CameraComponentRule.DefaultDisabled
+    Value: The component must be set to Disabled by default
+  - Key: F01_CameraComponentRule.DefaultDisabled.Solution
+    Value: Untick the component's checkbox, and rig it so that it gets enabled by
+      other means such as Animations and VRC_Trigger's SetComponentActive
+  - Key: F01_CameraComponentRule.MaxRenderTextureSize
+    Value: "The RenderTexture's size is above the limits({0}px\xD7{1}px) Currently
+      {2}px\xD7{3}px"
+  - Key: F01_CameraComponentRule.MaxRenderTextureSize.Solution
+    Value: From the RenderTexture's inspector, reduce the size below the limits
+  - Key: Vket5RuleSetBase.F01_CameraComponentMaxCountRule.Title
+    Value: Please reduce the usage of Camera components to the allowed limits
+  - Key: F01_CameraComponentMaxCountRule.Exceeded
+    Value: 'The component''s usage limit of {0} exceeded. (Current count: {1})'
+  - Key: F01_CameraComponentMaxCountRule.Exceeded.Solution
+    Value: Please reduce the component count
+  - Key: Vket5RuleSetBase.F01_ProjectorComponentRule.Title
+    Value: Please follow the set rules when using a Projector
+  - Key: F01_ProjectorComponentRule.DefaultDisabled
+    Value: The component must be set to Disabled by default
+  - Key: F01_ProjectorComponentRule.DefaultDisabled.Solution
+    Value: Untick the component's checkbox, and rig it so that it gets enabled by
+      other means such as Animations and VRC_Trigger's SetComponentActive
+  - Key: Vket5RuleSetBase.F01_ProjectorComponentMaxCountRule.Title
+    Value: Please reduce the usage of Projector components to the allowed limits
+  - Key: F01_ProjectorComponentMaxCountRule.Exceeded
+    Value: 'The component''s usage limit of {0} exceeded. (Current count: {1})'
+  - Key: F01_ProjectorComponentMaxCountRule.Exceeded.Solution
+    Value: Please reduce the component count
   - Key: Vket5RuleSetBase.AnimatorComponentMaxCountRule.Title
     Value: '[F-1]Please limit your animator usage within the allowed maximum count'
   - Key: F01_AnimatorComponentMaxCountRule.Exceeded
