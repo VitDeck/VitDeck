@@ -3,10 +3,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using VRC.Udon;
-using VRC.Udon.Editor.ProgramSources;
+using VRC.Udon.Common.Interfaces;
 using VRC.Udon.Editor.ProgramSources.UdonGraphProgram;
 using VRC.Udon.Graph;
-using VRC.Udon.ProgramSources;
 using VRC.Udon.UAssembly.Disassembler;
 
 namespace VitDeck.Validator
@@ -48,25 +47,34 @@ namespace VitDeck.Validator
         }
 
         /// <summary>
+        /// SerializedAssemblyからプログラムを取得
+        /// </summary>
+        /// <param name="component">VRC.Udon.UdonBehaviour</param>
+        /// <returns>IUdonProgram</returns>
+        protected static IUdonProgram GetUdonProgram(UdonBehaviour component)
+        {
+            return component.programSource.SerializedProgramAsset.RetrieveProgram();
+        }
+
+        /// <summary>
+        /// プログラムからのディスアセンブル
+        /// </summary>
+        /// <param name="program">VRC.Udon.Common.Interfaces.IUdonProgram</param>
+        /// <returns>string</returns>
+        protected static string GetDisassembleCode(IUdonProgram program)
+        {
+            var disasm = new UAssemblyDisassembler();
+            return String.Join("\n", disasm.DisassembleProgram(program));
+        }
+
+        /// <summary>
         /// バイトコードからのディスアセンブル
         /// </summary>
         /// <param name="component">VRC.Udon.UdonBehaviour</param>
         /// <returns>string</returns>
         protected static string GetDisassembleCode(UdonBehaviour component)
         {
-            if (component.programSource is UdonAssemblyProgramAsset)
-            {
-                var programAsset = component.programSource as UdonAssemblyProgramAsset;
-                if (programAsset.SerializedProgramAsset is SerializedUdonProgramAsset)
-                {
-                    var serializedProgram = programAsset.SerializedProgramAsset as SerializedUdonProgramAsset;
-                    var program = serializedProgram.RetrieveProgram();
-                    var disasm = new UAssemblyDisassembler();
-                    return String.Join("\n", disasm.DisassembleProgram(program));
-                }
-            }
-
-            return null;
+            return GetDisassembleCode(GetUdonProgram(component));
         }
 
         /// <summary>
