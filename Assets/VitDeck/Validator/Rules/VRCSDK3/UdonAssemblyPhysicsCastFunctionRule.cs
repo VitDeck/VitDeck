@@ -52,8 +52,9 @@ namespace VitDeck.Validator
 
             // プログラム
             var program = GetUdonProgram(component);
+
             // コード
-            var code = GetDisassembleCode(component);
+            var code = GetDisassembleCode(program);
 
             // 探索
             var rows = code.Replace("\r\n","\n").Split(new[]{'\n','\r'});
