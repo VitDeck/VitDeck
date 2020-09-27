@@ -585,3 +585,9 @@ MonoBehaviour:
     Value: 'UdonBehaviour Synced variable [{0}] is invalid type ({1}).'
   - Key: UdonBehaviourSyncedVariablesRule.InvalidType.Solution
     Value: 'Set type bool, sbyte, byte, ushort, short, uint, int or float.'
+  - Key: Vket5UdonRuleSetBase.X22_UdonAssemblyPhysicsCastFunctionRule.Title
+    Value: "[X-22] Physics.*Cast function in UdonAssembly rules."
+  - Key: UdonAssemblyPhysicsCastFunctionRule.InvalidArguments
+    Value: 'UdonAssembly function [{0}] has invalid arguments. : {1} ({2})'
+  - Key: UdonAssemblyPhysicsCastFunctionRule.InvalidArguments.Solution
+    Value: 'Set arguments {1} in the function {0}.'

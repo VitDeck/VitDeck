@@ -216,7 +216,8 @@ namespace VitDeck.Validator
                 // U#においては、全てのクラスは運営よりブース毎に指定するnamespaceに所属させてください
                 new UdonSharpScriptNamespaceRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X60_UdonSharpNameSpaceRule.Title"), "Vket5.Circle"), 
 
-                // ToDo: PhysicsクラスのCast関数 layerMaskを設定し、レイヤー23以外のコライダを無視するようにする, maxDistanceは最長で10メートルまで
+                // PhysicsクラスのCast関数 layerMaskを設定し、レイヤー23以外のコライダを無視するようにする, maxDistanceは最長で10メートルまで
+                new UdonAssemblyPhysicsCastFunctionRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X22_UdonAssemblyPhysicsCastFunctionRule.Title"), GetUdonAssemblyPhysicsCastFunctionReferences()), 
 
             };
         }
@@ -322,6 +323,37 @@ namespace VitDeck.Validator
             };
         }
 
+        private UdonAssemblyFunctionEssentialArgumentReference[] GetUdonAssemblyPhysicsCastFunctionReferences()
+        {
+            return new UdonAssemblyFunctionEssentialArgumentReference[]
+            {
+                new UdonAssemblyFunctionEssentialArgumentReference(
+                    "Physics.RayCast",
+                    "MaxDistance, LayerMask",
+                    new []{"UnityEnginePhysics.__Raycast__", "UnityEnginePhysics.__RaycastAll__", "UnityEnginePhysics.__RaycastNonAlloc__"},
+                    "_SystemSingle_SystemInt32_"), 
+                new UdonAssemblyFunctionEssentialArgumentReference(
+                    "Physics.BoxCast",
+                    "MaxDistance, LayerMask",
+                    new []{"UnityEnginePhysics.__Boxcast__", "UnityEnginePhysics.__BoxCastAll__", "UnityEnginePhysics.__BoxCastNonAlloc__"},
+                    "_SystemSingle_SystemInt32_"), 
+                new UdonAssemblyFunctionEssentialArgumentReference(
+                    "Physics.SphereCast",
+                    "MaxDistance, LayerMask",
+                    new []{"UnityEnginePhysics.__SphereCast__", "UnityEnginePhysics.__SphereCastAll__", "UnityEnginePhysics.__SphereCastNonAlloc__"},
+                    "_SystemSingle_SystemInt32_"), 
+                new UdonAssemblyFunctionEssentialArgumentReference(
+                    "Physics.CapsuleCast",
+                    "MaxDistance, LayerMask",
+                    new []{"UnityEnginePhysics.__CapsuleCast__", "UnityEnginePhysics.__CapsuleCastAll__", "UnityEnginePhysics.__CapsuleCastNonAlloc__"},
+                    "_SystemSingle_SystemInt32_"), 
+                new UdonAssemblyFunctionEssentialArgumentReference(
+                    "Physics.LineCast",
+                    "LayerMask",
+                    new []{"UnityEnginePhysics.__Linecast__"},
+                    "_SystemInt32_"), 
+            };
+        }
         protected virtual ValidationLevel AdvancedObjectValidationLevel
         {
             get
