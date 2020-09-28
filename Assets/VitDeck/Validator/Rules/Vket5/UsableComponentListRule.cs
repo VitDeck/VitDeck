@@ -104,15 +104,14 @@ namespace VitDeck.Validator
                 return false;
             }
 
-            var asset = PrefabUtility.GetPrefabParent(obj);
-            var path = AssetDatabase.GetAssetPath(asset);
+            
+            var path = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(obj);
             var guid = AssetDatabase.AssetPathToGUID(path);
 
             if (ignorePrefabs.Contains(guid))
             {
                 return true;
             }
-
 
             return false;
         }
