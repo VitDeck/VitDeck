@@ -86,20 +86,18 @@ namespace VitDeck.Validator
 
         private bool IsIgnoredPrefab(GameObject obj)
         {
-            if (PrefabUtility.GetPrefabType(obj) != PrefabType.PrefabInstance)
+            if (PrefabUtility.GetPrefabInstanceStatus(obj) != PrefabInstanceStatus.Connected)
             {
                 return false;
             }
 
-            var asset = PrefabUtility.GetPrefabParent(obj);
-            var path = AssetDatabase.GetAssetPath(asset);
+            var path = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(obj);
             var guid = AssetDatabase.AssetPathToGUID(path);
 
             if (ignorePrefabs.Contains(guid))
             {
                 return true;
             }
-
 
             return false;
         }

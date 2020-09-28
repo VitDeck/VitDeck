@@ -45,6 +45,10 @@ Assets/VitDeck/Config/UserSettings.asset.meta
 #Template loader temporary folder
 Assets/VitDeck/Temporary*
 
+# JetBrains Rider
+.idea
+Assets/Plugins/Editor/JetBrains*
+
 #VRChat SDK2
 Assets/VRCSDK*
 Assets/VRChat Examples*
