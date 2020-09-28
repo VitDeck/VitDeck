@@ -4,7 +4,12 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using VitDeck.Language;
+
+#if VRC_SDK_VRCSDK3
+using VRC.SDKBase;
+#elif VRC_SDK_VRCSDK2
 using VRCSDK2;
+#endif
 
 namespace VitDeck.Validator
 {
@@ -17,21 +22,18 @@ namespace VitDeck.Validator
         private readonly VRC_Trigger.TriggerType[] triggerWhitelist;
         private readonly VRC_EventHandler.VrcEventType[] actionWhitelist;
         private readonly HashSet<string> excludedAssetGUIDs;
-        private readonly ICustomPropertyIgnorer propertyIgnorer;
 
         public VRCTriggerConfigRule(string name, 
             VRC_EventHandler.VrcBroadcastType[] broadcastTypesWhitelist,
             VRC_Trigger.TriggerType[] triggerWhitelist,
             VRC_EventHandler.VrcEventType[] actionWhitelist,
-            string[] excludedAssetGUIDs,
-            ICustomPropertyIgnorer propertyIgnorer = null
+            string[] excludedAssetGUIDs
         ) : base(name)
         {
             this.broadcastTypesWhitelist = broadcastTypesWhitelist;
             this.triggerWhitelist = triggerWhitelist;
             this.actionWhitelist = actionWhitelist;
             this.excludedAssetGUIDs = new HashSet<string>(excludedAssetGUIDs);
-            this.propertyIgnorer = propertyIgnorer ?? new DummyPropertyIgnorer();
         }
 
         protected override void Logic(ValidationTarget target)
@@ -65,8 +67,7 @@ namespace VitDeck.Validator
 
             foreach (var triggerEvent in triggerEvents)
             {
-                if (!broadcastTypesWhitelist.Contains(triggerEvent.BroadcastType) &&
-                    !propertyIgnorer.IsIgnored(typeof(VRC_Trigger), "BroadcastType"))
+                if (!broadcastTypesWhitelist.Contains(triggerEvent.BroadcastType))
                 {
                     AddIssue(new Issue(
                         obj, 
@@ -75,8 +76,7 @@ namespace VitDeck.Validator
                         LocalizedMessage.Get("VRCTriggerConfigRule.UnauthorizedBroadcastType.Solution")));
                 }
 
-                if (!triggerWhitelist.Contains(triggerEvent.TriggerType) &&
-                    !propertyIgnorer.IsIgnored(typeof(VRC_Trigger), "TriggerType"))
+                if (!triggerWhitelist.Contains(triggerEvent.TriggerType))
                 {
                     AddIssue(new Issue(
                         obj,
@@ -88,8 +88,7 @@ namespace VitDeck.Validator
                 var actions = triggerEvent.Events;
                 foreach (var action in actions)
                 {
-                    if (!actionWhitelist.Contains(action.EventType) &&
-                        !propertyIgnorer.IsIgnored(typeof(VRC_Trigger), "EventType"))
+                    if (!actionWhitelist.Contains(action.EventType))
                     {
                         AddIssue(new Issue(
                             obj,

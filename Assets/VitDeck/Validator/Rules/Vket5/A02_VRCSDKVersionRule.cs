@@ -3,6 +3,12 @@ using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
+    /// <summary>
+    /// VRCSDKのバージョンを検出するルール
+    /// </summary>
+    /// <remarks>
+    /// GUIDは可変である可能性があるのでファイルパスをチェックする。
+    /// </remarks>
     public class A02_VRCSDKVersionRule : BaseRule
     {
         /* VRCSDKのフォルダGUIDが変わったみたい？
@@ -14,6 +20,11 @@ namespace VitDeck.Validator
 
         private readonly string downloadURL;
 
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="name">ルール名</param>
+        /// <param name="version">VRCSDKのバージョン</param>
         public A02_VRCSDKVersionRule(string name, VRCSDKVersion version, string downloadURL) : base(name)
         {
             targetVersion = version;

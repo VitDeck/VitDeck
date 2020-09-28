@@ -11,13 +11,11 @@ namespace VitDeck.Validator
     {
         private readonly HashSet<string> prefabGUIDs;
         private readonly int limit;
-        private readonly bool negotiable;
 
-        public F02_PrefabLimitRule(string name, string[] prefabGUIDs, int limit, bool negotiable = false) : base(name)
+        public F02_PrefabLimitRule(string name, string[] prefabGUIDs, int limit) : base(name)
         {
             this.prefabGUIDs = new HashSet<string>(prefabGUIDs);
             this.limit = limit;
-            this.negotiable = negotiable;
         }
 
         protected override void Logic(ValidationTarget target)
@@ -33,9 +31,7 @@ namespace VitDeck.Validator
             if (objects.Length > limit)
             {
                 var message = LocalizedMessage.Get("F02_PrefabLimitRule.Overuse", limit, objects.Length);
-                var solution = negotiable ?
-                    LocalizedMessage.Get("F02_PrefabLimitRule.Overuse.NegotiableSolution") :
-                    LocalizedMessage.Get("F02_PrefabLimitRule.Overuse.Solution");
+                var solution = LocalizedMessage.Get("F02_PrefabLimitRule.Overuse.Solution");
                 var solutionURL = LocalizedMessage.Get("F02_PrefabLimitRule.Overuse.SolutionURL");
 
                 foreach (var obj in objects)

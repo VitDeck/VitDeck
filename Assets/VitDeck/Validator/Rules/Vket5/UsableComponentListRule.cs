@@ -20,8 +20,6 @@ namespace VitDeck.Validator
 
         private readonly HashSet<string> ignorePrefabs;
 
-        private readonly ICustomComponentIgnorer customIgnore;
-
         /// <summary>
         /// コンストラクタ。
         /// </summary>
@@ -32,8 +30,7 @@ namespace VitDeck.Validator
         public UsableComponentListRule(string name,
             ComponentReference[] references,
             string[] ignorePrefabGUIDs = null,
-            ValidationLevel unregisteredComponent = ValidationLevel.ALLOW,
-            ICustomComponentIgnorer customIgnore = null)
+            ValidationLevel unregisteredComponent = ValidationLevel.ALLOW)
             : base(name)
         {
             this.references = references ?? new ComponentReference[] { };
@@ -42,7 +39,6 @@ namespace VitDeck.Validator
                 ignorePrefabGUIDs = new string[0];
             }
             ignorePrefabs = new HashSet<string>(ignorePrefabGUIDs);
-            this.customIgnore = customIgnore ?? new DummyComponentIgnorer();
             unregisteredComponentValidationLevel = unregisteredComponent;
         }
 
@@ -59,20 +55,11 @@ namespace VitDeck.Validator
                         component is Transform)
                         continue;
 
-                    if (customIgnore.IsIgnored(component))
-                    {
-                        continue;
-                    }
-
                     if ((component.hideFlags & HideFlags.DontSaveInEditor) == HideFlags.DontSaveInEditor)
                     {
                         continue;
                     }
-#if UNITY_2018_3_OR_NEWER
                     var isPrefabComponent = !PrefabUtility.IsAddedComponentOverride(component);
-#else
-                    var isPrefabComponent = !PrefabUtility.IsComponentAddedToPrefabInstance(component);
-#endif
                     if (isIgnorePrefabInstance &&
                         isPrefabComponent)
                     {
@@ -124,10 +111,6 @@ namespace VitDeck.Validator
             switch (level)
             {
                 case ValidationLevel.ALLOW:
-                    break;
-                case ValidationLevel.NEGOTIABLE:
-                    message = LocalizedMessage.Get("UsableComponentListRule.Negotiable", name, component.GetType().Name);
-                    AddIssue(new Issue(obj, IssueLevel.Error, message, string.Empty, string.Empty));
                     break;
                 case ValidationLevel.DISALLOW:
                     message = LocalizedMessage.Get("UsableComponentListRule.Disallow", name, component.GetType().Name);

@@ -150,19 +150,12 @@ namespace VitDeck.Validator
                 return false;
             }
 
-#if UNITY_2018_3_OR_NEWER
             var fileId = serializedProperty.FindPropertyRelative("m_FileID");
             if (fileId == null ||
                 fileId.intValue == 0)
             {
                 return false;
             }
-#else
-            if (serializedProperty.objectReferenceInstanceIDValue == 0)
-            {
-                return false;
-            }
-#endif
             return true;
         }
     }

@@ -13,7 +13,6 @@ namespace VitDeck.Validator.Test
                 new ComponentReference[]
                 {
                     new ComponentReference("ライティング", new string[] { "UnityEngine.Light" }, ValidationLevel.ALLOW),
-                    new ComponentReference("カメラ", new string[] { "UnityEngine.Camera" }, ValidationLevel.NEGOTIABLE),
                     new ComponentReference("Jointの使用禁止", new string[]
                     {
                         "UnityEngine.CharacterJoint",
@@ -27,11 +26,9 @@ namespace VitDeck.Validator.Test
             var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/F01_UsableComponentListRule", true);
             var result = rule.Validate(target);
 
-            Assert.That(result.Issues.Count, Is.EqualTo(2));
+            Assert.That(result.Issues.Count, Is.EqualTo(1));
             Assert.That(result.Issues[0].level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(result.Issues[0].target.name, Is.EqualTo("Main Camera"));
-            Assert.That(result.Issues[1].level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(result.Issues[1].target.name, Is.EqualTo("GameObjectWithJoint"));
+            Assert.That(result.Issues[0].target.name, Is.EqualTo("GameObjectWithJoint"));
         }
 
         [Test]
@@ -93,17 +90,6 @@ namespace VitDeck.Validator.Test
 
             Assert.That(disallowed.Issues.Count, Is.Not.Zero);
             foreach (var issue in disallowed.Issues)
-            {
-                Assert.That(issue.level, Is.EqualTo(IssueLevel.Error));
-            }
-
-            var negotiable = new UsableComponentListRule("",
-                new ComponentReference[] { },
-                unregisteredComponent: ValidationLevel.NEGOTIABLE)
-                .Validate(target);
-
-            Assert.That(negotiable.Issues.Count, Is.Not.Zero);
-            foreach (var issue in negotiable.Issues)
             {
                 Assert.That(issue.level, Is.EqualTo(IssueLevel.Error));
             }

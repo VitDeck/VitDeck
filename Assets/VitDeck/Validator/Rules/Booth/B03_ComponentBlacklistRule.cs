@@ -37,10 +37,6 @@ namespace VitDeck.Validator
                             {
                                 case ValidationLevel.ALLOW:
                                     break;
-                                case ValidationLevel.NEGOTIABLE:
-                                    message = string.Format("{0}:{1}を使用する場合は事前に運営に問い合わせてください。", reference.name, cmp.GetType().Name);
-                                    AddIssue(new Issue(obj, IssueLevel.Warning, message, string.Empty, string.Empty));
-                                    break;
                                 case ValidationLevel.DISALLOW:
                                     message = string.Format("{0}:{1}の使用は許可されていません。", reference.name, cmp.GetType().Name);
                                     AddIssue(new Issue(obj, IssueLevel.Error, message, string.Empty, string.Empty));

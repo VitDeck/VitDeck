@@ -21,91 +21,91 @@ MonoBehaviour:
     Value: Rule verification completed successfully
   - Key: ValidatorWindow.ValidationAborted
     Value: Rule verification aborted
-  - Key: Vket4TargetFinder.PackageFolderNotFound
+  - Key: Vket5TargetFinder.PackageFolderNotFound
     Value: Submissions folder not found
-  - Key: Vket4TargetFinder.ExhibitNotFound
+  - Key: Vket5TargetFinder.ExhibitNotFound
     Value: Submissions not found
-  - Key: Vket4TargetFinder.ManyExhibits
+  - Key: Vket5TargetFinder.ManyExhibits
     Value: Submission duplicates found
-  - Key: Vket4TargetFinder.SceneNotFound
+  - Key: Vket5TargetFinder.SceneNotFound
     Value: Submission scene ({0}) not found
-  - Key: Vket4TargetFinder.SceneOpenDialog.Title
+  - Key: Vket5TargetFinder.SceneOpenDialog.Title
     Value: Unable to open target scene
-  - Key: Vket4TargetFinder.SceneOpenDialog
+  - Key: Vket5TargetFinder.SceneOpenDialog
     Value: Submissions scene must be open for validation procedure
-  - Key: Vket4TargetFinder.SceneOpenDialog.Continue
+  - Key: Vket5TargetFinder.SceneOpenDialog.Continue
     Value: Run
-  - Key: Vket4TargetFinder.SceneOpenDialog.Abort
+  - Key: Vket5TargetFinder.SceneOpenDialog.Abort
     Value: Abord
-  - Key: Vket4TargetFinder.ValidationAborted
+  - Key: Vket5TargetFinder.ValidationAborted
     Value: Validation is aborted
-  - Key: Vket4TargetFinder.UserDidntSave
+  - Key: Vket5TargetFinder.UserDidntSave
     Value: Please save all changes and try again
-  - Key: Vket4RuleSetBase.UnityVersionRule.Title
+  - Key: Vket5RuleSetBase.UnityVersionRule.Title
     Value: '[A-1]Must use Unity version {0}'
-  - Key: Vket4RuleSetBase.VRCSDKVersionRule.Title
+  - Key: Vket5RuleSetBase.VRCSDKVersionRule.Title
     Value: '[A-2]Please use the latest Unity version as supported by VRCSDK'
-  - Key: Vket4RuleSetBase.ExistInSubmitFolderRule.Title
+  - Key: Vket5RuleSetBase.ExistInSubmitFolderRule.Title
     Value: '[A-4]Unrelated objects are found within the submissions folder'
-  - Key: Vket4RuleSetBase.OfficialAssetDontContainRule.Title
+  - Key: Vket5RuleSetBase.OfficialAssetDontContainRule.Title
     Value: '[A-4]Submission objects must be placed within the submissions folder'
-  - Key: Vket4RuleSetBase.NameOfFileAndFolderRule.Title
+  - Key: Vket5RuleSetBase.NameOfFileAndFolderRule.Title
     Value: '[B-1]Unsupported symbols found in file and folder names'
-  - Key: Vket4RuleSetBase.FilePathLengthLimitRule.Title
+  - Key: Vket5RuleSetBase.FilePathLengthLimitRule.Title
     Value: '[B-3]Please keep all file paths under Asset/ under {0} characters'
-  - Key: Vket4RuleSetBase.MeshFileTypeBlacklistRule.Title
+  - Key: Vket5RuleSetBase.MeshFileTypeBlacklistRule.Title
     Value: '[B-4]Found unsupported mesh file formats'
-  - Key: Vket4RuleSetBase.ContainMatOrTexInAssetRule.Title
+  - Key: Vket5RuleSetBase.ContainMatOrTexInAssetRule.Title
     Value: '[B-4]Unused materials and/or textures found in model asset'
-  - Key: Vket4RuleSetBase.FolderSizeRule.Title
+  - Key: Vket5RuleSetBase.FolderSizeRule.Title
     Value: '[B-5]Submission folder filesize exceeded allowed filesize limit'
-  - Key: Vket4RuleSetBase.ExhibitStructureRule.Title
+  - Key: Vket5RuleSetBase.ExhibitStructureRule.Title
     Value: '[C-2]All Static and Dynamic objects must be parented to Gameobjects named
       Static and Dynamic respectively'
-  - Key: Vket4RuleSetBase.StaticFlagsRule.Title
-    Value: '[C-2]All Static child objects must be static'
-  - Key: Vket4RuleSetBase.BoothBoundsRule.Title
+  - Key: Vket5RuleSetBase.StaticFlagsRule.Title
+    Value: '[C-2]Every child object inside Static must be set to static'
+  - Key: Vket5RuleSetBase.BoothBoundsRule.Title
     Value: '[D-1,2]Please keep the booth size under the allocated space'
-  - Key: Vket4RuleSetBase.MaterialLimitRule.Title
+  - Key: Vket5RuleSetBase.MaterialLimitRule.Title
     Value: '[D-4]Material count must be kept under {0}'
-  - Key: Vket4RuleSetBase.LightMapsLimitRule.Title
-    Value: '[D-8]Lightmap count must be kept under {0}'
-  - Key: Vket4RuleSetBase.GlobalIlluminationBakedRule.Title
+  - Key: Vket5RuleSetBase.LightMapsLimitRule.Title
+    Value: '[D-8]Lightmap count must be kept under {0}, and resolutions below {1}'
+  - Key: Vket5RuleSetBase.GlobalIlluminationBakedRule.Title
     Value: '[E-5]Global Illumination must be set to Baked when using Standard shader''s
       Emission'
-  - Key: Vket4RuleSetBase.UsableComponentListRule.Title
+  - Key: Vket5RuleSetBase.UsableComponentListRule.Title
     Value: '[F-1]Unallowed components in use'
-  - Key: Vket4RuleSetBase.VRCTriggerConfigRule.Title
+  - Key: Vket5RuleSetBase.VRCTriggerConfigRule.Title
     Value: '[F-1]Usage of VRC_Trigger not allowed outside of provided prefabs'
-  - Key: Vket4RuleSetBase.UseMeshColliderRule.Title
+  - Key: Vket5RuleSetBase.UseMeshColliderRule.Title
     Value: '[F-1]Should not use MeshCollider'
-  - Key: Vket4RuleSetBase.VRCTriggerCountLimitRule.Title
+  - Key: Vket5RuleSetBase.VRCTriggerCountLimitRule.Title
     Value: '[F-1]VRC_Trigger count must be kept under {0}'
-  - Key: Vket4RuleSetBase.DirectionalLightLimitRule.Title
+  - Key: Vket5RuleSetBase.DirectionalLightLimitRule.Title
     Value: '[F-1]Usage of DirectionalLight is not allowed'
-  - Key: Vket4RuleSetBase.PointLightConfigRule.Title
+  - Key: Vket5RuleSetBase.PointLightConfigRule.Title
     Value: '[F-1]PointLight parameters must be within the allowed range'
-  - Key: Vket4RuleSetBase.SpotLightConfigRule.Title
+  - Key: Vket5RuleSetBase.SpotLightConfigRule.Title
     Value: '[F-1]SpotLight parameters must be within the allowed range'
-  - Key: Vket4RuleSetBase.AreaLightConfigRule.Title
+  - Key: Vket5RuleSetBase.AreaLightConfigRule.Title
     Value: '[F-1]AreaLight parameters must be within the allowed range'
-  - Key: Vket4RuleSetBase.AreaLightLimitRule.Title
+  - Key: Vket5RuleSetBase.AreaLightLimitRule.Title
     Value: '[F-1]AreaLight count must be kept under {0}'
-  - Key: Vket4RuleSetBase.PointLightModeRule.Title
+  - Key: Vket5RuleSetBase.PointLightModeRule.Title
     Value: '[F-1]Please use only the allowed PointLight modes'
-  - Key: Vket4RuleSetBase.SpotLightModeRule.Title
+  - Key: Vket5RuleSetBase.SpotLightModeRule.Title
     Value: '[F-1]Please use only the allowed SpotLight modes'
-  - Key: Vket4RuleSetBase.PickupObjectSyncRule.Title
+  - Key: Vket5RuleSetBase.PickupObjectSyncRule.Title
     Value: '[F-1]PickupObjectSync parameters must meet the allowed values'
-  - Key: Vket4RuleSetBase.AvatarPedestalPrefabRule.Title
+  - Key: Vket5RuleSetBase.AvatarPedestalPrefabRule.Title
     Value: '[F-1]AvatarPedestal parameters must meet the allowed values'
-  - Key: Vket4RuleSetBase.AudioSourcePrefabRule.Title
+  - Key: Vket5RuleSetBase.AudioSourcePrefabRule.Title
     Value: '[F-1]AudioSource parameters must meet the allowed values'
-  - Key: Vket4RuleSetBase.ChairPrefabLimitRule.Title
+  - Key: Vket5RuleSetBase.ChairPrefabLimitRule.Title
     Value: '[F-2]Chair prefab count must be kept under {0}'
-  - Key: Vket4RuleSetBase.PickupObjectSyncPrefabLimitRule.Title
+  - Key: Vket5RuleSetBase.PickupObjectSyncPrefabLimitRule.Title
     Value: '[F-2]PickupObjectSync prefab count must be kept under {0}'
-  - Key: Vket4RuleSetBase.VideoPlayerComponentRule.Title
+  - Key: Vket5RuleSetBase.VideoPlayerComponentRule.Title
     Value: '[F-2]VideoPlayer parameters must meet the allowed values'
   - Key: UnityVersionRule.InvalidVersion
     Value: Current Unity version ({0}) does not meet the required version
@@ -122,15 +122,15 @@ MonoBehaviour:
     Value: Please download the latest version of VRCSDK from the VRChat site and import
       it
   - Key: PostProcessingExistsRule.SearchFailed
-    Value: 
+    Value: Failed to check the installation of PostProcessingStack
   - Key: PostProcessingExistsRule.SearchFailed.Solution
     Value: 
   - Key: PostProcessingExistsRule.SearchFailed.SolutionURL
     Value: 
   - Key: PostProcessingExistsRule.NotInstalled
-    Value: 
+    Value: The specified PostProcessingStack is not installed
   - Key: PostProcessingExistsRule.NotInstalled.Solution
-    Value: 
+    Value: Please install from the Package Manager
   - Key: PostProcessingExistsRule.NotInstalled.SolutionURL
     Value: 
   - Key: AssetGuidBlacklistRule.UnauthorizedAssetDetected
@@ -154,9 +154,9 @@ MonoBehaviour:
     Value: Please extract the textures from your models and use the extracted materials
       instead
   - Key: FolderSizeRule.Exceeded
-    Value: Submission folder total size exceeded {0} bytes
+    Value: Submission folder total size exceeded {2} bytes. The limit is set at {0}
   - Key: FolderSizeRule.Exceeded.Solution
-    Value: 
+    Value: Please delete unneccesary data to not exceed the filesize limit
   - Key: FolderSizeRule.Exceeded.SolutionURL
     Value: 
   - Key: C02_ExhibitStructureRule.UnauthorizedObject
@@ -168,41 +168,46 @@ MonoBehaviour:
   - Key: C02_ExhibitStructureRule.RootObjectNotFound
     Value: Root object {0} not found
   - Key: C02_ExhibitStructureRule.RootObjectNotFound.Solution
-    Value: 'Please create empty gameobject named [{0}] and parent it to the exhibit
-      root object  '
+    Value: Please create empty gameobject named [{0}] and parent it to the exhibit
+      root object
   - Key: C02_ExhibitStructureRule.UnauthorizedComponent
     Value: Unauthorized component found attached to root object {0}
   - Key: C02_ExhibitStructureRule.UnauthorizedComponent.Solution
     Value: Please do not attach any components except the transform component under
       the root object {0}
   - Key: C02_ExhibitStructureRule.NotInitialPosition
-    Value: 
+    Value: The root object has been moved from the origin point
   - Key: C02_ExhibitStructureRule.NotInitialPosition.Solution
-    Value: 
+    Value: Please change the object's Position to (0, 0, 0)
   - Key: C02_ExhibitStructureRule.NotInitialPosition.SolutionURL
     Value: 
   - Key: C02_ExhibitStructureRule.NotInitialRotation
-    Value: 
+    Value: The root object has been rotated
   - Key: C02_ExhibitStructureRule.NotInitialRotation.Solution
-    Value: 
+    Value: Please change the object's Rotation to (0, 0, 0)
   - Key: C02_ExhibitStructureRule.NotInitialRotation.SolutionURL
     Value: 
   - Key: C02_ExhibitStructureRule.NotInitialScale
-    Value: 
+    Value: The root object's scale has been changed
   - Key: C02_ExhibitStructureRule.NotInitialScale.Solution
-    Value: 
+    Value: Please change the object's Scale to (1, 1, 1)
   - Key: C02_ExhibitStructureRule.NotInitialScale.SolutionURL
     Value: 
   - Key: SceneStructureRule.UnrelatedSceneDetected
-    Value: 
+    Value: A Scene that is unrelated to the Submission Scene is open
   - Key: SceneStructureRule.UnrelatedSceneDetected.Solution
-    Value: 
+    Value: 'Please close or Unload the unrelated Scene '
   - Key: SceneStructureRule.UnrelatedSceneDetected.SolutionURL
     Value: 
   - Key: SceneStructureRule.UnrelatedRootObjectDetected
-    Value: 
+    Value: An Object that is not supported or intended for submission was detected
+      on the Scene
   - Key: SceneStructureRule.UnrelatedRootObjectDetected.Solution
-    Value: 
+    Value: 'If you did intend to submit the detected object, make sure it is inside
+      the root object (the GameObject with the same name as the Scene name)
+
+      If you did not intend to submit it, make sure it is removed before any checks
+      are performed'
   - Key: SceneStructureRule.UnrelatedRootObjectDetected.SolutionURL
     Value: 
   - Key: C02_StaticFlagRule.OccludeeStaticNotSet
@@ -218,7 +223,7 @@ MonoBehaviour:
   - Key: C02_StaticFlagRule.BatchingStaticNotSet.Solution
     Value: Please only disable BatchingStatic if it affects the exhibits visually
   - Key: C02_StaticFlagRule.OccluderStaticNotAllowed
-    Value: 
+    Value: Please disable OccluderStatic
   - Key: C02_StaticFlagRule.OccluderStaticNotAllowed.Solution
     Value: 
   - Key: C02_StaticFlagRule.OccluderStaticNotAllowed.SolutionURL
@@ -237,30 +242,25 @@ MonoBehaviour:
       Emissions
   - Key: UsableComponentListRule.DefaultComponentGroupName
     Value: Component not defined
-  - Key: UsableComponentListRule.Negotiable
-    Value: '{0}: Usage of {1} requires special permission. Please apply from the Virtual
-      Market website'
   - Key: UsableComponentListRule.Disallow
     Value: '{0}: Usage of {1} is not allowed'
   - Key: UsableComponentListRule.Disallow.Solution
-    Value: 
+    Value: If a replacement Prefab is released by Virtual Market, you could substitute
+      it by using that instead
   - Key: UsableComponentListRule.Disallow.SolutionURL
     Value: 
   - Key: VRCTriggerConfigRule.UnauthorizedBroadcastType
     Value: BroadcastType {0} not supported in component VRC_Trigger
   - Key: VRCTriggerConfigRule.UnauthorizedBroadcastType.Solution
-    Value: Please change to a supported broadcast type or apply for usage on the Virtual
-      Market website
+    Value: Please change to a supported broadcast type
   - Key: VRCTriggerConfigRule.UnauthorizedTriggerType
     Value: TriggerType {0} not supported in component VRC_Trigger
   - Key: VRCTriggerConfigRule.UnauthorizedTriggerType.Solution
-    Value: Please change to a supported trigger type or apply for usage on the Virtual
-      Market website
+    Value: Please change to a supported trigger type
   - Key: VRCTriggerConfigRule.UnauthorizedActionType
     Value: ActionType {0} not supported in component VRC_Trigger
   - Key: VRCTriggerConfigRule.UnauthorizedActionType.Solution
-    Value: Please change to a supported action type or apply for usage on the Virtual
-      Market website
+    Value: Please change to a supported action type
   - Key: UseMeshColliderRule.ShouldNotUse
     Value: MeshCollider usage is discouraged
   - Key: UseMeshColliderRule.ShouldNotUse.Solution
@@ -276,7 +276,7 @@ MonoBehaviour:
   - Key: UseLightModeRule.MustNotUse
     Value: Usage of {0} light's {1} mode is not supported
   - Key: UseLightModeRule.MustNotUse.Solution
-    Value: Please change the bake mode or apply for usage on the Virtual Market site
+    Value: Please change the bake mode
   - Key: F02_PickupObjectSyncPrefabRule.DontDeactivate
     Value: VRC_ObjectSync objects must be kept active at all times
   - Key: F02_PickupObjectSyncPrefabRule.DontAllowCollisionTransfer
@@ -301,48 +301,79 @@ MonoBehaviour:
     Value: 'MaxDistance value of Prefab must not exceed {0}. (Current value: {1})'
   - Key: F02_PrefabLimitRule.Overuse
     Value: 'Prefab''s usage limit of {0} exceeded. (Current count: {1})'
-  - Key: F02_PrefabLimitRule.Overuse.NegotiableSolution
-    Value: Usage limit can be increased by applying on the Virtual Market site
   - Key: F02_PrefabLimitRule.Overuse.Solution
-    Value: 
+    Value: Please reduce the usage count
   - Key: F02_PrefabLimitRule.Overuse.SolutionURL
     Value: 
+  - Key: F02_VideoPlayerComponentRule.DefaultDisabled
+    Value: A VideoPlayer's default state must be set to Disabled
+  - Key: F02_VideoPlayerComponentRule.DefaultDisabled.Solution
+    Value: Untick the component's checkbox, and rig it so that it gets enabled by
+      other means such as Animations and VRC_Trigger's SetComponentActive
+  - Key: Vket5RuleSetBase.F02_VideoPlayerComponentMaxCountRule.Title
+    Value: Please reduce the usage of VideoPlayer components to the allowed limits
+  - Key: F02_VideoPlayerComponentMaxCountRule.Exceeded
+    Value: 'The component''s usage limit of {0} exceeded. (Current count: {1})'
+  - Key: F02_VideoPlayerComponentMaxCountRule.Exceeded.Solution
+    Value: Please reduce the component count
   - Key: F02_VideoPlayerComponentRule.DontUseURL
     Value: Please disallow URL input on VideoPlayers
-  - Key: Vket4RuleSetBase.CanvasRenderModeRule.Title
+  - Key: Vket5RuleSetBase.CanvasRenderModeRule.Title
     Value: '[F-1]Canvas must be set to WorldSpace'
   - Key: F01_CanvasRenderModeRule.CanvasIsNotInWorldSpace
     Value: Please set the RenderMode of the canvas located under {0} to WorldSpace
-  - Key: Vket4RuleSetBase.AnimatorComponentMaxCountRule.Title
+  - Key: Vket5RuleSetBase.F01_CameraComponentRule.Title
+    Value: Please follow the set rules when using a Camera
+  - Key: F01_CameraComponentRule.DefaultDisabled
+    Value: The component must be set to Disabled by default
+  - Key: F01_CameraComponentRule.DefaultDisabled.Solution
+    Value: Untick the component's checkbox, and rig it so that it gets enabled by
+      other means such as Animations and VRC_Trigger's SetComponentActive
+  - Key: F01_CameraComponentRule.MaxRenderTextureSize
+    Value: "The RenderTexture's size is above the limits({0}px\xD7{1}px) Currently
+      {2}px\xD7{3}px"
+  - Key: F01_CameraComponentRule.MaxRenderTextureSize.Solution
+    Value: From the RenderTexture's inspector, reduce the size below the limits
+  - Key: Vket5RuleSetBase.F01_CameraComponentMaxCountRule.Title
+    Value: Please reduce the usage of Camera components to the allowed limits
+  - Key: F01_CameraComponentMaxCountRule.Exceeded
+    Value: 'The component''s usage limit of {0} exceeded. (Current count: {1})'
+  - Key: F01_CameraComponentMaxCountRule.Exceeded.Solution
+    Value: Please reduce the component count
+  - Key: Vket5RuleSetBase.F01_ProjectorComponentRule.Title
+    Value: Please follow the set rules when using a Projector
+  - Key: F01_ProjectorComponentRule.DefaultDisabled
+    Value: The component must be set to Disabled by default
+  - Key: F01_ProjectorComponentRule.DefaultDisabled.Solution
+    Value: Untick the component's checkbox, and rig it so that it gets enabled by
+      other means such as Animations and VRC_Trigger's SetComponentActive
+  - Key: Vket5RuleSetBase.F01_ProjectorComponentMaxCountRule.Title
+    Value: Please reduce the usage of Projector components to the allowed limits
+  - Key: F01_ProjectorComponentMaxCountRule.Exceeded
+    Value: 'The component''s usage limit of {0} exceeded. (Current count: {1})'
+  - Key: F01_ProjectorComponentMaxCountRule.Exceeded.Solution
+    Value: Please reduce the component count
+  - Key: Vket5RuleSetBase.AnimatorComponentMaxCountRule.Title
     Value: '[F-1]Please limit your animator usage within the allowed maximum count'
   - Key: F01_AnimatorComponentMaxCountRule.Exceeded
     Value: Total animator count({1}) exceeded the maximum allowed number of {0}.
   - Key: F01_AnimatorComponentMaxCountRule.Exceeded.Solution
     Value: Please reduce your animator component count
-  - Key: Vket4RuleSetBase.AnimationMakesMoveCollidersRule.Title
-    Value: '[F-1]Animated colliders must be applied for from the VKet homepage'
   - Key: AnimationMakesMoveCollidersRule.WillMakesMove
     Value: The animated object {0} contains a collider within its' children
   - Key: AnimationMakesMoveCollidersRule.WillMakesMove.Solution
-    Value: Please remove either the animator or the collider. If both components must
-      be used in this configuration, please apply for the usage on the VKet homepage.
-  - Key: Vket4RuleSetBase.F01_AnimationClipRule.Title
+    Value: Please remove either the animator or the collider.
+  - Key: Vket5RuleSetBase.F01_AnimationClipRule.Title
     Value: '[F-1]Please conform to the limitation of AnimationClip''s usage'
   - Key: F01_AnimationClipRule.DontChangeMaterialInAnimation
     Value: Switching of materials using AnimationClips is not allowed
-  - Key: F01_AnimationClipRule.DontChangeMaterialInAnimation.Solution
-    Value: If this configuration is mandatory, please apply for the usage on the VKet
-      homepage.
   - Key: F01_AnimationClipRule.DontAccessParentObject
     Value: AnimationClips must not contain paths containing ../
-  - Key: F01_AnimationClipRule.DontAccessParentObject.Solution
-    Value: If this configuration is mandatory, please apply for the usage on the VKet
-      homepage.
-  - Key: Vket4RuleSetBase.F01_AnimationComponentRule.Title
+  - Key: Vket5RuleSetBase.F01_AnimationComponentRule.Title
     Value: '[F-1]Please conform to the limitation of AnimationComponent''s usage'
   - Key: F01_AnimationComponentRule.ShouldNotUseAlwaysAnimate
     Value: In the exception of bugs, please avoid setting CullingType to Always.
-  - Key: Vket4RuleSetBase.F01_AnimatorComponentRule.Title
+  - Key: Vket5RuleSetBase.F01_AnimatorComponentRule.Title
     Value: '[F-1]Please conform to the limitation of AnimatorComponent''s usage'
   - Key: F01_AnimatorComponentRule.ShouldNotUseAlwaysAnimate
     Value: In the exception of bugs, please avoid setting CullingType to Always.
@@ -354,8 +385,7 @@ MonoBehaviour:
     Value: Animator components can not be used in combination with {0}
   - Key: F01_AnimatorComponentRule.MustUseComponentsSeparately.Solution
     Value: Please avoid having the combination of the two components within the same
-      or parented objects. If both components must be used in this configuration,
-      please apply for the usage on the VKet homepage.
+      or parented objects.
   - Key: TemplateLoaderWindow.TemplatesAreNotExists
     Value: Template not found
   - Key: TemplateLoaderWindow.ForceBinaryDetected
@@ -471,11 +501,11 @@ MonoBehaviour:
       of {1}~{2}. Current value {3}'
   - Key: LightConfigRule.OverIndirectMultiplier.Solution
     Value: Set the Indirect Multiplier value to within the allowed range.
-  - Key: Vket4RuleSetBase.SkinnedMeshRendererRule.Title
+  - Key: Vket5RuleSetBase.SkinnedMeshRendererRule.Title
     Value: '[F-1]Please follow the SkinnedMeshRenderer''s usage rules.'
-  - Key: Vket4RuleSetBase.MeshRendererRule.Title
+  - Key: Vket5RuleSetBase.MeshRendererRule.Title
     Value: '[F-1]Please follow the MeshRenderer/MeshFilter''s usage rules.'
-  - Key: Vket4RuleSetBase.ReflectionProbeRule.Title
+  - Key: Vket5RuleSetBase.ReflectionProbeRule.Title
     Value: '[F-1]Please follow the ReflectionProbe''s usage rules.'
   - Key: SkinnedMeshRendererRule.MustTurnOffUpdateWhenOffscreen
     Value: UpdateWhenOffscreen must be set to off.
@@ -485,9 +515,9 @@ MonoBehaviour:
     Value: LightmapStatic MeshRenderers must be assigned the Environment Layer.
   - Key: ReflectionProbeRule.MustUseCustomTexture
     Value: Please set ReflectionProbe's Type to Custom.
-  - Key: Vket4RuleSetBase.F02_RigidbodyRule.Title
+  - Key: Vket5RuleSetBase.F02_RigidbodyRule.Title
     Value: '[F-2]Rigidbody parameters must meet the allowed values'
   - Key: F02_RigidbodyRule.UseIsKinematic
     Value: Please enable IsKinematic on RigidBody objects
-  - Key: Vket4RuleSetBase.UnusabePrefabRule.Title
+  - Key: Vket5RuleSetBase.UnusabePrefabRule.Title
     Value: '[F-4]Unallowed prefabs in use'

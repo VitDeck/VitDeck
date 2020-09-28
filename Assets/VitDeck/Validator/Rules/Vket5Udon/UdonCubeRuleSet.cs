@@ -1,3 +1,4 @@
+﻿#if VRC_SDK_VRCSDK3
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,13 +7,13 @@ using VRC.SDKBase;
 
 namespace VitDeck.Validator
 {
-    public class DefaultCubeRuleSet : Vket5RuleSetBase
+    public class UdonCubeRuleSet : Vket5UdonRuleSetBase
     {
         public override string RuleSetName
         {
             get
             {
-                return "Vket5 - DefaultCube";
+                return "Vket5 - UdonCube";
             }
         }
 
@@ -32,29 +33,27 @@ namespace VitDeck.Validator
             }
         }
 
-        protected override VRC_EventHandler.VrcBroadcastType[] VRCTriggerBroadcastTypesWhitelist
+        protected override int UdonBehaviourCountLimit
         {
             get
             {
-                return base.VRCTriggerBroadcastTypesWhitelist.Concat(new[] {
-                    VRC_EventHandler.VrcBroadcastType.AlwaysUnbuffered }).ToArray();
+                return 25;
             }
         }
 
-        protected override VRC_EventHandler.VrcEventType[] VRCTriggerActionWhitelist
+        protected override int UdonBehaviourSynchronizePositionCountLimit
         {
             get
             {
-                return base.VRCTriggerActionWhitelist.Concat(new[] {
-                    VRC_EventHandler.VrcEventType.TeleportPlayer }).ToArray();
+                return 10;
             }
         }
 
-        protected override int VRCTriggerCountLimit
+        protected override int UdonScriptSyncedVariablesLimit
         {
             get
             {
-                return 50;
+                return 3;
             }
         }
 
@@ -150,3 +149,4 @@ namespace VitDeck.Validator
         }
     }
 }
+#endif

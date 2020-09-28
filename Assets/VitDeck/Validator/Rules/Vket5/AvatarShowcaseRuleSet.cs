@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace VitDeck.Validator
 {
-    public class AvatarShowcaseRuleSet : Vket4RuleSetBase
+    public class AvatarShowcaseRuleSet : Vket5RuleSetBase
     {
         public override string RuleSetName
         {
             get
             {
-                return "Vket4 - AvatarShowcase";
+                return "Vket5 - VirtualShowcase";
             }
         }
 

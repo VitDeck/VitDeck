@@ -29,13 +29,11 @@ namespace VitDeck.Validator
                             new ComponentReference[] { new ComponentReference("ライティング", new string[] { "UnityEngine.Light" }, ValidationLevel.ALLOW),
                                                        new ComponentReference("カメラ", new string[] { "UnityEngine.Camera","UnityEngine.FlareLayer" }, ValidationLevel.ALLOW),
                                                        new ComponentReference("Mesh", new string[] { "UnityEngine.MeshFilter" ,"UnityEngine.MeshRenderer" }, ValidationLevel.ALLOW),
-                                                       new ComponentReference("Animator", new string[] { "UnityEngine.Animator"  }, ValidationLevel.NEGOTIABLE),
                                                        new ComponentReference("Suport Object", new string[] { "ScaleLimitVisualizer", "NotEditableComponent" }, ValidationLevel.ALLOW),
                                                        new ComponentReference("AudioListerner", new string[] { "UnityEngine.AudioListener" }, ValidationLevel.DISALLOW)});
         [Validation]
         public IRule componentBlacklistRule = new ComponentBlacklistRule("[B03]コンポーネントブラックリストルール",
-                            new ComponentReference[] { new ComponentReference("AudioListerner", new string[] { "UnityEngine.AudioListener" }, ValidationLevel.DISALLOW),
-                                                       new ComponentReference("Animator", new string[] { "UnityEngine.Animator" }, ValidationLevel.NEGOTIABLE)});
+                            new ComponentReference[] { new ComponentReference("AudioListerner", new string[] { "UnityEngine.AudioListener" }, ValidationLevel.DISALLOW)});
         [Validation]
         public IRule errorShaderRule = new ErrorShaderRule("[B04]エラーシェーダールール");
         [Validation]
