@@ -7,12 +7,12 @@ namespace VitDeck.Validator
 {
 
     /// <summary>
-    /// Vket4の基本ルールセット。
+    /// Vket5の基本ルールセット。
     /// </summary>
     /// <remarks>
     /// 変数をabstractまたはvirtualプロパティで宣言し、継承先で上書きすることでワールドによる制限の違いを表現する。
     /// </remarks>
-    public abstract class Vket4RuleSetBase : IRuleSet
+    public abstract class Vket5RuleSetBase : IRuleSet
     {
         public abstract string RuleSetName
         {
@@ -21,7 +21,7 @@ namespace VitDeck.Validator
 
         protected readonly long MegaByte = 1048576;
 
-        private readonly Vket4TargetFinder targetFinder = new Vket4TargetFinder();
+        private readonly Vket5TargetFinder targetFinder = new Vket5TargetFinder();
         public IValidationTargetFinder TargetFinder => targetFinder;
 
         
@@ -29,15 +29,15 @@ namespace VitDeck.Validator
 
         private readonly IObjectDetector officialPrefabsDetector;
 
-        public Vket4RuleSetBase() : base()
+        public Vket5RuleSetBase() : base()
         {
             officialPrefabsDetector = new PrefabPartsDetector(
-                Vket4OfficialAssetData.AudioSourcePrefabGUIDs,
-                Vket4OfficialAssetData.AvatarPedestalPrefabGUIDs,
-                Vket4OfficialAssetData.ChairPrefabGUIDs,
-                Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs,
-                Vket4OfficialAssetData.CanvasPrefabGUIDs,
-                Vket4OfficialAssetData.PointLightProbeGUIDs);
+                Vket5OfficialAssetData.AudioSourcePrefabGUIDs,
+                Vket5OfficialAssetData.AvatarPedestalPrefabGUIDs,
+                Vket5OfficialAssetData.ChairPrefabGUIDs,
+                Vket5OfficialAssetData.PickupObjectSyncPrefabGUIDs,
+                Vket5OfficialAssetData.CanvasPrefabGUIDs,
+                Vket5OfficialAssetData.PointLightProbeGUIDs);
         }
 
         public IRule[] GetRules()
@@ -47,68 +47,68 @@ namespace VitDeck.Validator
             var requested = requestComponent ?? new DummyRequestComponent();
             var pickupObjectSyncUsesLimit = requested.PickupObjectSync > -1 ? requested.PickupObjectSync : PickupObjectSyncUsesLimit;
             var vrcTriggerUsesLimit = requested.VrcTrigger > -1 ? requested.VrcTrigger : VRCTriggerCountLimit;
-            var componentIgnorer = new Vket4ComponentIgnorer(requested);
-            var propertyIgnorer = new Vket4PropertyIgnorer(requested);
+            var componentIgnorer = new Vket5ComponentIgnorer(requested);
+            var propertyIgnorer = new Vket5PropertyIgnorer(requested);
 
             return new IRule[]
             {
 
-                new UnityVersionRule(LocalizedMessage.Get("Vket4RuleSetBase.UnityVersionRule.Title", "2018.4.20f1"), "2018.4.20f1"),
+                new UnityVersionRule(LocalizedMessage.Get("Vket5RuleSetBase.UnityVersionRule.Title", "2018.4.20f1"), "2018.4.20f1"),
 
-                new A02_VRCSDKVersionRule(LocalizedMessage.Get("Vket4RuleSetBase.VRCSDKVersionRule.Title"),
+                new A02_VRCSDKVersionRule(LocalizedMessage.Get("Vket5RuleSetBase.VRCSDKVersionRule.Title"),
                     new VRCSDKVersion("2020.01.14.10.39"),
                     "https://files.vrchat.cloud/sdk/VRCSDK2-2020.01.14.10.39.unitypackage"),
 
-                new A04_ExistInSubmitFolderRule(LocalizedMessage.Get("Vket4RuleSetBase.ExistInSubmitFolderRule.Title"), Vket4OfficialAssetData.GUIDs, targetFinder),
+                new A04_ExistInSubmitFolderRule(LocalizedMessage.Get("Vket5RuleSetBase.ExistInSubmitFolderRule.Title"), Vket5OfficialAssetData.GUIDs, targetFinder),
 
-                new AssetGuidBlacklistRule(LocalizedMessage.Get("Vket4RuleSetBase.OfficialAssetDontContainRule.Title"), Vket4OfficialAssetData.GUIDs),
+                new AssetGuidBlacklistRule(LocalizedMessage.Get("Vket5RuleSetBase.OfficialAssetDontContainRule.Title"), Vket5OfficialAssetData.GUIDs),
 
-                new AssetNamingRule(LocalizedMessage.Get("Vket4RuleSetBase.NameOfFileAndFolderRule.Title"), @"[a-zA-Z0-9 _\.\-\(\)]+"),
+                new AssetNamingRule(LocalizedMessage.Get("Vket5RuleSetBase.NameOfFileAndFolderRule.Title"), @"[a-zA-Z0-9 _\.\-\(\)]+"),
 
-                new AssetPathLengthRule(LocalizedMessage.Get("Vket4RuleSetBase.FilePathLengthLimitRule.Title", 184), 184),
+                new AssetPathLengthRule(LocalizedMessage.Get("Vket5RuleSetBase.FilePathLengthLimitRule.Title", 184), 184),
 
-                new AssetExtentionBlacklistRule(LocalizedMessage.Get("Vket4RuleSetBase.MeshFileTypeBlacklistRule.Title"),
+                new AssetExtentionBlacklistRule(LocalizedMessage.Get("Vket5RuleSetBase.MeshFileTypeBlacklistRule.Title"),
                                                 new string[]{".ma", ".mb", "max", "c4d", ".blend"}
                 ),
 
-                new ContainMatOrTexInAssetRule(LocalizedMessage.Get("Vket4RuleSetBase.ContainMatOrTexInAssetRule.Title")),
+                new ContainMatOrTexInAssetRule(LocalizedMessage.Get("Vket5RuleSetBase.ContainMatOrTexInAssetRule.Title")),
 
-                new FolderSizeRule(LocalizedMessage.Get("Vket4RuleSetBase.FolderSizeRule.Title"), FolderSizeLimit),
+                new FolderSizeRule(LocalizedMessage.Get("Vket5RuleSetBase.FolderSizeRule.Title"), FolderSizeLimit),
 
-                new C02_ExhibitStructureRule(LocalizedMessage.Get("Vket4RuleSetBase.ExhibitStructureRule.Title")),
+                new C02_ExhibitStructureRule(LocalizedMessage.Get("Vket5RuleSetBase.ExhibitStructureRule.Title")),
 
-                new C02_StaticFlagRule(LocalizedMessage.Get("Vket4RuleSetBase.StaticFlagsRule.Title")),
+                new C02_StaticFlagRule(LocalizedMessage.Get("Vket5RuleSetBase.StaticFlagsRule.Title")),
 
-                new BoothBoundsRule(LocalizedMessage.Get("Vket4RuleSetBase.BoothBoundsRule.Title"),
+                new BoothBoundsRule(LocalizedMessage.Get("Vket5RuleSetBase.BoothBoundsRule.Title"),
                     size: BoothSizeLimit,
                     margin: 0.01f),
 
                 new D04_AssetTypeLimitRule(
-                    LocalizedMessage.Get("Vket4RuleSetBase.MaterialLimitRule.Title", MaterialUsesLimit),
+                    LocalizedMessage.Get("Vket5RuleSetBase.MaterialLimitRule.Title", MaterialUsesLimit),
                     typeof(Material),
                     MaterialUsesLimit,
-                    Vket4OfficialAssetData.MaterialGUIDs),
+                    Vket5OfficialAssetData.MaterialGUIDs),
 
                 new D08_LightmapSizeLimitRule(
-                    LocalizedMessage.Get("Vket4RuleSetBase.LightMapsLimitRule.Title", LightmapCountLimit, 512),
+                    LocalizedMessage.Get("Vket5RuleSetBase.LightMapsLimitRule.Title", LightmapCountLimit, 512),
                     lightmapCountLimit: LightmapCountLimit,
                     lightmapResolutionLimit: 512),
 
-                new E05_GlobalIlluminationBakedRule(LocalizedMessage.Get("Vket4RuleSetBase.GlobalIlluminationBakedRule.Title")),
+                new E05_GlobalIlluminationBakedRule(LocalizedMessage.Get("Vket5RuleSetBase.GlobalIlluminationBakedRule.Title")),
 
-                new UsableComponentListRule(LocalizedMessage.Get("Vket4RuleSetBase.UsableComponentListRule.Title"),
+                new UsableComponentListRule(LocalizedMessage.Get("Vket5RuleSetBase.UsableComponentListRule.Title"),
                     GetComponentReferences(),
-                    ignorePrefabGUIDs: Vket4OfficialAssetData.GUIDs,
+                    ignorePrefabGUIDs: Vket5OfficialAssetData.GUIDs,
                     customIgnore: componentIgnorer,
                     unregisteredComponent: ValidationLevel.NEGOTIABLE),
 
-                new SkinnedMeshRendererRule(LocalizedMessage.Get("Vket4RuleSetBase.SkinnedMeshRendererRule.Title")),
+                new SkinnedMeshRendererRule(LocalizedMessage.Get("Vket5RuleSetBase.SkinnedMeshRendererRule.Title")),
 
-                new MeshRendererRule(LocalizedMessage.Get("Vket4RuleSetBase.MeshRendererRule.Title")),
+                new MeshRendererRule(LocalizedMessage.Get("Vket5RuleSetBase.MeshRendererRule.Title")),
 
-                new ReflectionProbeRule(LocalizedMessage.Get("Vket4RuleSetBase.ReflectionProbeRule.Title")),
+                new ReflectionProbeRule(LocalizedMessage.Get("Vket5RuleSetBase.ReflectionProbeRule.Title")),
 
-                new VRCTriggerConfigRule(LocalizedMessage.Get("Vket4RuleSetBase.VRCTriggerConfigRule.Title"),
+                new VRCTriggerConfigRule(LocalizedMessage.Get("Vket5RuleSetBase.VRCTriggerConfigRule.Title"),
                             new VRC_EventHandler.VrcBroadcastType []{
                                 VRC_EventHandler.VrcBroadcastType.Local },
                             new VRC_Trigger.TriggerType[] {
@@ -134,72 +134,72 @@ namespace VitDeck.Validator
                                 VRC_EventHandler.VrcEventType.AnimationIntMultiply,
                                 VRC_EventHandler.VrcEventType.AnimationIntSubtract,
                                 VRC_EventHandler.VrcEventType.AnimationTrigger},
-                            Vket4OfficialAssetData.GUIDs,
+                            Vket5OfficialAssetData.GUIDs,
                             propertyIgnorer),
 
-                new UseMeshColliderRule(LocalizedMessage.Get("Vket4RuleSetBase.UseMeshColliderRule.Title")),
+                new UseMeshColliderRule(LocalizedMessage.Get("Vket5RuleSetBase.UseMeshColliderRule.Title")),
 
-                new VRCTriggerCountLimitRule(LocalizedMessage.Get("Vket4RuleSetBase.VRCTriggerCountLimitRule.Title", vrcTriggerUsesLimit), vrcTriggerUsesLimit),
+                new VRCTriggerCountLimitRule(LocalizedMessage.Get("Vket5RuleSetBase.VRCTriggerCountLimitRule.Title", vrcTriggerUsesLimit), vrcTriggerUsesLimit),
 
-                new LightCountLimitRule(LocalizedMessage.Get("Vket4RuleSetBase.DirectionalLightLimitRule.Title"), UnityEngine.LightType.Directional, 0),
+                new LightCountLimitRule(LocalizedMessage.Get("Vket5RuleSetBase.DirectionalLightLimitRule.Title"), UnityEngine.LightType.Directional, 0),
 
-                new LightConfigRule(LocalizedMessage.Get("Vket4RuleSetBase.PointLightConfigRule.Title"), UnityEngine.LightType.Point, ApprovedPointLightConfig),
+                new LightConfigRule(LocalizedMessage.Get("Vket5RuleSetBase.PointLightConfigRule.Title"), UnityEngine.LightType.Point, ApprovedPointLightConfig),
 
-                new LightConfigRule(LocalizedMessage.Get("Vket4RuleSetBase.SpotLightConfigRule.Title"), UnityEngine.LightType.Spot, ApprovedSpotLightConfig),
+                new LightConfigRule(LocalizedMessage.Get("Vket5RuleSetBase.SpotLightConfigRule.Title"), UnityEngine.LightType.Spot, ApprovedSpotLightConfig),
 
-                new LightConfigRule(LocalizedMessage.Get("Vket4RuleSetBase.AreaLightConfigRule.Title"), UnityEngine.LightType.Area, ApprovedAreaLightConfig),
+                new LightConfigRule(LocalizedMessage.Get("Vket5RuleSetBase.AreaLightConfigRule.Title"), UnityEngine.LightType.Area, ApprovedAreaLightConfig),
 
                 new LightCountLimitRule(
-                    LocalizedMessage.Get("Vket4RuleSetBase.AreaLightLimitRule.Title", AreaLightUsesLimit),
+                    LocalizedMessage.Get("Vket5RuleSetBase.AreaLightLimitRule.Title", AreaLightUsesLimit),
                     UnityEngine.LightType.Area,
                     AreaLightUsesLimit),
 
-                new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.PointLightModeRule.Title"), UnityEngine.LightType.Point, unusablePointLightModes),
+                new UseLightModeRule(LocalizedMessage.Get("Vket5RuleSetBase.PointLightModeRule.Title"), UnityEngine.LightType.Point, unusablePointLightModes),
 
-                new UseLightModeRule(LocalizedMessage.Get("Vket4RuleSetBase.SpotLightModeRule.Title"), UnityEngine.LightType.Spot, unusableSpotLightModes),
+                new UseLightModeRule(LocalizedMessage.Get("Vket5RuleSetBase.SpotLightModeRule.Title"), UnityEngine.LightType.Spot, unusableSpotLightModes),
 
-                requested.DynamicCollider ? DummyRule.Get(LocalizedMessage.Get("Vket4RuleSetBase.AnimationMakesMoveCollidersRule.Title")) :
-                new AnimationMakesMoveCollidersRule(LocalizedMessage.Get("Vket4RuleSetBase.AnimationMakesMoveCollidersRule.Title")),
+                requested.DynamicCollider ? DummyRule.Get(LocalizedMessage.Get("Vket5RuleSetBase.AnimationMakesMoveCollidersRule.Title")) :
+                new AnimationMakesMoveCollidersRule(LocalizedMessage.Get("Vket5RuleSetBase.AnimationMakesMoveCollidersRule.Title")),
 
-                new F01_AnimationClipRule(LocalizedMessage.Get("Vket4RuleSetBase.F01_AnimationClipRule.Title")),
+                new F01_AnimationClipRule(LocalizedMessage.Get("Vket5RuleSetBase.F01_AnimationClipRule.Title")),
 
-                new F01_AnimationComponentRule(LocalizedMessage.Get("Vket4RuleSetBase.F01_AnimationComponentRule.Title"), officialPrefabsDetector),
+                new F01_AnimationComponentRule(LocalizedMessage.Get("Vket5RuleSetBase.F01_AnimationComponentRule.Title"), officialPrefabsDetector),
 
-                new F01_AnimatorComponentRule(LocalizedMessage.Get("Vket4RuleSetBase.F01_AnimatorComponentRule.Title"),
+                new F01_AnimatorComponentRule(LocalizedMessage.Get("Vket5RuleSetBase.F01_AnimatorComponentRule.Title"),
                     new System.Type[]{
                         typeof(VRC_Pickup),
                         typeof(VRC_ObjectSync)
                     },officialPrefabsDetector),
 
-                new F01_CanvasRenderModeRule(LocalizedMessage.Get("Vket4RuleSetBase.CanvasRenderModeRule.Title")),
+                new F01_CanvasRenderModeRule(LocalizedMessage.Get("Vket5RuleSetBase.CanvasRenderModeRule.Title")),
 
-                new F02_PickupObjectSyncPrefabRule(LocalizedMessage.Get("Vket4RuleSetBase.PickupObjectSyncRule.Title"), Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs),
+                new F02_PickupObjectSyncPrefabRule(LocalizedMessage.Get("Vket5RuleSetBase.PickupObjectSyncRule.Title"), Vket5OfficialAssetData.PickupObjectSyncPrefabGUIDs),
 
-                new F02_AvatarPedestalPrefabRule(LocalizedMessage.Get("Vket4RuleSetBase.AvatarPedestalPrefabRule.Title"), Vket4OfficialAssetData.AvatarPedestalPrefabGUIDs),
+                new F02_AvatarPedestalPrefabRule(LocalizedMessage.Get("Vket5RuleSetBase.AvatarPedestalPrefabRule.Title"), Vket5OfficialAssetData.AvatarPedestalPrefabGUIDs),
 
-                new F02_AudioSourcePrefabRule(LocalizedMessage.Get("Vket4RuleSetBase.AudioSourcePrefabRule.Title"),  Vket4OfficialAssetData.AudioSourcePrefabGUIDs),
+                new F02_AudioSourcePrefabRule(LocalizedMessage.Get("Vket5RuleSetBase.AudioSourcePrefabRule.Title"),  Vket5OfficialAssetData.AudioSourcePrefabGUIDs),
 
-                new F02_RigidbodyRule(LocalizedMessage.Get("Vket4RuleSetBase.F02_RigidbodyRule.Title"), propertyIgnorer),
+                new F02_RigidbodyRule(LocalizedMessage.Get("Vket5RuleSetBase.F02_RigidbodyRule.Title"), propertyIgnorer),
 
                 new F02_PrefabLimitRule(
-                    LocalizedMessage.Get("Vket4RuleSetBase.ChairPrefabLimitRule.Title", ChairPrefabUsesLimit),
-                    Vket4OfficialAssetData.ChairPrefabGUIDs,
+                    LocalizedMessage.Get("Vket5RuleSetBase.ChairPrefabLimitRule.Title", ChairPrefabUsesLimit),
+                    Vket5OfficialAssetData.ChairPrefabGUIDs,
                     ChairPrefabUsesLimit),
 
                 new F02_PrefabLimitRule(
-                    LocalizedMessage.Get("Vket4RuleSetBase.UnusabePrefabRule.Title", ChairPrefabUsesLimit),
-                    Vket4OfficialAssetData.VRCSDKPrefabGUIDs,
+                    LocalizedMessage.Get("Vket5RuleSetBase.UnusabePrefabRule.Title", ChairPrefabUsesLimit),
+                    Vket5OfficialAssetData.VRCSDKPrefabGUIDs,
                     0),
 
                 new F02_PrefabLimitRule(
-                    LocalizedMessage.Get("Vket4RuleSetBase.PickupObjectSyncPrefabLimitRule.Title", pickupObjectSyncUsesLimit),
-                    Vket4OfficialAssetData.PickupObjectSyncPrefabGUIDs,
+                    LocalizedMessage.Get("Vket5RuleSetBase.PickupObjectSyncPrefabLimitRule.Title", pickupObjectSyncUsesLimit),
+                    Vket5OfficialAssetData.PickupObjectSyncPrefabGUIDs,
                     pickupObjectSyncUsesLimit,
                     negotiable: true),
 
-                new F02_VideoPlayerComponentRule(LocalizedMessage.Get("Vket4RuleSetBase.VideoPlayerComponentRule.Title")),
+                new F02_VideoPlayerComponentRule(LocalizedMessage.Get("Vket5RuleSetBase.VideoPlayerComponentRule.Title")),
 
-                new F01_AnimatorComponentMaxCountRule(LocalizedMessage.Get("Vket4RuleSetBase.AnimatorComponentMaxCountRule.Title"), limit: 50)
+                new F01_AnimatorComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.AnimatorComponentMaxCountRule.Title"), limit: 50)
             };
         }
 

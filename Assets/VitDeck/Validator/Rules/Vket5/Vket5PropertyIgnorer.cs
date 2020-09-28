@@ -6,12 +6,12 @@ using VketTools.Utilities;
 
 namespace VitDeck.Validator
 {
-    internal class Vket4PropertyIgnorer : ICustomPropertyIgnorer
+    internal class Vket5PropertyIgnorer : ICustomPropertyIgnorer
     {
         private readonly RequestComponent requested;
         private readonly HashSet<string> properties;
 
-        public Vket4PropertyIgnorer(RequestComponent requested)
+        public Vket5PropertyIgnorer(RequestComponent requested)
         {
             this.requested = requested;
             properties = new HashSet<string>(requested.Propertys);

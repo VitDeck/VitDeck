@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace VitDeck.Validator
 {
-    public class ConceptWorldRuleSet : Vket4RuleSetBase
+    public class ConceptWorldRuleSet : Vket5RuleSetBase
     {
         public override string RuleSetName
         {
             get
             {
-                return "Vket4 - ConceptWorld";
+                return "Vket5 - ConceptWorld";
             }
         }
 

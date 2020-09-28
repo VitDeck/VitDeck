@@ -5,11 +5,11 @@ using VRCSDK2;
 
 namespace VitDeck.Validator
 {
-    public class Vket4ComponentIgnorer : ICustomComponentIgnorer
+    public class Vket5ComponentIgnorer : ICustomComponentIgnorer
     {
         private readonly RequestComponent requestComponent;
         private readonly HashSet<System.Type> customIgnoredTypes;
-        public Vket4ComponentIgnorer(RequestComponent requestComponent)
+        public Vket5ComponentIgnorer(RequestComponent requestComponent)
         {
             this.requestComponent = requestComponent;
             this.customIgnoredTypes = new HashSet<System.Type>(requestComponent.Components);

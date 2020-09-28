@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace VitDeck.Validator
 {
-    public class DefaultCubeRuleSet : Vket4RuleSetBase
+    public class DefaultCubeRuleSet : Vket5RuleSetBase
     {
         public override string RuleSetName
         {
             get
             {
-                return "Vket4 - DefaultCube";
+                return "Vket5 - DefaultCube";
             }
         }
 

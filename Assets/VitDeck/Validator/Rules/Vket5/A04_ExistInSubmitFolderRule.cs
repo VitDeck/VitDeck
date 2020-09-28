@@ -15,8 +15,8 @@ namespace VitDeck.Validator
     {
         // 入稿フォルダに含めることを許可されていないGUID
         private readonly HashSet<string> unauthorizedIDSet;
-        private readonly Vket4TargetFinder targetFinder;
-        public A04_ExistInSubmitFolderRule(string name, string[] guids, Vket4TargetFinder targetFinder) : base(name)
+        private readonly Vket5TargetFinder targetFinder;
+        public A04_ExistInSubmitFolderRule(string name, string[] guids, Vket5TargetFinder targetFinder) : base(name)
         {
             unauthorizedIDSet = new HashSet<string>(guids);
             this.targetFinder = targetFinder;

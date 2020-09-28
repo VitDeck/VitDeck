@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace VitDeck.Validator
 {
-    public static class Vket4OfficialAssetData
+    public static class Vket5OfficialAssetData
     {
         /// <summary>
         /// 公式配布されたアセット及び前提となるアセットのGUID
