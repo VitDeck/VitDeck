@@ -290,12 +290,50 @@ MonoBehaviour:
     Value: "\u4F7F\u7528\u500B\u6570\u3092\u6E1B\u3089\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
   - Key: F02_PrefabLimitRule.Overuse.SolutionURL
     Value: 
+  - Key: F02_VideoPlayerComponentRule.DefaultDisabled
+    Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306F\u521D\u671F\u72B6\u614B\u3067Disabled\u306B\u3059\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002"
+  - Key: F02_VideoPlayerComponentRule.DefaultDisabled.Solution
+    Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u30C1\u30A7\u30C3\u30AF\u3092\u5916\u3057\u3066\u304A\u304D\u3001\u30A2\u30CB\u30E1\u30FC\u30B7\u30E7\u30F3\u3084VRC_Trigger\u306ESetComponentActive\u306A\u3069\u3067\u6709\u52B9\u5316\u3059\u308B\u3088\u3046\u306B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
+  - Key: Vket5RuleSetBase.F02_VideoPlayerComponentMaxCountRule.Title
+    Value: "VideoPlayer\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u306F\u5236\u9650\u306B\u53CE\u3081\u308B\u3053\u3068"
+  - Key: F02_VideoPlayerComponentMaxCountRule.Exceeded
+    Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u304C{0}\u500B\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002({1}\u500B)"
+  - Key: F02_VideoPlayerComponentMaxCountRule.Exceeded.Solution
+    Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u3092\u6E1B\u3089\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
   - Key: F02_VideoPlayerComponentRule.DontUseURL
     Value: "VideoPlayer\u306FURL\u3092\u4F7F\u7528\u3059\u308B\u3053\u3068\u306F\u51FA\u6765\u307E\u305B\u3093\u3002"
   - Key: Vket5RuleSetBase.CanvasRenderModeRule.Title
     Value: "[F-1]Canvas\u306FWorldSpace\u306B\u8A2D\u5B9A\u3059\u308B\u3053\u3068"
   - Key: F01_CanvasRenderModeRule.CanvasIsNotInWorldSpace
     Value: "{0}\u306B\u304A\u3044\u3066Canvas\u306ERenderMode\u304CWorldSpace\u306B\u306A\u3063\u3066\u3044\u307E\u305B\u3093\u3002"
+  - Key: Vket5RuleSetBase.F01_CameraComponentRule.Title
+    Value: "Camera\u3092\u4F7F\u7528\u3059\u308B\u969B\u306F\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
+  - Key: F01_CameraComponentRule.DefaultDisabled
+    Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306F\u521D\u671F\u72B6\u614B\u3067Disabled\u306B\u3059\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002"
+  - Key: F01_CameraComponentRule.DefaultDisabled.Solution
+    Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u30C1\u30A7\u30C3\u30AF\u3092\u5916\u3057\u3066\u304A\u304D\u3001\u30A2\u30CB\u30E1\u30FC\u30B7\u30E7\u30F3\u3084VRC_Trigger\u306ESetComponentActive\u306A\u3069\u3067\u6709\u52B9\u5316\u3059\u308B\u3088\u3046\u306B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
+  - Key: F01_CameraComponentRule.MaxRenderTextureSize
+    Value: "RenderTexture\u306E\u30B5\u30A4\u30BA\u304C\u4E0A\u9650({0}px\xD7{1}px)\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002({2}px\xD7{3}px)"
+  - Key: F01_CameraComponentRule.MaxRenderTextureSize.Solution
+    Value: "RenderTexture\u30A2\u30BB\u30C3\u30C8\u306E\u30A4\u30F3\u30B9\u30DA\u30AF\u30BF\u30FC\u304B\u3089\u3001\u30B5\u30A4\u30BA\u3092\u5236\u9650\u5024\u4EE5\u4E0B\u306B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
+  - Key: Vket5RuleSetBase.F01_CameraComponentMaxCountRule.Title
+    Value: "Camera\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u306F\u5236\u9650\u306B\u53CE\u3081\u308B\u3053\u3068"
+  - Key: F01_CameraComponentMaxCountRule.Exceeded
+    Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u304C{0}\u500B\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002({1}\u500B)"
+  - Key: F01_CameraComponentMaxCountRule.Exceeded.Solution
+    Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u3092\u6E1B\u3089\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
+  - Key: Vket5RuleSetBase.F01_ProjectorComponentRule.Title
+    Value: "Projector\u3092\u4F7F\u7528\u3059\u308B\u969B\u306F\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
+  - Key: F01_ProjectorComponentRule.DefaultDisabled
+    Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306F\u521D\u671F\u72B6\u614B\u3067Disabled\u306B\u3059\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002"
+  - Key: F01_ProjectorComponentRule.DefaultDisabled.Solution
+    Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u30C1\u30A7\u30C3\u30AF\u3092\u5916\u3057\u3066\u304A\u304D\u3001\u30A2\u30CB\u30E1\u30FC\u30B7\u30E7\u30F3\u3084VRC_Trigger\u306ESetComponentActive\u306A\u3069\u3067\u6709\u52B9\u5316\u3059\u308B\u3088\u3046\u306B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
+  - Key: Vket5RuleSetBase.F01_ProjectorComponentMaxCountRule.Title
+    Value: "Projector\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u306F\u5236\u9650\u306B\u53CE\u3081\u308B\u3053\u3068"
+  - Key: F01_ProjectorComponentMaxCountRule.Exceeded
+    Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u304C{0}\u500B\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002({1}\u500B)"
+  - Key: F01_ProjectorComponentMaxCountRule.Exceeded.Solution
+    Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u3092\u6E1B\u3089\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
   - Key: Vket5RuleSetBase.AnimatorComponentMaxCountRule.Title
     Value: "[F-1]Animator\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u306F\u5236\u9650\u306B\u53CE\u3081\u308B\u3053\u3068"
   - Key: F01_AnimatorComponentMaxCountRule.Exceeded
@@ -307,17 +345,17 @@ MonoBehaviour:
   - Key: AnimationMakesMoveCollidersRule.WillMakesMove.Solution
     Value: "Collider\u3092\u524A\u9664\u3059\u308B\u304B\u3001\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3092Animation\u306E\u5BFE\u8C61\u304B\u3089\u5916\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
   - Key: Vket5RuleSetBase.F01_AnimationClipRule.Title
-    Value: "[F-1]AnimationClip\u306F\u65E2\u5B9A\u306E\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
+    Value: "[F-1]AnimationClip\u306F\u898F\u5B9A\u306E\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
   - Key: F01_AnimationClipRule.DontChangeMaterialInAnimation
     Value: "AnimationClip\u5185\u3067Material\u306E\u5909\u66F4\u306F\u51FA\u6765\u307E\u305B\u3093\u3002"
   - Key: F01_AnimationClipRule.DontAccessParentObject
     Value: "AnimationClip\u5185\u3067../\u3092\u542B\u3093\u3060\u30D1\u30B9\u3092\u5229\u7528\u3059\u308B\u4E8B\u306F\u51FA\u6765\u307E\u305B\u3093\u3002"
   - Key: Vket5RuleSetBase.F01_AnimationComponentRule.Title
-    Value: "[F-1]AnimationComponent\u306F\u65E2\u5B9A\u306E\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
+    Value: "[F-1]AnimationComponent\u306F\u898F\u5B9A\u306E\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
   - Key: F01_AnimationComponentRule.ShouldNotUseAlwaysAnimate
     Value: "\u4E0D\u5177\u5408\u304C\u51FA\u308B\u5834\u5408\u3092\u9664\u304D\u3001CullingType\u306FAlways\u3092\u907F\u3051\u3066\u4E0B\u3055\u3044\u3002"
   - Key: Vket5RuleSetBase.F01_AnimatorComponentRule.Title
-    Value: "[F-1]AnimatorComponent\u306F\u65E2\u5B9A\u306E\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
+    Value: "[F-1]AnimatorComponent\u306F\u898F\u5B9A\u306E\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
   - Key: F01_AnimatorComponentRule.ShouldNotUseAlwaysAnimate
     Value: "\u4E0D\u5177\u5408\u304C\u51FA\u308B\u5834\u5408\u3092\u9664\u304D\u3001CullingMode\u306FAlways\u3092\u907F\u3051\u3066\u4E0B\u3055\u3044\u3002"
   - Key: F01_AnimatorComponentRule.ShouldNotUseApplyRootMotion

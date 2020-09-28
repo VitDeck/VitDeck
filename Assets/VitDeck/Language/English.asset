@@ -168,8 +168,8 @@ MonoBehaviour:
   - Key: C02_ExhibitStructureRule.RootObjectNotFound
     Value: Root object {0} not found
   - Key: C02_ExhibitStructureRule.RootObjectNotFound.Solution
-    Value: 'Please create empty gameobject named [{0}] and parent it to the exhibit
-      root object  '
+    Value: Please create empty gameobject named [{0}] and parent it to the exhibit
+      root object
   - Key: C02_ExhibitStructureRule.UnauthorizedComponent
     Value: Unauthorized component found attached to root object {0}
   - Key: C02_ExhibitStructureRule.UnauthorizedComponent.Solution

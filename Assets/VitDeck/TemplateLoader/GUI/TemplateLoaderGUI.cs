@@ -106,13 +106,17 @@ namespace VitDeck.TemplateLoader.GUI
                 }
                 //Replace List
                 EditorGUILayout.LabelField("", UnityEngine.GUI.skin.horizontalSlider);
-                if (templateProperty.replaceList != null)
+                EditorGUI.BeginDisabledGroup(true);
                 {
-                    foreach (var replace in templateProperty.replaceList)
+                    if (templateProperty.replaceList != null)
                     {
-                        replaceStringList[replace.ID] = EditorGUILayout.TextField(replace.label, replaceStringList[replace.ID]);
+                        foreach (var replace in templateProperty.replaceList)
+                        {
+                            replaceStringList[replace.ID] = EditorGUILayout.TextField(replace.label, replaceStringList[replace.ID]);
+                        }
                     }
                 }
+                EditorGUI.EndDisabledGroup();
                 EditorGUI.BeginDisabledGroup(!CheckAllReplaceFieldFilled(replaceStringList));
                 if (GUILayout.Button("Load"))
                 {
