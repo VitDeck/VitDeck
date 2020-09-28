@@ -44,3 +44,7 @@ Assets/VitDeck/Config/UserSettings.asset.meta
 
 #Template loader temporary folder
 Assets/VitDeck/Temporary*
+
+#VRChat SDK2
+Assets/VRCSDK*
+Assets/VRChat Examples*
