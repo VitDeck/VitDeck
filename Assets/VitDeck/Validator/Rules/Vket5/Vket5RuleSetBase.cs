@@ -1,6 +1,5 @@
 using UnityEngine;
 using VitDeck.Language;
-using VketTools.Utilities;
 
 #if VRC_SDK_VRCSDK3
 using VRC.SDKBase;
