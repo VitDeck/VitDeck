@@ -8,10 +8,8 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestValidate()
         {
-            var grupeName = "カメラ";
             var rule = new ComponentWhitelistRule("コンポーネントホワイトリストルール",
                             new ComponentReference[] { new ComponentReference("ライティング", new string[] { "UnityEngine.Light" }, ValidationLevel.ALLOW),
-                                                       new ComponentReference(grupeName, new string[] { "UnityEngine.Camera" }, ValidationLevel.NEGOTIABLE),
                                                        new ComponentReference("Jointの使用禁止", new string[] { "UnityEngine.CharacterJoint",
                                                                                                                 "UnityEngine.ConfigurableJoint",
                                                                                                                 "UnityEngine.FixedJoint",
@@ -22,13 +20,9 @@ namespace VitDeck.Validator.Test
             var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("コンポーネントホワイトリストルール"));
             Assert.That(result.Issues.Count, Is.EqualTo(3));
-            Assert.That(result.Issues[0].level, Is.EqualTo(IssueLevel.Warning));
+            Assert.That(result.Issues[0].level, Is.EqualTo(IssueLevel.Error));
             Assert.That(result.Issues[0].target.name, Is.EqualTo("Main Camera"));
-            Assert.That(result.Issues[0].message, Is.EqualTo(string.Format("{0}:Cameraを使用する場合は事前に運営に問い合わせてください。", grupeName)));
-            Assert.That(result.Issues[0].solution, Is.Empty);
-            Assert.That(result.Issues[0].solutionURL, Is.Empty);
-            Assert.That(result.Issues[1].level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(result.Issues[1].target.name, Is.EqualTo("Main Camera"));
+            Assert.That(result.Issues[0].message, Is.EqualTo(string.Format("{0}は使用可能なコンポーネントリストに登録されていません。", "Camera")));
             Assert.That(result.Issues[1].message, Is.EqualTo(string.Format("{0}は使用可能なコンポーネントリストに登録されていません。", "FlareLayer")));
             Assert.That(result.Issues[2].message, Is.EqualTo(string.Format("{0}は使用可能なコンポーネントリストに登録されていません。", "AudioListener")));
         }
