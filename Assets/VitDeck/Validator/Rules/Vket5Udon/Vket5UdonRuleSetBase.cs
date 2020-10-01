@@ -26,7 +26,8 @@ namespace VitDeck.Validator
 
         protected readonly long MegaByte = 1048576;
 
-        public IValidationTargetFinder TargetFinder { get { return new Vket5TargetFinder(); } }
+        private readonly Vket5TargetFinder targetFinder = new Vket5TargetFinder();
+        public IValidationTargetFinder TargetFinder => targetFinder;
 
         private readonly IObjectDetector officialPrefabsDetector;
 
@@ -54,7 +55,7 @@ namespace VitDeck.Validator
                     new VRCSDKVersion("2020.05.06.12.14"),
                     "https://files.vrchat.cloud/sdk/VRCSDK3-WORLD-2020.08.07.18.18_Public.unitypackage"),
 
-                new A04_ExistInSubmitFolderRule(LocalizedMessage.Get("Vket5RuleSetBase.ExistInSubmitFolderRule.Title"), Vket5UdonOfficialAssetData.GUIDs),
+                new A04_ExistInSubmitFolderRule(LocalizedMessage.Get("Vket5RuleSetBase.ExistInSubmitFolderRule.Title"), Vket5UdonOfficialAssetData.GUIDs, targetFinder),
 
                 new AssetGuidBlacklistRule(LocalizedMessage.Get("Vket5RuleSetBase.OfficialAssetDontContainRule.Title"), Vket5UdonOfficialAssetData.GUIDs),
 
