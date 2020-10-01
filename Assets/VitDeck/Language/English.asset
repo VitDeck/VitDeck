@@ -591,3 +591,11 @@ MonoBehaviour:
     Value: 'UdonAssembly function [{0}] has invalid arguments. : {1} ({2})'
   - Key: UdonAssemblyPhysicsCastFunctionRule.InvalidArguments.Solution
     Value: 'Set arguments {1} in the function {0}.'
+  - Key: UdonAssemblyPhysicsCastFunctionRule.MaxDistanceError
+    Value: 'UdonAssembly function [{0}] has invalid argument value _maxDistance ({3}). : {1} ({2})'
+  - Key: UdonAssemblyPhysicsCastFunctionRule.MaxDistanceError.Solution
+    Value: 'Set argument {1} below {2} as const _maxDistance in the function {0}.'
+  - Key: UdonAssemblyPhysicsCastFunctionRule.LayerMaskError
+    Value: 'UdonAssembly function [{0}] has invalid argument value _layerMask ({3}). : {1} ({2})'
+  - Key: UdonAssemblyPhysicsCastFunctionRule.LayerMaskError.Solution
+    Value: 'Set argument {1} {2} as const _layerMask in the function {0}.'

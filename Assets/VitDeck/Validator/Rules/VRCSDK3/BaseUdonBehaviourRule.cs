@@ -84,13 +84,8 @@ namespace VitDeck.Validator
         /// <returns>VRC.Udon.Graph.UdonGraphData</returns>
         protected static UdonGraphData GetGraphData(UdonBehaviour component)
         {
-            if (component.programSource is UdonGraphProgramAsset)
-            {
-                var programAsset = component.programSource as UdonGraphProgramAsset;
-                return programAsset.GetGraphData();
-            }
-
-            return null;
+            var programAsset = component.programSource as UdonGraphProgramAsset;
+            return programAsset?.GetGraphData();
         }
     }
 }

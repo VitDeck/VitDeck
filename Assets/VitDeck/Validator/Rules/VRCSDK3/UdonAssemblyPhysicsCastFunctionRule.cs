@@ -1,9 +1,12 @@
 #if VRC_SDK_VRCSDK3
+using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 using VitDeck.Language;
 using VRC.Udon;
+using VRC.Udon.Common.Interfaces;
 
 namespace VitDeck.Validator
 {
@@ -17,8 +20,15 @@ namespace VitDeck.Validator
     /// </remarks>
     internal class UdonAssemblyPhysicsCastFunctionRule : BaseUdonBehaviourRule
     {
+        private const float _maxDistance = 10.0f; // 0.0f < x <= 10.0f あれば任意
+        private const int _layerMask = 8388608;  // Layer23 mask (固定値)
+
         private readonly UdonAssemblyFunctionEssentialArgumentReference[] references;
 
+        public enum AssemblyArgumentReferenceError
+        {
+            NoErrors, InvalidArguments, MaxDistanceError, LayerMaskError
+        }
 
         private readonly HashSet<string> ignorePrefabs;
 
@@ -52,6 +62,7 @@ namespace VitDeck.Validator
 
             // プログラム
             var program = GetUdonProgram(component);
+            var heap = program?.Heap;
 
             // コード
             var code = GetDisassembleCode(program);
@@ -59,23 +70,61 @@ namespace VitDeck.Validator
             // 探索
             var rows = code.Replace("\r\n","\n").Split(new[]{'\n','\r'});
             var rowNum = 1;
+            List<uint> pushStack = new List<uint>();
             foreach (var row in rows)
             {
+                var assembly = row.Split(' ');
                 foreach (var reference in references)
                 {
-                    if (reference != null && reference.hasInvalidArguments(row))
+                    // ターゲットの関数検索
+                    if (reference == null || !reference.ExistsTargetFunction(row)) continue;
+                    if (reference.ExistsEssentialArguments(row))
+                    {
+                        // エラーの分類
+                        var _error = CheckArgumentValues(heap, pushStack, assembly[2].Trim('"'), reference.essentialArgument, out var detail);
+                        switch (_error)
+                        {
+                            case AssemblyArgumentReferenceError.InvalidArguments:
+                                AddIssue(new Issue(component, IssueLevel.Error,
+                                    LocalizedMessage.Get("UdonAssemblyPhysicsCastFunctionRule.InvalidArguments", reference.name, row, rowNum),
+                                    LocalizedMessage.Get("UdonAssemblyPhysicsCastFunctionRule.InvalidArguments.Solution", reference.name, reference.essentialsName),
+                                    string.Empty));
+                                break;
+                            case AssemblyArgumentReferenceError.MaxDistanceError:
+                                AddIssue(new Issue(component, IssueLevel.Error,
+                                    LocalizedMessage.Get("UdonAssemblyPhysicsCastFunctionRule.MaxDistanceError", reference.name, row, rowNum, detail),
+                                    LocalizedMessage.Get("UdonAssemblyPhysicsCastFunctionRule.MaxDistanceError.Solution", reference.name, reference.essentialsName, _maxDistance),
+                                    string.Empty));
+                                break;
+                            case AssemblyArgumentReferenceError.LayerMaskError:
+                                AddIssue(new Issue(component, IssueLevel.Error,
+                                    LocalizedMessage.Get("UdonAssemblyPhysicsCastFunctionRule.LayerMaskError", reference.name, row, rowNum, detail),
+                                    LocalizedMessage.Get("UdonAssemblyPhysicsCastFunctionRule.LayerMaskError.Solution", reference.name, reference.essentialsName, _layerMask),
+                                    string.Empty));
+                                break;
+                        }
+                    }
+                    else
                     {
                         AddIssue(new Issue(component, IssueLevel.Error,
                             LocalizedMessage.Get("UdonAssemblyPhysicsCastFunctionRule.InvalidArguments", reference.name, row, rowNum),
-                        LocalizedMessage.Get("UdonAssemblyPhysicsCastFunctionRule.InvalidArguments.Solution", reference.name, reference.essentialsName),
+                            LocalizedMessage.Get("UdonAssemblyPhysicsCastFunctionRule.InvalidArguments.Solution", reference.name, reference.essentialsName),
                             string.Empty));
                     }
                 }
 
+                // PUSHスタックを集める
+                if (assembly[1] == "PUSH,")
+                {
+                    pushStack.Add( Convert.ToUInt32(assembly[2].Trim(), 16));
+                }
+                else
+                {
+                    pushStack.Clear();
+                }
                 rowNum++;
             }
         }
-
 
         private bool IsIgnoredPrefab(GameObject obj)
         {
@@ -93,6 +142,59 @@ namespace VitDeck.Validator
                 return true;
             }
             return false;
+        }
+
+        private AssemblyArgumentReferenceError CheckArgumentValues(IUdonHeap heap, List<uint> stack, string assembly, string arguments, out string detail)
+        {
+            var desiredArgs = arguments.Trim('_').Split('_');
+            var phrases = Regex.Split(assembly, "__");
+            var args = phrases[2].Split('_');
+            // 引数の構造的に最後の型一致が求める引数になる Physics.*Cast の引数構造がある前提
+            var hit = Array.LastIndexOf(args, desiredArgs[0]);
+            if (desiredArgs.Length == 2)
+            {
+                // *Cast は 2引数セットで揃っている
+                if (args[hit + 1] == desiredArgs[1])
+                {
+                    // 見つかった
+                    var maxDistance = heap.GetHeapVariable<float>(stack[hit]); // distance
+                    var layerMask = heap.GetHeapVariable<int>(stack[hit + 1]); // layermask
+                    if (maxDistance > _maxDistance)
+                    {
+                        // MaxDistanceエラー
+                        detail = maxDistance.ToString();
+                        return AssemblyArgumentReferenceError.MaxDistanceError;
+                    }
+
+                    if (layerMask != _layerMask)
+                    {
+                        // layerMaskエラー
+                        detail = layerMask.ToString();
+                        return AssemblyArgumentReferenceError.LayerMaskError;
+                    }
+                }
+                else
+                {
+                    // 引数エラー
+                    detail = "";
+                    return AssemblyArgumentReferenceError.InvalidArguments;
+                }
+            }
+            else
+            {
+                // LineCastの場合のみ
+                var layerMask = heap.GetHeapVariable<int>(stack[hit]); // layermask
+                if (layerMask != _layerMask)
+                {
+                    // layerMaskエラー
+                    detail = layerMask.ToString();
+                    return AssemblyArgumentReferenceError.LayerMaskError;
+                }
+            }
+
+            // 何もない
+            detail = "";
+            return AssemblyArgumentReferenceError.NoErrors;
         }
     }
 }

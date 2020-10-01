@@ -29,13 +29,22 @@ namespace VitDeck.Validator
             this.essentialArgument = essentialArgument;
         }
         /// <summary>
-        /// 引数のアセンブリが対象に含まれるか調べる。
+        /// 関数が対象のアセンブリに含まれるか調べる。
+        /// </summary>
+        /// <param name="code">調査対象のアセンブリコード</param>
+        /// <returns>存在する場合はtrueを返す</returns>
+        public bool ExistsTargetFunction(string code)
+        {
+            return Array.Exists(fullNames, name => code.IndexOf(name, StringComparison.Ordinal) != -1);
+        }
+        /// <summary>
+        /// 必須引数が対象のアセンブリに含まれるか調べる。
         /// </summary>
         /// <param name="code">一致するか調べるアセンブリ</param>
         /// <returns>存在する場合はtrueを返す</returns>
-        public bool hasInvalidArguments(string code)
+        public bool ExistsEssentialArguments(string code)
         {
-            return (Array.Exists(fullNames, name => code.IndexOf(name) != -1) && code.IndexOf(essentialArgument) == -1);
+            return code.IndexOf(essentialArgument, StringComparison.Ordinal) != -1;
         }
     }
 }
