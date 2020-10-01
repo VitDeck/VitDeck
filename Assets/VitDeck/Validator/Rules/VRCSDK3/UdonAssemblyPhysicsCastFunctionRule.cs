@@ -11,12 +11,12 @@ using VRC.Udon.Common.Interfaces;
 namespace VitDeck.Validator
 {
     /// <summary>
-    /// UdonAssemblyの中で使用禁止処理の有無を検証する。
+    /// PhysicsクラスのCast関数 layerMaskを設定し、レイヤー23以外のコライダを無視するようにする, maxDistanceは最長で10メートルまで
     /// </summary>
     /// <remarks>
-    /// 複数のアセンブリリストを持ち、リストの設定に応じて許可/許否/要申請を決定します。
-    /// また、プレハブをGUIDで与えることで、そのプレハブに元から追加してあるコンポーネントを許可されているものとして無視します。
-    /// UsableComponentListRule と同じ使い方です。
+    /// UdonAssemblyを調査し、特定の関数の引数が使用されているか、正しい値が設定されているかを調査します。
+    /// プレハブのGUIDを与えることで、そのプレハブに元から追加してあるコンポーネントを許可されているものとして無視します。
+    /// 値の確認は定数のみ UdonSharpで定義しているときは private const で UdonNodeで定義している場合は値を直接指定する方法のみサポート
     /// </remarks>
     internal class UdonAssemblyPhysicsCastFunctionRule : BaseUdonBehaviourRule
     {
