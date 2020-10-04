@@ -53,7 +53,9 @@ namespace VitDeck.Validator.GUI
         private bool isOpenResultLogArea;
         private bool isOpenMessageArea;
 
-        //[MenuItem(prefix + "Check Rule", priority = 101)]
+#if !VITDECK_HIDE_MENUITEM
+        [MenuItem(prefix + "Check Rule", priority = 101)]
+#endif
         static void Open()
         {
             window = GetWindow<ValidatorWindow>(false, "VitDeck");
