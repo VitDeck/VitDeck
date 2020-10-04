@@ -1470,10 +1470,6 @@ namespace VitDeck.Validator
 
         };
 
-        public static string[] ChairPrefabGUIDs = new string[]
-        {
-        };
-
         public static string[] PickupObjectSyncPrefabGUIDs = new string[]
         {
             "304812fb2352c7c419581d8f68b23f94",  // Assets/VketAssets/UdonPrefabs/Udon_PickupObjectSync/PickupObjectSync.prefab
@@ -1490,6 +1486,10 @@ namespace VitDeck.Validator
             "d7a2d6aa4218cdd45854cd81900deba6",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/AvatarPedestal_Default_L.prefab
             "8134e8c0ab5943a479b31c509f2325fb",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/AvatarPedestal_Default_M.prefab
             "fb107661b9b479d4fa95452f7fd46426",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/AvatarPedestal_Default_S.prefab
+        };
+
+        public static string[] UdonBehaviourPrefabGUIDs = new string[]
+        {
         };
 
         public static string[] AudioSourcePrefabGUIDs = new string[]

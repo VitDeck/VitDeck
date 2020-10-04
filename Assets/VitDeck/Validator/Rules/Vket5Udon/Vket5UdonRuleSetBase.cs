@@ -6,6 +6,7 @@ using VRC.SDK3;
 using VRC.SDK3.Components;
 using VRC.SDK3.Editor;
 using VRC.SDKBase;
+using VRC.Udon;
 
 namespace VitDeck.Validator
 {
@@ -25,7 +26,8 @@ namespace VitDeck.Validator
 
         protected readonly long MegaByte = 1048576;
 
-        public IValidationTargetFinder TargetFinder { get { return new Vket5TargetFinder(); } }
+        private readonly Vket5TargetFinder targetFinder = new Vket5TargetFinder();
+        public IValidationTargetFinder TargetFinder => targetFinder;
 
         private readonly IObjectDetector officialPrefabsDetector;
 
@@ -34,10 +36,10 @@ namespace VitDeck.Validator
             officialPrefabsDetector = new PrefabPartsDetector(
                 Vket5UdonOfficialAssetData.AudioSourcePrefabGUIDs,
                 Vket5UdonOfficialAssetData.AvatarPedestalPrefabGUIDs,
-                Vket5UdonOfficialAssetData.ChairPrefabGUIDs,
                 Vket5UdonOfficialAssetData.PickupObjectSyncPrefabGUIDs,
                 Vket5UdonOfficialAssetData.CanvasPrefabGUIDs,
-                Vket5UdonOfficialAssetData.PointLightProbeGUIDs);
+                Vket5UdonOfficialAssetData.PointLightProbeGUIDs,
+                Vket5UdonOfficialAssetData.UdonBehaviourPrefabGUIDs);
         }
 
         public IRule[] GetRules()
@@ -53,7 +55,7 @@ namespace VitDeck.Validator
                     new VRCSDKVersion("2020.05.06.12.14"),
                     "https://files.vrchat.cloud/sdk/VRCSDK3-WORLD-2020.08.07.18.18_Public.unitypackage"),
 
-                new A04_ExistInSubmitFolderRule(LocalizedMessage.Get("Vket5RuleSetBase.ExistInSubmitFolderRule.Title"), Vket5UdonOfficialAssetData.GUIDs),
+                new A04_ExistInSubmitFolderRule(LocalizedMessage.Get("Vket5RuleSetBase.ExistInSubmitFolderRule.Title"), Vket5UdonOfficialAssetData.GUIDs, targetFinder),
 
                 new AssetGuidBlacklistRule(LocalizedMessage.Get("Vket5RuleSetBase.OfficialAssetDontContainRule.Title"), Vket5UdonOfficialAssetData.GUIDs),
 
@@ -149,13 +151,6 @@ namespace VitDeck.Validator
 
                 new F02_RigidbodyRule(LocalizedMessage.Get("Vket5RuleSetBase.F02_RigidbodyRule.Title")),
 
-                //// UdonCube用のChairPrefab待ち(もしくは自前で実装を許す)
-                // new F02_PrefabLimitRule(
-                //     LocalizedMessage.Get("Vket5RuleSetBase.ChairPrefabLimitRule.Title", ChairPrefabUsesLimit),
-                //     Vket5UdonOfficialAssetData.ChairPrefabGUIDs,
-                //     ChairPrefabUsesLimit),
-
-                
                 new F02_PrefabLimitRule(
                     LocalizedMessage.Get("Vket5RuleSetBase.UnusabePrefabRule.Title", ChairPrefabUsesLimit),
                     Vket5UdonOfficialAssetData.VRCSDKPrefabGUIDs,
@@ -172,30 +167,58 @@ namespace VitDeck.Validator
                 //// IN SDK3 Video Player is suspended.
                 // new F02_VideoPlayerComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.F02_VideoPlayerComponentMaxCountRule.Title"), limit: 1),
 
-                new F01_AnimatorComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.AnimatorComponentMaxCountRule.Title"), limit: 50)
+                new F01_AnimatorComponentMaxCountRule(LocalizedMessage.Get("Vket5RuleSetBase.AnimatorComponentMaxCountRule.Title"), limit: 50),
 
                 // Udon Behaviour
-                // ToDo: UdonBehaviourを含むオブジェクト、UdonBehaviourによって操作を行うオブジェクトは全て入稿ルール C.Scene内階層規定におけるDynamicオブジェクトの階層下に入れてください
+                // UdonBehaviourを含むオブジェクト、UdonBehaviourによって操作を行うオブジェクトは全て入稿ルール C.Scene内階層規定におけるDynamicオブジェクトの階層下に入れてください
+                new UdonDynamicObjectParentRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X01_UdonDynamicObjectParentRule.Title")), 
                 
-                // ToDo: 全てのUdonBehaviourオブジェクトの親であるDynamicオブジェクトは初期でInactive状態にしてください
-                // ToDo: UdonBehaviourを含むオブジェクトのLayerはUserLayer23としてください
-                // ToDo: UdonBehaviourは1ブースあたり 25 まで
-                // ToDo: SynchronizePositionが有効なUdonBehaviourは1ブースあたり 10 まで
-                // ToDo: AllowOwnershipTransferOnCollisionは必ずFalseにすること
-                // ToDo: UdonBehaviourによってオブジェクトをスペース外に移動させる行為は禁止
-                // ⇒ バリデーションで防げないのでは
-                // ToDo: プレイヤーの設定(移動速度等)の変更はプレイヤーがスペース内にいる場合のみ許可されます
-                // ⇒ 制限方法のアイデアが無い。 定型処理を入れさせる？
-                // ToDo: プレイヤーの位置変更(テレポート)は、プレイヤーがスペース内にいる状態 スペース内のどこかに移動させる
-                // ⇒ Nodeの場合 テレポート先を GameObject.Transform 参照に縛る？
+                // 全てのUdonBehaviourオブジェクトの親であるDynamicオブジェクトは初期でInactive状態にしてください
+                new UdonDynamicObjectInactiveRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X02_UdonDynamicObjectInactiveRule.Title")), 
+
+                // UdonBehaviourを含むオブジェクトのLayerはUserLayer23としてください
+                new UdonBehaviourLayerConstraintRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X03_UdonBehaviourLayerConstraintRule.Title")),
+
+                // UdonBehaviourは1ブースあたり 25 まで
+                new D04_AssetTypeLimitRule(
+                    LocalizedMessage.Get("Vket5UdonRuleSetBase.UdonBehaviourLimitRule.Title", UdonBehaviourCountLimit),
+                    typeof(UdonBehaviour),
+                    UdonBehaviourCountLimit,
+                    Vket5UdonOfficialAssetData.UdonBehaviourPrefabGUIDs),
+
+                // SynchronizePositionが有効なUdonBehaviourは1ブースあたり 10 まで
+                new UdonBehaviourSynchronizePositionCountLimitRule(
+                    LocalizedMessage.Get("Vket5UdonRuleSetBase.X04_UdonBehaviourSynchronizePositionCountLimitRule.Title", UdonBehaviourSynchronizePositionCountLimit),
+                    UdonBehaviourSynchronizePositionCountLimit
+                ),
+
+                // AllowOwnershipTransferOnCollisionは必ずFalseにすること
+                new UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X05_UdonBehaviourSynchronizePositionCountLimitRule.Title")),
+
+                // UdonBehaviourによってオブジェクトをスペース外に移動させる行為は禁止
+                // ⇒ スタッフによる目視確認
+
+                // プレイヤーの設定(移動速度等)の変更はプレイヤーがスペース内にいる場合のみ許可されます
+                // ⇒ スタッフによる目視確認
+
+                // プレイヤーの位置変更(テレポート)は、プレイヤーがスペース内にいる状態 スペース内のどこかに移動させる
+                // ⇒ スタッフによる目視確認
 
                 // Udon Script
-                // ToDo: [UdonSynced]を付与した変数は1ブースあたり 3 まで
-                // ToDO: [UdonSynced]を付与した変数は下記の型のみ使用できます bool, sbyte, byte, ushort, short, uint, int, float
-                // ToDo: U#においては、全てのクラスは運営よりブース毎に指定するnamespaceに所属させてください
-                // ToDO: 使用禁止変数
-                // ToDo: 使用禁止関数
-                // ToDo: PhysicsクラスのCast関数 layerMaskを設定し、レイヤー23以外のコライダを無視するようにする, maxDistanceは最長で10メートルまで
+                // 使用禁止UdonAssembly
+                new UsableUdonAssemblyListRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X20_UsableUdonAssemblyListRule.Title"),
+                    GetUdonAssemblyReferences(),
+                    ignorePrefabGUIDs: Vket5UdonOfficialAssetData.GUIDs), 
+
+                // [UdonSynced]を付与した変数は1ブースあたり 3 まで
+                // [UdonSynced]を付与した変数は下記の型のみ使用できます bool, sbyte, byte, ushort, short, uint, int, float
+                new UdonBehaviourSyncedVariablesRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X21_UdonBehaviourSyncedVariablesRule.Title"), UdonScriptSyncedVariablesLimit), 
+
+                // U#においては、全てのクラスは運営よりブース毎に指定するnamespaceに所属させてください
+                new UdonSharpScriptNamespaceRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X60_UdonSharpNameSpaceRule.Title"), "Vket5.Circle"), 
+
+                // PhysicsクラスのCast関数 layerMaskを設定し、レイヤー23以外のコライダを無視するようにする, maxDistanceは最長で10メートルまで
+                new UdonAssemblyPhysicsCastFunctionRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X22_UdonAssemblyPhysicsCastFunctionRule.Title"), GetUdonAssemblyPhysicsCastFunctionReferences()), 
 
             };
         }
@@ -270,6 +293,8 @@ namespace VitDeck.Validator
                 new ComponentReference("VRC Url Input Field", new string[]{"VRC.SDK3.Components.VRCUrlInputField"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC Visual Damage", new string[]{"VRC.SDKBase.VRC_VisualDamage", "VRC.SDK3.Components.VRCVisualDamage"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC Spacial Audio Source", new string[]{"VRC.SDKBase.VRC_SpatialAudioSource", "VRC.SDK3.Components.VRCSpatialAudioSource"}, ValidationLevel.DISALLOW),
+                new ComponentReference("VRC Unity Video Player", new string[]{"VRC.SDK3.Video.Components.VRCUnityVideoPlayer", }, ValidationLevel.DISALLOW),
+                new ComponentReference("VRC AV Pro Video Player", new string[]{"VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer", "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoSpeaker", "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC Portal Marker", new string[]{"VRC.SDKBase.VRC_PortalMarker", "VRC.SDK3.Components.VRCPortalMarker"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC Scene Descriptor", new string[]{"VRC.SDKBase.VRC_SceneDescriptor", "VRC.SDK3.Components.VRCSceneDescriptor"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC Test Marker", new string[]{"VRC.SDK3.VRCTestMarker"}, ValidationLevel.DISALLOW),
@@ -280,6 +305,56 @@ namespace VitDeck.Validator
             };
         }
 
+        private UdonAssemblyReference[] GetUdonAssemblyReferences()
+        {
+            return new UdonAssemblyReference[]
+            {
+                // Variables
+                new UdonAssemblyReference("Transform.root", new string[]{"__get_root__UnityEngineTransform", "__set_root__UnityEngineTransform"}, ValidationLevel.DISALLOW),
+                new UdonAssemblyReference("GameObject.Layer", new string[]{"UnityEngineGameObject.__get_layer__SystemInt32", "UnityEngineGameObject.__set_layer__SystemInt32"}, ValidationLevel.DISALLOW),
+                new UdonAssemblyReference("RenderSettings", new string[]{"UnityEngineRenderSettings"}, ValidationLevel.DISALLOW),
+
+                // Functions
+                new UdonAssemblyReference("UdonSharpBehaviour.VRCInstantiate", new string[]{"VRCInstantiate"}, ValidationLevel.DISALLOW),
+                new UdonAssemblyReference("GameObject.Find", new string[]{"__Find__SystemString__UnityEngineGameObject"}, ValidationLevel.DISALLOW),
+                new UdonAssemblyReference("Object.Destroy", new string[]{"UnityEngineObject.__Destroy__UnityEngineObject__SystemVoid"}, ValidationLevel.DISALLOW),
+                new UdonAssemblyReference("Object.DestroyImmediate", new string[]{"UnityEngineObject.__DestroyImmediate__UnityEngineObject__SystemVoid"}, ValidationLevel.DISALLOW),
+                new UdonAssemblyReference("Transform.DetachChildren", new string[]{"UnityEngineTransform.__DetachChildren__SystemVoid"}, ValidationLevel.DISALLOW),
+                new UdonAssemblyReference("VRCSDK3VideoPlayer", new string[]{"VRCSDK3VideoComponentsBaseBaseVRCVideoPlayer"}, ValidationLevel.DISALLOW),
+            };
+        }
+
+        private UdonAssemblyFunctionEssentialArgumentReference[] GetUdonAssemblyPhysicsCastFunctionReferences()
+        {
+            return new UdonAssemblyFunctionEssentialArgumentReference[]
+            {
+                new UdonAssemblyFunctionEssentialArgumentReference(
+                    "Physics.RayCast",
+                    "MaxDistance, LayerMask",
+                    new []{"UnityEnginePhysics.__Raycast__", "UnityEnginePhysics.__RaycastAll__", "UnityEnginePhysics.__RaycastNonAlloc__"},
+                    "_SystemSingle_SystemInt32_"), 
+                new UdonAssemblyFunctionEssentialArgumentReference(
+                    "Physics.BoxCast",
+                    "MaxDistance, LayerMask",
+                    new []{"UnityEnginePhysics.__Boxcast__", "UnityEnginePhysics.__BoxCastAll__", "UnityEnginePhysics.__BoxCastNonAlloc__"},
+                    "_SystemSingle_SystemInt32_"), 
+                new UdonAssemblyFunctionEssentialArgumentReference(
+                    "Physics.SphereCast",
+                    "MaxDistance, LayerMask",
+                    new []{"UnityEnginePhysics.__SphereCast__", "UnityEnginePhysics.__SphereCastAll__", "UnityEnginePhysics.__SphereCastNonAlloc__"},
+                    "_SystemSingle_SystemInt32_"), 
+                new UdonAssemblyFunctionEssentialArgumentReference(
+                    "Physics.CapsuleCast",
+                    "MaxDistance, LayerMask",
+                    new []{"UnityEnginePhysics.__CapsuleCast__", "UnityEnginePhysics.__CapsuleCastAll__", "UnityEnginePhysics.__CapsuleCastNonAlloc__"},
+                    "_SystemSingle_SystemInt32_"), 
+                new UdonAssemblyFunctionEssentialArgumentReference(
+                    "Physics.LineCast",
+                    "LayerMask",
+                    new []{"UnityEnginePhysics.__Linecast__"},
+                    "_SystemInt32_"), 
+            };
+        }
         protected virtual ValidationLevel AdvancedObjectValidationLevel
         {
             get

@@ -521,3 +521,81 @@ MonoBehaviour:
     Value: Please enable IsKinematic on RigidBody objects
   - Key: Vket5RuleSetBase.UnusabePrefabRule.Title
     Value: '[F-4]Unallowed prefabs in use'
+  - Key: Vket5UdonRuleSetBase.X03_UdonBehaviourLayerConstraintRule.Title
+    Value: '[X-03] GameObject Layer including UdonBehaviour must 23.'
+  - Key: UdonBehaviourLayerConstraintRule.InvalidLayer
+    Value: 'Wrong Layer'
+  - Key: UdonBehaviourLayerConstraintRule.InvalidLayer.solution
+    Value: 'GameObject including UdonBehaviour must set Later 23.'
+  - Key: Vket5UdonRuleSetBase.X20_UsableUdonAssemblyListRule.Title
+    Value: "[X-20] Do not use forbidden Udon Assembly"
+  - Key: UsableUdonAssemblyListRule.DefaultComponentGroupName
+    Value: Udon Assembly not defined
+  - Key: UsableUdonAssemblyListRule.Disallow
+    Value: '{0}: Usage of {1} is not allowed'
+  - Key: Vket5UdonRuleSetBase.UdonBehaviourLimitRule.Title
+    Value: '[D-4]UdonBehaviour count must be kept under {0}'
+  - Key: Vket5UdonRuleSetBase.X02_UdonDynamicObjectInactiveRule.Title
+    Value: '[X-02]Dynamic object must be Inactive.'
+  - Key: UdonDynamicObjectInactiveRule.isActive
+    Value: 'Dynamic object is Active.'
+  - Key: UdonDynamicObjectInactiveRule.isActive.Solution
+    Value: 'Dynamic object make Inactive on initial state.'
+  - Key: UdonSharpScriptNamespaceRule.NotUdonSharp
+    Value: 'Class {0} must be child of UdonSharp.UdonSharpBehaviour.'
+  - Key: UdonSharpScriptNamespaceRule.InvalidNamespace
+    Value: 'Wrong Namespace'
+  - Key: UdonSharpScriptNamespaceRule.InvalidNamespace.solution
+    Value: 'Define U# class {0} in your namespace.'
+  - Key: Vket5UdonRuleSetBase.X60_UdonSharpNameSpaceRule.Title
+    Value: '[X-60] UdonSharp class definition rules.'
+  - Key: UdonBehaviourSynchronizePositionCountLimitRule.Overuse
+    Value: 'UdonBehaviour with synchronize position count exceeded limit of {0}. (Current count: {1})'
+  - Key: UdonBehaviourSynchronizePositionCountLimitRule.Overuse.Solution
+    Value: Please reduce the component count.
+  - Key: Vket5UdonRuleSetBase.X04_UdonBehaviourSynchronizePositionCountLimitRule.Title
+    Value: '[X-04] UdonSharp with SynchronizePosition  count must be kept under {0}'
+  - Key: Vket5UdonRuleSetBase.X05_UdonBehaviourSynchronizePositionCountLimitRule.Title
+    Value: '[X-05] UdonBehaviour AllowOwnershipTransferOnCollision to be false.'
+  - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.isTrue
+    Value: 'AllowOwnershipTransferOnCollision is true.'
+  - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.isTrue.solution
+    Value: 'UdonBehaviour AllowOwnershipTransferOnCollision must be false.'
+  - Key: X01_UdonDynamicObjectParentRule.Title
+    Value: "[X-01] UdonBehaviour and it's affected object are set child of Dynamic object."
+  - Key: UdonDynamicObjectParentRule.noDynamicObject
+    Value: 'Object Dynamic is not exists.'
+  - Key: UdonDynamicObjectParentRule.noDynamicObject.Solution
+    Value: 'Create Dynamic object.'
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourIsNotChildOfDynamic
+    Value: 'UdonBehaviour [{0}] is must be child of Dynamic object.'
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourIsNotChildOfDynamic.Solution
+    Value: 'Set it child of Dynamic object.'
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourPublicValueIsNotChildOfDynamic
+    Value: "The object UdonBehaviour [{0}]'s public variable [{1}] is must be child of Dynamic object."
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourPublicValueIsNotChildOfDynamic.Solution
+    Value: 'Set it child of Dynamic object.'
+  - Key: Vket5UdonRuleSetBase.X21_UdonBehaviourSyncedVariablesRule.Title
+    Value: '[X-21] SyncedVariables limitation of UdonBehaviour.'
+  - Key: UdonBehaviourSyncedVariablesRule.Overuse
+    Value: 'Synced variables count in UdonBehaviours exceeded limit of {0}. (Current count: {1})'
+  - Key: UdonBehaviourSyncedVariablesRule.Overuse.Solution
+    Value: ' Please reduce the synced variables count.'
+  - Key: UdonBehaviourSyncedVariablesRule.InvalidType
+    Value: 'UdonBehaviour Synced variable [{0}] is invalid type ({1}).'
+  - Key: UdonBehaviourSyncedVariablesRule.InvalidType.Solution
+    Value: 'Set type bool, sbyte, byte, ushort, short, uint, int or float.'
+  - Key: Vket5UdonRuleSetBase.X22_UdonAssemblyPhysicsCastFunctionRule.Title
+    Value: "[X-22] Physics.*Cast function in UdonAssembly rules."
+  - Key: UdonAssemblyPhysicsCastFunctionRule.InvalidArguments
+    Value: 'UdonAssembly function [{0}] has invalid arguments. : {1} ({2})'
+  - Key: UdonAssemblyPhysicsCastFunctionRule.InvalidArguments.Solution
+    Value: 'Set arguments {1} in the function {0}.'
+  - Key: UdonAssemblyPhysicsCastFunctionRule.MaxDistanceError
+    Value: 'UdonAssembly function [{0}] has invalid argument value _maxDistance ({3}). : {1} ({2})'
+  - Key: UdonAssemblyPhysicsCastFunctionRule.MaxDistanceError.Solution
+    Value: 'Set argument {1} below {2} as const _maxDistance in the function {0}.'
+  - Key: UdonAssemblyPhysicsCastFunctionRule.LayerMaskError
+    Value: 'UdonAssembly function [{0}] has invalid argument value _layerMask ({3}). : {1} ({2})'
+  - Key: UdonAssemblyPhysicsCastFunctionRule.LayerMaskError.Solution
+    Value: 'Set argument {1} {2} as const _layerMask in the function {0}.'
