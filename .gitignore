@@ -37,8 +37,6 @@ sysinfo.txt
 *.unitypackage
 
 # Templates assets
-Assets/VitDeck/Templates/*
-!Sample_template
 Assets/VitDeck/Config/UserSettings.asset
 Assets/VitDeck/Config/UserSettings.asset.meta
 
