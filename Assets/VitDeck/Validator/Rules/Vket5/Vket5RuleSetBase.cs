@@ -195,6 +195,7 @@ namespace VitDeck.Validator
 
         protected abstract Vector3 BoothSizeLimit { get; }
 
+#if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3 
         protected virtual VRC_EventHandler.VrcBroadcastType[] VRCTriggerBroadcastTypesWhitelist
         {
             get
@@ -225,6 +226,7 @@ namespace VitDeck.Validator
                     VRC_EventHandler.VrcEventType.AnimationTrigger};
             }
         }
+#endif
 
         protected abstract int VRCTriggerCountLimit { get; }
 

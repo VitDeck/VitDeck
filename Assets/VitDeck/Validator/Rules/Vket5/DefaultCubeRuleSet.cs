@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+#if VRC_SDK_VRCSDK3
 using VRC.SDKBase;
+#elif VRC_SDK_VRCSDK2
+using VRCSDK2;
+#endif
 
 namespace VitDeck.Validator
 {
@@ -32,6 +36,7 @@ namespace VitDeck.Validator
             }
         }
 
+#if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3 
         protected override VRC_EventHandler.VrcBroadcastType[] VRCTriggerBroadcastTypesWhitelist
         {
             get
@@ -49,6 +54,7 @@ namespace VitDeck.Validator
                     VRC_EventHandler.VrcEventType.TeleportPlayer }).ToArray();
             }
         }
+#endif
 
         protected override int VRCTriggerCountLimit
         {

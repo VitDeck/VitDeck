@@ -13,6 +13,7 @@ using VRCSDK2;
 
 namespace VitDeck.Validator
 {
+#if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3 
     /// <summary>
     /// VRC_Triggerコンポーネントの設定を検証するルール
     /// </summary>
@@ -115,4 +116,5 @@ namespace VitDeck.Validator
             return excludedAssetGUIDs.Contains(guid);
         }
     }
+#endif
 }

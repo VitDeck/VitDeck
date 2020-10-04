@@ -2,7 +2,11 @@ using NUnit.Framework;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.TestTools;
+#if VRC_SDK_VRCSDK3
+using VRC.SDKBase;
+#elif VRC_SDK_VRCSDK2
 using VRCSDK2;
+#endif
 
 namespace VitDeck.Validator.Test
 {
@@ -11,6 +15,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestValidateError()
         {
+#if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3 
             var rule = new VRCTriggerConfigRule(
                             "VRC_Triggerコンポーネントの設定を検証するルール",
                             new VRC_EventHandler.VrcBroadcastType []{
@@ -85,6 +90,7 @@ namespace VitDeck.Validator.Test
             Assert.That(result.Issues[7].level, Is.EqualTo(IssueLevel.Error));
             //Assert.That(result.Issues[7].message, Is.EqualTo(string.Format("VRC_Triggerコンポーネントで次のActionは使用できません:{0}", "SetVelocity")));
             //Assert.That(result.Issues[7].solution, Is.EqualTo("使用可能なActionに変更するか、使用申請をして下さい。"));
+#endif
         }
     }
 }

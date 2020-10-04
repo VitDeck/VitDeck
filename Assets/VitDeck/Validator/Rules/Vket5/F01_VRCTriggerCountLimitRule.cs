@@ -33,6 +33,7 @@ namespace VitDeck.Validator
 
         private void LogicForRootObject(GameObject rootObject)
         {
+#if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3 
             var triggers = rootObject.GetComponentsInChildren<VRC_Trigger>(true);
 
             if (triggers.Length > limit)
@@ -46,6 +47,7 @@ namespace VitDeck.Validator
                         LocalizedMessage.Get("VRCTriggerCountLimitRule.Overuse.Solution")));
                 }
             }
+#endif
         }
     }
 }
