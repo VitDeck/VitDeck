@@ -31,8 +31,36 @@ namespace VitDeck.Validator
             "04878769c08021a41bc2d2375e23ec0b",  // Assets/DynamicBone/Scripts/DynamicBoneColliderBase.cs
             "4e535bdf3689369408cc4d078260ef6a",  // Assets/DynamicBone/Scripts/DynamicBonePlaneCollider.cs
 
-            // Standard Assets
-            
+            // Text Mesh Pro
+            "1b8d251f9af63b746bf2f7ffe00ebb9b",  // Assets/TextMesh Pro/Documentation/TextMesh Pro User Guide 2016.pdf
+            "6e59c59b81ab47f9b6ec5781fa725d2c",  // Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt
+            "e3265ab4bf004d28a9537516768c1c75",  // Assets/TextMesh Pro/Fonts/LiberationSans.ttf
+            "fade42e8bc714b018fac513c043d323b",  // Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt
+            "d82c1b31c7e74239bff1220585707d2b",  // Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt
+            "3f5b5dff67a942289a9defa416b206f3",  // Assets/TextMesh Pro/Resources/TMP Settings.asset
+            "e73a58f6e2794ae7b1b7e50b7fb811b0",  // Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Drop Shadow.mat
+            "2e498d1c8094910479dc3e1b768306a4",  // Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+            "79459efec17a4d00a321bdcc27bbc385",  // Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat
+            "8f586378b4e144a9851e7b34d9b748ee",  // Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
+            "407bc68d299748449bbf7f48ee690f8d",  // Assets/TextMesh Pro/Resources/Shaders/TMPro.cginc
+            "3997e2241185407d80309a82f9148466",  // Assets/TextMesh Pro/Resources/Shaders/TMPro_Properties.cginc
+            "d930090c0cd643c7b55f19a38538c162",  // Assets/TextMesh Pro/Resources/Shaders/TMPro_Surface.cginc
+            "48bb5f55d8670e349b6e614913f9d910",  // Assets/TextMesh Pro/Resources/Shaders/TMP_Bitmap-Custom-Atlas.shader
+            "1e3b057af24249748ff873be7fafee47",  // Assets/TextMesh Pro/Resources/Shaders/TMP_Bitmap-Mobile.shader
+            "128e987d567d4e2c824d754223b3f3b0",  // Assets/TextMesh Pro/Resources/Shaders/TMP_Bitmap.shader
+            "dd89cf5b9246416f84610a006f916af7",  // Assets/TextMesh Pro/Resources/Shaders/TMP_SDF Overlay.shader
+            "bc1ede39bf3643ee8e493720e4259791",  // Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Mobile Masking.shader
+            "a02a7d8c237544f1962732b55a9aebf1",  // Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Mobile Overlay.shader
+            "fe393ace9b354375a9cb14cdbbc28be4",  // Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Mobile.shader
+            "85187c2149c549c5b33f0cdb02836b17",  // Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Surface-Mobile.shader
+            "f7ada0af4f174f0694ca6a487b8f543d",  // Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Surface.shader
+            "68e6db2ebdc24f95958faec2be5558d6",  // Assets/TextMesh Pro/Resources/Shaders/TMP_SDF.shader
+            "cf81c85f95fe47e1a27f6ae460cf182c",  // Assets/TextMesh Pro/Resources/Shaders/TMP_Sprite.shader
+            "c41005c129ba4d66911b75229fd70b45",  // Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset
+            "f952c082cb03451daed3ee968ac6c63e",  // Assets/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset
+            "381dcb09d5029d14897e55f98031fca5",  // Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt
+            "8f05276190cf498a8153f6cbe761d4e6",  // Assets/TextMesh Pro/Sprites/EmojiOne.json
+            "dffef66376be4fa480fb02b19edbe903",  // Assets/TextMesh Pro/Sprites/EmojiOne.png
 
             // VRCSDK
             "2cdbe2e71e2c46e48951c13df254e5b1",  // Assets/VRCSDK/version.txt
