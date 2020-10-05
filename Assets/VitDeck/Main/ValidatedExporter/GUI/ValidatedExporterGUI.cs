@@ -65,7 +65,9 @@ namespace VitDeck.Main.ValidatedExporter.GUI
         private List<Message> messages;
         private Vector2 msaageAreaScroll;
 
-        //[MenuItem(prefix + "Export Booth", priority = 102)]
+#if !VITDECK_HIDE_MENUITEM
+        [MenuItem(prefix + "Export Booth", priority = 102)]
+#endif
         static void Open()
         {
             window = GetWindow<ValidatedExporterWindow>(false, "VitDeck");
@@ -215,7 +217,7 @@ namespace VitDeck.Main.ValidatedExporter.GUI
             GUILayout.EndHorizontal();
         }
 
-        #region Log
+#region Log
         private void ClearLogs()
         {
             exportLog = "";
@@ -278,7 +280,7 @@ namespace VitDeck.Main.ValidatedExporter.GUI
                     messages.Add(new Message(exportResult.GetExportLog(), MessageType.Error));
             }
         }
-        #endregion
+#endregion
 
         /// <summary>
         /// HelpBoxに表示するメッセージ
