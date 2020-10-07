@@ -553,10 +553,9 @@ namespace VitDeck.Validator
             "d3d89b9ab72ef0d4696365b9fd07f7de",  // Assets/VitDeck/Templates/07_UC/SharedAssets/Post-process Volume Profile(07_UC).asset
             "43952b04c671c85499219a62eb939303",  // Assets/VitDeck/Templates/07_UC/SharedAssets/SampleBooth(07_UC).mat
             "262f8e55a8b27584092f4aef6a6ee290",  // Assets/VitDeck/Templates/07_UC/SharedAssets/Skybox(07_UC).mat
+            "fe9c6cf6073f2514e82259a4142d6932",  // Assets/VitDeck/Templates/07_UC/SharedAssets/UC_WorldSetting.asset
             "e23af24be2b1e7d40955d52dfad73f75",  // Assets/VitDeck/Templates/07_UC/TemplateAssets/{CIRCLEID}/{CIRCLEID}.unity
             "100bf51bc40cf3247937686b55939dcd",  // Assets/VitDeck/Templates/07_UC/TemplateAssets/{CIRCLEID}/UdonScript/Dummy.asset
-            "73bbc732855a51443905cd58f3a9a062",  // Assets/VitDeck/Templates/07_UC/TemplateAssets/{CIRCLEID}/{CIRCLEID}/LightingData.asset
-            "65a0ccb2a89862e4ab66c03cf619c0b4",  // Assets/VitDeck/Templates/07_UC/TemplateAssets/{CIRCLEID}/{CIRCLEID}/ReflectionProbe-0.exr
 
             #endregion
 
