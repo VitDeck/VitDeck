@@ -1,7 +1,6 @@
 #if VRC_SDK_VRCSDK3
 using UnityEngine;
 using VitDeck.Language;
-using VRC.Udon;
 
 namespace VitDeck.Validator
 {

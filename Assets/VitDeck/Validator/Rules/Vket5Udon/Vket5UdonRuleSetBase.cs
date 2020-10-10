@@ -1,10 +1,6 @@
 #if VRC_SDK_VRCSDK3
 using UnityEngine;
 using VitDeck.Language;
-using VketTools.Utilities;
-using VRC.SDK3;
-using VRC.SDK3.Components;
-using VRC.SDK3.Editor;
 using VRC.SDKBase;
 using VRC.Udon;
 
