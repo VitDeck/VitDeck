@@ -8,6 +8,9 @@ namespace VitDeck.Validator.Test
     public class TestVRCTriggerCountLimitRule
     {
         [Test]
+#if !VRC_SDK_VRCSDK2 
+        [Ignore("VRCSDK2 に依存したテストなので無視する")]
+#endif
         public void TestValidate()
         {
             var limit = 5;
@@ -21,6 +24,9 @@ namespace VitDeck.Validator.Test
         }
 
         [Test]
+#if !VRC_SDK_VRCSDK2 
+        [Ignore("VRCSDK2 に依存したテストなので無視する")]
+#endif
         public void TestValidateError()
         {
             var limit = 3;

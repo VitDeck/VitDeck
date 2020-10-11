@@ -13,6 +13,9 @@ namespace VitDeck.Validator.Test
     public class TestVRCTriggerConfigRule
     {
         [Test]
+#if !VRC_SDK_VRCSDK2 
+        [Ignore("VRCSDK2 に依存したテストなので無視する")]
+#endif
         public void TestValidateError()
         {
 #if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3 
