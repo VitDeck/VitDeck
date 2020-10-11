@@ -2,7 +2,8 @@
     "name": "VitDeck.Exporter",
     "references": [
         "VitDeck.Utilities",
-        "VitDeck.Language"
+        "VitDeck.Language",
+        "VitDeck.Exporter.Addons.VRCSDK3"
     ],
     "includePlatforms": [
         "Editor"

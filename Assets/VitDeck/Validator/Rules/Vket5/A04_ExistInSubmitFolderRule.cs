@@ -62,7 +62,13 @@ namespace VitDeck.Validator
                 // 入稿フォルダ内にパスがあるアセットなのか検証
                 if (filePathsInSubmitDirectory.Contains(assetPath)) 
                     continue;
-                
+
+#if VRC_SDK_VRCSDK3
+                // VRCSDK3: SerializedUdonPrograms の中を除外
+                if(assetPath.StartsWith("Assets/SerializedUdonPrograms/"))
+                    continue;
+#endif
+
                 // エラー対象である事が確定したためIssue発行
                 var targetAsset = AssetDatabase.LoadMainAssetAtPath(assetPath);
                 referenceDictionary.Reverse.TryGetValue(targetAsset, out var referrerAssets);
