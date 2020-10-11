@@ -108,7 +108,7 @@ namespace VitDeck.TemplateLoader.GUI
                 }
                 //Replace List
                 EditorGUILayout.LabelField("", UnityEngine.GUI.skin.horizontalSlider);
-                EditorGUI.BeginDisabledGroup(true);
+                EditorGUI.BeginDisabledGroup(ProductSettings.HideMenuItem);
                 {
                     if (templateProperty.replaceList != null)
                     {
