@@ -50,3 +50,10 @@ Assets/Plugins/Editor/JetBrains*
 #VRChat SDK2
 Assets/VRCSDK*
 Assets/VRChat Examples*
+
+# Base folder
+/Assets/[0-9]*
+
+# Destination folder for exporter
+/Assets/Exports*
+/Assets/Vket_Exports*
