@@ -1,8 +1,6 @@
 #if VRC_SDK_VRCSDK3
 using System;
-using UdonSharp;
 using UnityEditor;
-using UnityEngine;
 using VitDeck.Language;
 
 namespace VitDeck.Validator
@@ -14,6 +12,8 @@ namespace VitDeck.Validator
     /// </summary>
     public class UdonSharpScriptNamespaceRule : BaseRule
     {
+        private const string _scriptAssetPath = "UdonScript/";
+        private const string _baseClassName = "UdonSharp.UdonSharpBehaviour";
         private readonly string namespaceString;
         public UdonSharpScriptNamespaceRule(string name, string namespaceString) : base(name)
         {
@@ -35,16 +35,18 @@ namespace VitDeck.Validator
                     continue;
                 }
                 var localPath = path.Substring(rootPath.Length + 1);
-                if (localPath.IndexOf("UdonScript/", StringComparison.Ordinal) == 0 &&  asset is MonoScript src)
+                // UdonScript以下のみ探索
+                if (localPath.IndexOf(_scriptAssetPath, StringComparison.Ordinal) == 0 &&  asset is MonoScript src)
                 {
-                    // Debug.Log("path: " + path + " Object: " + src.name + " Class: " + src.GetClass() + "");
-                    // U# スクリプトは UdonSharpBehaviour を継承していなければならない
-                    if (!src.GetClass().IsSubclassOf(typeof(UdonSharpBehaviour)))
+                    // U# スクリプトは UdonSharpBehaviour を直接継承していなければならない
+                    Type srcType = src.GetClass();
+                    var baseType = srcType.UnderlyingSystemType.BaseType; 
+                    if (baseType == null || baseType.FullName != _baseClassName)
                     {
                         AddIssue(new Issue(asset, IssueLevel.Error, LocalizedMessage.Get("UdonSharpScriptNamespaceRule.NotUdonSharp", src.GetClass())));
                     }
                     // U# スクリプトは 正しい名前空間で定義されなければならない
-                    if (src.GetClass().ToString().IndexOf(namespaceString, StringComparison.Ordinal) == -1)
+                    if (srcType.Namespace == null || srcType.Namespace.IndexOf(namespaceString, StringComparison.Ordinal) == -1)
                     {
                         AddIssue(
                             new Issue(

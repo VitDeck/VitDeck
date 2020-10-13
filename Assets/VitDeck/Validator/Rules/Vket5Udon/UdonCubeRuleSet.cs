@@ -1,9 +1,5 @@
 ﻿#if VRC_SDK_VRCSDK3
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using VRC.SDKBase;
 
 namespace VitDeck.Validator
 {

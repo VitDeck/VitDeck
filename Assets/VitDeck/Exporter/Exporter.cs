@@ -92,6 +92,9 @@ namespace VitDeck.Exporter
         {
             var paths = AssetDatabase.FindAssets("t:Object", new string[] { baseFolderPath })
                 .Select(guid => AssetDatabase.GUIDToAssetPath(guid));
+#if VRC_SDK_VRCSDK3
+            paths = paths.Concat<string>(Addons.VRCSDK3.LinkedUdonManager.GetLinkedAssetPaths());
+#endif
             return paths.ToArray();
         }
 
