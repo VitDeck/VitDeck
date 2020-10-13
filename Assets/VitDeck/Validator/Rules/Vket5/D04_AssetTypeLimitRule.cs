@@ -39,14 +39,11 @@ namespace VitDeck.Validator
                 var message = LocalizedMessage.Get("D04_AssetTypeLimitRule.Overuse", type.Name, limit, foundAssets.Count);
                 var solution = LocalizedMessage.Get("D04_AssetTypeLimitRule.Overuse.Solution", type.Name);
 
-                foreach (var asset in foundAssets)
-                {
-                    AddIssue(new Issue(
-                        asset,
-                        IssueLevel.Error,
-                        message,
-                        solution));
-                }
+                AddIssue(new Issue(
+                    null,
+                    IssueLevel.Error,
+                    message,
+                    solution));
             }
         }
 

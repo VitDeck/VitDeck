@@ -34,16 +34,13 @@ namespace VitDeck.Validator
                 var solution = LocalizedMessage.Get("F02_PrefabLimitRule.Overuse.Solution");
                 var solutionURL = LocalizedMessage.Get("F02_PrefabLimitRule.Overuse.SolutionURL");
 
-                foreach (var obj in objects)
-                {
-                    AddIssue(new Issue(
-                        obj,
-                        IssueLevel.Error,
-                        message,
-                        solution,
-                        solutionURL
-                        ));
-                }
+                AddIssue(new Issue(
+                    null,
+                    IssueLevel.Error,
+                    message,
+                    solution,
+                    solutionURL
+                ));
             }
         }
 
