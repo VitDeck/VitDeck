@@ -3730,6 +3730,7 @@ namespace VitDeck.Validator
             "2d494ba3ef3a48e43abe4ae435602b78",
             "6e3ab83cce46dee44b40d0ea5202fce8",
             "a9d899b9b5f746b4cbf7ec49e7b32ccd",
+            // TMP Essential Resources
             "f54d1bd14bd3ca042bd867b519fee8cc",
             "8e7e8f5a82a3a134e91c54efd2274ea9",
             "1b8d251f9af63b746bf2f7ffe00ebb9b",
