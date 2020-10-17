@@ -588,6 +588,30 @@ namespace VitDeck.Validator
             "6b468349f6cba0248a76b7d33570fbad",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/Animation/Idle_2D.anim
             "8d5e148b91b24cf4dae7e22e010f7603",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/Animation/Idle_3D.anim
             "0d2cf2386895ff5499a1660a4327ad75",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/Scripts/AvatarPedestal.asset
+            "63af405779b7d6d44b64d709fb3fbdd7",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener2D_L.prefab
+            "ae8b674ab5516664ea5d5c535f5fbc6a",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener2D_M.prefab
+            "405b6beaa9b7b9947b9111840f170452",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener2D_S.prefab
+            "139aa3624bf91214dabb39362ccf4382",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_L.prefab
+            "4cb05397779ec7a48818e05b68c26960",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_M.prefab
+            "a4471dc2b540f9e46a5e36fe66ede5e9",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_S.prefab
+            "a8f4c2fad36a72340b13a226af201c06",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/ItemPageOpener2D_L.prefab
+            "5e3bce2103d11414592adb2ec1ca24a6",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/ItemPageOpener2D_M.prefab
+            "2ec4a406efaf5124fb79135ecb55580e",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/ItemPageOpener2D_S.prefab
+            "8029d591dfcb7ce4e8b8aaaf09a20192",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/ItemPageOpener3D_L.prefab
+            "5df0fdeda3453104e874b9a8b5986205",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/ItemPageOpener3D_M.prefab
+            "168fa6a9a48c7f74da629c5d67a31a52",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/ItemPageOpener3D_S.prefab
+            "af49ba9be5e5e2149b9c6dfa6decec82",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/Active_2D.anim
+            "f770e16ed5ac5c149b9e34d271b9fea4",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/Active_3D.anim
+            "251fd152628ba744899b986ab59ff7d3",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/CirclePageOpener_2D.controller
+            "886d4cde2c016cb4c9ea42c0af58f717",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/CirclePageOpener_3D.controller
+            "495ce3af8d25dcd49ab1eb9da5692373",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/Deactive_2D.anim
+            "a41d2fdf7f5e5eb49ab85919cf41e188",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/Deactive_3D.anim
+            "f93cc62348e48c64cbdb3a9b069a1d11",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/Idle_2D.anim
+            "ff7931a8fe75c2142a4e83797c8c21e9",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/Idle_3D.anim
+            "26ac8287216792149b49a2db74fc0309",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/Open_2D.anim
+            "72fddf1509a7339498051122d1da2ce5",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/Open_3D.anim
+            "6ea1e8fa7533f9647996810212fa976e",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Scripts/CirclePageOpener.asset
+            "171b9d597b1e63f4590b8d754491769a",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Textures/BUY.png
             "304812fb2352c7c419581d8f68b23f94",  // Assets/VketAssets/UdonPrefabs/Udon_PickupObjectSync/PickupObjectSync.prefab
             "73398b290b7c5ec43a2e158bfc1c45db",  // Assets/VketAssets/UdonPrefabs/Udon_PickupObjectSync/Scripts/AutoResetPickup.asset
 
