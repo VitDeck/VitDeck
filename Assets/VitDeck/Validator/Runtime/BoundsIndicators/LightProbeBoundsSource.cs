@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace VitDeck.Validator.BoundsIndicators
@@ -38,6 +39,22 @@ namespace VitDeck.Validator.BoundsIndicators
                 var center = (min + max) * 0.5f;
                 var size = max - min;
                 return new Bounds(center, size);
+            }
+        }
+
+        public Bounds LocalBounds
+        {
+            get
+            {
+                return new Bounds();
+            }
+        }
+        
+        public Matrix4x4 LocalToWorldMatrix
+        {
+            get
+            {
+                return Matrix4x4.identity;
             }
         }
 

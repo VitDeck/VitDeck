@@ -67,18 +67,28 @@ namespace VitDeck.Validator.BoundsIndicators
 
             booth.ClearTransformTemporarily();
             var bounds = boundsSource.Bounds;
+            var localBounds = boundsSource.LocalBounds;
+            var localToWorldMatrix = boundsSource.LocalToWorldMatrix;
             booth.RestorePosition();
 
-            DrawBoundsGizmos(ref bounds);
             DrawOverhangGizmos(ref bounds);
+            DrawBoundsGizmos(ref bounds);
+            DrawLocalBoundsGizmos(ref localBounds, ref localToWorldMatrix);
         }
 
         Vector3 rangeOutIndicatorPadding = Vector3.one * 0.0005f;
 
+        private void DrawLocalBoundsGizmos(ref Bounds bounds, ref Matrix4x4 localToWorldMatrix)
+        {
+            Gizmos.matrix = localToWorldMatrix;
+            Gizmos.color = Color.black;
+            Gizmos.DrawWireCube(bounds.center, bounds.size);
+        }
+        
         private void DrawBoundsGizmos(ref Bounds bounds)
         {
             Gizmos.matrix = booth.GetLocalToWorld();
-            Gizmos.color = Color.green;
+            Gizmos.color = Color.black;
             Gizmos.DrawWireCube(bounds.center, bounds.size + rangeOutIndicatorPadding);
         }
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace VitDeck.Validator.BoundsIndicators
 {
@@ -16,6 +17,22 @@ namespace VitDeck.Validator.BoundsIndicators
             get
             {
                 return collider.bounds;
+            }
+        }
+
+        public Bounds LocalBounds
+        {
+            get
+            {
+                return new Bounds();
+            }
+        }
+
+        public Matrix4x4 LocalToWorldMatrix
+        {
+            get
+            {
+                return Matrix4x4.identity;
             }
         }
 
