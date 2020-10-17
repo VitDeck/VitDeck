@@ -16,6 +16,10 @@ namespace VitDeck.Validator.BoundsIndicators
                 var filter = renderer.GetComponent<MeshFilter>();
                 localBoundsProvider = new MeshFilterLocalBoundProvider(filter);
             }
+            else if (renderer is SkinnedMeshRenderer skinnedMeshRenderer)
+            {
+                localBoundsProvider = new SkinnedMeshRendererLocalBoundsProvider(skinnedMeshRenderer);
+            }
         }
 
         public Bounds Bounds
