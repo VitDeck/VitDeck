@@ -524,8 +524,11 @@ namespace VitDeck.Validator
 
             #endregion
 
-            // UdonSharp
-            
+            #region UdonSharp
+
+            "c333ccfdd0cbdbc4ca30cef2dd6e6b9b",  // Assets/UdonSharp/Editor/UdonSharpProgramAsset.cs
+
+            #endregion
 
             #region VitDeck
 
