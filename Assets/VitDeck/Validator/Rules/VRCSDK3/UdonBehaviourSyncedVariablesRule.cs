@@ -35,6 +35,8 @@ namespace VitDeck.Validator
             var count = 0;
             foreach (var udonBehaviour in udonBehaviours)
             {
+                // ProgramSourceが無い場合はスキップ
+                if (udonBehaviour.programSource == null) continue;
                 // プログラムアセットを取得する
                 var program = udonBehaviour.programSource.SerializedProgramAsset.RetrieveProgram();
                 // SyncMetadataTableが無ければスキップ

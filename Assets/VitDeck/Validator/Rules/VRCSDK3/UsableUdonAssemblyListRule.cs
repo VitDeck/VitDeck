@@ -50,6 +50,8 @@ namespace VitDeck.Validator
             bool isIgnorePrefabInstance = IsIgnoredPrefab(component.gameObject);
             var isPrefabComponent = !PrefabUtility.IsAddedComponentOverride(component);
             if (isIgnorePrefabInstance && isPrefabComponent) return;
+            // ProgramSource が null の場合はスルー
+            if (component.programSource == null) return;
             
             // UdonProgramName
             var programName = component.programSource.name;
