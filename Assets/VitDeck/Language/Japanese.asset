@@ -585,3 +585,16 @@ MonoBehaviour:
   - Key: UdonAssemblyPhysicsCastFunctionRule.LayerMaskError.Solution
     Value: "\u95A2\u6570 [{0}] \u306E\u5F15\u6570 {1} \u3092 const _layerMask \u3067
       {2} \u3068\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044"
+  - Key: C02_StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap
+    Value: "Lightmap Static\u3092\u8A2D\u5B9A\u3057\u305F3D\u30E2\u30C7\u30EB\u306FImportSettings\u3067Generate
+      Lightmap UVs\u3092\u6709\u52B9\u306B\u3059\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002"
+  - Key: C02_StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.Solution
+    Value: 
+  - Key: C02_StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.SolutionURL
+    Value: 
+  - Key: C02_StaticFlagRule.LightmapStaticMeshShouldHaveUV2
+    Value: "Lightmap Static\u3092\u8A2D\u5B9A\u3057\u305F\u30E1\u30C3\u30B7\u30E5\u306FUV2\u3092\u6301\u3064\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002"
+  - Key: C02_StaticFlagRule.LightmapStaticMeshShouldHaveUV2.Solution
+    Value: 
+  - Key: C02_StaticFlagRule.LightmapStaticMeshShouldHaveUV2.SolutionURL
+    Value: 
