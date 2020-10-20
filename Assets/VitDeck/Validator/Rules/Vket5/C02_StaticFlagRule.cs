@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using VitDeck.Language;
@@ -76,7 +74,55 @@ namespace VitDeck.Validator
                     
                     AddIssue(new Issue(gameObject, IssueLevel.Error, message, solution, solutionURL));
                 }
+
+                if ((flag & StaticEditorFlags.LightmapStatic) != 0)
+                {
+                    foreach (var filter in gameObject.GetComponents<MeshFilter>())
+                    {
+                        if (filter == null) 
+                            continue;
+                            
+                        var mesh = filter.sharedMesh;
+                        if (mesh == null) // メッシュが設定されていない場合はチェック対象外
+                            continue;
+                            
+                        if (mesh.uv2.Length != 0) // uv2があればLightmapとして利用できる為問題なし
+                            continue;
+
+                        var assetPath = AssetDatabase.GetAssetPath(mesh);
+                        if (string.IsNullOrWhiteSpace(assetPath)) // 対象のメッシュがアセットでない
+                        {
+                            AddIssueForIndependentMeshWithoutUV2(filter);
+                            continue;
+                        }
+                            
+                        var importer = AssetImporter.GetAtPath(assetPath) as ModelImporter;
+                        if (importer == null) // 対象のメッシュのimporterがない（モデルインポートでないメッシュアセット）
+                        {
+                            AddIssueForIndependentMeshWithoutUV2(filter);
+                            continue;
+                        }
+
+                        if (!importer.generateSecondaryUV) // 対象のメッシュアセットのgenerateSecondaryUVが無効になっている
+                        {
+                            var message = LocalizedMessage.Get("C02_StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap");
+                            var solution = LocalizedMessage.Get("C02_StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.Solution");
+                            var solutionURL = LocalizedMessage.Get("C02_StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.SolutionURL");
+                        
+                            AddIssue(new Issue(filter, IssueLevel.Error, message, solution, solutionURL));
+                        }
+                    }
+                }
             }
+        }
+
+        private void AddIssueForIndependentMeshWithoutUV2(MeshFilter filter)
+        {
+            var message = LocalizedMessage.Get("C02_StaticFlagRule.LightmapStaticMeshShouldHaveUV2");
+            var solution = LocalizedMessage.Get("C02_StaticFlagRule.LightmapStaticMeshShouldHaveUV2.Solution");
+            var solutionURL = LocalizedMessage.Get("C02_StaticFlagRule.LightmapStaticMeshShouldHaveUV2.SolutionURL");
+
+            AddIssue(new Issue(filter, IssueLevel.Error, message, solution, solutionURL));
         }
     }
 }
