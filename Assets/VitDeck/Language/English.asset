@@ -605,3 +605,9 @@ MonoBehaviour:
       : {1} ({2})'
   - Key: UdonAssemblyPhysicsCastFunctionRule.LayerMaskError.Solution
     Value: Set argument {1} {2} as const _layerMask in the function {0}.
+  - Key: Vket5UdonRuleSetBase.X06_VRCStationCountLimitRule.Title
+    Value: '[X-06]VRCStation count must be kept under {0}'
+  - Key: VRCStationCountLimitRule.Overuse
+    Value: 'VRCStation count exceeded limit of {0}. (Current count: {1})'
+  - Key: VRCStationCountLimitRule.Overuse.Solution
+    Value: Please reduce the component count.

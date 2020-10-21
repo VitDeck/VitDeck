@@ -69,6 +69,14 @@ namespace VitDeck.Validator
             }
         }
 
+        protected override int VRCStationCountLimit
+        {
+            get
+            {
+                return 8;
+            }
+        }
+
         protected override LightConfigRule.LightConfig ApprovedPointLightConfig
         {
             get
