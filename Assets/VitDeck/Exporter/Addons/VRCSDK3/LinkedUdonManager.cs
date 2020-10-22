@@ -16,6 +16,7 @@ namespace VitDeck.Exporter.Addons.VRCSDK3
             var udonBehaviours = Resources.FindObjectsOfTypeAll<UdonBehaviour>();
             foreach (var udonBehaviour in udonBehaviours)
             {
+                if (udonBehaviour.programSource == null) continue;
                 var programName = udonBehaviour.programSource.SerializedProgramAsset.name;
                 var assetPath = _udonProgramBasePath + programName + ".asset";
                 var guid = AssetDatabase.AssetPathToGUID(assetPath);
