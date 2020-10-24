@@ -54,7 +54,7 @@ namespace VitDeck.Validator
             var gameObject = unityObject as GameObject;
             if (gameObject != null)
             {
-                if (PrefabUtility.GetPrefabType(unityObject) == PrefabType.MissingPrefabInstance)
+                if (PrefabUtility.GetPrefabInstanceStatus(unityObject) == PrefabInstanceStatus.MissingAsset)
                 {
                     missingPrefabInstances.Add(unityObject as GameObject);
                     return;

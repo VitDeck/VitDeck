@@ -33,12 +33,12 @@ namespace VitDeck.Validator
 
             foreach (var renderer in renderers)
             {
-                if (PrefabUtility.GetPrefabType(renderer.gameObject) == PrefabType.None)
+                if (PrefabUtility.GetPrefabAssetType(renderer.gameObject) == PrefabAssetType.NotAPrefab)
                 {
                     continue;
                 }
 
-                var prefabAsset = PrefabUtility.GetPrefabParent(renderer.gameObject);
+                var prefabAsset = PrefabUtility.GetCorrespondingObjectFromSource(renderer.gameObject);
                 var prefabAssetPath = AssetDatabase.GetAssetPath(prefabAsset);
 
                 foreach (var material in renderer.sharedMaterials)

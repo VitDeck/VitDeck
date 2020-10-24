@@ -22,8 +22,8 @@ namespace VitDeck.Validator
         {
             var objects = target
                 .GetAllObjects()
-                .Where(obj => PrefabUtility.GetPrefabType(obj) == PrefabType.PrefabInstance)
-                .Select(obj => PrefabUtility.FindPrefabRoot(obj))
+                .Where(obj => PrefabUtility.GetPrefabInstanceStatus(obj) == PrefabInstanceStatus.Connected)
+                .Select(PrefabUtility.GetOutermostPrefabInstanceRoot)
                 .Distinct()
                 .Where(IsTargetPrefabInstance)
                 .ToArray();
@@ -46,7 +46,7 @@ namespace VitDeck.Validator
 
         private bool IsTargetPrefabInstance(GameObject obj)
         {
-            var asset = PrefabUtility.GetPrefabParent(obj);
+            var asset = PrefabUtility.GetCorrespondingObjectFromSource(obj);
             var path = AssetDatabase.GetAssetPath(asset);
             var guid = AssetDatabase.AssetPathToGUID(path);
 

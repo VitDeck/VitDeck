@@ -26,8 +26,7 @@ namespace VitDeck.Validator
                 }
 
                 var prefabInstance = audioSources
-                    .Where(source => PrefabUtility.GetPrefabParent(source) == prefabObject)
-                    .Single();
+                    .Single(source => PrefabUtility.GetCorrespondingObjectFromSource<AudioSource>(source) == prefabObject);
 
                 if (mod.propertyPath == "Loop")
                 {
