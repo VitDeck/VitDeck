@@ -86,12 +86,12 @@ namespace VitDeck.Validator
                             else if (declaredType == typeof(GameObject))
                             {
                                 var go = value as GameObject;
-                                trans = go.transform;
+                                if(go != null) trans = go.transform;
                             }
                             else if (declaredType == typeof(UdonBehaviour))
                             {
                                 var ub = value as UdonBehaviour;
-                                trans = ub.transform;
+                                if(ub != null) trans = ub.transform;
                             }
                             // Scene 内配置を検証(Dunamicの子かどうか)
                             if (trans != null && !trans.IsChildOf(dynamicRoot))
