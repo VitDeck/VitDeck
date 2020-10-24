@@ -23,8 +23,8 @@ namespace VitDeck.Validator
         protected override void ComponentLogic(UdonBehaviour component)
         {
             // UdonProgramName
-            var name = component.programSource.name;
-            Debug.Log(name);
+            var udonProgramName = component.programSource.name;
+            Debug.Log(udonProgramName);
 
             // ノード一覧
             var graph = GetGraphData(component);

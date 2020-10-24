@@ -37,9 +37,9 @@ namespace VitDeck.Validator
                 }
             }
 
-            var UdonBehaviours = rootObject.transform.GetComponentsInChildren<UdonBehaviour>(true);
+            var udonBehaviours = rootObject.transform.GetComponentsInChildren<UdonBehaviour>(true);
             // UdonBehaviourが無い場合は帰る
-            if (UdonBehaviours == null || UdonBehaviours.Length == 0) return;
+            if (udonBehaviours == null || udonBehaviours.Length == 0) return;
 
             // UdonBehavioursがあるのにdynamicRootが無いのはエラー
             if (dynamicRoot == null)
@@ -53,7 +53,7 @@ namespace VitDeck.Validator
                 return;
             }
 
-            foreach (var udonBehaviour in UdonBehaviours)
+            foreach (var udonBehaviour in udonBehaviours)
             {
                 // UdonBehaviour がDynamicの子かどうかの検証
                 if (!udonBehaviour.transform.IsChildOf(dynamicRoot))
