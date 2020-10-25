@@ -605,6 +605,18 @@ MonoBehaviour:
       : {1} ({2})'
   - Key: UdonAssemblyPhysicsCastFunctionRule.LayerMaskError.Solution
     Value: Set argument {1} {2} as const _layerMask in the function {0}.
+  - Key: C02_StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap
+    Value: Models using Lightmap Static must be enabled Generate Lightmap UVs in ImportSetting.
+  - Key: C02_StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.Solution
+    Value: 
+  - Key: C02_StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.SolutionURL
+    Value: 
+  - Key: C02_StaticFlagRule.LightmapStaticMeshShouldHaveUV2
+    Value: Meshes using Lightmap Static must have UV2.
+  - Key: C02_StaticFlagRule.LightmapStaticMeshShouldHaveUV2.Solution
+    Value: Generate UV2 , or disable Lightmap Static.
+  - Key: C02_StaticFlagRule.LightmapStaticMeshShouldHaveUV2.SolutionURL
+    Value: 
   - Key: Vket5UdonRuleSetBase.X06_VRCStationCountLimitRule.Title
     Value: '[X-06]VRCStation count must be kept under {0}'
   - Key: VRCStationCountLimitRule.Overuse
