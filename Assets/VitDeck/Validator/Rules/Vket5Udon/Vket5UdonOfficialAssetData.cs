@@ -1606,6 +1606,12 @@ namespace VitDeck.Validator
             "d7a2d6aa4218cdd45854cd81900deba6",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/AvatarPedestal_Default_L.prefab
             "8134e8c0ab5943a479b31c509f2325fb",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/AvatarPedestal_Default_M.prefab
             "fb107661b9b479d4fa95452f7fd46426",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/AvatarPedestal_Default_S.prefab
+            "63af405779b7d6d44b64d709fb3fbdd7",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener2D_L.prefab
+            "ae8b674ab5516664ea5d5c535f5fbc6a",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener2D_M.prefab
+            "405b6beaa9b7b9947b9111840f170452",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener2D_S.prefab
+            "139aa3624bf91214dabb39362ccf4382",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_L.prefab
+            "4cb05397779ec7a48818e05b68c26960",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_M.prefab
+            "a4471dc2b540f9e46a5e36fe66ede5e9",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_S.prefab
         };
 
         public static string[] AudioSourcePrefabGUIDs = new string[]
