@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using VitDeck.Language;
-
 #if VRC_SDK_VRCSDK3
 using VRC.SDKBase;
 #elif VRC_SDK_VRCSDK2
@@ -103,17 +101,20 @@ namespace VitDeck.Validator
 
         private bool IsExcludedAsset(UnityEngine.Object obj)
         {
-            var prefabAsset = PrefabUtility.GetPrefabParent(obj);
+            if (PrefabUtility.IsPartOfPrefabInstance(obj))
+            {
+                var prefabObj = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
+                var path = AssetDatabase.GetAssetPath(prefabObj);
+                var guid = AssetDatabase.AssetPathToGUID(path);
+                var contains = excludedAssetGUIDs.Contains(guid);
+                Debug.Log($"[IsExcludedAsset]{obj} -> {path} , {guid} , {contains}", obj);
 
-            if (prefabAsset == null)
+                return contains;
+            }
+            else
             {
                 return false;
             }
-
-            var path = AssetDatabase.GetAssetPath(prefabAsset);
-            var guid = AssetDatabase.AssetPathToGUID(path);
-
-            return excludedAssetGUIDs.Contains(guid);
         }
     }
 #endif
