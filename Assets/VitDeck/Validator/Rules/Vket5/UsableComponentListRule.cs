@@ -46,8 +46,6 @@ namespace VitDeck.Validator
         {
             foreach (var gameObject in target.GetAllObjects())
             {
-                bool isIgnorePrefabInstance = IsIgnoredPrefab(gameObject);
-
                 var components = gameObject.GetComponents<Component>();
                 foreach (var component in components)
                 {
@@ -60,7 +58,7 @@ namespace VitDeck.Validator
                         continue;
                     }
                     var isPrefabComponent = !PrefabUtility.IsAddedComponentOverride(component);
-                    if (isIgnorePrefabInstance &&
+                    if (IsIgnoredComponent(component) &&
                         isPrefabComponent)
                     {
                         continue;
@@ -84,14 +82,15 @@ namespace VitDeck.Validator
             }
         }
 
-        private bool IsIgnoredPrefab(GameObject obj)
+        private bool IsIgnoredComponent(Component cp)
         {
-            if (PrefabUtility.GetPrefabInstanceStatus(obj) != PrefabInstanceStatus.Connected)
+            if (PrefabUtility.GetPrefabInstanceStatus(cp) != PrefabInstanceStatus.Connected)
             {
                 return false;
             }
 
-            var path = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(obj);
+            var prefabObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(cp);
+            var path = AssetDatabase.GetAssetPath(prefabObject);
             var guid = AssetDatabase.AssetPathToGUID(path);
 
             if (ignorePrefabs.Contains(guid))
