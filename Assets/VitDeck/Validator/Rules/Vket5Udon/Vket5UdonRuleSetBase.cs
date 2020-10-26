@@ -194,6 +194,9 @@ namespace VitDeck.Validator
                 // VRCStation は1ブースあたり 8 まで
                 new VRCStationCountLimitRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.VRCStationCountLimitRule.Title", VRCStationCountLimit), VRCStationCountLimit), 
 
+                // VRCSpatialAudioSourceを含むオブジェクトは全てDynamicオブジェクトの階層下に入れてください
+                new VRCSpatialAudioSourceDynamicObjectParentRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X07_SpatialAudioDynamicObjectParentRule.Title")), 
+
                 // UdonBehaviourによってオブジェクトをスペース外に移動させる行為は禁止
                 // ⇒ スタッフによる目視確認
 
