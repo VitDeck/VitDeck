@@ -30,17 +30,17 @@ namespace VitDeck.Validator
 
         protected bool IsTargetPrefabInstanceRoot(GameObject gameObject)
         {
-            if (PrefabUtility.GetPrefabType(gameObject) != PrefabType.PrefabInstance)
+            if (PrefabUtility.GetPrefabInstanceStatus(gameObject) != PrefabInstanceStatus.Connected)
             {
                 return false;
             }
 
-            if (PrefabUtility.FindPrefabRoot(gameObject) != gameObject)
+            if (PrefabUtility.GetOutermostPrefabInstanceRoot(gameObject) != gameObject)
             {
                 return false;
             }
 
-            var prefabObject = PrefabUtility.GetPrefabParent(gameObject);
+            var prefabObject = PrefabUtility.GetCorrespondingObjectFromSource(gameObject);
 
             var prefabPath = AssetDatabase.GetAssetPath(prefabObject);
 
@@ -56,10 +56,10 @@ namespace VitDeck.Validator
 
         protected T[] GetComponentsInChildrenSamePrefabInstance<T>(GameObject gameObject, bool includeInactive = false)
         {
-            var rootGameObject = PrefabUtility.FindPrefabRoot(gameObject);
+            var rootGameObject = PrefabUtility.GetOutermostPrefabInstanceRoot(gameObject);
 
             return gameObject.GetComponentsInChildren<Transform>(includeInactive)
-                .Where(tf => PrefabUtility.FindPrefabRoot(tf.gameObject) == rootGameObject)
+                .Where(tf => PrefabUtility.GetOutermostPrefabInstanceRoot(tf.gameObject) == rootGameObject)
                 .SelectMany(tf => tf.GetComponents<T>())
                 .ToArray();
         }

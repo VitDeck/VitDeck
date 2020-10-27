@@ -34,7 +34,7 @@ namespace VitDeck.Validator
 
         public bool IsTargetObject(Object target)
         {
-            var prefab = PrefabUtility.GetPrefabParent(target);
+            var prefab = PrefabUtility.GetCorrespondingObjectFromSource(target);
             if (prefab == null)
             {
                 return false;

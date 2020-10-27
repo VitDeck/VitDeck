@@ -31,7 +31,7 @@ namespace VitDeck.Validator
         /// <returns>存在する場合はtrueを返す</returns>
         public bool Exists(string code)
         {
-            return Array.Exists(fullNames, name => code.IndexOf(name) != -1 );
+            return Array.Exists(fullNames, checkAssemblyName => code.IndexOf(checkAssemblyName, StringComparison.Ordinal) != -1 );
         }
     }
 }

@@ -20,7 +20,6 @@ namespace VitDeck.Validator
         /// <param name="essentialsName">必要な引数の名称</param>
         /// <param name="fullNames">対象アセンブリの配列</param>
         /// <param name="essentialArgument">必要な引数</param>
-        /// <param name="level">検証レベル</param>
         public UdonAssemblyFunctionEssentialArgumentReference(string name, string essentialsName, string[] fullNames, string essentialArgument)
         {
             this.name = name;
@@ -35,7 +34,7 @@ namespace VitDeck.Validator
         /// <returns>存在する場合はtrueを返す</returns>
         public bool ExistsTargetFunction(string code)
         {
-            return Array.Exists(fullNames, name => code.IndexOf(name, StringComparison.Ordinal) != -1);
+            return Array.Exists(fullNames, checkFunctionName => code.IndexOf(checkFunctionName, StringComparison.Ordinal) != -1);
         }
         /// <summary>
         /// 必須引数が対象のアセンブリに含まれるか調べる。

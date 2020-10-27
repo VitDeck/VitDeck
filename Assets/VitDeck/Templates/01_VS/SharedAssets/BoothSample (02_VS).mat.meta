@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: ce62de801b8ad824bbf9ea504e021a28
+labels:
+- VitDeck.ReadOnly
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

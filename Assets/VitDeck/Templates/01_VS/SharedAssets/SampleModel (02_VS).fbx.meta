@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 6362e0045a29f474b9ac2460240b31ba
+labels:
+- VitDeck.ReadOnly
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:

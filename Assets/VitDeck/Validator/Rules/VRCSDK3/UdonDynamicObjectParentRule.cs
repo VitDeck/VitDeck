@@ -37,9 +37,9 @@ namespace VitDeck.Validator
                 }
             }
 
-            var UdonBehaviours = rootObject.transform.GetComponentsInChildren<UdonBehaviour>(true);
+            var udonBehaviours = rootObject.transform.GetComponentsInChildren<UdonBehaviour>(true);
             // UdonBehaviourが無い場合は帰る
-            if (UdonBehaviours == null || UdonBehaviours.Length == 0) return;
+            if (udonBehaviours == null || udonBehaviours.Length == 0) return;
 
             // UdonBehavioursがあるのにdynamicRootが無いのはエラー
             if (dynamicRoot == null)
@@ -53,7 +53,7 @@ namespace VitDeck.Validator
                 return;
             }
 
-            foreach (var udonBehaviour in UdonBehaviours)
+            foreach (var udonBehaviour in udonBehaviours)
             {
                 // UdonBehaviour がDynamicの子かどうかの検証
                 if (!udonBehaviour.transform.IsChildOf(dynamicRoot))
@@ -86,12 +86,12 @@ namespace VitDeck.Validator
                             else if (declaredType == typeof(GameObject))
                             {
                                 var go = value as GameObject;
-                                trans = go.transform;
+                                if(go != null) trans = go.transform;
                             }
                             else if (declaredType == typeof(UdonBehaviour))
                             {
                                 var ub = value as UdonBehaviour;
-                                trans = ub.transform;
+                                if(ub != null) trans = ub.transform;
                             }
                             // Scene 内配置を検証(Dunamicの子かどうか)
                             if (trans != null && !trans.IsChildOf(dynamicRoot))

@@ -17,11 +17,11 @@ namespace VitDeck.Validator
     /// </remarks>
     internal class UsableUdonAssemblyListRule : BaseUdonBehaviourRule
     {
-        private readonly UdonAssemblyReference[] references;
+        private readonly UdonAssemblyReference[] _references;
 
-        private readonly ValidationLevel unregisteredAssemblyValidationLevel;
+        private readonly ValidationLevel _unregisteredAssemblyValidationLevel;
 
-        private readonly HashSet<string> ignorePrefabs;
+        private readonly HashSet<string> _ignorePrefabs;
 
         /// <summary>
         /// コンストラクタ。
@@ -36,13 +36,13 @@ namespace VitDeck.Validator
             ValidationLevel unregisteredAssembly = ValidationLevel.ALLOW)
             : base(name)
         {
-            this.references = references ?? new UdonAssemblyReference[] { };
+            this._references = references ?? new UdonAssemblyReference[] { };
             if (ignorePrefabGUIDs == null)
             {
                 ignorePrefabGUIDs = new string[0];
             }
-            ignorePrefabs = new HashSet<string>(ignorePrefabGUIDs);
-            unregisteredAssemblyValidationLevel = unregisteredAssembly;
+            _ignorePrefabs = new HashSet<string>(ignorePrefabGUIDs);
+            _unregisteredAssemblyValidationLevel = unregisteredAssembly;
         }
 
         protected override void ComponentLogic(UdonBehaviour component)
@@ -50,6 +50,8 @@ namespace VitDeck.Validator
             bool isIgnorePrefabInstance = IsIgnoredPrefab(component.gameObject);
             var isPrefabComponent = !PrefabUtility.IsAddedComponentOverride(component);
             if (isIgnorePrefabInstance && isPrefabComponent) return;
+            // ProgramSource が null の場合はスルー
+            if (component.programSource == null) return;
             
             // UdonProgramName
             var programName = component.programSource.name;
@@ -59,7 +61,7 @@ namespace VitDeck.Validator
 
             // 探索
             bool found = false;
-            foreach (var reference in references)
+            foreach (var reference in _references)
             {
                 if (reference != null && reference.Exists(code))
                 {
@@ -70,41 +72,33 @@ namespace VitDeck.Validator
 
             if (!found)
             {
-                AddAssemblyIssue(LocalizedMessage.Get("UsableUdonAssemblyListRule.DefaultComponentGroupName"), component.gameObject, programName, unregisteredAssemblyValidationLevel);
+                AddAssemblyIssue(LocalizedMessage.Get("UsableUdonAssemblyListRule.DefaultComponentGroupName"), component.gameObject, programName, _unregisteredAssemblyValidationLevel);
             }
         }
 
 
         private bool IsIgnoredPrefab(GameObject obj)
         {
-            if (PrefabUtility.GetPrefabType(obj) != PrefabType.PrefabInstance)
+            if (PrefabUtility.GetPrefabInstanceStatus(obj) !=PrefabInstanceStatus.Connected)
             {
                 return false;
             }
 
-            var asset = PrefabUtility.GetPrefabParent(obj);
+            var asset = PrefabUtility.GetCorrespondingObjectFromSource(obj);
             var path = AssetDatabase.GetAssetPath(asset);
             var guid = AssetDatabase.AssetPathToGUID(path);
 
-            if (ignorePrefabs.Contains(guid))
-            {
-                return true;
-            }
-
-
-            return false;
+            return _ignorePrefabs.Contains(guid);
         }
 
-        private void AddAssemblyIssue(string name, GameObject obj, string AssemblyName, ValidationLevel level)
+        private void AddAssemblyIssue(string objectName, GameObject obj, string assemblyName, ValidationLevel level)
         {
-            string message;
-
             switch (level)
             {
                 case ValidationLevel.ALLOW:
                     break;
                 case ValidationLevel.DISALLOW:
-                    message = LocalizedMessage.Get("UsableUdonAssemblyListRule.Disallow", AssemblyName, name);
+                    var message = LocalizedMessage.Get("UsableUdonAssemblyListRule.Disallow", assemblyName, objectName);
                     AddIssue(new Issue(obj, IssueLevel.Error, message, string.Empty, string.Empty));
                     break;
             }

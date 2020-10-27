@@ -1,6 +1,7 @@
 #if VRC_SDK_VRCSDK3
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
@@ -23,14 +24,14 @@ namespace VitDeck.Validator
         private const float _maxDistance = 10.0f; // 0.0f < x <= 10.0f あれば任意
         private const int _layerMask = 8388608;  // Layer23 mask (固定値)
 
-        private readonly UdonAssemblyFunctionEssentialArgumentReference[] references;
+        private readonly UdonAssemblyFunctionEssentialArgumentReference[] _references;
 
         public enum AssemblyArgumentReferenceError
         {
             NoErrors, InvalidArguments, MaxDistanceError, LayerMaskError
         }
 
-        private readonly HashSet<string> ignorePrefabs;
+        private readonly HashSet<string> _ignorePrefabs;
 
         /// <summary>
         /// コンストラクタ。
@@ -43,12 +44,12 @@ namespace VitDeck.Validator
             string[] ignorePrefabGUIDs = null)
             : base(name)
         {
-            this.references = references ?? new UdonAssemblyFunctionEssentialArgumentReference[] { };
+            this._references = references ?? new UdonAssemblyFunctionEssentialArgumentReference[] { };
             if (ignorePrefabGUIDs == null)
             {
                 ignorePrefabGUIDs = new string[0];
             }
-            ignorePrefabs = new HashSet<string>(ignorePrefabGUIDs);
+            _ignorePrefabs = new HashSet<string>(ignorePrefabGUIDs);
         }
 
         protected override void ComponentLogic(UdonBehaviour component)
@@ -56,6 +57,8 @@ namespace VitDeck.Validator
             bool isIgnorePrefabInstance = IsIgnoredPrefab(component.gameObject);
             var isPrefabComponent = !PrefabUtility.IsAddedComponentOverride(component);
             if (isIgnorePrefabInstance && isPrefabComponent) return;
+            // ProgramSource が null の場合はスルー
+            if (component.programSource == null) return;
             
             // UdonProgramName
             var programName = component.programSource.name;
@@ -74,15 +77,15 @@ namespace VitDeck.Validator
             foreach (var row in rows)
             {
                 var assembly = row.Split(' ');
-                foreach (var reference in references)
+                foreach (var reference in _references)
                 {
                     // ターゲットの関数検索
                     if (reference == null || !reference.ExistsTargetFunction(row)) continue;
                     if (reference.ExistsEssentialArguments(row))
                     {
                         // エラーの分類
-                        var _error = CheckArgumentValues(heap, pushStack, assembly[2].Trim('"'), reference.essentialArgument, out var detail);
-                        switch (_error)
+                        var error = CheckArgumentValues(heap, pushStack, assembly[2].Trim('"'), reference.essentialArgument, out var detail);
+                        switch (error)
                         {
                             case AssemblyArgumentReferenceError.InvalidArguments:
                                 AddIssue(new Issue(component, IssueLevel.Error,
@@ -128,16 +131,16 @@ namespace VitDeck.Validator
 
         private bool IsIgnoredPrefab(GameObject obj)
         {
-            if (PrefabUtility.GetPrefabType(obj) != PrefabType.PrefabInstance)
+            if (PrefabUtility.GetPrefabInstanceStatus(obj) != PrefabInstanceStatus.Connected)
             {
                 return false;
             }
 
-            var asset = PrefabUtility.GetPrefabParent(obj);
+            var asset = PrefabUtility.GetCorrespondingObjectFromSource(obj);
             var path = AssetDatabase.GetAssetPath(asset);
             var guid = AssetDatabase.AssetPathToGUID(path);
 
-            if (ignorePrefabs.Contains(guid))
+            if (_ignorePrefabs.Contains(guid))
             {
                 return true;
             }
@@ -162,7 +165,7 @@ namespace VitDeck.Validator
                     if (maxDistance > _maxDistance)
                     {
                         // MaxDistanceエラー
-                        detail = maxDistance.ToString();
+                        detail = maxDistance.ToString(CultureInfo.InvariantCulture);
                         return AssemblyArgumentReferenceError.MaxDistanceError;
                     }
 

@@ -13,10 +13,10 @@ namespace VitDeck.Validator
     /// </summary>
     public class UdonBehaviourSyncedVariablesRule : BaseRule
     {
-        private readonly int limit;
+        private readonly int _limit;
         public UdonBehaviourSyncedVariablesRule(string name, int limit) : base(name)
         {
-            this.limit = limit;
+            this._limit = limit;
         }
 
         protected override void Logic(ValidationTarget target)
@@ -35,6 +35,8 @@ namespace VitDeck.Validator
             var count = 0;
             foreach (var udonBehaviour in udonBehaviours)
             {
+                // ProgramSourceが無い場合はスキップ
+                if (udonBehaviour.programSource == null) continue;
                 // プログラムアセットを取得する
                 var program = udonBehaviour.programSource.SerializedProgramAsset.RetrieveProgram();
                 // SyncMetadataTableが無ければスキップ
@@ -59,12 +61,12 @@ namespace VitDeck.Validator
                 }
             }
 
-            if (count > limit)
+            if (count > _limit)
             {
                 AddIssue(new Issue(
                     rootObject,
                     IssueLevel.Error,
-                    LocalizedMessage.Get("UdonBehaviourSyncedVariablesRule.Overuse", limit, count),
+                    LocalizedMessage.Get("UdonBehaviourSyncedVariablesRule.Overuse", _limit, count),
                     LocalizedMessage.Get("UdonBehaviourSyncedVariablesRule.Overuse.Solution")));
             }
         }

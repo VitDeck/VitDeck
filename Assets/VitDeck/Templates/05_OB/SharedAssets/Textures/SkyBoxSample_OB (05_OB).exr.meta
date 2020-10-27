@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: bbcc3d88b77008e4eb2a48a4bff17504
+labels:
+- VitDeck.ReadOnly
 TextureImporter:
   fileIDToRecycleName:
     8900000: generatedCubemap

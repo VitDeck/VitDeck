@@ -11,10 +11,10 @@ namespace VitDeck.Validator
     /// </summary>
     public class UdonBehaviourSynchronizePositionCountLimitRule : BaseRule
     {
-        private readonly int limit;
+        private readonly int _limit;
         public UdonBehaviourSynchronizePositionCountLimitRule(string name, int limit) : base(name)
         {
-            this.limit = limit;
+            this._limit = limit;
         }
 
         protected override void Logic(ValidationTarget target)
@@ -36,14 +36,14 @@ namespace VitDeck.Validator
                 if (udonBehaviour.SynchronizePosition) count++;
             }
 
-            if (count > limit)
+            if (count > _limit)
             {
                 foreach (var trigger in udonBehaviours)
                 {
                     AddIssue(new Issue(
                         trigger.gameObject,
                         IssueLevel.Error,
-                        LocalizedMessage.Get("UdonBehaviourSynchronizePositionCountLimitRule.Overuse", limit, count),
+                        LocalizedMessage.Get("UdonBehaviourSynchronizePositionCountLimitRule.Overuse", _limit, count),
                         LocalizedMessage.Get("UdonBehaviourSynchronizePositionCountLimitRule.Overuse.Solution")));
                 }
             }

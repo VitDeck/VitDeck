@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 2e41b2dfec7658d44894d1874b567f4b
+labels:
+- VitDeck.ReadOnly
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
