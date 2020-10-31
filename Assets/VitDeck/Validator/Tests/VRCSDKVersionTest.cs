@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace VitDeck.Validator
 {
-    [TestFixture(TestOf = typeof(A02_VRCSDKVersionRule))]
+    [TestFixture(TestOf = typeof(VRCSDKVersionRule))]
     public class VRCSDKVersionTest
     {
         [Test]
