@@ -570,6 +570,7 @@ namespace VitDeck.Validator
             "86487b9f4f81a774a9c49d53278c76cf",  // Assets/VketAssets/Prefabs/AvatarPedestal/Textures/Button.png
             "62f7352a395147043809a2d315af37ae",  // Assets/VketAssets/Prefabs/AvatarPedestal/Textures/Change Avatar.png
             "96c692c63aeba764081c1e04790fd3f1",  // Assets/VketAssets/Prefabs/AvatarPedestal/Textures/Sample.png
+            "109a7475f1e5fd74ea8ac3ebd42ab182",  // Assets/VketAssets/Prefabs/VketLauncher/VketLauncher.dll
             "59261512e4100df488de6ddd9b530829",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/AvatarPedestal_2D_L.prefab
             "3e6652d46d6d66d4092650094b064987",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/AvatarPedestal_2D_M.prefab
             "87a721a2eb0c25643a5eb305781dc3a8",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/AvatarPedestal_2D_S.prefab
@@ -587,6 +588,7 @@ namespace VitDeck.Validator
             "68bbad9fbab0708449c847419d62a17e",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/Animation/Deactive_3D.anim
             "6b468349f6cba0248a76b7d33570fbad",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/Animation/Idle_2D.anim
             "8d5e148b91b24cf4dae7e22e010f7603",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/Animation/Idle_3D.anim
+            "8efcb83444471ae4f99c5f5fecdd3e6e",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/Scripts/AvatarPedestal Udon C# Program Asset.asset
             "0d2cf2386895ff5499a1660a4327ad75",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/Scripts/AvatarPedestal.asset
             "63af405779b7d6d44b64d709fb3fbdd7",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener2D_L.prefab
             "ae8b674ab5516664ea5d5c535f5fbc6a",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener2D_M.prefab
@@ -594,12 +596,6 @@ namespace VitDeck.Validator
             "139aa3624bf91214dabb39362ccf4382",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_L.prefab
             "4cb05397779ec7a48818e05b68c26960",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_M.prefab
             "a4471dc2b540f9e46a5e36fe66ede5e9",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_S.prefab
-            "a8f4c2fad36a72340b13a226af201c06",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/ItemPageOpener2D_L.prefab
-            "5e3bce2103d11414592adb2ec1ca24a6",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/ItemPageOpener2D_M.prefab
-            "2ec4a406efaf5124fb79135ecb55580e",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/ItemPageOpener2D_S.prefab
-            "8029d591dfcb7ce4e8b8aaaf09a20192",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/ItemPageOpener3D_L.prefab
-            "5df0fdeda3453104e874b9a8b5986205",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/ItemPageOpener3D_M.prefab
-            "168fa6a9a48c7f74da629c5d67a31a52",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/ItemPageOpener3D_S.prefab
             "af49ba9be5e5e2149b9c6dfa6decec82",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/Active_2D.anim
             "f770e16ed5ac5c149b9e34d271b9fea4",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/Active_3D.anim
             "251fd152628ba744899b986ab59ff7d3",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/CirclePageOpener_2D.controller
@@ -610,9 +606,10 @@ namespace VitDeck.Validator
             "ff7931a8fe75c2142a4e83797c8c21e9",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/Idle_3D.anim
             "26ac8287216792149b49a2db74fc0309",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/Open_2D.anim
             "72fddf1509a7339498051122d1da2ce5",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/Open_3D.anim
+            "64d15967613adfa44a4c6926b6b9d714",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Scripts/CirclePageOpener Udon C# Program Asset.asset
             "6ea1e8fa7533f9647996810212fa976e",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Scripts/CirclePageOpener.asset
-            "171b9d597b1e63f4590b8d754491769a",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Textures/BUY.png
             "304812fb2352c7c419581d8f68b23f94",  // Assets/VketAssets/UdonPrefabs/Udon_PickupObjectSync/PickupObjectSync.prefab
+            "e3fd1bb74f6500f4aac868dd0c369b03",  // Assets/VketAssets/UdonPrefabs/Udon_PickupObjectSync/Scripts/AutoResetPickup Udon C# Program Asset.asset
             "73398b290b7c5ec43a2e158bfc1c45db",  // Assets/VketAssets/UdonPrefabs/Udon_PickupObjectSync/Scripts/AutoResetPickup.asset
 
             #endregion
@@ -1609,6 +1606,12 @@ namespace VitDeck.Validator
             "d7a2d6aa4218cdd45854cd81900deba6",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/AvatarPedestal_Default_L.prefab
             "8134e8c0ab5943a479b31c509f2325fb",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/AvatarPedestal_Default_M.prefab
             "fb107661b9b479d4fa95452f7fd46426",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/AvatarPedestal_Default_S.prefab
+            "63af405779b7d6d44b64d709fb3fbdd7",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener2D_L.prefab
+            "ae8b674ab5516664ea5d5c535f5fbc6a",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener2D_M.prefab
+            "405b6beaa9b7b9947b9111840f170452",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener2D_S.prefab
+            "139aa3624bf91214dabb39362ccf4382",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_L.prefab
+            "4cb05397779ec7a48818e05b68c26960",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_M.prefab
+            "a4471dc2b540f9e46a5e36fe66ede5e9",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_S.prefab
         };
 
         public static string[] AudioSourcePrefabGUIDs = new string[]
