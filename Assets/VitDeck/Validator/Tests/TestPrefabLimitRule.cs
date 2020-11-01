@@ -30,7 +30,7 @@ namespace VitDeck.Validator.Test
             var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/PrefabLimitRule", true);
             var result = rule.Validate(target);
 
-            Assert.That(result.Issues.Count, Is.EqualTo(4));
+            Assert.That(result.Issues.Count, Is.EqualTo(1));
             
             foreach(var issue in result.Issues)
             {
