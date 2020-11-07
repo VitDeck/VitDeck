@@ -1619,6 +1619,12 @@ namespace VitDeck.Validator
             "a4471dc2b540f9e46a5e36fe66ede5e9",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_S.prefab
         };
 
+        public static string[] SizeIgnorePrefabGUIDs = new string[]
+        {
+            "e6d5c31911ec7404e8b613767bc9c944",  // Assets/VketAssets/UdonPrefabs/Udon_WorldBGMFade/WorldBGMFade.prefab
+        };
+
+
         public static string[] AudioSourcePrefabGUIDs = new string[]
         {
         };

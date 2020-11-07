@@ -73,7 +73,9 @@ namespace VitDeck.Validator
 
                 new BoothBoundsRule(LocalizedMessage.Get("Vket5RuleSetBase.BoothBoundsRule.Title"),
                     size: BoothSizeLimit,
-                    margin: 0.01f),
+                    margin: 0.01f,
+                    Vector3.zero,
+                    Vket5UdonOfficialAssetData.SizeIgnorePrefabGUIDs),
 
                 new AssetTypeLimitRule(
                     LocalizedMessage.Get("Vket5RuleSetBase.MaterialLimitRule.Title", MaterialUsesLimit),
