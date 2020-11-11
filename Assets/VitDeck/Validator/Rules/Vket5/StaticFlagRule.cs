@@ -109,7 +109,7 @@ namespace VitDeck.Validator
                             var solution = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.Solution");
                             var solutionURL = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.SolutionURL");
                         
-                            AddIssue(new Issue(filter, IssueLevel.Error, message, solution, solutionURL));
+                            AddIssue(new Issue(filter, IssueLevel.Warning, message, solution, solutionURL));
                         }
                     }
                 }
@@ -122,7 +122,7 @@ namespace VitDeck.Validator
             var solution = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshShouldHaveUV2.Solution");
             var solutionURL = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshShouldHaveUV2.SolutionURL");
 
-            AddIssue(new Issue(filter, IssueLevel.Error, message, solution, solutionURL));
+            AddIssue(new Issue(filter, IssueLevel.Warning, message, solution, solutionURL));
         }
     }
 }
