@@ -147,7 +147,8 @@ namespace VitDeck.Validator
 
                 new AudioSourcePrefabRule(LocalizedMessage.Get("Vket5RuleSetBase.AudioSourcePrefabRule.Title"),  Vket5UdonOfficialAssetData.AudioSourcePrefabGUIDs),
 
-                new RigidbodyRule(LocalizedMessage.Get("Vket5RuleSetBase.RigidbodyRule.Title")),
+                //// UdonCube では IsKinematic = False を許可する 
+                // new RigidbodyRule(LocalizedMessage.Get("Vket5RuleSetBase.RigidbodyRule.Title")),
 
                 new PrefabLimitRule(
                     LocalizedMessage.Get("Vket5RuleSetBase.UnusabePrefabRule.Title", ChairPrefabUsesLimit),
