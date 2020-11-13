@@ -133,7 +133,7 @@ MonoBehaviour:
   - Key: PostProcessingExistsRule.NotInstalled.SolutionURL
     Value: 
   - Key: AssetGuidBlacklistRule.UnauthorizedAssetDetected
-    Value: 'Failed to move asset into the submissions folder: {0}'
+    Value: 'The following asset(s) cannot be placed in the submission folder:'
   - Key: AssetGuidBlacklistRule.UnauthorizedAssetDetected.Solution
     Value: Please move all uneditable or read only files out of the submissions folder
   - Key: AssetNamingRule.UnauthorizedTextDetected
