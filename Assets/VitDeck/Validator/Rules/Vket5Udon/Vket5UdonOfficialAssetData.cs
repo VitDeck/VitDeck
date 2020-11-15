@@ -611,6 +611,11 @@ namespace VitDeck.Validator
             "304812fb2352c7c419581d8f68b23f94",  // Assets/VketAssets/UdonPrefabs/Udon_PickupObjectSync/PickupObjectSync.prefab
             "e3fd1bb74f6500f4aac868dd0c369b03",  // Assets/VketAssets/UdonPrefabs/Udon_PickupObjectSync/Scripts/AutoResetPickup Udon C# Program Asset.asset
             "73398b290b7c5ec43a2e158bfc1c45db",  // Assets/VketAssets/UdonPrefabs/Udon_PickupObjectSync/Scripts/AutoResetPickup.asset
+            "47accc564d52c0e4abc61201a680477a",  // Assets/VketAssets/UdonPrefabs/Udon_WorldBGMFade/FadeIn.anim
+            "f3c75b315c1b019409bf422bfa5ac0fc",  // Assets/VketAssets/UdonPrefabs/Udon_WorldBGMFade/FadeOut.anim
+            "79cc3ed8171a44e44a01c2100e57cb0b",  // Assets/VketAssets/UdonPrefabs/Udon_WorldBGMFade/Idle.anim
+            "4f06c6b6d95c99e4c9eba1761a599fd6",  // Assets/VketAssets/UdonPrefabs/Udon_WorldBGMFade/WorldBGMFade.controller
+            "e6d5c31911ec7404e8b613767bc9c944",  // Assets/VketAssets/UdonPrefabs/Udon_WorldBGMFade/WorldBGMFade.prefab
 
             #endregion
 
@@ -1613,6 +1618,12 @@ namespace VitDeck.Validator
             "4cb05397779ec7a48818e05b68c26960",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_M.prefab
             "a4471dc2b540f9e46a5e36fe66ede5e9",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_S.prefab
         };
+
+        public static string[] SizeIgnorePrefabGUIDs = new string[]
+        {
+            "e6d5c31911ec7404e8b613767bc9c944",  // Assets/VketAssets/UdonPrefabs/Udon_WorldBGMFade/WorldBGMFade.prefab
+        };
+
 
         public static string[] AudioSourcePrefabGUIDs = new string[]
         {

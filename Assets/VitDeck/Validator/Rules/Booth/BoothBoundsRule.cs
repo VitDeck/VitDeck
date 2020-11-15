@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEditor;
 using VitDeck.Language;
 using VitDeck.Validator.BoundsIndicators;
 
@@ -17,6 +18,8 @@ namespace VitDeck.Validator
         private readonly Bounds limit;
         private readonly float margin;
         private readonly string floatToStringArgument;
+
+        private readonly HashSet<string> ignoreIDSet;
 
         // ルールをValidation毎に生成する場合indicatorResetter.Reset()が叩かれなくなってしまう為、staticに設定
         private static ResetTokenSource indicatorResetter = null;
@@ -48,6 +51,19 @@ namespace VitDeck.Validator
                 .Select(ToDecimalPlaces)
                 .Max();
             floatToStringArgument = string.Format("f{0}", maxDecimalPlaces + 1);
+        }
+
+        /// <summary>
+        /// コンストラクタ。
+        /// </summary>
+        /// <param name="name">ルールの名前</param>
+        /// <param name="size">バウンディングボックスの大きさ</param>
+        /// <param name="margin">制限に持たせる余裕</param>
+        /// <param name="pivot">バウンディングボックスの原点（中心下）</param>
+        /// <param name="guids">無視するguid</param>
+        public BoothBoundsRule(string name, Vector3 size, float margin, Vector3 pivot, string[] guids) :this(name, size, margin, pivot)
+        {
+            ignoreIDSet = new HashSet<string>(guids);
         }
 
         private int ToDecimalPlaces(float val)
@@ -87,6 +103,7 @@ namespace VitDeck.Validator
             var exceeds = rootObject
                 .GetComponentsInChildren<Transform>(true)
                 .Select(transform => transform.gameObject)
+                .Where(obj => !IsExcludeGuid(obj))
                 .SelectMany(GetObjectBounds)
                 .Where(data => IsExceeded(data.bounds, validationLimit));
 
@@ -156,6 +173,15 @@ namespace VitDeck.Validator
             return
                 !limit.Contains(bounds.min) ||
                 !limit.Contains(bounds.max);
+        }
+
+        private bool IsExcludeGuid(Object obj)
+        {
+            if (ignoreIDSet == null) return false;
+            var sourceObject = PrefabUtility.GetCorrespondingObjectFromSource(obj);
+            if (sourceObject == null) return false;
+            AssetDatabase.TryGetGUIDAndLocalFileIdentifier(sourceObject, out var guid, out long _);
+            return ignoreIDSet.Contains(guid);
         }
 
         private static IEnumerable<BoundsData> GetObjectBounds(GameObject gameObject)

@@ -73,7 +73,9 @@ namespace VitDeck.Validator
 
                 new BoothBoundsRule(LocalizedMessage.Get("Vket5RuleSetBase.BoothBoundsRule.Title"),
                     size: BoothSizeLimit,
-                    margin: 0.01f),
+                    margin: 0.01f,
+                    Vector3.zero,
+                    Vket5UdonOfficialAssetData.SizeIgnorePrefabGUIDs),
 
                 new AssetTypeLimitRule(
                     LocalizedMessage.Get("Vket5RuleSetBase.MaterialLimitRule.Title", MaterialUsesLimit),
@@ -194,6 +196,12 @@ namespace VitDeck.Validator
                 // VRCStation は1ブースあたり 8 まで
                 new VRCStationCountLimitRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.VRCStationCountLimitRule.Title", VRCStationCountLimit), VRCStationCountLimit), 
 
+                // VRCSpatialAudioSourceを含むオブジェクトは全てDynamicオブジェクトの階層下に入れてください
+                new VRCSpatialAudioSourceDynamicObjectParentRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X07_SpatialAudioDynamicObjectParentRule.Title")), 
+
+                // VRCPickup は UdonBehaviour [AutoResetPickup] を持つ必要があります。
+                new VRCPickupUdonBehaviourRule(LocalizedMessage.Get("Vket5UdonRuleSetBase.X08_VRCPickupUdonBehaviourRule.Title")), 
+
                 // UdonBehaviourによってオブジェクトをスペース外に移動させる行為は禁止
                 // ⇒ スタッフによる目視確認
 
@@ -286,7 +294,7 @@ namespace VitDeck.Validator
                 // VRCSDK3
                 //// VRC_Trigger is obsolete. Use instead Udon Behaviour
                 new ComponentReference("VRC Trigger", new string[]{"VRC.SDKBase.VRC_Trigger", "VRC.SDK3.Components.VRCTrigger"}, ValidationLevel.DISALLOW),
-                new ComponentReference("VRC Pickup", new string[]{"VRC.SDKBase.VRC_Pickup", "VRC.SDK3.Components.VRCPickup"}, ValidationLevel.DISALLOW),
+                new ComponentReference("VRC Pickup", new string[]{"VRC.SDKBase.VRC_Pickup", "VRC.SDK3.Components.VRCPickup"}, ValidationLevel.ALLOW),
                 new ComponentReference("VRC Station", new string[]{"VRC.SDKBase.VRCStation", "VRC.SDK3.Components.VRCStation"}, ValidationLevel.ALLOW),
                 new ComponentReference("VRC Avatar Pedestal", new string[]{"VRC.SDKBase.VRC_AvatarPedestal", "VRC.SDK3.Components.VRCAvatarPedestal"}, ValidationLevel.DISALLOW),
                 new ComponentReference("VRC Mirror Reflection", new string[]{"VRC.SDKBase.VRC_MirrorReflection", "VRC.SDK3.Components.VRC_MirrorReflection"}, ValidationLevel.DISALLOW),
