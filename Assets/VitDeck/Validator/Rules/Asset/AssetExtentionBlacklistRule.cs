@@ -46,9 +46,10 @@ namespace VitDeck.Validator
             }
             var hitPaths = target.GetAllAssetPaths()
                 .Where(targetPath => extList.Exists(ext => ext.Equals(Path.GetExtension(targetPath), StringComparison.InvariantCultureIgnoreCase)));
+            var baseFolderPath = target.GetBaseFolderPath();
             foreach (var path in hitPaths)
             {
-                if (AssetDatabase.IsValidFolder(path))
+                if (AssetDatabase.IsValidFolder(path) || !path.StartsWith(baseFolderPath))
                     continue;
                 var obj = AssetDatabase.LoadMainAssetAtPath(path);
                 var message = LocalizedMessage.Get("AssetExtentionBlacklistRule.UnauthorizedExtention", Path.GetExtension(path)) + Environment.NewLine + path;
