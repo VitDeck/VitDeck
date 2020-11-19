@@ -570,6 +570,8 @@ namespace VitDeck.Validator
             "86487b9f4f81a774a9c49d53278c76cf",  // Assets/VketAssets/Prefabs/AvatarPedestal/Textures/Button.png
             "62f7352a395147043809a2d315af37ae",  // Assets/VketAssets/Prefabs/AvatarPedestal/Textures/Change Avatar.png
             "96c692c63aeba764081c1e04790fd3f1",  // Assets/VketAssets/Prefabs/AvatarPedestal/Textures/Sample.png
+            "2c70a653a699f5c4b9c51c2160786525",  // Assets/VketAssets/Prefabs/CirclePageOpener/Components/CirclePageOpener.dll
+            "171b9d597b1e63f4590b8d754491769a",  // Assets/VketAssets/Prefabs/CirclePageOpener/Textures/BUY.png
             "109a7475f1e5fd74ea8ac3ebd42ab182",  // Assets/VketAssets/Prefabs/VketLauncher/VketLauncher.dll
             "59261512e4100df488de6ddd9b530829",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/AvatarPedestal_2D_L.prefab
             "3e6652d46d6d66d4092650094b064987",  // Assets/VketAssets/UdonPrefabs/Udon_AvatarPedestal/AvatarPedestal_2D_M.prefab
@@ -596,6 +598,8 @@ namespace VitDeck.Validator
             "139aa3624bf91214dabb39362ccf4382",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_L.prefab
             "4cb05397779ec7a48818e05b68c26960",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_M.prefab
             "a4471dc2b540f9e46a5e36fe66ede5e9",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/CirclePageOpener3D_S.prefab
+            "cfec853519dd4de4690152f16894cd49",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/ItemPageOpener2D.prefab
+            "91bb88e5f85d499488ebe6a238b396a3",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/ItemPageOpener3D.prefab
             "af49ba9be5e5e2149b9c6dfa6decec82",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/Active_2D.anim
             "f770e16ed5ac5c149b9e34d271b9fea4",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/Active_3D.anim
             "251fd152628ba744899b986ab59ff7d3",  // Assets/VketAssets/UdonPrefabs/Udon_CirclePageOpener/Animations/CirclePageOpener_2D.controller
