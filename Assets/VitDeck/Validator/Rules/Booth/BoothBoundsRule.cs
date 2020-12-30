@@ -198,7 +198,7 @@ namespace VitDeck.Validator
 
             foreach (var renderer in gameObject.GetComponents<Renderer>())
             {
-                yield return BoundsData.FromRenderer(renderer);
+                if (!(renderer is TrailRenderer)) yield return BoundsData.FromRenderer(renderer);
             }
 
             foreach (var collider in gameObject.GetComponents<Collider>())
@@ -262,13 +262,13 @@ namespace VitDeck.Validator
                 var particleSystem = renderer.gameObject.GetComponent<ParticleSystem>();
                 if (particleSystem != null)
                     particleSystem.Simulate(0f);
-                //Reculculate bounds for TrailRenderer
-                if (renderer is TrailRenderer)
-                {
-                    var originalFlag = renderer.enabled;
-                    renderer.enabled = !originalFlag;
-                    renderer.enabled = originalFlag;
-                }
+                // //Reculculate bounds for TrailRenderer
+                // if (renderer is TrailRenderer)
+                // {
+                //     var originalFlag = renderer.enabled;
+                //     renderer.enabled = !originalFlag;
+                //     renderer.enabled = originalFlag;
+                // }
                 return new BoundsData(renderer, renderer.bounds);
             }
 
