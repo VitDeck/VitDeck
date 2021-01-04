@@ -21,90 +21,90 @@ MonoBehaviour:
     Value: Rule verification completed successfully
   - Key: ValidatorWindow.ValidationAborted
     Value: Rule verification aborted
-  - Key: Vket5TargetFinder.PackageFolderNotFound
+  - Key: VketTargetFinder.PackageFolderNotFound
     Value: Submissions folder not found
-  - Key: Vket5TargetFinder.ExhibitNotFound
+  - Key: VketTargetFinder.ExhibitNotFound
     Value: Submissions not found
-  - Key: Vket5TargetFinder.ManyExhibits
+  - Key: VketTargetFinder.ManyExhibits
     Value: Submission duplicates found
-  - Key: Vket5TargetFinder.SceneNotFound
+  - Key: VketTargetFinder.SceneNotFound
     Value: Submission scene ({0}) not found
-  - Key: Vket5TargetFinder.SceneOpenDialog.Title
+  - Key: VketTargetFinder.SceneOpenDialog.Title
     Value: Unable to open target scene
-  - Key: Vket5TargetFinder.SceneOpenDialog
+  - Key: VketTargetFinder.SceneOpenDialog
     Value: Submissions scene must be open for validation procedure
-  - Key: Vket5TargetFinder.SceneOpenDialog.Continue
+  - Key: VketTargetFinder.SceneOpenDialog.Continue
     Value: Run
-  - Key: Vket5TargetFinder.SceneOpenDialog.Abort
+  - Key: VketTargetFinder.SceneOpenDialog.Abort
     Value: Abord
-  - Key: Vket5TargetFinder.ValidationAborted
+  - Key: VketTargetFinder.ValidationAborted
     Value: Validation is aborted
-  - Key: Vket5TargetFinder.UserDidntSave
+  - Key: VketTargetFinder.UserDidntSave
     Value: Please save all changes and try again
-  - Key: Vket5RuleSetBase.UnityVersionRule.Title
+  - Key: VketRuleSetBase.UnityVersionRule.Title
     Value: Must use Unity version {0}
-  - Key: Vket5RuleSetBase.VRCSDKVersionRule.Title
+  - Key: VketRuleSetBase.VRCSDKVersionRule.Title
     Value: Please use the latest Unity version as supported by VRCSDK
-  - Key: Vket5RuleSetBase.ExistInSubmitFolderRule.Title
+  - Key: VketRuleSetBase.ExistInSubmitFolderRule.Title
     Value: Unrelated objects are found within the submissions folder
-  - Key: Vket5RuleSetBase.OfficialAssetDontContainRule.Title
+  - Key: VketRuleSetBase.OfficialAssetDontContainRule.Title
     Value: Submission objects must be placed within the submissions folder
-  - Key: Vket5RuleSetBase.NameOfFileAndFolderRule.Title
+  - Key: VketRuleSetBase.NameOfFileAndFolderRule.Title
     Value: Unsupported symbols found in file and folder names
-  - Key: Vket5RuleSetBase.FilePathLengthLimitRule.Title
+  - Key: VketRuleSetBase.FilePathLengthLimitRule.Title
     Value: Please keep all file paths under Asset/ under {0} characters
-  - Key: Vket5RuleSetBase.MeshFileTypeBlacklistRule.Title
+  - Key: VketRuleSetBase.MeshFileTypeBlacklistRule.Title
     Value: Found unsupported mesh file formats
-  - Key: Vket5RuleSetBase.ContainMatOrTexInAssetRule.Title
+  - Key: VketRuleSetBase.ContainMatOrTexInAssetRule.Title
     Value: Unused materials and/or textures found in model asset
-  - Key: Vket5RuleSetBase.FolderSizeRule.Title
+  - Key: VketRuleSetBase.FolderSizeRule.Title
     Value: Submission folder filesize exceeded allowed filesize limit
-  - Key: Vket5RuleSetBase.ExhibitStructureRule.Title
+  - Key: VketRuleSetBase.ExhibitStructureRule.Title
     Value: All Static and Dynamic objects must be parented to Gameobjects named Static
       and Dynamic respectively
-  - Key: Vket5RuleSetBase.StaticFlagsRule.Title
+  - Key: VketRuleSetBase.StaticFlagsRule.Title
     Value: Every child object inside Static must be set to static
-  - Key: Vket5RuleSetBase.BoothBoundsRule.Title
+  - Key: VketRuleSetBase.BoothBoundsRule.Title
     Value: Please keep the booth size under the allocated space
-  - Key: Vket5RuleSetBase.MaterialLimitRule.Title
+  - Key: VketRuleSetBase.MaterialLimitRule.Title
     Value: Material count must be kept under {0}
-  - Key: Vket5RuleSetBase.LightMapsLimitRule.Title
+  - Key: VketRuleSetBase.LightMapsLimitRule.Title
     Value: Lightmap count must be kept under {0}, and resolutions below {1}
-  - Key: Vket5RuleSetBase.GlobalIlluminationBakedRule.Title
+  - Key: VketRuleSetBase.GlobalIlluminationBakedRule.Title
     Value: Global Illumination must be set to Baked when using Standard shader's Emission
-  - Key: Vket5RuleSetBase.UsableComponentListRule.Title
+  - Key: VketRuleSetBase.UsableComponentListRule.Title
     Value: Unallowed components in use
-  - Key: Vket5RuleSetBase.VRCTriggerConfigRule.Title
+  - Key: VketRuleSetBase.VRCTriggerConfigRule.Title
     Value: Usage of VRC_Trigger not allowed outside of provided prefabs
-  - Key: Vket5RuleSetBase.UseMeshColliderRule.Title
+  - Key: VketRuleSetBase.UseMeshColliderRule.Title
     Value: Should not use MeshCollider
-  - Key: Vket5RuleSetBase.VRCTriggerCountLimitRule.Title
+  - Key: VketRuleSetBase.VRCTriggerCountLimitRule.Title
     Value: VRC_Trigger count must be kept under {0}
-  - Key: Vket5RuleSetBase.DirectionalLightLimitRule.Title
+  - Key: VketRuleSetBase.DirectionalLightLimitRule.Title
     Value: Usage of DirectionalLight is not allowed
-  - Key: Vket5RuleSetBase.PointLightConfigRule.Title
+  - Key: VketRuleSetBase.PointLightConfigRule.Title
     Value: PointLight parameters must be within the allowed range
-  - Key: Vket5RuleSetBase.SpotLightConfigRule.Title
+  - Key: VketRuleSetBase.SpotLightConfigRule.Title
     Value: SpotLight parameters must be within the allowed range
-  - Key: Vket5RuleSetBase.AreaLightConfigRule.Title
+  - Key: VketRuleSetBase.AreaLightConfigRule.Title
     Value: AreaLight parameters must be within the allowed range
-  - Key: Vket5RuleSetBase.AreaLightLimitRule.Title
+  - Key: VketRuleSetBase.AreaLightLimitRule.Title
     Value: AreaLight count must be kept under {0}
-  - Key: Vket5RuleSetBase.PointLightModeRule.Title
+  - Key: VketRuleSetBase.PointLightModeRule.Title
     Value: Please use only the allowed PointLight modes
-  - Key: Vket5RuleSetBase.SpotLightModeRule.Title
+  - Key: VketRuleSetBase.SpotLightModeRule.Title
     Value: Please use only the allowed SpotLight modes
-  - Key: Vket5RuleSetBase.PickupObjectSyncRule.Title
+  - Key: VketRuleSetBase.PickupObjectSyncRule.Title
     Value: PickupObjectSync parameters must meet the allowed values
-  - Key: Vket5RuleSetBase.AvatarPedestalPrefabRule.Title
+  - Key: VketRuleSetBase.AvatarPedestalPrefabRule.Title
     Value: AvatarPedestal parameters must meet the allowed values
-  - Key: Vket5RuleSetBase.AudioSourcePrefabRule.Title
+  - Key: VketRuleSetBase.AudioSourcePrefabRule.Title
     Value: AudioSource parameters must meet the allowed values
-  - Key: Vket5RuleSetBase.ChairPrefabLimitRule.Title
+  - Key: VketRuleSetBase.ChairPrefabLimitRule.Title
     Value: Chair prefab count must be kept under {0}
-  - Key: Vket5RuleSetBase.PickupObjectSyncPrefabLimitRule.Title
+  - Key: VketRuleSetBase.PickupObjectSyncPrefabLimitRule.Title
     Value: PickupObjectSync prefab count must be kept under {0}
-  - Key: Vket5RuleSetBase.VideoPlayerComponentRule.Title
+  - Key: VketRuleSetBase.VideoPlayerComponentRule.Title
     Value: VideoPlayer parameters must meet the allowed values
   - Key: UnityVersionRule.InvalidVersion
     Value: Current Unity version ({0}) does not meet the required version
@@ -309,7 +309,7 @@ MonoBehaviour:
   - Key: VideoPlayerComponentRule.DefaultDisabled.Solution
     Value: Untick the component's checkbox, and rig it so that it gets enabled by
       other means such as Animations and VRC_Trigger's SetComponentActive
-  - Key: Vket5RuleSetBase.VideoPlayerComponentMaxCountRule.Title
+  - Key: VketRuleSetBase.VideoPlayerComponentMaxCountRule.Title
     Value: Please reduce the usage of VideoPlayer components to the allowed limits
   - Key: VideoPlayerComponentMaxCountRule.Exceeded
     Value: 'The component''s usage limit of {0} exceeded. (Current count: {1})'
@@ -317,11 +317,11 @@ MonoBehaviour:
     Value: Please reduce the component count
   - Key: VideoPlayerComponentRule.DontUseURL
     Value: Please disallow URL input on VideoPlayers
-  - Key: Vket5RuleSetBase.CanvasRenderModeRule.Title
+  - Key: VketRuleSetBase.CanvasRenderModeRule.Title
     Value: Canvas must be set to WorldSpace
   - Key: CanvasRenderModeRule.CanvasIsNotInWorldSpace
     Value: Please set the RenderMode of the canvas located under {0} to WorldSpace
-  - Key: Vket5RuleSetBase.CameraComponentRule.Title
+  - Key: VketRuleSetBase.CameraComponentRule.Title
     Value: Please follow the set rules when using a Camera
   - Key: CameraComponentRule.DefaultDisabled
     Value: The component must be set to Disabled by default
@@ -333,26 +333,26 @@ MonoBehaviour:
       {2}px\xD7{3}px"
   - Key: CameraComponentRule.MaxRenderTextureSize.Solution
     Value: From the RenderTexture's inspector, reduce the size below the limits
-  - Key: Vket5RuleSetBase.CameraComponentMaxCountRule.Title
+  - Key: VketRuleSetBase.CameraComponentMaxCountRule.Title
     Value: Please reduce the usage of Camera components to the allowed limits
   - Key: CameraComponentMaxCountRule.Exceeded
     Value: 'The component''s usage limit of {0} exceeded. (Current count: {1})'
   - Key: CameraComponentMaxCountRule.Exceeded.Solution
     Value: Please reduce the component count
-  - Key: Vket5RuleSetBase.ProjectorComponentRule.Title
+  - Key: VketRuleSetBase.ProjectorComponentRule.Title
     Value: Please follow the set rules when using a Projector
   - Key: ProjectorComponentRule.DefaultDisabled
     Value: The component must be set to Disabled by default
   - Key: ProjectorComponentRule.DefaultDisabled.Solution
     Value: Untick the component's checkbox, and rig it so that it gets enabled by
       other means such as Animations and VRC_Trigger's SetComponentActive
-  - Key: Vket5RuleSetBase.ProjectorComponentMaxCountRule.Title
+  - Key: VketRuleSetBase.ProjectorComponentMaxCountRule.Title
     Value: Please reduce the usage of Projector components to the allowed limits
   - Key: ProjectorComponentMaxCountRule.Exceeded
     Value: 'The component''s usage limit of {0} exceeded. (Current count: {1})'
   - Key: ProjectorComponentMaxCountRule.Exceeded.Solution
     Value: Please reduce the component count
-  - Key: Vket5RuleSetBase.AnimatorComponentMaxCountRule.Title
+  - Key: VketRuleSetBase.AnimatorComponentMaxCountRule.Title
     Value: Please limit your animator usage within the allowed maximum count
   - Key: AnimatorComponentMaxCountRule.Exceeded
     Value: Total animator count({1}) exceeded the maximum allowed number of {0}.
@@ -362,17 +362,17 @@ MonoBehaviour:
     Value: The animated object {0} contains a collider within its' children
   - Key: AnimationMakesMoveCollidersRule.WillMakesMove.Solution
     Value: Please remove either the animator or the collider.
-  - Key: Vket5RuleSetBase.AnimationClipRule.Title
+  - Key: VketRuleSetBase.AnimationClipRule.Title
     Value: Please conform to the limitation of AnimationClip's usage
   - Key: AnimationClipRule.DontChangeMaterialInAnimation
     Value: Switching of materials using AnimationClips is not allowed
   - Key: AnimationClipRule.DontAccessParentObject
     Value: AnimationClips must not contain paths containing ../
-  - Key: Vket5RuleSetBase.AnimationComponentRule.Title
+  - Key: VketRuleSetBase.AnimationComponentRule.Title
     Value: Please conform to the limitation of AnimationComponent's usage
   - Key: AnimationComponentRule.ShouldNotUseAlwaysAnimate
     Value: In the exception of bugs, please avoid setting CullingType to Always.
-  - Key: Vket5RuleSetBase.AnimatorComponentRule.Title
+  - Key: VketRuleSetBase.AnimatorComponentRule.Title
     Value: Please conform to the limitation of AnimatorComponent's usage
   - Key: AnimatorComponentRule.ShouldNotUseAlwaysAnimate
     Value: In the exception of bugs, please avoid setting CullingType to Always.
@@ -500,11 +500,11 @@ MonoBehaviour:
       of {1}~{2}. Current value {3}'
   - Key: LightConfigRule.OverIndirectMultiplier.Solution
     Value: Set the Indirect Multiplier value to within the allowed range.
-  - Key: Vket5RuleSetBase.SkinnedMeshRendererRule.Title
+  - Key: VketRuleSetBase.SkinnedMeshRendererRule.Title
     Value: Please follow the SkinnedMeshRenderer's usage rules.
-  - Key: Vket5RuleSetBase.MeshRendererRule.Title
+  - Key: VketRuleSetBase.MeshRendererRule.Title
     Value: Please follow the MeshRenderer/MeshFilter's usage rules.
-  - Key: Vket5RuleSetBase.ReflectionProbeRule.Title
+  - Key: VketRuleSetBase.ReflectionProbeRule.Title
     Value: Please follow the ReflectionProbe's usage rules.
   - Key: SkinnedMeshRendererRule.MustTurnOffUpdateWhenOffscreen
     Value: UpdateWhenOffscreen must be set to off.
@@ -514,27 +514,27 @@ MonoBehaviour:
     Value: LightmapStatic MeshRenderers must be assigned the Environment Layer.
   - Key: ReflectionProbeRule.MustUseCustomTexture
     Value: Please set ReflectionProbe's Type to Custom.
-  - Key: Vket5RuleSetBase.RigidbodyRule.Title
+  - Key: VketRuleSetBase.RigidbodyRule.Title
     Value: Rigidbody parameters must meet the allowed values
   - Key: RigidbodyRule.UseIsKinematic
     Value: Please enable IsKinematic on RigidBody objects
-  - Key: Vket5RuleSetBase.UnusabePrefabRule.Title
+  - Key: VketRuleSetBase.UnusabePrefabRule.Title
     Value: Unallowed prefabs in use
-  - Key: Vket5UdonRuleSetBase.UdonBehaviourLayerConstraintRule.Title
+  - Key: VketUdonRuleSetBase.UdonBehaviourLayerConstraintRule.Title
     Value: GameObject Layer including UdonBehaviour must 23.
   - Key: UdonBehaviourLayerConstraintRule.InvalidLayer
     Value: Wrong Layer
   - Key: UdonBehaviourLayerConstraintRule.InvalidLayer.solution
     Value: GameObject including UdonBehaviour must set Later 23.
-  - Key: Vket5UdonRuleSetBase.UsableUdonAssemblyListRule.Title
+  - Key: VketUdonRuleSetBase.UsableUdonAssemblyListRule.Title
     Value: Do not use forbidden Udon Assembly
   - Key: UsableUdonAssemblyListRule.Disallow
     Value: '{0}: Usage of {1} is not allowed'
   - Key: UsableUdonAssemblyListRule.DefaultComponentGroupName
     Value: Udon Assembly not defined
-  - Key: Vket5UdonRuleSetBase.UdonBehaviourLimitRule.Title
+  - Key: VketUdonRuleSetBase.UdonBehaviourLimitRule.Title
     Value: UdonBehaviour count must be kept under {0}
-  - Key: Vket5UdonRuleSetBase.UdonDynamicObjectInactiveRule.Title
+  - Key: VketUdonRuleSetBase.UdonDynamicObjectInactiveRule.Title
     Value: Dynamic object must be Inactive.
   - Key: UdonDynamicObjectInactiveRule.isActive
     Value: Dynamic object is Active.
@@ -546,14 +546,14 @@ MonoBehaviour:
     Value: Wrong Namespace
   - Key: UdonSharpScriptNamespaceRule.InvalidNamespace.solution
     Value: Define U# class {0} in your namespace.
-  - Key: Vket5UdonRuleSetBase.UdonSharpNameSpaceRule.Title
+  - Key: VketUdonRuleSetBase.UdonSharpNameSpaceRule.Title
     Value: UdonSharp class definition rules.
   - Key: UdonBehaviourSynchronizePositionCountLimitRule.Overuse
     Value: 'UdonBehaviour with synchronize position count exceeded limit of {0}. (Current
       count: {1})'
   - Key: UdonBehaviourSynchronizePositionCountLimitRule.Overuse.Solution
     Value: Please reduce the component count.
-  - Key: Vket5UdonRuleSetBase.UdonBehaviourSynchronizePositionCountLimitRule.Title
+  - Key: VketUdonRuleSetBase.UdonBehaviourSynchronizePositionCountLimitRule.Title
     Value: UdonSharp with SynchronizePosition  count must be kept under {0}
   - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.Title
     Value: UdonBehaviour AllowOwnershipTransferOnCollision to be false.
@@ -561,7 +561,7 @@ MonoBehaviour:
     Value: AllowOwnershipTransferOnCollision is true.
   - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.isTrue.solution
     Value: UdonBehaviour AllowOwnershipTransferOnCollision must be false.
-  - Key: Vket5UdonRuleSetBase.UdonDynamicObjectParentRule.Title
+  - Key: VketUdonRuleSetBase.UdonDynamicObjectParentRule.Title
     Value: UdonBehaviour and it's affected object are set child of Dynamic object.
   - Key: UdonDynamicObjectParentRule.noDynamicObject
     Value: Object Dynamic is not exists.
@@ -576,7 +576,7 @@ MonoBehaviour:
       of Dynamic object.
   - Key: UdonDynamicObjectParentRule.UdonBehaviourPublicValueIsNotChildOfDynamic.Solution
     Value: Set it child of Dynamic object.
-  - Key: Vket5UdonRuleSetBase.UdonBehaviourSyncedVariablesRule.Title
+  - Key: VketUdonRuleSetBase.UdonBehaviourSyncedVariablesRule.Title
     Value: SyncedVariables limitation of UdonBehaviour.
   - Key: UdonBehaviourSyncedVariablesRule.Overuse
     Value: 'Synced variables count in UdonBehaviours exceeded limit of {0}. (Current
@@ -587,7 +587,7 @@ MonoBehaviour:
     Value: UdonBehaviour Synced variable [{0}] is invalid type ({1}).
   - Key: UdonBehaviourSyncedVariablesRule.InvalidType.Solution
     Value: Set type bool, sbyte, byte, ushort, short, uint, int or float.
-  - Key: Vket5UdonRuleSetBase.UdonAssemblyPhysicsCastFunctionRule.Title
+  - Key: VketUdonRuleSetBase.UdonAssemblyPhysicsCastFunctionRule.Title
     Value: Physics.*Cast function in UdonAssembly rules.
   - Key: UdonAssemblyPhysicsCastFunctionRule.InvalidArguments
     Value: 'UdonAssembly function [{0}] has invalid arguments. : {1} ({2})'
@@ -615,13 +615,13 @@ MonoBehaviour:
     Value: Generate UV2 , or disable Lightmap Static.
   - Key: StaticFlagRule.LightmapStaticMeshShouldHaveUV2.SolutionURL
     Value: 
-  - Key: Vket5UdonRuleSetBase.VRCStationCountLimitRule.Title
+  - Key: VketUdonRuleSetBase.VRCStationCountLimitRule.Title
     Value: VRCStation count must be kept under {0}
   - Key: VRCStationCountLimitRule.Overuse
     Value: 'VRCStation count exceeded limit of {0}. (Current count: {1})'
   - Key: VRCStationCountLimitRule.Overuse.Solution
     Value: Please reduce the component count.
-  - Key: Vket5UdonRuleSetBase.SpatialAudioDynamicObjectParentRule.Title
+  - Key: VketUdonRuleSetBase.SpatialAudioDynamicObjectParentRule.Title
     Value: VRCSpatialAudioSources are must set child of Dynamic object.
   - Key: SpatialAudioDynamicObjectParentRule.noDynamicObject
     Value: Object Dynamic is not exists.
@@ -631,7 +631,7 @@ MonoBehaviour:
     Value: VRCSpatialAudioSource [{0}] is must be child of Dynamic object.
   - Key: SpatialAudioDynamicObjectParentRule.IsNotChildOfDynamic.Solution
     Value: Set it child of Dynamic object.
-  - Key: Vket5UdonRuleSetBase.VRCPickupUdonBehaviourRule.Title
+  - Key: VketUdonRuleSetBase.VRCPickupUdonBehaviourRule.Title
     Value: VRCPickup UdonAssembly constraints
   - Key: VRCPickupUdonBehaviourRule.NotImplementedAutoResetPickup
     Value: VRCPickup must be together UdonBehaviour [AutoResetPickup]

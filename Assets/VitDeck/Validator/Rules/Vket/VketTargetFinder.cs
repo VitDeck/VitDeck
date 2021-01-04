@@ -11,7 +11,7 @@ using Object = UnityEngine.Object;
 
 namespace VitDeck.Validator
 {
-    public class Vket5TargetFinder : IValidationTargetFinder
+    public class VketTargetFinder : IValidationTargetFinder
     {
         bool finded = false;
 
@@ -29,7 +29,7 @@ namespace VitDeck.Validator
         {
             if (!Directory.Exists(baseFolder))
             {
-                throw new FatalValidationErrorException(LocalizedMessage.Get("Vket5TargetFinder.PackageFolderNotFound"));
+                throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.PackageFolderNotFound"));
             }
 
             var exhibitorID = Path.GetFileName(baseFolder);
@@ -80,12 +80,12 @@ namespace VitDeck.Validator
 
             if (exhibitRootObjects.Length == 0)
             {
-                throw new FatalValidationErrorException(LocalizedMessage.Get("Vket5TargetFinder.ExhibitNotFound"));
+                throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.ExhibitNotFound"));
 
             }
             else if (exhibitRootObjects.Length > 1)
             {
-                throw new FatalValidationErrorException(LocalizedMessage.Get("Vket5TargetFinder.ManyExhibits"));
+                throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.ManyExhibits"));
             }
             else
             {
@@ -111,7 +111,7 @@ namespace VitDeck.Validator
             Debug.Log(scenePath);
             if (!File.Exists(scenePath))
             {
-                throw new FatalValidationErrorException(LocalizedMessage.Get("Vket5TargetFinder.SceneNotFound", scenePath));
+                throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.SceneNotFound", scenePath));
             }
             var targetScene = EditorSceneManager.GetSceneByPath(scenePath);
             Debug.Log(targetScene.name);
@@ -119,12 +119,12 @@ namespace VitDeck.Validator
             if (!targetScene.isLoaded)
             {
                 if (!EditorUtility.DisplayDialog(
-                    LocalizedMessage.Get("Vket5TargetFinder.SceneOpenDialog.Title"),
-                    LocalizedMessage.Get("Vket5TargetFinder.SceneOpenDialog") + Environment.NewLine + targetScene.path,
-                    LocalizedMessage.Get("Vket5TargetFinder.SceneOpenDialog.Continue"),
-                    LocalizedMessage.Get("Vket5TargetFinder.SceneOpenDialog.Abort")))
+                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Title"),
+                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog") + Environment.NewLine + targetScene.path,
+                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Continue"),
+                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Abort")))
                 {
-                    throw new FatalValidationErrorException(LocalizedMessage.Get("Vket5TargetFinder.ValidationAborted"));
+                    throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.ValidationAborted"));
                 }
 
                 DoSaveIfNecessary();
@@ -140,7 +140,7 @@ namespace VitDeck.Validator
         {
             if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
             {
-                throw new FatalValidationErrorException(LocalizedMessage.Get("Vket5TargetFinder.UserDidntSave"));
+                throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.UserDidntSave"));
             }
         }
 

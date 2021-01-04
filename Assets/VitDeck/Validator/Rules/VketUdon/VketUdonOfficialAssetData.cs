@@ -1,6 +1,6 @@
 namespace VitDeck.Validator
 {
-    public static class Vket5UdonOfficialAssetData
+    public static class VketUdonOfficialAssetData
     {
         /// <summary>
         /// 公式配布されたアセット及び前提となるアセットのGUID

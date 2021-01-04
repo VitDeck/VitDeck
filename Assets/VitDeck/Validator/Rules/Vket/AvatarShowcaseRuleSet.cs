@@ -1,15 +1,16 @@
-﻿#if VRC_SDK_VRCSDK3
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace VitDeck.Validator
 {
-    public class UdonCubeRuleSet : Vket5UdonRuleSetBase
+    public class AvatarShowcaseRuleSet : VketRuleSetBase
     {
         public override string RuleSetName
         {
             get
             {
-                return "Vket5 - UdonCube";
+                return "Vket - VirtualShowcase";
             }
         }
 
@@ -17,7 +18,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return 100 * MegaByte;
+                return 30 * MegaByte;
             }
         }
 
@@ -25,39 +26,22 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new Vector3(10, 10, 10);
+                return new Vector3(2, 2.5f, 2);
             }
         }
 
-        protected override int UdonBehaviourCountLimit
+        protected override int VRCTriggerCountLimit
         {
             get
             {
-                return 25;
+                return 12;
             }
         }
-
-        protected override int UdonBehaviourSynchronizePositionCountLimit
-        {
-            get
-            {
-                return 10;
-            }
-        }
-
-        protected override int UdonScriptSyncedVariablesLimit
-        {
-            get
-            {
-                return 3;
-            }
-        }
-
         protected override int MaterialUsesLimit
         {
             get
             {
-                return 60;
+                return 10;
             }
         }
 
@@ -65,15 +49,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return 2;
-            }
-        }
-
-        protected override int VRCStationCountLimit
-        {
-            get
-            {
-                return 8;
+                return 1;
             }
         }
 
@@ -81,8 +57,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new LightConfigRule.LightConfig(
-                            new [] { LightmapBakeType.Baked, LightmapBakeType.Realtime });
+                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
             }
         }
 
@@ -90,8 +65,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new LightConfigRule.LightConfig(
-                            new[] { LightmapBakeType.Baked, LightmapBakeType.Realtime });
+                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
             }
         }
 
@@ -99,8 +73,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new LightConfigRule.LightConfig(
-                            new[] { LightmapBakeType.Baked });
+                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
             }
         }
 
@@ -108,7 +81,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return 3;
+                return 0;
             }
         }
 
@@ -116,7 +89,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new LightmapBakeType[] { LightmapBakeType.Realtime, LightmapBakeType.Mixed };
+                return new LightmapBakeType[] { };
             }
         }
 
@@ -124,15 +97,15 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new LightmapBakeType[] { LightmapBakeType.Realtime, LightmapBakeType.Mixed };
+                return new LightmapBakeType[] { };
             }
         }
 
-        protected override ValidationLevel MoreAdvancedObjectValidationLevel
+        protected override ValidationLevel AdvancedObjectValidationLevel
         {
             get
             {
-                return ValidationLevel.ALLOW;
+                return ValidationLevel.DISALLOW;
             }
         }
 
@@ -140,7 +113,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return 1;
+                return 0;
             }
         }
 
@@ -148,9 +121,8 @@ namespace VitDeck.Validator
         {
             get
             {
-                return 10;
+                return 3;
             }
         }
     }
 }
-#endif

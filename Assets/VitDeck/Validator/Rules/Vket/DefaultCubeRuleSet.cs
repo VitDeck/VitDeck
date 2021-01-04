@@ -1,16 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+#if VRC_SDK_VRCSDK3
+using VRC.SDKBase;
+#elif VRC_SDK_VRCSDK2
+using VRCSDK2;
+#endif
 
 namespace VitDeck.Validator
 {
-    public class AvatarShowcaseRuleSet : Vket5RuleSetBase
+    public class DefaultCubeRuleSet : VketRuleSetBase
     {
         public override string RuleSetName
         {
             get
             {
-                return "Vket5 - VirtualShowcase";
+                return "Vket - DefaultCube";
             }
         }
 
@@ -18,7 +24,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return 30 * MegaByte;
+                return 100 * MegaByte;
             }
         }
 
@@ -26,22 +32,43 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new Vector3(2, 2.5f, 2);
+                return new Vector3(10, 10, 10);
             }
         }
+
+#if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3 
+        protected override VRC_EventHandler.VrcBroadcastType[] VRCTriggerBroadcastTypesWhitelist
+        {
+            get
+            {
+                return base.VRCTriggerBroadcastTypesWhitelist.Concat(new[] {
+                    VRC_EventHandler.VrcBroadcastType.AlwaysUnbuffered }).ToArray();
+            }
+        }
+
+        protected override VRC_EventHandler.VrcEventType[] VRCTriggerActionWhitelist
+        {
+            get
+            {
+                return base.VRCTriggerActionWhitelist.Concat(new[] {
+                    VRC_EventHandler.VrcEventType.TeleportPlayer }).ToArray();
+            }
+        }
+#endif
 
         protected override int VRCTriggerCountLimit
         {
             get
             {
-                return 12;
+                return 50;
             }
         }
+
         protected override int MaterialUsesLimit
         {
             get
             {
-                return 10;
+                return 60;
             }
         }
 
@@ -49,7 +76,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return 1;
+                return 2;
             }
         }
 
@@ -57,7 +84,8 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
+                return new LightConfigRule.LightConfig(
+                            new [] { LightmapBakeType.Baked, LightmapBakeType.Realtime });
             }
         }
 
@@ -65,7 +93,8 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
+                return new LightConfigRule.LightConfig(
+                            new[] { LightmapBakeType.Baked, LightmapBakeType.Realtime });
             }
         }
 
@@ -73,7 +102,8 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new LightConfigRule.LightConfig(new LightmapBakeType[] { });
+                return new LightConfigRule.LightConfig(
+                            new[] { LightmapBakeType.Baked });
             }
         }
 
@@ -81,7 +111,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return 0;
+                return 3;
             }
         }
 
@@ -89,7 +119,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new LightmapBakeType[] { };
+                return new LightmapBakeType[] { LightmapBakeType.Realtime, LightmapBakeType.Mixed };
             }
         }
 
@@ -97,15 +127,15 @@ namespace VitDeck.Validator
         {
             get
             {
-                return new LightmapBakeType[] { };
+                return new LightmapBakeType[] { LightmapBakeType.Realtime, LightmapBakeType.Mixed };
             }
         }
 
-        protected override ValidationLevel AdvancedObjectValidationLevel
+        protected override ValidationLevel MoreAdvancedObjectValidationLevel
         {
             get
             {
-                return ValidationLevel.DISALLOW;
+                return ValidationLevel.ALLOW;
             }
         }
 
@@ -113,7 +143,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return 0;
+                return 1;
             }
         }
 
@@ -121,7 +151,7 @@ namespace VitDeck.Validator
         {
             get
             {
-                return 3;
+                return 10;
             }
         }
     }
