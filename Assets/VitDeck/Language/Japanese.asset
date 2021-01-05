@@ -21,90 +21,90 @@ MonoBehaviour:
     Value: "\u30EB\u30FC\u30EB\u30C1\u30A7\u30C3\u30AF\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F\u3002"
   - Key: ValidatorWindow.ValidationAborted
     Value: "\u30EB\u30FC\u30EB\u30C1\u30A7\u30C3\u30AF\u3092\u4E2D\u65AD\u3057\u307E\u3057\u305F\u3002"
-  - Key: Vket5TargetFinder.PackageFolderNotFound
+  - Key: VketTargetFinder.PackageFolderNotFound
     Value: "\u5165\u7A3F\u30D5\u30A9\u30EB\u30C0\u304C\u5B58\u5728\u3057\u307E\u305B\u3093\u3002"
-  - Key: Vket5TargetFinder.ExhibitNotFound
+  - Key: VketTargetFinder.ExhibitNotFound
     Value: "\u5165\u7A3F\u7269\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002"
-  - Key: Vket5TargetFinder.ManyExhibits
+  - Key: VketTargetFinder.ManyExhibits
     Value: "\u5165\u7A3F\u7269\u304C\u8907\u6570\u5B58\u5728\u3057\u307E\u3059\u3002"
-  - Key: Vket5TargetFinder.SceneNotFound
+  - Key: VketTargetFinder.SceneNotFound
     Value: "\u5165\u7A3F\u30B7\u30FC\u30F3({0})\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002"
-  - Key: Vket5TargetFinder.SceneOpenDialog.Title
+  - Key: VketTargetFinder.SceneOpenDialog.Title
     Value: "\u691C\u8A3C\u5BFE\u8C61\u306E\u30B7\u30FC\u30F3\u304C\u958B\u304B\u308C\u3066\u3044\u307E\u305B\u3093\u3002"
-  - Key: Vket5TargetFinder.SceneOpenDialog
+  - Key: VketTargetFinder.SceneOpenDialog
     Value: "\u691C\u8A3C\u3092\u7D9A\u884C\u3059\u308B\u70BA\u306B\u306F\u691C\u8A3C\u5BFE\u8C61\u306E\u30B7\u30FC\u30F3\u3092\u958B\u304F\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002"
-  - Key: Vket5TargetFinder.SceneOpenDialog.Continue
+  - Key: VketTargetFinder.SceneOpenDialog.Continue
     Value: "\u7D9A\u884C"
-  - Key: Vket5TargetFinder.SceneOpenDialog.Abort
+  - Key: VketTargetFinder.SceneOpenDialog.Abort
     Value: "\u4E2D\u6B62"
-  - Key: Vket5TargetFinder.ValidationAborted
+  - Key: VketTargetFinder.ValidationAborted
     Value: "\u691C\u8A3C\u3092\u4E2D\u6B62\u3057\u307E\u3057\u305F\u3002"
-  - Key: Vket5TargetFinder.UserDidntSave
+  - Key: VketTargetFinder.UserDidntSave
     Value: "\u7DE8\u96C6\u4E2D\u306E\u30B7\u30FC\u30F3\u30D5\u30A1\u30A4\u30EB\u3092\u30BB\u30FC\u30D6\u3057\u3066\u518D\u5B9F\u884C\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
-  - Key: Vket5RuleSetBase.UnityVersionRule.Title
+  - Key: VketRuleSetBase.UnityVersionRule.Title
     Value: "Unity\u306E\u30D0\u30FC\u30B8\u30E7\u30F3\u306F{0}\u3092\u4F7F\u7528\u3059\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.VRCSDKVersionRule.Title
+  - Key: VketRuleSetBase.VRCSDKVersionRule.Title
     Value: "VRCSDK\u306F\u63D0\u51FA\u6642\u70B9\u306E\u6700\u65B0\u30D0\u30FC\u30B8\u30E7\u30F3\u3092\u4F7F\u3046\u3053\u3068"
-  - Key: Vket5RuleSetBase.ExistInSubmitFolderRule.Title
+  - Key: VketRuleSetBase.ExistInSubmitFolderRule.Title
     Value: "\u914D\u5E03\u7269\u4EE5\u5916\u306E\u5168\u3066\u306E\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u53C2\u7167\u304C\u5165\u7A3F\u30D5\u30A9\u30EB\u30C0\u5185\u306B\u5B58\u5728\u3059\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.OfficialAssetDontContainRule.Title
+  - Key: VketRuleSetBase.OfficialAssetDontContainRule.Title
     Value: "\u914D\u5E03\u30A2\u30BB\u30C3\u30C8\u3092\u5165\u7A3F\u30D5\u30A9\u30EB\u30C0\u5185\u306B\u5165\u308C\u306A\u3044\u3053\u3068"
-  - Key: Vket5RuleSetBase.NameOfFileAndFolderRule.Title
+  - Key: VketRuleSetBase.NameOfFileAndFolderRule.Title
     Value: "\u30D5\u30A1\u30A4\u30EB\u540D\u3068\u30D5\u30A9\u30EB\u30C0\u540D\u306E\u4F7F\u7528\u7981\u6B62\u6587\u5B57\u30EB\u30FC\u30EB"
-  - Key: Vket5RuleSetBase.FilePathLengthLimitRule.Title
+  - Key: VketRuleSetBase.FilePathLengthLimitRule.Title
     Value: "\u30D5\u30A1\u30A4\u30EB\u30D1\u30B9\u306FAsset/\u304B\u3089\u6570\u3048\u3066{0}\u6587\u5B57\u4EE5\u5185\u306B\u53CE\u307E\u3063\u3066\u3044\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.MeshFileTypeBlacklistRule.Title
+  - Key: VketRuleSetBase.MeshFileTypeBlacklistRule.Title
     Value: "\u30E1\u30C3\u30B7\u30E5\u30A2\u30BB\u30C3\u30C8\u306E\u30D5\u30A1\u30A4\u30EB\u5F62\u5F0F\u3067\u7279\u5B9A\u306E\u3082\u306E\u304C\u542B\u307E\u308C\u3066\u3044\u306A\u3044\u3053\u3068"
-  - Key: Vket5RuleSetBase.ContainMatOrTexInAssetRule.Title
+  - Key: VketRuleSetBase.ContainMatOrTexInAssetRule.Title
     Value: "\u30A2\u30BB\u30C3\u30C8\u306B\u57CB\u3081\u8FBC\u307E\u308C\u305FMaterial\u3082\u3057\u304F\u306FTexture\u3092\u4F7F\u3063\u3066\u3044\u306A\u3044\u3053\u3068"
-  - Key: Vket5RuleSetBase.FolderSizeRule.Title
+  - Key: VketRuleSetBase.FolderSizeRule.Title
     Value: "\u30D5\u30A9\u30EB\u30C0\u30B5\u30A4\u30BA\u306F\u5236\u9650\u4EE5\u5185\u306B\u53CE\u3081\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.ExhibitStructureRule.Title
+  - Key: VketRuleSetBase.ExhibitStructureRule.Title
     Value: "Static,Dynamic\u306E2\u3064\u306EEmpty\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3092\u4F5C\u308A\u3001\u3059\u3079\u3066\u306E\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306F\u3053\u306E\u3069\u3061\u3089\u304B\u306E\u968E\u5C64\u4E0B\u306B\u5165\u308C\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.StaticFlagsRule.Title
+  - Key: VketRuleSetBase.StaticFlagsRule.Title
     Value: "Static\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u4EE5\u4E0B\u306F\u7279\u5B9A\u306EStatic\u8A2D\u5B9A\u3092\u884C\u3046\u3053\u3068"
-  - Key: Vket5RuleSetBase.BoothBoundsRule.Title
+  - Key: VketRuleSetBase.BoothBoundsRule.Title
     Value: "\u30D6\u30FC\u30B9\u30B5\u30A4\u30BA\u306F\u898F\u5B9A\u306E\u7BC4\u56F2\u5185\u306B\u53CE\u3081\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.MaterialLimitRule.Title
+  - Key: VketRuleSetBase.MaterialLimitRule.Title
     Value: "Material\u4F7F\u7528\u6570\u304C{0}\u500B\u4EE5\u4E0B\u3067\u3042\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.LightMapsLimitRule.Title
+  - Key: VketRuleSetBase.LightMapsLimitRule.Title
     Value: "LightMap\u306E\u4F7F\u7528\u679A\u6570\u304C{0}\u679A\u4EE5\u4E0B\u3001\u89E3\u50CF\u5EA6\u306F{1}\u4EE5\u4E0B\u3067\u3042\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.GlobalIlluminationBakedRule.Title
+  - Key: VketRuleSetBase.GlobalIlluminationBakedRule.Title
     Value: "Standard\u30B7\u30A7\u30FC\u30C0\u3067Emission\u3092\u4F7F\u7528\u3059\u308B\u5834\u5408\u3001Global
       Illumination\u306FBaked\u3092\u8A2D\u5B9A\u3059\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.UsableComponentListRule.Title
+  - Key: VketRuleSetBase.UsableComponentListRule.Title
     Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u53EF\u5426"
-  - Key: Vket5RuleSetBase.VRCTriggerConfigRule.Title
+  - Key: VketRuleSetBase.VRCTriggerConfigRule.Title
     Value: "\u914D\u5E03Prefab\u4EE5\u5916\u306EVRC_Trigger\u306F\u8A31\u53EF\u3055\u308C\u305F\u8A2D\u5B9A\u306E\u307F\u4F7F\u3046\u3053\u3068"
-  - Key: Vket5RuleSetBase.UseMeshColliderRule.Title
+  - Key: VketRuleSetBase.UseMeshColliderRule.Title
     Value: "MeshCollider\u4EE5\u5916\u306ECollider\u3092\u4F7F\u7528\u3059\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.VRCTriggerCountLimitRule.Title
+  - Key: VketRuleSetBase.VRCTriggerCountLimitRule.Title
     Value: "VRC_Trigger\u306E\u4F7F\u7528\u6570\u304C{0}\u500B\u4EE5\u4E0B\u3067\u3042\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.DirectionalLightLimitRule.Title
+  - Key: VketRuleSetBase.DirectionalLightLimitRule.Title
     Value: "DirectionalLight\u3092\u4F7F\u7528\u3057\u306A\u3044\u3053\u3068"
-  - Key: Vket5RuleSetBase.PointLightConfigRule.Title
+  - Key: VketRuleSetBase.PointLightConfigRule.Title
     Value: "PointLight\u306E\u8A2D\u5B9A\u304C\u5236\u9650\u306B\u5F93\u3063\u3066\u3044\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.SpotLightConfigRule.Title
+  - Key: VketRuleSetBase.SpotLightConfigRule.Title
     Value: "SpotLight\u306E\u8A2D\u5B9A\u304C\u5236\u9650\u306B\u5F93\u3063\u3066\u3044\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.AreaLightConfigRule.Title
+  - Key: VketRuleSetBase.AreaLightConfigRule.Title
     Value: "AreaLight\u306E\u8A2D\u5B9A\u304C\u5236\u9650\u306B\u5F93\u3063\u3066\u3044\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.AreaLightLimitRule.Title
+  - Key: VketRuleSetBase.AreaLightLimitRule.Title
     Value: "AreaLight\u306E\u4F7F\u7528\u6570\u304C{0}\u500B\u4EE5\u4E0B\u3067\u3042\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.PointLightModeRule.Title
+  - Key: VketRuleSetBase.PointLightModeRule.Title
     Value: "DefaultCube\u306B\u3066PointLight\u3067\u8A31\u53EF\u3055\u308C\u3066\u3044\u306A\u3044Mode\u3092\u4F7F\u7528\u3057\u306A\u3044\u3053\u3068"
-  - Key: Vket5RuleSetBase.SpotLightModeRule.Title
+  - Key: VketRuleSetBase.SpotLightModeRule.Title
     Value: "DefaultCube\u306B\u3066SpotLight\u3067\u8A31\u53EF\u3055\u308C\u3066\u3044\u306A\u3044Mode\u3092\u4F7F\u7528\u3057\u306A\u3044\u3053\u3068"
-  - Key: Vket5RuleSetBase.PickupObjectSyncRule.Title
+  - Key: VketRuleSetBase.PickupObjectSyncRule.Title
     Value: "PickupObjectSync\u306E\u8A2D\u5B9A\u304C\u898F\u5B9A\u306B\u5F93\u3063\u3066\u3044\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.AvatarPedestalPrefabRule.Title
+  - Key: VketRuleSetBase.AvatarPedestalPrefabRule.Title
     Value: "AvatarPedestal\u306E\u8A2D\u5B9A\u304C\u898F\u5B9A\u306B\u5F93\u3063\u3066\u3044\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.AudioSourcePrefabRule.Title
+  - Key: VketRuleSetBase.AudioSourcePrefabRule.Title
     Value: "AudioSource\u306E\u8A2D\u5B9A\u304C\u898F\u5B9A\u306B\u5F93\u3063\u3066\u3044\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.ChairPrefabLimitRule.Title
+  - Key: VketRuleSetBase.ChairPrefabLimitRule.Title
     Value: "Chair\u306E\u4F7F\u7528\u6570\u306F{0}\u500B\u306B\u53CE\u3081\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.PickupObjectSyncPrefabLimitRule.Title
+  - Key: VketRuleSetBase.PickupObjectSyncPrefabLimitRule.Title
     Value: "PickupObjectSync\u306E\u4F7F\u7528\u6570\u306F{0}\u500B\u306B\u53CE\u3081\u308B\u3053\u3068"
-  - Key: Vket5RuleSetBase.VideoPlayerComponentRule.Title
+  - Key: VketRuleSetBase.VideoPlayerComponentRule.Title
     Value: "VideoPlayer\u3092\u4F7F\u7528\u3059\u308B\u969B\u306F\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
   - Key: UnityVersionRule.InvalidVersion
     Value: "\u5B9F\u884C\u4E2D\u306EUnity\u306E\u30D0\u30FC\u30B8\u30E7\u30F3({0})\u304C\u6307\u5B9A\u3055\u308C\u305F\u30D0\u30FC\u30B8\u30E7\u30F3\u3068\u7570\u306A\u3063\u3066\u3044\u307E\u3059\u3002"
@@ -294,7 +294,7 @@ MonoBehaviour:
     Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306F\u521D\u671F\u72B6\u614B\u3067Disabled\u306B\u3059\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002"
   - Key: VideoPlayerComponentRule.DefaultDisabled.Solution
     Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u30C1\u30A7\u30C3\u30AF\u3092\u5916\u3057\u3066\u304A\u304D\u3001\u30A2\u30CB\u30E1\u30FC\u30B7\u30E7\u30F3\u3084VRC_Trigger\u306ESetComponentActive\u306A\u3069\u3067\u6709\u52B9\u5316\u3059\u308B\u3088\u3046\u306B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
-  - Key: Vket5RuleSetBase.VideoPlayerComponentMaxCountRule.Title
+  - Key: VketRuleSetBase.VideoPlayerComponentMaxCountRule.Title
     Value: "VideoPlayer\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u306F\u5236\u9650\u306B\u53CE\u3081\u308B\u3053\u3068"
   - Key: VideoPlayerComponentMaxCountRule.Exceeded
     Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u304C{0}\u500B\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002({1}\u500B)"
@@ -302,11 +302,11 @@ MonoBehaviour:
     Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u3092\u6E1B\u3089\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
   - Key: VideoPlayerComponentRule.DontUseURL
     Value: "VideoPlayer\u306FURL\u3092\u4F7F\u7528\u3059\u308B\u3053\u3068\u306F\u51FA\u6765\u307E\u305B\u3093\u3002"
-  - Key: Vket5RuleSetBase.CanvasRenderModeRule.Title
+  - Key: VketRuleSetBase.CanvasRenderModeRule.Title
     Value: "Canvas\u306FWorldSpace\u306B\u8A2D\u5B9A\u3059\u308B\u3053\u3068"
   - Key: CanvasRenderModeRule.CanvasIsNotInWorldSpace
     Value: "{0}\u306B\u304A\u3044\u3066Canvas\u306ERenderMode\u304CWorldSpace\u306B\u306A\u3063\u3066\u3044\u307E\u305B\u3093\u3002"
-  - Key: Vket5RuleSetBase.CameraComponentRule.Title
+  - Key: VketRuleSetBase.CameraComponentRule.Title
     Value: "Camera\u3092\u4F7F\u7528\u3059\u308B\u969B\u306F\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
   - Key: CameraComponentRule.DefaultDisabled
     Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306F\u521D\u671F\u72B6\u614B\u3067Disabled\u306B\u3059\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002"
@@ -316,25 +316,25 @@ MonoBehaviour:
     Value: "RenderTexture\u306E\u30B5\u30A4\u30BA\u304C\u4E0A\u9650({0}px\xD7{1}px)\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002({2}px\xD7{3}px)"
   - Key: CameraComponentRule.MaxRenderTextureSize.Solution
     Value: "RenderTexture\u30A2\u30BB\u30C3\u30C8\u306E\u30A4\u30F3\u30B9\u30DA\u30AF\u30BF\u30FC\u304B\u3089\u3001\u30B5\u30A4\u30BA\u3092\u5236\u9650\u5024\u4EE5\u4E0B\u306B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
-  - Key: Vket5RuleSetBase.CameraComponentMaxCountRule.Title
+  - Key: VketRuleSetBase.CameraComponentMaxCountRule.Title
     Value: "Camera\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u306F\u5236\u9650\u306B\u53CE\u3081\u308B\u3053\u3068"
   - Key: CameraComponentMaxCountRule.Exceeded
     Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u304C{0}\u500B\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002({1}\u500B)"
   - Key: CameraComponentMaxCountRule.Exceeded.Solution
     Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u3092\u6E1B\u3089\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
-  - Key: Vket5RuleSetBase.ProjectorComponentRule.Title
+  - Key: VketRuleSetBase.ProjectorComponentRule.Title
     Value: "Projector\u3092\u4F7F\u7528\u3059\u308B\u969B\u306F\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
   - Key: ProjectorComponentRule.DefaultDisabled
     Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306F\u521D\u671F\u72B6\u614B\u3067Disabled\u306B\u3059\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002"
   - Key: ProjectorComponentRule.DefaultDisabled.Solution
     Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u30C1\u30A7\u30C3\u30AF\u3092\u5916\u3057\u3066\u304A\u304D\u3001\u30A2\u30CB\u30E1\u30FC\u30B7\u30E7\u30F3\u3084VRC_Trigger\u306ESetComponentActive\u306A\u3069\u3067\u6709\u52B9\u5316\u3059\u308B\u3088\u3046\u306B\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
-  - Key: Vket5RuleSetBase.ProjectorComponentMaxCountRule.Title
+  - Key: VketRuleSetBase.ProjectorComponentMaxCountRule.Title
     Value: "Projector\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u306F\u5236\u9650\u306B\u53CE\u3081\u308B\u3053\u3068"
   - Key: ProjectorComponentMaxCountRule.Exceeded
     Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u304C{0}\u500B\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002({1}\u500B)"
   - Key: ProjectorComponentMaxCountRule.Exceeded.Solution
     Value: "\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u3092\u6E1B\u3089\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
-  - Key: Vket5RuleSetBase.AnimatorComponentMaxCountRule.Title
+  - Key: VketRuleSetBase.AnimatorComponentMaxCountRule.Title
     Value: "Animator\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u306F\u5236\u9650\u306B\u53CE\u3081\u308B\u3053\u3068"
   - Key: AnimatorComponentMaxCountRule.Exceeded
     Value: "Animator\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u4F7F\u7528\u6570\u304C{0}\u500B\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002({1}\u500B)"
@@ -344,17 +344,17 @@ MonoBehaviour:
     Value: "\u89AA\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8({0})\u304C\u6301\u3064Animation\u306B\u3088\u3063\u3066Collider\u304C\u52D5\u304F\u53EF\u80FD\u6027\u304C\u3042\u308A\u307E\u3059\u3002"
   - Key: AnimationMakesMoveCollidersRule.WillMakesMove.Solution
     Value: "Collider\u3092\u524A\u9664\u3059\u308B\u304B\u3001\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3092Animation\u306E\u5BFE\u8C61\u304B\u3089\u5916\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
-  - Key: Vket5RuleSetBase.AnimationClipRule.Title
+  - Key: VketRuleSetBase.AnimationClipRule.Title
     Value: "AnimationClip\u306F\u898F\u5B9A\u306E\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
   - Key: AnimationClipRule.DontChangeMaterialInAnimation
     Value: "AnimationClip\u5185\u3067Material\u306E\u5909\u66F4\u306F\u51FA\u6765\u307E\u305B\u3093\u3002"
   - Key: AnimationClipRule.DontAccessParentObject
     Value: "AnimationClip\u5185\u3067../\u3092\u542B\u3093\u3060\u30D1\u30B9\u3092\u5229\u7528\u3059\u308B\u4E8B\u306F\u51FA\u6765\u307E\u305B\u3093\u3002"
-  - Key: Vket5RuleSetBase.AnimationComponentRule.Title
+  - Key: VketRuleSetBase.AnimationComponentRule.Title
     Value: "AnimationComponent\u306F\u898F\u5B9A\u306E\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
   - Key: AnimationComponentRule.ShouldNotUseAlwaysAnimate
     Value: "\u4E0D\u5177\u5408\u304C\u51FA\u308B\u5834\u5408\u3092\u9664\u304D\u3001CullingType\u306FAlways\u3092\u907F\u3051\u3066\u4E0B\u3055\u3044\u3002"
-  - Key: Vket5RuleSetBase.AnimatorComponentRule.Title
+  - Key: VketRuleSetBase.AnimatorComponentRule.Title
     Value: "AnimatorComponent\u306F\u898F\u5B9A\u306E\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
   - Key: AnimatorComponentRule.ShouldNotUseAlwaysAnimate
     Value: "\u4E0D\u5177\u5408\u304C\u51FA\u308B\u5834\u5408\u3092\u9664\u304D\u3001CullingMode\u306FAlways\u3092\u907F\u3051\u3066\u4E0B\u3055\u3044\u3002"
@@ -480,11 +480,11 @@ MonoBehaviour:
     Value: "{0}Light\u306EIndirect Multiplier\u304C{1}\uFF5E{2}\u306E\u7BC4\u56F2\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002(\u8A2D\u5B9A\u5024\uFF1A{3})"
   - Key: LightConfigRule.OverIndirectMultiplier.Solution
     Value: "Indirect Multiplier\u3092\u7BC4\u56F2\u5185\u306B\u306A\u308B\u3088\u3046\u306B\u8A2D\u5B9A\u3057\u3066\u4E0B\u3055\u3044\u3002"
-  - Key: Vket5RuleSetBase.SkinnedMeshRendererRule.Title
+  - Key: VketRuleSetBase.SkinnedMeshRendererRule.Title
     Value: "SkinnedMeshRenderer\u3092\u4F7F\u7528\u3059\u308B\u969B\u306F\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
-  - Key: Vket5RuleSetBase.MeshRendererRule.Title
+  - Key: VketRuleSetBase.MeshRendererRule.Title
     Value: "MeshRenderer/MeshFilter\u3092\u4F7F\u7528\u3059\u308B\u969B\u306F\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
-  - Key: Vket5RuleSetBase.ReflectionProbeRule.Title
+  - Key: VketRuleSetBase.ReflectionProbeRule.Title
     Value: "ReflectionProbe\u3092\u4F7F\u7528\u3059\u308B\u969B\u306F\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
   - Key: SkinnedMeshRendererRule.MustTurnOffUpdateWhenOffscreen
     Value: "UpdateWhenOffscreen\u3092\u6709\u52B9\u306B\u3059\u308B\u3053\u3068\u306F\u51FA\u6765\u307E\u305B\u3093\u3002"
@@ -494,27 +494,27 @@ MonoBehaviour:
     Value: "MeshRenderer\u3092LightmapStatic\u306B\u8A2D\u5B9A\u3059\u308B\u969B\u306F\u3001\u30EC\u30A4\u30E4\u30FC\u3092Environment\u306B\u8A2D\u5B9A\u3057\u3066\u4E0B\u3055\u3044\u3002"
   - Key: ReflectionProbeRule.MustUseCustomTexture
     Value: "ReflectionProbe\u306EType\u306FCustom\u306B\u8A2D\u5B9A\u3057\u3066\u4E0B\u3055\u3044\u3002"
-  - Key: Vket5RuleSetBase.RigidbodyRule.Title
+  - Key: VketRuleSetBase.RigidbodyRule.Title
     Value: "Rigidbody\u306EIsKinematic\u3092\u4F7F\u7528\u3059\u308B\u3053\u3068"
   - Key: RigidbodyRule.UseIsKinematic
     Value: "Rigidbody\u306EIsKinematic\u306F\u5FC5\u305A\u6709\u52B9\u306B\u3057\u3066\u4E0B\u3055\u3044\u3002"
-  - Key: Vket5RuleSetBase.UnusabePrefabRule.Title
+  - Key: VketRuleSetBase.UnusabePrefabRule.Title
     Value: "\u5165\u7A3F\u30D5\u30A9\u30EB\u30C0\u30FC\u306B\u542B\u307E\u308C\u3066\u3044\u308BPrefab\u3001\u304A\u3088\u3073\u516C\u5F0FPrefab\u4EE5\u5916\u306EPrefab\u3092\u4F7F\u7528\u3057\u306A\u3044\u3053\u3068"
-  - Key: Vket5UdonRuleSetBase.UdonBehaviourLayerConstraintRule.Title
+  - Key: VketUdonRuleSetBase.UdonBehaviourLayerConstraintRule.Title
     Value: "UdonBehaviour \u3092\u542B\u3080GameOnject \u306ELayer\u306F 23 \u3068\u3059\u308B"
   - Key: UdonBehaviourLayerConstraintRule.InvalidLayer
     Value: "\u30EC\u30A4\u30E4\u30FC\u304C\u4E0D\u6B63\u3067\u3059"
   - Key: UdonBehaviourLayerConstraintRule.InvalidLayer.solution
     Value: "UdonBehaviour\u3092\u542B\u3080\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306ELayer\u306FUserLayer23\u3068\u3057\u3066\u304F\u3060\u3055\u3044"
-  - Key: Vket5UdonRuleSetBase.UsableUdonAssemblyListRule.Title
+  - Key: VketUdonRuleSetBase.UsableUdonAssemblyListRule.Title
     Value: "\u8A31\u53EF\u3055\u308C\u3066\u3044\u306A\u3044UdonAssembly\u3092\u4F7F\u7528\u3057\u306A\u3044\u3053\u3068"
   - Key: UsableUdonAssemblyListRule.Disallow
     Value: "{0} : {1}\u306E\u4F7F\u7528\u306F\u8A31\u53EF\u3055\u308C\u3066\u3044\u307E\u305B\u3093\u3002"
   - Key: UsableUdonAssemblyListRule.DefaultComponentGroupName
     Value: "\u6307\u5B9A\u3055\u308C\u3066\u3044\u306A\u3044\u30A2\u30BB\u30F3\u30D6\u30EA"
-  - Key: Vket5UdonRuleSetBase.UdonBehaviourLimitRule.Title
+  - Key: VketUdonRuleSetBase.UdonBehaviourLimitRule.Title
     Value: "UdonBehaviour\u306E\u6570\u304C{0}\u500B\u4EE5\u4E0B\u3067\u3042\u308B\u3053\u3068"
-  - Key: Vket5UdonRuleSetBase.UdonDynamicObjectInactiveRule.Title
+  - Key: VketUdonRuleSetBase.UdonDynamicObjectInactiveRule.Title
     Value: "Dynamic\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u304CInactive\u3067\u3042\u308B\u3053\u3068"
   - Key: UdonDynamicObjectInactiveRule.isActive
     Value: "Dynamic\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u304CActive\u3067\u3059"
@@ -526,13 +526,13 @@ MonoBehaviour:
     Value: "\u540D\u524D\u7A7A\u9593\u304C\u4E0D\u6B63"
   - Key: UdonSharpScriptNamespaceRule.InvalidNamespace.solution
     Value: "U# \u30AF\u30E9\u30B9 {0} \u306F\u6307\u5B9A\u306E\u540D\u524D\u7A7A\u9593\u3067\u5B9A\u7FA9\u3059\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059"
-  - Key: Vket5UdonRuleSetBase.UdonSharpNameSpaceRule.Title
+  - Key: VketUdonRuleSetBase.UdonSharpNameSpaceRule.Title
     Value: "UdonSharp \u30BD\u30FC\u30B9\u306E\u540D\u524D\u7A7A\u9593\u306E\u5B9A\u7FA9"
   - Key: UdonBehaviourSynchronizePositionCountLimitRule.Overuse
     Value: "SynchronizePosition\u304C\u6709\u52B9\u306AUdonBehaviour\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u6570\u304C{0}\u500B\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002({1}\u500B)"
   - Key: UdonBehaviourSynchronizePositionCountLimitRule.Overuse.Solution
     Value: "\u4F7F\u7528\u500B\u6570\u3092\u6E1B\u3089\u3057\u3066\u4E0B\u3055\u3044\u3002"
-  - Key: Vket5UdonRuleSetBase.UdonBehaviourSynchronizePositionCountLimitRule.Title
+  - Key: VketUdonRuleSetBase.UdonBehaviourSynchronizePositionCountLimitRule.Title
     Value: "SynchronizePosition \u304C\u6709\u52B9\u306A UdonSharp \u306E\u4F7F\u7528\u6570\u304C{0}\u500B\u4EE5\u4E0B\u3067\u3042\u308B\u3053\u3068"
   - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.Title
     Value: "UdonBehaviour \u306E AllowOwnershipTransferOnCollision\u306F\u5FC5\u305AFalse\u306B\u3059\u308B\u3053\u3068"
@@ -540,7 +540,7 @@ MonoBehaviour:
     Value: "UdonBehaviour \u306E AllowOwnershipTransferOnCollision \u306FFalse\u3067\u306A\u3051\u308C\u3070\u306A\u3089\u306A\u3044"
   - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.isTrue.solution
     Value: "AllowOwnershipTransferOnCollision \u3092False\u306B\u3057\u3066\u304F\u3060\u3055\u3044"
-  - Key: Vket5UdonRuleSetBase.UdonDynamicObjectParentRule.Title
+  - Key: VketUdonRuleSetBase.UdonDynamicObjectParentRule.Title
     Value: "UdonBehaviour \u3068 \u305D\u308C\u306B\u3088\u3063\u3066\u64CD\u4F5C\u3092\u884C\u3046\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306F
       Dynamic\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306E\u5B50\u306B\u914D\u7F6E\u3055\u308C\u308B\u3053\u3068"
   - Key: UdonDynamicObjectParentRule.noDynamicObject
@@ -555,7 +555,7 @@ MonoBehaviour:
     Value: "UdonBehaviour [{0}] \u306E Public\u5909\u6570 [{1}] \u306F Dynamic \u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306E\u5B50\u3067\u306A\u3051\u308C\u3070\u306A\u308A\u307E\u305B\u3093"
   - Key: UdonDynamicObjectParentRule.UdonBehaviourPublicValueIsNotChildOfDynamic.Solution
     Value: "Dynamic \u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306E\u5B50\u306B\u79FB\u52D5\u3057\u3066\u304F\u3060\u3055\u3044"
-  - Key: Vket5UdonRuleSetBase.UdonBehaviourSyncedVariablesRule.Title
+  - Key: VketUdonRuleSetBase.UdonBehaviourSyncedVariablesRule.Title
     Value: "UdonBehaviour \u306E SyncedVariables \u5236\u9650"
   - Key: UdonBehaviourSyncedVariablesRule.Overuse
     Value: "UdonBehaviour\u306E Synced\u5909\u6570\u304C{0}\u500B\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002({1}\u500B)"
@@ -565,7 +565,7 @@ MonoBehaviour:
     Value: "UdonBehaviour \u306E Synced\u5909\u6570[{0}] \u306B\u306F [{1}] \u578B\u3092\u6307\u5B9A\u3067\u304D\u307E\u305B\u3093"
   - Key: UdonBehaviourSyncedVariablesRule.InvalidType.Solution
     Value: "bool, sbyte, byte, ushort, short, uint, int, float \u306E\u3044\u305A\u308C\u304B\u306E\u578B\u3092\u4F7F\u7528\u3057\u3066\u304F\u3060\u3055\u3044"
-  - Key: Vket5UdonRuleSetBase.UdonAssemblyPhysicsCastFunctionRule.Title
+  - Key: VketUdonRuleSetBase.UdonAssemblyPhysicsCastFunctionRule.Title
     Value: "UdonAssembly \u5185\u3067\u306E Physics\u30AF\u30E9\u30B9\u306ECast\u95A2\u6570\u306E\u547C\u3073\u51FA\u3057\u30EB\u30FC\u30EB"
   - Key: UdonAssemblyPhysicsCastFunctionRule.InvalidArguments
     Value: "UdonAssembly \u306E \u95A2\u6570 [{0}] \u306E\u5F15\u6570\u304C\u4E0D\u6B63\u3067\u3059\u3002:
@@ -597,13 +597,13 @@ MonoBehaviour:
     Value: "UV2\u3092\u751F\u6210\u3059\u308B\u304B\u3001Lightmap Static\u3092\u5916\u3057\u3066\u304F\u3060\u3055\u3044"
   - Key: StaticFlagRule.LightmapStaticMeshShouldHaveUV2.SolutionURL
     Value: 
-  - Key: Vket5UdonRuleSetBase.VRCStationCountLimitRule.Title
+  - Key: VketUdonRuleSetBase.VRCStationCountLimitRule.Title
     Value: "VRCStation\u306E\u4F7F\u7528\u6570\u304C{0}\u500B\u4EE5\u4E0B\u3067\u3042\u308B\u3053\u3068"
   - Key: VRCStationCountLimitRule.Overuse
     Value: "VRCStation\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u306E\u6570\u304C{0}\u500B\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002({1}\u500B)"
   - Key: VRCStationCountLimitRule.Overuse.Solution
     Value: "\u4F7F\u7528\u500B\u6570\u3092\u6E1B\u3089\u3057\u3066\u4E0B\u3055\u3044\u3002"
-  - Key: Vket5UdonRuleSetBase.SpatialAudioDynamicObjectParentRule.Title
+  - Key: VketUdonRuleSetBase.SpatialAudioDynamicObjectParentRule.Title
     Value: "VRCSpatialAudioSource\u3092\u542B\u3080\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306F\u5168\u3066Dynamic\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306E\u5B50\u306B\u914D\u7F6E\u3055\u308C\u308B\u3053\u3068"
   - Key: SpatialAudioDynamicObjectParentRule.noDynamicObject
     Value: "Dynamic\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u304C\u5B58\u5728\u3057\u307E\u305B\u3093"
@@ -613,7 +613,7 @@ MonoBehaviour:
     Value: "VRCSpatialAudioSource [{0}] \u306F Dynamic \u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306E\u5B50\u3067\u306A\u3051\u308C\u3070\u306A\u308A\u307E\u305B\u3093"
   - Key: SpatialAudioDynamicObjectParentRule.IsNotChildOfDynamic.Solution
     Value: "Dynamic \u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306E\u5B50\u306B\u79FB\u52D5\u3057\u3066\u304F\u3060\u3055\u3044"
-  - Key: Vket5UdonRuleSetBase.VRCPickupUdonBehaviourRule.Title
+  - Key: VketUdonRuleSetBase.VRCPickupUdonBehaviourRule.Title
     Value: "VRCPickup \u306E UdonAssembly \u5236\u7D04"
   - Key: VRCPickupUdonBehaviourRule.NotImplementedAutoResetPickup
     Value: "VRCPickup \u306F UdonBehaviour [AutoResetPickup] \u3092\u6301\u3064\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002"
