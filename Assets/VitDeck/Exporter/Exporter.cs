@@ -50,11 +50,12 @@ namespace VitDeck.Exporter
                 if (!forceExport && File.Exists(outputPath))
                     throw new IOException(LocalizedMessage.Get("Exporter.DestinationAlreadyExists", outputPath));
                 AssetDatabase.ExportPackage(assetPaths, outputPath);
-                //SHA-1 string rename
-                if (fileName.IndexOf("{SHA-1}") != -1)
+                if (new[] { "{SHA-1}", "{ID}", "{DATETIME}" }.Any(placeholder => fileName.Contains(placeholder)))
                 {
-                    var hash = GetHash(outputPath);
-                    var newPath = exportFolderPath + Path.AltDirectorySeparatorChar + fileName.Replace("{SHA-1}", hash);
+                    var newPath = exportFolderPath + Path.AltDirectorySeparatorChar + fileName
+                        .Replace("{SHA-1}", GetHash(outputPath))
+                        .Replace("{ID}", Path.GetFileName(baseFolderPath))
+                        .Replace("{DATETIME}", DateTimeOffset.Now.ToString("yyyyMMddTHHmmsszzz").Replace(":", "")); // ファイルシステムに依っては「:」を使用できない
                     if (forceExport || !File.Exists(newPath))
                     {
                         File.Move(outputPath, newPath);
