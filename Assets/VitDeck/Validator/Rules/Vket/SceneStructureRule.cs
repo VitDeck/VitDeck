@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -46,7 +46,7 @@ namespace VitDeck.Validator
             var allowedRootObjects = target.GetRootObjects();
             var rootObjects = new HashSet<GameObject>(scene.GetRootGameObjects());
 
-            rootObjects.RemoveWhere(obj => obj.name == "ReferenceObject");
+            rootObjects.RemoveWhere(obj => obj.name == "Reference Object");
             foreach (var allowedRootObject in allowedRootObjects)
             {
                 rootObjects.Remove(allowedRootObject);
