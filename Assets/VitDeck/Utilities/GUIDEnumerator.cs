@@ -12,17 +12,15 @@ namespace VitDeck.Utilities
         [MenuItem("Assets/GUIDToClipboard")]
         public static void EnumerateSelectedGUIDs()
         {
-            var guids = Selection.assetGUIDs
+            var paths = Selection.assetGUIDs
                 .Select(AssetDatabase.GUIDToAssetPath)
                 .SelectMany(AssetUtility.EnumerateAssets)
-                .Select(AssetDatabase.GetAssetPath)
-                .Select(AssetDatabase.AssetPathToGUID);
+                .Select(AssetDatabase.GetAssetPath);
 
             var builder = new StringBuilder();
-            foreach(var guid in guids)
+            foreach(var path in paths)
             {
-                builder.AppendFormat("\"{0}\",", guid);
-                builder.AppendLine();
+                builder.AppendLine($"\"{AssetDatabase.AssetPathToGUID(path)}\", // {path}");
             }
 
             EditorGUIUtility.systemCopyBuffer = builder.ToString();
@@ -31,18 +29,16 @@ namespace VitDeck.Utilities
         [MenuItem("Assets/MaterialGUIDToClipboard")]
         public static void EnumerateMaterialGUIDs()
         {
-            var guids = Selection.assetGUIDs
+            var paths = Selection.assetGUIDs
                 .Select(AssetDatabase.GUIDToAssetPath)
                 .SelectMany(AssetUtility.EnumerateAssets)
                 .Where(asset => asset is Material)
-                .Select(AssetDatabase.GetAssetPath)
-                .Select(AssetDatabase.AssetPathToGUID);
+                .Select(AssetDatabase.GetAssetPath);
 
             var builder = new StringBuilder();
-            foreach (var guid in guids)
+            foreach (var path in paths)
             {
-                builder.AppendFormat("\"{0}\",", guid);
-                builder.AppendLine();
+                builder.AppendLine($"\"{AssetDatabase.AssetPathToGUID(path)}\", // {path}");
             }
 
             EditorGUIUtility.systemCopyBuffer = builder.ToString();
