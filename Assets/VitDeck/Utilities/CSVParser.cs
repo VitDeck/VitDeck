@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Original:
  * Simple CSV Parser for C# without any dependency. 
  *
@@ -11,7 +11,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace VitDeck.Language
+namespace VitDeck.Utilities
 {
     public static class CSVParser
     {

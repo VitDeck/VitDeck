@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using System;
 using System.Text;
+using VitDeck.Utilities;
 
 namespace VitDeck.Language
 {
