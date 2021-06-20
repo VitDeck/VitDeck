@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using ICSharpCode.SharpZipLib.Tar;
 using ICSharpCode.SharpZipLib.GZip;
+using VitDeck.Utilities;
 using VitDeck.Validator;
 
 namespace VitDeck.Placement
@@ -22,8 +23,8 @@ namespace VitDeck.Placement
         {
             internal string Guid { get; set; }
             internal string Path { get; set; }
-            internal Stream Meta { get; set; }
-            internal Stream Content { get; set; }
+            internal MemoryStream Meta { get; set; }
+            internal MemoryStream Content { get; set; }
 
             public void Dispose()
             {
@@ -54,6 +55,8 @@ namespace VitDeck.Placement
             {
                 var assets = ExtractUnitypackage(stream);
 
+                var tempUnitypackagePath = Path.GetTempPath() + Guid.NewGuid() + ".unitypackage";
+
                 try
                 {
                     var pathsWithForbiddenExtensions = GetPathsWithForbiddenExtensions(assets, allowedExtensions);
@@ -72,11 +75,20 @@ namespace VitDeck.Placement
                         );
                     }
 
+                    ReplaceAllGuids(assets);
+
+                    using (var guidReplacedUnitypackage = PackUnitypackage(assets))
+                    {
+                        File.WriteAllBytes(tempUnitypackagePath, guidReplacedUnitypackage.ToArray());
+                    }
+
                     RemoveAssets(id);
-                    AssetDatabase.ImportPackage(path, false);
+                    AssetDatabase.ImportPackage(tempUnitypackagePath, false);
                 }
                 finally
                 {
+                    File.Delete(tempUnitypackagePath);
+
                     foreach (var asset in assets)
                     {
                         asset.Dispose();
@@ -145,6 +157,51 @@ namespace VitDeck.Placement
         }
 
         /// <summary>
+        /// アセットをunitypackage化します。
+        /// </summary>
+        /// <param name="assets"></param>
+        /// <returns></returns>
+        private static MemoryStream PackUnitypackage(IEnumerable<Asset> assets)
+        {
+            var unitypackage = new MemoryStream();
+            using (var gzipStream = new GZipOutputStream(unitypackage))
+            using (var tarStream = new TarOutputStream(gzipStream))
+            {
+                foreach (var asset in assets)
+                {
+                    var bytes = Encoding.UTF8.GetBytes(asset.Path);
+                    tarStream.PutNextEntry(new TarEntry(new TarHeader()
+                    {
+                        Name = asset.Guid + "/pathname",
+                        Size = bytes.Length,
+                    }));
+                    tarStream.Write(bytes, 0, bytes.Length);
+                    tarStream.CloseEntry();
+
+                    tarStream.PutNextEntry(new TarEntry(new TarHeader()
+                    {
+                        Name = asset.Guid + "/asset.meta",
+                        Size = asset.Meta.Length,
+                    }));
+                    tarStream.Write(asset.Meta.ToArray(), 0, (int)asset.Meta.Length);
+                    tarStream.CloseEntry();
+
+                    if (asset.Content != null)
+                    {
+                        tarStream.PutNextEntry(new TarEntry(new TarHeader()
+                        {
+                            Name = asset.Guid + "/asset",
+                            Size = asset.Content.Length,
+                        }));
+                        tarStream.Write(asset.Content.ToArray(), 0, (int)asset.Content.Length);
+                        tarStream.CloseEntry();
+                    }
+                }
+            }
+            return unitypackage;
+        }
+
+        /// <summary>
         /// 許可されていない拡張子を持つファイルのパス一覧を取得します。
         /// </summary>
         /// <param name="assets"></param>
@@ -169,6 +226,57 @@ namespace VitDeck.Placement
             return assets
                 .Where(asset => asset.Path != folderPath && !asset.Path.StartsWith(folderPath + "/"))
                 .Select(asset => asset.Path);
+        }
+
+        /// <summary>
+        /// 競合防止のため、すべてのアセットのGUIDを置き換えます。
+        /// </summary>
+        /// <param name="assets"></param>
+        /// <returns></returns>
+        private static void ReplaceAllGuids(IEnumerable<Asset> assets)
+        {
+            var oldNewGuidPairs = assets.ToDictionary(asset => asset.Guid, _ => Guid.NewGuid().ToString("N"));
+            foreach (var asset in assets)
+            {
+                asset.Guid = oldNewGuidPairs[asset.Guid];
+                asset.Meta = ReplaceStrings(asset.Meta, oldNewGuidPairs);
+                if (asset.Content != null)
+                {
+                    asset.Content = ReplaceStrings(asset.Content, oldNewGuidPairs);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Streamに含まれる文字列の置換を行います。
+        /// </summary>
+        /// <remarks>
+        /// バイナリ形式であれば、そのまま返します。
+        /// </remarks>
+        /// <param name="stream"></param>
+        /// <param name="oldNewPairs"></param>
+        /// <returns></returns>
+        private static MemoryStream ReplaceStrings(MemoryStream stream, IDictionary<string, string> oldNewPairs)
+        {
+            var utf8Encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+            string str;
+            try
+            {
+                str = utf8Encoding.GetString(stream.ToArray());
+            }
+            catch (ArgumentException)
+            {
+                return stream;
+            }
+
+            stream.Dispose();
+
+            foreach (var (oldValue, newValue) in oldNewPairs)
+            {
+                str = str.Replace(oldValue, newValue);
+            }
+
+            return new MemoryStream(utf8Encoding.GetBytes(str));
         }
 
         /// <summary>
