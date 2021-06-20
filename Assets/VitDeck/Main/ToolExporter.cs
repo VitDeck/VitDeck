@@ -19,6 +19,7 @@ namespace VitDeck.Main
 
         private static readonly Regex IgnorePattern = new Regex(@"^Assets/VitDeck/(
             Main/ToolExporter\.cs
+            |Utilities/GUIDEnumerator\.cs
             |Temporary(/.+)?
             |.+/Tests/.+
             |TestUtilities(/.+)?
