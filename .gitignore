@@ -48,7 +48,12 @@ Assets/VitDeck/Temporary*
 Assets/Plugins/Editor/JetBrains*
 
 #VRChat SDK2
-Assets/VRCSDK*
+Assets/VRCSDK/*
+!Assets/VRCSDK/Dependencies
+!Assets/VRCSDK/Dependencies.meta
+Assets/VRCSDK/Dependencies/*
+!Assets/VRCSDK/Dependencies/SharpZipLib
+!Assets/VRCSDK/Dependencies/SharpZipLib.meta
 Assets/VRChat Examples*
 
 # Base folder
