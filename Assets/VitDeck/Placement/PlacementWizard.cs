@@ -23,6 +23,9 @@ namespace VitDeck.Placement
         [SerializeField]
         private string folderPath = null;
 
+        [SerializeField]
+        private SceneAsset location = null;
+
         [MenuItem("VitDeck/Placement Tool", priority = 120)]
         public static void Open()
         {
@@ -81,23 +84,27 @@ namespace VitDeck.Placement
                 return;
             }
 
-            var results = new List<string>();
-            foreach (var (path, id) in pathIdPairs)
+            var idMessagePairs = pathIdPairs.ToDictionary(pathIdPair => pathIdPair.Value, pathIdPair =>
             {
-                var result = $"[{id}]\n";
+                var (path, id) = pathIdPair;
+
+                // インポート
                 try
                 {
                     PackageImporter.Import(id, path, allowedExtensions);
-                    result += "問題なし";
                 }
                 catch (FatalValidationErrorException exception)
                 {
-                    result += exception.Message;
+                    return exception.Message;
                 };
-                results.Add(result);
-            }
 
-            var message = string.Join("\n\n", results);
+                // 配置
+                Placement.Place(id, this.location);
+
+                return "配置完了";
+            });
+
+            var message = string.Join("\n\n", idMessagePairs.Select(idMessagePair => $"[{idMessagePair.Key}]\n{idMessagePair.Value}"));
             Debug.Log("\n" + message);
             EditorUtility.DisplayDialog("VitDeck", message, "OK");
         }

@@ -2,7 +2,8 @@
     "name": "VitDeck.Placement",
     "references": [
         "VitDeck.Utilities",
-        "VitDeck.Validator.Components"
+        "VitDeck.Validator.Components",
+        "VitDeck.Placement.Components"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [
