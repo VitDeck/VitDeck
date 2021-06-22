@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Linq;
 using System.IO;
 using System.Text;
@@ -83,7 +84,7 @@ namespace VitDeck.Placement
                     }
 
                     RemoveAssets(id);
-                    AssetDatabase.ImportPackage(tempUnitypackagePath, false);
+                    ImportPackageImmediately(tempUnitypackagePath);
                 }
                 finally
                 {
@@ -95,6 +96,18 @@ namespace VitDeck.Placement
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// <see cref="AssetDatabase.ImportPackageImmediately"/>を呼び出します。
+        /// </summary>
+        /// <param name="packagePath"></param>
+        private static void ImportPackageImmediately(string packagePath)
+        {
+            var AssetDatabase = typeof(AssetDatabase);
+            AssetDatabase
+                .GetMethod("ImportPackageImmediately", BindingFlags.NonPublic | BindingFlags.Static)
+                .Invoke(AssetDatabase, new[] { packagePath });
         }
 
         /// <summary>
