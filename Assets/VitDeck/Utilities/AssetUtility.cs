@@ -191,8 +191,8 @@ namespace VitDeck.Utilities
         /// シーンは保存されている必要がある。
         /// </remarks>
         /// <param name="rootObjectName"></param>
-        /// <param name="callback"></param>
-        public static void TemporaryDestroyObjectsOutsideOfRootObjectAndRunCallback(string rootObjectName, Action callback)
+        /// <param name="callback">コールバック関数が指定されていなければ、削除したオブジェクトを復元しない。</param>
+        public static void TemporaryDestroyObjectsOutsideOfRootObjectAndRunCallback(string rootObjectName, Action callback = null)
         {
             foreach (var obj in Array.FindAll(Resources.FindObjectsOfTypeAll<GameObject>(), (item) => item.transform.parent == null))
             {
@@ -202,11 +202,13 @@ namespace VitDeck.Utilities
                 }
             }
 
-            callback();
+            if (callback != null)
+            {
+                callback();
 
-            EditorSceneManager.OpenScene(SceneManager.GetActiveScene().path);
+                EditorSceneManager.OpenScene(SceneManager.GetActiveScene().path);
+            }
         }
-    }
 
         /// <summary>
         /// ベースフォルダを基に、IDを返す。
