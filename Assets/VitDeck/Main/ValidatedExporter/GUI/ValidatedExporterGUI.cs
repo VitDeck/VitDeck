@@ -66,7 +66,7 @@ namespace VitDeck.Main.ValidatedExporter.GUI
         private Vector2 msaageAreaScroll;
 
 #if !VITDECK_HIDE_MENUITEM
-        [MenuItem(prefix + "Export Booth", priority = 102)]
+        [MenuItem(prefix + "Export Booth", priority = 104)]
 #endif
         static void Open()
         {

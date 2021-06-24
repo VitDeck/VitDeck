@@ -13,6 +13,14 @@ MonoBehaviour:
   m_Name: English
   m_EditorClassIdentifier: 
   language:
+  - Key: Main.Baker.LightBakeFailed
+    Value: Light Bake failed.
+  - Key: BuildSizeCalculator.OpenSceneFile
+    Value: Please open a Scene file.
+  - Key: BuildSizeCalculator.BuildFailed
+    Value: Build failed.
+  - Key: BuildSizeCalculator.BuildSize
+    Value: The build size for {0} is {1}.
   - Key: Validator.SerchingValidationTarget
     Value: Validating
   - Key: Validator.AbortWithException

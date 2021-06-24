@@ -1,11 +1,9 @@
 {
-    "name": "VitDeck.Main",
+    "name": "VitDeck.BuildSizeCalculator",
     "references": [
-        "VitDeck.TemplateLoader",
-        "VitDeck.Validator",
-        "VitDeck.Exporter",
+        "VitDeck.Language",
         "VitDeck.Utilities",
-        "VitDeck.Language"
+        "VitDeck.Main"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [
