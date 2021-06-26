@@ -452,6 +452,12 @@ MonoBehaviour:
     Value: Issues found while rule checking.
   - Key: ValidatedExporter.SkipValidation
     Value: Undefined ruleset, skipping validation.
+  - Key: ValidatedExporter.ProblemOccurredWhileBuildSizeCheck
+    Value: Unexpected error occured during build size check.
+  - Key: ValidatedExporter.MaxBuildSize
+    Value: Keep the build size within {0}.
+  - Key: ValidatedExporter.SkipBuildSizeCheck
+    Value: Undefined build size, skipping build size check.
   - Key: ValidatedExporter.Failed
     Value: Failed to export.
   - Key: ExistInSubmitFolderRule.AssetOutOfPackage

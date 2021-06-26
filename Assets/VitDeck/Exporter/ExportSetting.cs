@@ -17,5 +17,7 @@ namespace VitDeck.Exporter
         public string ruleSetName = "";
         [Tooltip("If true, Export will done though validation result has warning issues.")]
         public bool ignoreValidationWarning = false;
+        [Min(0), Tooltip("Max build byte count. If this field is `0`, Export will skip build size check.")]
+        public int MaxBuildByteCount = 0;
     }
 }

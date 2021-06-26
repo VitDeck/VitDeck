@@ -1,8 +1,12 @@
 using System;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using VitDeck.Exporter;
 using VitDeck.Validator;
 using VitDeck.Language;
+using VitDeck.BuildSizeCalculator;
+using VitDeck.Utilities;
 
 namespace VitDeck.Main.ValidatedExporter
 {
@@ -50,6 +54,40 @@ namespace VitDeck.Main.ValidatedExporter
                 else
                 {
                     result.log += LocalizedMessage.Get("ValidatedExporter.SkipValidation") + System.Environment.NewLine;
+                }
+
+                // build size check
+                if (setting.MaxBuildByteCount > 0)
+                {
+                    var buildByteCount = Calculator.ForceRebuild();
+                    if (buildByteCount == null) {
+                        result.log += LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileBuildSizeCheck")
+                            + System.Environment.NewLine;
+                        return result;
+                    }
+
+                    var buildSizeValidationResult = new ValidationResult("Build Size Check");
+                    var formattedBuildSize = MathUtility.FormatByteCount((int)buildByteCount);
+                    buildSizeValidationResult.AddIssue(new Issue(
+                        target: null,
+                        IssueLevel.Info,
+                        LocalizedMessage.Get("BuildSizeCalculator.BuildSize", SceneManager.GetActiveScene().path, formattedBuildSize)
+                    ));
+                    result.validationResults = result.validationResults.Concat(new[] { buildSizeValidationResult }).ToArray();
+                    if (buildByteCount > setting.MaxBuildByteCount)
+                    {
+                        buildSizeValidationResult.AddIssue(new Issue(
+                        target: null,
+                            IssueLevel.Fatal,
+                            LocalizedMessage.Get("ValidatedExporter.MaxBuildSize", formattedBuildSize)
+                        ));
+                        result.log += LocalizedMessage.Get("ValidatedExporter.IssueFound") + System.Environment.NewLine;
+                        return result;
+                    }
+                }
+                else
+                {
+                    result.log += LocalizedMessage.Get("ValidatedExporter.SkipBuildSizeCheck") + System.Environment.NewLine;
                 }
             }
 

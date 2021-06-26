@@ -2,14 +2,21 @@
     "name": "VitDeck.Main.ValidatedExporter",
     "references": [
         "VitDeck.Validator",
+        "VitDeck.BuildSizeCalculator",
         "VitDeck.Exporter",
         "VitDeck.Utilities",
         "VitDeck.Validator.Components",
         "VitDeck.Validator.Rules",
         "VitDeck.Language"
     ],
+    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
-    "excludePlatforms": []
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
 }

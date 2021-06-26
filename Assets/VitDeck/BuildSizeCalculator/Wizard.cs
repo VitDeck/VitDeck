@@ -91,7 +91,7 @@ namespace VitDeck.BuildSizeCalculator
 
             EditorUtility.DisplayDialog(
                 "VitDeck",
-                LocalizedMessage.Get("BuildSizeCalculator.BuildSize", AssetUtility.GetScenePath(this.baseFolder), (byteCount.Value / Math.Pow(2, 20)).ToString("0.00' MiB'")),
+                LocalizedMessage.Get("BuildSizeCalculator.BuildSize", AssetUtility.GetScenePath(this.baseFolder), MathUtility.FormatByteCount((int)byteCount)),
                 "OK"
             );
         }
