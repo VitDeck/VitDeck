@@ -8,6 +8,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using VitDeck.Utilities;
 using VitDeck.Validator;
+using VitDeck.BuildSizeCalculator;
 using VitDeck.Exporter;
 using VitDeck.Language;
 
@@ -66,6 +67,10 @@ namespace VitDeck.Placement
                 {
                     throw new Exception($"指定されたルールセット「{this.exportSetting.ruleSetName}」が見つかりません。");
                 }
+            }
+            if (this.exportSetting.MaxBuildByteCount == 0)
+            {
+                Debug.LogWarning(LocalizedMessage.Get("ValidatedExporter.SkipBuildSizeCheck"));
             }
 
             var pathsNotMatchingPattern = new List<string>();
@@ -152,7 +157,19 @@ namespace VitDeck.Placement
                 }
 
                 // ビルド容量チェック
+                if (this.exportSetting.MaxBuildByteCount > 0)
+                {
+                    var buildByteCount = Calculator.ForceRebuild();
+                    if (buildByteCount == null)
+                    {
+                        return LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileBuildSizeCheck");
+                    }
 
+                    if (buildByteCount > this.exportSetting.MaxBuildByteCount)
+                    {
+                        return $"ビルド容量 {MathUtility.FormatByteCount((int)buildByteCount)} が {MathUtility.FormatByteCount(this.exportSetting.MaxBuildByteCount)} を超過しています。";
+                    }
+                }
 
                 // 配置
                 Placement.Place(id, this.location);

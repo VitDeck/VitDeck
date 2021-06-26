@@ -5,6 +5,7 @@
         "VitDeck.Exporter",
         "VitDeck.Validator",
         "VitDeck.Validator.Components",
+        "VitDeck.BuildSizeCalculator",
         "VitDeck.Placement.Components",
         "VitDeck.Language"
     ],
