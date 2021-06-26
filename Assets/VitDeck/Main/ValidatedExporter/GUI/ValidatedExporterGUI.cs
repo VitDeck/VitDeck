@@ -90,7 +90,7 @@ namespace VitDeck.Main.ValidatedExporter.GUI
 
         private void LoadSettings()
         {
-            var userSettings = UserSettingUtility.GetUserSettings();
+            var userSettings = SettingUtility.GetSettings<UserSettings>();
             baseFolder = AssetDatabase.LoadAssetAtPath<DefaultAsset>(userSettings.validatorFolderPath);
             var settings = Settings.Where(a => a.name == userSettings.exporterSettingFileName);
             if (settings.Count() > 0)
@@ -101,13 +101,13 @@ namespace VitDeck.Main.ValidatedExporter.GUI
 
         private void SaveSettings()
         {
-            var userSettings = UserSettingUtility.GetUserSettings();
+            var userSettings = SettingUtility.GetSettings<UserSettings>();
             if (selectedSetting != null)
             {
                 userSettings.exporterSettingFileName = selectedSetting.name;
             }
             userSettings.validatorFolderPath = AssetDatabase.GetAssetPath(baseFolder);
-            UserSettingUtility.SaveUserSettings(userSettings);
+            SettingUtility.SaveSettings(userSettings);
         }
 
         private void OnGUI()

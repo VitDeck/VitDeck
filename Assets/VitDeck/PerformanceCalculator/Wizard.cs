@@ -92,7 +92,7 @@ namespace VitDeck.PerformanceCalculator
         /// </summary>
         private void LoadSettings()
         {
-            var userSettings = UserSettingUtility.GetUserSettings();
+            var userSettings = SettingUtility.GetSettings<UserSettings>();
             this.baseFolder = AssetDatabase.LoadAssetAtPath<DefaultAsset>(userSettings.validatorFolderPath);
         }
 
@@ -101,9 +101,9 @@ namespace VitDeck.PerformanceCalculator
         /// </summary>
         private void SaveSettings()
         {
-            var userSettings = UserSettingUtility.GetUserSettings();
+            var userSettings = SettingUtility.GetSettings<UserSettings>();
             userSettings.validatorFolderPath = AssetDatabase.GetAssetPath(this.baseFolder);
-            UserSettingUtility.SaveUserSettings(userSettings);
+            SettingUtility.SaveSettings(userSettings);
         }
 
         private async void Calculate()
