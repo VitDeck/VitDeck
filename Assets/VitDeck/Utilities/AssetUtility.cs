@@ -1,7 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using UnityEngine;
+using Object = UnityEngine.Object;
+using UnityEngine.SceneManagement;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 
 namespace VitDeck.Utilities
 {
@@ -177,6 +182,72 @@ namespace VitDeck.Utilities
             var path = AssetDatabase.GenerateUniqueAssetPath(targetFolder + "/" + defaultAssetName);
 
             ProjectWindowUtil.CreateAsset(instance, path);
+        }
+
+        /// <summary>
+        /// 現在のシーン上で、指定したルートオブジェクト外のオブジェクトを一時的に削除し、コールバック関数を実行する。
+        /// </summary>
+        /// <remarks>
+        /// シーンは保存されている必要がある。
+        /// </remarks>
+        /// <param name="rootObjectName"></param>
+        /// <param name="callback">コールバック関数が指定されていなければ、削除したオブジェクトを復元しない。</param>
+        public static void TemporaryDestroyObjectsOutsideOfRootObjectAndRunCallback(string rootObjectName, Action callback = null)
+        {
+            foreach (var obj in Array.FindAll(Resources.FindObjectsOfTypeAll<GameObject>(), (item) => item.transform.parent == null))
+            {
+                if (obj.name != rootObjectName && AssetDatabase.GetAssetOrScenePath(obj).Contains(".unity"))
+                {
+                    Object.DestroyImmediate(obj);
+                }
+            }
+
+            if (callback != null)
+            {
+                callback();
+
+                EditorSceneManager.OpenScene(SceneManager.GetActiveScene().path);
+            }
+        }
+
+        /// <summary>
+        /// ベースフォルダを基に、IDを返す。
+        /// </summary>
+        /// <returns></returns>
+        public static string GetId(DefaultAsset baseFolder)
+        {
+            return Path.GetFileName(AssetDatabase.GetAssetPath(baseFolder));
+        }
+
+        /// <summary>
+        /// ベースフォルダを基に、シーンのパスを返す。
+        /// </summary>
+        /// <returns></returns>
+        public static string GetScenePath(DefaultAsset baseFolder)
+        {
+            var id = GetId(baseFolder);
+            return $"Assets/{id}/{id}.unity";
+        }
+
+        /// <summary>
+        /// 入稿用シーンを開く。
+        /// </summary>
+        /// <returns>シーンが存在しなければ <c>false</c> を返す。</returns>
+        public static bool OpenScene(DefaultAsset baseFolder)
+        {
+            var scenePath = GetScenePath(baseFolder);
+            var scene = EditorSceneManager.GetSceneByPath(scenePath);
+            if (!scene.IsValid())
+            {
+                return false;
+            }
+
+            if (!scene.isLoaded)
+            {
+                EditorSceneManager.OpenScene(scenePath);
+            }
+
+            return true;
         }
     }
 }
