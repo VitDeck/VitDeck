@@ -3,8 +3,10 @@
     "references": [
         "VitDeck.Utilities",
         "VitDeck.Exporter",
+        "VitDeck.Validator",
         "VitDeck.Validator.Components",
-        "VitDeck.Placement.Components"
+        "VitDeck.Placement.Components",
+        "VitDeck.Language"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [

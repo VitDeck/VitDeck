@@ -5,9 +5,11 @@ using System.Text.RegularExpressions;
 using System.IO;
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using VitDeck.Utilities;
 using VitDeck.Validator;
 using VitDeck.Exporter;
+using VitDeck.Language;
 
 namespace VitDeck.Placement
 {
@@ -52,6 +54,19 @@ namespace VitDeck.Placement
             this.SaveSettings();
 
             var allowedExtensions = this.exportSetting.GetAllowedExtensions();
+            IRuleSet ruleSet = null;
+            if (string.IsNullOrEmpty(this.exportSetting.ruleSetName))
+            {
+                Debug.LogWarning(LocalizedMessage.Get("ValidatedExporter.SkipValidation"));
+            }
+            else
+            {
+                ruleSet = Validator.Validator.GetRuleSet(this.exportSetting.ruleSetName);
+                if (ruleSet == null)
+                {
+                    throw new Exception($"指定されたルールセット「{this.exportSetting.ruleSetName}」が見つかりません。");
+                }
+            }
 
             var pathsNotMatchingPattern = new List<string>();
             var pathIdPairs = Directory.GetFiles(this.folderPath).ToDictionary(path => path, path => {
@@ -102,6 +117,42 @@ namespace VitDeck.Placement
                 {
                     return exception.Message;
                 };
+
+                // 入稿シーンを開く
+                var scenePath = $"Assets/{id}/{id}.unity";
+                if (AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath) == null)
+                {
+                    return $"シーン「{scenePath}」が存在しません。";
+                }
+                EditorSceneManager.OpenScene(scenePath);
+
+                // バリデーション
+                if (ruleSet != null)
+                {
+                    ValidationResult[] validationResults;
+                    try
+                    {
+                        validationResults = Validator.Validator.Validate(ruleSet, "Assets/" + id, forceOpenScene: true);
+                    }
+                    catch (FatalValidationErrorException exception)
+                    {
+                        return LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileValidating") + "\n" + exception.Message;
+                    }
+                    var minIssueLevel = this.exportSetting.ignoreValidationWarning ? IssueLevel.Error : IssueLevel.Warning;
+                    if (validationResults.SelectMany(result => result.Issues).Any(issue => issue.level >= minIssueLevel))
+                    {
+                        return LocalizedMessage.Get("ValidatedExporter.IssueFound") + "\n" + string.Join(
+                            "\n",
+                            validationResults
+                                .Where(result => result.Issues.Any(issue => issue.level >= minIssueLevel))
+                                .Select(result => result.RuleName + ":\n"
+                                    + string.Join("\n", result.Issues.Where(issue => issue.level >= minIssueLevel).Select(issue => "    " + issue.message)))
+                        );
+                    }
+                }
+
+                // ビルド容量チェック
+
 
                 // 配置
                 Placement.Place(id, this.location);
