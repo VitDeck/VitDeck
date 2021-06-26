@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -92,7 +93,12 @@ namespace VitDeck.Main.ValidatedExporter
             }
 
             //export
-            result.exportResult = Exporter.Exporter.Export(baseFolderPath, settingStock.GetSetting(), forceExport);
+            result.exportResult = Exporter.Exporter.Export(
+                baseFolderPath,
+                settingStock.GetSetting(),
+                forceExport,
+                string.IsNullOrWhiteSpace(setting.AllowedExtensions) ? null : ParseExtensionList(setting.AllowedExtensions)
+            );
             if (!result.IsExportSuccess)
             {
                 result.log += LocalizedMessage.Get("ValidatedExporter.Failed") + System.Environment.NewLine;
@@ -103,6 +109,21 @@ namespace VitDeck.Main.ValidatedExporter
         private static IRuleSet GetRuleSet(string ruleSetName)
         {
             return Validator.Validator.GetRuleSet(ruleSetName);
+        }
+
+        /// <param name="lineFeedSeparatedExtensions">改行区切りの拡張子リスト。</param>
+        /// <exception cref="ArgumentException">「.」で始まらない行がある場合。</exception>
+        /// <returns>小文字の拡張子リスト。</returns>
+        private static IEnumerable<string> ParseExtensionList(string lineFeedSeparatedExtensions)
+        {
+            return lineFeedSeparatedExtensions.Trim().Split('\n').Select(line => {
+                var extension = line.Trim().ToLower();
+                if (!extension.StartsWith("."))
+                {
+                    throw new ArgumentException($"「{extension}」は「.」で始まりません。");
+                }
+                return extension;
+            });
         }
 
         private class ExportSettingStock

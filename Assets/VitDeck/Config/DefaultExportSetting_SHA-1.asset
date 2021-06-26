@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -17,3 +18,71 @@ MonoBehaviour:
   fileNameFormat: '{SHA-1}.unitypackage'
   ruleSetName: SampleRuleSet
   ignoreValidationWarning: 0
+  MaxBuildByteCount: 0
+  AllowedExtensions: '.anim
+
+    .asset
+
+    .bmp
+
+    .cginc
+
+    .controller
+
+    .exr
+
+    .fbx
+
+    .flare
+
+    .gif
+
+    .hdr
+
+    .jpeg
+
+    .jpg
+
+    .mat
+
+    .meta
+
+    .mp3
+
+    .mtl
+
+    .obj
+
+    .ogg
+
+    .otf
+
+    .overrideController
+
+    .physicMaterial
+
+    .png
+
+    .prefab
+
+    .psd
+
+    .ptx
+
+    .shader
+
+    .spm
+
+    .spriteatlas
+
+    .tga
+
+    .tif
+
+    .tiff
+
+    .ttf
+
+    .unity
+
+    .wav'

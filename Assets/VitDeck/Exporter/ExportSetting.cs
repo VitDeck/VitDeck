@@ -19,5 +19,7 @@ namespace VitDeck.Exporter
         public bool ignoreValidationWarning = false;
         [Min(0), Tooltip("Max build byte count. If this field is `0`, Export will skip build size check.")]
         public int MaxBuildByteCount = 0;
+        [Multiline(lines: 40), Tooltip("Extensions of the file to include in the unitypackage. A newline-separated extensions starting with `.`. Case-insensitive. If this field is empty, all files will be exported.")]
+        public string AllowedExtensions;
     }
 }
