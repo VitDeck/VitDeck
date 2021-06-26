@@ -9,7 +9,8 @@
         "VRC.Udon.Editor",
         "UdonSharp.Runtime",
         "UdonSharp.Editor",
-        "VitDeck.Main"
+        "VitDeck.Main",
+        "VitDeck.Exporter"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [

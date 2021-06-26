@@ -61,7 +61,7 @@ namespace VitDeck.Exporter
 
                 if (forbiddenPaths.Count > 0)
                 {
-                    var forbiddenPathList = "# " + LocalizedMessage.Get("AllowedExtensionsRule.ForbiddenPaths") + System.Environment.NewLine
+                    var forbiddenPathList = "# " + LocalizedMessage.Get("AllowedExtensionsForExportRule.ForbiddenPaths") + System.Environment.NewLine
                         + String.Join(System.Environment.NewLine, forbiddenPaths);
                     Debug.Log(forbiddenPathList);
                     result.log += forbiddenPathList + System.Environment.NewLine;

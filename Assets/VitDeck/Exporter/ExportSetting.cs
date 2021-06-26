@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using VitDeck.Language;
@@ -21,5 +24,24 @@ namespace VitDeck.Exporter
         public int MaxBuildByteCount = 0;
         [Multiline(lines: 40), Tooltip("Extensions of the file to include in the unitypackage. A newline-separated extensions starting with `.`. Case-insensitive. If this field is empty, all files will be exported.")]
         public string AllowedExtensions;
+
+        /// <exception cref="ArgumentException">「.」で始まらない行がある場合。</exception>
+        /// <returns>小文字の拡張子リスト。空の場合はnull。</returns>
+        public IEnumerable<string> GetAllowedExtensions()
+        {
+            if (string.IsNullOrWhiteSpace(this.AllowedExtensions))
+            {
+                return null;
+            }
+
+            return this.AllowedExtensions.Trim().Split('\n').Select(line => {
+                var extension = line.Trim().ToLower();
+                if (!extension.StartsWith("."))
+                {
+                    throw new ArgumentException($"「{extension}」は「.」で始まりません。");
+                }
+                return extension;
+            });
+        }
     }
 }

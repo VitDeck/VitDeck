@@ -658,5 +658,7 @@ MonoBehaviour:
     Value: UdonBehaviour [AutoResetPickup] must set Synchronize Position is True.
   - Key: VRCPickupUdonBehaviourRule.SynchronizePositionFalse.Solution
     Value: Check UdonBehaviour property Synchronize Position is True.
-  - Key: AllowedExtensionsRule.ForbiddenPaths
+  - Key: AllowedExtensionsForExportRule.Title
+    Value: Extensions
+  - Key: AllowedExtensionsForExportRule.ForbiddenPaths
     Value: 'The following files will not be exported:'
