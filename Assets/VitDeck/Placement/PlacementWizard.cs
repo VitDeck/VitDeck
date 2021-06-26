@@ -37,6 +37,7 @@ namespace VitDeck.Placement
                 MessageType.None
             );
 
+            this.isValid = this.exportSetting != null && this.location != null;
             return true;
         }
 
