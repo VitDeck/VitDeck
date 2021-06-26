@@ -19,31 +19,33 @@ namespace VitDeck.Placement
         private ExportSetting exportSetting;
 
         [SerializeField]
-        private string folderPath = null;
-
-        [SerializeField]
         private SceneAsset location = null;
 
         [MenuItem("VitDeck/Placement Tool", priority = 120)]
         public static void Open()
         {
-            ScriptableWizard.DisplayWizard<PlacementWizard>("VitDeck", "Import unitypackages");
+            ScriptableWizard.DisplayWizard<PlacementWizard>("VitDeck", "Select folder and Import unitypackages");
         }
 
         protected override bool DrawWizardGUI()
         {
             base.DrawWizardGUI();
             EditorGUILayout.HelpBox(
-                "指定したフォルダ内に含まれるunitypackageをインポートします。\n\nパッケージ名に含まれる「_」で囲まれた数字をIDとして扱います。",
+                "選択したフォルダ内に含まれるunitypackageをインポートします。\n\nパッケージ名に含まれる「_」で囲まれた数字をIDとして扱います。",
                 MessageType.None
             );
 
-            this.isValid = !string.IsNullOrEmpty(this.folderPath);
             return true;
         }
 
         private void OnWizardCreate()
         {
+            var folderPath = EditorUtility.OpenFolderPanel(title: "VitDeck", folder: null, defaultName: null);
+            if (string.IsNullOrEmpty(folderPath))
+            {
+                return;
+            }
+
             var allowedExtensions = this.exportSetting.GetAllowedExtensions();
 
             var pathsNotMatchingPattern = new List<string>();
