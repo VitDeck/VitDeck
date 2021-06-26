@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEditor;
 using VitDeck.Utilities;
 using VitDeck.Validator;
+using VitDeck.Exporter;
 
 namespace VitDeck.Placement
 {
@@ -14,11 +15,8 @@ namespace VitDeck.Placement
     {
         private static readonly Regex FilePathPattern = new Regex(@"[/\\][^/\\]*?_([1-9][0-9]*)_[^/\\]*\.unitypackage$");
 
-        /// <summary>
-        /// 「.」を含まない「,」区切りの拡張子リスト。
-        /// </summary>
         [SerializeField]
-        private string allowedExtensions = "unity,prefab,asset,mat,exr,fbx,png,jpg,jpeg,gif,anim,controller,overrideController";
+        private ExportSetting exportSetting;
 
         [SerializeField]
         private string folderPath = null;
@@ -46,7 +44,7 @@ namespace VitDeck.Placement
 
         private void OnWizardCreate()
         {
-            var allowedExtensions = this.allowedExtensions.Split(',').Select(extension => "." + extension.ToLower());
+            var allowedExtensions = this.exportSetting.GetAllowedExtensions();
 
             var pathsNotMatchingPattern = new List<string>();
             var pathIdPairs = Directory.GetFiles(folderPath).ToDictionary(path => path, path => {

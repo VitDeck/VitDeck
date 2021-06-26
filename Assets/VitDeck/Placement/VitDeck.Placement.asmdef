@@ -2,6 +2,7 @@
     "name": "VitDeck.Placement",
     "references": [
         "VitDeck.Utilities",
+        "VitDeck.Exporter",
         "VitDeck.Validator.Components",
         "VitDeck.Placement.Components"
     ],
