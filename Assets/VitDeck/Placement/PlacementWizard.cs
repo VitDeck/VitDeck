@@ -21,10 +21,12 @@ namespace VitDeck.Placement
         [SerializeField]
         private SceneAsset location = null;
 
+        private string folderPath;
+
         [MenuItem("VitDeck/Placement Tool", priority = 120)]
         public static void Open()
         {
-            ScriptableWizard.DisplayWizard<PlacementWizard>("VitDeck", "Select folder and Import unitypackages");
+            ScriptableWizard.DisplayWizard<PlacementWizard>("VitDeck", "Select folder and Import unitypackages").LoadSettings();
         }
 
         protected override bool DrawWizardGUI()
@@ -40,16 +42,18 @@ namespace VitDeck.Placement
 
         private void OnWizardCreate()
         {
-            var folderPath = EditorUtility.OpenFolderPanel(title: "VitDeck", folder: null, defaultName: null);
-            if (string.IsNullOrEmpty(folderPath))
+            this.folderPath = EditorUtility.OpenFolderPanel(title: "VitDeck", folder: this.folderPath, defaultName: null);
+            if (string.IsNullOrEmpty(this.folderPath))
             {
                 return;
             }
 
+            this.SaveSettings();
+
             var allowedExtensions = this.exportSetting.GetAllowedExtensions();
 
             var pathsNotMatchingPattern = new List<string>();
-            var pathIdPairs = Directory.GetFiles(folderPath).ToDictionary(path => path, path => {
+            var pathIdPairs = Directory.GetFiles(this.folderPath).ToDictionary(path => path, path => {
                 var match = FilePathPattern.Match(path);
                 if (!match.Success)
                 {
@@ -107,6 +111,23 @@ namespace VitDeck.Placement
             var message = string.Join("\n\n", idMessagePairs.Select(idMessagePair => $"[{idMessagePair.Key}]\n{idMessagePair.Value}"));
             Debug.Log("\n" + message);
             EditorUtility.DisplayDialog("VitDeck", message, "OK");
+        }
+
+        private void LoadSettings()
+        {
+            var settings = SettingUtility.GetSettings<PlacementSettings>();
+            this.exportSetting = settings.ExportSetting;
+            this.location = settings.Location;
+            this.folderPath = settings.FolderPath;
+        }
+
+        private void SaveSettings()
+        {
+            var settings = SettingUtility.GetSettings<PlacementSettings>();
+            settings.ExportSetting = this.exportSetting;
+            settings.Location = this.location;
+            settings.FolderPath = this.folderPath;
+            SettingUtility.SaveSettings(settings);
         }
     }
 }
