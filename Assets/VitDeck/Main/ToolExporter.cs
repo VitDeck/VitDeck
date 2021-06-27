@@ -24,9 +24,9 @@ namespace VitDeck.Main
             |Temporary(/.+)?
             |.+/Tests/.+
             |TestUtilities(/.+)?
-            |Templates/Sample_template(/.+)?
+            |Templates/(Sample_template|0.+)(/.+)?
             |Validator/Rules/Sample(/.+)?
-            |Config/(UserSettings|DefaultExportSetting.*|PlacementSettings)\.asset
+            |Config/(UserSettings|DefaultExportSetting.*|PlacementSettings|Vket.+)\.asset
         )$", RegexOptions.ExplicitCapture | RegexOptions.IgnorePatternWhitespace);
 
         [MenuItem("VitDeck/Export VitDeck", false, 201)]
