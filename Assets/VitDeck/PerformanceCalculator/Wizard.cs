@@ -30,7 +30,7 @@ namespace VitDeck.PerformanceCalculator
         private IEnumerator coroutine;
 
 #if !VITDECK_HIDE_MENUITEM
-        [MenuItem(prefix + "Calculate Peformance", priority = 103)]
+        [MenuItem(prefix + "Calculate Performance", priority = 103)]
 #endif
         public static void Open()
         {
@@ -43,7 +43,7 @@ namespace VitDeck.PerformanceCalculator
             this.baseFolder = (DefaultAsset)EditorGUILayout.ObjectField("Base Folder", this.baseFolder, typeof(DefaultAsset), allowSceneObjects: false);
             this.spaceSize = (Calculator.SpaceSize)EditorGUILayout.EnumPopup("Space Size", this.spaceSize);
             EditorGUI.BeginDisabledGroup(this.baseFolder == null);
-                if (GUILayout.Button("Calculate Peformance"))
+                if (GUILayout.Button("Calculate Performance"))
                 {
                     this.SaveSettings();
 
