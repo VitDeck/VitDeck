@@ -39,18 +39,13 @@ namespace VitDeck.Utilities
             Coroutines.Add(coroutine);
             if (Coroutines.Count == 1)
             {
-                //EditorApplication.update += MoveNext;
-                DummyEditorWindow.Action = MoveNext;
-                var window = EditorWindow.GetWindow<DummyEditorWindow>();
-                //window.position = new Rect(position: new Vector3(-1000, -1000), size: new Vector2(0, 0));
-                
+                EditorApplication.update += MoveNext;
             }
         }
 
         private static void MoveNext()
         {
             var endCoroutines = new List<IEnumerator>();
-            Debug.Log("1 / Coroutines.Count(): " + Coroutines.Count() + " / endCoroutines.Count(): " + endCoroutines.Count());
 
             foreach (var coroutine in Coroutines)
             {
@@ -60,8 +55,6 @@ namespace VitDeck.Utilities
                 }
             }
 
-            Debug.Log("2 / Coroutines.Count(): " + Coroutines.Count() + " / endCoroutines.Count(): " + endCoroutines.Count());
-
             foreach (var coroutine in endCoroutines)
             {
                 Coroutines.Remove(coroutine);
@@ -69,10 +62,8 @@ namespace VitDeck.Utilities
 
             if (Coroutines.Count == 0)
             {
-                //EditorApplication.update -= MoveNext;
-                EditorWindow.GetWindow<DummyEditorWindow>().Close();
+                EditorApplication.update -= MoveNext;
             }
-            Debug.Log("3 / Coroutines.Count(): " + Coroutines.Count() + " / endCoroutines.Count(): " + endCoroutines.Count());
         }
     }
 }
