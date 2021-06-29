@@ -19,9 +19,7 @@ namespace VitDeck.Utilities
 
             private void Update()
             {
-                Debug.Log("1: " + (Action != null ? "true" : "false"));
                 DummyEditorWindow.Action?.Invoke();
-                Debug.Log("2: " + (Action != null ? "true" : "false"));
             }
         }
 
