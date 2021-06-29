@@ -52,6 +52,10 @@ namespace VitDeck.Main
             }
         }
 
+        /// <summary>
+        /// 開いているシーンをベイクする。
+        /// </summary>
+        /// <returns>asyncメソッドを利用すると、<see cref="BuildPipeline.BuildAssetBundles"/>時にasyncメソッドが二重実行されてしまう問題を回避するため、TaskではなくIEnumeratorを返す。</returns>
         public static IEnumerator BakeCheckAndRun()
         {
             EditorUtility.DisplayProgressBar("Bake", "Baking...", 0);

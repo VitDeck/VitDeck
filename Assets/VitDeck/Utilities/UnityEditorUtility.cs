@@ -29,7 +29,7 @@ namespace VitDeck.Utilities
         /// コルーチンを実行する。
         /// </summary>
         /// <remarks>
-        /// asyncメソッドを利用すると、<see cref="BuildPipeline.BuildAssetBundles"/>時にasyncメソッドがが二重実行されてしまう問題の回避のため。
+        /// asyncメソッドを利用すると、<see cref="BuildPipeline.BuildAssetBundles"/>時にasyncメソッドが二重実行されてしまう問題の回避のため。
         /// </remarks>
         /// <param name="coroutine"></param>
         public static void StartCoroutine(IEnumerator coroutine)
