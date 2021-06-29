@@ -43,18 +43,12 @@ namespace VitDeck.PerformanceCalculator
             this.baseFolder = (DefaultAsset)EditorGUILayout.ObjectField("Base Folder", this.baseFolder, typeof(DefaultAsset), allowSceneObjects: false);
             this.spaceSize = (Calculator.SpaceSize)EditorGUILayout.EnumPopup("Space Size", this.spaceSize);
             EditorGUI.BeginDisabledGroup(this.baseFolder == null);
-                if (GUILayout.Button("Calculate Performance"))
-                {
-                    this.SaveSettings();
-
-                    if (!AssetUtility.OpenScene(this.baseFolder))
-                    {
-                        EditorUtility.DisplayDialog("VitDeck", LocalizedMessage.Get("VketTargetFinder.SceneNotFound", AssetUtility.GetScenePath(this.baseFolder)), "OK");
-                        return;
-                    }
-
-                    this.Calculate();
-                }
+            if (GUILayout.Button("Calculate Performance"))
+            {
+                this.SaveSettings();
+                GUIUtilities.OpenPackageScene(AssetUtility.GetId(this.baseFolder));
+                this.Calculate();
+            }
             EditorGUI.EndDisabledGroup();
         }
 

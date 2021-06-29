@@ -1,14 +1,53 @@
+using System;
+using System.IO;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using VitDeck.Language;
+using VitDeck.Validator;
 
 namespace VitDeck.Main
 {
-    /// <summary>
-    /// ビルドサイズ計算と負荷チェックの共通処理。
-    /// </summary>
     public static class GUIUtilities
     {
+        public static Scene OpenPackageScene(string exhibitorID)
+        {
+            var scenePath = string.Format("Assets/{0}/{0}.unity", exhibitorID);
+            if (!File.Exists(scenePath))
+            {
+                throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.SceneNotFound", scenePath));
+            }
+            var targetScene = EditorSceneManager.GetSceneByPath(scenePath);
+
+            if (!targetScene.isLoaded)
+            {
+                if (!EditorUtility.DisplayDialog(
+                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Title"),
+                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog") + Environment.NewLine + targetScene.path,
+                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Continue"),
+                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Abort")))
+                {
+                    throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.ValidationAborted"));
+                }
+
+                DoSaveIfNecessary();
+
+                targetScene = EditorSceneManager.OpenScene(scenePath);
+                EditorSceneManager.SetActiveScene(targetScene);
+            }
+
+            return targetScene;
+        }
+
+        private static void DoSaveIfNecessary()
+        {
+            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+            {
+                throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.UserDidntSave"));
+            }
+        }
+
         public static IEnumerator BakeCheckAndRun()
         {
             EditorUtility.DisplayProgressBar("Bake", "Baking...", 0);

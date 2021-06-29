@@ -176,6 +176,7 @@ namespace VitDeck.Main.ValidatedExporter.GUI
                 return;
             ClearLogs();
             SaveSettings();
+            GUIUtilities.OpenPackageScene(AssetUtility.GetId(baseFolder));
             OutLog("Start exporting with validation.");
             var baseFolderPath = AssetDatabase.GetAssetPath(baseFolder);
             result = ValidatedExporter.ValidatedExport(baseFolderPath, selectedSetting, forceExport);

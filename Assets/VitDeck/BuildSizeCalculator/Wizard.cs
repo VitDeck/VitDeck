@@ -55,13 +55,7 @@ namespace VitDeck.BuildSizeCalculator
         private void OnWizardCreate()
         {
             this.SaveSettings();
-
-            if (!AssetUtility.OpenScene(this.baseFolder))
-            {
-                EditorUtility.DisplayDialog("VitDeck", LocalizedMessage.Get("VketTargetFinder.SceneNotFound", AssetUtility.GetScenePath(this.baseFolder)), "OK");
-                return;
-            }
-
+            GUIUtilities.OpenPackageScene(AssetUtility.GetId(this.baseFolder));
             UnityEditorUtility.StartCoroutine(this.Calculate());
         }
 

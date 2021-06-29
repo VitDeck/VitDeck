@@ -228,26 +228,5 @@ namespace VitDeck.Utilities
             var id = GetId(baseFolder);
             return $"Assets/{id}/{id}.unity";
         }
-
-        /// <summary>
-        /// 入稿用シーンを開く。
-        /// </summary>
-        /// <returns>シーンが存在しなければ <c>false</c> を返す。</returns>
-        public static bool OpenScene(DefaultAsset baseFolder)
-        {
-            var scenePath = GetScenePath(baseFolder);
-            var scene = EditorSceneManager.GetSceneByPath(scenePath);
-            if (!scene.IsValid())
-            {
-                return false;
-            }
-
-            if (!scene.isLoaded)
-            {
-                EditorSceneManager.OpenScene(scenePath);
-            }
-
-            return true;
-        }
     }
 }

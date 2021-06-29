@@ -9,6 +9,8 @@ using UnityEditor;
 using VitDeck.Utilities;
 using VitDeck.Language;
 using System.Collections;
+using VitDeck.Main;
+using System.IO;
 
 namespace VitDeck.PerformanceCalculator
 {
@@ -39,18 +41,16 @@ namespace VitDeck.PerformanceCalculator
             EditorUtility.DisplayProgressBar(ProgressTitle, "Initializing...", 0);
         }
 
-        public static IEnumerator Calculate(string rootObjectName, SpaceSize spaceSize)
+        public static IEnumerator Calculate(string exhibitId, SpaceSize spaceSize)
         {
             float progress = 0;
-
-            Scene scene = SceneManager.GetActiveScene();
 
             if (EditorApplication.isPaused)
             {
                 EditorApplication.isPaused = false;
             }
 
-            AssetUtility.TemporaryDestroyObjectsOutsideOfRootObjectAndRunCallback(rootObjectName);
+            AssetUtility.TemporaryDestroyObjectsOutsideOfRootObjectAndRunCallback(exhibitId);
 
             if (EditorApplication.isPaused)
             {

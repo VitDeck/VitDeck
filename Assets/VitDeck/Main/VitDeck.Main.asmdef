@@ -3,6 +3,7 @@
     "references": [
         "VitDeck.TemplateLoader",
         "VitDeck.Validator",
+        "VitDeck.Validator.Components",
         "VitDeck.Exporter",
         "VitDeck.Utilities",
         "VitDeck.Language"
