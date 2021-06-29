@@ -36,6 +36,10 @@ namespace VitDeck.Main
                 targetScene = EditorSceneManager.OpenScene(scenePath);
                 EditorSceneManager.SetActiveScene(targetScene);
             }
+            else
+            {
+                DoSaveIfNecessary();
+            }
 
             return targetScene;
         }
