@@ -80,7 +80,7 @@ namespace VitDeck.Main.ValidatedExporter
                         buildSizeValidationResult.AddIssue(new Issue(
                         target: null,
                             IssueLevel.Fatal,
-                            LocalizedMessage.Get("ValidatedExporter.MaxBuildSize", formattedBuildSize)
+                            LocalizedMessage.Get("ValidatedExporter.MaxBuildSize", MathUtility.FormatByteCount(setting.MaxBuildByteCount))
                         ));
                         result.log += LocalizedMessage.Get("ValidatedExporter.IssueFound") + System.Environment.NewLine;
                         return result;
