@@ -73,7 +73,7 @@ MonoBehaviour:
     Value: All Static and Dynamic objects must be parented to Gameobjects named Static
       and Dynamic respectively
   - Key: VketRuleSetBase.StaticFlagsRule.Title
-    Value: Every child object inside Static must be set to static
+    Value: Each objects must be set to the specific static settings
   - Key: VketRuleSetBase.BoothBoundsRule.Title
     Value: Please keep the booth size under the allocated space
   - Key: VketRuleSetBase.MaterialLimitRule.Title
@@ -237,6 +237,10 @@ MonoBehaviour:
     Value: 
   - Key: StaticFlagRule.OccluderStaticNotAllowed.SolutionURL
     Value: 
+  - Key: StaticFlagRule.StaticNotAllowed
+    Value: Static settings are enabled
+  - Key: StaticFlagRule.StaticNotAllowed.Solution
+    Value: Please disable Static settings.
   - Key: BoothBoundsRule.Exceeded
     Value: Object exceeded the booth size limit by {0}. Size limit={1}, Target size={2},  Object
       type={3}
