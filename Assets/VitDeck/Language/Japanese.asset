@@ -496,6 +496,10 @@ MonoBehaviour:
     Value: "{0}Light\u306EIndirect Multiplier\u304C{1}\uFF5E{2}\u306E\u7BC4\u56F2\u3092\u8D85\u3048\u3066\u3044\u307E\u3059\u3002(\u8A2D\u5B9A\u5024\uFF1A{3})"
   - Key: LightConfigRule.OverIndirectMultiplier.Solution
     Value: "Indirect Multiplier\u3092\u7BC4\u56F2\u5185\u306B\u306A\u308B\u3088\u3046\u306B\u8A2D\u5B9A\u3057\u3066\u4E0B\u3055\u3044\u3002"
+  - Key: VketRuleSetBase.RendererRule.Title
+    Value: "SkinnedMeshRenderer / MeshRenderer\u3092\u4F7F\u7528\u3059\u308B\u969B\u306F\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
+  - Key: RendererRule.MustAttachMaterial
+    Value: "SkinnedMeshRenderer / MeshRenderer\u306B\u306F\u5FC5\u305A1\u3064\u4EE5\u4E0A\u306E\u30DE\u30C6\u30EA\u30A2\u30EB\u3092\u8A2D\u5B9A\u3057\u3066\u4E0B\u3055\u3044\u3002"
   - Key: VketRuleSetBase.SkinnedMeshRendererRule.Title
     Value: "SkinnedMeshRenderer\u3092\u4F7F\u7528\u3059\u308B\u969B\u306F\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
   - Key: VketRuleSetBase.MeshRendererRule.Title
@@ -504,8 +508,6 @@ MonoBehaviour:
     Value: "ReflectionProbe\u3092\u4F7F\u7528\u3059\u308B\u969B\u306F\u5236\u9650\u306B\u5F93\u3046\u3053\u3068"
   - Key: SkinnedMeshRendererRule.MustTurnOffUpdateWhenOffscreen
     Value: "UpdateWhenOffscreen\u3092\u6709\u52B9\u306B\u3059\u308B\u3053\u3068\u306F\u51FA\u6765\u307E\u305B\u3093\u3002"
-  - Key: SkinnedMeshRendererRule.MustAttachMaterial
-    Value: "SkinnedMeshRenderer\u306B\u306F\u5FC5\u305A1\u3064\u4EE5\u4E0A\u306E\u30DE\u30C6\u30EA\u30A2\u30EB\u3092\u8A2D\u5B9A\u3057\u3066\u4E0B\u3055\u3044\u3002"
   - Key: MeshRendererRule.StaticMeshMustPutInEnvironmentLayer
     Value: "MeshRenderer\u3092LightmapStatic\u306B\u8A2D\u5B9A\u3059\u308B\u969B\u306F\u3001\u30EC\u30A4\u30E4\u30FC\u3092Environment\u306B\u8A2D\u5B9A\u3057\u3066\u4E0B\u3055\u3044\u3002"
   - Key: ReflectionProbeRule.MustUseCustomTexture

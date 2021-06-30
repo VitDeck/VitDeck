@@ -516,6 +516,10 @@ MonoBehaviour:
       of {1}~{2}. Current value {3}'
   - Key: LightConfigRule.OverIndirectMultiplier.Solution
     Value: Set the Indirect Multiplier value to within the allowed range.
+  - Key: VketRuleSetBase.RendererRule.Title
+    Value: Please follow the SkinnedMeshRenderer or MeshRenderer's usage rules.
+  - Key: RendererRule.MustAttachMaterial
+    Value: SkinnedMeshRenderers / MeshRenderers must have at least 1 material assigned.
   - Key: VketRuleSetBase.SkinnedMeshRendererRule.Title
     Value: Please follow the SkinnedMeshRenderer's usage rules.
   - Key: VketRuleSetBase.MeshRendererRule.Title
@@ -524,8 +528,6 @@ MonoBehaviour:
     Value: Please follow the ReflectionProbe's usage rules.
   - Key: SkinnedMeshRendererRule.MustTurnOffUpdateWhenOffscreen
     Value: UpdateWhenOffscreen must be set to off.
-  - Key: SkinnedMeshRendererRule.MustAttachMaterial
-    Value: SkinnedMeshRenderers must have at least 1 material assigned.
   - Key: MeshRendererRule.StaticMeshMustPutInEnvironmentLayer
     Value: LightmapStatic MeshRenderers must be assigned the Environment Layer.
   - Key: ReflectionProbeRule.MustUseCustomTexture
