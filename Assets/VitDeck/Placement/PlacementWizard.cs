@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.IO;
@@ -43,13 +44,17 @@ namespace VitDeck.Placement
             this.isValid = this.exportSetting != null && this.location != null;
             return true;
         }
-
         private void OnWizardCreate()
+        {
+            UnityEditorUtility.StartCoroutine(this.Place());
+        }
+
+        private IEnumerator Place()
         {
             this.folderPath = EditorUtility.OpenFolderPanel(title: "VitDeck", folder: this.folderPath, defaultName: null);
             if (string.IsNullOrEmpty(this.folderPath))
             {
-                return;
+                yield break;
             }
 
             this.SaveSettings();
@@ -92,7 +97,7 @@ namespace VitDeck.Placement
                     "次のファイルは入稿パッケージのファイル名パターンに一致しません:\n" + string.Join("\n", pathsNotMatchingPattern),
                     "OK"
                 );
-                return;
+                yield break;
             }
 
             var pathsIncludingDuplicatedId = pathIdPairs
@@ -106,13 +111,12 @@ namespace VitDeck.Placement
                     "次のファイルはIDが重複しています:\n" + string.Join("\n", pathsIncludingDuplicatedId),
                     "OK"
                 );
-                return;
+                yield break;
             }
 
-            var idMessagePairs = pathIdPairs.ToDictionary(pathIdPair => pathIdPair.Value, pathIdPair =>
+            var idMessagePairs = new Dictionary<string, string>();
+            foreach (var (path, id) in pathIdPairs)
             {
-                var (path, id) = pathIdPair;
-
                 // インポート
                 try
                 {
@@ -120,14 +124,16 @@ namespace VitDeck.Placement
                 }
                 catch (FatalValidationErrorException exception)
                 {
-                    return exception.Message;
+                    idMessagePairs.Add(id, exception.Message);
+                    continue;
                 };
 
                 // 入稿シーンを開く
                 var scenePath = $"Assets/{id}/{id}.unity";
                 if (AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath) == null)
                 {
-                    return $"シーン「{scenePath}」が存在しません。";
+                    idMessagePairs.Add(id, $"シーン「{scenePath}」が存在しません。");
+                    continue;
                 }
                 EditorSceneManager.OpenScene(scenePath);
 
@@ -141,41 +147,49 @@ namespace VitDeck.Placement
                     }
                     catch (FatalValidationErrorException exception)
                     {
-                        return LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileValidating") + "\n" + exception.Message;
+                        idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileValidating") + "\n" + exception.Message);
+                        continue;
                     }
                     var minIssueLevel = this.exportSetting.ignoreValidationWarning ? IssueLevel.Error : IssueLevel.Warning;
                     if (validationResults.SelectMany(result => result.Issues).Any(issue => issue.level >= minIssueLevel))
                     {
-                        return LocalizedMessage.Get("ValidatedExporter.IssueFound") + "\n" + string.Join(
+                        idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.IssueFound") + "\n" + string.Join(
                             "\n",
                             validationResults
                                 .Where(result => result.Issues.Any(issue => issue.level >= minIssueLevel))
                                 .Select(result => result.RuleName + ":\n"
-                                    + string.Join("\n", result.Issues.Where(issue => issue.level >= minIssueLevel).Select(issue => "    " + issue.message)))
-                        );
+                                    + string.Join("\n", result.Issues.Where(issue => issue.level >= minIssueLevel).Select(issue => "    " + issue.message)))));
+                        continue;
                     }
                 }
 
                 // ビルド容量チェック
                 if (this.exportSetting.MaxBuildByteCount > 0)
                 {
-                    var buildByteCount = Calculator.ForceRebuild();
-                    if (buildByteCount == null)
+                    var buildByteCountEnumerator = Calculator.ForceRebuild(id);
+                    while (buildByteCountEnumerator.MoveNext())
                     {
-                        return LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileBuildSizeCheck");
+                        yield return null;
                     }
+                    if (buildByteCountEnumerator.Current == null)
+                    {
+                        idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileBuildSizeCheck"));
+                        continue;
+                    }
+                    var buildByteCount = (int)buildByteCountEnumerator.Current;
 
                     if (buildByteCount > this.exportSetting.MaxBuildByteCount)
                     {
-                        return $"ビルド容量 {MathUtility.FormatByteCount((int)buildByteCount)} が {MathUtility.FormatByteCount(this.exportSetting.MaxBuildByteCount)} を超過しています。";
+                        idMessagePairs.Add(id, $"ビルド容量 {MathUtility.FormatByteCount((int)buildByteCount)} が {MathUtility.FormatByteCount(this.exportSetting.MaxBuildByteCount)} を超過しています。");
+                        continue;
                     }
                 }
 
                 // 配置
                 Placement.Place(id, this.location);
 
-                return "配置完了";
-            });
+                idMessagePairs.Add(id, "配置完了");
+            }
 
             var message = string.Join("\n\n", idMessagePairs.Select(idMessagePair => $"[{idMessagePair.Key}]\n{idMessagePair.Value}"));
             Debug.Log("\n" + message);

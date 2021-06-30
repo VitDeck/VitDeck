@@ -8,6 +8,7 @@ using VitDeck.Exporter;
 
 namespace VitDeck.Main.ValidatedExporter.Tests
 {
+    /*
     public class TestValidatedExporter
     {
         private string testExportFolder = "Assets/VitDeckTestExport";
@@ -79,4 +80,5 @@ namespace VitDeck.Main.ValidatedExporter.Tests
                 Directory.Delete(testExportFolder, true);
         }
     }
+    */
 }

@@ -1,9 +1,12 @@
 using System;
+using System.Collections;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 using VitDeck.Language;
+using VitDeck.Utilities;
+using VitDeck.Main;
 
 namespace VitDeck.BuildSizeCalculator
 {
@@ -13,42 +16,59 @@ namespace VitDeck.BuildSizeCalculator
     public static class Calculator
     {
         /// <returns>ビルドサイズをバイト数で返す。</returns>
-        public static float? ForceRebuild()
+        public static IEnumerator ForceRebuild(string exhibitId)
         {
-            string path = SceneManager.GetActiveScene().path;
-            AssetBundleManifest result = null;
-            try
+            var bakeCheck = GUIUtilities.BakeCheckAndRun();
+            while (bakeCheck.MoveNext())
             {
-                string bundleName = "vitdeckscene.vrcw";
-                AssetImporter atPath = AssetImporter.GetAtPath(path);
-                if (atPath == null)
-                {
-                    EditorUtility.DisplayDialog("Error", LocalizedMessage.Get("BuildSizeCalculator.OpenSceneFile"), "OK");
-                    return null;
-                }
-
-                string outPath = Application.temporaryCachePath;
-                if (!Directory.Exists(outPath))
-                {
-                    Directory.CreateDirectory(outPath);
-                }
-
-                atPath.assetBundleName = bundleName;
-                atPath.SaveAndReimport();
-                result = BuildPipeline.BuildAssetBundles(outPath, BuildAssetBundleOptions.ForceRebuildAssetBundle, EditorUserBuildSettings.activeBuildTarget);
-                atPath.assetBundleName = string.Empty;
-                atPath.SaveAndReimport();
-                AssetDatabase.RemoveUnusedAssetBundleNames();
+                yield return null;
             }
-            catch (Exception e)
+
+            if (!(bool)bakeCheck.Current)
             {
-                Debug.LogError(e.Message);
-                return null;
+                yield break;
             }
-            return result != null ? GetFileByteCount() : null;
+
+            int? byteCount = null;
+            AssetUtility.TemporaryDestroyObjectsOutsideOfRootObjectAndRunCallback(exhibitId, () => {
+
+                string path = SceneManager.GetActiveScene().path;
+                AssetBundleManifest result = null;
+                try
+                {
+                    string bundleName = "vitdeckscene.vrcw";
+                    AssetImporter atPath = AssetImporter.GetAtPath(path);
+                    if (atPath == null)
+                    {
+                        EditorUtility.DisplayDialog("Error", LocalizedMessage.Get("BuildSizeCalculator.OpenSceneFile"), "OK");
+                        return;
+                    }
+
+                    string outPath = Application.temporaryCachePath;
+                    if (!Directory.Exists(outPath))
+                    {
+                        Directory.CreateDirectory(outPath);
+                    }
+
+                    atPath.assetBundleName = bundleName;
+                    atPath.SaveAndReimport();
+                    result = BuildPipeline.BuildAssetBundles(outPath, BuildAssetBundleOptions.ForceRebuildAssetBundle, EditorUserBuildSettings.activeBuildTarget);
+                    atPath.assetBundleName = string.Empty;
+                    atPath.SaveAndReimport();
+                    AssetDatabase.RemoveUnusedAssetBundleNames();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e.Message);
+                    return;
+                }
+                byteCount = result != null ? GetFileByteCount() : null;
+            });
+
+            yield return byteCount;
         }
 
-        private static float? GetFileByteCount()
+        private static int? GetFileByteCount()
         {
             try
             {
@@ -59,7 +79,7 @@ namespace VitDeck.BuildSizeCalculator
                 }
 
                 FileInfo fileInfo = new FileInfo(path);
-                return fileInfo.Length;
+                return (int)fileInfo.Length;
             }
             catch (Exception e)
             {

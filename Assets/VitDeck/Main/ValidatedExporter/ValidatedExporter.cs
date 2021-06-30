@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,7 +15,15 @@ namespace VitDeck.Main.ValidatedExporter
 {
     public class ValidatedExporter
     {
-        public static ValidatedExportResult ValidatedExport(string baseFolderPath, ExportSetting setting, bool forceExport = false, bool forceOpenScene = false)
+        /// <param name="baseFolderPath"></param>
+        /// <param name="setting"></param>
+        /// <param name="forceExport"></param>
+        /// <param name="forceOpenScene"></param>
+        /// <returns>
+        /// <see cref="ValidatedExportResult"/>。
+        /// asyncメソッドを利用すると、<see cref="BuildPipeline.BuildAssetBundles"/>時にasyncメソッドが二重実行されてしまう問題を回避するため、TaskではなくIEnumeratorを返す。
+        /// </returns>
+        public static IEnumerator ValidatedExport(string baseFolderPath, ExportSetting setting, bool forceExport = false, bool forceOpenScene = false)
         {
             if (setting == null)
                 throw new ArgumentNullException("Argument `setting` is null.");
@@ -34,8 +44,10 @@ namespace VitDeck.Main.ValidatedExporter
                     {
                         result.log += LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileValidating") +
                             LocalizedMessage.Get("ValidatedExporter.RuleNotFound", setting.ruleSetName);
-                        return result;
+                        yield return result;
+                        yield break;
                     }
+                    var problemOccurred = false;
                     try
                     {
                         result.validationResults = Validator.Validator.Validate(ruleSet, baseFolderPath, forceOpenScene);
@@ -44,12 +56,18 @@ namespace VitDeck.Main.ValidatedExporter
                     {
                         result.log += LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileValidating")
                             + System.Environment.NewLine + e.Message;
-                        return result;
+                    }
+                    if (problemOccurred)
+                    {
+                        yield return result;
+                        yield break;
                     }
                     if (!result.HasValidationIssues(setting.ignoreValidationWarning ? IssueLevel.Error : IssueLevel.Warning))
                     {
                         result.log += LocalizedMessage.Get("ValidatedExporter.IssueFound") + System.Environment.NewLine;
-                        return result;
+                            problemOccurred = true;
+                        yield return result;
+                        yield break;
                     }
                 }
                 else
@@ -60,15 +78,22 @@ namespace VitDeck.Main.ValidatedExporter
                 // build size check
                 if (setting.MaxBuildByteCount > 0)
                 {
-                    var buildByteCount = Calculator.ForceRebuild();
-                    if (buildByteCount == null) {
+                    var buildByteCountEnumerator = Calculator.ForceRebuild(Path.GetFileName(baseFolderPath));
+                    while (buildByteCountEnumerator.MoveNext())
+                    {
+                        yield return null;
+                    }
+                    if (buildByteCountEnumerator.Current == null) {
                         result.log += LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileBuildSizeCheck")
                             + System.Environment.NewLine;
-                        return result;
+                        yield return result;
+                        yield break;
                     }
 
+                    var buildByteCount = (int)buildByteCountEnumerator.Current;
+
                     var buildSizeValidationResult = new ValidationResult("Build Size Check");
-                    var formattedBuildSize = MathUtility.FormatByteCount((int)buildByteCount);
+                    var formattedBuildSize = MathUtility.FormatByteCount(buildByteCount);
                     buildSizeValidationResult.AddIssue(new Issue(
                         target: null,
                         IssueLevel.Info,
@@ -83,7 +108,8 @@ namespace VitDeck.Main.ValidatedExporter
                             LocalizedMessage.Get("ValidatedExporter.MaxBuildSize", MathUtility.FormatByteCount(setting.MaxBuildByteCount))
                         ));
                         result.log += LocalizedMessage.Get("ValidatedExporter.IssueFound") + System.Environment.NewLine;
-                        return result;
+                        yield return result;
+                        yield break;
                     }
                 }
                 else
@@ -103,7 +129,7 @@ namespace VitDeck.Main.ValidatedExporter
             {
                 result.log += LocalizedMessage.Get("ValidatedExporter.Failed") + System.Environment.NewLine;
             }
-            return result;
+            yield return result;
         }
 
         private static IRuleSet GetRuleSet(string ruleSetName)

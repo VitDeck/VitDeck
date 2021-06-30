@@ -62,23 +62,13 @@ namespace VitDeck.BuildSizeCalculator
         /// <returns><returns>asyncメソッドを利用すると、<see cref="BuildPipeline.BuildAssetBundles"/>時にasyncメソッドが二重実行されてしまう問題を回避するため、コルーチンを利用する。</returns></returns>
         private IEnumerator Calculate()
         {
-            var bakeCheck = GUIUtilities.BakeCheckAndRun();
-            while (bakeCheck.MoveNext())
+            var calculating = Calculator.ForceRebuild(AssetUtility.GetId(this.baseFolder));
+            while (calculating.MoveNext())
             {
                 yield return null;
             }
 
-            if (!(bool)bakeCheck.Current)
-            {
-                yield break;
-            }
-
-            float? byteCount = null;
-            AssetUtility.TemporaryDestroyObjectsOutsideOfRootObjectAndRunCallback(AssetUtility.GetId(this.baseFolder), () => {
-                byteCount = Calculator.ForceRebuild();
-            });
-
-            if (byteCount == null)
+            if (calculating.Current == null)
             {
                 EditorUtility.DisplayDialog("VitDeck", LocalizedMessage.Get("BuildSizeCalculator.BuildFailed"), "OK");
                 yield break;
@@ -86,7 +76,7 @@ namespace VitDeck.BuildSizeCalculator
 
             EditorUtility.DisplayDialog(
                 "VitDeck",
-                LocalizedMessage.Get("BuildSizeCalculator.BuildSize", AssetUtility.GetScenePath(this.baseFolder), MathUtility.FormatByteCount((int)byteCount)),
+                LocalizedMessage.Get("BuildSizeCalculator.BuildSize", AssetUtility.GetScenePath(this.baseFolder), MathUtility.FormatByteCount((int)calculating.Current)),
                 "OK"
             );
         }
