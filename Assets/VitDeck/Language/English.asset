@@ -505,6 +505,10 @@ MonoBehaviour:
     Value: '{0} Light must be set to {1} mode. Current mode: {2}'
   - Key: LightConfigRule.UnauthorizedLightMode.Solution
     Value: Set the light Mode to {0}
+  - Key: LightConfigRule.UnauthorizedShadowTypes
+    Value: '{0} Light must be set to {1} shadow. Current mode: {2}'
+  - Key: LightConfigRule.UnauthorizedShadowTypes.Solution
+    Value: Set the Shadow to {0}
   - Key: LightConfigRule.OverRange
     Value: '{0} Light''s Range value has exceeded the allowed range of {1}~{2}. Current
       value {3}'
