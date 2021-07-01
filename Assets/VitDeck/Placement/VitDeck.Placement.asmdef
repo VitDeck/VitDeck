@@ -6,6 +6,7 @@
         "VitDeck.Validator",
         "VitDeck.Validator.Components",
         "VitDeck.BuildSizeCalculator",
+        "VitDeck.PerformanceCalculator",
         "VitDeck.Placement.Components",
         "VitDeck.Language"
     ],
