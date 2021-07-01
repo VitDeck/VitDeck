@@ -124,7 +124,7 @@ namespace VitDeck.Placement
                 }
                 catch (FatalValidationErrorException exception)
                 {
-                    idMessagePairs.Add(id, exception.Message);
+                    idMessagePairs.Add(id, exception.Message + "\n" + Remove(id, location));
                     continue;
                 };
 
@@ -132,7 +132,7 @@ namespace VitDeck.Placement
                 var scenePath = $"Assets/{id}/{id}.unity";
                 if (AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath) == null)
                 {
-                    idMessagePairs.Add(id, $"シーン「{scenePath}」が存在しません。");
+                    idMessagePairs.Add(id, $"シーン「{scenePath}」が存在しません。\n" + Remove(id, location));
                     continue;
                 }
                 EditorSceneManager.OpenScene(scenePath);
@@ -147,7 +147,7 @@ namespace VitDeck.Placement
                     }
                     catch (FatalValidationErrorException exception)
                     {
-                        idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileValidating") + "\n" + exception.Message);
+                        idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileValidating") + "\n" + exception.Message + "\n" + Remove(id, location));
                         continue;
                     }
                     var minIssueLevel = this.exportSetting.ignoreValidationWarning ? IssueLevel.Error : IssueLevel.Warning;
@@ -158,7 +158,8 @@ namespace VitDeck.Placement
                             validationResults
                                 .Where(result => result.Issues.Any(issue => issue.level >= minIssueLevel))
                                 .Select(result => result.RuleName + ":\n"
-                                    + string.Join("\n", result.Issues.Where(issue => issue.level >= minIssueLevel).Select(issue => "    " + issue.message)))));
+                                    + string.Join("\n", result.Issues.Where(issue => issue.level >= minIssueLevel).Select(issue => "    " + issue.message))))
+                            + "\n" + Remove(id, location));
                         continue;
                     }
                 }
@@ -173,14 +174,15 @@ namespace VitDeck.Placement
                     }
                     if (buildByteCountEnumerator.Current == null)
                     {
-                        idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileBuildSizeCheck"));
+                        idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileBuildSizeCheck") + "\n" + Remove(id, location));
                         continue;
                     }
                     var buildByteCount = (int)buildByteCountEnumerator.Current;
 
                     if (buildByteCount > this.exportSetting.MaxBuildByteCount)
                     {
-                        idMessagePairs.Add(id, $"ビルド容量 {MathUtility.FormatByteCount((int)buildByteCount)} が {MathUtility.FormatByteCount(this.exportSetting.MaxBuildByteCount)} を超過しています。");
+                        idMessagePairs.Add(id, $"ビルド容量 {MathUtility.FormatByteCount((int)buildByteCount)} が {MathUtility.FormatByteCount(this.exportSetting.MaxBuildByteCount)} を超過しています。"
+                            + "\n" + Remove(id, location));
                         continue;
                     }
                 }
@@ -194,6 +196,24 @@ namespace VitDeck.Placement
             var message = string.Join("\n\n", idMessagePairs.Select(idMessagePair => $"[{idMessagePair.Key}]\n{idMessagePair.Value}"));
             Debug.Log("\n" + message);
             EditorUtility.DisplayDialog("VitDeck", message, "OK");
+        }
+
+        /// <summary>
+        /// 指定したIDのオブジェクトを、アセット、およびシーンから削除します。
+        /// </summary>
+        /// <returns></returns>
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>削除メッセージ。</returns>
+        private string Remove(string id, SceneAsset location)
+        {
+            var message = $"「Assets/{id}」を削除しました。";
+            PackageImporter.RemoveAssets(id);
+            if (Placement.ReplaceToEmptyObject(id, location))
+            {
+                message += $"\nシーン上の「{id}」を空オブジェクトへ置換しました。";
+            }
+            return message;
         }
 
         private void LoadSettings()

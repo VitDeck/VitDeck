@@ -22,14 +22,9 @@ namespace VitDeck.Placement
         /// <returns></returns>
         public static void Place(string id, SceneAsset location)
         {
-            var activeScene = SceneManager.GetActiveScene();
-            var locationPath = AssetDatabase.GetAssetPath(location);
-            if (activeScene.path != locationPath)
-            {
-                activeScene = EditorSceneManager.OpenScene(locationPath);
-            }
+            var scene = OpenScene(location);
 
-            var anchorIdPairs = GetAnchorIdPairs(activeScene);
+            var anchorIdPairs = GetAnchorIdPairs(scene);
             var anchor = anchorIdPairs.FirstOrDefault(anchorIdPair => anchorIdPair.Value == id).Key;
             if (anchor != null)
             {
@@ -40,7 +35,8 @@ namespace VitDeck.Placement
             {
                 // 未配置のアンカーを取得
                 anchor = anchorIdPairs.First(anchorIdPair => anchorIdPair.Value == null).Key;
-                foreach (var child in GetChildren(anchor)) {
+                foreach (var child in GetChildren(anchor))
+                {
                     Object.DestroyImmediate(child.gameObject);
                 }
             }
@@ -49,7 +45,52 @@ namespace VitDeck.Placement
             GetRootObject(idScene).transform.SetParent(anchor);
             EditorSceneManager.CloseScene(idScene, removeScene: true);
 
-            EditorSceneManager.SaveScene(activeScene);
+            EditorSceneManager.SaveScene(scene);
+        }
+
+        /// <summary>
+        /// シーン上の指定された出展者IDのオブジェクトを空オブジェクトへ置換します。
+        /// </summary>
+        /// <remarks>
+        /// 存在しなければ何もしません。
+        /// </remarks>
+        /// <param name="id">出展者ID。</param>
+        /// <param name="location">配置先のシーン。</param>
+        /// <returns>置換した場合は <c>true</c>、存在しなければ <c>false</c> を返します。</returns>
+        public static bool ReplaceToEmptyObject(string id, SceneAsset location)
+        {
+            var scene = OpenScene(location);
+
+            var anchorIdPairs = GetAnchorIdPairs(scene);
+            var anchor = anchorIdPairs.FirstOrDefault(anchorIdPair => anchorIdPair.Value == id).Key;
+            if (anchor == null)
+            {
+                // 存在しなければ
+                return false;
+            }
+
+            Object.DestroyImmediate(anchor.GetChild(0).gameObject);
+            new GameObject(id).transform.SetParent(anchor);
+
+            EditorSceneManager.SaveScene(scene);
+
+            return true;
+        }
+
+        /// <summary>
+        /// 指定したシーンが開いていなければ開きます。
+        /// </summary>
+        /// <param name="sceneAsset"></param>
+        /// <returns></returns>
+        private static Scene OpenScene(SceneAsset sceneAsset)
+        {
+            var scene = SceneManager.GetActiveScene();
+            var locationPath = AssetDatabase.GetAssetPath(sceneAsset);
+            if (scene.path != locationPath)
+            {
+                scene = EditorSceneManager.OpenScene(locationPath);
+            }
+            return scene;
         }
 
         /// <summary>

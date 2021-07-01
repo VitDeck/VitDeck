@@ -297,7 +297,7 @@ namespace VitDeck.Placement
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        private static void RemoveAssets(string id)
+        public static void RemoveAssets(string id)
         {
             AssetDatabase.DeleteAsset("Assets/" + id);
             AssetDatabase.Refresh();
