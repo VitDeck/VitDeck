@@ -23,7 +23,6 @@ namespace VitDeck.Validator
             foreach(var rootObject in rootObjects)
             {
                 LogicForDynamicObjects(new[] { rootObject });
-                Debug.Log(rootObject.name);
 
                 var staticRoot = rootObject.transform.Find("Static");
                 if (staticRoot != null)
