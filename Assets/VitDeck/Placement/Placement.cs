@@ -82,7 +82,7 @@ namespace VitDeck.Placement
         /// </summary>
         /// <param name="sceneAsset"></param>
         /// <returns></returns>
-        private static Scene OpenScene(SceneAsset sceneAsset)
+        public static Scene OpenScene(SceneAsset sceneAsset)
         {
             var scene = SceneManager.GetActiveScene();
             var locationPath = AssetDatabase.GetAssetPath(sceneAsset);
@@ -98,7 +98,7 @@ namespace VitDeck.Placement
         /// </summary>
         /// <param name="unitypackage"></param>
         /// <returns>キーに配置先の親を持つDictionary。配置済みのオブジェクトを持つ場合、値に出展者IDを持ちます。</returns>
-        private static IDictionary<Transform, string> GetAnchorIdPairs(Scene location)
+        public static IDictionary<Transform, string> GetAnchorIdPairs(Scene location)
         {
             return location.GetRootGameObjects()
                 .SelectMany(root => root.GetComponentsInChildren<PlacementAnchor>(includeInactive: true))

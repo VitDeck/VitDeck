@@ -26,6 +26,8 @@ namespace VitDeck.Placement
         private SceneAsset location = null;
 
         private string folderPath;
+        private Vector2 anchorListScrollPosition;
+        private IDictionary<Transform, string> anchorIdPairs;
 
         [MenuItem("VitDeck/Placement Tool", priority = 120)]
         public static void Open()
@@ -40,6 +42,35 @@ namespace VitDeck.Placement
                 "選択したフォルダ内に含まれるunitypackageをインポートします。\n\nパッケージ名に含まれる「_」で囲まれた数字をIDとして扱います。",
                 MessageType.None
             );
+
+            using (new EditorGUI.DisabledGroupScope(this.location == null))
+            {
+                if (GUILayout.Button("シーン内の配置状態を表示"))
+                {
+                    this.anchorIdPairs = Placement.GetAnchorIdPairs(Placement.OpenScene(this.location));
+                }
+            }
+
+            if (this.anchorIdPairs != null)
+            {
+                using (var scrollViewScope = new EditorGUILayout.ScrollViewScope(this.anchorListScrollPosition))
+                {
+                    this.anchorListScrollPosition = scrollViewScope.scrollPosition;
+                    var i = 1;
+                    foreach (var (anchor, id) in this.anchorIdPairs)
+                    {
+                        using (new EditorGUILayout.HorizontalScope())
+                        {
+                            if (GUILayout.Button(i.ToString()))
+                            {
+                                EditorGUIUtility.PingObject(anchor);
+                            }
+                            EditorGUILayout.LabelField(id);
+                        }
+                        i++;
+                    }
+                }
+            }
 
             this.isValid = this.exportSetting != null && this.location != null;
             return true;
