@@ -145,6 +145,19 @@ namespace VitDeck.Placement
                 yield break;
             }
 
+            var anchorIdPairs = Placement.GetAnchorIdPairs(Placement.OpenScene(this.location));
+            var freeAnchorCount = anchorIdPairs.Values.Count(id => id == null);
+            var newPackageCount = pathIdPairs.Values.Except(anchorIdPairs.Values).Count();
+            if (newPackageCount > freeAnchorCount)
+            {
+                EditorUtility.DisplayDialog(
+                    "VitDeck",
+                    $"配置先が不足しています。\n\nすべての配置場所: {anchorIdPairs.Count}\n空き配置場所: {freeAnchorCount}\nすべての入稿数: {pathIdPairs.Count}\n新規入稿数: {newPackageCount}\n",
+                    "OK"
+                );
+                yield break;
+            }
+
             var idMessagePairs = new Dictionary<string, string>();
             foreach (var (path, id) in pathIdPairs)
             {
