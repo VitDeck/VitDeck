@@ -83,7 +83,6 @@ namespace VitDeck.Placement
                         File.WriteAllBytes(tempUnitypackagePath, guidReplacedUnitypackage.ToArray());
                     }
 
-                    RemoveAssets(id);
                     ImportPackageImmediately(tempUnitypackagePath);
                 }
                 finally
@@ -290,17 +289,6 @@ namespace VitDeck.Placement
             }
 
             return new MemoryStream(utf8Encoding.GetBytes(str));
-        }
-
-        /// <summary>
-        /// 指定した出展者IDのフォルダがすでに存在すれば削除します。
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static void RemoveAssets(string id)
-        {
-            AssetDatabase.DeleteAsset("Assets/" + id);
-            AssetDatabase.Refresh();
         }
     }
 }

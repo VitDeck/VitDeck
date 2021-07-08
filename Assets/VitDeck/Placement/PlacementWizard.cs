@@ -148,73 +148,94 @@ namespace VitDeck.Placement
             var idMessagePairs = new Dictionary<string, string>();
             foreach (var (path, id) in pathIdPairs)
             {
-                // インポート
+                string backupFolderPath = null;
+                if (AssetDatabase.IsValidFolder($"Assets/{id}"))
+                {
+                    // 再入稿なら
+                    // 入稿済みフォルダを移動
+                    backupFolderPath = $"Assets/{id}.bak";
+                    AssetDatabase.RenameAsset($"Assets/{id}", backupFolderPath);
+                    AssetDatabase.Refresh();
+                }
+
                 try
                 {
-                    PackageImporter.Import(id, path, allowedExtensions);
-                }
-                catch (FatalValidationErrorException exception)
-                {
-                    idMessagePairs.Add(id, exception.Message + "\n" + Remove(id, location));
-                    continue;
-                };
-
-                // 入稿シーンを開く
-                var scenePath = $"Assets/{id}/{id}.unity";
-                if (AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath) == null)
-                {
-                    idMessagePairs.Add(id, $"シーン「{scenePath}」が存在しません。\n" + Remove(id, location));
-                    continue;
-                }
-                EditorSceneManager.OpenScene(scenePath);
-
-                // バリデーション
-                if (ruleSet != null)
-                {
-                    ValidationResult[] validationResults;
+                    // インポート
                     try
                     {
-                        validationResults = Validator.Validator.Validate(ruleSet, "Assets/" + id, forceOpenScene: true);
+                        PackageImporter.Import(id, path, allowedExtensions);
                     }
                     catch (FatalValidationErrorException exception)
                     {
-                        idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileValidating") + "\n" + exception.Message + "\n" + Remove(id, location));
+                        idMessagePairs.Add(id, exception.Message);
+                        continue;
+                    };
+
+                    // 入稿シーンを開く
+                    var scenePath = $"Assets/{id}/{id}.unity";
+                    if (AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath) == null)
+                    {
+                        idMessagePairs.Add(id, $"シーン「{scenePath}」が存在しません。");
                         continue;
                     }
-                    var minIssueLevel = this.exportSetting.ignoreValidationWarning ? IssueLevel.Error : IssueLevel.Warning;
-                    if (validationResults.SelectMany(result => result.Issues).Any(issue => issue.level >= minIssueLevel))
+                    EditorSceneManager.OpenScene(scenePath);
+
+                    // バリデーション
+                    if (ruleSet != null)
                     {
-                        idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.IssueFound") + "\n" + string.Join(
-                            "\n",
-                            validationResults
-                                .Where(result => result.Issues.Any(issue => issue.level >= minIssueLevel))
-                                .Select(result => result.RuleName + ":\n"
-                                    + string.Join("\n", result.Issues.Where(issue => issue.level >= minIssueLevel).Select(issue => "    " + issue.message))))
-                            + "\n" + Remove(id, location));
-                        continue;
+                        ValidationResult[] validationResults;
+                        try
+                        {
+                            validationResults = Validator.Validator.Validate(ruleSet, "Assets/" + id, forceOpenScene: true);
+                        }
+                        catch (FatalValidationErrorException exception)
+                        {
+                            idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileValidating") + "\n" + exception.Message);
+                            continue;
+                        }
+                        var minIssueLevel = this.exportSetting.ignoreValidationWarning ? IssueLevel.Error : IssueLevel.Warning;
+                        if (validationResults.SelectMany(result => result.Issues).Any(issue => issue.level >= minIssueLevel))
+                        {
+                            idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.IssueFound") + "\n" + string.Join(
+                                "\n",
+                                validationResults
+                                    .Where(result => result.Issues.Any(issue => issue.level >= minIssueLevel))
+                                    .Select(result => result.RuleName + ":\n"
+                                        + string.Join("\n", result.Issues.Where(issue => issue.level >= minIssueLevel).Select(issue => "    " + issue.message)))));
+                            continue;
+                        }
+                    }
+
+                    // ビルド容量チェック
+                    if (this.exportSetting.MaxBuildByteCount > 0)
+                    {
+                        var buildByteCountEnumerator = Calculator.ForceRebuild(id);
+                        while (buildByteCountEnumerator.MoveNext())
+                        {
+                            yield return null;
+                        }
+                        if (buildByteCountEnumerator.Current == null)
+                        {
+                            idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileBuildSizeCheck"));
+                            continue;
+                        }
+                        var buildByteCount = (int)buildByteCountEnumerator.Current;
+
+                        if (buildByteCount > this.exportSetting.MaxBuildByteCount)
+                        {
+                            idMessagePairs.Add(id, $"ビルド容量 {MathUtility.FormatByteCount((int)buildByteCount)} が {MathUtility.FormatByteCount(this.exportSetting.MaxBuildByteCount)} を超過しています。");
+                            continue;
+                        }
                     }
                 }
-
-                // ビルド容量チェック
-                if (this.exportSetting.MaxBuildByteCount > 0)
+                finally
                 {
-                    var buildByteCountEnumerator = Calculator.ForceRebuild(id);
-                    while (buildByteCountEnumerator.MoveNext())
+                    if (backupFolderPath != null && !AssetDatabase.IsValidFolder($"Assets/{id}"))
                     {
-                        yield return null;
-                    }
-                    if (buildByteCountEnumerator.Current == null)
-                    {
-                        idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileBuildSizeCheck") + "\n" + Remove(id, location));
-                        continue;
-                    }
-                    var buildByteCount = (int)buildByteCountEnumerator.Current;
-
-                    if (buildByteCount > this.exportSetting.MaxBuildByteCount)
-                    {
-                        idMessagePairs.Add(id, $"ビルド容量 {MathUtility.FormatByteCount((int)buildByteCount)} が {MathUtility.FormatByteCount(this.exportSetting.MaxBuildByteCount)} を超過しています。"
-                            + "\n" + Remove(id, location));
-                        continue;
+                        // 再配置、かつ失敗していれば
+                        // 配置前のブースを元に戻す
+                        AssetDatabase.RenameAsset(backupFolderPath, $"Assets/{id}");
+                        AssetDatabase.Refresh();
                     }
                 }
 
@@ -227,24 +248,6 @@ namespace VitDeck.Placement
             var message = string.Join("\n\n", idMessagePairs.Select(idMessagePair => $"[{idMessagePair.Key}]\n{idMessagePair.Value}"));
             Debug.Log("\n" + message);
             EditorUtility.DisplayDialog("VitDeck", message, "OK");
-        }
-
-        /// <summary>
-        /// 指定したIDのオブジェクトを、アセット、およびシーンから削除します。
-        /// </summary>
-        /// <returns></returns>
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>削除メッセージ。</returns>
-        private string Remove(string id, SceneAsset location)
-        {
-            var message = $"「Assets/{id}」を削除しました。";
-            PackageImporter.RemoveAssets(id);
-            if (Placement.ReplaceToEmptyObject(id, location))
-            {
-                message += $"\nシーン上の「{id}」を空オブジェクトへ置換しました。";
-            }
-            return message;
         }
 
         private void LoadSettings()
