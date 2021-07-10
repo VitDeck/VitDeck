@@ -49,35 +49,6 @@ namespace VitDeck.Placement
         }
 
         /// <summary>
-        /// シーン上の指定された出展者IDのオブジェクトを空オブジェクトへ置換します。
-        /// </summary>
-        /// <remarks>
-        /// 存在しなければ何もしません。
-        /// </remarks>
-        /// <param name="id">出展者ID。</param>
-        /// <param name="location">配置先のシーン。</param>
-        /// <returns>置換した場合は <c>true</c>、存在しなければ <c>false</c> を返します。</returns>
-        public static bool ReplaceToEmptyObject(string id, SceneAsset location)
-        {
-            var scene = OpenScene(location);
-
-            var anchorIdPairs = GetAnchorIdPairs(scene);
-            var anchor = anchorIdPairs.FirstOrDefault(anchorIdPair => anchorIdPair.Value == id).Key;
-            if (anchor == null)
-            {
-                // 存在しなければ
-                return false;
-            }
-
-            Object.DestroyImmediate(anchor.GetChild(0).gameObject);
-            new GameObject(id).transform.SetParent(anchor);
-
-            EditorSceneManager.SaveScene(scene);
-
-            return true;
-        }
-
-        /// <summary>
         /// 指定したシーンが開いていなければ開きます。
         /// </summary>
         /// <param name="sceneAsset"></param>
