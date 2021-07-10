@@ -124,7 +124,8 @@ namespace VitDeck.Placement
                 TarEntry entry;
                 while ((entry = tarStream.GetNextEntry()) != null)
                 {
-                    var guidNamePair = entry.Name.Split('/');
+                    var entryName = entry.Name.Replace("./", ""); // Macでunitypackageを作成すると先頭に「./」が付く問題への対処
+                    var guidNamePair = entryName.Split('/');
                     var guid = guidNamePair[0];
                     var archiveFileName = guidNamePair[1];
 
