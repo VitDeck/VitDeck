@@ -135,7 +135,8 @@ namespace VitDeck.Main.ValidatedExporter.GUI
                 GUILayout.TextArea(selectedSetting.Description);
             }
             //ForceExportCheck
-            if (result != null && !result.IsExportSuccess)
+            if (result != null && !result.IsExportSuccess
+                && selectedSetting != null && selectedSetting.AllowForceExport)
                 forceExport = GUILayout.Toggle(forceExport, LocalizedMessage.Get("ValidatedExporterWindow.ForceExport"));
             //Export button
             EditorGUI.BeginDisabledGroup(selectedSetting == null || baseFolder == null);

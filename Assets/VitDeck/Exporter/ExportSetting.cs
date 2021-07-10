@@ -20,6 +20,8 @@ namespace VitDeck.Exporter
         public string ruleSetName = "";
         [Tooltip("If true, Export will done though validation result has warning issues.")]
         public bool ignoreValidationWarning = false;
+        [Tooltip("If true, Allow `Force Export`.")]
+        public bool AllowForceExport = true;
         [Min(0), Tooltip("Max build byte count. If this field is `0`, Export will skip build size check.")]
         public int MaxBuildByteCount = 0;
         [Multiline(lines: 40), Tooltip("Extensions of the file to include in the unitypackage. A newline-separated extensions starting with `.`. Case-insensitive. If this field is empty, all files will be exported.")]
