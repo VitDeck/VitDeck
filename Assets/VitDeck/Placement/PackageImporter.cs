@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Linq;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using UnityEditor;
 using ICSharpCode.SharpZipLib.Tar;
@@ -17,6 +18,8 @@ namespace VitDeck.Placement
     /// </summary>
     public static class PackageImporter
     {
+        private static readonly Regex GuidPattern = new Regex("^[0-9a-f]{32}$");
+
         /// <summary>
         /// Unityプロジェクト上の1つのアセット (ファイル、またはフォルダ) を表します。
         /// </summary>
@@ -113,6 +116,7 @@ namespace VitDeck.Placement
         /// unitypackageからアセットを取り出します。
         /// </summary>
         /// <param name="unitypackage"></param>
+        /// <exception cref="FatalValidationErrorException">unitypackageに不正なエントリーが含まれていた場合。</exception>
         /// <returns></returns>
         private static IEnumerable<Asset> ExtractUnitypackage(Stream unitypackage)
         {
@@ -125,8 +129,17 @@ namespace VitDeck.Placement
                 while ((entry = tarStream.GetNextEntry()) != null)
                 {
                     var entryName = entry.Name.Replace("./", ""); // Macでunitypackageを作成すると先頭に「./」が付く問題への対処
+                    if (entryName == "")
+                    {
+                        continue;
+                    }
+
                     var guidNamePair = entryName.Split('/');
                     var guid = guidNamePair[0];
+                    if (!GuidPattern.IsMatch(guid))
+                    {
+                        throw new FatalValidationErrorException($"unitypackageに、不正なGUIDを持つエントリー「{entryName}」が含まれています。");
+                    }
                     var archiveFileName = guidNamePair[1];
 
                     var asset = assets.FirstOrDefault(a => a.Guid == guid);
@@ -162,7 +175,28 @@ namespace VitDeck.Placement
                                     break;
                             }
                             break;
+
+                        case "": // フォルダエントリー
+                        case "preview.png": // プレビュー
+                        case "._asset": // Macで生成されるファイル
+                            break;
+
+                        default:
+                            throw new FatalValidationErrorException($"unitypackageに、不正なファイル名のエントリー「{entryName}」が含まれています。");
                     }
+                }
+            }
+
+            foreach (var asset in assets)
+            {
+                if (asset.Path == null)
+                {
+                    throw new FatalValidationErrorException($"unitypackageに、pathnameのエントリーを含まない不正なアセット (GUID: {asset.Guid}) が含まれています。");
+                }
+
+                if (asset.Meta == null)
+                {
+                    throw new FatalValidationErrorException($"unitypackageに、asset.metaのエントリーを含まない不正なアセット (GUID: {asset.Guid}) が含まれています。");
                 }
             }
 
