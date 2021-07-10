@@ -42,7 +42,10 @@ namespace VitDeck.Placement
             }
 
             var idScene = EditorSceneManager.OpenScene(GetScenePath(id), OpenSceneMode.Additive);
-            GetRootObject(idScene).transform.SetParent(anchor);
+            var root = GetRootObject(idScene).transform;
+            root.SetParent(anchor);
+            root.transform.localPosition = Vector3.zero;
+            root.transform.localRotation = Quaternion.identity;
             EditorSceneManager.CloseScene(idScene, removeScene: true);
 
             EditorSceneManager.SaveScene(scene);
