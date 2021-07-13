@@ -73,6 +73,11 @@ namespace VitDeck.Main
 
             EditorUtility.ClearProgressBar();
 
+            if (bakeFlag)
+            {
+                EditorSceneManager.SaveOpenScenes();
+            }
+
             yield return bakeFlag;
         }
     }
