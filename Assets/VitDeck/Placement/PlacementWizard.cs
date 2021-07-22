@@ -25,6 +25,9 @@ namespace VitDeck.Placement
         [SerializeField]
         private SceneAsset location = null;
 
+        [SerializeField]
+        private bool forcePlace = false;
+
         private string folderPath;
         private Vector2 anchorListScrollPosition;
         private IDictionary<Transform, string> anchorIdPairs;
@@ -40,6 +43,11 @@ namespace VitDeck.Placement
             base.DrawWizardGUI();
             EditorGUILayout.HelpBox(
                 "選択したフォルダ内に含まれるunitypackageをインポートします。\n\nパッケージ名に含まれる「_」で囲まれた数字をIDとして扱います。",
+                MessageType.None
+            );
+
+            EditorGUILayout.HelpBox(
+                "「Force Place」へチェックを入れると、unitypackageの検査・GUID変更のみを行い、インポート後のバリデーション、ビルド容量チェックを行わず、強制的に配置します。",
                 MessageType.None
             );
 
@@ -195,51 +203,54 @@ namespace VitDeck.Placement
                     }
                     EditorSceneManager.OpenScene(scenePath);
 
-                    // バリデーション
-                    if (ruleSet != null)
+                    if (!this.forcePlace)
                     {
-                        ValidationResult[] validationResults;
-                        try
+                        // バリデーション
+                        if (ruleSet != null)
                         {
-                            validationResults = Validator.Validator.Validate(ruleSet, "Assets/" + id, forceOpenScene: true);
+                            ValidationResult[] validationResults;
+                            try
+                            {
+                                validationResults = Validator.Validator.Validate(ruleSet, "Assets/" + id, forceOpenScene: true);
+                            }
+                            catch (FatalValidationErrorException exception)
+                            {
+                                idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileValidating") + "\n" + exception.Message);
+                                continue;
+                            }
+                            var minIssueLevel = this.exportSetting.ignoreValidationWarning ? IssueLevel.Error : IssueLevel.Warning;
+                            if (validationResults.SelectMany(result => result.Issues).Any(issue => issue.level >= minIssueLevel))
+                            {
+                                idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.IssueFound") + "\n" + string.Join(
+                                    "\n",
+                                    validationResults
+                                        .Where(result => result.Issues.Any(issue => issue.level >= minIssueLevel))
+                                        .Select(result => result.RuleName + ":\n"
+                                            + string.Join("\n", result.Issues.Where(issue => issue.level >= minIssueLevel).Select(issue => "    " + issue.message)))));
+                                continue;
+                            }
                         }
-                        catch (FatalValidationErrorException exception)
-                        {
-                            idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileValidating") + "\n" + exception.Message);
-                            continue;
-                        }
-                        var minIssueLevel = this.exportSetting.ignoreValidationWarning ? IssueLevel.Error : IssueLevel.Warning;
-                        if (validationResults.SelectMany(result => result.Issues).Any(issue => issue.level >= minIssueLevel))
-                        {
-                            idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.IssueFound") + "\n" + string.Join(
-                                "\n",
-                                validationResults
-                                    .Where(result => result.Issues.Any(issue => issue.level >= minIssueLevel))
-                                    .Select(result => result.RuleName + ":\n"
-                                        + string.Join("\n", result.Issues.Where(issue => issue.level >= minIssueLevel).Select(issue => "    " + issue.message)))));
-                            continue;
-                        }
-                    }
 
-                    // ビルド容量チェック
-                    if (this.exportSetting.MaxBuildByteCount > 0)
-                    {
-                        var buildByteCountEnumerator = Calculator.ForceRebuild(id);
-                        while (buildByteCountEnumerator.MoveNext())
+                        // ビルド容量チェック
+                        if (this.exportSetting.MaxBuildByteCount > 0)
                         {
-                            yield return null;
-                        }
-                        if (buildByteCountEnumerator.Current == null)
-                        {
-                            idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileBuildSizeCheck"));
-                            continue;
-                        }
-                        var buildByteCount = (int)buildByteCountEnumerator.Current;
+                            var buildByteCountEnumerator = Calculator.ForceRebuild(id);
+                            while (buildByteCountEnumerator.MoveNext())
+                            {
+                                yield return null;
+                            }
+                            if (buildByteCountEnumerator.Current == null)
+                            {
+                                idMessagePairs.Add(id, LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileBuildSizeCheck"));
+                                continue;
+                            }
+                            var buildByteCount = (int)buildByteCountEnumerator.Current;
 
-                        if (buildByteCount > this.exportSetting.MaxBuildByteCount)
-                        {
-                            idMessagePairs.Add(id, $"ビルド容量 {MathUtility.FormatByteCount((int)buildByteCount)} が {MathUtility.FormatByteCount(this.exportSetting.MaxBuildByteCount)} を超過しています。");
-                            continue;
+                            if (buildByteCount > this.exportSetting.MaxBuildByteCount)
+                            {
+                                idMessagePairs.Add(id, $"ビルド容量 {MathUtility.FormatByteCount((int)buildByteCount)} が {MathUtility.FormatByteCount(this.exportSetting.MaxBuildByteCount)} を超過しています。");
+                                continue;
+                            }
                         }
                     }
 
