@@ -167,7 +167,7 @@ namespace VitDeck.Placement
                     // 再入稿なら
                     // 入稿済みフォルダを移動
                     backupFolderPath = $"Assets/{id}.bak";
-                    AssetDatabase.RenameAsset($"Assets/{id}", backupFolderPath);
+                    AssetDatabase.RenameAsset($"Assets/{id}", Path.GetFileName(backupFolderPath));
                     AssetDatabase.Refresh();
                 }
 
@@ -243,11 +243,21 @@ namespace VitDeck.Placement
                 }
                 finally
                 {
-                    if (backupFolderPath != null && !AssetDatabase.IsValidFolder($"Assets/{id}"))
+                    if (backupFolderPath != null)
                     {
-                        // 再配置、かつ失敗していれば
-                        // 配置前のブースを元に戻す
-                        AssetDatabase.RenameAsset(backupFolderPath, $"Assets/{id}");
+                        // 再配置の場合
+                        if (AssetDatabase.IsValidFolder($"Assets/{id}"))
+                        {
+                            // 成功していれば
+                            // 配置前のブースを削除
+                            AssetDatabase.DeleteAsset(backupFolderPath);
+                        }
+                        else
+                        {
+                            // 失敗していれば
+                            // 配置前のブースを元に戻す
+                            AssetDatabase.RenameAsset(backupFolderPath, id);
+                        }
                         AssetDatabase.Refresh();
                     }
                 }
