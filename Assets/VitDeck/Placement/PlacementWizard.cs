@@ -258,17 +258,15 @@ namespace VitDeck.Placement
                 }
                 finally
                 {
-                    if (backupFolderPath == null)
+                    if (!valid)
                     {
-                        if (!valid)
-                        {
-                            // 失敗していれば
-                            // インポートしたブースを削除
-                            AssetDatabase.DeleteAsset($"Assets/{id}");
-                            AssetDatabase.Refresh();
-                        }
+                        // 失敗していれば
+                        // インポートしたブースを削除
+                        AssetDatabase.DeleteAsset($"Assets/{id}");
+                        AssetDatabase.Refresh();
                     }
-                    else
+
+                    if (backupFolderPath != null)
                     {
                         // 再配置の場合
                         if (valid)
