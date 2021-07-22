@@ -171,6 +171,8 @@ namespace VitDeck.Placement
                     AssetDatabase.Refresh();
                 }
 
+                var valid = false;
+
                 try
                 {
                     // インポート
@@ -240,13 +242,25 @@ namespace VitDeck.Placement
                             continue;
                         }
                     }
+
+                    valid = true;
                 }
                 finally
                 {
-                    if (backupFolderPath != null)
+                    if (backupFolderPath == null)
+                    {
+                        if (!valid)
+                        {
+                            // 失敗していれば
+                            // インポートしたブースを削除
+                            AssetDatabase.DeleteAsset($"Assets/{id}");
+                            AssetDatabase.Refresh();
+                        }
+                    }
+                    else
                     {
                         // 再配置の場合
-                        if (AssetDatabase.IsValidFolder($"Assets/{id}"))
+                        if (valid)
                         {
                             // 成功していれば
                             // 配置前のブースを削除
