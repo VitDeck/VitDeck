@@ -173,9 +173,10 @@ namespace VitDeck.Placement
                 if (AssetDatabase.IsValidFolder($"Assets/{id}"))
                 {
                     // 再入稿なら
-                    // 入稿済みフォルダを移動
-                    backupFolderPath = $"Assets/{id}.bak";
-                    AssetDatabase.RenameAsset($"Assets/{id}", Path.GetFileName(backupFolderPath));
+                    // 入稿済みフォルダを退避
+                    backupFolderPath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+                    DirectoryCopy(Path.Combine(Application.dataPath, id), backupFolderPath, copySubDirs: true);
+                    AssetDatabase.DeleteAsset($"Assets/{id}");
                     AssetDatabase.Refresh();
                 }
 
@@ -273,13 +274,14 @@ namespace VitDeck.Placement
                         {
                             // 成功していれば
                             // 配置前のブースを削除
-                            AssetDatabase.DeleteAsset(backupFolderPath);
+                            Directory.Delete(backupFolderPath, recursive: true);
                         }
                         else
                         {
                             // 失敗していれば
                             // 配置前のブースを元に戻す
-                            AssetDatabase.RenameAsset(backupFolderPath, id);
+                            Directory.Move(backupFolderPath, Path.Combine(Application.dataPath, id));
+                            AssetDatabase.ImportAsset($"Assets/{id}", ImportAssetOptions.ForceUpdate | ImportAssetOptions.ImportRecursive);
                         }
                         AssetDatabase.Refresh();
                     }
@@ -294,6 +296,71 @@ namespace VitDeck.Placement
             var message = string.Join("\n\n", idMessagePairs.Select(idMessagePair => $"[{idMessagePair.Key}]\n{idMessagePair.Value}"));
             Debug.Log("\n" + message);
             EditorUtility.DisplayDialog("VitDeck", message, "OK");
+        }
+
+        /// <summary>
+        /// ディレクトリをコピーします。
+        /// </summary>
+        /// <remarks>
+        /// 方法: ディレクトリをコピーする | Microsoft Docs
+        /// https://docs.microsoft.com/dotnet/standard/io/how-to-copy-directories
+        /// 
+        /// The MIT License (MIT)
+        /// https://github.com/dotnet/docs/blob/main/LICENSE-CODE
+        /// Copyright (c) Microsoft Corporation
+        /// 
+        /// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and 
+        /// associated documentation files (the "Software"), to deal in the Software without restriction, 
+        /// including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+        /// and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, 
+        /// subject to the following conditions:
+        ///
+        /// The above copyright notice and this permission notice shall be included in all copies or substantial 
+        /// portions of the Software.
+        ///
+        /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT 
+        /// NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+        /// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+        /// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+        /// SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+        /// </remarks>
+        /// <param name="sourceDirName"></param>
+        /// <param name="destDirName"></param>
+        /// <param name="copySubDirs"></param>
+        private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        {
+            // Get the subdirectories for the specified directory.
+            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+
+            if (!dir.Exists)
+            {
+                throw new DirectoryNotFoundException(
+                    "Source directory does not exist or could not be found: "
+                    + sourceDirName);
+            }
+
+            DirectoryInfo[] dirs = dir.GetDirectories();
+
+            // If the destination directory doesn't exist, create it.       
+            Directory.CreateDirectory(destDirName);
+
+            // Get the files in the directory and copy them to the new location.
+            FileInfo[] files = dir.GetFiles();
+            foreach (FileInfo file in files)
+            {
+                string tempPath = Path.Combine(destDirName, file.Name);
+                file.CopyTo(tempPath, false);
+            }
+
+            // If copying subdirectories, copy them and their contents to new location.
+            if (copySubDirs)
+            {
+                foreach (DirectoryInfo subdir in dirs)
+                {
+                    string tempPath = Path.Combine(destDirName, subdir.Name);
+                    DirectoryCopy(subdir.FullName, tempPath, copySubDirs);
+                }
+            }
         }
 
         private void LoadSettings()
