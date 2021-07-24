@@ -179,6 +179,7 @@ namespace VitDeck.Placement
                         case "": // フォルダエントリー
                         case "preview.png": // プレビュー
                         case "._asset": // Macで生成されるファイル
+                        case "._asset.meta": // Macで生成されるファイル
                             break;
 
                         default:
