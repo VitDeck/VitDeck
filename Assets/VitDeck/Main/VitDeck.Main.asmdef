@@ -1,0 +1,20 @@
+{
+    "name": "VitDeck.Main",
+    "references": [
+        "VitDeck.TemplateLoader",
+        "VitDeck.Validator",
+        "VitDeck.Exporter",
+        "VitDeck.Utilities",
+        "VitDeck.Language"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

@@ -4,7 +4,7 @@
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
-VitDeck/Assets/AssetStoreTools*
+Assets/AssetStoreTools*
 
 # Visual Studio cache directory
 .vs/
@@ -37,10 +37,23 @@ sysinfo.txt
 *.unitypackage
 
 # Templates assets
-VitDeck/Assets/VitDeck/Templates/*
-!Sample_template
-VitDeck/Assets/VitDeck/Config/UserSettings.asset
-VitDeck/Assets/VitDeck/Config/UserSettings.asset.meta
+Assets/VitDeck/Config/UserSettings.asset
+Assets/VitDeck/Config/UserSettings.asset.meta
 
 #Template loader temporary folder
-VitDeck/Assets/VitDeck/Temporary*
+Assets/VitDeck/Temporary*
+
+# JetBrains Rider
+.idea
+Assets/Plugins/Editor/JetBrains*
+
+#VRChat SDK2
+Assets/VRCSDK*
+Assets/VRChat Examples*
+
+# Base folder
+/Assets/[0-9]*
+
+# Destination folder for exporter
+/Assets/Exports*
+/Assets/Vket_Exports*

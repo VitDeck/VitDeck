@@ -1,0 +1,654 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba6412c28ce82684d9553dad6c745558, type: 3}
+  m_Name: English
+  m_EditorClassIdentifier: 
+  language:
+  - Key: Main.Baker.LightBakeFailed
+    Value: Light Bake failed.
+  - Key: BuildSizeCalculator.OpenSceneFile
+    Value: Please open a Scene file.
+  - Key: BuildSizeCalculator.BuildFailed
+    Value: Build failed.
+  - Key: BuildSizeCalculator.BuildSize
+    Value: The build size for {0} is {1}.
+  - Key: PerformanceCalculator.Result
+    Value: SetPassCalls for {0} is {1} and Batches is {2}.
+  - Key: Validator.SerchingValidationTarget
+    Value: Validating
+  - Key: Validator.AbortWithException
+    Value: 'Rule verification aborted with exception: {0}'
+  - Key: ValidatorWindow.ValidationCompleted
+    Value: Rule verification completed successfully
+  - Key: ValidatorWindow.ValidationAborted
+    Value: Rule verification aborted
+  - Key: VketTargetFinder.PackageFolderNotFound
+    Value: Submissions folder not found
+  - Key: VketTargetFinder.ExhibitNotFound
+    Value: Submissions not found
+  - Key: VketTargetFinder.ManyExhibits
+    Value: Submission duplicates found
+  - Key: VketTargetFinder.SceneNotFound
+    Value: Submission scene ({0}) not found
+  - Key: VketTargetFinder.SceneOpenDialog.Title
+    Value: Unable to open target scene
+  - Key: VketTargetFinder.SceneOpenDialog
+    Value: Submissions scene must be open for validation procedure
+  - Key: VketTargetFinder.SceneOpenDialog.Continue
+    Value: Run
+  - Key: VketTargetFinder.SceneOpenDialog.Abort
+    Value: Abord
+  - Key: VketTargetFinder.ValidationAborted
+    Value: Validation is aborted
+  - Key: VketTargetFinder.UserDidntSave
+    Value: Please save all changes and try again
+  - Key: VketRuleSetBase.UnityVersionRule.Title
+    Value: Must use Unity version {0}
+  - Key: VketRuleSetBase.VRCSDKVersionRule.Title
+    Value: Please use the latest Unity version as supported by VRCSDK
+  - Key: VketRuleSetBase.ExistInSubmitFolderRule.Title
+    Value: Unrelated objects are found within the submissions folder
+  - Key: VketRuleSetBase.OfficialAssetDontContainRule.Title
+    Value: Submission objects must be placed within the submissions folder
+  - Key: VketRuleSetBase.NameOfFileAndFolderRule.Title
+    Value: Unsupported symbols found in file and folder names
+  - Key: VketRuleSetBase.FilePathLengthLimitRule.Title
+    Value: Please keep all file paths under Asset/ under {0} characters
+  - Key: VketRuleSetBase.MeshFileTypeBlacklistRule.Title
+    Value: Found unsupported mesh file formats
+  - Key: VketRuleSetBase.ContainMatOrTexInAssetRule.Title
+    Value: Unused materials and/or textures found in model asset
+  - Key: VketRuleSetBase.FolderSizeRule.Title
+    Value: Submission folder filesize exceeded allowed filesize limit
+  - Key: VketRuleSetBase.ExhibitStructureRule.Title
+    Value: All Static and Dynamic objects must be parented to Gameobjects named Static
+      and Dynamic respectively
+  - Key: VketRuleSetBase.StaticFlagsRule.Title
+    Value: Every child object inside Static must be set to static
+  - Key: VketRuleSetBase.BoothBoundsRule.Title
+    Value: Please keep the booth size under the allocated space
+  - Key: VketRuleSetBase.MaterialLimitRule.Title
+    Value: Material count must be kept under {0}
+  - Key: VketRuleSetBase.LightMapsLimitRule.Title
+    Value: Lightmap count must be kept under {0}, and resolutions below {1}
+  - Key: VketRuleSetBase.GlobalIlluminationBakedRule.Title
+    Value: Global Illumination must be set to Baked when using Standard shader's Emission
+  - Key: VketRuleSetBase.UsableComponentListRule.Title
+    Value: Unallowed components in use
+  - Key: VketRuleSetBase.VRCTriggerConfigRule.Title
+    Value: Usage of VRC_Trigger not allowed outside of provided prefabs
+  - Key: VketRuleSetBase.UseMeshColliderRule.Title
+    Value: Should not use MeshCollider
+  - Key: VketRuleSetBase.VRCTriggerCountLimitRule.Title
+    Value: VRC_Trigger count must be kept under {0}
+  - Key: VketRuleSetBase.DirectionalLightLimitRule.Title
+    Value: Usage of DirectionalLight is not allowed
+  - Key: VketRuleSetBase.PointLightConfigRule.Title
+    Value: PointLight parameters must be within the allowed range
+  - Key: VketRuleSetBase.SpotLightConfigRule.Title
+    Value: SpotLight parameters must be within the allowed range
+  - Key: VketRuleSetBase.AreaLightConfigRule.Title
+    Value: AreaLight parameters must be within the allowed range
+  - Key: VketRuleSetBase.AreaLightLimitRule.Title
+    Value: AreaLight count must be kept under {0}
+  - Key: VketRuleSetBase.PointLightModeRule.Title
+    Value: Please use only the allowed PointLight modes
+  - Key: VketRuleSetBase.SpotLightModeRule.Title
+    Value: Please use only the allowed SpotLight modes
+  - Key: VketRuleSetBase.PickupObjectSyncRule.Title
+    Value: PickupObjectSync parameters must meet the allowed values
+  - Key: VketRuleSetBase.AvatarPedestalPrefabRule.Title
+    Value: AvatarPedestal parameters must meet the allowed values
+  - Key: VketRuleSetBase.AudioSourcePrefabRule.Title
+    Value: AudioSource parameters must meet the allowed values
+  - Key: VketRuleSetBase.ChairPrefabLimitRule.Title
+    Value: Chair prefab count must be kept under {0}
+  - Key: VketRuleSetBase.PickupObjectSyncPrefabLimitRule.Title
+    Value: PickupObjectSync prefab count must be kept under {0}
+  - Key: VketRuleSetBase.VideoPlayerComponentRule.Title
+    Value: VideoPlayer parameters must meet the allowed values
+  - Key: UnityVersionRule.InvalidVersion
+    Value: Current Unity version ({0}) does not meet the required version
+  - Key: UnityVersionRule.InvalidVersion.Solution
+    Value: Please use Unity version ({0}) for your submissions
+  - Key: VRCSDKVersionRule.NotInstalled
+    Value: VRCSDK not found
+  - Key: VRCSDKVersionRule.NotInstalled.Solution
+    Value: Please download the latest version of VRCSDK from the VRChat site and import
+      it
+  - Key: VRCSDKVersionRule.PreviousVersion
+    Value: VRCSDK is outdated
+  - Key: VRCSDKVersionRule.PreviousVersion.Solution
+    Value: Please download the latest version of VRCSDK from the VRChat site and import
+      it
+  - Key: PostProcessingExistsRule.SearchFailed
+    Value: Failed to check the installation of PostProcessingStack
+  - Key: PostProcessingExistsRule.SearchFailed.Solution
+    Value: 
+  - Key: PostProcessingExistsRule.SearchFailed.SolutionURL
+    Value: 
+  - Key: PostProcessingExistsRule.NotInstalled
+    Value: The specified PostProcessingStack is not installed
+  - Key: PostProcessingExistsRule.NotInstalled.Solution
+    Value: Please install from the Package Manager
+  - Key: PostProcessingExistsRule.NotInstalled.SolutionURL
+    Value: 
+  - Key: AssetGuidBlacklistRule.UnauthorizedAssetDetected
+    Value: 'The following asset(s) cannot be placed in the submission folder:'
+  - Key: AssetGuidBlacklistRule.UnauthorizedAssetDetected.Solution
+    Value: Please move all uneditable or read only files out of the submissions folder
+  - Key: AssetNamingRule.UnauthorizedTextDetected
+    Value: Unsupported character ({1}) found in the name of asset ({0})
+  - Key: AssetPathLengthRule.Overlength
+    Value: Asset path is too long. (Limit={0}, Over limit={1}, Path={2})
+  - Key: AssetExtentionBlacklistRule.UnauthorizedExtention
+    Value: Unsupported asset found in ({0})
+  - Key: ContainMatOrTexInAssetRule.EmbeddedMaterial
+    Value: Asset found using embedded materials
+  - Key: ContainMatOrTexInAssetRule.EmbeddedMaterial.Solution
+    Value: Please extract the materials from your models and use the extracted materials
+      instead
+  - Key: ContainMatOrTexInAssetRule.EmbeddedTexture
+    Value: Asset found using embedded textures
+  - Key: ContainMatOrTexInAssetRule.EmbeddedTexture.Solution
+    Value: Please extract the textures from your models and use the extracted materials
+      instead
+  - Key: FolderSizeRule.Exceeded
+    Value: Submission folder total size exceeded {2} bytes. The limit is set at {0}
+  - Key: FolderSizeRule.Exceeded.Solution
+    Value: Please delete unneccesary data to not exceed the filesize limit
+  - Key: FolderSizeRule.Exceeded.SolutionURL
+    Value: 
+  - Key: ExhibitStructureRule.UnauthorizedObject
+    Value: Unauthorized object found under the exhibit root object
+  - Key: ExhibitStructureRule.UnauthorizedObject.Solution
+    Value: Please create empty gameobjects [Dynamic] and [Static] and set those as
+      the child of the exhibit root object. All other gameobjects should be parented
+      to either the Dynamic or Static gameobject
+  - Key: ExhibitStructureRule.RootObjectNotFound
+    Value: Root object {0} not found
+  - Key: ExhibitStructureRule.RootObjectNotFound.Solution
+    Value: Please create empty gameobject named [{0}] and parent it to the exhibit
+      root object
+  - Key: ExhibitStructureRule.UnauthorizedComponent
+    Value: Unauthorized component found attached to root object {0}
+  - Key: ExhibitStructureRule.UnauthorizedComponent.Solution
+    Value: Please do not attach any components except the transform component under
+      the root object {0}
+  - Key: ExhibitStructureRule.NotInitialPosition
+    Value: The root object has been moved from the origin point
+  - Key: ExhibitStructureRule.NotInitialPosition.Solution
+    Value: Please change the object's Position to (0, 0, 0)
+  - Key: ExhibitStructureRule.NotInitialPosition.SolutionURL
+    Value: 
+  - Key: ExhibitStructureRule.NotInitialRotation
+    Value: The root object has been rotated
+  - Key: ExhibitStructureRule.NotInitialRotation.Solution
+    Value: Please change the object's Rotation to (0, 0, 0)
+  - Key: ExhibitStructureRule.NotInitialRotation.SolutionURL
+    Value: 
+  - Key: ExhibitStructureRule.NotInitialScale
+    Value: The root object's scale has been changed
+  - Key: ExhibitStructureRule.NotInitialScale.Solution
+    Value: Please change the object's Scale to (1, 1, 1)
+  - Key: ExhibitStructureRule.NotInitialScale.SolutionURL
+    Value: 
+  - Key: SceneStructureRule.UnrelatedSceneDetected
+    Value: A Scene that is unrelated to the Submission Scene is open
+  - Key: SceneStructureRule.UnrelatedSceneDetected.Solution
+    Value: 'Please close or Unload the unrelated Scene '
+  - Key: SceneStructureRule.UnrelatedSceneDetected.SolutionURL
+    Value: 
+  - Key: SceneStructureRule.UnrelatedRootObjectDetected
+    Value: An Object that is not supported or intended for submission was detected
+      on the Scene
+  - Key: SceneStructureRule.UnrelatedRootObjectDetected.Solution
+    Value: 'If you did intend to submit the detected object, make sure it is inside
+      the root object (the GameObject with the same name as the Scene name)
+
+      If you did not intend to submit it, make sure it is removed before any checks
+      are performed'
+  - Key: SceneStructureRule.UnrelatedRootObjectDetected.SolutionURL
+    Value: 
+  - Key: StaticFlagRule.OccludeeStaticNotSet
+    Value: OccludeeStatic is not checked in the Static settings
+  - Key: StaticFlagRule.OccludeeStaticNotSet.Solution
+    Value: Please check the OccludeeStatic setting under your static objects
+  - Key: StaticFlagRule.ReflectionProveStaticNotSet
+    Value: ReflectionProbeStatic is not checked in the Static settings
+  - Key: StaticFlagRule.ReflectionProveStaticNotSet.Solution
+    Value: Please check the ReflectionProbeStatic setting under your static objects
+  - Key: StaticFlagRule.BatchingStaticNotSet
+    Value: BatchingStatic is not checked in the Static settings
+  - Key: StaticFlagRule.BatchingStaticNotSet.Solution
+    Value: Please only disable BatchingStatic if it affects the exhibits visually
+  - Key: StaticFlagRule.OccluderStaticNotAllowed
+    Value: Please disable OccluderStatic
+  - Key: StaticFlagRule.OccluderStaticNotAllowed.Solution
+    Value: 
+  - Key: StaticFlagRule.OccluderStaticNotAllowed.SolutionURL
+    Value: 
+  - Key: BoothBoundsRule.Exceeded
+    Value: Object exceeded the booth size limit by {0}. Size limit={1}, Target size={2},  Object
+      type={3}
+  - Key: AssetTypeLimitRule.Overuse
+    Value: '{0} count({2}) exceeded the count limit of {1}.'
+  - Key: AssetTypeLimitRule.Overuse.Solution
+    Value: Reduce the object count or use the provided {0}.
+  - Key: GlobalIlluminationBakedRule.NotBaked
+    Value: Asset {0}'s Global Illumination is not set to Baked
+  - Key: GlobalIlluminationBakedRule.NotBaked.Solution
+    Value: Please set the Global Illumination to Baked mode if using Standard Shader's
+      Emissions
+  - Key: UsableComponentListRule.DefaultComponentGroupName
+    Value: Component not defined
+  - Key: UsableComponentListRule.Disallow
+    Value: '{0}: Usage of {1} is not allowed'
+  - Key: UsableComponentListRule.Disallow.Solution
+    Value: If a replacement Prefab is released by Virtual Market, you could substitute
+      it by using that instead
+  - Key: UsableComponentListRule.Disallow.SolutionURL
+    Value: 
+  - Key: VRCTriggerConfigRule.UnauthorizedBroadcastType
+    Value: BroadcastType {0} not supported in component VRC_Trigger
+  - Key: VRCTriggerConfigRule.UnauthorizedBroadcastType.Solution
+    Value: Please change to a supported broadcast type
+  - Key: VRCTriggerConfigRule.UnauthorizedTriggerType
+    Value: TriggerType {0} not supported in component VRC_Trigger
+  - Key: VRCTriggerConfigRule.UnauthorizedTriggerType.Solution
+    Value: Please change to a supported trigger type
+  - Key: VRCTriggerConfigRule.UnauthorizedActionType
+    Value: ActionType {0} not supported in component VRC_Trigger
+  - Key: VRCTriggerConfigRule.UnauthorizedActionType.Solution
+    Value: Please change to a supported action type
+  - Key: UseMeshColliderRule.ShouldNotUse
+    Value: MeshCollider usage is discouraged
+  - Key: UseMeshColliderRule.ShouldNotUse.Solution
+    Value: Please use other collider types
+  - Key: VRCTriggerCountLimitRule.Overuse
+    Value: 'VRC_Trigger count exceeded limit of {0}. (Current count: {1})'
+  - Key: VRCTriggerCountLimitRule.Overuse.Solution
+    Value: Please reduce the component count.
+  - Key: LightCountLimitRule.Overuse
+    Value: '{0} light count exceeded the limit by {1}. (Current count: {2})'
+  - Key: LightCountLimitRule.Overuse.Solution
+    Value: Please reduce the light count or use different light types
+  - Key: UseLightModeRule.MustNotUse
+    Value: Usage of {0} light's {1} mode is not supported
+  - Key: UseLightModeRule.MustNotUse.Solution
+    Value: Please change the bake mode
+  - Key: PickupObjectSyncPrefabRule.DontDeactivate
+    Value: VRC_ObjectSync objects must be kept active at all times
+  - Key: PickupObjectSyncPrefabRule.DontAllowCollisionTransfer
+    Value: Usage of AllowCollisionTransfer in VRC_ObjectSync is not supported
+  - Key: PickupObjectSyncPrefabRule.DontNest
+    Value: Please do not parent objects to PickupObjectSync objects
+  - Key: AvatarPedestalPrefabRule.BroadcastTypeMustLocal
+    Value: VRC_Trigger's BroadcastType must be set to local
+  - Key: AvatarPedestalPrefabRule.UnauthorizedTriggerType
+    Value: 'TriggerType {0} is not supported. VRC_Trigger''s TriggerType must be set
+      to one of the following: [Custom, OnInteract, OnEnterTrigger, OnExitTrigger,
+      OnPickup, OnDrop, OnPickupUseDown, OnPickupUseUp]'
+  - Key: AvatarPedestalPrefabRule.RPCMustSetAvatarUse
+    Value: VRC_Trigger's SendRPC must be set to SetAvatarUse
+  - Key: AvatarPedestalPrefabRule.UnauthorizedActionType
+    Value: Action {0} is not supported. VRC_Trigger's Action must be set to one of
+      the following:[AnimationFloat, AnimationBool, AnimationTrigger, ActivateCustomTrigger,
+      AudioTrigger, PlayAnimation, SetComponentActive, SetGameObjectActive, SendRPC(SetAvatarUse)]
+  - Key: AudioSourcePrefabRule.DontLoop
+    Value: AudioSource's loop setting must be unchecked
+  - Key: AudioSourcePrefabRule.DontIncreaseMaxDistance
+    Value: 'MaxDistance value of Prefab must not exceed {0}. (Current value: {1})'
+  - Key: PrefabLimitRule.Overuse
+    Value: 'Prefab''s usage limit of {0} exceeded. (Current count: {1})'
+  - Key: PrefabLimitRule.Overuse.Solution
+    Value: Please reduce the usage count
+  - Key: PrefabLimitRule.Overuse.SolutionURL
+    Value: 
+  - Key: VideoPlayerComponentRule.DefaultDisabled
+    Value: A VideoPlayer's default state must be set to Disabled
+  - Key: VideoPlayerComponentRule.DefaultDisabled.Solution
+    Value: Untick the component's checkbox, and rig it so that it gets enabled by
+      other means such as Animations and VRC_Trigger's SetComponentActive
+  - Key: VketRuleSetBase.VideoPlayerComponentMaxCountRule.Title
+    Value: Please reduce the usage of VideoPlayer components to the allowed limits
+  - Key: VideoPlayerComponentMaxCountRule.Exceeded
+    Value: 'The component''s usage limit of {0} exceeded. (Current count: {1})'
+  - Key: VideoPlayerComponentMaxCountRule.Exceeded.Solution
+    Value: Please reduce the component count
+  - Key: VideoPlayerComponentRule.DontUseURL
+    Value: Please disallow URL input on VideoPlayers
+  - Key: VketRuleSetBase.CanvasRenderModeRule.Title
+    Value: Canvas must be set to WorldSpace
+  - Key: CanvasRenderModeRule.CanvasIsNotInWorldSpace
+    Value: Please set the RenderMode of the canvas located under {0} to WorldSpace
+  - Key: VketRuleSetBase.CameraComponentRule.Title
+    Value: Please follow the set rules when using a Camera
+  - Key: CameraComponentRule.DefaultDisabled
+    Value: The component must be set to Disabled by default
+  - Key: CameraComponentRule.DefaultDisabled.Solution
+    Value: Untick the component's checkbox, and rig it so that it gets enabled by
+      other means such as Animations and VRC_Trigger's SetComponentActive
+  - Key: CameraComponentRule.MaxRenderTextureSize
+    Value: "The RenderTexture's size is above the limits({0}px\xD7{1}px) Currently
+      {2}px\xD7{3}px"
+  - Key: CameraComponentRule.MaxRenderTextureSize.Solution
+    Value: From the RenderTexture's inspector, reduce the size below the limits
+  - Key: VketRuleSetBase.CameraComponentMaxCountRule.Title
+    Value: Please reduce the usage of Camera components to the allowed limits
+  - Key: CameraComponentMaxCountRule.Exceeded
+    Value: 'The component''s usage limit of {0} exceeded. (Current count: {1})'
+  - Key: CameraComponentMaxCountRule.Exceeded.Solution
+    Value: Please reduce the component count
+  - Key: VketRuleSetBase.ProjectorComponentRule.Title
+    Value: Please follow the set rules when using a Projector
+  - Key: ProjectorComponentRule.DefaultDisabled
+    Value: The component must be set to Disabled by default
+  - Key: ProjectorComponentRule.DefaultDisabled.Solution
+    Value: Untick the component's checkbox, and rig it so that it gets enabled by
+      other means such as Animations and VRC_Trigger's SetComponentActive
+  - Key: VketRuleSetBase.ProjectorComponentMaxCountRule.Title
+    Value: Please reduce the usage of Projector components to the allowed limits
+  - Key: ProjectorComponentMaxCountRule.Exceeded
+    Value: 'The component''s usage limit of {0} exceeded. (Current count: {1})'
+  - Key: ProjectorComponentMaxCountRule.Exceeded.Solution
+    Value: Please reduce the component count
+  - Key: VketRuleSetBase.AnimatorComponentMaxCountRule.Title
+    Value: Please limit your animator usage within the allowed maximum count
+  - Key: AnimatorComponentMaxCountRule.Exceeded
+    Value: Total animator count({1}) exceeded the maximum allowed number of {0}.
+  - Key: AnimatorComponentMaxCountRule.Exceeded.Solution
+    Value: Please reduce your animator component count
+  - Key: AnimationMakesMoveCollidersRule.WillMakesMove
+    Value: The animated object {0} contains a collider within its' children
+  - Key: AnimationMakesMoveCollidersRule.WillMakesMove.Solution
+    Value: Please remove either the animator or the collider.
+  - Key: VketRuleSetBase.AnimationClipRule.Title
+    Value: Please conform to the limitation of AnimationClip's usage
+  - Key: AnimationClipRule.DontChangeMaterialInAnimation
+    Value: Switching of materials using AnimationClips is not allowed
+  - Key: AnimationClipRule.DontAccessParentObject
+    Value: AnimationClips must not contain paths containing ../
+  - Key: VketRuleSetBase.AnimationComponentRule.Title
+    Value: Please conform to the limitation of AnimationComponent's usage
+  - Key: AnimationComponentRule.ShouldNotUseAlwaysAnimate
+    Value: In the exception of bugs, please avoid setting CullingType to Always.
+  - Key: VketRuleSetBase.AnimatorComponentRule.Title
+    Value: Please conform to the limitation of AnimatorComponent's usage
+  - Key: AnimatorComponentRule.ShouldNotUseAlwaysAnimate
+    Value: In the exception of bugs, please avoid setting CullingType to Always.
+  - Key: AnimatorComponentRule.ShouldNotUseApplyRootMotion
+    Value: Usage of Apply Root Motion is not allowed.
+  - Key: AnimatorComponentRule.ShouldNotUseApplyRootMotion.Solution
+    Value: Please use the Bake Into Pose option instead for Humanoid Animations.
+  - Key: AnimatorComponentRule.MustUseComponentsSeparately
+    Value: Animator components can not be used in combination with {0}
+  - Key: AnimatorComponentRule.MustUseComponentsSeparately.Solution
+    Value: Please avoid having the combination of the two components within the same
+      or parented objects.
+  - Key: TemplateLoaderWindow.TemplatesAreNotExists
+    Value: Template not found
+  - Key: TemplateLoaderWindow.ForceBinaryDetected
+    Value: Asset Serialization is set to ForceBinary, certain assets might not be
+      loaded properly. Proceed?
+  - Key: TemplateLoaderWindow.ForceBinaryDetected.Continue
+    Value: Load
+  - Key: TemplateLoaderWindow.ForceBinaryDetected.Cancel
+    Value: Cancel
+  - Key: TemplateLoaderWindow.Succeeded
+    Value: Template '{0}' copied succesfully.
+  - Key: TemplateLoaderWindow.Failed
+    Value: Failed to copy template '{0}'.
+  - Key: TemplateLoader.InvalitCharsDetected
+    Value: Invalid characters found in entry {0}.
+  - Key: TemplateLoader.DestinationAlreadyExists
+    Value: Destination path already exists
+  - Key: TemplateLoader.OverlengthPathDetected
+    Value: 'Path exceeding character limit found: {0}'
+  - Key: TemplateLoader.InformationFileNotFound
+    Value: Template information file can not be found
+  - Key: TemplateLoader.InformationFileDuplicated
+    Value: Duplicate template information files found
+  - Key: Exporter.TargetAsset
+    Value: Target asset
+  - Key: Exporter.DestinationAlreadyExists
+    Value: 'File already exists: {0}'
+  - Key: Exporter.RenameDestinationAlreadyExists
+    Value: File with same name already exists.
+  - Key: Exporter.Succeeded
+    Value: The following UnityPackage has been successfully exported.
+  - Key: Exporter.Failed
+    Value: 'Unexpected error occured during export: {0}'
+  - Key: ValidatedExporterWindow.ForceExport
+    Value: Ignore and continue exporting
+  - Key: ValidatedExporterWindow.Succeeded
+    Value: Exporting successful
+  - Key: ValidatedExporterWindow.SucceededDetail
+    Value: The following UnityPackage has been successfully exported.
+  - Key: ValidatedExporterWindow.Aborted
+    Value: Export has been aborted.
+  - Key: AssetGuardian.Notificator.ModificationNotAllowed
+    Value: Modification of the following assets are not allowed.
+  - Key: AssetGuardian.Notificator.DeleteNotAllowed
+    Value: Deletion of the following assets are not allowed.
+  - Key: AssetGuardian.Notificator.MoveOrRenameNotAllowed
+    Value: Renaming and/or changing directories of the following assets are not allowed.
+  - Key: AssetGuardian.Notificator.CloseDialog
+    Value: OK
+  - Key: ValidatedExporter.ProblemOccurredWhileValidating
+    Value: Unexpected error occured during validation.
+  - Key: ValidatedExporter.RuleNotFound
+    Value: Rule {0} not found.
+  - Key: ValidatedExporter.IssueFound
+    Value: Issues found while rule checking.
+  - Key: ValidatedExporter.SkipValidation
+    Value: Undefined ruleset, skipping validation.
+  - Key: ValidatedExporter.Failed
+    Value: Failed to export.
+  - Key: ExistInSubmitFolderRule.AssetOutOfPackage
+    Value: Asset {0} is not located in the submissions folder.
+  - Key: ExistInSubmitFolderRule.AssetOutOfPackage.Solution
+    Value: All assets to be submitted (excluding distributed prefabs) must be placed
+      within a folder renamed to your Exhibitor's ID located under the Assets folder.
+  - Key: ExistInSubmitFolderRule.HasOutOfPackageReference
+    Value: 
+  - Key: ExistInSubmitFolderRule.HasOutOfPackageReference.Solution
+    Value: 
+  - Key: ExistInSubmitFolderRule.HasOutOfPackageReference.SolutionURL
+    Value: 
+  - Key: LightmapSizeLimitRule.MustLightmapBakingManually
+    Value: LightMaps can not be examined when set to Auto Generate
+  - Key: LightmapSizeLimitRule.MustLightmapBakingManually.Solution
+    Value: "Please set lightmap baking to Manual with the following steps:\n1. Open
+      the Lighting menu through the unity taskbar\u2192Window\u2192Lighting\u2192Setting\n2.
+      Uncheck the Auto Generate checkbox located towards the bottom of the lighting
+      menu\n3. Click the Generate Lighting button\n4. Hold on while the lightmap baking
+      commences. Progress can be confirmed from the bottom right of the lighting menu\n5.
+      Restart the validation process once the baking process is done\nPlease repead
+      steps 3-5 when adding objects or changing the positions of existing objects."
+  - Key: LightmapSizeLimitRule.Overuse
+    Value: Current Lightmap count {1} has exceeded the limit of {0}.
+  - Key: LightmapSizeLimitRule.Overuse.Solution
+    Value: Try reducing the object count or lowering the Scale in Lightmap value in
+      the MeshRenderer settings.
+  - Key: LightmapSizeLimitRule.Overresolution
+    Value: Current Lightmap resolution of {1}, {2} has exceeded the limit of {0}.
+  - Key: LightmapSizeLimitRule.Overresolution.Solution
+    Value: "Please lower the lightmap resolution with the following steps:\n1. Open
+      the Lighting menu through the unity taskbar\u2192Window\u2192Lighting\u2192Setting\n2.
+      Select the 'Scene' tab from the top of the Lighting menu\n3. Scroll down and
+      expand the 'Lightmap Settings' tab\n4. Set the Lightmap Size value to {0}"
+  - Key: LightConfigRule.UnauthorizedLightType
+    Value: '{0} Light usage is not supported.'
+  - Key: LightConfigRule.UnauthorizedLightType.Solution
+    Value: Either delete or change the light to another type.
+  - Key: LightConfigRule.UnauthorizedLightMode
+    Value: '{0} Light must be set to {1} mode. Current mode: {2}'
+  - Key: LightConfigRule.UnauthorizedLightMode.Solution
+    Value: Set the light Mode to {0}
+  - Key: LightConfigRule.OverRange
+    Value: '{0} Light''s Range value has exceeded the allowed range of {1}~{2}. Current
+      value {3}'
+  - Key: LightConfigRule.OverRange.Solution
+    Value: Set the Range value to within the allowed range.
+  - Key: LightConfigRule.OverIntensity
+    Value: '{0} Light''s Intensity value has exceeded the allowed range of {1}~{2}.
+      Current value {3}'
+  - Key: LightConfigRule.OverIntensity.Solution
+    Value: Set the Intensity value to within the allowed range.
+  - Key: LightConfigRule.OverIndirectMultiplier
+    Value: '{0} Light''s Indirect Multiplier value has exceeded the allowed range
+      of {1}~{2}. Current value {3}'
+  - Key: LightConfigRule.OverIndirectMultiplier.Solution
+    Value: Set the Indirect Multiplier value to within the allowed range.
+  - Key: VketRuleSetBase.SkinnedMeshRendererRule.Title
+    Value: Please follow the SkinnedMeshRenderer's usage rules.
+  - Key: VketRuleSetBase.MeshRendererRule.Title
+    Value: Please follow the MeshRenderer/MeshFilter's usage rules.
+  - Key: VketRuleSetBase.ReflectionProbeRule.Title
+    Value: Please follow the ReflectionProbe's usage rules.
+  - Key: SkinnedMeshRendererRule.MustTurnOffUpdateWhenOffscreen
+    Value: UpdateWhenOffscreen must be set to off.
+  - Key: SkinnedMeshRendererRule.MustAttachMaterial
+    Value: SkinnedMeshRenderers must have at least 1 material assigned.
+  - Key: MeshRendererRule.StaticMeshMustPutInEnvironmentLayer
+    Value: LightmapStatic MeshRenderers must be assigned the Environment Layer.
+  - Key: ReflectionProbeRule.MustUseCustomTexture
+    Value: Please set ReflectionProbe's Type to Custom.
+  - Key: VketRuleSetBase.RigidbodyRule.Title
+    Value: Rigidbody parameters must meet the allowed values
+  - Key: RigidbodyRule.UseIsKinematic
+    Value: Please enable IsKinematic on RigidBody objects
+  - Key: VketRuleSetBase.UnusabePrefabRule.Title
+    Value: Unallowed prefabs in use
+  - Key: VketUdonRuleSetBase.UdonBehaviourLayerConstraintRule.Title
+    Value: GameObject Layer including UdonBehaviour must 23.
+  - Key: UdonBehaviourLayerConstraintRule.InvalidLayer
+    Value: Wrong Layer
+  - Key: UdonBehaviourLayerConstraintRule.InvalidLayer.solution
+    Value: GameObject including UdonBehaviour must set Later 23.
+  - Key: VketUdonRuleSetBase.UsableUdonAssemblyListRule.Title
+    Value: Do not use forbidden Udon Assembly
+  - Key: UsableUdonAssemblyListRule.Disallow
+    Value: '{0}: Usage of {1} is not allowed'
+  - Key: UsableUdonAssemblyListRule.DefaultComponentGroupName
+    Value: Udon Assembly not defined
+  - Key: VketUdonRuleSetBase.UdonBehaviourLimitRule.Title
+    Value: UdonBehaviour count must be kept under {0}
+  - Key: VketUdonRuleSetBase.UdonDynamicObjectInactiveRule.Title
+    Value: Dynamic object must be Inactive.
+  - Key: UdonDynamicObjectInactiveRule.isActive
+    Value: Dynamic object is Active.
+  - Key: UdonDynamicObjectInactiveRule.isActive.Solution
+    Value: Dynamic object make Inactive on initial state.
+  - Key: UdonSharpScriptNamespaceRule.NotUdonSharp
+    Value: Class {0} must be child of UdonSharp.UdonSharpBehaviour.
+  - Key: UdonSharpScriptNamespaceRule.InvalidNamespace
+    Value: Wrong Namespace
+  - Key: UdonSharpScriptNamespaceRule.InvalidNamespace.solution
+    Value: Define U# class {0} in your namespace.
+  - Key: VketUdonRuleSetBase.UdonSharpNameSpaceRule.Title
+    Value: UdonSharp class definition rules.
+  - Key: UdonBehaviourSynchronizePositionCountLimitRule.Overuse
+    Value: 'UdonBehaviour with synchronize position count exceeded limit of {0}. (Current
+      count: {1})'
+  - Key: UdonBehaviourSynchronizePositionCountLimitRule.Overuse.Solution
+    Value: Please reduce the component count.
+  - Key: VketUdonRuleSetBase.UdonBehaviourSynchronizePositionCountLimitRule.Title
+    Value: UdonSharp with SynchronizePosition  count must be kept under {0}
+  - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.Title
+    Value: UdonBehaviour AllowOwnershipTransferOnCollision to be false.
+  - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.isTrue
+    Value: AllowOwnershipTransferOnCollision is true.
+  - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.isTrue.solution
+    Value: UdonBehaviour AllowOwnershipTransferOnCollision must be false.
+  - Key: VketUdonRuleSetBase.UdonDynamicObjectParentRule.Title
+    Value: UdonBehaviour and it's affected object are set child of Dynamic object.
+  - Key: UdonDynamicObjectParentRule.noDynamicObject
+    Value: Object Dynamic is not exists.
+  - Key: UdonDynamicObjectParentRule.noDynamicObject.Solution
+    Value: Create Dynamic object.
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourIsNotChildOfDynamic
+    Value: UdonBehaviour [{0}] is must be child of Dynamic object.
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourIsNotChildOfDynamic.Solution
+    Value: Set it child of Dynamic object.
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourPublicValueIsNotChildOfDynamic
+    Value: The object UdonBehaviour [{0}]'s public variable [{1}] is must be child
+      of Dynamic object.
+  - Key: UdonDynamicObjectParentRule.UdonBehaviourPublicValueIsNotChildOfDynamic.Solution
+    Value: Set it child of Dynamic object.
+  - Key: VketUdonRuleSetBase.UdonBehaviourSyncedVariablesRule.Title
+    Value: SyncedVariables limitation of UdonBehaviour.
+  - Key: UdonBehaviourSyncedVariablesRule.Overuse
+    Value: 'Synced variables count in UdonBehaviours exceeded limit of {0}. (Current
+      count: {1})'
+  - Key: UdonBehaviourSyncedVariablesRule.Overuse.Solution
+    Value: Please reduce the synced variables count.
+  - Key: UdonBehaviourSyncedVariablesRule.InvalidType
+    Value: UdonBehaviour Synced variable [{0}] is invalid type ({1}).
+  - Key: UdonBehaviourSyncedVariablesRule.InvalidType.Solution
+    Value: Set type bool, sbyte, byte, ushort, short, uint, int or float.
+  - Key: VketUdonRuleSetBase.UdonAssemblyPhysicsCastFunctionRule.Title
+    Value: Physics.*Cast function in UdonAssembly rules.
+  - Key: UdonAssemblyPhysicsCastFunctionRule.InvalidArguments
+    Value: 'UdonAssembly function [{0}] has invalid arguments. : {1} ({2})'
+  - Key: UdonAssemblyPhysicsCastFunctionRule.InvalidArguments.Solution
+    Value: Set arguments {1} in the function {0}.
+  - Key: UdonAssemblyPhysicsCastFunctionRule.MaxDistanceError
+    Value: 'UdonAssembly function [{0}] has invalid argument value _maxDistance ({3}).
+      : {1} ({2})'
+  - Key: UdonAssemblyPhysicsCastFunctionRule.MaxDistanceError.Solution
+    Value: Set argument {1} below {2} as const _maxDistance in the function {0}.
+  - Key: UdonAssemblyPhysicsCastFunctionRule.LayerMaskError
+    Value: 'UdonAssembly function [{0}] has invalid argument value _layerMask ({3}).
+      : {1} ({2})'
+  - Key: UdonAssemblyPhysicsCastFunctionRule.LayerMaskError.Solution
+    Value: Set argument {1} {2} as const _layerMask in the function {0}.
+  - Key: StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap
+    Value: Models using Lightmap Static must be enabled Generate Lightmap UVs in ImportSetting.
+  - Key: StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.Solution
+    Value: 
+  - Key: StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.SolutionURL
+    Value: 
+  - Key: StaticFlagRule.LightmapStaticMeshShouldHaveUV2
+    Value: Meshes using Lightmap Static must have UV2.
+  - Key: StaticFlagRule.LightmapStaticMeshShouldHaveUV2.Solution
+    Value: Generate UV2 , or disable Lightmap Static.
+  - Key: StaticFlagRule.LightmapStaticMeshShouldHaveUV2.SolutionURL
+    Value: 
+  - Key: VketUdonRuleSetBase.VRCStationCountLimitRule.Title
+    Value: VRCStation count must be kept under {0}
+  - Key: VRCStationCountLimitRule.Overuse
+    Value: 'VRCStation count exceeded limit of {0}. (Current count: {1})'
+  - Key: VRCStationCountLimitRule.Overuse.Solution
+    Value: Please reduce the component count.
+  - Key: VketUdonRuleSetBase.SpatialAudioDynamicObjectParentRule.Title
+    Value: VRCSpatialAudioSources are must set child of Dynamic object.
+  - Key: SpatialAudioDynamicObjectParentRule.noDynamicObject
+    Value: Object Dynamic is not exists.
+  - Key: SpatialAudioDynamicObjectParentRule.noDynamicObject.Solution
+    Value: Create Dynamic object.
+  - Key: SpatialAudioDynamicObjectParentRule.IsNotChildOfDynamic
+    Value: VRCSpatialAudioSource [{0}] is must be child of Dynamic object.
+  - Key: SpatialAudioDynamicObjectParentRule.IsNotChildOfDynamic.Solution
+    Value: Set it child of Dynamic object.
+  - Key: VketUdonRuleSetBase.VRCPickupUdonBehaviourRule.Title
+    Value: VRCPickup UdonAssembly constraints
+  - Key: VRCPickupUdonBehaviourRule.NotImplementedAutoResetPickup
+    Value: VRCPickup must be together UdonBehaviour [AutoResetPickup]
+  - Key: VRCPickupUdonBehaviourRule.NotImplementedAutoResetPickup.Solution
+    Value: Add component Udonbehaviour with UdonProgramAssembly [AutoResetPickup].
+      They are included official prefabs.
+  - Key: VRCPickupUdonBehaviourRule.SynchronizePositionFalse
+    Value: UdonBehaviour [AutoResetPickup] must set Synchronize Position is True.
+  - Key: VRCPickupUdonBehaviourRule.SynchronizePositionFalse.Solution
+    Value: Check UdonBehaviour property Synchronize Position is True.

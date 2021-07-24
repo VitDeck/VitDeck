@@ -1,0 +1,12 @@
+{
+    "name": "VitDeck.Validator",
+    "references": [
+        "VitDeck.Utilities",
+        "VitDeck.Validator.Components",
+        "VitDeck.Language"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}
