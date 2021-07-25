@@ -13,29 +13,26 @@ namespace VitDeck.Validator
     /// <remarks>
     /// 変数をabstractまたはvirtualプロパティで宣言し、継承先で上書きすることでワールドによる制限の違いを表現する。
     /// </remarks>
-    public abstract class VketUdonRuleSetBase : IRuleSet
+    public class VRCUdonSampleRuleSet : IRuleSet
     {
-        public abstract string RuleSetName
-        {
-            get;
-        }
+        public string RuleSetName => "Vket - UdonCube";
 
         protected readonly long MegaByte = 1048576;
 
-        private readonly VketTargetFinder targetFinder = new VketTargetFinder();
+        private readonly VRCSampleTargetFinder targetFinder = new VRCSampleTargetFinder();
         public IValidationTargetFinder TargetFinder => targetFinder;
 
         private readonly IObjectDetector officialPrefabsDetector;
 
-        public VketUdonRuleSetBase() : base()
+        public VRCUdonSampleRuleSet() : base()
         {
             officialPrefabsDetector = new PrefabPartsDetector(
-                VketUdonOfficialAssetData.AudioSourcePrefabGUIDs,
-                VketUdonOfficialAssetData.AvatarPedestalPrefabGUIDs,
-                VketUdonOfficialAssetData.PickupObjectSyncPrefabGUIDs,
-                VketUdonOfficialAssetData.CanvasPrefabGUIDs,
-                VketUdonOfficialAssetData.PointLightProbeGUIDs,
-                VketUdonOfficialAssetData.UdonBehaviourPrefabGUIDs);
+                VRCUdonSampleOfficialAssetData.AudioSourcePrefabGUIDs,
+                VRCUdonSampleOfficialAssetData.AvatarPedestalPrefabGUIDs,
+                VRCUdonSampleOfficialAssetData.PickupObjectSyncPrefabGUIDs,
+                VRCUdonSampleOfficialAssetData.CanvasPrefabGUIDs,
+                VRCUdonSampleOfficialAssetData.PointLightProbeGUIDs,
+                VRCUdonSampleOfficialAssetData.UdonBehaviourPrefabGUIDs);
         }
 
         public IRule[] GetRules()
@@ -51,9 +48,9 @@ namespace VitDeck.Validator
                     new VRCSDKVersion("2020.05.06.12.14"),
                     "https://files.vrchat.cloud/sdk/VRCSDK3-WORLD-2020.08.07.18.18_Public.unitypackage"),
 
-                new ExistInSubmitFolderRule(LocalizedMessage.Get("VketRuleSetBase.ExistInSubmitFolderRule.Title"), VketUdonOfficialAssetData.GUIDs, targetFinder),
+                new ExistInSubmitFolderRule(LocalizedMessage.Get("VketRuleSetBase.ExistInSubmitFolderRule.Title"), VRCUdonSampleOfficialAssetData.GUIDs, targetFinder),
 
-                new AssetGuidBlacklistRule(LocalizedMessage.Get("VketRuleSetBase.OfficialAssetDontContainRule.Title"), VketUdonOfficialAssetData.GUIDs),
+                new AssetGuidBlacklistRule(LocalizedMessage.Get("VketRuleSetBase.OfficialAssetDontContainRule.Title"), VRCUdonSampleOfficialAssetData.GUIDs),
 
                 new AssetNamingRule(LocalizedMessage.Get("VketRuleSetBase.NameOfFileAndFolderRule.Title"), @"[a-zA-Z0-9 _\.\-\(\)]+"),
 
@@ -75,13 +72,13 @@ namespace VitDeck.Validator
                     size: BoothSizeLimit,
                     margin: 0.01f,
                     Vector3.zero,
-                    VketUdonOfficialAssetData.SizeIgnorePrefabGUIDs),
+                    VRCUdonSampleOfficialAssetData.SizeIgnorePrefabGUIDs),
 
                 new AssetTypeLimitRule(
                     LocalizedMessage.Get("VketRuleSetBase.MaterialLimitRule.Title", MaterialUsesLimit),
                     typeof(Material),
                     MaterialUsesLimit,
-                    VketUdonOfficialAssetData.MaterialGUIDs),
+                    VRCUdonSampleOfficialAssetData.MaterialGUIDs),
 
                 new LightmapSizeLimitRule(
                     LocalizedMessage.Get("VketRuleSetBase.LightMapsLimitRule.Title", LightmapCountLimit, 512),
@@ -92,7 +89,7 @@ namespace VitDeck.Validator
 
                 new UsableComponentListRule(LocalizedMessage.Get("VketRuleSetBase.UsableComponentListRule.Title"),
                     GetComponentReferences(),
-                    ignorePrefabGUIDs: VketUdonOfficialAssetData.GUIDs),
+                    ignorePrefabGUIDs: VRCUdonSampleOfficialAssetData.GUIDs),
 
                 new SkinnedMeshRendererRule(LocalizedMessage.Get("VketRuleSetBase.SkinnedMeshRendererRule.Title")),
 
@@ -141,23 +138,23 @@ namespace VitDeck.Validator
 
                 new ProjectorComponentMaxCountRule(LocalizedMessage.Get("VketRuleSetBase.ProjectorComponentMaxCountRule.Title"), limit: 1),
 
-                new PickupObjectSyncPrefabRule(LocalizedMessage.Get("VketRuleSetBase.PickupObjectSyncRule.Title"), VketUdonOfficialAssetData.PickupObjectSyncPrefabGUIDs),
+                new PickupObjectSyncPrefabRule(LocalizedMessage.Get("VketRuleSetBase.PickupObjectSyncRule.Title"), VRCUdonSampleOfficialAssetData.PickupObjectSyncPrefabGUIDs),
 
-                new AvatarPedestalPrefabRule(LocalizedMessage.Get("VketRuleSetBase.AvatarPedestalPrefabRule.Title"), VketUdonOfficialAssetData.AvatarPedestalPrefabGUIDs),
+                new AvatarPedestalPrefabRule(LocalizedMessage.Get("VketRuleSetBase.AvatarPedestalPrefabRule.Title"), VRCUdonSampleOfficialAssetData.AvatarPedestalPrefabGUIDs),
 
-                new AudioSourcePrefabRule(LocalizedMessage.Get("VketRuleSetBase.AudioSourcePrefabRule.Title"),  VketUdonOfficialAssetData.AudioSourcePrefabGUIDs),
+                new AudioSourcePrefabRule(LocalizedMessage.Get("VketRuleSetBase.AudioSourcePrefabRule.Title"),  VRCUdonSampleOfficialAssetData.AudioSourcePrefabGUIDs),
 
                 //// UdonCube では IsKinematic = False を許可する 
                 // new RigidbodyRule(LocalizedMessage.Get("VketRuleSetBase.RigidbodyRule.Title")),
 
                 new PrefabLimitRule(
                     LocalizedMessage.Get("VketRuleSetBase.UnusabePrefabRule.Title", ChairPrefabUsesLimit),
-                    VketUdonOfficialAssetData.VRCSDKPrefabGUIDs,
+                    VRCUdonSampleOfficialAssetData.VRCSDKPrefabGUIDs,
                     0),
 
                 new PrefabLimitRule(
                     LocalizedMessage.Get("VketRuleSetBase.PickupObjectSyncPrefabLimitRule.Title", PickupObjectSyncUsesLimit),
-                    VketUdonOfficialAssetData.PickupObjectSyncPrefabGUIDs,
+                    VRCUdonSampleOfficialAssetData.PickupObjectSyncPrefabGUIDs,
                     PickupObjectSyncUsesLimit),
 
                 //// IN SDK3 Video Player is suspended.
@@ -183,7 +180,7 @@ namespace VitDeck.Validator
                     LocalizedMessage.Get("VketUdonRuleSetBase.UdonBehaviourLimitRule.Title", UdonBehaviourCountLimit),
                     typeof(UdonBehaviour),
                     UdonBehaviourCountLimit,
-                    VketUdonOfficialAssetData.UdonBehaviourPrefabGUIDs),
+                    VRCUdonSampleOfficialAssetData.UdonBehaviourPrefabGUIDs),
 
                 // SynchronizePositionが有効なUdonBehaviourは1ブースあたり 10 まで
                 new UdonBehaviourSynchronizePositionCountLimitRule(
@@ -216,7 +213,7 @@ namespace VitDeck.Validator
                 // 使用禁止UdonAssembly
                 new UsableUdonAssemblyListRule(LocalizedMessage.Get("VketUdonRuleSetBase.UsableUdonAssemblyListRule.Title"),
                     GetUdonAssemblyReferences(),
-                    ignorePrefabGUIDs: VketUdonOfficialAssetData.GUIDs), 
+                    ignorePrefabGUIDs: VRCUdonSampleOfficialAssetData.GUIDs), 
 
                 // [UdonSynced]を付与した変数は1ブースあたり 3 まで
                 // [UdonSynced]を付与した変数は下記の型のみ使用できます bool, sbyte, byte, ushort, short, uint, int, float
@@ -231,21 +228,69 @@ namespace VitDeck.Validator
             };
         }
 
-        protected abstract long FolderSizeLimit { get; }
+        private long FolderSizeLimit 
+        {
+            get
+            {
+                return 100 * MegaByte; 
+            }
+        }
 
-        protected abstract Vector3 BoothSizeLimit { get; }
+        private Vector3 BoothSizeLimit
+        {
+            get
+            {
+                return new Vector3(10, 10, 10);
+            }
+        }
 
-        protected abstract int UdonBehaviourCountLimit { get; }
+        private int UdonBehaviourCountLimit 
+        {
+            get
+            {
+                return 25;
+            }
+        }
 
-        protected abstract int UdonBehaviourSynchronizePositionCountLimit { get; }
+        private int UdonBehaviourSynchronizePositionCountLimit
+        {
+            get
+            {
+                return 10;
+            }
+        }
 
-        protected abstract int UdonScriptSyncedVariablesLimit { get; }
+        private int UdonScriptSyncedVariablesLimit 
+        {
+            get
+            {
+                return 3;
+            }
+        }
 
-        protected abstract int MaterialUsesLimit { get; }
+        private int MaterialUsesLimit
+        {
+            get
+            {
+                return 60;
+            }
+        }
 
-        protected abstract int LightmapCountLimit { get; }
+        private int LightmapCountLimit
+        {
+            get
+            {
+                return 2;
+            }
+        }
 
-        protected abstract int VRCStationCountLimit { get; }
+        private int VRCStationCountLimit 
+        {
+            get
+            {
+                return 8;
+            }
+        }
 
         private ComponentReference[] GetComponentReferences()
         {
@@ -365,7 +410,7 @@ namespace VitDeck.Validator
                     "_SystemInt32_"), 
             };
         }
-        protected virtual ValidationLevel AdvancedObjectValidationLevel
+        protected ValidationLevel AdvancedObjectValidationLevel
         {
             get
             {
@@ -373,7 +418,7 @@ namespace VitDeck.Validator
             }
         }
 
-        protected virtual ValidationLevel MoreAdvancedObjectValidationLevel
+        protected ValidationLevel MoreAdvancedObjectValidationLevel
         {
             get
             {
@@ -381,21 +426,72 @@ namespace VitDeck.Validator
             }
         }
 
-        protected abstract LightConfigRule.LightConfig ApprovedPointLightConfig { get; }
+        private LightConfigRule.LightConfig ApprovedPointLightConfig
+        {
+            get
+            {
+                return new LightConfigRule.LightConfig(
+                    new [] { LightmapBakeType.Baked, LightmapBakeType.Realtime });
+            }
+        }
 
-        protected abstract LightConfigRule.LightConfig ApprovedSpotLightConfig { get; }
+        private LightConfigRule.LightConfig ApprovedSpotLightConfig
+        {
+            get
+            {
+                return new LightConfigRule.LightConfig(
+                    new[] { LightmapBakeType.Baked, LightmapBakeType.Realtime });
+            }
+        }
 
-        protected abstract LightConfigRule.LightConfig ApprovedAreaLightConfig { get; }
+        private LightConfigRule.LightConfig ApprovedAreaLightConfig 
+        {
+            get
+            {
+                return new LightConfigRule.LightConfig(
+                    new[] { LightmapBakeType.Baked });
+            }
+        }
 
-        protected abstract LightmapBakeType[] unusablePointLightModes { get; }
+        private LightmapBakeType[] unusablePointLightModes
+        {
+            get
+            {
+                return new LightmapBakeType[] { LightmapBakeType.Realtime, LightmapBakeType.Mixed };
+            }
+        }
 
-        protected abstract LightmapBakeType[] unusableSpotLightModes { get; }
+        private LightmapBakeType[] unusableSpotLightModes
+        {
+            get
+            {
+                return new LightmapBakeType[] { LightmapBakeType.Realtime, LightmapBakeType.Mixed };
+            }
+        }
 
-        protected abstract int AreaLightUsesLimit { get; }
+        private int AreaLightUsesLimit 
+        {
+            get
+            {
+                return 3;
+            }
+        }
 
-        protected abstract int ChairPrefabUsesLimit { get; }
+        private int ChairPrefabUsesLimit
+        {
+            get
+            {
+                return 1;
+            }
+        }
 
-        protected abstract int PickupObjectSyncUsesLimit { get; }
+        private int PickupObjectSyncUsesLimit 
+        {
+            get
+            {
+                return 10;
+            }
+        }
 
     }
 }
