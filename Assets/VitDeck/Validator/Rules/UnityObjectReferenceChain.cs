@@ -101,6 +101,10 @@ namespace VitDeck.Validator
             if (material.shader == null)
                 return;
 
+            // シェーダーがベースフォルダに含まれない場合でもエラーが出ない問題に対する暫定対応
+            // ※この記述がなくてもエラー出る場合がある
+            dictionary.AddReference(material.shader);
+
             //設定中のシェーダーに存在するプロパティの取得
             var count = ShaderUtil.GetPropertyCount(material.shader);
             var propertyNames = new string[count];
