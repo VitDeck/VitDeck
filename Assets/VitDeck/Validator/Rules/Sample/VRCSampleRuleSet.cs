@@ -11,34 +11,31 @@ namespace VitDeck.Validator
 {
 
     /// <summary>
-    /// Vketの基本ルールセット。
+    /// VRChat向けの基本ルールセット
     /// </summary>
     /// <remarks>
-    /// 変数をabstractまたはvirtualプロパティで宣言し、継承先で上書きすることでワールドによる制限の違いを表現する。
+    /// Vket5で利用されたルールセットをベースとしています。
     /// </remarks>
-    public abstract class VketRuleSetBase : IRuleSet
+    public class VRCSampleRuleSet : IRuleSet
     {
-        public abstract string RuleSetName
-        {
-            get;
-        }
+        public string RuleSetName => "VRCサンプルルールセット";
 
         protected readonly long MegaByte = 1048576;
 
-        private readonly VketTargetFinder targetFinder = new VketTargetFinder();
+        private readonly VRCSampleTargetFinder targetFinder = new VRCSampleTargetFinder();
         public IValidationTargetFinder TargetFinder => targetFinder;
 
         private readonly IObjectDetector officialPrefabsDetector;
 
-        public VketRuleSetBase() : base()
+        public VRCSampleRuleSet() : base()
         {
             officialPrefabsDetector = new PrefabPartsDetector(
-                VketOfficialAssetData.AudioSourcePrefabGUIDs,
-                VketOfficialAssetData.AvatarPedestalPrefabGUIDs,
-                VketOfficialAssetData.ChairPrefabGUIDs,
-                VketOfficialAssetData.PickupObjectSyncPrefabGUIDs,
-                VketOfficialAssetData.CanvasPrefabGUIDs,
-                VketOfficialAssetData.PointLightProbeGUIDs);
+                VRCSampleOfficialAssetData.AudioSourcePrefabGUIDs,
+                VRCSampleOfficialAssetData.AvatarPedestalPrefabGUIDs,
+                VRCSampleOfficialAssetData.ChairPrefabGUIDs,
+                VRCSampleOfficialAssetData.PickupObjectSyncPrefabGUIDs,
+                VRCSampleOfficialAssetData.CanvasPrefabGUIDs,
+                VRCSampleOfficialAssetData.PointLightProbeGUIDs);
         }
 
         public IRule[] GetRules()
@@ -55,9 +52,9 @@ namespace VitDeck.Validator
                     new VRCSDKVersion("2020.05.06.12.14"),
                     "https://files.vrchat.cloud/sdk/VRCSDK2-2020.09.15.11.25_Public.unitypackage"),
 
-                new ExistInSubmitFolderRule(LocalizedMessage.Get("VketRuleSetBase.ExistInSubmitFolderRule.Title"), VketOfficialAssetData.GUIDs, targetFinder),
+                new ExistInSubmitFolderRule(LocalizedMessage.Get("VketRuleSetBase.ExistInSubmitFolderRule.Title"), VRCSampleOfficialAssetData.GUIDs, targetFinder),
 
-                new AssetGuidBlacklistRule(LocalizedMessage.Get("VketRuleSetBase.OfficialAssetDontContainRule.Title"), VketOfficialAssetData.GUIDs),
+                new AssetGuidBlacklistRule(LocalizedMessage.Get("VketRuleSetBase.OfficialAssetDontContainRule.Title"), VRCSampleOfficialAssetData.GUIDs),
 
                 new AssetNamingRule(LocalizedMessage.Get("VketRuleSetBase.NameOfFileAndFolderRule.Title"), @"[a-zA-Z0-9 _\.\-\(\)]+"),
 
@@ -83,7 +80,7 @@ namespace VitDeck.Validator
                     LocalizedMessage.Get("VketRuleSetBase.MaterialLimitRule.Title", MaterialUsesLimit),
                     typeof(Material),
                     MaterialUsesLimit,
-                    VketOfficialAssetData.MaterialGUIDs),
+                    VRCSampleOfficialAssetData.MaterialGUIDs),
 
                 new LightmapSizeLimitRule(
                     LocalizedMessage.Get("VketRuleSetBase.LightMapsLimitRule.Title", LightmapCountLimit, 512),
@@ -94,7 +91,7 @@ namespace VitDeck.Validator
 
                 new UsableComponentListRule(LocalizedMessage.Get("VketRuleSetBase.UsableComponentListRule.Title"),
                     GetComponentReferences(),
-                    ignorePrefabGUIDs: VketOfficialAssetData.GUIDs),
+                    ignorePrefabGUIDs: VRCSampleOfficialAssetData.GUIDs),
 
                 new SkinnedMeshRendererRule(LocalizedMessage.Get("VketRuleSetBase.SkinnedMeshRendererRule.Title")),
 
@@ -114,7 +111,7 @@ namespace VitDeck.Validator
                                 VRC_Trigger.TriggerType.OnPickupUseDown,
                                 VRC_Trigger.TriggerType.OnPickupUseUp   },
                             VRCTriggerActionWhitelist,
-                            VketOfficialAssetData.GUIDs),
+                            VRCSampleOfficialAssetData.GUIDs),
 
                 new UseMeshColliderRule(LocalizedMessage.Get("VketRuleSetBase.UseMeshColliderRule.Title")),
 
@@ -159,27 +156,27 @@ namespace VitDeck.Validator
 
                 new ProjectorComponentMaxCountRule(LocalizedMessage.Get("VketRuleSetBase.ProjectorComponentMaxCountRule.Title"), limit: 1),
 
-                new PickupObjectSyncPrefabRule(LocalizedMessage.Get("VketRuleSetBase.PickupObjectSyncRule.Title"), VketOfficialAssetData.PickupObjectSyncPrefabGUIDs),
+                new PickupObjectSyncPrefabRule(LocalizedMessage.Get("VketRuleSetBase.PickupObjectSyncRule.Title"), VRCSampleOfficialAssetData.PickupObjectSyncPrefabGUIDs),
 
-                new AvatarPedestalPrefabRule(LocalizedMessage.Get("VketRuleSetBase.AvatarPedestalPrefabRule.Title"), VketOfficialAssetData.AvatarPedestalPrefabGUIDs),
+                new AvatarPedestalPrefabRule(LocalizedMessage.Get("VketRuleSetBase.AvatarPedestalPrefabRule.Title"), VRCSampleOfficialAssetData.AvatarPedestalPrefabGUIDs),
 
-                new AudioSourcePrefabRule(LocalizedMessage.Get("VketRuleSetBase.AudioSourcePrefabRule.Title"),  VketOfficialAssetData.AudioSourcePrefabGUIDs),
+                new AudioSourcePrefabRule(LocalizedMessage.Get("VketRuleSetBase.AudioSourcePrefabRule.Title"),  VRCSampleOfficialAssetData.AudioSourcePrefabGUIDs),
 
                 new RigidbodyRule(LocalizedMessage.Get("VketRuleSetBase.RigidbodyRule.Title")),
 
                 new PrefabLimitRule(
                     LocalizedMessage.Get("VketRuleSetBase.ChairPrefabLimitRule.Title", ChairPrefabUsesLimit),
-                    VketOfficialAssetData.ChairPrefabGUIDs,
+                    VRCSampleOfficialAssetData.ChairPrefabGUIDs,
                     ChairPrefabUsesLimit),
 
                 new PrefabLimitRule(
                     LocalizedMessage.Get("VketRuleSetBase.UnusabePrefabRule.Title", ChairPrefabUsesLimit),
-                    VketOfficialAssetData.VRCSDKPrefabGUIDs,
+                    VRCSampleOfficialAssetData.VRCSDKPrefabGUIDs,
                     0),
 
                 new PrefabLimitRule(
                     LocalizedMessage.Get("VketRuleSetBase.PickupObjectSyncPrefabLimitRule.Title", PickupObjectSyncUsesLimit),
-                    VketOfficialAssetData.PickupObjectSyncPrefabGUIDs,
+                    VRCSampleOfficialAssetData.PickupObjectSyncPrefabGUIDs,
                     PickupObjectSyncUsesLimit),
 
                 new VideoPlayerComponentRule(LocalizedMessage.Get("VketRuleSetBase.VideoPlayerComponentRule.Title")),
@@ -191,12 +188,12 @@ namespace VitDeck.Validator
             };
         }
 
-        protected abstract long FolderSizeLimit { get; }
+        private long FolderSizeLimit => 50 * MegaByte;
 
-        protected abstract Vector3 BoothSizeLimit { get; }
+        private Vector3 BoothSizeLimit => new Vector3(4, 5, 4);
 
 #if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3 
-        protected virtual VRC_EventHandler.VrcBroadcastType[] VRCTriggerBroadcastTypesWhitelist
+        private VRC_EventHandler.VrcBroadcastType[] VRCTriggerBroadcastTypesWhitelist
         {
             get
             {
@@ -205,7 +202,7 @@ namespace VitDeck.Validator
             }
         }
 
-        protected virtual VRC_EventHandler.VrcEventType[] VRCTriggerActionWhitelist
+        private VRC_EventHandler.VrcEventType[] VRCTriggerActionWhitelist
         {
             get
             {
@@ -228,11 +225,11 @@ namespace VitDeck.Validator
         }
 #endif
 
-        protected abstract int VRCTriggerCountLimit { get; }
+        private int VRCTriggerCountLimit => 25;
 
-        protected abstract int MaterialUsesLimit { get; }
+        private int MaterialUsesLimit => 20;
 
-        protected abstract int LightmapCountLimit { get; }
+        private int LightmapCountLimit => 1;
 
         private ComponentReference[] GetComponentReferences()
         {
@@ -279,7 +276,7 @@ namespace VitDeck.Validator
             };
         }
 
-        protected virtual ValidationLevel AdvancedObjectValidationLevel
+        private ValidationLevel AdvancedObjectValidationLevel
         {
             get
             {
@@ -287,7 +284,7 @@ namespace VitDeck.Validator
             }
         }
 
-        protected virtual ValidationLevel MoreAdvancedObjectValidationLevel
+        private ValidationLevel MoreAdvancedObjectValidationLevel
         {
             get
             {
@@ -295,21 +292,81 @@ namespace VitDeck.Validator
             }
         }
 
-        protected abstract LightConfigRule.LightConfig ApprovedPointLightConfig { get; }
+        private LightConfigRule.LightConfig ApprovedPointLightConfig 
+        { 
+            get
+            {
+            return new LightConfigRule.LightConfig(
+                new[] { LightmapBakeType.Baked, LightmapBakeType.Realtime },
+                0, 7,
+                0, 10,
+                0, 15);
+            }
+        }
 
-        protected abstract LightConfigRule.LightConfig ApprovedSpotLightConfig { get; }
+        private LightConfigRule.LightConfig ApprovedSpotLightConfig 
+        {
+            get
+            {
+                return new LightConfigRule.LightConfig(
+                    new[] { LightmapBakeType.Baked, LightmapBakeType.Realtime },
+                    0, 7,
+                    0, 10,
+                    0, 15);
+            }
+        }
 
-        protected abstract LightConfigRule.LightConfig ApprovedAreaLightConfig { get; }
+        private LightConfigRule.LightConfig ApprovedAreaLightConfig 
+        {
+            get
+            {
+                return new LightConfigRule.LightConfig(
+                    new[] { LightmapBakeType.Baked },
+                    0, 30,
+                    0, 10,
+                    0, 15);
+            }
+        }
 
-        protected abstract LightmapBakeType[] unusablePointLightModes { get; }
+        private LightmapBakeType[] unusablePointLightModes
+        {
+            get
+            {
+                return new LightmapBakeType[] { };
+            }
+        }
 
-        protected abstract LightmapBakeType[] unusableSpotLightModes { get; }
+        private LightmapBakeType[] unusableSpotLightModes 
+        {
+            get
+            {
+                return new LightmapBakeType[] { };
+            }
+        }
 
-        protected abstract int AreaLightUsesLimit { get; }
+        private int AreaLightUsesLimit 
+        {
+            get
+            {
+                return 3;
+            }
+        }
 
-        protected abstract int ChairPrefabUsesLimit { get; }
+        private int ChairPrefabUsesLimit 
+        {
+            get
+            {
+                return 1;
+            }
+        }
 
-        protected abstract int PickupObjectSyncUsesLimit { get; }
+        private int PickupObjectSyncUsesLimit 
+        {
+            get
+            {
+                return 5;
+            }
+        }
 
     }
 }

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -11,7 +10,7 @@ using Object = UnityEngine.Object;
 
 namespace VitDeck.Validator
 {
-    public class VketTargetFinder : IValidationTargetFinder
+    public class VRCSampleTargetFinder : IValidationTargetFinder
     {
         bool finded = false;
 
