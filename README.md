@@ -86,6 +86,6 @@ namespace VitDeck.Validator
 - Unity 2017.4.28f1
 
 # License
-Copyright (c) 2019 VitDeck
+Copyright (c) 2019-2021 VitDeck
 
 Released under the MIT license.
