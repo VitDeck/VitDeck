@@ -40,7 +40,7 @@ subst Z: .
 echo Export unitypackage
 %UNITY_PATH%^
  -exportPackage %VITDECK_ROOT% %PACKAGE_NAME%^
- -projectPath "%~dp0"^
+ -projectPath "Z:\"^
  -batchmode^
  -nographics^
  -logfile %LOG_FILE%^
