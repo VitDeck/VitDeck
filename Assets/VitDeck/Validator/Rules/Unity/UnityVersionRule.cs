@@ -15,7 +15,7 @@ namespace VitDeck.Validator
         /// <param name="name">ルール名</param>
         /// <param name="version">Unityのバージョン</param>
         /// <remarks>`UnityEngine.Application.unityVersion`で取得した値と`version`で指定した値が同一か検証する。</remarks>
-        public UnityVersionRule(string name, string version = "2017.4.28f1") : base(name)
+        public UnityVersionRule(string name, string version = "2018.4.20f1") : base(name)
         {
             this.version = version;
         }

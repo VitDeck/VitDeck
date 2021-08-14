@@ -12,7 +12,7 @@ namespace VitDeck.Validator
         [Validation(order = -1)]
         public IRule rule1 = new SampleRule("サンプルメッセージ");
         [Validation]
-        public IRule unityVersionRule = new UnityVersionRule("[U01]Unityバージョンルール", "2017.4.28f1");
+        public IRule unityVersionRule = new UnityVersionRule("[U01]Unityバージョンルール", "2018.4.20f1");
         [Validation]
         public IRule assetNamingRule = new AssetNamingRule("[A01]アセット名の使用禁止文字ルール", @"[a-zA-Z0-9 _\.\-]+");
         [Validation]
