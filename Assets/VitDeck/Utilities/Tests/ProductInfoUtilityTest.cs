@@ -8,7 +8,7 @@ namespace VitDeck.Utilities.Tests
         public void TestGetVersion()
         {
             var version = ProductInfoUtility.GetVersion();
-            Assert.That(version, Is.EqualTo("1.0.1"));
+            Assert.That(version, Is.EqualTo("1.1.0"));
         }
         [Test]
         public void TestGetDeveloperLinkTitle()
