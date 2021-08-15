@@ -1,0 +1,16 @@
+{
+    "name": "VitDeck.Main.ValidatedExporter.GUI",
+    "references": [
+        "VitDeck.Main",
+        "VitDeck.Utilities",
+        "VitDeck.Exporter",
+        "VitDeck.Validator.Components",
+        "VitDeck.Validator",
+        "VitDeck.Main.ValidatedExporter",
+        "VitDeck.Language"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

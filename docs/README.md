@@ -55,7 +55,7 @@ namespace VitDeck.Validator
             get { return "サンプルルールセット"; }
         }
         [Validation]
-        public IRule unityVersionRule = new UnityVersionRule("[U01]Unityバージョンルール", "2017.4.28f1");
+        public IRule unityVersionRule = new UnityVersionRule("[U01]Unityバージョンルール", "2018.4.20f1");
         [Validation]
         public IRule assetNamingRule = new AssetNamingRule("[A01]アセット名の使用禁止文字ルール", @"[a-zA-Z0-9 _\.\-]+");
         [Validation]
@@ -83,9 +83,9 @@ namespace VitDeck.Validator
 # 動作環境
 以下の環境でテストしています。
 - Windows 10
-- Unity 2017.4.28f1
+- Unity 2018.4.20f1
 
 # License
-Copyright (c) 2019 VitDeck
+Copyright (c) 2019-2021 VitDeck
 
 Released under the MIT license.

@@ -1,65 +1,64 @@
 setlocal
-set BAT_LOG=%~dp0release.log
-echo Build VitDeck release files. > "%BAT_LOG%" 2>&1
-echo %date% %time% >> "%BAT_LOG%" 2>&1
+echo Build VitDeck release files.
+echo %date% %time%
 if "%1"=="" (
  set /p VERSION="input VERSION:"
 ) else (
  set  VERSION=%1
 )
-echo VERSION: %VERSION% >> "%BAT_LOG%" 2>&1
-set UNITY_PATH="C:\Program Files\Unity\Hub\Editor\2017.4.28f1\Editor\Unity.exe"
+echo VERSION: %VERSION%
+set UNITY_PATH="C:\Program Files\Unity\Hub\Editor\2018.4.20f1\Editor\Unity.exe"
 set LOG_FILE="release-unity.log"
 set PACKAGE_NAME="VitDeck-%VERSION%.unitypackage"
 set RELEASE_INFO_JSON="latest.json"
 set VITDECK_ROOT=Assets\VitDeck
 set RELEASE_PATH=Release\VitDeck
 
-echo Remove Test folder >> "%BAT_LOG%" 2>&1
-call :DelFolder "VitDeck\%VITDECK_ROOT%\AssetGuardian\Tests" "%BAT_LOG%"
-call :DelFolder "VitDeck\%VITDECK_ROOT%\Exporter\Tests" "%BAT_LOG%"
-call :DelFolder "VitDeck\%VITDECK_ROOT%\Main\ValidatedExporter\Tests" "%BAT_LOG%"
-call :DelFolder "VitDeck\%VITDECK_ROOT%\Main\Tests" "%BAT_LOG%"
-call :DelFolder "VitDeck\%VITDECK_ROOT%\TemplateLoader\Tests" "%BAT_LOG%"
-call :DelFolder "VitDeck\%VITDECK_ROOT%\Utilities\Tests" "%BAT_LOG%"
-call :DelFolder "VitDeck\%VITDECK_ROOT%\Validator\Tests" "%BAT_LOG%"
-call :DelFolder "VitDeck\%VITDECK_ROOT%\TestUtilities" "%BAT_LOG%"
+echo Remove Test folder
+call :DelFolder "%VITDECK_ROOT%\AssetGuardian\Tests" "%BAT_LOG%"
+call :DelFolder "%VITDECK_ROOT%\Exporter\Tests" "%BAT_LOG%"
+call :DelFolder "%VITDECK_ROOT%\Main\ValidatedExporter\Tests" "%BAT_LOG%"
+call :DelFolder "%VITDECK_ROOT%\Main\Tests" "%BAT_LOG%"
+call :DelFolder "%VITDECK_ROOT%\TemplateLoader\Tests" "%BAT_LOG%"
+call :DelFolder "%VITDECK_ROOT%\Utilities\Tests" "%BAT_LOG%"
+call :DelFolder "%VITDECK_ROOT%\Validator\Tests" "%BAT_LOG%"
+call :DelFolder "%VITDECK_ROOT%\TestUtilities" "%BAT_LOG%"
 
-echo Delete UserSettings.asset >> "%BAT_LOG%" 2>&1
-del /s /q "VitDeck\%VITDECK_ROOT%\Config\UserSettings.asset"
+echo Delete UserSettings.asset
+del /s /q "%VITDECK_ROOT%\Config\UserSettings.asset"
 
-echo Copy documents >> "%BAT_LOG%" 2>&1
-copy /Y LICENSE VitDeck\%VITDECK_ROOT%\LICENSE.txt >> "%BAT_LOG%" 2>&1
-copy /Y releaseAssets\LICENSE.txt.meta VitDeck\%VITDECK_ROOT%\LICENSE.txt.meta >> "%BAT_LOG%" 2>&1
-copy /Y README.md VitDeck\%VITDECK_ROOT%\README.txt >> "%BAT_LOG%" 2>&1
-copy /Y releaseAssets\README.txt.meta VitDeck\%VITDECK_ROOT%\README.txt.meta >> "%BAT_LOG%" 2>&1
+echo Copy documents
+copy /Y LICENSE "%VITDECK_ROOT%\LICENSE.txt"
+copy /Y releaseAssets\LICENSE.txt.meta "%VITDECK_ROOT%\LICENSE.txt.meta"
+copy /Y README.md "%VITDECK_ROOT%\README.txt"
+copy /Y releaseAssets\README.txt.meta "%VITDECK_ROOT%\README.txt.meta"
 
 
-echo Mount >> "%BAT_LOG%" 2>&1
-subst Z: . >> "%BAT_LOG%" 2>&1
+echo Mount
+subst Z: .
 
-echo Export unitypackage >> "%BAT_LOG%" 2>&1
+echo Export unitypackage
 %UNITY_PATH%^
  -exportPackage %VITDECK_ROOT% %PACKAGE_NAME%^
- -projectPath "Z:\VitDeck"^
+ -projectPath "Z:\"^
  -batchmode^
  -nographics^
  -logfile %LOG_FILE%^
  -quit
 
-echo Generate json file >> "%BAT_LOG%" 2>&1
+echo Generate json file
 echo { > %RELEASE_INFO_JSON% 2>&1
 echo  "version": "%VERSION%", >> %RELEASE_INFO_JSON% 2>&1
 echo  "package_name": "VitDeck-%VERSION%.unitypackage", >> %RELEASE_INFO_JSON% 2>&1
 echo  "download_url": "https://github.com/vitdeck/VitDeck/releases/download/%VERSION%/VitDeck-%VERSION%.unitypackage" >> %RELEASE_INFO_JSON% 2>&1
 echo } >> %RELEASE_INFO_JSON% 2>&1
 
-echo Move to Release folder >> "%BAT_LOG%" 2>&1
-mkdir %RELEASE_PATH% >> "%BAT_LOG%" 2>&1
-move .\VitDeck\%PACKAGE_NAME% %RELEASE_PATH% >> "%BAT_LOG%" 2>&1
-move %RELEASE_INFO_JSON% %RELEASE_PATH% >> "%BAT_LOG%" 2>&1
+echo Move to Release folder
+mkdir %RELEASE_PATH%
+move %PACKAGE_NAME% %RELEASE_PATH%
+move %RELEASE_INFO_JSON% %RELEASE_PATH%
 
-echo Unmount >> "%BAT_LOG%" 2>&1
+echo Unmount
 subst Z: /D
 
 exit /b
