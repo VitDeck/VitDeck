@@ -28,15 +28,13 @@ namespace VitDeck.AssetGuardian
         /// <param name="asset">対象のアセット</param>
         public static void Restore(Object asset)
         {
-            var path = AssetDatabase.GetAssetPath(asset);
-            var mainAsset = AssetDatabase.LoadMainAssetAtPath(path);
-            var detail = AssetTypeIdentifier.Of(mainAsset);
+            var detail = AssetTypeIdentifier.Of(asset);
 
             IRestorer tool;
             if (!restoreTools.TryGetValue(detail, out tool))
                 tool = defaultRestorer;
-
-            tool.Restore(mainAsset);
+            
+            tool.Restore(asset);
         }
 
         private static void RegisterAll()
@@ -77,6 +75,17 @@ namespace VitDeck.AssetGuardian
             restoreTools.Add(
                 new AssetTypeIdentifier(typeof(UnityEngine.Video.VideoClip)),
                 new SimpleRestorer(HideFlags.NotEditable));
+            #if UNITY_2019_4_OR_NEWER
+            restoreTools.Add(
+                new AssetTypeIdentifier(typeof(UnityEngine.Cubemap)),
+                new SimpleRestorer(HideFlags.NotEditable));
+            restoreTools.Add(
+                new AssetTypeIdentifier(typeof(UnityEngine.Texture2D)),
+                new SimpleRestorer(HideFlags.NotEditable));
+            restoreTools.Add(
+                new AssetTypeIdentifier(typeof(UnityEngine.Sprite)),
+                new SimpleRestorer(HideFlags.None, HideFlags.NotEditable));
+            #endif
         }
 
         private interface IRestorer
