@@ -75,7 +75,7 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(gameObject, IssueLevel.Error, message, solution, solutionURL));
                 }
 
-                if ((flag & StaticEditorFlags.LightmapStatic) != 0)
+                if ((flag & StaticEditorFlags.ContributeGI) != 0)
                 {
                     foreach (var filter in gameObject.GetComponents<MeshFilter>())
                     {

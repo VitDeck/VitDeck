@@ -34,7 +34,7 @@ namespace VitDeck.Validator
 
         private static bool IsLightmapStatic(StaticEditorFlags flags)
         {
-            return (flags & StaticEditorFlags.LightmapStatic) == StaticEditorFlags.LightmapStatic;
+            return (flags & StaticEditorFlags.ContributeGI) == StaticEditorFlags.ContributeGI;
         }
     }
 }

@@ -56,7 +56,7 @@ namespace VitDeck.Validator
             }
 
             var objStaticFlags = GameObjectUtility.GetStaticEditorFlags(obj);
-            if ((objStaticFlags & StaticEditorFlags.LightmapStatic) != StaticEditorFlags.LightmapStatic)
+            if ((objStaticFlags & StaticEditorFlags.ContributeGI) != StaticEditorFlags.ContributeGI)
             {
                 return false;
             }
