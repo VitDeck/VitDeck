@@ -18,14 +18,6 @@ namespace VitDeck.Validator
                     IssueLevel.Error,
                     LocalizedMessage.Get("SkinnedMeshRendererRule.MustTurnOffUpdateWhenOffscreen")));
             }
-
-            if (component.sharedMaterials.Length == 0)
-            {
-                AddIssue(new Issue(
-                       component,
-                       IssueLevel.Error,
-                       LocalizedMessage.Get("SkinnedMeshRendererRule.MustAttachMaterial")));
-            }
         }
 
         protected override void HasComponentObjectLogic(GameObject hasComponentObject)

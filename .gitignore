@@ -39,6 +39,8 @@ sysinfo.txt
 # Templates assets
 Assets/VitDeck/Config/UserSettings.asset
 Assets/VitDeck/Config/UserSettings.asset.meta
+Assets/VitDeck/Config/PlacementSettings.asset
+Assets/VitDeck/Config/PlacementSettings.asset.meta
 
 #Template loader temporary folder
 Assets/VitDeck/Temporary*
@@ -48,7 +50,12 @@ Assets/VitDeck/Temporary*
 Assets/Plugins/Editor/JetBrains*
 
 #VRChat SDK2
-Assets/VRCSDK*
+Assets/VRCSDK/*
+!Assets/VRCSDK/Dependencies
+!Assets/VRCSDK/Dependencies.meta
+Assets/VRCSDK/Dependencies/*
+!Assets/VRCSDK/Dependencies/SharpZipLib
+!Assets/VRCSDK/Dependencies/SharpZipLib.meta
 Assets/VRChat Examples*
 
 # Base folder

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -90,7 +91,7 @@ namespace VitDeck.Main.ValidatedExporter.GUI
 
         private void LoadSettings()
         {
-            var userSettings = UserSettingUtility.GetUserSettings();
+            var userSettings = SettingUtility.GetSettings<UserSettings>();
             baseFolder = AssetDatabase.LoadAssetAtPath<DefaultAsset>(userSettings.validatorFolderPath);
             var settings = Settings.Where(a => a.name == userSettings.exporterSettingFileName);
             if (settings.Count() > 0)
@@ -101,13 +102,13 @@ namespace VitDeck.Main.ValidatedExporter.GUI
 
         private void SaveSettings()
         {
-            var userSettings = UserSettingUtility.GetUserSettings();
+            var userSettings = SettingUtility.GetSettings<UserSettings>();
             if (selectedSetting != null)
             {
                 userSettings.exporterSettingFileName = selectedSetting.name;
             }
             userSettings.validatorFolderPath = AssetDatabase.GetAssetPath(baseFolder);
-            UserSettingUtility.SaveUserSettings(userSettings);
+            SettingUtility.SaveSettings(userSettings);
         }
 
         private void OnGUI()
@@ -134,14 +135,15 @@ namespace VitDeck.Main.ValidatedExporter.GUI
                 GUILayout.TextArea(selectedSetting.Description);
             }
             //ForceExportCheck
-            if (result != null && !result.IsExportSuccess)
+            if (result != null && !result.IsExportSuccess
+                && selectedSetting != null && selectedSetting.AllowForceExport)
                 forceExport = GUILayout.Toggle(forceExport, LocalizedMessage.Get("ValidatedExporterWindow.ForceExport"));
             //Export button
             EditorGUI.BeginDisabledGroup(selectedSetting == null || baseFolder == null);
 
             if (GUILayout.Button("Export"))
             {
-                OnExport();
+                UnityEditorUtility.StartCoroutine(OnExport());
             }
 
             EditorGUI.EndDisabledGroup();
@@ -170,15 +172,21 @@ namespace VitDeck.Main.ValidatedExporter.GUI
             return index;
         }
 
-        private void OnExport()
+        private IEnumerator OnExport()
         {
             if (selectedSetting == null)
-                return;
+                yield break;
             ClearLogs();
             SaveSettings();
+            GUIUtilities.OpenPackageScene(AssetUtility.GetId(baseFolder));
             OutLog("Start exporting with validation.");
             var baseFolderPath = AssetDatabase.GetAssetPath(baseFolder);
-            result = ValidatedExporter.ValidatedExport(baseFolderPath, selectedSetting, forceExport);
+            var resultEnumerator = ValidatedExporter.ValidatedExport(baseFolderPath, selectedSetting, forceExport);
+            while (resultEnumerator.MoveNext())
+            {
+                yield return null;
+            }
+            result = (ValidatedExportResult)resultEnumerator.Current;
             AssetDatabase.Refresh();
             var header = string.Format("- version:{0}", ProductInfoUtility.GetVersion()) + Environment.NewLine;
             header += string.Format("- Rule set:{0}", selectedSetting.SettingName) + Environment.NewLine;

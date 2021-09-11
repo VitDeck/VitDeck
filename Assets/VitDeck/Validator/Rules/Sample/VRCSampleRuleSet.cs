@@ -298,6 +298,7 @@ namespace VitDeck.Validator
             {
             return new LightConfigRule.LightConfig(
                 new[] { LightmapBakeType.Baked, LightmapBakeType.Realtime },
+                new[] { LightShadows.Hard, LightShadows.Soft },
                 0, 7,
                 0, 10,
                 0, 15);
@@ -310,6 +311,7 @@ namespace VitDeck.Validator
             {
                 return new LightConfigRule.LightConfig(
                     new[] { LightmapBakeType.Baked, LightmapBakeType.Realtime },
+                    new[] { LightShadows.Hard, LightShadows.Soft },
                     0, 7,
                     0, 10,
                     0, 15);
@@ -322,6 +324,7 @@ namespace VitDeck.Validator
             {
                 return new LightConfigRule.LightConfig(
                     new[] { LightmapBakeType.Baked },
+                    null,
                     0, 30,
                     0, 10,
                     0, 15);

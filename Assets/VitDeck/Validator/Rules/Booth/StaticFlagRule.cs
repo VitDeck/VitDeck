@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 using VitDeck.Language;
@@ -20,26 +22,35 @@ namespace VitDeck.Validator
 
             foreach(var rootObject in rootObjects)
             {
+                LogicForDynamicObjects(new[] { rootObject });
+
                 var staticRoot = rootObject.transform.Find("Static");
-                if (staticRoot == null)
+                if (staticRoot != null)
                 {
-                    continue;
+                    LogicForStaticObjects(GetGameObjectsInChildren(staticRoot));
                 }
 
-                LogicForStaticRoot(staticRoot);
+                var dynamicRoot = rootObject.transform.Find("Dynamic");
+                if (dynamicRoot != null)
+                {
+                    LogicForDynamicObjects(GetGameObjectsInChildren(dynamicRoot));
+                }
             }
         }
 
-        private void LogicForStaticRoot(Transform staticRoot)
+        private IEnumerable<GameObject> GetGameObjectsInChildren(Transform transform)
         {
-            var children = staticRoot.GetComponentsInChildren<Transform>(true);
+            return transform.GetComponentsInChildren<Transform>(includeInactive: true)
+                .Select(t => t.gameObject);
+        }
 
-            foreach(var child in children)
+        private void LogicForStaticObjects(IEnumerable<GameObject> gameObjects)
+        {
+            foreach (var gameObject in gameObjects)
             {
-                var gameObject = child.gameObject;
-                var flag = GameObjectUtility.GetStaticEditorFlags(child.gameObject);
+                var flag = GameObjectUtility.GetStaticEditorFlags(gameObject);
 
-                if((flag & StaticEditorFlags.OccludeeStatic) == 0)
+                if ((flag & StaticEditorFlags.OccludeeStatic) == 0)
                 {
                     AddIssue(new Issue(
                         gameObject,
@@ -65,13 +76,13 @@ namespace VitDeck.Validator
                         LocalizedMessage.Get("StaticFlagRule.BatchingStaticNotSet"),
                         LocalizedMessage.Get("StaticFlagRule.BatchingStaticNotSet.Solution")));
                 }
-                
+
                 if ((flag & StaticEditorFlags.OccluderStatic) != 0)
                 {
                     var message = LocalizedMessage.Get("StaticFlagRule.OccluderStaticNotAllowed");
                     var solution = LocalizedMessage.Get("StaticFlagRule.OccluderStaticNotAllowed.Solution");
                     var solutionURL = LocalizedMessage.Get("StaticFlagRule.OccluderStaticNotAllowed.SolutionURL");
-                    
+
                     AddIssue(new Issue(gameObject, IssueLevel.Error, message, solution, solutionURL));
                 }
 
@@ -79,13 +90,13 @@ namespace VitDeck.Validator
                 {
                     foreach (var filter in gameObject.GetComponents<MeshFilter>())
                     {
-                        if (filter == null) 
+                        if (filter == null)
                             continue;
-                            
+
                         var mesh = filter.sharedMesh;
                         if (mesh == null) // メッシュが設定されていない場合はチェック対象外
                             continue;
-                            
+
                         if (mesh.uv2.Length != 0) // uv2があればLightmapとして利用できる為問題なし
                             continue;
 
@@ -95,7 +106,7 @@ namespace VitDeck.Validator
                             AddIssueForIndependentMeshWithoutUV2(filter);
                             continue;
                         }
-                            
+
                         var importer = AssetImporter.GetAtPath(assetPath) as ModelImporter;
                         if (importer == null) // 対象のメッシュのimporterがない（モデルインポートでないメッシュアセット）
                         {
@@ -108,10 +119,27 @@ namespace VitDeck.Validator
                             var message = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap");
                             var solution = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.Solution");
                             var solutionURL = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.SolutionURL");
-                        
+
                             AddIssue(new Issue(filter, IssueLevel.Warning, message, solution, solutionURL));
                         }
                     }
+                }
+            }
+        }
+
+        private void LogicForDynamicObjects(IEnumerable<GameObject> gameObjects)
+        {
+            foreach (var gameObject in gameObjects)
+            {
+                var flag = GameObjectUtility.GetStaticEditorFlags(gameObject);
+
+                if (flag != 0)
+                {
+                    AddIssue(new Issue(
+                        gameObject,
+                        IssueLevel.Error,
+                        LocalizedMessage.Get("StaticFlagRule.StaticNotAllowed"),
+                        LocalizedMessage.Get("StaticFlagRule.StaticNotAllowed.Solution")));
                 }
             }
         }

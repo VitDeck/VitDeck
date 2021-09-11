@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -20,8 +21,9 @@ namespace VitDeck.Exporter
         /// <param name="baseFolderPath">ベースフォルダパス</param>
         /// <param name="setting">エクスポートに使用する設定</param>
         /// <param name="forceExport">ファイルが既に存在していた場合に上書きするかどうか</param>
+        /// <param name="allowedExtensions">「.」で始まる小文字の拡張子リスト。ここに含まれる拡張子のみをunitypackageへ含める。null の場合はすべてのファイルをunitypackageへ含める</param>
         /// <returns>エクスポート結果</returns>
-        public static ExportResult Export(string baseFolderPath, ExportSetting setting, bool forceExport = false)
+        public static ExportResult Export(string baseFolderPath, ExportSetting setting, bool forceExport = false, IEnumerable<string> allowedExtensions = null)
         {
             if (setting == null)
                 throw new ArgumentNullException("Argument `setting` is null.");
@@ -42,6 +44,29 @@ namespace VitDeck.Exporter
             //export
             Debug.Log(string.Format("Export base folder:{0} export file:{1}", baseFolderPath, outputPath));
             var assetPaths = GetExportAssetPaths(baseFolderPath);
+            if (allowedExtensions != null)
+            {
+                var forbiddenPaths = new List<string>();
+                assetPaths = assetPaths.Where(path =>
+                {
+                    if (AssetDatabase.IsValidFolder(path) || allowedExtensions.Contains(Path.GetExtension(path).ToLower()))
+                    {
+                        return true;
+                    }
+
+                    forbiddenPaths.Add(path);
+                    
+                    return false;
+                }).ToArray();
+
+                if (forbiddenPaths.Count > 0)
+                {
+                    var forbiddenPathList = "# " + LocalizedMessage.Get("AllowedExtensionsForExportRule.ForbiddenPaths") + System.Environment.NewLine
+                        + String.Join(System.Environment.NewLine, forbiddenPaths);
+                    Debug.Log(forbiddenPathList);
+                    result.log += forbiddenPathList + System.Environment.NewLine;
+                }
+            }
             var assetList = "# " + LocalizedMessage.Get("Exporter.TargetAsset") + System.Environment.NewLine + String.Join(System.Environment.NewLine, assetPaths);
             Debug.Log(assetList);
             result.log += assetList + System.Environment.NewLine;

@@ -30,7 +30,7 @@ namespace VitDeck.PerformanceCalculator
         private IEnumerator coroutine;
 
 #if !VITDECK_HIDE_MENUITEM
-        [MenuItem(prefix + "Calculate Peformance", priority = 103)]
+        [MenuItem(prefix + "Calculate Performance", priority = 103)]
 #endif
         public static void Open()
         {
@@ -43,18 +43,12 @@ namespace VitDeck.PerformanceCalculator
             this.baseFolder = (DefaultAsset)EditorGUILayout.ObjectField("Base Folder", this.baseFolder, typeof(DefaultAsset), allowSceneObjects: false);
             this.spaceSize = (Calculator.SpaceSize)EditorGUILayout.EnumPopup("Space Size", this.spaceSize);
             EditorGUI.BeginDisabledGroup(this.baseFolder == null);
-                if (GUILayout.Button("Calculate Peformance"))
-                {
-                    this.SaveSettings();
-
-                    if (!AssetUtility.OpenScene(this.baseFolder))
-                    {
-                        EditorUtility.DisplayDialog("VitDeck", LocalizedMessage.Get("VketTargetFinder.SceneNotFound", AssetUtility.GetScenePath(this.baseFolder)), "OK");
-                        return;
-                    }
-
-                    this.Calculate();
-                }
+            if (GUILayout.Button("Calculate Performance"))
+            {
+                this.SaveSettings();
+                GUIUtilities.OpenPackageScene(AssetUtility.GetId(this.baseFolder));
+                this.Calculate();
+            }
             EditorGUI.EndDisabledGroup();
         }
 
@@ -92,7 +86,7 @@ namespace VitDeck.PerformanceCalculator
         /// </summary>
         private void LoadSettings()
         {
-            var userSettings = UserSettingUtility.GetUserSettings();
+            var userSettings = SettingUtility.GetSettings<UserSettings>();
             this.baseFolder = AssetDatabase.LoadAssetAtPath<DefaultAsset>(userSettings.validatorFolderPath);
         }
 
@@ -101,9 +95,9 @@ namespace VitDeck.PerformanceCalculator
         /// </summary>
         private void SaveSettings()
         {
-            var userSettings = UserSettingUtility.GetUserSettings();
+            var userSettings = SettingUtility.GetSettings<UserSettings>();
             userSettings.validatorFolderPath = AssetDatabase.GetAssetPath(this.baseFolder);
-            UserSettingUtility.SaveUserSettings(userSettings);
+            SettingUtility.SaveSettings(userSettings);
         }
 
         private async void Calculate()

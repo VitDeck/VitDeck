@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Original:
  * Simple CSV Parser for C# without any dependency. 
  *
@@ -8,10 +8,11 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace VitDeck.Language
+namespace VitDeck.Utilities
 {
     public static class CSVParser
     {
@@ -48,6 +49,19 @@ namespace VitDeck.Language
         public static List<List<string>> LoadFromString(string data, Delimiter delimiter = Delimiter.Comma)
         {
             return Parse(data, delimiter);
+        }
+
+        /// <summary>
+        /// CSVの1行目をヘッダとし、各行を連想配列で返します。
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="delimiter"></param>
+        /// <returns></returns>
+        public static IEnumerable<IDictionary<string, string>> LoadFromStringWithHeader(string data, Delimiter delimiter = Delimiter.Comma)
+        {
+            var fieldsList = Parse(data, delimiter);
+            var header = fieldsList.First();
+            return fieldsList.Skip(1).Select(fields => header.Zip(fields, (name, value) => (name, value)).ToDictionary(item => item.name, item => item.value));
         }
 
         static List<List<string>> Parse(string data, Delimiter delimiter)

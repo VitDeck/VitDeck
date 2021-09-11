@@ -73,7 +73,7 @@ MonoBehaviour:
     Value: All Static and Dynamic objects must be parented to Gameobjects named Static
       and Dynamic respectively
   - Key: VketRuleSetBase.StaticFlagsRule.Title
-    Value: Every child object inside Static must be set to static
+    Value: Each objects must be set to the specific static settings
   - Key: VketRuleSetBase.BoothBoundsRule.Title
     Value: Please keep the booth size under the allocated space
   - Key: VketRuleSetBase.MaterialLimitRule.Title
@@ -237,6 +237,10 @@ MonoBehaviour:
     Value: 
   - Key: StaticFlagRule.OccluderStaticNotAllowed.SolutionURL
     Value: 
+  - Key: StaticFlagRule.StaticNotAllowed
+    Value: Static settings are enabled
+  - Key: StaticFlagRule.StaticNotAllowed.Solution
+    Value: Please disable Static settings.
   - Key: BoothBoundsRule.Exceeded
     Value: Object exceeded the booth size limit by {0}. Size limit={1}, Target size={2},  Object
       type={3}
@@ -452,6 +456,12 @@ MonoBehaviour:
     Value: Issues found while rule checking.
   - Key: ValidatedExporter.SkipValidation
     Value: Undefined ruleset, skipping validation.
+  - Key: ValidatedExporter.ProblemOccurredWhileBuildSizeCheck
+    Value: Unexpected error occured during build size check.
+  - Key: ValidatedExporter.MaxBuildSize
+    Value: Keep the build size within {0}.
+  - Key: ValidatedExporter.SkipBuildSizeCheck
+    Value: Undefined build size, skipping build size check.
   - Key: ValidatedExporter.Failed
     Value: Failed to export.
   - Key: ExistInSubmitFolderRule.AssetOutOfPackage
@@ -495,6 +505,10 @@ MonoBehaviour:
     Value: '{0} Light must be set to {1} mode. Current mode: {2}'
   - Key: LightConfigRule.UnauthorizedLightMode.Solution
     Value: Set the light Mode to {0}
+  - Key: LightConfigRule.UnauthorizedShadowTypes
+    Value: '{0} Light must be set to {1} shadow. Current mode: {2}'
+  - Key: LightConfigRule.UnauthorizedShadowTypes.Solution
+    Value: Set the Shadow to {0}
   - Key: LightConfigRule.OverRange
     Value: '{0} Light''s Range value has exceeded the allowed range of {1}~{2}. Current
       value {3}'
@@ -510,6 +524,10 @@ MonoBehaviour:
       of {1}~{2}. Current value {3}'
   - Key: LightConfigRule.OverIndirectMultiplier.Solution
     Value: Set the Indirect Multiplier value to within the allowed range.
+  - Key: VketRuleSetBase.RendererRule.Title
+    Value: Please follow the SkinnedMeshRenderer or MeshRenderer's usage rules.
+  - Key: RendererRule.MustAttachMaterial
+    Value: SkinnedMeshRenderers / MeshRenderers must have at least 1 material assigned.
   - Key: VketRuleSetBase.SkinnedMeshRendererRule.Title
     Value: Please follow the SkinnedMeshRenderer's usage rules.
   - Key: VketRuleSetBase.MeshRendererRule.Title
@@ -518,8 +536,6 @@ MonoBehaviour:
     Value: Please follow the ReflectionProbe's usage rules.
   - Key: SkinnedMeshRendererRule.MustTurnOffUpdateWhenOffscreen
     Value: UpdateWhenOffscreen must be set to off.
-  - Key: SkinnedMeshRendererRule.MustAttachMaterial
-    Value: SkinnedMeshRenderers must have at least 1 material assigned.
   - Key: MeshRendererRule.StaticMeshMustPutInEnvironmentLayer
     Value: LightmapStatic MeshRenderers must be assigned the Environment Layer.
   - Key: ReflectionProbeRule.MustUseCustomTexture
@@ -652,3 +668,7 @@ MonoBehaviour:
     Value: UdonBehaviour [AutoResetPickup] must set Synchronize Position is True.
   - Key: VRCPickupUdonBehaviourRule.SynchronizePositionFalse.Solution
     Value: Check UdonBehaviour property Synchronize Position is True.
+  - Key: AllowedExtensionsForExportRule.Title
+    Value: Extensions
+  - Key: AllowedExtensionsForExportRule.ForbiddenPaths
+    Value: 'The following files will not be exported:'

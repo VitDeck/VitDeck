@@ -75,7 +75,7 @@ namespace VitDeck.Validator.GUI
 
         private void LoadSettings()
         {
-            var userSettings = UserSettingUtility.GetUserSettings();
+            var userSettings = SettingUtility.GetSettings<UserSettings>();
             baseFolder = AssetDatabase.LoadAssetAtPath<DefaultAsset>(userSettings.validatorFolderPath);
             var ruleSets = RuleSets.Where(a => a.GetType().Name == userSettings.validatorRuleSetType);
             if (ruleSets.Count() > 0)
@@ -86,13 +86,13 @@ namespace VitDeck.Validator.GUI
 
         private void SaveSettings()
         {
-            var userSettings = UserSettingUtility.GetUserSettings();
+            var userSettings = SettingUtility.GetSettings<UserSettings>();
             userSettings.validatorFolderPath = AssetDatabase.GetAssetPath(baseFolder);
             if (selectedRuleSet != null)
             {
                 userSettings.validatorRuleSetType = selectedRuleSet.GetType().Name;
             }
-            UserSettingUtility.SaveUserSettings(userSettings);
+            SettingUtility.SaveSettings(userSettings);
         }
 
         private void OnGUI()
