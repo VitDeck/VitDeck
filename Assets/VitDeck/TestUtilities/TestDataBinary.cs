@@ -12,7 +12,7 @@ namespace VitDeck.TestUtilities
 
         public static void WriteAudio(string path)
         {
-            var dataGUID = AssetDatabase.FindAssets(testDataSearchFilter + "Test Audio").FirstOrDefault();
+            var dataGUID = AssetDatabase.FindAssets(testDataSearchFilter + "Test Audio t:AudioClip").FirstOrDefault();
             var dataPath = AssetDatabase.GUIDToAssetPath(dataGUID);
             System.IO.File.Copy(dataPath, path);
         }
