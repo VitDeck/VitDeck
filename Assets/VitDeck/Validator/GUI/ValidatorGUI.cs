@@ -63,7 +63,10 @@ namespace VitDeck.Validator.GUI
             window.Show();
         }
 
-        [InitializeOnLoadMethod]
+        private void OnEnable()
+        {
+            Init();
+        }
         private void Init()
         {
             validationLog = "";
