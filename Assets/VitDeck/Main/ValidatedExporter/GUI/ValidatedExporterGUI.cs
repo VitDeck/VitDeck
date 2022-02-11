@@ -76,7 +76,11 @@ namespace VitDeck.Main.ValidatedExporter.GUI
             window.Show();
         }
 
-        [InitializeOnLoadMethod]
+        private void OnEnable()
+        {
+            Init();
+        }
+
         private void Init()
         {
             settings = null;
