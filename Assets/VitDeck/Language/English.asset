@@ -538,8 +538,9 @@ MonoBehaviour:
     Value: UpdateWhenOffscreen must be set to off.
   - Key: MeshRendererRule.StaticMeshMustPutInEnvironmentLayer
     Value: LightmapStatic MeshRenderers must be assigned the Environment Layer.
-  - Key: ReflectionProbeRule.MustUseCustomTexture
-    Value: Please set ReflectionProbe's Type to Custom.
+  - Key: ReflectionProbeRule.UnauthorizedType
+    Value: 'ReflectionProbe''s Type {1} is not supported. It must be set to one of
+      the following: [{0}]'
   - Key: VketRuleSetBase.RigidbodyRule.Title
     Value: Rigidbody parameters must meet the allowed values
   - Key: RigidbodyRule.UseIsKinematic

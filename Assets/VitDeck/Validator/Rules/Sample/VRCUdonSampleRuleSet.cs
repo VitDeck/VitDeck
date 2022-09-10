@@ -1,5 +1,6 @@
 #if VRC_SDK_VRCSDK3
 using UnityEngine;
+using UnityEngine.Rendering;
 using VitDeck.Language;
 using VRC.SDKBase;
 using VRC.Udon;
@@ -95,7 +96,7 @@ namespace VitDeck.Validator
 
                 new MeshRendererRule(LocalizedMessage.Get("VketRuleSetBase.MeshRendererRule.Title")),
 
-                new ReflectionProbeRule(LocalizedMessage.Get("VketRuleSetBase.ReflectionProbeRule.Title")),
+                new ReflectionProbeRule(LocalizedMessage.Get("VketRuleSetBase.ReflectionProbeRule.Title"), new[]{ ReflectionProbeMode.Custom }),
 
                 new UseMeshColliderRule(LocalizedMessage.Get("VketRuleSetBase.UseMeshColliderRule.Title")),
 
