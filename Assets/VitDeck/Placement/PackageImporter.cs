@@ -47,13 +47,13 @@ namespace VitDeck.Placement
         /// <summary>
         /// 指定したパッケージをバリデート・インポートします。
         /// </summary>
-        /// <param name="id">出展者ID。</param>
         /// <param name="path">unitypackageのパス。</param>
+        /// <param name="id">出展者ID。</param>
         /// <param name="allowedExtensions">「.」を含む拡張子。</param>
         /// <exception cref="FatalValidationErrorException">許可されていない拡張子を持つアセットが存在する場合。</exception>
         /// <exception cref="FatalValidationErrorException">出展者IDのフォルダ外にアセットが存在する場合。</exception>
         /// <returns></returns>
-        public static void Import(string id, string path, IEnumerable<string> allowedExtensions)
+        public static void Import(string path, string id = null, IEnumerable<string> allowedExtensions = null)
         {
             using (var stream = File.OpenRead(path))
             {
@@ -63,20 +63,26 @@ namespace VitDeck.Placement
 
                 try
                 {
-                    var pathsWithForbiddenExtensions = GetPathsWithForbiddenExtensions(assets, allowedExtensions);
-                    if (pathsWithForbiddenExtensions.Count() > 0)
+                    if (allowedExtensions != null)
                     {
-                        throw new FatalValidationErrorException(
-                            "次のファイルは許可されていない拡張子を持っています:\n" + string.Join("\n", pathsWithForbiddenExtensions)
-                        );
+                        var pathsWithForbiddenExtensions = GetPathsWithForbiddenExtensions(assets, allowedExtensions);
+                        if (pathsWithForbiddenExtensions.Count() > 0)
+                        {
+                            throw new FatalValidationErrorException(
+                                "次のファイルは許可されていない拡張子を持っています:\n" + string.Join("\n", pathsWithForbiddenExtensions)
+                            );
+                        }
                     }
 
-                    var pathsOutOfIdFolder = GetPathsOutOfIdFolder(assets, id);
-                    if (pathsOutOfIdFolder.Count() > 0)
+                    if (id != null)
                     {
-                        throw new FatalValidationErrorException(
-                            "次のアセットは出展者IDのフォルダ外に存在します:\n" + string.Join("\n", pathsOutOfIdFolder)
-                        );
+                        var pathsOutOfIdFolder = GetPathsOutOfIdFolder(assets, id);
+                        if (pathsOutOfIdFolder.Count() > 0)
+                        {
+                            throw new FatalValidationErrorException(
+                                "次のアセットは出展者IDのフォルダ外に存在します:\n" + string.Join("\n", pathsOutOfIdFolder)
+                            );
+                        }
                     }
 
                     ReplaceAllGuids(assets);

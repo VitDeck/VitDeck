@@ -187,7 +187,7 @@ namespace VitDeck.Placement
                     // インポート
                     try
                     {
-                        PackageImporter.Import(id, path, allowedExtensions);
+                        PackageImporter.Import(path, id, allowedExtensions);
                     }
                     catch (FatalValidationErrorException exception)
                     {
