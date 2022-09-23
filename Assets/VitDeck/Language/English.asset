@@ -537,7 +537,9 @@ MonoBehaviour:
   - Key: SkinnedMeshRendererRule.MustTurnOffUpdateWhenOffscreen
     Value: UpdateWhenOffscreen must be set to off.
   - Key: MeshRendererRule.StaticMeshMustPutInEnvironmentLayer
-    Value: LightmapStatic MeshRenderers must be assigned the Environment Layer.
+    Value: Contribute GI MeshRenderers must be assigned the Environment Layer.
+  - Key: ReflectionProbeRule.MustUseCustomTexture
+    Value: Please set ReflectionProbe's Type to Custom.
   - Key: ReflectionProbeRule.UnauthorizedType
     Value: 'ReflectionProbe''s Type {1} is not supported. It must be set to one of
       the following: [{0}]'
@@ -637,9 +639,9 @@ MonoBehaviour:
   - Key: StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.SolutionURL
     Value: 
   - Key: StaticFlagRule.LightmapStaticMeshShouldHaveUV2
-    Value: Meshes using Lightmap Static must have UV2.
+    Value: Meshes using Contribute GI must have UV2.
   - Key: StaticFlagRule.LightmapStaticMeshShouldHaveUV2.Solution
-    Value: Generate UV2 , or disable Lightmap Static.
+    Value: Generate UV2 , or disable Contribute GI.
   - Key: StaticFlagRule.LightmapStaticMeshShouldHaveUV2.SolutionURL
     Value: 
   - Key: VketUdonRuleSetBase.VRCStationCountLimitRule.Title
