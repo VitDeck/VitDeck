@@ -51,6 +51,14 @@ namespace VitDeck.Placement
                 MessageType.None
             );
 
+            if (this.location == null)
+            {
+                EditorGUILayout.HelpBox(
+                    "「Location」未指定の場合、unitypackageの検査・GUID変更、インポート、インポート後のバリデーション、ビルド容量チェックを行い、自動配置を省略します。",
+                    MessageType.Info
+                );
+            }
+
             using (new EditorGUI.DisabledGroupScope(this.location == null))
             {
                 if (GUILayout.Button("シーン内の配置状態を表示"))
@@ -80,7 +88,7 @@ namespace VitDeck.Placement
                 }
             }
 
-            this.isValid = this.exportSetting != null && this.location != null;
+            this.isValid = this.exportSetting != null;
             return true;
         }
         private void OnWizardCreate()
@@ -153,17 +161,20 @@ namespace VitDeck.Placement
                 yield break;
             }
 
-            var anchorIdPairs = Placement.GetAnchorIdPairs(Placement.OpenScene(this.location));
-            var freeAnchorCount = anchorIdPairs.Values.Count(id => id == null);
-            var newPackageCount = pathIdPairs.Values.Except(anchorIdPairs.Values).Count();
-            if (newPackageCount > freeAnchorCount)
+            if (this.location != null)
             {
-                EditorUtility.DisplayDialog(
-                    "VitDeck",
-                    $"配置先が不足しています。\n\nすべての配置場所: {anchorIdPairs.Count}\n空き配置場所: {freeAnchorCount}\nすべての入稿数: {pathIdPairs.Count}\n新規入稿数: {newPackageCount}\n",
-                    "OK"
-                );
-                yield break;
+                var anchorIdPairs = Placement.GetAnchorIdPairs(Placement.OpenScene(this.location));
+                var freeAnchorCount = anchorIdPairs.Values.Count(id => id == null);
+                var newPackageCount = pathIdPairs.Values.Except(anchorIdPairs.Values).Count();
+                if (newPackageCount > freeAnchorCount)
+                {
+                    EditorUtility.DisplayDialog(
+                        "VitDeck",
+                        $"配置先が不足しています。\n\nすべての配置場所: {anchorIdPairs.Count}\n空き配置場所: {freeAnchorCount}\nすべての入稿数: {pathIdPairs.Count}\n新規入稿数: {newPackageCount}\n",
+                        "OK"
+                    );
+                    yield break;
+                }
             }
 
             var idMessagePairs = new Dictionary<string, string>();
@@ -287,10 +298,13 @@ namespace VitDeck.Placement
                     }
                 }
 
-                // 配置
-                Placement.Place(id, this.location);
+                if (this.location != null)
+                {
+                    // 配置
+                    Placement.Place(id, this.location);
+                }
 
-                idMessagePairs.Add(id, "配置完了");
+                idMessagePairs.Add(id, this.location != null ? "配置完了" : "バリデーション成功");
             }
 
             var message = string.Join("\n\n", idMessagePairs.Select(idMessagePair => $"[{idMessagePair.Key}]\n{idMessagePair.Value}"));
