@@ -138,8 +138,6 @@ namespace VitDeck.Validator
 
                 new ProjectorComponentMaxCountRule(LocalizedMessage.Get("VketRuleSetBase.ProjectorComponentMaxCountRule.Title"), limit: 1),
 
-                new PickupObjectSyncPrefabRule(LocalizedMessage.Get("VketRuleSetBase.PickupObjectSyncRule.Title"), VRCUdonSampleOfficialAssetData.PickupObjectSyncPrefabGUIDs),
-
                 new AvatarPedestalPrefabRule(LocalizedMessage.Get("VketRuleSetBase.AvatarPedestalPrefabRule.Title"), VRCUdonSampleOfficialAssetData.AvatarPedestalPrefabGUIDs),
 
                 new AudioSourcePrefabRule(LocalizedMessage.Get("VketRuleSetBase.AudioSourcePrefabRule.Title"),  VRCUdonSampleOfficialAssetData.AudioSourcePrefabGUIDs),
