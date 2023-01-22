@@ -14,7 +14,7 @@ namespace VitDeck.Validator
     /// </remarks>
     public class UsableComponentListRule : BaseRule
     {
-        private readonly ComponentReference[] references;
+        private readonly IEnumerable<ComponentReference> references;
 
         private readonly ValidationLevel unregisteredComponentValidationLevel;
 
@@ -28,7 +28,7 @@ namespace VitDeck.Validator
         /// <param name="ignorePrefabGUIDs">例外Prefabのリスト</param>
         /// <param name="unregisteredComponent">リストにないコンポーネントの扱い</param>
         public UsableComponentListRule(string name,
-            ComponentReference[] references,
+            IEnumerable<ComponentReference> references,
             string[] ignorePrefabGUIDs = null,
             ValidationLevel unregisteredComponent = ValidationLevel.ALLOW)
             : base(name)

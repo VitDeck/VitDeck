@@ -1,22 +1,31 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
     internal class ReflectionProbeRule : ComponentBaseRule<ReflectionProbe>
     {
-        public ReflectionProbeRule(string name) : base(name)
+        private readonly IEnumerable<ReflectionProbeMode> allowedModes;
+
+        public ReflectionProbeRule(string name, IEnumerable<ReflectionProbeMode> allowedModes) : base(name)
         {
+            this.allowedModes = allowedModes;
         }
 
         protected override void ComponentLogic(ReflectionProbe component)
         {
-            if (component.mode != UnityEngine.Rendering.ReflectionProbeMode.Custom)
+            if (!allowedModes.Contains(component.mode))
             {
                 AddIssue(new Issue(
                     component,
                     IssueLevel.Error,
-                    LocalizedMessage.Get("ReflectionProbeRule.MustUseCustomTexture", component.mode)));
+                    LocalizedMessage.Get(
+                        "ReflectionProbeRule.UnauthorizedType",
+                        string.Join(", ", allowedModes.Select(mode => mode.ToString())),
+                        component.mode)));
             }
         }
 

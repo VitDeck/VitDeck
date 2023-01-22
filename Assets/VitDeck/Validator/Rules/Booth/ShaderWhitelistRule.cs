@@ -15,7 +15,7 @@ namespace VitDeck.Validator
         private readonly string solutionURL;
 
         /// <param name="name">ルール名</param>
-        /// <param name="shaderNameGUIDPairs">キーにシェーダー名、値にシェーダーのGUIDを持つ連想配列。ビルトインシェーダーは常に許可。</param>
+        /// <param name="shaderNameGUIDPairs">キーにシェーダー名、値にシェーダーのGUIDを持つ連想配列。ビルトインシェーダーは値に <c>null</c> を指定。</param>
         public ShaderWhitelistRule(
             string name,
             IDictionary<string, string> shaderNameGUIDPairs,
@@ -38,12 +38,6 @@ namespace VitDeck.Validator
                         continue;
                     }
 
-                    var path = AssetDatabase.GetAssetPath(Shader.Find(shader.name));
-                    if (path == "Resources/unity_builtin_extra")
-                    {
-                        continue;
-                    }
-
                     if (!this.shaderNameGUIDPairs.ContainsKey(shader.name))
                     {
                         this.AddIssue(new Issue(
@@ -53,6 +47,21 @@ namespace VitDeck.Validator
                             solution,
                             solutionURL
                         ));
+                        continue;
+                    }
+
+                    var path = AssetDatabase.GetAssetPath(Shader.Find(shader.name));
+                    if (path == "Resources/unity_builtin_extra")
+                    {
+                        // ビルトインシェーダー
+                        if (this.shaderNameGUIDPairs[shader.name] != null)
+                        {
+                            this.AddIssue(new Issue(gameObject, IssueLevel.Error, string.Format(
+                                "ビルトインシェーダー「{0}」と同名のシェーダーが使用されています:\n{1}",
+                                shader.name,
+                                path
+                            ), solution, solutionURL));
+                        }
                         continue;
                     }
 
