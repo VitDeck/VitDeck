@@ -30,7 +30,7 @@ namespace VitDeck.Validator.Test
         {
             var rule = new MissingReferenceRule("missing検出ルール");
             var gameObject = new GameObject("TestObject");
-            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", allObjects: new GameObject[] { gameObject });
+            var target = new ValidationTarget("Packages/com.vitdeck.vitdeck/Validator/Tests", allObjects: new GameObject[] { gameObject });
 
             var meshAsset = new TestMeshAsset(rootFolder.Path);
             var meshFilter = gameObject.AddComponent<MeshFilter>();

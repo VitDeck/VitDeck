@@ -13,7 +13,7 @@ namespace VitDeck.Validator.Test
         {
             var version = UnityEngine.Application.unityVersion;
             var rule = new AssetPathLengthRule("アセットパス長制限テスト");
-            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", assetPaths: new string[] { });
+            var target = new ValidationTarget("Packages/com.vitdeck.vitdeck/Validator/Tests", assetPaths: new string[] { });
             var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("アセットパス長制限テスト"));
             Assert.That(result.Issues.Count, Is.EqualTo(0));
@@ -23,7 +23,7 @@ namespace VitDeck.Validator.Test
         {
             var targetAssetPath = "Packages/com.vitdeck.vitdeck/Validator/Tests/TestAssetPathLengthRule.cs";
             var targetAssetPaths = new string[] { targetAssetPath };
-            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", assetPaths: targetAssetPaths);
+            var target = new ValidationTarget("Packages/com.vitdeck.vitdeck/Validator/Tests", assetPaths: targetAssetPaths);
 
             var willPassRule = new AssetPathLengthRule("アセットパス長制限テスト", targetAssetPath.Length);
             var willFailRule = new AssetPathLengthRule("アセットパス長制限テスト", targetAssetPath.Length - 1);

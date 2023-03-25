@@ -7,7 +7,7 @@ namespace VitDeck.Utilities.Tests
         [Test]
         public void TestImagesFolderPath()
         {
-            Assert.That(AssetUtility.ImageFolderPath, Is.EqualTo("Assets/VitDeck/Images"));
+            Assert.That(AssetUtility.ImageFolderPath, Is.EqualTo("Packages/com.vitdeck.vitdeck/Images"));
         }
         [Test]
         public void TestConfigFolderPath()
@@ -17,7 +17,7 @@ namespace VitDeck.Utilities.Tests
         [Test]
         public void TestRootFolderPath()
         {
-            Assert.That(AssetUtility.RootFolderPath, Is.EqualTo("Assets/VitDeck"));
+            Assert.That(AssetUtility.RootFolderPath, Is.EqualTo("Packages/com.vitdeck.vitdeck"));
         }
     }
 }

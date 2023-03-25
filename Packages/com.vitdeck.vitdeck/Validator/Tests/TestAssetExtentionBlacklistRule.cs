@@ -52,7 +52,7 @@ namespace VitDeck.Validator.Test
         //    var targetPaths = new string[] {
         //        path ,
         //        "Packages/com.vitdeck.vitdeck/Validator/Tests/test_dummy_OK.text" };
-        //    var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", assetPaths: targetPaths);
+        //    var target = new ValidationTarget("Packages/com.vitdeck.vitdeck/Validator/Tests", assetPaths: targetPaths);
         //    var result = invalidRule.Validate(target);
         //    Assert.That(result.Issues.Count, Is.EqualTo(2));
         //    var issue = result.Issues[0];

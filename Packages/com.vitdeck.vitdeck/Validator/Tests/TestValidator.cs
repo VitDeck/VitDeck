@@ -47,7 +47,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestValidationtarget()
         {
-            var baseFolderPath = "Assets/VitDeck/Validator/Tests";
+            var baseFolderPath = "Packages/com.vitdeck.vitdeck/Validator/Tests";
             var assetGuids = new string[] { "testguid" };
             var assetPaths = new string[] { "testPath", "testPath2" };
             var assetObjects = new Object[] { };
@@ -72,7 +72,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestValidationtargetError()
         {
-            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests");
+            var target = new ValidationTarget("Packages/com.vitdeck.vitdeck/Validator/Tests");
             Assert.That(() => target.GetAllAssetGuids(),
                 Throws.Exception.TypeOf<FatalValidationErrorException>()
                 .And.Message.EqualTo("Faild to get asset GUIDs."));
