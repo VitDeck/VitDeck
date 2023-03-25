@@ -16,7 +16,7 @@ namespace VitDeck.Validator.Test
                                                                                                                 "UnityEngine.HingeJoint",
                                                                                                                 "UnityEngine.SpringJoint"}, ValidationLevel.DISALLOW)});
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/ComponentWhitelistRule", true);
+            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/ComponentWhitelistRule", true);
             var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("コンポーネントホワイトリストルール"));
             Assert.That(result.Issues.Count, Is.EqualTo(3));
@@ -39,7 +39,7 @@ namespace VitDeck.Validator.Test
                                                                                                                 "UnityEngine.HingeJoint",
                                                                                                                 "UnityEngine.SpringJoint"}, ValidationLevel.DISALLOW)});
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/ComponentWhitelistRule", true);
+            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/ComponentWhitelistRule", true);
             var result = rule.Validate(target);
             Assert.That(result.Issues.Count, Is.EqualTo(3));
             Assert.That(result.Issues[0].level, Is.EqualTo(IssueLevel.Error));
@@ -54,7 +54,7 @@ namespace VitDeck.Validator.Test
             var invalidRule = new ComponentWhitelistRule(null, new ComponentReference[] { null });
             var invalidRule2 = new ComponentWhitelistRule("コンポーネントホワイトリストルール", null);
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/ComponentWhitelistRule", true);
+            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/ComponentWhitelistRule", true);
             var result = invalidRule.Validate(target);
             Assert.That(result.Issues.Count, Is.EqualTo(4));
             var failResult = invalidRule2.Validate(target);

@@ -21,7 +21,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestValidate()
         {
-            var targetAssetPath = "Assets/VitDeck/Validator/Tests/TestAssetPathLengthRule.cs";
+            var targetAssetPath = "Packages/com.vitdeck.vitdeck/Validator/Tests/TestAssetPathLengthRule.cs";
             var targetAssetPaths = new string[] { targetAssetPath };
             var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", assetPaths: targetAssetPaths);
 

@@ -13,7 +13,7 @@ namespace VitDeck.Validator.Test
             long limit = 5000;
 
             var rule = new FolderSizeRule("入稿サイズテスト", limit);
-            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests/Data/FolderSizeRule");
+            var target = new ValidationTarget("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/FolderSizeRule");
             var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("入稿サイズテスト"));
             Assert.That(result.Issues.Count, Is.EqualTo(0));
@@ -25,7 +25,7 @@ namespace VitDeck.Validator.Test
             long limit = 1000;
 
             var rule = new FolderSizeRule("入稿サイズテスト", limit);
-            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests/Data/FolderSizeRule");
+            var target = new ValidationTarget("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/FolderSizeRule");
             var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("入稿サイズテスト"));
             Assert.That(result.Issues.Count, Is.EqualTo(1));

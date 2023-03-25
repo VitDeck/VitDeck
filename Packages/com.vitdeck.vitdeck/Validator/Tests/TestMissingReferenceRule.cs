@@ -47,7 +47,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestBySampleData()
         {
-            var testData = "Assets/VitDeck/Validator/Tests/Data/MissingReferenceRule";
+            var testData = "Packages/com.vitdeck.vitdeck/Validator/Tests/Data/MissingReferenceRule";
             var rule = new MissingReferenceRule("missing検出ルール");
             var target = new ValidationTargetFinder().Find(testData, true);
 

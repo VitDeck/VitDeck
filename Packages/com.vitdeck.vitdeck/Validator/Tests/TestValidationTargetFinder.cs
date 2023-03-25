@@ -10,7 +10,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestFind()
         {
-            var testFolder = "Assets/VitDeck/Validator/Tests/ValidationTargetFinder";
+            var testFolder = "Packages/com.vitdeck.vitdeck/Validator/Tests/ValidationTargetFinder";
             var finder = new ValidationTargetFinder();
             var validationTarget = finder.Find(testFolder, true);
             Assert.That(validationTarget.GetBaseFolderPath(), Is.EqualTo(testFolder));
@@ -33,7 +33,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestFindAssetPaths()
         {
-            var testFolder = "Assets/VitDeck/Validator/Tests/ValidationTargetFinder";
+            var testFolder = "Packages/com.vitdeck.vitdeck/Validator/Tests/ValidationTargetFinder";
             var finder = new ValidationTargetFinder();
             var assetPaths = finder.FindAssetPaths(testFolder);
             Assert.That(Array.Exists(assetPaths, path => path == testFolder), Is.True);
@@ -47,7 +47,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestFindAssetGuids()
         {
-            var testFolder = "Assets/VitDeck/Validator/Tests/ValidationTargetFinder";
+            var testFolder = "Packages/com.vitdeck.vitdeck/Validator/Tests/ValidationTargetFinder";
             var finder = new ValidationTargetFinder();
             var assetGuids = finder.FindAssetGuids(testFolder);
             //Base Folder
@@ -66,7 +66,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestFindAssetObjects()
         {
-            var testFolder = "Assets/VitDeck/Validator/Tests/ValidationTargetFinder";
+            var testFolder = "Packages/com.vitdeck.vitdeck/Validator/Tests/ValidationTargetFinder";
             var finder = new ValidationTargetFinder();
             var assetObjects = finder.FindAssetObjects(testFolder);
             //Base Folder
@@ -85,17 +85,17 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestFindScenes()
         {
-            var testFolder = "Assets/VitDeck/Validator/Tests/ValidationTargetFinder";
+            var testFolder = "Packages/com.vitdeck.vitdeck/Validator/Tests/ValidationTargetFinder";
             var finder = new ValidationTargetFinder();
             var scenes = finder.FindScenes(testFolder, true);
             //New Scene
             Assert.That(scenes.Length, Is.EqualTo(1));
-            Assert.That(Array.Exists(scenes, scene => scene.path == "Assets/VitDeck/Validator/Tests/ValidationTargetFinder/New Scene.unity"), Is.True);
+            Assert.That(Array.Exists(scenes, scene => scene.path == "Packages/com.vitdeck.vitdeck/Validator/Tests/ValidationTargetFinder/New Scene.unity"), Is.True);
         }
         [Test]
         public void TestFindRootObjects()
         {
-            var testFolder = "Assets/VitDeck/Validator/Tests/ValidationTargetFinder";
+            var testFolder = "Packages/com.vitdeck.vitdeck/Validator/Tests/ValidationTargetFinder";
             var finder = new ValidationTargetFinder();
             var rootObjects = finder.FindRootObjects(testFolder, true);
             //New Scene
@@ -107,7 +107,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestFindObjects()
         {
-            var testFolder = "Assets/VitDeck/Validator/Tests/ValidationTargetFinder";
+            var testFolder = "Packages/com.vitdeck.vitdeck/Validator/Tests/ValidationTargetFinder";
             var finder = new ValidationTargetFinder();
             var allObjects = finder.FindAllObjects(testFolder, true);
             //New Scene
@@ -132,7 +132,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestFindNoObject()
         {
-            var testFolder = "Assets/VitDeck/Validator/Tests/ValidationTargetFinderNoObject";
+            var testFolder = "Packages/com.vitdeck.vitdeck/Validator/Tests/ValidationTargetFinderNoObject";
             var finder = new ValidationTargetFinder();
             var rootObjects = finder.FindRootObjects(testFolder, true);
             Assert.That(rootObjects.Length, Is.EqualTo(0));

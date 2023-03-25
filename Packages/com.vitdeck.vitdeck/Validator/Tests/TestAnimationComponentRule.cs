@@ -7,7 +7,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void EnableAlwaysAnimateTest()
         {
-            var target = new ValidationTargetFinder().Find("Assets/VitDeck/Validator/Tests/Data/AnimationComponentRule/EnableAlwaysAnimate", true);
+            var target = new ValidationTargetFinder().Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/AnimationComponentRule/EnableAlwaysAnimate", true);
             var issues = new AnimationComponentRule("").Validate(target).Issues;
 
             Assert.That(issues.Count, Is.EqualTo(1));
@@ -17,7 +17,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void DisableAlwaysAnimateTest()
         {
-            var target = new ValidationTargetFinder().Find("Assets/VitDeck/Validator/Tests/Data/AnimationComponentRule/DisableAlwaysAnimate", true);
+            var target = new ValidationTargetFinder().Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/AnimationComponentRule/DisableAlwaysAnimate", true);
             var issues = new AnimationComponentRule("").Validate(target).Issues;
 
             Assert.That(issues.Count, Is.EqualTo(0));

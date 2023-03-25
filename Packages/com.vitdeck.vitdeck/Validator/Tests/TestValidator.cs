@@ -12,7 +12,7 @@ namespace VitDeck.Validator.Test
         public void TestValidate()
         {
             var ruleSet = new SampleRuleSet();
-            var results = Validator.Validate(ruleSet, "Assets/VitDeck/Validator/Tests/Validate", true);
+            var results = Validator.Validate(ruleSet, "Packages/com.vitdeck.vitdeck/Validator/Tests/Validate", true);
             foreach (var result in results)
             {
                 Debug.Log(result.GetResultLog());
@@ -34,7 +34,7 @@ namespace VitDeck.Validator.Test
             Assert.That(results[0].Issues[0].solution, Is.EqualTo(""));
             Assert.That(results[0].Issues[0].solutionURL, Is.EqualTo(""));
             //Validate中の例外
-            results = Validator.Validate(ruleSet, "Assets/VitDeck/Validator/Tests/Validate", true);
+            results = Validator.Validate(ruleSet, "Packages/com.vitdeck.vitdeck/Validator/Tests/Validate", true);
             LogAssert.Expect(LogType.Error, new Regex(@".*"));
         }
         [Test]

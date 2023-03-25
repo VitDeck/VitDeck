@@ -14,7 +14,7 @@ namespace VitDeck.Validator.Test
         public void TestValidate()
         {
             var rule = new AssetExtentionBlacklistRule("拡張子テスト", new string[] { "TXT", ".prefab", ".FBX" });
-            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", assetPaths: new string[] { });
+            var target = new ValidationTarget("Packages/com.vitdeck.vitdeck/Validator/Tests", assetPaths: new string[] { });
             var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("拡張子テスト"));
             Assert.That(result.Issues.Count, Is.EqualTo(0));
@@ -23,15 +23,15 @@ namespace VitDeck.Validator.Test
         public void TestValidateError()
         {
             var rule = new AssetExtentionBlacklistRule("拡張子テスト", new string[] { "TXT", ".prefab", ".Fbx" });
-            var path = "Assets/VitDeck/Validator/Tests/Data/AssetExtentionBlacklistRule/TestData.txt";
-            var folderPath = "Assets/VitDeck/Validator/Tests/Data/AssetExtentionBlacklistRule/test.txt";
+            var path = "Packages/com.vitdeck.vitdeck/Validator/Tests/Data/AssetExtentionBlacklistRule/TestData.txt";
+            var folderPath = "Packages/com.vitdeck.vitdeck/Validator/Tests/Data/AssetExtentionBlacklistRule/test.txt";
             var targetPaths = new string[] {
                 path ,
                 folderPath,
-                "Assets/VitDeck/Validator/Tests/test dummy data.prefab" ,
-                "Assets/VitDeck/Validator/Tests/test dummy data.fake.FBX",
-                "Assets/VitDeck/Validator/Tests/test_dummy_OK.fbx2" };
-            var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", assetPaths: targetPaths);
+                "Packages/com.vitdeck.vitdeck/Validator/Tests/test dummy data.prefab" ,
+                "Packages/com.vitdeck.vitdeck/Validator/Tests/test dummy data.fake.FBX",
+                "Packages/com.vitdeck.vitdeck/Validator/Tests/test_dummy_OK.fbx2" };
+            var target = new ValidationTarget("Packages/com.vitdeck.vitdeck/Validator/Tests", assetPaths: targetPaths);
             var result = rule.Validate(target);
             Assert.That(result.Issues.Count, Is.EqualTo(3));
             var issue = result.Issues[0];
@@ -48,10 +48,10 @@ namespace VitDeck.Validator.Test
         //public void TestValidateInvalidSetting()
         //{
         //    var invalidRule = new AssetExtentionBlacklistRule("空文字拡張子テスト", new string[] { "", ".txt" });
-        //    var path = "Assets/VitDeck/Validator/Tests/Data/AssetExtentionBlacklistRule/TestData.txt";
+        //    var path = "Packages/com.vitdeck.vitdeck/Validator/Tests/Data/AssetExtentionBlacklistRule/TestData.txt";
         //    var targetPaths = new string[] {
         //        path ,
-        //        "Assets/VitDeck/Validator/Tests/test_dummy_OK.text" };
+        //        "Packages/com.vitdeck.vitdeck/Validator/Tests/test_dummy_OK.text" };
         //    var target = new ValidationTarget("Assets/VitDeck/Validator/Tests", assetPaths: targetPaths);
         //    var result = invalidRule.Validate(target);
         //    Assert.That(result.Issues.Count, Is.EqualTo(2));

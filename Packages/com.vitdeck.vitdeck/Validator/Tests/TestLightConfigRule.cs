@@ -15,7 +15,7 @@ namespace VitDeck.Validator.Test
         {
             var rule = new LightConfigRule(string.Format("{0}Lightの設定が制限に従っていることを検証するルール", type), type, bakeTypes);
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/LightConfigRule", true);
+            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/LightConfigRule", true);
             var result = rule.Validate(target);
 
             Assert.That(result.RuleName, Is.EqualTo(string.Format("{0}Lightの設定が制限に従っていることを検証するルール", type)));
@@ -29,7 +29,7 @@ namespace VitDeck.Validator.Test
         {
             var rule = new LightConfigRule(string.Format("{0}Lightの設定が制限に従っていることを検証するルール", type), type, bakeTypes);
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/LightConfigRule", true);
+            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/LightConfigRule", true);
             var result = rule.Validate(target);
 
             Assert.That(result.RuleName, Is.EqualTo(string.Format("{0}Lightの設定が制限に従っていることを検証するルール", type)));
@@ -60,7 +60,7 @@ namespace VitDeck.Validator.Test
             var rule = new LightConfigRule(string.Format("{0}Lightの設定が制限に従っていることを検証するルール", type),
                     type, bakeTypes, minRange, maxRange, minIntensity, maxIntensity, minBounceIntensity, maxBounceIntensity);
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/LightConfigRule", true);
+            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/LightConfigRule", true);
             var result = rule.Validate(target);
 
             Assert.That(result.RuleName, Is.EqualTo(string.Format("{0}Lightの設定が制限に従っていることを検証するルール", type)));
@@ -122,7 +122,7 @@ namespace VitDeck.Validator.Test
                 new LightConfigRule(string.Format("{0}Lightの設定が制限に従っていることを検証するルール", type),
                     type, bakeTypes, minRange, maxRange, minIntensity, maxIntensity, minBounceIntensity, maxBounceIntensity);
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/LightConfigRule", true);
+            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/LightConfigRule", true);
             var result = rule.Validate(target);
 
             Assert.That(result.RuleName, Is.EqualTo(string.Format("{0}Lightの設定が制限に従っていることを検証するルール", type)));
@@ -167,7 +167,7 @@ namespace VitDeck.Validator.Test
 
             var rule = new LightConfigRule(string.Format("{0}Lightが使用されていないことを検証するルール", type), type, new LightmapBakeType[] { });
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/LightConfigRule", true);
+            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/LightConfigRule", true);
             var result = rule.Validate(target);
 
             Assert.That(result.RuleName, Is.EqualTo(string.Format("{0}Lightが使用されていないことを検証するルール", type)));

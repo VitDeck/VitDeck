@@ -5,7 +5,7 @@ namespace VitDeck.Validator.Test
 {
     public class TestAnimatorComponentRule
     {
-        const string BaseFolder = "Assets/VitDeck/Validator/Tests/Data/AnimatorComponentRule/";
+        const string BaseFolder = "Packages/com.vitdeck.vitdeck/Validator/Tests/Data/AnimatorComponentRule/";
 
         [Test]
         public void ApplyRootMotionTest()

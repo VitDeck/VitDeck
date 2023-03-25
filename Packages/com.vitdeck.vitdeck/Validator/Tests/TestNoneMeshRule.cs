@@ -13,7 +13,7 @@ namespace VitDeck.Validator.Test
         {
             var rule = new NoneMeshRule("メッシュ未設定検出ルール");
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Assets/VitDeck/Validator/Tests/ValidationTargetFinderNoObject", true);
+            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/ValidationTargetFinderNoObject", true);
 
             var result = rule.Validate(target);
             var issues = result.Issues;
@@ -24,7 +24,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestBySampleData()
         {
-            var testData = "Assets/VitDeck/Validator/Tests/Data/NoneMeshRule";
+            var testData = "Packages/com.vitdeck.vitdeck/Validator/Tests/Data/NoneMeshRule";
             var rule = new NoneMeshRule("メッシュ未設定検出ルール");
             var target = new ValidationTargetFinder().Find(testData, true);
 

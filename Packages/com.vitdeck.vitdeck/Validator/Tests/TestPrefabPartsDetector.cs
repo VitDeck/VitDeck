@@ -8,7 +8,7 @@ namespace VitDeck.Validator.Test
 {
     public class TestPrefabPartsDetector
     {
-        private const string BaseFolderPath = "Assets/VitDeck/Validator/Tests/Data/PrefabPartsDetector/";
+        private const string BaseFolderPath = "Packages/com.vitdeck.vitdeck/Validator/Tests/Data/PrefabPartsDetector/";
 
         [Test]
         public void Test()

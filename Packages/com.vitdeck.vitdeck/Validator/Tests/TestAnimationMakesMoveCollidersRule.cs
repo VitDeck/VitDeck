@@ -12,7 +12,7 @@ namespace VitDeck.Validator.Test
         public void TestValidate()
         {
             var target = new ValidationTargetFinder()
-                .Find("Assets/VitDeck/Validator/Tests/Data/AnimationMakesMoveCollidersRule", true);
+                .Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/AnimationMakesMoveCollidersRule", true);
 
             var result = new AnimationMakesMoveCollidersRule("")
                 .Validate(target);

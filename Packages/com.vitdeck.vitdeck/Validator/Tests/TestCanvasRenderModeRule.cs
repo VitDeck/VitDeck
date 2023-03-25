@@ -9,7 +9,7 @@ namespace VitDeck.Validator.Test
 		public void TestValidate()
 		{
 			var finder = new ValidationTargetFinder();
-			var target = finder.Find("Assets/VitDeck/Validator/Tests/Data/CanvasRenderModeRule", true);
+			var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/CanvasRenderModeRule", true);
 			var rule = new CanvasRenderModeRule("RenderMode.WorldSpaceテスト");
 			var result = rule.Validate(target);
 			Assert.That(result.RuleName, Is.EqualTo("RenderMode.WorldSpaceテスト"));

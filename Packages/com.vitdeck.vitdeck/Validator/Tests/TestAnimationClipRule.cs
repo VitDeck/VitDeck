@@ -6,7 +6,7 @@ namespace VitDeck.Validator.Test
 {
     public class TestAnimationClipRule
     {
-        const string BaseFolder = "Assets/VitDeck/Validator/Tests/Data/AnimationClipRule";
+        const string BaseFolder = "Packages/com.vitdeck.vitdeck/Validator/Tests/Data/AnimationClipRule";
 
         [Test]
         public void MaterialChangeAnimationTest()
