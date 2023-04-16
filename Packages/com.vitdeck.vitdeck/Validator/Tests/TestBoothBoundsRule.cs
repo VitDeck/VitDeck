@@ -29,7 +29,7 @@ namespace VitDeck.Validator.Test
             }
 
             targetContainer = new ValidationTarget(
-                "Packages/com.vitdeck.vitdeck/Validator/Tests",
+                ValidatorTestUtilities.TestDirectoryPath ,
                 allObjects: targetObjects,
                 rootObjects: new GameObject[] { rootObject });
         }

@@ -16,7 +16,7 @@ namespace VitDeck.Validator.Test
         {
             var rule = new UseLightModeRule("特定のLightのModeについて検証するルール", type, unusableBakeTypes);
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/UseLightModeRule", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/UseLightModeRule", true);
             var result = rule.Validate(target);
             Assert.That(result.RuleName,Is.EqualTo("特定のLightのModeについて検証するルール"));
             Assert.That(result.Issues.Count, Is.Zero);
@@ -29,7 +29,7 @@ namespace VitDeck.Validator.Test
         {
             var rule = new UseLightModeRule(string.Format("{0}LightのModeについて検証するルール", type), type, unusableBakeTypes);
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/UseLightModeRule", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/UseLightModeRule", true);
             var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo(string.Format("{0}LightのModeについて検証するルール", type)));
             Assert.That(result.Issues.Count, Is.EqualTo(1));

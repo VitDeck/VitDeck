@@ -12,7 +12,7 @@ namespace VitDeck.Validator.Test
         {
             var rule = new ContainMatOrTexInAssetRule("アセット内のMaterialやTextureの埋め込みを検証するルール");
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/ContainMatOrTexInAssetRule/OK", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/ContainMatOrTexInAssetRule/OK", true);
             var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("アセット内のMaterialやTextureの埋め込みを検証するルール"));
 
@@ -24,7 +24,7 @@ namespace VitDeck.Validator.Test
         {
             var rule = new ContainMatOrTexInAssetRule("アセット内のMaterialやTextureの埋め込みを検証するルール");
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/ContainMatOrTexInAssetRule/NG", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/ContainMatOrTexInAssetRule/NG", true);
             var result = rule.Validate(target);
             Assert.That(result.RuleName,Is.EqualTo("アセット内のMaterialやTextureの埋め込みを検証するルール"));
 

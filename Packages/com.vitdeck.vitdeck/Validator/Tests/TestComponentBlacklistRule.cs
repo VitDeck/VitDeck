@@ -15,7 +15,7 @@ namespace VitDeck.Validator.Test
                                                                                                                 "UnityEngine.HingeJoint",
                                                                                                                 "UnityEngine.SpringJoint"}, ValidationLevel.DISALLOW)});
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/ComponentBlacklistRule", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/ComponentBlacklistRule", true);
             var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("コンポーネントブラックリストルール"));
             Assert.That(result.Issues.Count, Is.EqualTo(1));
@@ -35,7 +35,7 @@ namespace VitDeck.Validator.Test
                                                                                                                 "UnityEngine.HingeJoint",
                                                                                                                 "UnityEngine.SpringJoint"}, ValidationLevel.DISALLOW)});
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/ComponentBlacklistRule", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/ComponentBlacklistRule", true);
             var result = rule.Validate(target);
             Assert.That(result.Issues.Count, Is.EqualTo(2));
             Assert.That(result.Issues[0].level, Is.EqualTo(IssueLevel.Error));
@@ -50,7 +50,7 @@ namespace VitDeck.Validator.Test
             var invalidRule = new ComponentBlacklistRule(null, new ComponentReference[] { null });
             var invalidRule2 = new ComponentBlacklistRule("コンポーネントブラックリストルール", null);
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/ComponentBlacklistRule", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/ComponentBlacklistRule", true);
             var result = invalidRule.Validate(target);
             Assert.That(result.Issues.Count, Is.EqualTo(0));
             var failResult = invalidRule2.Validate(target);

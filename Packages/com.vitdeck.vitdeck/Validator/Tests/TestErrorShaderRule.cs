@@ -10,7 +10,7 @@ namespace VitDeck.Validator.Test
         public void TestValidate()
         {
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/ErrorShaderRule", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/ErrorShaderRule", true);
             var rule = new ErrorShaderRule("エラーシェーダー検出");
             var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("エラーシェーダー検出"));

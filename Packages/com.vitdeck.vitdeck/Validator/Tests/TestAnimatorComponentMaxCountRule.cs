@@ -10,7 +10,7 @@ namespace VitDeck.Validator.Test
         public void TestValidate()
         {
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/AnimatorComponentMaxCountRule", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/AnimatorComponentMaxCountRule", true);
             var rule = new AnimatorComponentMaxCountRule("AnimatorComponent使用数検出", ANIMATOR_LIMIT_COUNT);
             var result = rule.Validate(target);
             var issues = result.Issues;

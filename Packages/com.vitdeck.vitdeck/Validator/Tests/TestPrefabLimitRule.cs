@@ -14,7 +14,7 @@ namespace VitDeck.Validator.Test
             var guids = new string[] { "c4bb7970c870834499aba4a950dd3d73" };
             var rule = new PrefabLimitRule("", guids, limit);
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/PrefabLimitRule", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/PrefabLimitRule", true);
             var result = rule.Validate(target);
 
             Assert.That(result.Issues.Count, Is.Zero);
@@ -27,7 +27,7 @@ namespace VitDeck.Validator.Test
             var guids = new string[] { "c4bb7970c870834499aba4a950dd3d73" };
             var rule = new PrefabLimitRule("", guids, limit);
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/PrefabLimitRule", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/PrefabLimitRule", true);
             var result = rule.Validate(target);
 
             Assert.That(result.Issues.Count, Is.EqualTo(1));

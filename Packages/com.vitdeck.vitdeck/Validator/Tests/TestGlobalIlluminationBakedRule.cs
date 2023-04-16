@@ -8,7 +8,7 @@ namespace VitDeck.Validator.Test
         public void TestValidate()
         {
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/GlobalIlluminationBakedRule", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/GlobalIlluminationBakedRule", true);
             var rule = new GlobalIlluminationBakedRule("Global IlluminationのBakedチェックルール");
             var result = rule.Validate(target);
 

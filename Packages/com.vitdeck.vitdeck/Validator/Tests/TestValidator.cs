@@ -12,7 +12,7 @@ namespace VitDeck.Validator.Test
         public void TestValidate()
         {
             var ruleSet = new SampleRuleSet();
-            var results = Validator.Validate(ruleSet, "Packages/com.vitdeck.vitdeck/Validator/Tests/Validate", true);
+            var results = Validator.Validate(ruleSet, ValidatorTestUtilities.TestDirectoryPath + "/Validate", true);
             foreach (var result in results)
             {
                 Debug.Log(result.GetResultLog());
@@ -34,7 +34,7 @@ namespace VitDeck.Validator.Test
             Assert.That(results[0].Issues[0].solution, Is.EqualTo(""));
             Assert.That(results[0].Issues[0].solutionURL, Is.EqualTo(""));
             //Validate中の例外
-            results = Validator.Validate(ruleSet, "Packages/com.vitdeck.vitdeck/Validator/Tests/Validate", true);
+            results = Validator.Validate(ruleSet, ValidatorTestUtilities.TestDirectoryPath + "/Validate", true);
             LogAssert.Expect(LogType.Error, new Regex(@".*"));
         }
         [Test]
@@ -47,7 +47,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestValidationtarget()
         {
-            var baseFolderPath = "Packages/com.vitdeck.vitdeck/Validator/Tests";
+            var baseFolderPath = ValidatorTestUtilities.TestDirectoryPath ;
             var assetGuids = new string[] { "testguid" };
             var assetPaths = new string[] { "testPath", "testPath2" };
             var assetObjects = new Object[] { };
@@ -72,7 +72,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestValidationtargetError()
         {
-            var target = new ValidationTarget("Packages/com.vitdeck.vitdeck/Validator/Tests");
+            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath );
             Assert.That(() => target.GetAllAssetGuids(),
                 Throws.Exception.TypeOf<FatalValidationErrorException>()
                 .And.Message.EqualTo("Faild to get asset GUIDs."));

@@ -23,7 +23,7 @@ namespace VitDeck.Validator.Test
                     }, ValidationLevel.DISALLOW)
                 });
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/UsableComponentListRule", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/UsableComponentListRule", true);
             var result = rule.Validate(target);
 
             Assert.That(result.Issues.Count, Is.EqualTo(1));
@@ -48,7 +48,7 @@ namespace VitDeck.Validator.Test
                     }, ValidationLevel.DISALLOW)
                 });
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/UsableComponentListRule", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/UsableComponentListRule", true);
             var result = rule.Validate(target);
 
             Assert.That(result.Issues.Count, Is.EqualTo(2));
@@ -62,7 +62,7 @@ namespace VitDeck.Validator.Test
             var invalidRule = new UsableComponentListRule(null, new ComponentReference[] { null });
             var invalidRule2 = new UsableComponentListRule("", null);
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/UsableComponentListRule", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/UsableComponentListRule", true);
             var result = invalidRule.Validate(target);
             Assert.That(result.Issues.Count, Is.Zero);
             var failResult = invalidRule2.Validate(target);
@@ -73,7 +73,7 @@ namespace VitDeck.Validator.Test
         public void TestUnregisteredComponent()
         {
             var target = new ValidationTargetFinder()
-                .Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/UsableComponentListRule", true);
+                .Find(ValidatorTestUtilities.DataDirectoryPath + "/UsableComponentListRule", true);
 
             var allowed = new UsableComponentListRule("",
                 new ComponentReference[] { },
@@ -99,10 +99,10 @@ namespace VitDeck.Validator.Test
         public void TestIgnoreAsset()
         {
             var target = new ValidationTargetFinder()
-                .Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/UsableComponentListRule", true);
+                .Find(ValidatorTestUtilities.DataDirectoryPath + "/UsableComponentListRule", true);
 
             var ignoredPrefabGUID = AssetDatabase
-                .AssetPathToGUID("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/UsableComponentListRule/Directional Light Prefab.prefab");
+                .AssetPathToGUID(ValidatorTestUtilities.DataDirectoryPath + "/UsableComponentListRule/Directional Light Prefab.prefab");
 
             Debug.Log(ignoredPrefabGUID);
             var result = new UsableComponentListRule("",

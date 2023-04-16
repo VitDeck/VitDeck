@@ -12,7 +12,7 @@ namespace VitDeck.Validator.Test
         {
             var rule = new UseMeshColliderRule("MeshColliderの使用を検証するルール");
             var finder = new ValidationTargetFinder();
-            var target = finder.Find("Packages/com.vitdeck.vitdeck/Validator/Tests/Data/UseMeshColliderRule", true);
+            var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/UseMeshColliderRule", true);
             var result = rule.Validate(target);
             Assert.That(result.RuleName,Is.EqualTo("MeshColliderの使用を検証するルール"));
             Assert.That(result.Issues.Count, Is.AtLeast(1));

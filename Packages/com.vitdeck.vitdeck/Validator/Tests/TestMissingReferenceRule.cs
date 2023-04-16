@@ -30,7 +30,7 @@ namespace VitDeck.Validator.Test
         {
             var rule = new MissingReferenceRule("missing検出ルール");
             var gameObject = new GameObject("TestObject");
-            var target = new ValidationTarget("Packages/com.vitdeck.vitdeck/Validator/Tests", allObjects: new GameObject[] { gameObject });
+            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath , allObjects: new GameObject[] { gameObject });
 
             var meshAsset = new TestMeshAsset(rootFolder.Path);
             var meshFilter = gameObject.AddComponent<MeshFilter>();
@@ -47,7 +47,7 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestBySampleData()
         {
-            var testData = "Packages/com.vitdeck.vitdeck/Validator/Tests/Data/MissingReferenceRule";
+            var testData = ValidatorTestUtilities.DataDirectoryPath + "/MissingReferenceRule";
             var rule = new MissingReferenceRule("missing検出ルール");
             var target = new ValidationTargetFinder().Find(testData, true);
 
