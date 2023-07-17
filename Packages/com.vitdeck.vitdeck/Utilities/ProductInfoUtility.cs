@@ -9,15 +9,15 @@ namespace VitDeck.Utilities
     /// </summary>
     public static class ProductInfoUtility
     {
-        private const string fileName = "ProductInfo.asset";
+        private const string guid = "bac4bb3ff22830b418a8dea9a67747ce";
         /// <summary>
         /// 製品情報を取得する
         /// </summary>
         /// <returns>製品情報</returns>
         private static ProductInfo GetProductInfo()
         {
-            var assetPath = Path.Combine(AssetUtility.ConfigFolderPath, fileName);
-            var productInfo = AssetDatabase.LoadAssetAtPath<ProductInfo>(assetPath);
+            var path = AssetDatabase.GUIDToAssetPath(guid);
+            var productInfo = AssetDatabase.LoadAssetAtPath<ProductInfo>(path);
             if (productInfo == null)
                 Debug.LogError("Failed to load ProductInfo.");
             return productInfo;
