@@ -18,6 +18,7 @@ namespace VitDeck.Utilities
         private static string _imageFolderPath;
         private static string _configFolderPath;
         private static string _rootFolderPath;
+
         /// <summary>
         /// VitDeck用画像フォルダのパス
         /// </summary>
@@ -33,24 +34,23 @@ namespace VitDeck.Utilities
                 {
                     _imageFolderPath = GetFolderPath("VitDeck.ImagesFolder");
                 }
+
                 return _imageFolderPath;
             }
         }
+
         /// <summary>
         /// 設定ファイル用フォルダのパス
         /// </summary>
-        /// <remarks>
-        /// Unityでラベルが付与されているアセットの一つ目のパスを返す。
-        /// 存在しない場合はDirectoryNotFoundExceptionを返す。
-        /// </remarks>
         public static string ConfigFolderPath
         {
             get
             {
                 if (string.IsNullOrEmpty(_configFolderPath))
                 {
-                    _configFolderPath = GetFolderPath("VitDeck.ConfigFolder");
+                    _configFolderPath = GetOrCreateConfigFolderPath();
                 }
+
                 return _configFolderPath;
             }
         }
@@ -70,16 +70,62 @@ namespace VitDeck.Utilities
                 {
                     _rootFolderPath = "Packages/com.vitdeck.vitdeck";
                 }
+
                 return _rootFolderPath;
             }
+        }
+
+        private static string GetOrCreateConfigFolderPath()
+        {
+            try
+            {
+                var configFolder = GetFolderPath("VitDeck.ConfigFolder");
+                return configFolder;
+            }
+            catch (DirectoryNotFoundException)
+            {
+                var path = GetOrCreateDirectory("Assets/VitDeck/Config");
+                var folderAsset = AssetDatabase.LoadAssetAtPath<DefaultAsset>(path);
+                AssetDatabase.SetLabels(folderAsset, new[] { "VitDeck.ConfigFolder" });
+                AssetDatabase.SaveAssets();
+                return path;
+            }
+        }
+
+        private static string GetOrCreateDirectory(string path)
+        {
+            if (!path.StartsWith("Assets/"))
+            {
+                throw new InvalidOperationException("ディレクトリパスはAssetsから始まる必要があります。");
+            }
+
+            var paths = path.Split('/', '\\');
+            var completedPath = paths[0];
+            for (int i = 1; i < paths.Length; i++)
+            {
+                var currentDirectoryName = paths[i];
+                var currentPath = Path.Combine(completedPath, currentDirectoryName);
+                if (!Directory.Exists(currentPath))
+                {
+                    var guid = AssetDatabase.CreateFolder(completedPath, currentDirectoryName);
+                    var actuallyPath = AssetDatabase.GUIDToAssetPath(guid);
+                    completedPath = actuallyPath;
+                }
+                else
+                {
+                    completedPath = Path.Combine(completedPath, currentDirectoryName);
+                }
+            }
+
+            return completedPath;
         }
 
         private static string GetFolderPath(string assetLabel)
         {
             string folderPath = AssetDatabase.FindAssets("l:" + assetLabel)
-                 .Select(guid => AssetDatabase.GUIDToAssetPath(guid))
-                 .Where(path => path != null)
-                 .FirstOrDefault();
+                .Select(guid => AssetDatabase.GUIDToAssetPath(guid))
+                .Where(path => path != null)
+                .FirstOrDefault();
             if (folderPath != null)
             {
                 return folderPath;
@@ -103,6 +149,7 @@ namespace VitDeck.Utilities
                 var name = AssetDatabase.GUIDToAssetPath(guid);
                 names.Add(name);
             }
+
             return names.ToArray();
         }
 
@@ -118,11 +165,13 @@ namespace VitDeck.Utilities
                 {
                     continue;
                 }
+
                 var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
                 if (asset == null)
                 {
                     continue;
                 }
+
                 yield return asset;
             }
         }
@@ -192,9 +241,11 @@ namespace VitDeck.Utilities
         /// </remarks>
         /// <param name="rootObjectName"></param>
         /// <param name="callback">コールバック関数が指定されていなければ、削除したオブジェクトを復元しない。</param>
-        public static void TemporaryDestroyObjectsOutsideOfRootObjectAndRunCallback(string rootObjectName, Action callback = null)
+        public static void TemporaryDestroyObjectsOutsideOfRootObjectAndRunCallback(string rootObjectName,
+            Action callback = null)
         {
-            foreach (var obj in Array.FindAll(Resources.FindObjectsOfTypeAll<GameObject>(), (item) => item.transform.parent == null))
+            foreach (var obj in Array.FindAll(Resources.FindObjectsOfTypeAll<GameObject>(),
+                         (item) => item.transform.parent == null))
             {
                 if (obj.name != rootObjectName && AssetDatabase.GetAssetOrScenePath(obj).Contains(".unity"))
                 {
