@@ -149,6 +149,14 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "com.vitdeck.vitdeck-organizer": {
+      "version": "file:com.vitdeck.vitdeck-organizer",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.vitdeck.vitdeck": "2.0.0"
+      }
+    },
     "nuget.mono-cecil": {
       "version": "0.1.6-preview",
       "depth": 1,
