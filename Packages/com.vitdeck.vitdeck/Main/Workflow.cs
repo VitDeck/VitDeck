@@ -13,7 +13,7 @@ namespace VitDeck.Main
 
         public void OnBeforeSerialize()
         {
-            ruleSetTypeFullName = ruleSet == null ? "" : ruleSet.GetType().FullName;
+            ruleSetTypeFullName = ruleSet == null ? "" : ruleSet.GetType().AssemblyQualifiedName;
         }
 
         public void OnAfterDeserialize()
