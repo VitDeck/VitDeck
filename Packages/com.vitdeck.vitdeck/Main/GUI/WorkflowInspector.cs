@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using UnityEditor;
 using VitDeck.Main;
 using VitDeck.Validator;
@@ -10,14 +9,14 @@ namespace Main.GUI
     [CustomEditor(typeof(Workflow))]
     public class WorkflowInspector : Editor
     {
-        private string[] ruleSetTypeList = null;
+        private string[] ruleSetTypeNameList = null;
         private string[] ruleSetTypeShortNameList = null;
 
         public override void OnInspectorGUI()
         {
-            if (ruleSetTypeList == null)
+            if (ruleSetTypeNameList == null)
             {
-                InitializeRuleSetTypeList();
+                InitializeRuleSetTypeNameList();
             }
 
             var ruleSetNameProperty = serializedObject.FindProperty("ruleSetTypeFullName");
@@ -26,7 +25,7 @@ namespace Main.GUI
             serializedObject.ApplyModifiedProperties();
         }
 
-        private void InitializeRuleSetTypeList()
+        private void InitializeRuleSetTypeNameList()
         {
             var interfaceType = typeof(IRuleSet);
             var ruleSets = AppDomain.CurrentDomain.GetAssemblies()
@@ -38,17 +37,16 @@ namespace Main.GUI
                     t.GetConstructor(Type.EmptyTypes) != null) // デフォルトコンストラクタを持つ
                 .ToArray();
 
-            ruleSetTypeList = ruleSets.Select(t => t.AssemblyQualifiedName).ToArray();
+            ruleSetTypeNameList = ruleSets.Select(t => t.AssemblyQualifiedName).ToArray();
             ruleSetTypeShortNameList = ruleSets.Select(t => t.Name).ToArray();
         }
 
-
-        private void RuleSetSelectorField(string label, SerializedProperty ruleSetNameField)
+        private void RuleSetSelectorField(string label, SerializedProperty ruleSetTypeNameProperty)
         {
-            var name = ruleSetNameField.stringValue;
-            var index = Array.IndexOf(ruleSetTypeList, name);
+            var ruleSetTypeName = ruleSetTypeNameProperty.stringValue;
+            var index = Array.IndexOf(ruleSetTypeNameList, ruleSetTypeName);
             index = EditorGUILayout.Popup(label, index, ruleSetTypeShortNameList);
-            ruleSetNameField.stringValue = index >= 0 ? ruleSetTypeList[index] : "";
+            ruleSetTypeNameProperty.stringValue = index >= 0 ? ruleSetTypeNameList[index] : "";
         }
     }
 }

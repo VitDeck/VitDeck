@@ -2,6 +2,10 @@
 
 namespace VitDeck.Main
 {
+    /// <summary>
+    /// Workflowによる制作状況を管理するためのScriptableObject
+    /// このScriptableObjectアセットが配置されているフォルダが制作物のルートフォルダとなる。
+    /// </summary>
     [CreateAssetMenu(menuName = "VitDeck/Workspace")]
     public class Workspace : ScriptableObject
     {

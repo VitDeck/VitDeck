@@ -1,15 +1,17 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VitDeck.Validator;
 
 namespace VitDeck.Main
 {
-    [CreateAssetMenu(menuName = "VitDeck/Workflow")]
+    /// <summary>
+    /// VitDeckを使った一連の作業の流れを定義しているScriptableObject
+    /// </summary>
     public class Workflow : ScriptableObject, ISerializationCallbackReceiver
     {
         [SerializeField, HideInInspector] private string ruleSetTypeFullName;
         private IRuleSet ruleSet;
+        public IRuleSet RuleSet => ruleSet;
 
         public void OnBeforeSerialize()
         {
