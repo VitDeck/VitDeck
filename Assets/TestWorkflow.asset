@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960228753ebd48deabd46f945d1cdc2f, type: 3}
   m_Name: TestWorkflow
   m_EditorClassIdentifier: 
-  ruleSetTypeFullName: VitDeck.Validator.SampleRuleSet, VitDeck.Validator.Rules,
-    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  ruleSet: VitDeck.Validator.SampleRuleSet, VitDeck.Validator.Rules, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null

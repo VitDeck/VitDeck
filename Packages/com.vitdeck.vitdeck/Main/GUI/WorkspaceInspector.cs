@@ -1,10 +1,8 @@
 ﻿using System.IO;
 using UnityEditor;
 using UnityEngine;
-using VitDeck.Main;
-using VitDeck.Validator;
 
-namespace Main.GUI
+namespace VitDeck.Main.GUI
 {
     [CustomEditor(typeof(Workspace))]
     public class WorkspaceInspector : Editor
@@ -23,7 +21,7 @@ namespace Main.GUI
                 {
                     Debug.Log("Run validation");
                     var ruleSet = workflow.RuleSet;
-                    var results = Validator.Validate(ruleSet, baseDirectory);
+                    var results = Validator.Validator.Validate(ruleSet, baseDirectory);
                     Debug.Log("Results:" + results.Length);
                     foreach (var result in results)
                     {

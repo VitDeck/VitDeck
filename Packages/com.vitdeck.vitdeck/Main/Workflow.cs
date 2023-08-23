@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VitDeck.Validator;
 
 namespace VitDeck.Main
@@ -9,18 +10,18 @@ namespace VitDeck.Main
     /// </summary>
     public class Workflow : ScriptableObject, ISerializationCallbackReceiver
     {
-        [SerializeField, HideInInspector] private string ruleSetTypeFullName;
-        private IRuleSet ruleSet;
-        public IRuleSet RuleSet => ruleSet;
+        [SerializeField, RuleSetType] private string ruleSet;
+        private IRuleSet deserializedRuleSet;
+        public IRuleSet RuleSet => deserializedRuleSet;
 
         public void OnBeforeSerialize()
         {
-            ruleSetTypeFullName = ruleSet == null ? "" : ruleSet.GetType().AssemblyQualifiedName;
+            ruleSet = deserializedRuleSet == null ? "" : deserializedRuleSet.GetType().AssemblyQualifiedName;
         }
 
         public void OnAfterDeserialize()
         {
-            ruleSet = GetRuleSetInstance(ruleSetTypeFullName);
+            deserializedRuleSet = GetRuleSetInstance(ruleSet);
         }
 
         private static IRuleSet GetRuleSetInstance(string fullName)
