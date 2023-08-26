@@ -24,17 +24,17 @@ namespace VitDeck.Main
             deserializedRuleSet = GetRuleSetInstance(ruleSet);
         }
 
-        private static IRuleSet GetRuleSetInstance(string fullName)
+        private static IRuleSet GetRuleSetInstance(string assemblyQualifiedName)
         {
-            if (string.IsNullOrEmpty(fullName))
+            if (string.IsNullOrEmpty(assemblyQualifiedName))
             {
                 return null;
             }
 
-            var type = Type.GetType(fullName);
+            var type = Type.GetType(assemblyQualifiedName);
             if (type == null)
             {
-                Debug.LogError($"{fullName}型のルールセットがプロジェクト内に定義されていません。");
+                Debug.LogError($"'{assemblyQualifiedName}'に対応する型のルールセットがプロジェクト内に定義されていません。");
                 return null;
             }
 
