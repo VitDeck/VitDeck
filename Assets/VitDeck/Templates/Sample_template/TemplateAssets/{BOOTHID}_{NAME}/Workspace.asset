@@ -10,7 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d9dee01eeb6ca34cbb0a412f26baa8f, type: 3}
-  m_Name: TestWorkspace
+  m_Name: Workspace
   m_EditorClassIdentifier: 
   workflow: {fileID: 11400000, guid: 57167fd5d8e41cd40905a33f7523f778, type: 2}
-  saveData: {fileID: 0}

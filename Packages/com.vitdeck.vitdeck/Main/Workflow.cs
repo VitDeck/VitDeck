@@ -10,6 +10,7 @@ namespace VitDeck.Main
     /// </summary>
     public class Workflow : ScriptableObject, ISerializationCallbackReceiver
     {
+        
         [SerializeField, RuleSetType] private string ruleSet;
         private IRuleSet deserializedRuleSet;
         public IRuleSet RuleSet => deserializedRuleSet;
