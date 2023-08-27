@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using VitDeck.Exporter;
 using VitDeck.Validator;
 
 namespace VitDeck.Main
@@ -11,6 +12,8 @@ namespace VitDeck.Main
     public class Workflow : ScriptableObject
     {
         [SerializeField, RuleSetPopup] private string ruleSet;
+        [SerializeField] private ExportSetting exportSetting;
         public IRuleSet RuleSet => Validator.Validator.GetRuleSet(ruleSet);
+        public ExportSetting ExportSetting => exportSetting;
     }
 }

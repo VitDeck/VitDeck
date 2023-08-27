@@ -10,5 +10,10 @@ namespace VitDeck.Main
     public class Workspace : ScriptableObject
     {
         [SerializeField] private Workflow workflow;
+        
+        public string GetFolderPath()
+        {
+            return System.IO.Path.GetDirectoryName(UnityEditor.AssetDatabase.GetAssetPath(this));
+        }
     }
 }

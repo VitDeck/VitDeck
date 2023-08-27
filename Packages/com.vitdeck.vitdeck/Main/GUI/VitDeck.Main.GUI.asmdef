@@ -4,7 +4,8 @@
         "VitDeck.Main",
         "VitDeck.Utilities",
         "VitDeck.Validator.Components",
-        "VitDeck.Validator"
+        "VitDeck.Validator",
+        "VitDeck.Exporter"
     ],
     "includePlatforms": [
         "Editor"

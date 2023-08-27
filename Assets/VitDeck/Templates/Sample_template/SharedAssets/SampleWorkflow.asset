@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: SampleWorkflow
   m_EditorClassIdentifier: 
   ruleSet: SampleRuleSet
+  exportSetting: {fileID: 11400000, guid: f9a7c21573dad094eb21d501e052c252, type: 2}
