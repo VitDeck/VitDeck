@@ -2,6 +2,7 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Validator.GUI;
 
 namespace VitDeck.Main.GUI
 {
@@ -25,17 +26,21 @@ namespace VitDeck.Main.GUI
 
                 Debug.Log("Run validation");
                 var ruleSet = workflow.RuleSet;
-                var results = Validator.Validator.Validate(ruleSet, baseDirectory);
-                Debug.Log("Results:" + results.Length);
-                foreach (var result in results)
-                {
-                    Debug.Log(result.RuleName);
-                    Debug.Log("Issues:" + result.Issues.Count);
-                    foreach (var issue in result.Issues)
-                    {
-                        Debug.Log(issue.message);
-                    }
-                }
+                var baseFolder = AssetDatabase.LoadAssetAtPath<DefaultAsset>(workspace.GetFolderPath());
+                
+                SimpleValidatorWindow.Validate(ruleSet, baseFolder);
+                
+                // var results = Validator.Validator.Validate(ruleSet, baseDirectory);
+                // Debug.Log("Results:" + results.Length);
+                // foreach (var result in results)
+                // {
+                //     Debug.Log(result.RuleName);
+                //     Debug.Log("Issues:" + result.Issues.Count);
+                //     foreach (var issue in result.Issues)
+                //     {
+                //         Debug.Log(issue.message);
+                //     }
+                // }
             }
 
             if (GUILayout.Button("Export") && workflow != null)
