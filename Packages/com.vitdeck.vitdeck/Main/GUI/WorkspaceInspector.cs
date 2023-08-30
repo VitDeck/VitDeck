@@ -2,6 +2,7 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using VitDeck.Main.ValidatedExporter.GUI;
 using VitDeck.Validator.GUI;
 
 namespace VitDeck.Main.GUI
@@ -46,8 +47,8 @@ namespace VitDeck.Main.GUI
             if (GUILayout.Button("Export") && workflow != null)
             {
                 var exportSettings = workflow.ExportSetting;
-                var path = workspace.GetFolderPath();
-                Exporter.Exporter.Export(path, exportSettings);
+                var baseFolder = AssetDatabase.LoadAssetAtPath<DefaultAsset>(workspace.GetFolderPath());
+                SimpleValidatedExporterWindow.ValidateAndExport(exportSettings, baseFolder);
             }
 
             EditorGUI.EndDisabledGroup();

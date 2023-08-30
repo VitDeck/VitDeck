@@ -6,7 +6,9 @@
         "VitDeck.Validator.Components",
         "VitDeck.Validator",
         "VitDeck.Exporter",
-        "VitDeck.Validator.GUI"
+        "VitDeck.Validator.GUI",
+        "VitDeck.Main.ValidatedExporter",
+        "VitDeck.Main.ValidatedExporter.GUI"
     ],
     "includePlatforms": [
         "Editor"
