@@ -1,4 +1,5 @@
-using UnityEngine;
+using System;
+using Object = UnityEngine.Object;
 
 namespace VitDeck.Validator
 {
@@ -7,13 +8,15 @@ namespace VitDeck.Validator
     /// </summary>
     public class Issue
     {
-        public Issue(Object target, IssueLevel level, string message, string solution = "", string solutionURL = "")
+        public Issue(Object target, IssueLevel level, string message, string solution = "", string solutionURL = "",
+            ResolverDelegate resolver = null)
         {
             this.target = target;
             this.level = level;
             this.message = message;
             this.solution = solution;
             this.solutionURL = solutionURL;
+            this.resolver = resolver;
         }
         /// <summary>
         /// 対象のオブジェクト
@@ -35,6 +38,10 @@ namespace VitDeck.Validator
         /// 解決策が記載されたWebページのURL
         /// </summary>
         public readonly string solutionURL;
+        /// <summary>
+        /// 問題を修正するためのデリゲート
+        /// </summary>
+        public readonly ResolverDelegate resolver;
     }
     /// <summary>
     /// 検出した問題の重要度
