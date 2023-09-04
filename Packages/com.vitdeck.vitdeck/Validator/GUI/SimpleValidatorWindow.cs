@@ -205,21 +205,31 @@ namespace VitDeck.Validator.GUI
         private void GetMessageBox(Message msg)
         {
             GUILayout.BeginHorizontal();
+            var hasissue = msg.issue != null;
 
             var helpBoxRect = EditorGUILayout.BeginHorizontal();
             if (Event.current.type == EventType.MouseUp && helpBoxRect.Contains(Event.current.mousePosition) &&
-                msg.issue != null)
+                hasissue)
                 EditorGUIUtility.PingObject(msg.issue.target);
             EditorGUILayout.HelpBox(msg.message, msg.type, true);
             EditorGUILayout.EndHorizontal();
-            if (msg.issue != null && !string.IsNullOrEmpty(msg.issue.solutionURL))
+            
+            EditorGUILayout.BeginVertical(GUILayout.Width(50));
+            if (hasissue && !string.IsNullOrEmpty(msg.issue.solutionURL))
             {
                 CustomGUILayout.URLButton("Help", msg.issue.solutionURL, GUILayout.Width(50));
             }
-            else
+            if (hasissue && msg.issue.resolver != null)
             {
-                GUILayout.Space(55);
+                EditorGUI.BeginDisabledGroup(msg.isResolved);
+                if (GUILayout.Button("Resolve", GUILayout.Width(55)))
+                {
+                    msg.issue.resolver.Invoke();
+                    msg.isResolved = true;
+                }
+                EditorGUI.EndDisabledGroup();
             }
+            GUILayout.EndVertical();
 
             GUILayout.EndHorizontal();
         }
@@ -236,6 +246,7 @@ namespace VitDeck.Validator.GUI
             public Issue issue;
             public string message;
             public MessageType type;
+            public bool isResolved;
         }
     }
 }
