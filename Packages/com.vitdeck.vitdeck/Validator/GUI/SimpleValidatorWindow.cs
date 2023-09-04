@@ -45,6 +45,11 @@ namespace VitDeck.Validator.GUI
         {
             EditorGUIUtility.labelWidth = 80;
             EditorGUILayout.LabelField("Rule Checker");
+            if (ruleSet == null)
+            {
+                GUILayout.Label("Rule Checker is Inactive. Please run validation from workspace menu.");
+                return;
+            }
             //Rule set dropdown
             EditorGUILayout.LabelField("Rule Set:", ruleSet.RuleSetName);
             //Base folder field
