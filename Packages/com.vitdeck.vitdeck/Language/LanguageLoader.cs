@@ -11,6 +11,7 @@ namespace VitDeck.Language
     {
         private static Dictionary<SystemLanguage, string> languageGUIDs;
         private static SystemLanguage defaultLanguage = SystemLanguage.English;
+        private const string LogHeader = "[VitDeck]";
 
         private static Dictionary<SystemLanguage, string> LanguageFileGUIDs
         {
@@ -47,14 +48,14 @@ namespace VitDeck.Language
             {
                 string languageGUID;
                 var currentLanguage = Application.systemLanguage;
-                Debug.Log("Current system language = " + currentLanguage);
+                Debug.Log(LogHeader + "Current system language = " + currentLanguage);
                 if (LanguageFileGUIDs.TryGetValue(currentLanguage, out languageGUID))
                 {
-                    Debug.Log("Load LanguageFile which for " + currentLanguage);
+                    Debug.Log(LogHeader + "Load LanguageFile which for " + currentLanguage);
                 }
                 else
                 {
-                    Debug.Log("LanguageFile which for current system language is not found. load default LanguageFile.");
+                    Debug.Log(LogHeader + "LanguageFile which for current system language is not found. load default LanguageFile.");
                     languageGUID = LanguageFileGUIDs[defaultLanguage];
                 }
 
@@ -63,7 +64,7 @@ namespace VitDeck.Language
             }
             else
             {
-                Debug.Log("Load overrided LanguageFile = " + settings.language);
+                Debug.Log(LogHeader + "Load overrode LanguageFile = " + settings.language);
                 dictionary = settings.language;
             }
 
