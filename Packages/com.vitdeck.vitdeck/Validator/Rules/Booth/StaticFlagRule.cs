@@ -56,7 +56,12 @@ namespace VitDeck.Validator
                         gameObject,
                         IssueLevel.Error,
                         LocalizedMessage.Get("StaticFlagRule.OccludeeStaticNotSet"),
-                        LocalizedMessage.Get("StaticFlagRule.OccludeeStaticNotSet.Solution")));
+                        LocalizedMessage.Get("StaticFlagRule.OccludeeStaticNotSet.Solution"),
+                        resolver: () =>
+                        {
+                            GameObjectUtility.SetStaticEditorFlags(gameObject, flag | StaticEditorFlags.OccludeeStatic);
+                            return ResolverResult.Resolved("StaticEditorFlags is set.");
+                        }));
                 }
 
                 if ((flag & StaticEditorFlags.ReflectionProbeStatic) == 0)
@@ -65,7 +70,12 @@ namespace VitDeck.Validator
                         gameObject,
                         IssueLevel.Error,
                         LocalizedMessage.Get("StaticFlagRule.ReflectionProveStaticNotSet"),
-                        LocalizedMessage.Get("StaticFlagRule.ReflectionProveStaticNotSet.Solution")));
+                        LocalizedMessage.Get("StaticFlagRule.ReflectionProveStaticNotSet.Solution"),
+                        resolver: () =>
+                        {
+                            GameObjectUtility.SetStaticEditorFlags(gameObject, flag | StaticEditorFlags.ReflectionProbeStatic);
+                            return ResolverResult.Resolved("StaticEditorFlags is set.");
+                        }));
                 }
 
                 if ((flag & StaticEditorFlags.BatchingStatic) == 0)
@@ -74,7 +84,12 @@ namespace VitDeck.Validator
                         gameObject,
                         IssueLevel.Warning,
                         LocalizedMessage.Get("StaticFlagRule.BatchingStaticNotSet"),
-                        LocalizedMessage.Get("StaticFlagRule.BatchingStaticNotSet.Solution")));
+                        LocalizedMessage.Get("StaticFlagRule.BatchingStaticNotSet.Solution"),
+                        resolver: () =>
+                        {
+                            GameObjectUtility.SetStaticEditorFlags(gameObject, flag | StaticEditorFlags.BatchingStatic);
+                            return ResolverResult.Resolved("StaticEditorFlags is set.");
+                        }));
                 }
 
                 if ((flag & StaticEditorFlags.OccluderStatic) != 0)
@@ -83,7 +98,13 @@ namespace VitDeck.Validator
                     var solution = LocalizedMessage.Get("StaticFlagRule.OccluderStaticNotAllowed.Solution");
                     var solutionURL = LocalizedMessage.Get("StaticFlagRule.OccluderStaticNotAllowed.SolutionURL");
 
-                    AddIssue(new Issue(gameObject, IssueLevel.Error, message, solution, solutionURL));
+                    ResolverResult Resolver()
+                    {
+                        GameObjectUtility.SetStaticEditorFlags(gameObject, flag & ~StaticEditorFlags.OccluderStatic);
+                        return ResolverResult.Resolved("StaticEditorFlags is reset.");
+                    }
+
+                    AddIssue(new Issue(gameObject, IssueLevel.Error, message, solution, solutionURL, Resolver));
                 }
 
                 if ((flag & StaticEditorFlags.ContributeGI) != 0)
@@ -120,7 +141,14 @@ namespace VitDeck.Validator
                             var solution = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.Solution");
                             var solutionURL = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.SolutionURL");
 
-                            AddIssue(new Issue(filter, IssueLevel.Warning, message, solution, solutionURL));
+                            ResolverResult Resolver()
+                            {
+                                importer.generateSecondaryUV = true;
+                                importer.SaveAndReimport();
+                                return ResolverResult.Resolved("UV2 is generated.");
+                            }
+
+                            AddIssue(new Issue(filter, IssueLevel.Warning, message, solution, solutionURL, Resolver));
                         }
                     }
                 }
@@ -139,7 +167,12 @@ namespace VitDeck.Validator
                         gameObject,
                         IssueLevel.Error,
                         LocalizedMessage.Get("StaticFlagRule.StaticNotAllowed"),
-                        LocalizedMessage.Get("StaticFlagRule.StaticNotAllowed.Solution")));
+                        LocalizedMessage.Get("StaticFlagRule.StaticNotAllowed.Solution"),
+                        resolver: () =>
+                        {
+                            GameObjectUtility.SetStaticEditorFlags(gameObject, 0);
+                            return ResolverResult.Resolved("StaticEditorFlags is reset.");
+                        }));
                 }
             }
         }
@@ -149,8 +182,24 @@ namespace VitDeck.Validator
             var message = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshShouldHaveUV2");
             var solution = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshShouldHaveUV2.Solution");
             var solutionURL = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshShouldHaveUV2.SolutionURL");
+            
+            ResolverResult Resolver()
+            {
+                var mesh = filter.sharedMesh;
+                if (mesh == null) return ResolverResult.Failed("Mesh is null.");
 
-            AddIssue(new Issue(filter, IssueLevel.Warning, message, solution, solutionURL));
+                var assetPath = AssetDatabase.GetAssetPath(mesh);
+                if (string.IsNullOrWhiteSpace(assetPath)) return ResolverResult.Failed("AssetPath is null or empty.");
+
+                var importer = AssetImporter.GetAtPath(assetPath) as ModelImporter;
+                if (importer == null) return ResolverResult.Failed("ModelImporter is null.");
+
+                importer.generateSecondaryUV = true;
+                importer.SaveAndReimport();
+                return ResolverResult.Resolved("UV2 is generated.");
+            }
+            
+            AddIssue(new Issue(filter, IssueLevel.Warning, message, solution, solutionURL, Resolver));
         }
     }
 }

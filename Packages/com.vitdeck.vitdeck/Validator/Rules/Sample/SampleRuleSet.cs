@@ -40,5 +40,7 @@ namespace VitDeck.Validator
         public IRule noneMeshRule = new NoneMeshRule("[B05]None meshルール");
         [Validation]
         public IRule missingReferenceRule = new MissingReferenceRule("[B06]missing参照ルール");
+        [Validation]
+        public IRule staticFlagRule = new StaticFlagRule("[B07]Staticフラグルール");
     }
 }

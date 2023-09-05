@@ -45,6 +45,11 @@ namespace VitDeck.Validator.GUI
         {
             EditorGUIUtility.labelWidth = 80;
             EditorGUILayout.LabelField("Rule Checker");
+            if (ruleSet == null)
+            {
+                GUILayout.Label("Rule Checker is Inactive. Please run validation from workspace menu.");
+                return;
+            }
             //Rule set dropdown
             EditorGUILayout.LabelField("Rule Set:", ruleSet.RuleSetName);
             //Base folder field
@@ -81,6 +86,17 @@ namespace VitDeck.Validator.GUI
                 isOpenMessageArea = EditorGUILayout.Foldout(isOpenMessageArea, "Messages:" + countMessage);
                 if (isOpenMessageArea)
                 {
+                    var fixableCount = messages.Count(m => m.issue != null && m.issue.resolver != null && !m.isResolved);
+                    EditorGUI.BeginDisabledGroup(fixableCount == 0);
+                    if(GUILayout.Button("Resolve all fixable issues"))
+                    {
+                        foreach (var msg in messages)
+                        {
+                            TryResolve(msg);
+                        }
+                    }
+                    EditorGUI.EndDisabledGroup();
+                    
                     messageAreaScroll = EditorGUILayout.BeginScrollView(messageAreaScroll);
                     foreach (var msg in messages)
                     {
@@ -97,6 +113,42 @@ namespace VitDeck.Validator.GUI
             if (GUILayout.Button("Copy result log"))
             {
                 EditorGUIUtility.systemCopyBuffer = validationLog;
+            }
+        }
+
+        private void TryResolve(Message message)
+        {
+            if (message.issue?.resolver == null ||
+                message.isResolved)
+            {
+                return;
+            }
+            var result = message.issue.resolver.Invoke();
+            var hasResultMessage = !string.IsNullOrEmpty(result.Message);
+            
+            switch (result.Type)
+            {
+                case ResolverResultType.Resolved:
+                    message.isResolved = true;
+                    if (hasResultMessage)
+                    {
+                        Debug.Log(result.Message);
+                    }
+                    break;
+                case ResolverResultType.Cancelled:
+                    if (hasResultMessage)
+                    {
+                        Debug.LogWarning(result.Message);
+                    }
+                    break;
+                case ResolverResultType.Failed:
+                    if (hasResultMessage)
+                    {
+                        Debug.LogError(result.Message);
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -200,21 +252,30 @@ namespace VitDeck.Validator.GUI
         private void GetMessageBox(Message msg)
         {
             GUILayout.BeginHorizontal();
+            var hasissue = msg.issue != null;
 
             var helpBoxRect = EditorGUILayout.BeginHorizontal();
             if (Event.current.type == EventType.MouseUp && helpBoxRect.Contains(Event.current.mousePosition) &&
-                msg.issue != null)
+                hasissue)
                 EditorGUIUtility.PingObject(msg.issue.target);
             EditorGUILayout.HelpBox(msg.message, msg.type, true);
             EditorGUILayout.EndHorizontal();
-            if (msg.issue != null && !string.IsNullOrEmpty(msg.issue.solutionURL))
+            
+            EditorGUILayout.BeginVertical(GUILayout.Width(50));
+            if (hasissue && !string.IsNullOrEmpty(msg.issue.solutionURL))
             {
                 CustomGUILayout.URLButton("Help", msg.issue.solutionURL, GUILayout.Width(50));
             }
-            else
+            if (hasissue && msg.issue.resolver != null)
             {
-                GUILayout.Space(55);
+                EditorGUI.BeginDisabledGroup(msg.isResolved);
+                if (GUILayout.Button("Resolve", GUILayout.Width(55)))
+                {
+                    TryResolve(msg);
+                }
+                EditorGUI.EndDisabledGroup();
             }
+            GUILayout.EndVertical();
 
             GUILayout.EndHorizontal();
         }
@@ -231,6 +292,7 @@ namespace VitDeck.Validator.GUI
             public Issue issue;
             public string message;
             public MessageType type;
+            public bool isResolved;
         }
     }
 }
