@@ -86,6 +86,17 @@ namespace VitDeck.Validator.GUI
                 isOpenMessageArea = EditorGUILayout.Foldout(isOpenMessageArea, "Messages:" + countMessage);
                 if (isOpenMessageArea)
                 {
+                    var fixableCount = messages.Count(m => m.issue != null && m.issue.resolver != null && !m.isResolved);
+                    EditorGUI.BeginDisabledGroup(fixableCount == 0);
+                    if(GUILayout.Button("Resolve all fixable issues"))
+                    {
+                        foreach (var msg in messages)
+                        {
+                            TryResolve(msg);
+                        }
+                    }
+                    EditorGUI.EndDisabledGroup();
+                    
                     messageAreaScroll = EditorGUILayout.BeginScrollView(messageAreaScroll);
                     foreach (var msg in messages)
                     {
@@ -102,6 +113,42 @@ namespace VitDeck.Validator.GUI
             if (GUILayout.Button("Copy result log"))
             {
                 EditorGUIUtility.systemCopyBuffer = validationLog;
+            }
+        }
+
+        private void TryResolve(Message message)
+        {
+            if (message.issue?.resolver == null ||
+                message.isResolved)
+            {
+                return;
+            }
+            var result = message.issue.resolver.Invoke();
+            var hasResultMessage = !string.IsNullOrEmpty(result.Message);
+            
+            switch (result.Type)
+            {
+                case ResolverResultType.Resolved:
+                    message.isResolved = true;
+                    if (hasResultMessage)
+                    {
+                        Debug.Log(result.Message);
+                    }
+                    break;
+                case ResolverResultType.Cancelled:
+                    if (hasResultMessage)
+                    {
+                        Debug.LogWarning(result.Message);
+                    }
+                    break;
+                case ResolverResultType.Failed:
+                    if (hasResultMessage)
+                    {
+                        Debug.LogError(result.Message);
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -224,8 +271,7 @@ namespace VitDeck.Validator.GUI
                 EditorGUI.BeginDisabledGroup(msg.isResolved);
                 if (GUILayout.Button("Resolve", GUILayout.Width(55)))
                 {
-                    msg.issue.resolver.Invoke();
-                    msg.isResolved = true;
+                    TryResolve(msg);
                 }
                 EditorGUI.EndDisabledGroup();
             }
