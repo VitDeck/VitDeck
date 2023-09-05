@@ -2,9 +2,8 @@ using System;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using VitDeck.Validator;
 
-namespace VitDeck.Main.GUI
+namespace VitDeck.Validator.GUI
 {
     [CustomPropertyDrawer(typeof(RuleSetPopupAttribute))]
     public class RuleSetPopupDrawer : PropertyDrawer
@@ -18,7 +17,7 @@ namespace VitDeck.Main.GUI
 
         private static void InitializeRuleSetTypeNameList()
         {
-            var ruleSets = Validator.Validator.GetRuleSets();
+            var ruleSets = Validator.GetRuleSets();
 
             ruleSetNameList = ruleSets.Select(t => t.GetType().Name).ToArray();
         }

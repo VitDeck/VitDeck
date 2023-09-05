@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using VitDeck.Language;
+using VitDeck.Validator;
 
 namespace VitDeck.Exporter
 {
@@ -16,7 +17,7 @@ namespace VitDeck.Exporter
         public string ExportFolderPath = "Assets/Exports";
         [Tooltip("File name for export. If `{SHA-1}` is contained, it will replace SHA-1 hash value. If `{ID}` is contained, it will replace base folder name. If `{DATETIME}` is contained, it will replace exporting time.")]
         public string fileNameFormat = "export_file.unitypackage";
-        [Tooltip("Class name of IRuleSet. If this field is empty, Export will skip validation.")]
+        [Tooltip("Class name of IRuleSet. If this field is empty, Export will skip validation."), RuleSetPopup]
         public string ruleSetName = "";
         [Tooltip("If true, Export will done though validation result has warning issues.")]
         public bool ignoreValidationWarning = false;

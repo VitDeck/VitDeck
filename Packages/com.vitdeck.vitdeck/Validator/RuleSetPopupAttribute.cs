@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VitDeck.Main
+namespace VitDeck.Validator
 {
     public class RuleSetPopupAttribute : PropertyAttribute
     {

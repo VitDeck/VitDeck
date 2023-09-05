@@ -3,7 +3,8 @@
     "references": [
         "VitDeck.Utilities",
         "VitDeck.Language",
-        "VitDeck.Exporter.Addons.VRCSDK3"
+        "VitDeck.Exporter.Addons.VRCSDK3",
+        "VitDeck.Validator"
     ],
     "includePlatforms": [
         "Editor"
