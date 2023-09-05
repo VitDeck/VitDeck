@@ -149,6 +149,14 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "com.vitdeck.vitdeck-exhibitor": {
+      "version": "file:com.vitdeck.vitdeck-exhibitor",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.vitdeck.vitdeck": "2.0.0"
+      }
+    },
     "com.vitdeck.vitdeck-organizer": {
       "version": "file:com.vitdeck.vitdeck-organizer",
       "depth": 0,
