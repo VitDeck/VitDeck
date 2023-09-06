@@ -33,14 +33,6 @@ namespace VitDeck.Validator.GUI
             window.Validate();
         }
 
-        [MenuItem("VitDeck/Validate(Simple)")]
-        static void Open()
-        {
-            var window = GetWindow<ValidatorWindow>(false, "VitDeck");
-            window.Show();
-        }
-
-
         private void OnGUI()
         {
             EditorGUIUtility.labelWidth = 80;
