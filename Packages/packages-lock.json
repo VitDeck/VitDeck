@@ -143,26 +143,26 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.vitdeck.vitdeck": {
-      "version": "file:com.vitdeck.vitdeck",
+    "com.vitdeck.core": {
+      "version": "file:com.vitdeck.core",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
     },
-    "com.vitdeck.vitdeck-exhibitor": {
-      "version": "file:com.vitdeck.vitdeck-exhibitor",
+    "com.vitdeck.exhibitor": {
+      "version": "file:com.vitdeck.exhibitor",
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.vitdeck.vitdeck": "2.0.0"
+        "com.vitdeck.core": "2.0.0"
       }
     },
-    "com.vitdeck.vitdeck-organizer": {
-      "version": "file:com.vitdeck.vitdeck-organizer",
+    "com.vitdeck.organizer": {
+      "version": "file:com.vitdeck.organizer",
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.vitdeck.vitdeck": "2.0.0"
+        "com.vitdeck.core": "2.0.0"
       }
     },
     "nuget.mono-cecil": {
