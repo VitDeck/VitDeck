@@ -5,8 +5,9 @@ using UnityEditor;
 using UnityEngine;
 using VitDeck.Language;
 using VitDeck.Utilities;
+using VitDeck.Validator;
 
-namespace VitDeck.Validator.GUI
+namespace VitDeck.ExhibitorGUI
 {
     /// <summary>
     /// テンプレートから作成機能のGUI
@@ -23,7 +24,7 @@ namespace VitDeck.Validator.GUI
             {
                 if (ruleSets == null)
                 {
-                    ruleSets = Validator.GetRuleSets();
+                    ruleSets = Validator.Validator.GetRuleSets();
                 }
                 return ruleSets;
             }
@@ -168,7 +169,7 @@ namespace VitDeck.Validator.GUI
             SaveSettings();
             var baseFolderPath = AssetDatabase.GetAssetPath(baseFolder);
             OutLog("Starting validation.");
-            results = Validator.Validate(selectedRuleSet, baseFolderPath);
+            results = Validator.Validator.Validate(selectedRuleSet, baseFolderPath);
             var header = string.Format("- version:{0}", ProductInfoUtility.GetVersion()) + Environment.NewLine;
             header += string.Format("- Rule set:{0}", selectedRuleSet.RuleSetName) + Environment.NewLine;
             header += string.Format("- Base folder:{0}", baseFolderPath) + Environment.NewLine;

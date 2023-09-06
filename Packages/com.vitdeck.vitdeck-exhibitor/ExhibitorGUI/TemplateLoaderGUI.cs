@@ -3,9 +3,10 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using VitDeck.Language;
+using VitDeck.TemplateLoader;
 using VitDeck.Utilities;
 
-namespace VitDeck.TemplateLoader.GUI
+namespace VitDeck.ExhibitorGUI
 {
     /// <summary>
     /// テンプレートから作成機能のGUI
@@ -44,14 +45,14 @@ namespace VitDeck.TemplateLoader.GUI
 
         static void Init()
         {
-            templateFolders = TemplateLoader.GetTemplateFolders();
-            templateOptions = TemplateLoader.GetTemplateNames(templateFolders);
+            templateFolders = TemplateLoader.TemplateLoader.GetTemplateFolders();
+            templateOptions = TemplateLoader.TemplateLoader.GetTemplateNames(templateFolders);
             popupIndex = 0;
             licenceScroll = new Vector2();
             messages = new List<Message>();
             if (templateFolders.Length > 0)
             {
-                templateProperty = TemplateLoader.GetTemplateProperty(templateFolders[popupIndex]);
+                templateProperty = TemplateLoader.TemplateLoader.GetTemplateProperty(templateFolders[popupIndex]);
                 replaceStringList = CreateReplaceStringList(templateProperty.replaceList);
             }
             else
@@ -87,7 +88,7 @@ namespace VitDeck.TemplateLoader.GUI
             popupIndex = EditorGUILayout.Popup("Template:", popupIndex, templateOptions);
             if (UnityEngine.GUI.changed)
             {
-                templateProperty = TemplateLoader.GetTemplateProperty(templateFolders[popupIndex]);
+                templateProperty = TemplateLoader.TemplateLoader.GetTemplateProperty(templateFolders[popupIndex]);
                 replaceStringList = CreateReplaceStringList(templateProperty.replaceList);
                 licenceScroll = new Vector2();
                 messages = new List<Message>();
@@ -133,7 +134,7 @@ namespace VitDeck.TemplateLoader.GUI
                     messages = new List<Message>();
                     var folderName = templateFolders[popupIndex];
                     var templateName = templateOptions[popupIndex];
-                    if (TemplateLoader.Load(folderName, replaceStringList))
+                    if (TemplateLoader.TemplateLoader.Load(folderName, replaceStringList))
                     {
                         messages.Add(new Message(LocalizedMessage.Get("TemplateLoaderWindow.Succeeded", templateName), MessageType.Info));
                     }

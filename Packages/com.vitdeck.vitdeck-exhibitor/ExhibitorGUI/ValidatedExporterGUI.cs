@@ -8,8 +8,10 @@ using VitDeck.Exporter;
 using VitDeck.Utilities;
 using VitDeck.Validator;
 using VitDeck.Language;
+using VitDeck.Main;
+using VitDeck.Main.ValidatedExporter;
 
-namespace VitDeck.Main.ValidatedExporter.GUI
+namespace VitDeck.ExhibitorGUI
 {
     /// <summary>
     /// ルールチェック付きエクスポート機能のGUI
