@@ -1,0 +1,15 @@
+{
+    "name": "VitDeck.Developer",
+    "references": [
+        "GUID:b921f40c1e696ff43b28e8fed5801326"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

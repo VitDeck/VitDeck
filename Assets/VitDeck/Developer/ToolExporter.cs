@@ -5,7 +5,7 @@ using System.IO;
 using UnityEditor;
 using VitDeck.Utilities;
 
-namespace VitDeck.Main
+namespace VitDeck.Developer
 {
     /// <summary>
     /// VitDeck自体のunitypackageを作成し、デスクトップへ出力します。
