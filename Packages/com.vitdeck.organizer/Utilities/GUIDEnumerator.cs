@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 using System.Text;
+using VitDeck.Utilities;
 
-namespace VitDeck.Utilities
+namespace VitDeck.Organizer.Utilities
 {
     public class GUIDEnumerator
     {
