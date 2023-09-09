@@ -14,7 +14,7 @@ namespace VitDeck.Exporter.Tests
         public void TestExport()
         {
             var filename = "test.unitypackage";
-            var baseFolderPath = "Packages/com.vitdeck.vitdeck/Exporter/Tests/TestBaseFolder";
+            var baseFolderPath = "Packages/com.vitdeck.core/Exporter/Tests/TestBaseFolder";
             var setting = new ExportSetting();
             setting.SettingName = "";
             setting.Description = "";
@@ -31,7 +31,7 @@ namespace VitDeck.Exporter.Tests
         public void TestExportError()
         {
             var filename = "testError.unitypackage";
-            var baseFolderPath = "Packages/com.vitdeck.vitdeck/Exporter/Tests/TestBaseFolder";
+            var baseFolderPath = "Packages/com.vitdeck.core/Exporter/Tests/TestBaseFolder";
             var setting = new ExportSetting();
             setting.SettingName = "";
             setting.Description = "";
@@ -54,7 +54,7 @@ namespace VitDeck.Exporter.Tests
         public void TestExportException()
         {
             var filename = "testException.unitypackage";
-            var baseFolderPath = "Packages/com.vitdeck.vitdeck/Exporter/Tests/TestBaseFolder";
+            var baseFolderPath = "Packages/com.vitdeck.core/Exporter/Tests/TestBaseFolder";
             var setting = new ExportSetting();
             setting.SettingName = "";
             setting.Description = "";
@@ -75,7 +75,7 @@ namespace VitDeck.Exporter.Tests
         [Test]
         public void TestExportSettingValue()
         {
-            var baseFolderPath = "Packages/com.vitdeck.vitdeck/Exporter/Tests/TestBaseFolder";
+            var baseFolderPath = "Packages/com.vitdeck.core/Exporter/Tests/TestBaseFolder";
             var setting = new ExportSetting();
             setting.SettingName = "";
             setting.Description = "";

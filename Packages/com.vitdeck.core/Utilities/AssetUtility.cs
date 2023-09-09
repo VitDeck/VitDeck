@@ -74,7 +74,7 @@ namespace VitDeck.Utilities
             {
                 if (string.IsNullOrEmpty(_rootFolderPath))
                 {
-                    _rootFolderPath = "Packages/com.vitdeck";
+                    _rootFolderPath = "Packages/com.vitdeck.core";
                 }
 
                 return _rootFolderPath;

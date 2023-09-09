@@ -1,4 +1,6 @@
 using NUnit.Framework;
+using UnityEditor;
+using UnityEngine.Windows;
 
 namespace VitDeck.Utilities.Tests
 {
@@ -7,7 +9,7 @@ namespace VitDeck.Utilities.Tests
         [Test]
         public void TestImagesFolderPath()
         {
-            Assert.That(AssetUtility.ImageFolderPath, Is.EqualTo("Packages/com.vitdeck.vitdeck/Images"));
+            Assert.That(AssetUtility.ImageFolderPath, Is.EqualTo("Packages/com.vitdeck.core/Images"));
         }
         [Test]
         public void TestConfigFolderPath()
@@ -17,7 +19,7 @@ namespace VitDeck.Utilities.Tests
         [Test]
         public void TestRootFolderPath()
         {
-            Assert.That(AssetUtility.RootFolderPath, Is.EqualTo("Packages/com.vitdeck.vitdeck"));
+            Assert.That(AssetUtility.RootFolderPath, Is.EqualTo("Packages/com.vitdeck.core"));
         }
     }
 }
