@@ -15,6 +15,7 @@ namespace VitDeck.Utilities
     /// </summary>
     public static class AssetUtility
     {
+        private static string _temporaryFolderPath;
         private static string _imageFolderPath;
         private static string _configFolderPath;
         private static string _rootFolderPath;
@@ -38,6 +39,11 @@ namespace VitDeck.Utilities
                 return _imageFolderPath;
             }
         }
+
+        /// <summary>
+        /// 一時的ファイルを配置する為のフォルダのパス
+        /// </summary>
+        public static string TemporaryFolderPath => "Assets/VitDeck/Temporary";
 
         /// <summary>
         /// 設定ファイル用フォルダのパス
