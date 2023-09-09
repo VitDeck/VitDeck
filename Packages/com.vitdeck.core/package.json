@@ -1,7 +1,7 @@
 {
   "name": "com.vitdeck.core",
   "displayName": "VitDeck Core",
-  "version": "2.0.0-exp.1",
+  "version": "2.0.0-exp.2",
   "unity": "2019.4",
   "description": "VitDeck is a Unity Editor extension that provides a set of tools for co-create assets that comply with certain rules."
 }

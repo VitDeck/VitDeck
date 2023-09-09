@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a424079e73ca2ce4e91c6c9f0d62cf81, type: 3}
   m_Name: ProductInfo
   m_EditorClassIdentifier: 
-  version: 2.0.0-exp
+  version: 2.0.0-exp.2
   developerLinkTitle: VitDeck on GitHub
   developerLinkURL: https://github.com/vitdeck/VitDeck
