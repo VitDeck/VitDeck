@@ -42,6 +42,7 @@ namespace VitDeck.Validator.GUI
                 GUILayout.Label("Rule Checker is Inactive. Please run validation from workspace menu.");
                 return;
             }
+
             //Rule set dropdown
             EditorGUILayout.LabelField("Rule Set:", ruleSet.RuleSetName);
             //Base folder field
@@ -78,17 +79,19 @@ namespace VitDeck.Validator.GUI
                 isOpenMessageArea = EditorGUILayout.Foldout(isOpenMessageArea, "Messages:" + countMessage);
                 if (isOpenMessageArea)
                 {
-                    var fixableCount = messages.Count(m => m.issue != null && m.issue.resolver != null && !m.isResolved);
+                    var fixableCount =
+                        messages.Count(m => m.issue != null && m.issue.resolver != null && !m.isResolved);
                     EditorGUI.BeginDisabledGroup(fixableCount == 0);
-                    if(GUILayout.Button("Resolve all fixable issues"))
+                    if (GUILayout.Button("Resolve all fixable issues"))
                     {
                         foreach (var msg in messages)
                         {
                             TryResolve(msg);
                         }
                     }
+
                     EditorGUI.EndDisabledGroup();
-                    
+
                     messageAreaScroll = EditorGUILayout.BeginScrollView(messageAreaScroll);
                     foreach (var msg in messages)
                     {
@@ -115,9 +118,10 @@ namespace VitDeck.Validator.GUI
             {
                 return;
             }
+
             var result = message.issue.resolver.Invoke();
             var hasResultMessage = !string.IsNullOrEmpty(result.Message);
-            
+
             switch (result.Type)
             {
                 case ResolverResultType.Resolved:
@@ -126,18 +130,21 @@ namespace VitDeck.Validator.GUI
                     {
                         Debug.Log(result.Message);
                     }
+
                     break;
                 case ResolverResultType.Cancelled:
                     if (hasResultMessage)
                     {
                         Debug.LogWarning(result.Message);
                     }
+
                     break;
                 case ResolverResultType.Failed:
                     if (hasResultMessage)
                     {
                         Debug.LogError(result.Message);
                     }
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -252,12 +259,13 @@ namespace VitDeck.Validator.GUI
                 EditorGUIUtility.PingObject(msg.issue.target);
             EditorGUILayout.HelpBox(msg.message, msg.type, true);
             EditorGUILayout.EndHorizontal();
-            
+
             EditorGUILayout.BeginVertical(GUILayout.Width(50));
             if (hasissue && !string.IsNullOrEmpty(msg.issue.solutionURL))
             {
                 CustomGUILayout.URLButton("Help", msg.issue.solutionURL, GUILayout.Width(50));
             }
+
             if (hasissue && msg.issue.resolver != null)
             {
                 EditorGUI.BeginDisabledGroup(msg.isResolved);
@@ -265,8 +273,10 @@ namespace VitDeck.Validator.GUI
                 {
                     TryResolve(msg);
                 }
+
                 EditorGUI.EndDisabledGroup();
             }
+
             GUILayout.EndVertical();
 
             GUILayout.EndHorizontal();

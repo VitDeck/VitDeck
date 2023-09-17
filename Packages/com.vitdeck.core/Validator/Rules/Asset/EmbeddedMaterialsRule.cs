@@ -30,6 +30,7 @@ namespace VitDeck.Validator
             {
                 return;
             }
+
             UnityEngine.Debug.Log(path);
 
             AddIssue(new Issue(

@@ -12,17 +12,18 @@ namespace VitDeck.Validator.Test
         {
             var version = UnityEngine.Application.unityVersion;
             var rule = new UnityVersionRule("Unityバージョンテスト", version);
-            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath );
+            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath);
             var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("Unityバージョンテスト"));
             Assert.That(result.Issues.Count, Is.EqualTo(0));
         }
+
         [Test]
         public void TestValidateError()
         {
             var version = UnityEngine.Application.unityVersion;
             var rule = new UnityVersionRule("Unityバージョンテスト", "invalidVersion");
-            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath );
+            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath);
             var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("Unityバージョンテスト"));
             Assert.That(result.Issues.Count, Is.EqualTo(1));

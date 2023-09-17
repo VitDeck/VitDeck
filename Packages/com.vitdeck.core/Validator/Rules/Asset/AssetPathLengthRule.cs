@@ -10,6 +10,7 @@ namespace VitDeck.Validator
     public class AssetPathLengthRule : BaseRule
     {
         private readonly int limit;
+
         /// <summary>
         /// コンストラクタ。
         /// </summary>

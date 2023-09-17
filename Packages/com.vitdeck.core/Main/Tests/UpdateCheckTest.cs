@@ -14,11 +14,12 @@ namespace VitDeck.Main.Tests
             string version = JsonReleaseInfo.GetVersion();
             Assert.That(version, Is.EqualTo("1.0.0"));
         }
+
         [Test]
         public void TestGetLatestVersion()
         {
             var version = UpdateCheck.GetLatestVersion();
-            if(version != null)
+            if (version != null)
                 Assert.That(version, Is.Not.Empty);
         }
     }

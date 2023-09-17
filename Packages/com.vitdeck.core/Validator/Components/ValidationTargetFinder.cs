@@ -14,9 +14,11 @@ namespace VitDeck.Validator
     public class ValidationTargetFinder : IValidationTargetFinder
     {
         private bool showSaveDialogFlag = true;
+
         public ValidationTargetFinder()
         {
         }
+
         /// <summary>
         /// 検証対象を検索する
         /// </summary>
@@ -29,6 +31,7 @@ namespace VitDeck.Validator
             {
                 throw new FatalValidationErrorException(string.Format("正しいベースフォルダを指定してください。:{0}", baseFonderPath));
             }
+
             return new ValidationTarget(baseFonderPath,
                 FindAssetGuids(baseFonderPath),
                 FindAssetPaths(baseFonderPath),
@@ -37,6 +40,7 @@ namespace VitDeck.Validator
                 FindRootObjects(baseFonderPath, forceOpenScene),
                 FindAllObjects(baseFonderPath, forceOpenScene));
         }
+
         /// <summary>
         /// ベースフォルダ内のアセットの全てのGUIDを検索する
         /// </summary>
@@ -54,6 +58,7 @@ namespace VitDeck.Validator
             assetGuids.Insert(0, baseFolderGuid);
             return assetGuids.ToArray();
         }
+
         /// <summary>
         /// ベースフォルダ内のアセットの全てのパスを検索する
         /// </summary>
@@ -71,6 +76,7 @@ namespace VitDeck.Validator
             assetPaths.Insert(0, baseFolderPath);
             return assetPaths.ToArray();
         }
+
         /// <summary>
         /// ベースフォルダ内のアセットの全てのオブジェクトを検索する
         /// </summary>
@@ -89,6 +95,7 @@ namespace VitDeck.Validator
             assetObjects.Insert(0, baseFolder);
             return assetObjects.ToArray();
         }
+
         /// <summary>
         /// ベースフォルダ内のシーンファイルを検索する。
         /// </summary>
@@ -117,8 +124,10 @@ namespace VitDeck.Validator
                 var scene = SceneManager.GetSceneByPath(path);
                 if (scene.path == null)
                 {
-                    if (forceOpenScene ? true :
-                        EditorUtility.DisplayDialog("検証対象のシーンが開かれていません。", "検証対象のシーンを開きますか？" + Environment.NewLine + path, "開く", "中止"))
+                    if (forceOpenScene
+                            ? true
+                            : EditorUtility.DisplayDialog("検証対象のシーンが開かれていません。",
+                                "検証対象のシーンを開きますか？" + Environment.NewLine + path, "開く", "中止"))
                     {
                         scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
                         EditorSceneManager.SetActiveScene(scene);
@@ -128,13 +137,16 @@ namespace VitDeck.Validator
                         throw new FatalValidationErrorException("検証を中止しました。");
                     }
                 }
+
                 sceneList.Add(scene);
             }
             else
             {
                 var paths = sceneGuids.Select(guid => AssetDatabase.GUIDToAssetPath(guid)).ToArray();
-                throw new FatalValidationErrorException("シーンファイルが複数見つかりました。" + Environment.NewLine + string.Join(Environment.NewLine, paths));
+                throw new FatalValidationErrorException("シーンファイルが複数見つかりました。" + Environment.NewLine +
+                                                        string.Join(Environment.NewLine, paths));
             }
+
             return sceneList.ToArray();
         }
 
@@ -146,9 +158,11 @@ namespace VitDeck.Validator
                 {
                     throw new FatalValidationErrorException("編集中のシーンファイルをセーブして再実行してください。");
                 }
+
                 showSaveDialogFlag = false;
             }
         }
+
         /// <summary>
         /// ベースフォルダ内のシーンから全てのルートオブジェクトを取得する。
         /// </summary>
@@ -165,6 +179,7 @@ namespace VitDeck.Validator
             var scenes = FindScenes(baseFolderPath, forceOpenScene);
             return scenes[0].GetRootGameObjects();
         }
+
         /// <summary>
         /// ベースフォルダ内のシーンから全てのゲームオブジェクトを取得する。
         /// </summary>

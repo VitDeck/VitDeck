@@ -7,7 +7,6 @@ namespace VitDeck.Validator
 {
     public abstract class BasePrefabRule : BaseRule
     {
-
         private readonly HashSet<string> targetGUIDs;
 
         public BasePrefabRule(string name, string[] targetPrefabGUIDs) : base(name)

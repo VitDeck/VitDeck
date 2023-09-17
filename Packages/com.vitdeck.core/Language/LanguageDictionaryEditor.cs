@@ -12,8 +12,7 @@ namespace VitDeck.Language
     [CustomEditor(typeof(LanguageDictionary))]
     public class LanguageDictionaryEditor : Editor
     {
-        [SerializeField]
-        private TreeViewState treeViewState;
+        [SerializeField] private TreeViewState treeViewState;
 
         private LanguageDictionary dictionary;
 
@@ -92,18 +91,17 @@ namespace VitDeck.Language
 
         private void ReadFromTSV(string tsvText)
         {
-            
             var translations = new List<LanguageDictionary.Pair>();
             var tsv = CSVParser.LoadFromString(tsvText, CSVParser.Delimiter.Tab);
-            
+
             int messageIDColumnIndex = 0;
             int messageColumnIndex = 1;
-            
+
             foreach (var row in tsv)
             {
                 var messageID = row[messageIDColumnIndex];
                 var message = row[messageColumnIndex];
-                
+
                 translations.Add(new LanguageDictionary.Pair() { Key = messageID, Value = message });
             }
 
@@ -123,7 +121,7 @@ namespace VitDeck.Language
 
                 if (IsMustQuote(value))
                 {
-                    value = $"\"{value.Replace("\"","\\\"")}\"";
+                    value = $"\"{value.Replace("\"", "\\\"")}\"";
                 }
 
                 builder.AppendFormat("{0}\t{1}\n", translation.Key, value);

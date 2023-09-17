@@ -22,6 +22,7 @@ namespace VitDeck.ExhibitorGUI
         private static ValidatedExporterWindow window;
         private static ExportSetting[] settings;
         private static string[] settingNames;
+
         private static ExportSetting[] Settings
         {
             get
@@ -30,9 +31,11 @@ namespace VitDeck.ExhibitorGUI
                 {
                     settings = Exporter.Exporter.GetExportSettings();
                 }
+
                 return settings;
             }
         }
+
         private static string[] SettingNames
         {
             get
@@ -44,10 +47,13 @@ namespace VitDeck.ExhibitorGUI
                         names.Add(setting.SettingName);
                     settingNames = names.Count() > 0 ? names.ToArray() : new string[] { "Settings Not Found" };
                 }
+
                 return settingNames;
             }
         }
+
         private string ruleSetName = "";
+
         private string RuleSetName
         {
             get
@@ -57,9 +63,11 @@ namespace VitDeck.ExhibitorGUI
                     var ruleSet = Validator.Validator.GetRuleSet(selectedSetting.ruleSetName);
                     ruleSetName = ruleSet != null ? ruleSet.RuleSetName : "";
                 }
+
                 return ruleSetName;
             }
         }
+
         private ExportSetting selectedSetting;
         private DefaultAsset baseFolder;
         private bool forceExport;
@@ -113,6 +121,7 @@ namespace VitDeck.ExhibitorGUI
             {
                 userSettings.exporterSettingFileName = selectedSetting.name;
             }
+
             userSettings.validatorFolderPath = AssetDatabase.GetAssetPath(baseFolder);
             SettingUtility.SaveSettings(userSettings);
         }
@@ -125,12 +134,14 @@ namespace VitDeck.ExhibitorGUI
             EditorGUI.BeginChangeCheck();
             var index = EditorGUILayout.Popup("Setting:", GetPopupIndex(selectedSetting), SettingNames);
             selectedSetting = Settings.Count() > 0 ? Settings[index] : null;
-            if(EditorGUI.EndChangeCheck())
+            if (EditorGUI.EndChangeCheck())
             {
                 ruleSetName = "";
             }
+
             //Base folder field
-            DefaultAsset newFolder = (DefaultAsset)EditorGUILayout.ObjectField("Base Folder:", baseFolder, typeof(DefaultAsset), true);
+            DefaultAsset newFolder =
+                (DefaultAsset)EditorGUILayout.ObjectField("Base Folder:", baseFolder, typeof(DefaultAsset), true);
             var path = AssetDatabase.GetAssetPath(newFolder);
             baseFolder = AssetDatabase.IsValidFolder(path) ? newFolder : null;
             if (selectedSetting != null)
@@ -140,10 +151,12 @@ namespace VitDeck.ExhibitorGUI
                 //Setting fields
                 GUILayout.TextArea(selectedSetting.Description);
             }
+
             //ForceExportCheck
             if (result != null && !result.IsExportSuccess
-                && selectedSetting != null && selectedSetting.AllowForceExport)
-                forceExport = GUILayout.Toggle(forceExport, LocalizedMessage.Get("ValidatedExporterWindow.ForceExport"));
+                               && selectedSetting != null && selectedSetting.AllowForceExport)
+                forceExport = GUILayout.Toggle(forceExport,
+                    LocalizedMessage.Get("ValidatedExporterWindow.ForceExport"));
             //Export button
             EditorGUI.BeginDisabledGroup(selectedSetting == null || baseFolder == null);
 
@@ -161,8 +174,10 @@ namespace VitDeck.ExhibitorGUI
                 {
                     GetMessageBox(msg);
                 }
+
                 EditorGUILayout.EndScrollView();
             }
+
             //Copy Button
             if (GUILayout.Button("Copy result log"))
                 OnCopyResultLog();
@@ -175,6 +190,7 @@ namespace VitDeck.ExhibitorGUI
             {
                 index = Array.IndexOf(Settings, setting);
             }
+
             return index;
         }
 
@@ -192,6 +208,7 @@ namespace VitDeck.ExhibitorGUI
             {
                 yield return null;
             }
+
             result = (ValidatedExportResult)resultEnumerator.Current;
             AssetDatabase.Refresh();
             var header = string.Format("- version:{0}", ProductInfoUtility.GetVersion()) + Environment.NewLine;
@@ -216,7 +233,8 @@ namespace VitDeck.ExhibitorGUI
             GUILayout.BeginHorizontal();
 
             var helpBoxRect = EditorGUILayout.BeginHorizontal();
-            if (Event.current.type == EventType.MouseUp && helpBoxRect.Contains(Event.current.mousePosition) && msg.issue != null)
+            if (Event.current.type == EventType.MouseUp && helpBoxRect.Contains(Event.current.mousePosition) &&
+                msg.issue != null)
                 EditorGUIUtility.PingObject(msg.issue.target);
             EditorGUILayout.HelpBox(msg.message, msg.type, true);
             EditorGUILayout.EndHorizontal();
@@ -228,10 +246,12 @@ namespace VitDeck.ExhibitorGUI
             {
                 GUILayout.Space(55);
             }
+
             GUILayout.EndHorizontal();
         }
 
-#region Log
+        #region Log
+
         private void ClearLogs()
         {
             exportLog = "";
@@ -275,26 +295,36 @@ namespace VitDeck.ExhibitorGUI
                     }
                 }
             }
+
             if (exportResult.IsExportSuccess)
             {
-                messages.Add(new Message(LocalizedMessage.Get("ValidatedExporterWindow.Succeeded") + Environment.NewLine + header, MessageType.Info));
+                messages.Add(new Message(
+                    LocalizedMessage.Get("ValidatedExporterWindow.Succeeded") + Environment.NewLine + header,
+                    MessageType.Info));
                 if (exportResult.GetValidationLog() != "")
                     messages.Add(new Message(exportResult.GetValidationLog(), MessageType.Info));
                 if (exportResult.GetExportLog() != "")
                     messages.Add(new Message(exportResult.GetExportLog(), MessageType.Info));
-                var package = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(exportResult.exportResult.exportFilePath);
-                var result = new Issue(package, IssueLevel.Info, LocalizedMessage.Get("ValidatedExporterWindow.Succeeded"));
-                messages.Add(new Message(LocalizedMessage.Get("ValidatedExporterWindow.SucceededDetail") + Environment.NewLine + exportResult.exportResult.exportFilePath, MessageType.Info, result));
+                var package =
+                    AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(exportResult.exportResult.exportFilePath);
+                var result = new Issue(package, IssueLevel.Info,
+                    LocalizedMessage.Get("ValidatedExporterWindow.Succeeded"));
+                messages.Add(new Message(
+                    LocalizedMessage.Get("ValidatedExporterWindow.SucceededDetail") + Environment.NewLine +
+                    exportResult.exportResult.exportFilePath, MessageType.Info, result));
             }
             else
             {
-                messages.Add(new Message(LocalizedMessage.Get("ValidatedExporterWindow.Aborted") + Environment.NewLine + header, MessageType.Error));
+                messages.Add(new Message(
+                    LocalizedMessage.Get("ValidatedExporterWindow.Aborted") + Environment.NewLine + header,
+                    MessageType.Error));
                 messages.Add(new Message(exportResult.log, MessageType.Info));
                 if (exportResult.GetExportLog() != "")
                     messages.Add(new Message(exportResult.GetExportLog(), MessageType.Error));
             }
         }
-#endregion
+
+        #endregion
 
         /// <summary>
         /// HelpBoxに表示するメッセージ
@@ -307,6 +337,7 @@ namespace VitDeck.ExhibitorGUI
                 this.type = type;
                 this.issue = issue;
             }
+
             public Issue issue;
             public string message;
             public MessageType type;

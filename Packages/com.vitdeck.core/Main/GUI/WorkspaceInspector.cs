@@ -28,9 +28,9 @@ namespace VitDeck.Main.GUI
                 Debug.Log("Run validation");
                 var ruleSet = workflow.RuleSet;
                 var baseFolder = AssetDatabase.LoadAssetAtPath<DefaultAsset>(workspace.GetFolderPath());
-                
+
                 SimpleValidatorWindow.Validate(ruleSet, baseFolder);
-                
+
                 // var results = Validator.Validator.Validate(ruleSet, baseDirectory);
                 // Debug.Log("Results:" + results.Length);
                 // foreach (var result in results)

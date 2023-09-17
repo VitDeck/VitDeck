@@ -31,8 +31,8 @@ namespace VitDeck.Validator.Test
             var result = rule.Validate(target);
 
             Assert.That(result.Issues.Count, Is.EqualTo(1));
-            
-            foreach(var issue in result.Issues)
+
+            foreach (var issue in result.Issues)
             {
                 Assert.That(issue.level, Is.EqualTo(IssueLevel.Error));
             }

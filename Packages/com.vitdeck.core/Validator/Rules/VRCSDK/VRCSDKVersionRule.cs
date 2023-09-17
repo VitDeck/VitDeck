@@ -47,7 +47,7 @@ namespace VitDeck.Validator
                     LocalizedMessage.Get("VRCSDKVersionRule.NotInstalled"),
                     LocalizedMessage.Get("VRCSDKVersionRule.NotInstalled.Solution"),
                     solutionURL: downloadURL
-                    ));
+                ));
                 return;
             }
 
@@ -60,7 +60,7 @@ namespace VitDeck.Validator
                     LocalizedMessage.Get("VRCSDKVersionRule.PreviousVersion"),
                     LocalizedMessage.Get("VRCSDKVersionRule.PreviousVersion.Solution"),
                     solutionURL: downloadURL
-                    ));
+                ));
             }
         }
     }

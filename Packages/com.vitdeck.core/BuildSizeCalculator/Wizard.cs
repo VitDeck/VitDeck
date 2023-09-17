@@ -15,8 +15,7 @@ namespace VitDeck.BuildSizeCalculator
     {
         private const string prefix = "VitDeck/";
 
-        [SerializeField]
-        private DefaultAsset baseFolder;
+        [SerializeField] private DefaultAsset baseFolder;
 
 #if !VITDECK_HIDE_MENUITEM
         [MenuItem(prefix + "Calculate Build Size", priority = 102)]
@@ -76,7 +75,8 @@ namespace VitDeck.BuildSizeCalculator
 
             EditorUtility.DisplayDialog(
                 "VitDeck",
-                LocalizedMessage.Get("BuildSizeCalculator.BuildSize", AssetUtility.GetScenePath(this.baseFolder), MathUtility.FormatByteCount((int)calculating.Current)),
+                LocalizedMessage.Get("BuildSizeCalculator.BuildSize", AssetUtility.GetScenePath(this.baseFolder),
+                    MathUtility.FormatByteCount((int)calculating.Current)),
                 "OK"
             );
         }

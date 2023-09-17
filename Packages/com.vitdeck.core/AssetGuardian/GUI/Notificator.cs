@@ -25,25 +25,30 @@ namespace VitDeck.AssetGuardian.GUI
             if (SaveCancelledAssetList.Count > 0)
             {
                 EditorUtility.DisplayDialog(
-                    "VitDeck Asset Guardian", 
-                    LocalizedMessage.Get("AssetGuardian.Notificator.ModificationNotAllowed") + "\n" + Digest(SaveCancelledAssetList), 
+                    "VitDeck Asset Guardian",
+                    LocalizedMessage.Get("AssetGuardian.Notificator.ModificationNotAllowed") + "\n" +
+                    Digest(SaveCancelledAssetList),
                     LocalizedMessage.Get("AssetGuardian.Notificator.CloseDialog"));
 
                 SaveCancelledAssetList.Clear();
             }
+
             if (DeleteCancelledAssetList.Count > 0)
             {
                 EditorUtility.DisplayDialog(
                     "VitDeck Asset Guardian",
-                    LocalizedMessage.Get("AssetGuardian.Notificator.DeleteNotAllowed") + "\n" + Digest(DeleteCancelledAssetList),
+                    LocalizedMessage.Get("AssetGuardian.Notificator.DeleteNotAllowed") + "\n" +
+                    Digest(DeleteCancelledAssetList),
                     LocalizedMessage.Get("AssetGuardian.Notificator.CloseDialog"));
                 DeleteCancelledAssetList.Clear();
             }
+
             if (MoveCancelledAssetList.Count > 0)
             {
                 EditorUtility.DisplayDialog(
                     "VitDeck Asset Guardian",
-                    LocalizedMessage.Get("AssetGuardian.Notificator.MoveOrRenameNotAllowed") + "\n" + Digest(MoveCancelledAssetList),
+                    LocalizedMessage.Get("AssetGuardian.Notificator.MoveOrRenameNotAllowed") + "\n" +
+                    Digest(MoveCancelledAssetList),
                     LocalizedMessage.Get("AssetGuardian.Notificator.CloseDialog"));
                 MoveCancelledAssetList.Clear();
             }
@@ -60,6 +65,7 @@ namespace VitDeck.AssetGuardian.GUI
             {
                 builder.AppendLine(item);
             }
+
             return builder.ToString();
         }
 

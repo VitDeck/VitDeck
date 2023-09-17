@@ -51,7 +51,6 @@ namespace VitDeck.Validator.Test
             {
                 Assert.That(detector.IsTargetObject(component), Is.True);
             }
-
         }
     }
 }

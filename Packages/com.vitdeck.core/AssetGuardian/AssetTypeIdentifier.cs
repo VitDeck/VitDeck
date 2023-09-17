@@ -11,7 +11,9 @@ namespace VitDeck.AssetGuardian
         public readonly Type assetType;
         public readonly bool isPrefab;
 
-        public AssetTypeIdentifier(Type assetType) : this(assetType, false) { }
+        public AssetTypeIdentifier(Type assetType) : this(assetType, false)
+        {
+        }
 
         public AssetTypeIdentifier(Type assetType, bool isPrefab)
         {
@@ -43,7 +45,7 @@ namespace VitDeck.AssetGuardian
             }
 
             return assetType == detail.assetType
-                && isPrefab == detail.isPrefab;
+                   && isPrefab == detail.isPrefab;
         }
 
         public override int GetHashCode()

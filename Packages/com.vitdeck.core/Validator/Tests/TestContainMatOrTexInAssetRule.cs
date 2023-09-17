@@ -26,7 +26,7 @@ namespace VitDeck.Validator.Test
             var finder = new ValidationTargetFinder();
             var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/ContainMatOrTexInAssetRule/NG", true);
             var result = rule.Validate(target);
-            Assert.That(result.RuleName,Is.EqualTo("アセット内のMaterialやTextureの埋め込みを検証するルール"));
+            Assert.That(result.RuleName, Is.EqualTo("アセット内のMaterialやTextureの埋め込みを検証するルール"));
 
             Assert.That(result.Issues.Count, Is.EqualTo(1));
             Assert.That(result.Issues[0].level, Is.EqualTo(IssueLevel.Error));

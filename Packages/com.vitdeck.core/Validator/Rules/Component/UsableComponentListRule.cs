@@ -38,6 +38,7 @@ namespace VitDeck.Validator
             {
                 ignorePrefabGUIDs = new string[0];
             }
+
             ignorePrefabs = new HashSet<string>(ignorePrefabGUIDs);
             unregisteredComponentValidationLevel = unregisteredComponent;
         }
@@ -57,6 +58,7 @@ namespace VitDeck.Validator
                     {
                         continue;
                     }
+
                     var isPrefabComponent = !PrefabUtility.IsAddedComponentOverride(component);
                     if (IsIgnoredComponent(component) &&
                         isPrefabComponent)
@@ -76,7 +78,8 @@ namespace VitDeck.Validator
 
                     if (!found)
                     {
-                        AddComponentIssue(LocalizedMessage.Get("UsableComponentListRule.DefaultComponentGroupName"), gameObject, component, unregisteredComponentValidationLevel);
+                        AddComponentIssue(LocalizedMessage.Get("UsableComponentListRule.DefaultComponentGroupName"),
+                            gameObject, component, unregisteredComponentValidationLevel);
                     }
                 }
             }
@@ -106,7 +109,7 @@ namespace VitDeck.Validator
             string message;
             string solution;
             string solutionURL;
-            
+
             switch (level)
             {
                 case ValidationLevel.ALLOW:
@@ -115,7 +118,7 @@ namespace VitDeck.Validator
                     message = LocalizedMessage.Get("UsableComponentListRule.Disallow", name, component.GetType().Name);
                     solution = LocalizedMessage.Get("UsableComponentListRule.Disallow.Solution");
                     solutionURL = LocalizedMessage.Get("UsableComponentListRule.Disallow.SolutionURL");
-                    
+
                     AddIssue(new Issue(obj, IssueLevel.Error, message, solution, solutionURL));
                     break;
             }

@@ -7,8 +7,7 @@ namespace VitDeck.Validator.BoundsIndicators
     [ExecuteInEditMode]
     public class TransformRangeOutIndicator : MonoBehaviour
     {
-        [System.NonSerialized]
-        private bool initialized = false;
+        [System.NonSerialized] private bool initialized = false;
 
         private IBoothRoot booth;
 
@@ -24,6 +23,7 @@ namespace VitDeck.Validator.BoundsIndicators
             {
                 token.Reset += Token_Reset;
             }
+
             initialized = true;
         }
 
@@ -66,7 +66,8 @@ namespace VitDeck.Validator.BoundsIndicators
                 return;
             }
 
-            Gizmos.color = Color.Lerp(Color.red, Color.yellow, Mathf.PingPong(System.DateTime.Now.Millisecond * 0.002f, 1));
+            Gizmos.color = Color.Lerp(Color.red, Color.yellow,
+                Mathf.PingPong(System.DateTime.Now.Millisecond * 0.002f, 1));
             Gizmos.DrawSphere(transform.position, 0.1f);
         }
     }

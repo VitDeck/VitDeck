@@ -24,34 +24,22 @@ namespace VitDeck.Validator.BoundsIndicators
 
         public Bounds Bounds
         {
-            get
-            {
-                return renderer.bounds;
-            }
+            get { return renderer.bounds; }
         }
 
         public Bounds LocalBounds
         {
-            get
-            {
-                return localBoundsProvider?.Bounds ?? new Bounds();
-            }
+            get { return localBoundsProvider?.Bounds ?? new Bounds(); }
         }
 
         public Matrix4x4 LocalToWorldMatrix
         {
-            get
-            {
-                return renderer.localToWorldMatrix;
-            }
+            get { return renderer.localToWorldMatrix; }
         }
 
         public bool IsRemoved
         {
-            get
-            {
-                return renderer == null;
-            }
+            get { return renderer == null; }
         }
     }
 }

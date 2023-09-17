@@ -12,6 +12,7 @@ namespace VitDeck.Validator
     public class AssetGuidBlacklistRule : BaseRule
     {
         private readonly HashSet<string> unauthorizedIDSet;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>

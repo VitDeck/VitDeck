@@ -10,6 +10,5 @@ namespace VitDeck.Validator.BoundsIndicators
 
         void ClearTransformTemporarily();
         void RestorePosition();
-
     }
 }

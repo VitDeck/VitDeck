@@ -10,6 +10,7 @@ namespace VitDeck.TemplateLoader
     internal class AnimationClipReferenceModifier : IReferenceModifier
     {
         private Dictionary<string, string> replaceNamePairDictionary;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -40,6 +41,7 @@ namespace VitDeck.TemplateLoader
                     }
                 }
             }
+
             if (findFlag)
             {
                 var newClip = new AnimationClip();
@@ -51,6 +53,7 @@ namespace VitDeck.TemplateLoader
                     var curve = AnimationUtility.GetEditorCurve(clip, binding);
                     newClip.SetCurve(newPaths[i], binding.type, binding.propertyName, curve);
                 }
+
                 AssetDatabase.CreateAsset(newClip, path);
             }
         }

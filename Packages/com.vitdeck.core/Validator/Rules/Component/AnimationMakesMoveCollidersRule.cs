@@ -51,10 +51,11 @@ namespace VitDeck.Validator
             foreach (var movableCollider in movableColliders)
             {
                 AddIssue(new Issue(
-                        movableCollider.collider,
-                        IssueLevel.Error,
-                        LocalizedMessage.Get("AnimationMakesMoveCollidersRule.WillMakesMove", movableCollider.rootObject.name),
-                        LocalizedMessage.Get("AnimationMakesMoveCollidersRule.WillMakesMove.Solution")));
+                    movableCollider.collider,
+                    IssueLevel.Error,
+                    LocalizedMessage.Get("AnimationMakesMoveCollidersRule.WillMakesMove",
+                        movableCollider.rootObject.name),
+                    LocalizedMessage.Get("AnimationMakesMoveCollidersRule.WillMakesMove.Solution")));
             }
         }
 
@@ -85,7 +86,8 @@ namespace VitDeck.Validator
                     var colliders = target.GetComponentsInChildren<Collider>(true);
                     foreach (var collider in colliders)
                     {
-                        yield return new ColliderContext(collider, rootObject, animationClip); ;
+                        yield return new ColliderContext(collider, rootObject, animationClip);
+                        ;
                     }
                 }
                 else if (binding.type.IsSubclassOf(typeof(Collider)))
@@ -164,14 +166,13 @@ namespace VitDeck.Validator
             for (int i = 0; i < animationsProperty.arraySize; i++)
             {
                 var clip = animationsProperty.GetArrayElementAtIndex(i)
-                    .objectReferenceValue
+                        .objectReferenceValue
                     as AnimationClip;
 
                 if (clip != null)
                 {
                     yield return clip;
                 }
-
             }
         }
 
@@ -181,6 +182,7 @@ namespace VitDeck.Validator
             {
                 throw new System.ArgumentNullException("animator");
             }
+
             var controller = animator.runtimeAnimatorController;
 
             if (controller == null)

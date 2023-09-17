@@ -9,6 +9,7 @@ namespace VitDeck.Validator
     public class ComponentBlacklistRule : BaseRule
     {
         private readonly ComponentReference[] references;
+
         /// <summary>
         /// コンストラクタ。
         /// </summary>
@@ -38,7 +39,8 @@ namespace VitDeck.Validator
                                 case ValidationLevel.ALLOW:
                                     break;
                                 case ValidationLevel.DISALLOW:
-                                    message = string.Format("{0}:{1}の使用は許可されていません。", reference.name, cmp.GetType().Name);
+                                    message = string.Format("{0}:{1}の使用は許可されていません。", reference.name,
+                                        cmp.GetType().Name);
                                     AddIssue(new Issue(obj, IssueLevel.Error, message, string.Empty, string.Empty));
                                     break;
                             }

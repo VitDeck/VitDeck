@@ -30,7 +30,8 @@ namespace VitDeck.Language
             }
             catch (FormatException e)
             {
-                throw new InvalidOperationException(String.Format("翻訳文のフォーマットが一致しません。\nMessageID={0}\nMessage{1}", messageID, translated), e);
+                throw new InvalidOperationException(
+                    String.Format("翻訳文のフォーマットが一致しません。\nMessageID={0}\nMessage{1}", messageID, translated), e);
             }
         }
 

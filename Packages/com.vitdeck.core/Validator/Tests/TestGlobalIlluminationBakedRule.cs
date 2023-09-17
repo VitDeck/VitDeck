@@ -19,6 +19,6 @@ namespace VitDeck.Validator.Test
             //Assert.That(result.Issues[0].message, Is.EqualTo(string.Format("アセット{0}でGlobal IlluminationがBakedに設定されていません。", "Cube_GINotBaked (UnityEngine.GameObject)")));
             //Assert.That(result.Issues[0].solution, Is.EqualTo("Standard ShaderでEmissionを利用する場合はGlobal Illuminationの設定をBakedにしてください。"));
             Assert.That(result.Issues[0].solutionURL, Is.Empty);
-		}
+        }
     }
 }

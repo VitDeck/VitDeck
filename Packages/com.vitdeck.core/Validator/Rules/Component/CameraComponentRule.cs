@@ -22,7 +22,6 @@ namespace VitDeck.Validator
         {
             if (component.enabled)
             {
-
                 var message = LocalizedMessage.Get("CameraComponentRule.DefaultDisabled");
                 var solution = LocalizedMessage.Get("CameraComponentRule.DefaultDisabled.Solution");
 

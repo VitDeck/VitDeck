@@ -57,7 +57,8 @@ namespace VitDeck.ExhibitorGUI
             }
             else
             {
-                messages.Add(new Message(LocalizedMessage.Get("TemplateLoaderWindow.TemplatesAreNotExists"), MessageType.Warning));
+                messages.Add(new Message(LocalizedMessage.Get("TemplateLoaderWindow.TemplatesAreNotExists"),
+                    MessageType.Warning));
             }
         }
 
@@ -78,6 +79,7 @@ namespace VitDeck.ExhibitorGUI
                     }
                 }
             }
+
             return list;
         }
 
@@ -93,6 +95,7 @@ namespace VitDeck.ExhibitorGUI
                 licenceScroll = new Vector2();
                 messages = new List<Message>();
             }
+
             if (templateProperty != null)
             {
                 //Template Property
@@ -107,6 +110,7 @@ namespace VitDeck.ExhibitorGUI
                     GUILayout.TextArea(templateProperty.lisenseFile.text);
                     EditorGUILayout.EndScrollView();
                 }
+
                 //Replace List
                 EditorGUILayout.LabelField("", UnityEngine.GUI.skin.horizontalSlider);
                 EditorGUI.BeginDisabledGroup(ProductSettings.HideMenuItem);
@@ -115,7 +119,8 @@ namespace VitDeck.ExhibitorGUI
                     {
                         foreach (var replace in templateProperty.replaceList)
                         {
-                            replaceStringList[replace.ID] = EditorGUILayout.TextField(replace.label, replaceStringList[replace.ID]);
+                            replaceStringList[replace.ID] =
+                                EditorGUILayout.TextField(replace.label, replaceStringList[replace.ID]);
                         }
                     }
                 }
@@ -124,27 +129,32 @@ namespace VitDeck.ExhibitorGUI
                 if (GUILayout.Button("Load"))
                 {
                     if (UnityEditor.EditorSettings.serializationMode == SerializationMode.ForceBinary &&
-                        !EditorUtility.DisplayDialog("Template Loader", 
+                        !EditorUtility.DisplayDialog("Template Loader",
                             LocalizedMessage.Get("TemplateLoaderWindow.ForceBinaryDetected"),
                             LocalizedMessage.Get("TemplateLoaderWindow.ForceBinaryDetected.Continue"),
                             LocalizedMessage.Get("TemplateLoaderWindow.ForceBinaryDetected.Cancel")))
                     {
                         return;
                     }
+
                     messages = new List<Message>();
                     var folderName = templateFolders[popupIndex];
                     var templateName = templateOptions[popupIndex];
                     if (TemplateLoader.TemplateLoader.Load(folderName, replaceStringList))
                     {
-                        messages.Add(new Message(LocalizedMessage.Get("TemplateLoaderWindow.Succeeded", templateName), MessageType.Info));
+                        messages.Add(new Message(LocalizedMessage.Get("TemplateLoaderWindow.Succeeded", templateName),
+                            MessageType.Info));
                     }
                     else
                     {
-                        messages.Add(new Message(LocalizedMessage.Get("TemplateLoaderWindow.Failed", templateName), MessageType.Error));
+                        messages.Add(new Message(LocalizedMessage.Get("TemplateLoaderWindow.Failed", templateName),
+                            MessageType.Error));
                     }
                 }
+
                 EditorGUI.EndDisabledGroup();
             }
+
             foreach (var msg in messages)
             {
                 EditorGUILayout.HelpBox(msg.message, msg.type, true);
@@ -158,6 +168,7 @@ namespace VitDeck.ExhibitorGUI
                 if (string.IsNullOrEmpty(str))
                     return false;
             }
+
             return true;
         }
 
@@ -171,6 +182,7 @@ namespace VitDeck.ExhibitorGUI
                 message = _message;
                 type = _type;
             }
+
             public string message;
             public MessageType type;
         }

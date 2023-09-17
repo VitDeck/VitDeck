@@ -35,6 +35,7 @@ namespace VitDeck.Validator
                 results.Add(result);
                 return results.ToArray();
             }
+
             foreach (var rule in rules)
             {
                 try
@@ -49,6 +50,7 @@ namespace VitDeck.Validator
                     break;
                 }
             }
+
             Undo.RevertAllInCurrentGroup();
             return results.ToArray();
         }
@@ -78,6 +80,7 @@ namespace VitDeck.Validator
                     Debug.LogError(type + "の取得に失敗しました。RuleSetは引数無しでインスタンスを生成出来る必要があります。");
                 }
             }
+
             return ruleSets.ToArray();
         }
 

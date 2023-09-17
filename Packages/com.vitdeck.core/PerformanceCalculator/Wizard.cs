@@ -18,14 +18,11 @@ namespace VitDeck.PerformanceCalculator
 
         private DefaultAsset baseFolder;
 
-        [SerializeField]
-        private Calculator.SpaceSize spaceSize;
+        [SerializeField] private Calculator.SpaceSize spaceSize;
 
-        [SerializeField]
-        private bool calculatingReserved = false;
+        [SerializeField] private bool calculatingReserved = false;
 
-        [SerializeField]
-        private string id;
+        [SerializeField] private string id;
 
         private IEnumerator coroutine;
 
@@ -40,7 +37,8 @@ namespace VitDeck.PerformanceCalculator
 
         private void OnGUI()
         {
-            this.baseFolder = (DefaultAsset)EditorGUILayout.ObjectField("Base Folder", this.baseFolder, typeof(DefaultAsset), allowSceneObjects: false);
+            this.baseFolder = (DefaultAsset)EditorGUILayout.ObjectField("Base Folder", this.baseFolder,
+                typeof(DefaultAsset), allowSceneObjects: false);
             this.spaceSize = (Calculator.SpaceSize)EditorGUILayout.EnumPopup("Space Size", this.spaceSize);
             EditorGUI.BeginDisabledGroup(this.baseFolder == null);
             if (GUILayout.Button("Calculate Performance"))
@@ -49,6 +47,7 @@ namespace VitDeck.PerformanceCalculator
                 GUIUtilities.OpenPackageScene(AssetUtility.GetId(this.baseFolder));
                 this.Calculate();
             }
+
             EditorGUI.EndDisabledGroup();
         }
 

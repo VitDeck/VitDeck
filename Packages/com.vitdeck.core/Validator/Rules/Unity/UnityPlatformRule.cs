@@ -1,4 +1,3 @@
-
 namespace VitDeck.Validator
 {
     /// <summary>
@@ -28,7 +27,7 @@ namespace VitDeck.Validator
         {
             var currentPlatform =
 #if UNITY_STANDALONE_WIN
-                Platform.Windows
+                    Platform.Windows
 #elif UNITY_ANDROID
                 Platform.Android
 #endif

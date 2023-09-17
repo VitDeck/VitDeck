@@ -23,7 +23,8 @@ namespace VitDeck.Exporter
         /// <param name="forceExport">ファイルが既に存在していた場合に上書きするかどうか</param>
         /// <param name="allowedExtensions">「.」で始まる小文字の拡張子リスト。ここに含まれる拡張子のみをunitypackageへ含める。null の場合はすべてのファイルをunitypackageへ含める</param>
         /// <returns>エクスポート結果</returns>
-        public static ExportResult Export(string baseFolderPath, ExportSetting setting, bool forceExport = false, IEnumerable<string> allowedExtensions = null)
+        public static ExportResult Export(string baseFolderPath, ExportSetting setting, bool forceExport = false,
+            IEnumerable<string> allowedExtensions = null)
         {
             if (setting == null)
                 throw new ArgumentNullException("Argument `setting` is null.");
@@ -33,7 +34,9 @@ namespace VitDeck.Exporter
             if (string.IsNullOrEmpty(exportFolderPath) || !exportFolderPath.StartsWith("Assets"))
                 throw new ArgumentNullException("Invalid export folder path:" + exportFolderPath);
 
-            var fileName = string.IsNullOrEmpty(setting.fileNameFormat) ? "export.unitypackage" : setting.fileNameFormat;
+            var fileName = string.IsNullOrEmpty(setting.fileNameFormat)
+                ? "export.unitypackage"
+                : setting.fileNameFormat;
             var outputPath = exportFolderPath + Path.AltDirectorySeparatorChar + fileName;
             var result = new ExportResult();
 
@@ -49,25 +52,30 @@ namespace VitDeck.Exporter
                 var forbiddenPaths = new List<string>();
                 assetPaths = assetPaths.Where(path =>
                 {
-                    if (AssetDatabase.IsValidFolder(path) || allowedExtensions.Contains(Path.GetExtension(path).ToLower()))
+                    if (AssetDatabase.IsValidFolder(path) ||
+                        allowedExtensions.Contains(Path.GetExtension(path).ToLower()))
                     {
                         return true;
                     }
 
                     forbiddenPaths.Add(path);
-                    
+
                     return false;
                 }).ToArray();
 
                 if (forbiddenPaths.Count > 0)
                 {
-                    var forbiddenPathList = "# " + LocalizedMessage.Get("AllowedExtensionsForExportRule.ForbiddenPaths") + System.Environment.NewLine
+                    var forbiddenPathList =
+                        "# " + LocalizedMessage.Get("AllowedExtensionsForExportRule.ForbiddenPaths") +
+                        System.Environment.NewLine
                         + String.Join(System.Environment.NewLine, forbiddenPaths);
                     Debug.Log(forbiddenPathList);
                     result.log += forbiddenPathList + System.Environment.NewLine;
                 }
             }
-            var assetList = "# " + LocalizedMessage.Get("Exporter.TargetAsset") + System.Environment.NewLine + String.Join(System.Environment.NewLine, assetPaths);
+
+            var assetList = "# " + LocalizedMessage.Get("Exporter.TargetAsset") + System.Environment.NewLine +
+                            String.Join(System.Environment.NewLine, assetPaths);
             Debug.Log(assetList);
             result.log += assetList + System.Environment.NewLine;
             try
@@ -80,7 +88,9 @@ namespace VitDeck.Exporter
                     var newPath = exportFolderPath + Path.AltDirectorySeparatorChar + fileName
                         .Replace("{SHA-1}", GetHash(outputPath))
                         .Replace("{ID}", Path.GetFileName(baseFolderPath))
-                        .Replace("{DATETIME}", DateTimeOffset.Now.ToString("yyyyMMddTHHmmsszzz").Replace(":", "")); // ファイルシステムに依っては「:」を使用できない
+                        .Replace("{DATETIME}",
+                            DateTimeOffset.Now.ToString("yyyyMMddTHHmmsszzz")
+                                .Replace(":", "")); // ファイルシステムに依っては「:」を使用できない
                     if (forceExport || !File.Exists(newPath))
                     {
                         File.Move(outputPath, newPath);
@@ -89,8 +99,10 @@ namespace VitDeck.Exporter
                     {
                         throw new IOException(LocalizedMessage.Get("Exporter.RenameDestinationAlreadyExists"));
                     }
+
                     outputPath = newPath;
                 }
+
                 result.log += LocalizedMessage.Get("Exporter.Succeeded") + System.Environment.NewLine + outputPath;
                 result.exportFilePath = outputPath;
                 result.exportResult = true;
@@ -101,6 +113,7 @@ namespace VitDeck.Exporter
                 result.log += LocalizedMessage.Get("Exporter.Failed", e.Message) + System.Environment.NewLine;
                 result.exportResult = false;
             }
+
             return result;
         }
 

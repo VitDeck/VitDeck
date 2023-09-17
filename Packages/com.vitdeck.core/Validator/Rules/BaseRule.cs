@@ -11,6 +11,7 @@ namespace VitDeck.Validator
         /// ルール名
         /// </summary>
         protected string name;
+
         /// <summary>
         /// 検証結果
         /// </summary>
@@ -21,6 +22,7 @@ namespace VitDeck.Validator
             this.name = name;
             result = new ValidationResult(name);
         }
+
         /// <summary>
         /// 検証結果を返す
         /// </summary>
@@ -39,6 +41,7 @@ namespace VitDeck.Validator
         {
             result.AddIssue(issue);
         }
+
         /// <summary>
         /// 定められたルールに従って検証する。検証後にresultフィールドを結果として返す
         /// </summary>
@@ -59,8 +62,10 @@ namespace VitDeck.Validator
                 result.AddIssue(new Issue(null, IssueLevel.Fatal, e.Message));
                 throw e;
             }
+
             return result;
         }
+
         /// <summary>
         /// ルールの検証ロジック。
         /// </summary>

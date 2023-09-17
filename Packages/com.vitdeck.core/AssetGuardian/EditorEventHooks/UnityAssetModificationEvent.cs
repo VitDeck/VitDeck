@@ -11,7 +11,9 @@ namespace VitDeck.AssetGuardian
     public class UnityAssetModificationEvent : UnityEditor.AssetModificationProcessor
     {
         public delegate string[] OnWillSaveAssetsHandler(string[] paths);
+
         public delegate AssetDeleteResult OnWillDeleteAssetHandler(string path, RemoveAssetOptions options);
+
         public delegate AssetMoveResult OnWillMoveAssetHandler(string sourcePath, string destinationPath);
 
         static List<OnWillSaveAssetsHandler> saveHandlers = new List<OnWillSaveAssetsHandler>();
@@ -66,6 +68,7 @@ namespace VitDeck.AssetGuardian
                 if (result == AssetDeleteResult.DidDelete || result == AssetDeleteResult.FailedDelete)
                     return result;
             }
+
             return AssetDeleteResult.DidNotDelete;
         }
 
@@ -77,6 +80,7 @@ namespace VitDeck.AssetGuardian
                 if (result == AssetMoveResult.DidMove || result == AssetMoveResult.FailedMove)
                     return result;
             }
+
             return AssetMoveResult.DidNotMove;
         }
     }

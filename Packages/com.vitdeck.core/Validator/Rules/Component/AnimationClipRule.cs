@@ -41,14 +41,16 @@ namespace VitDeck.Validator
                             IssueLevel.Error,
                             LocalizedMessage.Get("AnimationClipRule.DontChangeMaterialInAnimation"),
                             LocalizedMessage.Get("AnimationClipRule.DontChangeMaterialInAnimation.Solution")
-                            ));
+                        ));
                     }
+
                     // エラーは1個出せば十分なのでbreakでループを抜ける
                     break;
                 }
 
                 LogicForBinding(clip, binding);
             }
+
             var curveBindings = AnimationUtility.GetCurveBindings(clip);
             foreach (var binding in curveBindings)
             {
@@ -65,7 +67,7 @@ namespace VitDeck.Validator
                     IssueLevel.Error,
                     LocalizedMessage.Get("AnimationClipRule.DontAccessParentObject"),
                     LocalizedMessage.Get("AnimationClipRule.DontAccessParentObject.Solution")
-                    ));
+                ));
             }
         }
     }

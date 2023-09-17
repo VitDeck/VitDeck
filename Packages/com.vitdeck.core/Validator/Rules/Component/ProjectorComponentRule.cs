@@ -18,7 +18,6 @@ namespace VitDeck.Validator
         {
             if (component.enabled)
             {
-
                 var message = LocalizedMessage.Get("ProjectorComponentRule.DefaultDisabled");
                 var solution = LocalizedMessage.Get("ProjectorComponentRule.DefaultDisabled.Solution");
 

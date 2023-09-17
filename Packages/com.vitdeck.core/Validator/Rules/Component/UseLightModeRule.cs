@@ -38,11 +38,11 @@ namespace VitDeck.Validator
                     if (unusableBakeTypes.Contains(light.lightmapBakeType))
                     {
                         AddIssue(new Issue(
-                            obj, 
-                            IssueLevel.Error, 
+                            obj,
+                            IssueLevel.Error,
                             LocalizedMessage.Get("UseLightModeRule.MustNotUse", type, light.lightmapBakeType),
                             LocalizedMessage.Get("UseLightModeRule.MustNotUse.Solution")
-                            ));
+                        ));
                     }
                 }
             }

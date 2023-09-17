@@ -13,6 +13,7 @@ namespace VitDeck.Validator
         {
             _request = Client.List(true);
         }
+
         public PostProcessingExistsRule(string name) : base(name)
         {
         }
@@ -31,7 +32,7 @@ namespace VitDeck.Validator
                 var solutionURL = LocalizedMessage.Get("PostProcessingExistsRule.SearchFailed.SolutionURL");
 
                 AddIssue(new Issue(null, IssueLevel.Error, message, solution, solutionURL));
-                
+
                 _request = Client.List(true);
                 return;
             }

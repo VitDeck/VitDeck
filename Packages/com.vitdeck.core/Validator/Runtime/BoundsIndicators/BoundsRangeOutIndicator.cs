@@ -7,8 +7,7 @@ namespace VitDeck.Validator.BoundsIndicators
     [ExecuteInEditMode]
     public class BoundsRangeOutIndicator : MonoBehaviour
     {
-        [System.NonSerialized]
-        bool initialized = false;
+        [System.NonSerialized] bool initialized = false;
 
         IBoundsSource boundsSource;
         private IBoothRoot booth;
@@ -19,6 +18,7 @@ namespace VitDeck.Validator.BoundsIndicators
             {
                 throw new System.ArgumentNullException("booth");
             }
+
             if (boundsSource == null)
             {
                 throw new System.ArgumentNullException("targetRenderer");
@@ -30,6 +30,7 @@ namespace VitDeck.Validator.BoundsIndicators
             {
                 token.Reset += Token_Reset;
             }
+
             initialized = true;
         }
 
@@ -84,7 +85,7 @@ namespace VitDeck.Validator.BoundsIndicators
             Gizmos.color = Color.black;
             Gizmos.DrawWireCube(bounds.center, bounds.size);
         }
-        
+
         private void DrawBoundsGizmos(ref Bounds bounds)
         {
             Gizmos.matrix = booth.GetLocalToWorld();
@@ -96,7 +97,8 @@ namespace VitDeck.Validator.BoundsIndicators
         {
             var limit = booth.GetBounds();
             Gizmos.matrix = booth.GetLocalToWorld();
-            Gizmos.color = Color.Lerp(Color.red, Color.yellow, Mathf.PingPong(System.DateTime.Now.Millisecond * 0.002f, 1));
+            Gizmos.color = Color.Lerp(Color.red, Color.yellow,
+                Mathf.PingPong(System.DateTime.Now.Millisecond * 0.002f, 1));
 
             if (limit.max.x < bounds.max.x)
             {

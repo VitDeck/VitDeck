@@ -38,6 +38,7 @@ namespace VitDeck.Validator
             {
                 FindRecursive(obj);
             }
+
             uniqueObjectHashSet.Clear();
             uniqueObjectHashSet = null;
         }
@@ -73,6 +74,7 @@ namespace VitDeck.Validator
                         FindRecursive(component);
                     }
                 }
+
                 return;
             }
 
@@ -156,6 +158,7 @@ namespace VitDeck.Validator
             {
                 return false;
             }
+
             return true;
         }
     }

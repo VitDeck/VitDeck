@@ -3,12 +3,10 @@
     public class ResetTokenSource
     {
         private readonly InternalResetToken token;
+
         public ResetToken Token
         {
-            get
-            {
-                return token;
-            }
+            get { return token; }
         }
 
         public ResetTokenSource()

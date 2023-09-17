@@ -21,15 +21,17 @@ namespace VitDeck.Validator.Test
             Assert.That(validationTarget.GetRootObjects(), Is.Not.Null);
             Assert.That(validationTarget.GetAllObjects(), Is.Not.Null);
         }
+
         [Test]
         public void TestFindInvalid()
         {
             var testFolder = "Invalid";
             var finder = new ValidationTargetFinder();
             Assert.That(() => finder.Find(testFolder),
-                 Throws.Exception.TypeOf<FatalValidationErrorException>()
-                 .And.Message.EqualTo("正しいベースフォルダを指定してください。:Invalid"));
+                Throws.Exception.TypeOf<FatalValidationErrorException>()
+                    .And.Message.EqualTo("正しいベースフォルダを指定してください。:Invalid"));
         }
+
         [Test]
         public void TestFindAssetPaths()
         {
@@ -40,10 +42,13 @@ namespace VitDeck.Validator.Test
             Assert.That(Array.Exists(assetPaths, path => path == (testFolder + "/Sample_object.fbx")), Is.True);
             Assert.That(Array.Exists(assetPaths, path => path == (testFolder + "/New Scene.unity")), Is.True);
             Assert.That(Array.Exists(assetPaths, path => path == (testFolder + "/Sub Folder")), Is.True);
-            Assert.That(Array.Exists(assetPaths, path => path == (testFolder + "/Sub Folder/New Prefab in sub folder.prefab")), Is.True);
+            Assert.That(
+                Array.Exists(assetPaths, path => path == (testFolder + "/Sub Folder/New Prefab in sub folder.prefab")),
+                Is.True);
             //FBXのサブアセットによりパスが重複取得されない
             Assert.That(assetPaths.Length, Is.EqualTo(assetPaths.Distinct().Count()));
         }
+
         [Test]
         public void TestFindAssetGuids()
         {
@@ -63,6 +68,7 @@ namespace VitDeck.Validator.Test
             //FBXのサブアセットによりGUIDが重複取得されない
             Assert.That(assetGuids.Length, Is.EqualTo(assetGuids.Distinct().Count()));
         }
+
         [Test]
         public void TestFindAssetObjects()
         {
@@ -72,16 +78,26 @@ namespace VitDeck.Validator.Test
             //Base Folder
             Assert.That(Array.Exists(assetObjects, obj => AssetDatabase.GetAssetPath(obj) == testFolder), Is.True);
             //New Scene.unity
-            Assert.That(Array.Exists(assetObjects, obj => AssetDatabase.GetAssetPath(obj) == (testFolder + "/New Scene.unity")), Is.True);
+            Assert.That(
+                Array.Exists(assetObjects, obj => AssetDatabase.GetAssetPath(obj) == (testFolder + "/New Scene.unity")),
+                Is.True);
             //Sample_object.fbx 
-            Assert.That(Array.Exists(assetObjects, obj => AssetDatabase.GetAssetPath(obj) == (testFolder + "/Sample_object.fbx")), Is.True);
+            Assert.That(
+                Array.Exists(assetObjects,
+                    obj => AssetDatabase.GetAssetPath(obj) == (testFolder + "/Sample_object.fbx")), Is.True);
             //Sub Fonder
-            Assert.That(Array.Exists(assetObjects, obj => AssetDatabase.GetAssetPath(obj) == (testFolder + "/Sub Folder")), Is.True);
+            Assert.That(
+                Array.Exists(assetObjects, obj => AssetDatabase.GetAssetPath(obj) == (testFolder + "/Sub Folder")),
+                Is.True);
             //New Prefab in sub folder.prefab
-            Assert.That(Array.Exists(assetObjects, obj => AssetDatabase.GetAssetPath(obj) == (testFolder + "/Sub Folder/New Prefab in sub folder.prefab")), Is.True);
+            Assert.That(
+                Array.Exists(assetObjects,
+                    obj => AssetDatabase.GetAssetPath(obj) ==
+                           (testFolder + "/Sub Folder/New Prefab in sub folder.prefab")), Is.True);
             //FBXのサブアセットによりオブジェクトが重複取得されない
             Assert.That(assetObjects.Length, Is.EqualTo(assetObjects.Distinct().Count()));
         }
+
         [Test]
         public void TestFindScenes()
         {
@@ -90,8 +106,12 @@ namespace VitDeck.Validator.Test
             var scenes = finder.FindScenes(testFolder, true);
             //New Scene
             Assert.That(scenes.Length, Is.EqualTo(1));
-            Assert.That(Array.Exists(scenes, scene => scene.path == ValidatorTestUtilities.TestDirectoryPath + "/ValidationTargetFinder/New Scene.unity"), Is.True);
+            Assert.That(
+                Array.Exists(scenes,
+                    scene => scene.path == ValidatorTestUtilities.TestDirectoryPath +
+                        "/ValidationTargetFinder/New Scene.unity"), Is.True);
         }
+
         [Test]
         public void TestFindRootObjects()
         {
@@ -104,6 +124,7 @@ namespace VitDeck.Validator.Test
             Assert.That(Array.Exists(rootObjects, obj => obj.name == "Directional Light"), Is.True);
             Assert.That(Array.Exists(rootObjects, obj => obj.name == "Main Camera"), Is.True);
         }
+
         [Test]
         public void TestFindObjects()
         {
@@ -117,6 +138,7 @@ namespace VitDeck.Validator.Test
             Assert.That(Array.Exists(allObjects, obj => obj.name == "Capsule"), Is.True);
             Assert.That(Array.Exists(allObjects, obj => obj.name == "Audio Source"), Is.True);
         }
+
         [Test]
         public void TestInvalidPath()
         {
@@ -129,6 +151,7 @@ namespace VitDeck.Validator.Test
             Assert.That(finder.FindRootObjects(path), Is.Null);
             Assert.That(finder.FindAllObjects(path), Is.Null);
         }
+
         [Test]
         public void TestFindNoObject()
         {

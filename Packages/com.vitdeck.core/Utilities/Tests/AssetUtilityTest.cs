@@ -11,11 +11,13 @@ namespace VitDeck.Utilities.Tests
         {
             Assert.That(AssetUtility.ImageFolderPath, Is.EqualTo("Packages/com.vitdeck.core/Images"));
         }
+
         [Test]
         public void TestConfigFolderPath()
         {
             Assert.That(AssetUtility.ConfigFolderPath, Is.EqualTo("Assets/VitDeck/Config"));
         }
+
         [Test]
         public void TestRootFolderPath()
         {

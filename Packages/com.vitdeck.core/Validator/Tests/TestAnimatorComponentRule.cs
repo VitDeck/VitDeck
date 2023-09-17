@@ -5,7 +5,8 @@ namespace VitDeck.Validator.Test
 {
     public class TestAnimatorComponentRule
     {
-        private static readonly string BaseFolder = ValidatorTestUtilities.DataDirectoryPath + "/AnimatorComponentRule/";
+        private static readonly string
+            BaseFolder = ValidatorTestUtilities.DataDirectoryPath + "/AnimatorComponentRule/";
 
         [Test]
         public void ApplyRootMotionTest()
@@ -32,7 +33,8 @@ namespace VitDeck.Validator.Test
         {
             // ここでは例としてBoxColliderをmustUseSeparatelyComponentsに設定
             var target = new ValidationTargetFinder().Find(BaseFolder + "WithBoxColliderComponent", true);
-            var issues = new AnimatorComponentRule("", new System.Type[] { typeof(BoxCollider) }).Validate(target).Issues;
+            var issues = new AnimatorComponentRule("", new System.Type[] { typeof(BoxCollider) }).Validate(target)
+                .Issues;
 
             Assert.That(issues.Count, Is.EqualTo(1));
             Assert.That(issues[0].level, Is.EqualTo(IssueLevel.Error));

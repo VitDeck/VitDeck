@@ -14,13 +14,13 @@ namespace VitDeck.Validator
                 null,
                 IssueLevel.Info,
                 "gameObjects = " + ArrayToString(target.GetAllObjects())
-                ));
+            ));
 
             AddIssue(new Issue(
                 null,
                 IssueLevel.Info,
                 "assets = " + ArrayToString(target.GetAllAssets())
-                ));
+            ));
         }
 
         private string ArrayToString(object[] objects)
@@ -33,6 +33,7 @@ namespace VitDeck.Validator
                 builder.Append(obj.ToString());
                 builder.Append(", ");
             }
+
             builder.Append("}");
 
             return builder.ToString();

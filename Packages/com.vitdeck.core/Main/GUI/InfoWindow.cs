@@ -10,12 +10,9 @@ namespace VitDeck.Main.GUI
     /// </summary>
     public class InfoWindow : EditorWindow
     {
-        [SerializeField]
-        string versionLabel = null;
-        [SerializeField]
-        string latestVersionLabel = null;
-        [SerializeField]
-        string latestVersion = null;
+        [SerializeField] string versionLabel = null;
+        [SerializeField] string latestVersionLabel = null;
+        [SerializeField] string latestVersion = null;
 
         private static string developerLinkTitle = null;
         private static string developerLinkURL = null;
@@ -51,6 +48,7 @@ namespace VitDeck.Main.GUI
                 {
                     latestVersion = version;
                 }
+
                 latestVersionLabel = "Latest Version : " + latestVersion;
             }
         }
@@ -70,6 +68,7 @@ namespace VitDeck.Main.GUI
                 EditorGUILayout.LabelField(latestVersionLabel);
                 VersionCheckLabelField();
             }
+
             //Developer info
             if (!string.IsNullOrEmpty(developerLinkTitle) &&
                 !string.IsNullOrEmpty(developerLinkURL))

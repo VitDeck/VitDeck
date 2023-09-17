@@ -20,7 +20,7 @@ namespace VitDeck.Validator
 
         protected override void HasComponentObjectLogic(GameObject hasComponentObject)
         {
-            var objs =  hasComponentObject.transform.GetComponentsInChildren<Transform>();
+            var objs = hasComponentObject.transform.GetComponentsInChildren<Transform>();
             foreach (var obj in objs)
             {
                 if (obj.gameObject.layer != 23)

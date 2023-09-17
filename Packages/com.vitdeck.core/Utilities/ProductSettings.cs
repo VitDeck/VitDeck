@@ -1,4 +1,3 @@
-
 namespace VitDeck.Utilities
 {
     public class ProductSettings
@@ -10,7 +9,7 @@ namespace VitDeck.Utilities
 #if VITDECK_HIDE_MENUITEM
             true
 #else
-            false
+                false
 #endif
             ;
     }

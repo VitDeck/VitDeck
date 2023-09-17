@@ -55,7 +55,8 @@ namespace VitDeck.TestUtilities
         public static void WriteShader(string path)
         {
             var name = Path.GetFileNameWithoutExtension(path);
-            System.IO.File.WriteAllText(path, "Shader\"" + name + "\"{SubShader{Pass{Material{Diffuse(1,.5,.5,1)}Lighting On}}}");
+            System.IO.File.WriteAllText(path,
+                "Shader\"" + name + "\"{SubShader{Pass{Material{Diffuse(1,.5,.5,1)}Lighting On}}}");
         }
 
         public static void WriteSprite(string path)

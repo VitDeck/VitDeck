@@ -28,7 +28,7 @@ namespace VitDeck.AssetGuardian.Tests
 
         public static object[] SourceOfTestMarking()
         {
-            return new object[] 
+            return new object[]
             {
                 typeof(TestFolderAsset),
                 typeof(TestPrefabAsset),

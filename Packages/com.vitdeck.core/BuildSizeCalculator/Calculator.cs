@@ -30,8 +30,8 @@ namespace VitDeck.BuildSizeCalculator
             }
 
             int? byteCount = null;
-            AssetUtility.TemporaryDestroyObjectsOutsideOfRootObjectAndRunCallback(exhibitId, () => {
-
+            AssetUtility.TemporaryDestroyObjectsOutsideOfRootObjectAndRunCallback(exhibitId, () =>
+            {
                 string path = SceneManager.GetActiveScene().path;
                 AssetBundleManifest result = null;
                 try
@@ -40,7 +40,8 @@ namespace VitDeck.BuildSizeCalculator
                     AssetImporter atPath = AssetImporter.GetAtPath(path);
                     if (atPath == null)
                     {
-                        EditorUtility.DisplayDialog("Error", LocalizedMessage.Get("BuildSizeCalculator.OpenSceneFile"), "OK");
+                        EditorUtility.DisplayDialog("Error", LocalizedMessage.Get("BuildSizeCalculator.OpenSceneFile"),
+                            "OK");
                         return;
                     }
 
@@ -52,7 +53,8 @@ namespace VitDeck.BuildSizeCalculator
 
                     atPath.assetBundleName = bundleName;
                     atPath.SaveAndReimport();
-                    result = BuildPipeline.BuildAssetBundles(outPath, BuildAssetBundleOptions.ForceRebuildAssetBundle, EditorUserBuildSettings.activeBuildTarget);
+                    result = BuildPipeline.BuildAssetBundles(outPath, BuildAssetBundleOptions.ForceRebuildAssetBundle,
+                        EditorUserBuildSettings.activeBuildTarget);
                     atPath.assetBundleName = string.Empty;
                     atPath.SaveAndReimport();
                     AssetDatabase.RemoveUnusedAssetBundleNames();
@@ -62,6 +64,7 @@ namespace VitDeck.BuildSizeCalculator
                     Debug.LogError(e.Message);
                     return;
                 }
+
                 byteCount = result != null ? GetFileByteCount() : null;
             });
 

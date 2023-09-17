@@ -9,7 +9,6 @@ using VRCSDK2;
 
 namespace VitDeck.Validator
 {
-
     /// <summary>
     /// VRChat向けの基本ルールセット
     /// </summary>
@@ -45,7 +44,6 @@ namespace VitDeck.Validator
             return new IRule[]
             {
 #if VRC_SDK_VRCSDK2
-
                 new UnityVersionRule(LocalizedMessage.Get("VketRuleSetBase.UnityVersionRule.Title", "2018.4.20f1"), "2018.4.20f1"),
 
                 new VRCSDKVersionRule(LocalizedMessage.Get("VketRuleSetBase.VRCSDKVersionRule.Title"),
@@ -192,7 +190,7 @@ namespace VitDeck.Validator
 
         private Vector3 BoothSizeLimit => new Vector3(4, 5, 4);
 
-#if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3 
+#if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3
         private VRC_EventHandler.VrcBroadcastType[] VRCTriggerBroadcastTypesWhitelist
         {
             get
@@ -233,79 +231,115 @@ namespace VitDeck.Validator
 
         private ComponentReference[] GetComponentReferences()
         {
-            return new ComponentReference[] {
-                new ComponentReference("VRC_Trigger", new string[]{"VRCSDK2.VRC_Trigger", "VRCSDK2.VRC_EventHandler"}, AdvancedObjectValidationLevel),
-                new ComponentReference("VRC_Object Sync", new string[]{"VRCSDK2.VRC_ObjectSync"}, ValidationLevel.DISALLOW),
-                new ComponentReference("VRC_Pickup", new string[]{"VRCSDK2.VRC_Pickup"}, ValidationLevel.DISALLOW),
-                new ComponentReference("VRC_Audio Bank", new string[]{"VRCSDK2.VRC_AudioBank"}, ValidationLevel.DISALLOW),
-                new ComponentReference("VRC_Avatar Pedestal", new string[]{"VRCSDK2.VRC_AvatarPedestal"}, ValidationLevel.DISALLOW),
-                new ComponentReference("VRC_Ui Shape", new string[]{"VRCSDK2.VRC_UiShape"}, AdvancedObjectValidationLevel),
-                new ComponentReference("Rigidbody", new string[]{"UnityEngine.Rigidbody"}, ValidationLevel.ALLOW),
-                new ComponentReference("Cloth", new string[]{"UnityEngine.Cloth"}, MoreAdvancedObjectValidationLevel),
-                new ComponentReference("Collider", new string[]{"UnityEngine.SphereCollider", "UnityEngine.BoxCollider", "UnityEngine.SphereCollider", "UnityEngine.CapsuleCollider", "UnityEngine.MeshCollider", "UnityEngine.WheelCollider"}, ValidationLevel.ALLOW),
-                new ComponentReference("Dynamic Bone", new string[]{"DynamicBone"}, ValidationLevel.ALLOW),
-                new ComponentReference("Dynamic Bone Collider", new string[]{"DynamicBoneCollider"}, ValidationLevel.ALLOW),
-                new ComponentReference("Skinned Mesh Renderer", new string[]{"UnityEngine.SkinnedMeshRenderer"}, ValidationLevel.ALLOW),
-                new ComponentReference("Mesh Renderer ", new string[]{"UnityEngine.MeshRenderer"}, ValidationLevel.ALLOW),
-                new ComponentReference("Mesh Filter", new string[]{"UnityEngine.MeshFilter"}, ValidationLevel.ALLOW),
-                new ComponentReference("Particle System", new string[]{"UnityEngine.ParticleSystem", "UnityEngine.ParticleSystemRenderer"}, ValidationLevel.ALLOW),
-                new ComponentReference("Trail Renderer", new string[]{"UnityEngine.TrailRenderer"}, ValidationLevel.ALLOW),
-                new ComponentReference("Line Renderer", new string[]{"UnityEngine.LineRenderer"}, ValidationLevel.ALLOW),
-                new ComponentReference("Light", new string[]{"UnityEngine.Light"}, AdvancedObjectValidationLevel),
-                new ComponentReference("LightProbeGroup", new string[]{"UnityEngine.LightProbeGroup"}, AdvancedObjectValidationLevel),
-                new ComponentReference("ReflectionProbe", new string[]{"UnityEngine.ReflectionProbe"}, AdvancedObjectValidationLevel),
-                new ComponentReference("Camera", new string[]{"UnityEngine.Camera"}, MoreAdvancedObjectValidationLevel),
-                new ComponentReference("Projector", new string[]{"UnityEngine.Projector"}, MoreAdvancedObjectValidationLevel),
-                new ComponentReference("LookatTarget", new string[]{"UnityStandardAssets.Cameras.LookatTarget" }, MoreAdvancedObjectValidationLevel),
-                new ComponentReference("FollowTarget", new string[]{"UnityStandardAssets.Utility.FollowTarget" }, MoreAdvancedObjectValidationLevel),
-                new ComponentReference("Suspension", new string[]{"UnityStandardAssets.Vehicles.Car.Suspension" }, MoreAdvancedObjectValidationLevel),
-                new ComponentReference("Animator", new string[]{"UnityEngine.Animator"}, ValidationLevel.ALLOW),
-                new ComponentReference("Animation", new string[]{"UnityEngine.Animation"}, ValidationLevel.ALLOW),
-                new ComponentReference("Audio Source", new string[]{"UnityEngine.AudioSource", "ONSPAudioSource", "VRCSDK2.VRC_SpatialAudioSource"}, ValidationLevel.DISALLOW),
-                new ComponentReference("Canvas", new string[]{"UnityEngine.Canvas", "UnityEngine.CanvasGroup", "UnityEngine.RectTransform", "UnityEngine.UI.CanvasScaler", "UnityEngine.UI.GraphicRaycaster", "UnityEngine.UI.AspectRatioFitter", "UnityEngine.UI.LayoutElement", "UnityEngine.UI.ContentSizeFitter", "UnityEngine.UI.HorizontalLayoutGroup", "UnityEngine.UI.VerticalLayoutGroup", "UnityEngine.UI.GridLayoutGroup", "UnityEngine.UI.Text", "UnityEngine.UI.Image", "UnityEngine.UI.RawImage", "UnityEngine.UI.Mask", "UnityEngine.UI.RectMask2D", "UnityEngine.UI.Button", "UnityEngine.UI.InputField", "UnityEngine.UI.Toggle", "UnityEngine.UI.ToggleGroup", "UnityEngine.UI.Slider", "UnityEngine.UI.Scrollbar", "UnityEngine.UI.Dropdown", "UnityEngine.UI.ScrollRect", "UnityEngine.UI.Selectable", "UnityEngine.UI.Shadow", "UnityEngine.UI.Outline", "UnityEngine.UI.PositionAsUV1", "UnityEngine.RectTransform", "UnityEngine.CanvasRenderer"}, ValidationLevel.ALLOW),
-                new ComponentReference("VideoPlayer", new string[]{"UnityEngine.Video.VideoPlayer" }, MoreAdvancedObjectValidationLevel),
-                new ComponentReference("VRC_Station", new string[]{"VRCSDK2.VRC_Station"}, ValidationLevel.DISALLOW),
-                new ComponentReference("VRC_Mirror", new string[]{ "VRCSDK2.VRC_MirrorCamera", "VRCSDK2.VRC_MirrorReflection" }, ValidationLevel.DISALLOW),
-                new ComponentReference("VRC_PlayerAudioOverride", new string[]{"VRCSDK2.VRC_PlayerAudioOverride"}, ValidationLevel.DISALLOW),
-                new ComponentReference("EventSystem", new string[]{"UnityEngine.EventSystems.EventSystem", "UnityEngine.EventSystems.StandaloneInputModule"}, ValidationLevel.DISALLOW),
-                new ComponentReference("StandaloneInputModule", new string[]{"UnityEngine.EventSystems.StandaloneInputModule"}, ValidationLevel.DISALLOW),
-                new ComponentReference("VRC_SceneResetPosition", new string[]{"VRCSDK2.VRC_SceneResetPosition"}, ValidationLevel.DISALLOW),
-                new ComponentReference("PlayableDirector", new string[]{"UnityEngine.Playables.PlayableDirector" }, ValidationLevel.DISALLOW),
-                new ComponentReference("VRC_Panorama", new string[]{"VRCSDK2.scripts.Scenes.VRC_Panorama" }, ValidationLevel.DISALLOW),
-                new ComponentReference("VRC_SyncVideoPlayer", new string[]{"VRCSDK2.VRC_SyncVideoPlayer", "VRCSDK2.VRC_SyncVideoStream" }, ValidationLevel.DISALLOW),
+            return new ComponentReference[]
+            {
+                new ComponentReference("VRC_Trigger",
+                    new string[] { "VRCSDK2.VRC_Trigger", "VRCSDK2.VRC_EventHandler" }, AdvancedObjectValidationLevel),
+                new ComponentReference("VRC_Object Sync", new string[] { "VRCSDK2.VRC_ObjectSync" },
+                    ValidationLevel.DISALLOW),
+                new ComponentReference("VRC_Pickup", new string[] { "VRCSDK2.VRC_Pickup" }, ValidationLevel.DISALLOW),
+                new ComponentReference("VRC_Audio Bank", new string[] { "VRCSDK2.VRC_AudioBank" },
+                    ValidationLevel.DISALLOW),
+                new ComponentReference("VRC_Avatar Pedestal", new string[] { "VRCSDK2.VRC_AvatarPedestal" },
+                    ValidationLevel.DISALLOW),
+                new ComponentReference("VRC_Ui Shape", new string[] { "VRCSDK2.VRC_UiShape" },
+                    AdvancedObjectValidationLevel),
+                new ComponentReference("Rigidbody", new string[] { "UnityEngine.Rigidbody" }, ValidationLevel.ALLOW),
+                new ComponentReference("Cloth", new string[] { "UnityEngine.Cloth" },
+                    MoreAdvancedObjectValidationLevel),
+                new ComponentReference("Collider",
+                    new string[]
+                    {
+                        "UnityEngine.SphereCollider", "UnityEngine.BoxCollider", "UnityEngine.SphereCollider",
+                        "UnityEngine.CapsuleCollider", "UnityEngine.MeshCollider", "UnityEngine.WheelCollider"
+                    }, ValidationLevel.ALLOW),
+                new ComponentReference("Dynamic Bone", new string[] { "DynamicBone" }, ValidationLevel.ALLOW),
+                new ComponentReference("Dynamic Bone Collider", new string[] { "DynamicBoneCollider" },
+                    ValidationLevel.ALLOW),
+                new ComponentReference("Skinned Mesh Renderer", new string[] { "UnityEngine.SkinnedMeshRenderer" },
+                    ValidationLevel.ALLOW),
+                new ComponentReference("Mesh Renderer ", new string[] { "UnityEngine.MeshRenderer" },
+                    ValidationLevel.ALLOW),
+                new ComponentReference("Mesh Filter", new string[] { "UnityEngine.MeshFilter" }, ValidationLevel.ALLOW),
+                new ComponentReference("Particle System",
+                    new string[] { "UnityEngine.ParticleSystem", "UnityEngine.ParticleSystemRenderer" },
+                    ValidationLevel.ALLOW),
+                new ComponentReference("Trail Renderer", new string[] { "UnityEngine.TrailRenderer" },
+                    ValidationLevel.ALLOW),
+                new ComponentReference("Line Renderer", new string[] { "UnityEngine.LineRenderer" },
+                    ValidationLevel.ALLOW),
+                new ComponentReference("Light", new string[] { "UnityEngine.Light" }, AdvancedObjectValidationLevel),
+                new ComponentReference("LightProbeGroup", new string[] { "UnityEngine.LightProbeGroup" },
+                    AdvancedObjectValidationLevel),
+                new ComponentReference("ReflectionProbe", new string[] { "UnityEngine.ReflectionProbe" },
+                    AdvancedObjectValidationLevel),
+                new ComponentReference("Camera", new string[] { "UnityEngine.Camera" },
+                    MoreAdvancedObjectValidationLevel),
+                new ComponentReference("Projector", new string[] { "UnityEngine.Projector" },
+                    MoreAdvancedObjectValidationLevel),
+                new ComponentReference("LookatTarget", new string[] { "UnityStandardAssets.Cameras.LookatTarget" },
+                    MoreAdvancedObjectValidationLevel),
+                new ComponentReference("FollowTarget", new string[] { "UnityStandardAssets.Utility.FollowTarget" },
+                    MoreAdvancedObjectValidationLevel),
+                new ComponentReference("Suspension", new string[] { "UnityStandardAssets.Vehicles.Car.Suspension" },
+                    MoreAdvancedObjectValidationLevel),
+                new ComponentReference("Animator", new string[] { "UnityEngine.Animator" }, ValidationLevel.ALLOW),
+                new ComponentReference("Animation", new string[] { "UnityEngine.Animation" }, ValidationLevel.ALLOW),
+                new ComponentReference("Audio Source",
+                    new string[] { "UnityEngine.AudioSource", "ONSPAudioSource", "VRCSDK2.VRC_SpatialAudioSource" },
+                    ValidationLevel.DISALLOW),
+                new ComponentReference("Canvas",
+                    new string[]
+                    {
+                        "UnityEngine.Canvas", "UnityEngine.CanvasGroup", "UnityEngine.RectTransform",
+                        "UnityEngine.UI.CanvasScaler", "UnityEngine.UI.GraphicRaycaster",
+                        "UnityEngine.UI.AspectRatioFitter", "UnityEngine.UI.LayoutElement",
+                        "UnityEngine.UI.ContentSizeFitter", "UnityEngine.UI.HorizontalLayoutGroup",
+                        "UnityEngine.UI.VerticalLayoutGroup", "UnityEngine.UI.GridLayoutGroup", "UnityEngine.UI.Text",
+                        "UnityEngine.UI.Image", "UnityEngine.UI.RawImage", "UnityEngine.UI.Mask",
+                        "UnityEngine.UI.RectMask2D", "UnityEngine.UI.Button", "UnityEngine.UI.InputField",
+                        "UnityEngine.UI.Toggle", "UnityEngine.UI.ToggleGroup", "UnityEngine.UI.Slider",
+                        "UnityEngine.UI.Scrollbar", "UnityEngine.UI.Dropdown", "UnityEngine.UI.ScrollRect",
+                        "UnityEngine.UI.Selectable", "UnityEngine.UI.Shadow", "UnityEngine.UI.Outline",
+                        "UnityEngine.UI.PositionAsUV1", "UnityEngine.RectTransform", "UnityEngine.CanvasRenderer"
+                    }, ValidationLevel.ALLOW),
+                new ComponentReference("VideoPlayer", new string[] { "UnityEngine.Video.VideoPlayer" },
+                    MoreAdvancedObjectValidationLevel),
+                new ComponentReference("VRC_Station", new string[] { "VRCSDK2.VRC_Station" }, ValidationLevel.DISALLOW),
+                new ComponentReference("VRC_Mirror",
+                    new string[] { "VRCSDK2.VRC_MirrorCamera", "VRCSDK2.VRC_MirrorReflection" },
+                    ValidationLevel.DISALLOW),
+                new ComponentReference("VRC_PlayerAudioOverride", new string[] { "VRCSDK2.VRC_PlayerAudioOverride" },
+                    ValidationLevel.DISALLOW),
+                new ComponentReference("EventSystem",
+                    new string[]
+                        { "UnityEngine.EventSystems.EventSystem", "UnityEngine.EventSystems.StandaloneInputModule" },
+                    ValidationLevel.DISALLOW),
+                new ComponentReference("StandaloneInputModule",
+                    new string[] { "UnityEngine.EventSystems.StandaloneInputModule" }, ValidationLevel.DISALLOW),
+                new ComponentReference("VRC_SceneResetPosition", new string[] { "VRCSDK2.VRC_SceneResetPosition" },
+                    ValidationLevel.DISALLOW),
+                new ComponentReference("PlayableDirector", new string[] { "UnityEngine.Playables.PlayableDirector" },
+                    ValidationLevel.DISALLOW),
+                new ComponentReference("VRC_Panorama", new string[] { "VRCSDK2.scripts.Scenes.VRC_Panorama" },
+                    ValidationLevel.DISALLOW),
+                new ComponentReference("VRC_SyncVideoPlayer",
+                    new string[] { "VRCSDK2.VRC_SyncVideoPlayer", "VRCSDK2.VRC_SyncVideoStream" },
+                    ValidationLevel.DISALLOW),
             };
         }
 
         private ValidationLevel AdvancedObjectValidationLevel
         {
-            get
-            {
-                return ValidationLevel.ALLOW;
-            }
+            get { return ValidationLevel.ALLOW; }
         }
 
         private ValidationLevel MoreAdvancedObjectValidationLevel
         {
-            get
-            {
-                return ValidationLevel.DISALLOW;
-            }
+            get { return ValidationLevel.DISALLOW; }
         }
 
-        private LightConfigRule.LightConfig ApprovedPointLightConfig 
-        { 
-            get
-            {
-            return new LightConfigRule.LightConfig(
-                new[] { LightmapBakeType.Baked, LightmapBakeType.Realtime },
-                new[] { LightShadows.Hard, LightShadows.Soft },
-                0, 7,
-                0, 10,
-                0, 15);
-            }
-        }
-
-        private LightConfigRule.LightConfig ApprovedSpotLightConfig 
+        private LightConfigRule.LightConfig ApprovedPointLightConfig
         {
             get
             {
@@ -318,7 +352,20 @@ namespace VitDeck.Validator
             }
         }
 
-        private LightConfigRule.LightConfig ApprovedAreaLightConfig 
+        private LightConfigRule.LightConfig ApprovedSpotLightConfig
+        {
+            get
+            {
+                return new LightConfigRule.LightConfig(
+                    new[] { LightmapBakeType.Baked, LightmapBakeType.Realtime },
+                    new[] { LightShadows.Hard, LightShadows.Soft },
+                    0, 7,
+                    0, 10,
+                    0, 15);
+            }
+        }
+
+        private LightConfigRule.LightConfig ApprovedAreaLightConfig
         {
             get
             {
@@ -333,43 +380,27 @@ namespace VitDeck.Validator
 
         private LightmapBakeType[] unusablePointLightModes
         {
-            get
-            {
-                return new LightmapBakeType[] { };
-            }
+            get { return new LightmapBakeType[] { }; }
         }
 
-        private LightmapBakeType[] unusableSpotLightModes 
+        private LightmapBakeType[] unusableSpotLightModes
         {
-            get
-            {
-                return new LightmapBakeType[] { };
-            }
+            get { return new LightmapBakeType[] { }; }
         }
 
-        private int AreaLightUsesLimit 
+        private int AreaLightUsesLimit
         {
-            get
-            {
-                return 3;
-            }
+            get { return 3; }
         }
 
-        private int ChairPrefabUsesLimit 
+        private int ChairPrefabUsesLimit
         {
-            get
-            {
-                return 1;
-            }
+            get { return 1; }
         }
 
-        private int PickupObjectSyncUsesLimit 
+        private int PickupObjectSyncUsesLimit
         {
-            get
-            {
-                return 5;
-            }
+            get { return 5; }
         }
-
     }
 }

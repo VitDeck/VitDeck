@@ -29,6 +29,7 @@ namespace VitDeck.TemplateLoader.Test
             LogAssert.Expect(LogType.Error, new Regex("^入力した文字列に使えない文字が含まれています。.*"));
             TemplateLoader.Load("Sample_template", invalidReplaceList, "Assets/TestTemplateLoad2");
         }
+
         [Test]
         public void TestFbxReferenceModifier()
         {
@@ -49,17 +50,21 @@ namespace VitDeck.TemplateLoader.Test
                 }
             }
         }
+
         [Test, Ignore("Vket用のテンプレートが用意され、制限に一致しなくなった為")]
         public void TestGetTemplateFolders()
         {
             Assert.That(TemplateLoader.GetTemplateFolders().Length, Is.EqualTo(1));
             Assert.That(TemplateLoader.GetTemplateFolders()[0], Is.EqualTo("Sample_template"));
         }
+
         [Test]
         public void TestGetTemplateNames()
         {
-            Assert.That(TemplateLoader.GetTemplateNames(new string[] { "invalid", "Sample_template" }), Is.EqualTo(new string[] { "No name[invalid]", "Sample Template" }));
+            Assert.That(TemplateLoader.GetTemplateNames(new string[] { "invalid", "Sample_template" }),
+                Is.EqualTo(new string[] { "No name[invalid]", "Sample Template" }));
         }
+
         [Test]
         public void TestGetTemplateName()
         {
@@ -69,12 +74,16 @@ namespace VitDeck.TemplateLoader.Test
         [Test]
         public void TestGetTemplateProperty()
         {
-            Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").templateName, Is.EqualTo("Sample Template"));
-            Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").description, Is.EqualTo("This is VitDeck sample template"));
+            Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").templateName,
+                Is.EqualTo("Sample Template"));
+            Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").description,
+                Is.EqualTo("This is VitDeck sample template"));
             Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").developer, Is.EqualTo("VitDeck"));
-            Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").developerUrl, Is.EqualTo("https://github.com/vitdeck/VitDeck"));
+            Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").developerUrl,
+                Is.EqualTo("https://github.com/vitdeck/VitDeck"));
             Assert.That(TemplateLoader.GetTemplateProperty("Sample_template").lisenseFile.name, Is.EqualTo("LICENSE"));
         }
+
         [TearDown]
         public void Destoroy()
         {

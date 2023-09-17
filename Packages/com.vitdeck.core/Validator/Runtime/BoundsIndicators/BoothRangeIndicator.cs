@@ -7,8 +7,7 @@ namespace VitDeck.Validator.BoundsIndicators
     [ExecuteInEditMode]
     public class BoothRangeIndicator : MonoBehaviour, IBoothRoot
     {
-        [System.NonSerialized]
-        bool initialized = false;
+        [System.NonSerialized] bool initialized = false;
 
         private Bounds bounds;
 
@@ -19,6 +18,7 @@ namespace VitDeck.Validator.BoundsIndicators
             {
                 token.Reset += Token_Reset;
             }
+
             initialized = true;
         }
 

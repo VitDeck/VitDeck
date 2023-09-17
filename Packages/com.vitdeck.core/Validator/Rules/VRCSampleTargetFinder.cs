@@ -21,7 +21,7 @@ namespace VitDeck.Validator
         GameObject[] allObjects;
         Scene[] scenes;
         ValidationTarget target;
-        
+
         public IReadonlyReferenceDictionary ReferenceDictionary { get; private set; }
 
         private void FindInternal(string baseFolder, bool forceOpenScene = false)
@@ -80,7 +80,6 @@ namespace VitDeck.Validator
             if (exhibitRootObjects.Length == 0)
             {
                 throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.ExhibitNotFound"));
-
             }
             else if (exhibitRootObjects.Length > 1)
             {
@@ -92,7 +91,8 @@ namespace VitDeck.Validator
             }
         }
 
-        private static IReadonlyReferenceDictionary GetContainsAndReferredAssets(string baseFolder, GameObject[] gameObjects)
+        private static IReadonlyReferenceDictionary GetContainsAndReferredAssets(string baseFolder,
+            GameObject[] gameObjects)
         {
             var referenceChain = UnityObjectReferenceChain
                 .ExploreFrom(
@@ -110,18 +110,21 @@ namespace VitDeck.Validator
             Debug.Log(scenePath);
             if (!File.Exists(scenePath))
             {
-                throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.SceneNotFound", scenePath));
+                throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.SceneNotFound",
+                    scenePath));
             }
+
             var targetScene = EditorSceneManager.GetSceneByPath(scenePath);
             Debug.Log(targetScene.name);
 
             if (!targetScene.isLoaded)
             {
                 if (!EditorUtility.DisplayDialog(
-                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Title"),
-                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog") + Environment.NewLine + targetScene.path,
-                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Continue"),
-                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Abort")))
+                        LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Title"),
+                        LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog") + Environment.NewLine +
+                        targetScene.path,
+                        LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Continue"),
+                        LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Abort")))
                 {
                     throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.ValidationAborted"));
                 }

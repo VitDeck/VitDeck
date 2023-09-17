@@ -14,9 +14,9 @@ namespace VitDeck.Validator.Test
         public void TestValidate(LightType type, int limit)
         {
             var rule = new LightCountLimitRule(
-                    string.Format("{0}Lightの個数が制限を超えていることを検出するルール", type),
-                    type,
-                    limit);
+                string.Format("{0}Lightの個数が制限を超えていることを検出するルール", type),
+                type,
+                limit);
 
             var finder = new ValidationTargetFinder();
             var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/LightCountLimitRule", true);
@@ -35,11 +35,11 @@ namespace VitDeck.Validator.Test
             var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/LightCountLimitRule", true);
 
             var rule = new LightCountLimitRule(
-                                string.Format("{0}Lightの個数が制限を超えていることを検出するルール", type), 
-                                type,
-                                limit);
+                string.Format("{0}Lightの個数が制限を超えていることを検出するルール", type),
+                type,
+                limit);
             var result = rule.Validate(target);
-            Assert.That(result.RuleName,Is.EqualTo(string.Format("{0}Lightの個数が制限を超えていることを検出するルール", type)));
+            Assert.That(result.RuleName, Is.EqualTo(string.Format("{0}Lightの個数が制限を超えていることを検出するルール", type)));
             Assert.That(result.Issues.Count, Is.EqualTo(count));
             var targetLight = result.Issues[0].target as Light;
             Assert.That(targetLight.type, Is.EqualTo(type));

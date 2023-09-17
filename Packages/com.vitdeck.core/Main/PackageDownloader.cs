@@ -18,7 +18,9 @@ namespace VitDeck.Main
         public void Download(string downloadUrl, string packageName)
         {
             var downloader = Downloader(downloadUrl, packageName);
-            while (downloader.MoveNext()) { }
+            while (downloader.MoveNext())
+            {
+            }
         }
 
         IEnumerator Downloader(string downloadUrl, string packageName)

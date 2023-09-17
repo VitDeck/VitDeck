@@ -8,8 +8,9 @@ namespace VitDeck.Validator
 {
     public class StaticFlagRule : BaseRule
     {
+        private const StaticEditorFlags mustFlag =
+            StaticEditorFlags.OccludeeStatic | StaticEditorFlags.ReflectionProbeStatic;
 
-        private const StaticEditorFlags mustFlag = StaticEditorFlags.OccludeeStatic | StaticEditorFlags.ReflectionProbeStatic;
         private const StaticEditorFlags shouldFlag = StaticEditorFlags.BatchingStatic;
 
         public StaticFlagRule(string name) : base(name)
@@ -20,7 +21,7 @@ namespace VitDeck.Validator
         {
             var rootObjects = target.GetRootObjects();
 
-            foreach(var rootObject in rootObjects)
+            foreach (var rootObject in rootObjects)
             {
                 LogicForDynamicObjects(new[] { rootObject });
 
@@ -73,7 +74,8 @@ namespace VitDeck.Validator
                         LocalizedMessage.Get("StaticFlagRule.ReflectionProveStaticNotSet.Solution"),
                         resolver: () =>
                         {
-                            GameObjectUtility.SetStaticEditorFlags(gameObject, flag | StaticEditorFlags.ReflectionProbeStatic);
+                            GameObjectUtility.SetStaticEditorFlags(gameObject,
+                                flag | StaticEditorFlags.ReflectionProbeStatic);
                             return ResolverResult.Resolved("StaticEditorFlags is set.");
                         }));
                 }
@@ -137,9 +139,14 @@ namespace VitDeck.Validator
 
                         if (!importer.generateSecondaryUV) // 対象のメッシュアセットのgenerateSecondaryUVが無効になっている
                         {
-                            var message = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap");
-                            var solution = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.Solution");
-                            var solutionURL = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.SolutionURL");
+                            var message =
+                                LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap");
+                            var solution =
+                                LocalizedMessage.Get(
+                                    "StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.Solution");
+                            var solutionURL =
+                                LocalizedMessage.Get(
+                                    "StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.SolutionURL");
 
                             ResolverResult Resolver()
                             {
@@ -182,7 +189,7 @@ namespace VitDeck.Validator
             var message = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshShouldHaveUV2");
             var solution = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshShouldHaveUV2.Solution");
             var solutionURL = LocalizedMessage.Get("StaticFlagRule.LightmapStaticMeshShouldHaveUV2.SolutionURL");
-            
+
             ResolverResult Resolver()
             {
                 var mesh = filter.sharedMesh;
@@ -198,7 +205,7 @@ namespace VitDeck.Validator
                 importer.SaveAndReimport();
                 return ResolverResult.Resolved("UV2 is generated.");
             }
-            
+
             AddIssue(new Issue(filter, IssueLevel.Warning, message, solution, solutionURL, Resolver));
         }
     }

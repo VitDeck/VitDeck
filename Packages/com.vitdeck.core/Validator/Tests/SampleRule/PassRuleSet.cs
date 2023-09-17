@@ -11,7 +11,7 @@ namespace VitDeck.Validator
         {
             get { return "パスルール"; }
         }
-        [Validation]
-        public IRule passRule = new UnityVersionRule("pass rule", Application.unityVersion);
+
+        [Validation] public IRule passRule = new UnityVersionRule("pass rule", Application.unityVersion);
     }
 }

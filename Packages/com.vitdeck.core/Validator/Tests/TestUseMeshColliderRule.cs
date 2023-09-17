@@ -14,7 +14,7 @@ namespace VitDeck.Validator.Test
             var finder = new ValidationTargetFinder();
             var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/UseMeshColliderRule", true);
             var result = rule.Validate(target);
-            Assert.That(result.RuleName,Is.EqualTo("MeshColliderの使用を検証するルール"));
+            Assert.That(result.RuleName, Is.EqualTo("MeshColliderの使用を検証するルール"));
             Assert.That(result.Issues.Count, Is.AtLeast(1));
             Assert.That(result.Issues[0].level, Is.EqualTo(IssueLevel.Warning));
             //Assert.That(result.Issues[0].message, Is.EqualTo("MeshColliderは非推奨です。"));

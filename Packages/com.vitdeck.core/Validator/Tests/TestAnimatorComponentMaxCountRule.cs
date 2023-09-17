@@ -5,7 +5,8 @@ namespace VitDeck.Validator.Test
 {
     public class TestAnimatorComponentMaxCountRule
     {
-		private readonly int ANIMATOR_LIMIT_COUNT = 50;
+        private readonly int ANIMATOR_LIMIT_COUNT = 50;
+
         [Test]
         public void TestValidate()
         {
@@ -27,6 +28,7 @@ namespace VitDeck.Validator.Test
                 {
                     Assert.That(issues[i].target.name, Is.EqualTo(string.Format("AnimatorObject ({0})", i)));
                 }
+
                 //Assert.That(issues[i].message, Is.EqualTo(string.Format("Animatorコンポーネントの使用数が{0}個を超えています。({1}個)", ANIMATOR_LIMIT_COUNT, 51)));
                 //Assert.That(issues[i].solution, Is.EqualTo("Animatorコンポーネントの使用数を減らしてください。"));
                 Assert.That(issues[i].solutionURL, Is.Empty);

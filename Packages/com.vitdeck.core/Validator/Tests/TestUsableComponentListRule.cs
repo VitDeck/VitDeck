@@ -39,7 +39,8 @@ namespace VitDeck.Validator.Test
                 {
                     new ComponentReference("ライティング", new string[] { "UnityEngine.Light" }, ValidationLevel.ALLOW),
                     new ComponentReference("カメラ", new string[] { "UnityEngine.Camera" }, ValidationLevel.DISALLOW),
-                    new ComponentReference("Jointの使用禁止", new string[] {
+                    new ComponentReference("Jointの使用禁止", new string[]
+                    {
                         "UnityEngine.CharacterJoint",
                         "UnityEngine.ConfigurableJoint",
                         "UnityEngine.FixedJoint",
@@ -76,16 +77,16 @@ namespace VitDeck.Validator.Test
                 .Find(ValidatorTestUtilities.DataDirectoryPath + "/UsableComponentListRule", true);
 
             var allowed = new UsableComponentListRule("",
-                new ComponentReference[] { },
-                unregisteredComponent: ValidationLevel.ALLOW)
+                    new ComponentReference[] { },
+                    unregisteredComponent: ValidationLevel.ALLOW)
                 .Validate(target);
 
             Assert.That(allowed.Issues.Count, Is.Zero);
 
 
             var disallowed = new UsableComponentListRule("",
-                new ComponentReference[] { },
-                unregisteredComponent: ValidationLevel.DISALLOW)
+                    new ComponentReference[] { },
+                    unregisteredComponent: ValidationLevel.DISALLOW)
                 .Validate(target);
 
             Assert.That(disallowed.Issues.Count, Is.Not.Zero);
@@ -102,15 +103,16 @@ namespace VitDeck.Validator.Test
                 .Find(ValidatorTestUtilities.DataDirectoryPath + "/UsableComponentListRule", true);
 
             var ignoredPrefabGUID = AssetDatabase
-                .AssetPathToGUID(ValidatorTestUtilities.DataDirectoryPath + "/UsableComponentListRule/Directional Light Prefab.prefab");
+                .AssetPathToGUID(ValidatorTestUtilities.DataDirectoryPath +
+                                 "/UsableComponentListRule/Directional Light Prefab.prefab");
 
             Debug.Log(ignoredPrefabGUID);
             var result = new UsableComponentListRule("",
-                new ComponentReference[]
-                {
-                    new ComponentReference("", new string[]{ typeof(Light).FullName }, ValidationLevel.DISALLOW)
-                },
-                ignorePrefabGUIDs: new string[] { ignoredPrefabGUID })
+                    new ComponentReference[]
+                    {
+                        new ComponentReference("", new string[] { typeof(Light).FullName }, ValidationLevel.DISALLOW)
+                    },
+                    ignorePrefabGUIDs: new string[] { ignoredPrefabGUID })
                 .Validate(target);
 
             Assert.That(Object.FindObjectsOfType<Light>().Length, Is.EqualTo(2));

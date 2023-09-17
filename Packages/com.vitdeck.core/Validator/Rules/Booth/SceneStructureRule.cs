@@ -17,9 +17,9 @@ namespace VitDeck.Validator
 
         protected override void Logic(ValidationTarget target)
         {
-            var loadedScenes =  new HashSet<Scene>(GetLoadedScenes());
-            var targetScenes= target.GetScenes();
-            
+            var loadedScenes = new HashSet<Scene>(GetLoadedScenes());
+            var targetScenes = target.GetScenes();
+
             foreach (var scene in targetScenes)
             {
                 loadedScenes.Remove(scene);
@@ -54,7 +54,8 @@ namespace VitDeck.Validator
 
             foreach (var unrelatedRootObject in rootObjects)
             {
-                var message = LocalizedMessage.Get("SceneStructureRule.UnrelatedRootObjectDetected", unrelatedRootObject.name);
+                var message = LocalizedMessage.Get("SceneStructureRule.UnrelatedRootObjectDetected",
+                    unrelatedRootObject.name);
                 var solution = LocalizedMessage.Get("SceneStructureRule.UnrelatedRootObjectDetected.Solution");
                 var solutionURL = LocalizedMessage.Get("SceneStructureRule.UnrelatedRootObjectDetected.SolutionURL");
 
@@ -67,7 +68,7 @@ namespace VitDeck.Validator
         {
             var sceneCount = SceneManager.sceneCount;
             var scenes = new List<Scene>(sceneCount);
-            
+
             for (var i = 0; i < sceneCount; i++)
             {
                 var scene = SceneManager.GetSceneAt(i);
@@ -75,6 +76,7 @@ namespace VitDeck.Validator
                 {
                     continue;
                 }
+
                 scenes.Add(scene);
             }
 

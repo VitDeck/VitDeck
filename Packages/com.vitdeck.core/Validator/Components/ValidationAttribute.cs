@@ -12,6 +12,7 @@ namespace VitDeck.Validator
         /// ルールの実行順序。値が小さいほど先に実行される。
         /// </summary>
         public int order = 0;
+
         public int CompareTo(ValidationAttribute item)
         {
             return this.order - item.order;

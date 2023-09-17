@@ -12,10 +12,12 @@ namespace VitDeck.Validator
         /// 検証を実行したルール名
         /// </summary>
         public readonly string RuleName;
+
         /// <summary>
         /// 検証の結果検出した問題のリスト
         /// </summary>
         public readonly List<Issue> Issues;
+
         private string resultLog;
 
         public ValidationResult(string ruleName)
@@ -23,6 +25,7 @@ namespace VitDeck.Validator
             this.RuleName = ruleName;
             this.Issues = new List<Issue>();
         }
+
         /// <summary>
         /// 検出した問題を追加する
         /// </summary>
@@ -31,6 +34,7 @@ namespace VitDeck.Validator
         {
             Issues.Add(issue);
         }
+
         /// <summary>
         /// 検証ログを追記する。
         /// </summary>
@@ -39,6 +43,7 @@ namespace VitDeck.Validator
         {
             resultLog += log + Environment.NewLine;
         }
+
         /// <summary>
         /// 検証ログを取得する。
         /// </summary>
@@ -67,6 +72,7 @@ namespace VitDeck.Validator
                     log += issueLog + Environment.NewLine;
                 }
             }
+
             return log;
         }
 

@@ -9,11 +9,8 @@ namespace VitDeck.TemplateLoader
     [Serializable]
     public class ReplacementDefinition
     {
-        [SerializeField]
-        public string ID;
-        [SerializeField]
-        public string searchString;
-        [SerializeField]
-        public string label;
+        [SerializeField] public string ID;
+        [SerializeField] public string searchString;
+        [SerializeField] public string label;
     }
 }

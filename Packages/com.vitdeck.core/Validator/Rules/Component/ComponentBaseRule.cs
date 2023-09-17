@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace VitDeck.Validator
 {
-
     public abstract class ComponentRuleCommonLogics : BaseRule
     {
         public ComponentRuleCommonLogics(string name) : base(name)
@@ -39,6 +38,7 @@ namespace VitDeck.Validator
                     visibleComponentCount++;
                 }
             }
+
             bool hasVisbleComponent = visibleComponentCount != 0;
             return hasVisbleComponent;
         }

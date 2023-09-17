@@ -44,26 +44,17 @@ namespace VitDeck.Validator.BoundsIndicators
 
         public Bounds LocalBounds
         {
-            get
-            {
-                return new Bounds();
-            }
+            get { return new Bounds(); }
         }
-        
+
         public Matrix4x4 LocalToWorldMatrix
         {
-            get
-            {
-                return Matrix4x4.identity;
-            }
+            get { return Matrix4x4.identity; }
         }
 
         public bool IsRemoved
         {
-            get
-            {
-                return probeTransform == null || group == null;
-            }
+            get { return probeTransform == null || group == null; }
         }
     }
 }

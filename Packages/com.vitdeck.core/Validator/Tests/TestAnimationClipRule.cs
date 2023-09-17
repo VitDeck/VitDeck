@@ -11,7 +11,8 @@ namespace VitDeck.Validator.Test
         [Test]
         public void MaterialChangeAnimationTest()
         {
-            var targetClip = AssetDatabase.LoadAssetAtPath<AnimationClip>(BaseFolder + "/TestMateralChangeAnimation.anim");
+            var targetClip =
+                AssetDatabase.LoadAssetAtPath<AnimationClip>(BaseFolder + "/TestMateralChangeAnimation.anim");
             var validationTarget = new ValidationTarget(BaseFolder, assetObjects: new Object[] { targetClip });
 
             var issues = new AnimationClipRule("").Validate(validationTarget).Issues;

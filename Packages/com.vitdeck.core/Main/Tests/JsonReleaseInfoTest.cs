@@ -12,7 +12,8 @@ namespace VitDeck.Main.Tests
             Assert.That(JsonReleaseInfo.GetVersion(), Is.EqualTo("1.0.0"));
             Assert.That(JsonReleaseInfo.GetPackageName(), Is.EqualTo("VitDeck-1.0.0-alpha1.unitypackage"));
             Assert.That(JsonReleaseInfo.GetDownloadURL(),
-                Is.EqualTo("https://github.com/vitdeck/VitDeckTest/releases/download/1.0.0-alpha1/VitDeck-1.0.0-alpha1.unitypackage"));
+                Is.EqualTo(
+                    "https://github.com/vitdeck/VitDeckTest/releases/download/1.0.0-alpha1/VitDeck-1.0.0-alpha1.unitypackage"));
         }
     }
 }

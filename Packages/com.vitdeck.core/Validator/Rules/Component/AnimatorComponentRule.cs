@@ -11,7 +11,8 @@ namespace VitDeck.Validator
         private readonly Type[] mustUseSeparatelyComponents;
         private readonly IObjectDetector ignoredPrefabDetector;
 
-        public AnimatorComponentRule(string name, Type[] mustUseSeparatelyComponents, IObjectDetector ignoredPrefabDetector = null) : base(name)
+        public AnimatorComponentRule(string name, Type[] mustUseSeparatelyComponents,
+            IObjectDetector ignoredPrefabDetector = null) : base(name)
         {
             this.mustUseSeparatelyComponents = mustUseSeparatelyComponents;
             this.ignoredPrefabDetector = ignoredPrefabDetector ?? new DefaultObjectDetector();
@@ -24,29 +25,29 @@ namespace VitDeck.Validator
 
             var applyRootMotion = serializedObject.FindProperty("m_ApplyRootMotion");
             if (IsValueToPointOut(
-                applyRootMotion.boolValue,
-                applyRootMotion.prefabOverride, 
-                isPartOfOfficialAsset))
+                    applyRootMotion.boolValue,
+                    applyRootMotion.prefabOverride,
+                    isPartOfOfficialAsset))
             {
                 AddIssue(new Issue(
                     component,
                     IssueLevel.Error,
                     LocalizedMessage.Get("AnimatorComponentRule.ShouldNotUseApplyRootMotion"),
                     LocalizedMessage.Get("AnimatorComponentRule.ShouldNotUseApplyRootMotion.Solution")
-                    ));
+                ));
             }
 
             var cullingMode = serializedObject.FindProperty("m_CullingMode");
             if (IsValueToPointOut(
-                cullingMode.enumValueIndex == (int)AnimatorCullingMode.AlwaysAnimate,
-                cullingMode.prefabOverride, 
-                isPartOfOfficialAsset))
+                    cullingMode.enumValueIndex == (int)AnimatorCullingMode.AlwaysAnimate,
+                    cullingMode.prefabOverride,
+                    isPartOfOfficialAsset))
             {
                 AddIssue(new Issue(
                     component,
                     IssueLevel.Warning,
                     LocalizedMessage.Get("AnimatorComponentRule.ShouldNotUseAlwaysAnimate")
-                    ));
+                ));
             }
         }
 
@@ -56,6 +57,7 @@ namespace VitDeck.Validator
             {
                 return false;
             }
+
             return value;
         }
 
@@ -64,7 +66,6 @@ namespace VitDeck.Validator
             foreach (var type in mustUseSeparatelyComponents)
             {
                 CheckComponent(type, hasComponentObject);
-
             }
         }
 
@@ -78,7 +79,7 @@ namespace VitDeck.Validator
                     IssueLevel.Error,
                     LocalizedMessage.Get("AnimatorComponentRule.MustUseComponentsSeparately", mustSeparatedType),
                     LocalizedMessage.Get("AnimatorComponentRule.MustUseComponentsSeparately.Solution")
-                    ));
+                ));
             }
         }
     }

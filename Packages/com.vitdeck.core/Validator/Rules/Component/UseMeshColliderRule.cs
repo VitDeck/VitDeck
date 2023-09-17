@@ -26,7 +26,7 @@ namespace VitDeck.Validator
                 {
                     AddIssue(
                         new Issue(
-                            obj, 
+                            obj,
                             IssueLevel.Warning,
                             LocalizedMessage.Get("UseMeshColliderRule.ShouldNotUse"),
                             LocalizedMessage.Get("UseMeshColliderRule.ShouldNotUse.Solution")

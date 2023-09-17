@@ -14,6 +14,7 @@ namespace VitDeck.Validator
     public class AssetNamingRule : BaseRule
     {
         private readonly string permissionPattern;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -36,6 +37,7 @@ namespace VitDeck.Validator
                 {
                     continue;
                 }
+
                 var assetName = Path.GetFileName(path);
                 if (!Regex.IsMatch(assetName, matchPattern))
                 {
@@ -57,6 +59,7 @@ namespace VitDeck.Validator
                 else
                     prohibition += c;
             }
+
             return prohibition;
         }
     }

@@ -13,6 +13,7 @@ namespace VitDeck.TemplateLoader
     internal class FbxReferenceModifier : IReferenceModifier
     {
         Dictionary<string, string> replaceGuidPairDictionary;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -30,6 +31,7 @@ namespace VitDeck.TemplateLoader
             {
                 return;
             }
+
             var modelImporter = ModelImporter.GetAtPath(path);
             var map = modelImporter.GetExternalObjectMap();
             foreach (var pair in map)
@@ -48,6 +50,7 @@ namespace VitDeck.TemplateLoader
                     }
                 }
             }
+
             AssetDatabase.WriteImportSettingsIfDirty(path);
         }
     }

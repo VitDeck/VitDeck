@@ -16,17 +16,20 @@ namespace VitDeck.Main
             var scenePath = string.Format("Assets/{0}/{0}.unity", exhibitorID);
             if (!File.Exists(scenePath))
             {
-                throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.SceneNotFound", scenePath));
+                throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.SceneNotFound",
+                    scenePath));
             }
+
             var targetScene = EditorSceneManager.GetSceneByPath(scenePath);
 
             if (!targetScene.isLoaded)
             {
                 if (!EditorUtility.DisplayDialog(
-                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Title"),
-                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog") + Environment.NewLine + targetScene.path,
-                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Continue"),
-                    LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Abort")))
+                        LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Title"),
+                        LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog") + Environment.NewLine +
+                        targetScene.path,
+                        LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Continue"),
+                        LocalizedMessage.Get("VketTargetFinder.SceneOpenDialog.Abort")))
                 {
                     throw new FatalValidationErrorException(LocalizedMessage.Get("VketTargetFinder.ValidationAborted"));
                 }

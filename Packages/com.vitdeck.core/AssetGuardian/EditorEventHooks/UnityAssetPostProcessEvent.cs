@@ -16,7 +16,8 @@ namespace VitDeck.AssetGuardian
 
         public static event ImportedPostProcessDelegate OnImportedPostProcess;
 
-        static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+        static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets,
+            string[] movedFromAssetPaths)
         {
             if (OnImportedPostProcess != null)
             {

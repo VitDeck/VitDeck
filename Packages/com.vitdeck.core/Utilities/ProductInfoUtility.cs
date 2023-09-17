@@ -10,6 +10,7 @@ namespace VitDeck.Utilities
     public static class ProductInfoUtility
     {
         private const string guid = "bac4bb3ff22830b418a8dea9a67747ce";
+
         /// <summary>
         /// 製品情報を取得する
         /// </summary>

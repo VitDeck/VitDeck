@@ -12,14 +12,13 @@ namespace VitDeck.Validator
 {
     public class AvatarPedestalPrefabRule : BasePrefabRule
     {
-
         public AvatarPedestalPrefabRule(string name, string[] targetPrefabGUIDs) : base(name, targetPrefabGUIDs)
         {
         }
 
         protected override void LogicForPrefabInstanceRoot(GameObject gameObject)
         {
-#if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3 
+#if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3
             var triggerComponents = GetComponentsInChildrenSamePrefabInstance<VRC_Trigger>(gameObject, true);
 
 
@@ -47,7 +46,7 @@ namespace VitDeck.Validator
 #endif
         }
 
-#if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3 
+#if VRC_SDK_VRCSDK2 || VRC_SDK_VRCSDK3
         private void ValidateTriggerType(UnityEngine.Object context, VRC_Trigger.TriggerType triggerType)
         {
             switch (triggerType)

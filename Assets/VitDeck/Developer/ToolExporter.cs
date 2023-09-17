@@ -60,7 +60,8 @@ namespace VitDeck.Developer
                     )
                 );
 
-                EditorUtility.DisplayDialog("Export VitDeck", $"Exported packages to \"{DestinationFolderPath}\"", "OK");
+                EditorUtility.DisplayDialog("Export VitDeck", $"Exported packages to \"{DestinationFolderPath}\"",
+                    "OK");
             }
             finally
             {

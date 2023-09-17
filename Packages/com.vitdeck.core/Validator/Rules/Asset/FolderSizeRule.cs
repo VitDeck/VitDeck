@@ -16,6 +16,7 @@ namespace VitDeck.Validator
     public class FolderSizeRule : BaseRule
     {
         private readonly long limit;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>

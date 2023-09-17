@@ -18,6 +18,7 @@ namespace VitDeck.ExhibitorGUI
         private static ValidatorWindow window;
         private static IRuleSet[] ruleSets;
         private static string[] ruleSetNames;
+
         private static IRuleSet[] RuleSets
         {
             get
@@ -26,9 +27,11 @@ namespace VitDeck.ExhibitorGUI
                 {
                     ruleSets = Validator.Validator.GetRuleSets();
                 }
+
                 return ruleSets;
             }
         }
+
         private static string[] RuleSetNames
         {
             get
@@ -40,9 +43,11 @@ namespace VitDeck.ExhibitorGUI
                         names.Add(rule.RuleSetName);
                     ruleSetNames = names.ToArray();
                 }
+
                 return ruleSetNames;
             }
         }
+
         private IRuleSet selectedRuleSet;
         private DefaultAsset baseFolder;
         private ValidationResult[] results;
@@ -68,6 +73,7 @@ namespace VitDeck.ExhibitorGUI
         {
             Init();
         }
+
         private void Init()
         {
             validationLog = "";
@@ -96,6 +102,7 @@ namespace VitDeck.ExhibitorGUI
             {
                 userSettings.validatorRuleSetType = selectedRuleSet.GetType().Name;
             }
+
             SettingUtility.SaveSettings(userSettings);
         }
 
@@ -107,7 +114,8 @@ namespace VitDeck.ExhibitorGUI
             var index = EditorGUILayout.Popup("Rule Set:", GetPopupIndex(selectedRuleSet), RuleSetNames);
             selectedRuleSet = RuleSets[index];
             //Base folder field
-            DefaultAsset newFolder = (DefaultAsset)EditorGUILayout.ObjectField("Base Folder:", baseFolder, typeof(DefaultAsset), true);
+            DefaultAsset newFolder =
+                (DefaultAsset)EditorGUILayout.ObjectField("Base Folder:", baseFolder, typeof(DefaultAsset), true);
             var path = AssetDatabase.GetAssetPath(newFolder);
             baseFolder = AssetDatabase.IsValidFolder(path) ? newFolder : null;
             //Log Option
@@ -117,6 +125,7 @@ namespace VitDeck.ExhibitorGUI
             {
                 OnValidate();
             }
+
             //Result log
             isOpenResultLogArea = EditorGUILayout.Foldout(isOpenResultLogArea, "Result log");
             if (isOpenResultLogArea)
@@ -125,6 +134,7 @@ namespace VitDeck.ExhibitorGUI
                 GUILayout.TextArea(validationLog, GUILayout.ExpandHeight(true));
                 EditorGUILayout.EndScrollView();
             }
+
             //Help message
             if (messages != null)
             {
@@ -132,7 +142,8 @@ namespace VitDeck.ExhibitorGUI
                 var warningCount = GetMessageCount(MessageType.Warning);
                 var infoCount = GetMessageCount(MessageType.Info);
                 var sum = errorCount + warningCount + infoCount;
-                var CountMessage = string.Format("{0}(Error:{1}  Warning:{2}  Informaiton:{3})", sum, errorCount, warningCount, infoCount);
+                var CountMessage = string.Format("{0}(Error:{1}  Warning:{2}  Informaiton:{3})", sum, errorCount,
+                    warningCount, infoCount);
                 isOpenMessageArea = EditorGUILayout.Foldout(isOpenMessageArea, "Messages:" + CountMessage);
                 if (isOpenMessageArea)
                 {
@@ -143,9 +154,11 @@ namespace VitDeck.ExhibitorGUI
                             continue;
                         GetMessageBox(msg);
                     }
+
                     EditorGUILayout.EndScrollView();
                 }
             }
+
             //Copy Button
             if (GUILayout.Button("Copy result log"))
                 OnCopyResultLog();
@@ -158,6 +171,7 @@ namespace VitDeck.ExhibitorGUI
             {
                 index = Array.IndexOf(RuleSets, selectedRuleSet);
             }
+
             return index;
         }
 
@@ -190,7 +204,8 @@ namespace VitDeck.ExhibitorGUI
             GUILayout.BeginHorizontal();
 
             var helpBoxRect = EditorGUILayout.BeginHorizontal();
-            if (Event.current.type == EventType.MouseUp && helpBoxRect.Contains(Event.current.mousePosition) && msg.issue != null)
+            if (Event.current.type == EventType.MouseUp && helpBoxRect.Contains(Event.current.mousePosition) &&
+                msg.issue != null)
                 EditorGUIUtility.PingObject(msg.issue.target);
             EditorGUILayout.HelpBox(msg.message, msg.type, true);
             EditorGUILayout.EndHorizontal();
@@ -202,10 +217,12 @@ namespace VitDeck.ExhibitorGUI
             {
                 GUILayout.Space(55);
             }
+
             GUILayout.EndHorizontal();
         }
 
         #region Log
+
         private void ClearLogs()
         {
             validationLog = "";
@@ -225,6 +242,7 @@ namespace VitDeck.ExhibitorGUI
             {
                 log += result.GetResultLog(true, level) + Environment.NewLine;
             }
+
             return log;
         }
 
@@ -241,6 +259,7 @@ namespace VitDeck.ExhibitorGUI
                     }
                 }
             }
+
             return false;
         }
 
@@ -267,6 +286,7 @@ namespace VitDeck.ExhibitorGUI
                         count++;
                 }
             }
+
             return count;
         }
 
@@ -274,12 +294,17 @@ namespace VitDeck.ExhibitorGUI
         {
             if (!HasFatalError(results))
             {
-                messages.Add(new Message(LocalizedMessage.Get("ValidatorWindow.ValidationCompleted") + Environment.NewLine + header, MessageType.Info));
+                messages.Add(new Message(
+                    LocalizedMessage.Get("ValidatorWindow.ValidationCompleted") + Environment.NewLine + header,
+                    MessageType.Info));
             }
             else
             {
-                messages.Add(new Message(LocalizedMessage.Get("ValidatorWindow.ValidationAborted") + Environment.NewLine + header, MessageType.Error));
+                messages.Add(new Message(
+                    LocalizedMessage.Get("ValidatorWindow.ValidationAborted") + Environment.NewLine + header,
+                    MessageType.Error));
             }
+
             foreach (var result in results)
             {
                 var ruleResultLog = result.GetResultLog(false);
@@ -295,6 +320,7 @@ namespace VitDeck.ExhibitorGUI
                 }
             }
         }
+
         #endregion
 
         /// <summary>
@@ -308,6 +334,7 @@ namespace VitDeck.ExhibitorGUI
                 this.type = type;
                 this.issue = issue;
             }
+
             public Issue issue;
             public string message;
             public MessageType type;

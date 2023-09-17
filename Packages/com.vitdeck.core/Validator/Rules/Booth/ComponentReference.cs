@@ -24,6 +24,7 @@ namespace VitDeck.Validator
             this.fullNames = fullNames;
             this.level = level;
         }
+
         /// <summary>
         /// 引数のコンポーネントが対象コンポーネントに含まれるか調べる。
         /// </summary>
@@ -34,6 +35,7 @@ namespace VitDeck.Validator
             return Array.Exists(fullNames, name => name == comp.GetType().FullName);
         }
     }
+
     /// <summary>
     ///使用可能コンポーネントの判定
     /// ALLOW：許可

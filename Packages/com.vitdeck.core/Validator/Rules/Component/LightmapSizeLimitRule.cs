@@ -74,7 +74,7 @@ namespace VitDeck.Validator
                     IssueLevel.Error,
                     LocalizedMessage.Get("LightmapSizeLimitRule.Overuse", lightmapCountLimit, lightmaps.Length),
                     LocalizedMessage.Get("LightmapSizeLimitRule.Overuse.Solution")
-                    ));
+                ));
             }
 
             foreach (var lightmap in lightmaps)
@@ -84,13 +84,16 @@ namespace VitDeck.Validator
                 {
                     continue;
                 }
+
                 if (texture.width > lightmapResolutionLimit || texture.height > lightmapResolutionLimit)
                 {
                     AddIssue(new Issue(
                         null,
                         IssueLevel.Error,
-                        LocalizedMessage.Get("LightmapSizeLimitRule.Overresolution", lightmapResolutionLimit, texture.width, texture.height),
-                        LocalizedMessage.Get("LightmapSizeLimitRule.Overresolution.Solution", lightmapResolutionLimit)));
+                        LocalizedMessage.Get("LightmapSizeLimitRule.Overresolution", lightmapResolutionLimit,
+                            texture.width, texture.height),
+                        LocalizedMessage.Get("LightmapSizeLimitRule.Overresolution.Solution",
+                            lightmapResolutionLimit)));
                 }
             }
         }

@@ -10,7 +10,7 @@ namespace VitDeck.Validator.Test
         public void TestValidateNoAsset()
         {
             var rule = new AssetNamingRule("アセット名使用禁止文字検出", "^[\x21-\x7e]+$");
-            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath ,
+            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath,
                 assetPaths: new string[] { });
             var result = rule.Validate(target);
 
@@ -28,7 +28,7 @@ namespace VitDeck.Validator.Test
             var pattern = matchPattern;
 
             var rule = new AssetNamingRule("アセット名使用禁止文字検出", pattern);
-            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath ,
+            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath,
                 assetPaths: targetAssetPaths);
             var result = rule.Validate(target);
 
@@ -54,7 +54,9 @@ namespace VitDeck.Validator.Test
 
             var issue = result.Issues[0];
             Assert.That(issue.level, Is.EqualTo(IssueLevel.Error));
-            Assert.That(issue.target, Is.EqualTo(AssetDatabase.LoadMainAssetAtPath(ValidatorTestUtilities.DataDirectoryPath + targetAssetPath)));
+            Assert.That(issue.target,
+                Is.EqualTo(
+                    AssetDatabase.LoadMainAssetAtPath(ValidatorTestUtilities.DataDirectoryPath + targetAssetPath)));
             //Assert.That(issue.message,
             //            Is.EqualTo(string.Format("アセット名({0})に使用禁止文字({1})が含まれています。", targetAssetPath, prohibition)));
             Assert.That(issue.solution, Is.Empty);

@@ -16,8 +16,10 @@ namespace VitDeck.Utilities
                 settings = ScriptableObject.CreateInstance<T>();
                 AssetDatabase.CreateAsset(settings, assetPath);
             }
+
             return settings;
         }
+
         public static void SaveSettings(ScriptableObject settings)
         {
             EditorUtility.SetDirty(settings);

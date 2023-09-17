@@ -7,8 +7,7 @@ namespace VitDeck.Validator.BoundsIndicators
     [ExecuteInEditMode]
     public class RectTransformRangeOutIndicator : MonoBehaviour
     {
-        [System.NonSerialized]
-        bool initialized = false;
+        [System.NonSerialized] bool initialized = false;
 
         RectTransform targetRectTransform;
         private IBoothRoot booth;
@@ -19,6 +18,7 @@ namespace VitDeck.Validator.BoundsIndicators
             {
                 throw new System.ArgumentNullException("booth");
             }
+
             if (targetRectTransform == null)
             {
                 throw new System.ArgumentNullException("targetRenderer");
@@ -30,6 +30,7 @@ namespace VitDeck.Validator.BoundsIndicators
             {
                 token.Reset += Token_Reset;
             }
+
             initialized = true;
         }
 
@@ -74,8 +75,10 @@ namespace VitDeck.Validator.BoundsIndicators
             }
 
             targetRectTransform.GetWorldCorners(cornersCache);
-            var min = Vector3.Min(Vector3.Min(cornersCache[0], cornersCache[1]), Vector3.Min(cornersCache[2], cornersCache[2]));
-            var max = Vector3.Max(Vector3.Max(cornersCache[0], cornersCache[1]), Vector3.Max(cornersCache[2], cornersCache[2]));
+            var min = Vector3.Min(Vector3.Min(cornersCache[0], cornersCache[1]),
+                Vector3.Min(cornersCache[2], cornersCache[2]));
+            var max = Vector3.Max(Vector3.Max(cornersCache[0], cornersCache[1]),
+                Vector3.Max(cornersCache[2], cornersCache[2]));
 
             var bounds = new Bounds();
             bounds.min = min;
@@ -100,7 +103,8 @@ namespace VitDeck.Validator.BoundsIndicators
         {
             var limit = booth.GetBounds();
             Gizmos.matrix = booth.GetLocalToWorld();
-            Gizmos.color = Color.Lerp(Color.red, Color.yellow, Mathf.PingPong(System.DateTime.Now.Millisecond * 0.002f, 1));
+            Gizmos.color = Color.Lerp(Color.red, Color.yellow,
+                Mathf.PingPong(System.DateTime.Now.Millisecond * 0.002f, 1));
 
             if (limit.max.x < bounds.max.x)
             {

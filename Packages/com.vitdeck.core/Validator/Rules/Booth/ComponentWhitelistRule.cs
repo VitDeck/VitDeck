@@ -10,6 +10,7 @@ namespace VitDeck.Validator
     public class ComponentWhitelistRule : BaseRule
     {
         private readonly ComponentReference[] references;
+
         /// <summary>
         /// コンストラクタ。
         /// </summary>
@@ -41,12 +42,14 @@ namespace VitDeck.Validator
                                 case ValidationLevel.ALLOW:
                                     break;
                                 case ValidationLevel.DISALLOW:
-                                    message = string.Format("{0}:{1}の使用は許可されていません。", reference.name, cmp.GetType().Name);
+                                    message = string.Format("{0}:{1}の使用は許可されていません。", reference.name,
+                                        cmp.GetType().Name);
                                     AddIssue(new Issue(obj, IssueLevel.Error, message, string.Empty, string.Empty));
                                     break;
                             }
                         }
                     }
+
                     if (!findFlg)
                     {
                         message = string.Format("{0}は使用可能なコンポーネントリストに登録されていません。", cmp.GetType().Name);

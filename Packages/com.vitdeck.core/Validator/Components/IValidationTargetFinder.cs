@@ -10,7 +10,7 @@ namespace VitDeck.Validator
         string[] FindAssetGuids(string baseFolderPath);
         Object[] FindAssetObjects(string baseFolderPath);
         string[] FindAssetPaths(string baseFolderPath);
-        GameObject[] FindRootObjects(string baseFolderPath,bool forceOpenScene = false);
-        Scene[] FindScenes(string baseFolderPath,bool forceOpenScene = false);
+        GameObject[] FindRootObjects(string baseFolderPath, bool forceOpenScene = false);
+        Scene[] FindScenes(string baseFolderPath, bool forceOpenScene = false);
     }
 }

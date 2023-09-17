@@ -12,7 +12,8 @@ namespace VitDeck.Validator
         private readonly int Major;
         private readonly int Minor;
 
-        private static readonly Regex regex = new Regex(@"^(?<Year>\d+)\.(?<Month>\d+)\.(?<Date>\d+)\.(?<Major>\d+)\.(?<Minor>\d+)$");
+        private static readonly Regex regex =
+            new Regex(@"^(?<Year>\d+)\.(?<Month>\d+)\.(?<Date>\d+)\.(?<Major>\d+)\.(?<Minor>\d+)$");
 
         public VRCSDKVersion(string version)
         {
@@ -40,7 +41,6 @@ namespace VitDeck.Validator
         }
 
 
-
         public override bool Equals(object obj)
         {
             var version = obj as VRCSDKVersion;
@@ -48,6 +48,7 @@ namespace VitDeck.Validator
             {
                 return Equals(version);
             }
+
             return false;
         }
 

@@ -8,14 +8,15 @@ using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
-	/// <summary>
-	/// 配布物以外のすべてのオブジェクトが入稿フォルダ内にあるか検出するルール
-	/// <summary>
+    /// <summary>
+    /// 配布物以外のすべてのオブジェクトが入稿フォルダ内にあるか検出するルール
+    /// <summary>
     public class ExistInSubmitFolderRule : BaseRule
     {
         // 入稿フォルダに含めることを許可されていないGUID
         private readonly HashSet<string> unauthorizedIDSet;
         private readonly VRCSampleTargetFinder targetFinder;
+
         public ExistInSubmitFolderRule(string name, string[] guids, VRCSampleTargetFinder targetFinder) : base(name)
         {
             unauthorizedIDSet = new HashSet<string>(guids);
@@ -25,7 +26,7 @@ namespace VitDeck.Validator
         protected override void Logic(ValidationTarget target)
         {
             var referenceDictionary = targetFinder.ReferenceDictionary;
-            
+
             // 除外する配布物アセットのパス
             var excludePaths = unauthorizedIDSet
                 .Select(guid => AssetDatabase.GUIDToAssetPath(guid));
@@ -39,7 +40,7 @@ namespace VitDeck.Validator
             var filePathsInSubmitDirectory = Directory
                 .GetFiles(submitDirectory, "*", SearchOption.AllDirectories)
                 .Select(x => x.Replace("\\", "/"));
-            
+
             // 入稿フォルダ内のディレクトリのパス
             var folderPathInSubmitDirectory = Directory
                 .GetDirectories(submitDirectory, "*", SearchOption.AllDirectories)
@@ -48,7 +49,7 @@ namespace VitDeck.Validator
             foreach (var assetPath in allAssetPaths)
             {
                 // Unityのビルトインアセットを除外
-                if(!assetPath.StartsWith("Assets"))
+                if (!assetPath.StartsWith("Assets"))
                     continue;
 
                 // 運営からの配布物を検証対象から除外
@@ -60,7 +61,7 @@ namespace VitDeck.Validator
                     continue;
 
                 // 入稿フォルダ内にパスがあるアセットなのか検証
-                if (filePathsInSubmitDirectory.Contains(assetPath)) 
+                if (filePathsInSubmitDirectory.Contains(assetPath))
                     continue;
 
 #if VRC_SDK_VRCSDK3
@@ -73,7 +74,7 @@ namespace VitDeck.Validator
                 var targetAsset = AssetDatabase.LoadMainAssetAtPath(assetPath);
                 referenceDictionary.Reverse.TryGetValue(targetAsset, out var referrerAssets);
 
-                var referrerMessage = 
+                var referrerMessage =
                     LocalizedMessage.Get("ExistInSubmitFolderRule.HasOutOfPackageReference", assetPath);
                 var referrerSolution =
                     LocalizedMessage.Get("ExistInSubmitFolderRule.HasOutOfPackageReference.Solution");
@@ -84,10 +85,11 @@ namespace VitDeck.Validator
                 {
                     foreach (var referrerAsset in referrerAssets)
                     {
-                        AddIssue(new Issue(referrerAsset, IssueLevel.Error, referrerMessage, referrerSolution, referrerSolutionURL));
+                        AddIssue(new Issue(referrerAsset, IssueLevel.Error, referrerMessage, referrerSolution,
+                            referrerSolutionURL));
                     }
                 }
-                
+
                 var message = LocalizedMessage.Get("ExistInSubmitFolderRule.AssetOutOfPackage", assetPath);
                 var solution = LocalizedMessage.Get("ExistInSubmitFolderRule.AssetOutOfPackage.Solution");
 

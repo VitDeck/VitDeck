@@ -28,12 +28,12 @@ namespace VitDeck.Validator
         private string shadowsListString;
 
         public LightConfigRule(
-                string name,
-                LightType type,
-                LightmapBakeType[] approvedLightmapBakeTypes,
-                float minRange = NO_LIMIT, float maxRange = NO_LIMIT,
-                float minIntensity = NO_LIMIT, float maxIntensity = NO_LIMIT,
-                float minBounceIntensity = NO_LIMIT, float maxBounceIntensity = NO_LIMIT
+            string name,
+            LightType type,
+            LightmapBakeType[] approvedLightmapBakeTypes,
+            float minRange = NO_LIMIT, float maxRange = NO_LIMIT,
+            float minIntensity = NO_LIMIT, float maxIntensity = NO_LIMIT,
+            float minBounceIntensity = NO_LIMIT, float maxBounceIntensity = NO_LIMIT
         ) : base(name)
         {
             this.type = type;
@@ -104,7 +104,7 @@ namespace VitDeck.Validator
                     LocalizedMessage.Get("LightConfigRule.UnauthorizedLightMode",
                         light.type, bakeTypeListString, light.lightmapBakeType),
                     LocalizedMessage.Get("LightConfigRule.UnauthorizedLightMode.Solution", bakeTypeListString)
-                    ));
+                ));
             }
 
             if (approvedLightShadows != null && !approvedLightShadows.Contains(light.shadows))
@@ -115,7 +115,7 @@ namespace VitDeck.Validator
                     LocalizedMessage.Get("LightConfigRule.UnauthorizedShadowTypes",
                         light.type, shadowsListString, light.shadows),
                     LocalizedMessage.Get("LightConfigRule.UnauthorizedShadowTypes.Solution", shadowsListString)
-                    ));
+                ));
             }
 
             if (minRange != NO_LIMIT && maxRange != NO_LIMIT)
@@ -125,10 +125,10 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         light.gameObject,
                         IssueLevel.Error,
-                        LocalizedMessage.Get("LightConfigRule.OverRange", 
+                        LocalizedMessage.Get("LightConfigRule.OverRange",
                             light.type, minRange, maxRange, light.range),
                         LocalizedMessage.Get("LightConfigRule.OverRange.Solution")
-                        ));
+                    ));
                 }
             }
 
@@ -139,10 +139,10 @@ namespace VitDeck.Validator
                     AddIssue(new Issue(
                         light.gameObject,
                         IssueLevel.Error,
-                        LocalizedMessage.Get("LightConfigRule.OverIntensity", 
+                        LocalizedMessage.Get("LightConfigRule.OverIntensity",
                             light.type, minIntensity, maxIntensity, light.intensity),
                         LocalizedMessage.Get("LightConfigRule.OverIntensity.Solution")
-                        ));
+                    ));
                 }
             }
 
@@ -156,7 +156,7 @@ namespace VitDeck.Validator
                         LocalizedMessage.Get("LightConfigRule.OverIndirectMultiplier",
                             light.type, minBounceIntensity, maxBounceIntensity, light.bounceIntensity),
                         LocalizedMessage.Get("LightConfigRule.OverIndirectMultiplier.Solution")
-                        ));
+                    ));
                 }
             }
         }
@@ -175,8 +175,8 @@ namespace VitDeck.Validator
             public LightConfig(
                 LightmapBakeType[] bakeTypes,
                 LightShadows[] lightShadows = null,
-                float minRange = NO_LIMIT, float maxRange = NO_LIMIT, 
-                float minIntensity = NO_LIMIT, float maxIntensity = NO_LIMIT, 
+                float minRange = NO_LIMIT, float maxRange = NO_LIMIT,
+                float minIntensity = NO_LIMIT, float maxIntensity = NO_LIMIT,
                 float minBounceIntensity = NO_LIMIT, float maxBounceIntensity = NO_LIMIT)
             {
                 this.bakeTypes = bakeTypes;

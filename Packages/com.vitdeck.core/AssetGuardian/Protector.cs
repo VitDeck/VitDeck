@@ -20,6 +20,7 @@ namespace VitDeck.AssetGuardian
             Reprotect,
             Unprotect
         }
+
         private static ProtectionRepairMode protectionRepairMode;
 
         public static event Action<string> OnSaveCancelled;

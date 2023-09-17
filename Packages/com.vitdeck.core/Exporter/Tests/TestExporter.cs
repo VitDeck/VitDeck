@@ -10,6 +10,7 @@ namespace VitDeck.Exporter.Tests
     public class TestExporter
     {
         private string testExportFolder = "Assets/VitDeckTestExport";
+
         [Test]
         public void TestExport()
         {
@@ -23,10 +24,12 @@ namespace VitDeck.Exporter.Tests
             setting.ruleSetName = "";
             var result = Exporter.Export(baseFolderPath, setting, false);
             Assert.That(result.exportResult, Is.True);
-            Assert.That(result.exportFilePath, Is.EqualTo(testExportFolder + Path.AltDirectorySeparatorChar + filename));
+            Assert.That(result.exportFilePath,
+                Is.EqualTo(testExportFolder + Path.AltDirectorySeparatorChar + filename));
             Assert.That(result.log, Is.Not.Empty);
             Assert.That(File.Exists(result.exportFilePath));
         }
+
         [Test]
         public void TestExportError()
         {
@@ -50,6 +53,7 @@ namespace VitDeck.Exporter.Tests
             var willPassResult = Exporter.Export(baseFolderPath, setting, true);
             Assert.That(willPassResult.exportResult, Is.True);
         }
+
         [Test]
         public void TestExportException()
         {
@@ -72,6 +76,7 @@ namespace VitDeck.Exporter.Tests
             setting.ExportFolderPath = "InvalidPath/Export";
             Assert.That(() => Exporter.Export(null, setting, false), Throws.ArgumentNullException);
         }
+
         [Test]
         public void TestExportSettingValue()
         {
@@ -84,7 +89,8 @@ namespace VitDeck.Exporter.Tests
             setting.ruleSetName = "";
             var result = Exporter.Export(baseFolderPath, setting, true);
             Assert.That(result.exportResult, Is.True);
-            Assert.That(result.exportFilePath, Is.EqualTo(testExportFolder+Path.AltDirectorySeparatorChar+"export.unitypackage"));
+            Assert.That(result.exportFilePath,
+                Is.EqualTo(testExportFolder + Path.AltDirectorySeparatorChar + "export.unitypackage"));
             Assert.That(File.Exists(result.exportFilePath));
         }
 
@@ -102,6 +108,7 @@ namespace VitDeck.Exporter.Tests
             Assert.That(firstSetting.ruleSetName, Is.Not.Null);
             Assert.That(firstSetting.ignoreValidationWarning, Is.Not.Null);
         }
+
         [OneTimeTearDown]
         public void TearDown()
         {

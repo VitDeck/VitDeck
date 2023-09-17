@@ -10,12 +10,14 @@ namespace VitDeck.Utilities.Tests
             var version = ProductInfoUtility.GetVersion();
             Assert.That(version, Is.EqualTo("2.0.0-exp.2"));
         }
+
         [Test]
         public void TestGetDeveloperLinkTitle()
         {
             var title = ProductInfoUtility.GetDeveloperLinkTitle();
             Assert.That(title, Is.EqualTo("VitDeck on GitHub"));
         }
+
         [Test]
         public void TestGetDeveloperLinkURL()
         {

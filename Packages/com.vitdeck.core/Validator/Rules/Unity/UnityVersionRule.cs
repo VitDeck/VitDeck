@@ -9,6 +9,7 @@ namespace VitDeck.Validator
     public class UnityVersionRule : BaseRule
     {
         private readonly string version;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>

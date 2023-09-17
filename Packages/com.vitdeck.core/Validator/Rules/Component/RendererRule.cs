@@ -14,13 +14,12 @@ namespace VitDeck.Validator
 
         protected override void ComponentLogic(Renderer component)
         {
-
             if (component.sharedMaterials.Length == 0)
             {
                 AddIssue(new Issue(
-                       component,
-                       IssueLevel.Error,
-                       LocalizedMessage.Get("RendererRule.MustAttachMaterial")));
+                    component,
+                    IssueLevel.Error,
+                    LocalizedMessage.Get("RendererRule.MustAttachMaterial")));
             }
         }
 

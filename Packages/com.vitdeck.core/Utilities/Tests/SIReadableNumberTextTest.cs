@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace VitDeck.Utilities.Tests
 {
-    public class SIReadableNumberTextTest 
+    public class SIReadableNumberTextTest
     {
         [TestCase(-1, "-1 B")]
         [TestCase(0, "0 B")]

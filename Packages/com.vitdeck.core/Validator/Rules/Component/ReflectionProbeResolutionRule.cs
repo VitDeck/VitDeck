@@ -21,7 +21,8 @@ namespace VitDeck.Validator
                 AddIssue(new Issue(
                     component,
                     IssueLevel.Error,
-                    string.Format("Reflection ProbeのCubemap capture settingsのResolutionが{0}になっています。", component.resolution),
+                    string.Format("Reflection ProbeのCubemap capture settingsのResolutionが{0}になっています。",
+                        component.resolution),
                     string.Format("Resolutionを{0}にしてください。", resolution)));
             }
         }

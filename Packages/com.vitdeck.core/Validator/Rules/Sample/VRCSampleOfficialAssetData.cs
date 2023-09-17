@@ -3769,7 +3769,6 @@ namespace VitDeck.Validator
             "381dcb09d5029d14897e55f98031fca5",
             "8f05276190cf498a8153f6cbe761d4e6",
             "dffef66376be4fa480fb02b19edbe903",
-
         };
 
         public static string[] MaterialGUIDs = new string[]

@@ -11,14 +11,14 @@ namespace VitDeck.Validator.Test
         [TestCase(LightType.Spot, new[] { LightmapBakeType.Mixed })]
         [TestCase(LightType.Point, new[] { LightmapBakeType.Baked })]
         [TestCase(LightType.Area, new[] { LightmapBakeType.Baked })]
-        [TestCase(LightType.Directional, new LightmapBakeType[] {})]
+        [TestCase(LightType.Directional, new LightmapBakeType[] { })]
         public void TestValidate(LightType type, LightmapBakeType[] unusableBakeTypes)
         {
             var rule = new UseLightModeRule("特定のLightのModeについて検証するルール", type, unusableBakeTypes);
             var finder = new ValidationTargetFinder();
             var target = finder.Find(ValidatorTestUtilities.DataDirectoryPath + "/UseLightModeRule", true);
             var result = rule.Validate(target);
-            Assert.That(result.RuleName,Is.EqualTo("特定のLightのModeについて検証するルール"));
+            Assert.That(result.RuleName, Is.EqualTo("特定のLightのModeについて検証するルール"));
             Assert.That(result.Issues.Count, Is.Zero);
         }
 

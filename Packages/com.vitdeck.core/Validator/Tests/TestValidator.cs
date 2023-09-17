@@ -17,8 +17,10 @@ namespace VitDeck.Validator.Test
             {
                 Debug.Log(result.GetResultLog());
             }
+
             Assert.That(results.Length, Is.AtLeast(1));
         }
+
         [Test]
         public void TestValidateException()
         {
@@ -37,6 +39,7 @@ namespace VitDeck.Validator.Test
             results = Validator.Validate(ruleSet, ValidatorTestUtilities.TestDirectoryPath + "/Validate", true);
             LogAssert.Expect(LogType.Error, new Regex(@".*"));
         }
+
         [Test]
         public void TestRuleSet()
         {
@@ -44,10 +47,11 @@ namespace VitDeck.Validator.Test
             Assert.That(ruleSet.RuleSetName, Is.EqualTo("サンプルルールセット"));
             Assert.That(ruleSet.GetRules().Length, Is.AtLeast(1));
         }
+
         [Test]
         public void TestValidationtarget()
         {
-            var baseFolderPath = ValidatorTestUtilities.TestDirectoryPath ;
+            var baseFolderPath = ValidatorTestUtilities.TestDirectoryPath;
             var assetGuids = new string[] { "testguid" };
             var assetPaths = new string[] { "testPath", "testPath2" };
             var assetObjects = new Object[] { };
@@ -69,28 +73,29 @@ namespace VitDeck.Validator.Test
             Assert.That(target.GetRootObjects(), Is.EqualTo(rootObjects));
             Assert.That(target.GetAllObjects(), Is.EqualTo(allObjects));
         }
+
         [Test]
         public void TestValidationtargetError()
         {
-            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath );
+            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath);
             Assert.That(() => target.GetAllAssetGuids(),
                 Throws.Exception.TypeOf<FatalValidationErrorException>()
-                .And.Message.EqualTo("Faild to get asset GUIDs."));
+                    .And.Message.EqualTo("Faild to get asset GUIDs."));
             Assert.That(() => target.GetAllAssetPaths(),
                 Throws.Exception.TypeOf<FatalValidationErrorException>()
-                .And.Message.EqualTo("Faild to get asset Paths."));
+                    .And.Message.EqualTo("Faild to get asset Paths."));
             Assert.That(() => target.GetAllAssets(),
                 Throws.Exception.TypeOf<FatalValidationErrorException>()
-                .And.Message.EqualTo("Faild to get asset Objects."));
+                    .And.Message.EqualTo("Faild to get asset Objects."));
             Assert.That(() => target.GetScenes(),
                 Throws.Exception.TypeOf<FatalValidationErrorException>()
-                .And.Message.EqualTo("Faild to get scenes."));
+                    .And.Message.EqualTo("Faild to get scenes."));
             Assert.That(() => target.GetRootObjects(),
-                 Throws.Exception.TypeOf<FatalValidationErrorException>()
-                 .And.Message.EqualTo("Faild to get root objects."));
+                Throws.Exception.TypeOf<FatalValidationErrorException>()
+                    .And.Message.EqualTo("Faild to get root objects."));
             Assert.That(() => target.GetAllObjects(),
-                 Throws.Exception.TypeOf<FatalValidationErrorException>()
-                 .And.Message.EqualTo("Faild to get all objects."));
+                Throws.Exception.TypeOf<FatalValidationErrorException>()
+                    .And.Message.EqualTo("Faild to get all objects."));
         }
     }
 }

@@ -5,7 +5,7 @@ namespace VitDeck.Validator.BoundsIndicators
     public class SkinnedMeshRendererLocalBoundsProvider : IMeshLocalBoundsProvider
     {
         private readonly SkinnedMeshRenderer skinnedMeshRenderer;
-        
+
         public SkinnedMeshRendererLocalBoundsProvider(SkinnedMeshRenderer skinnedMeshRenderer)
         {
             this.skinnedMeshRenderer = skinnedMeshRenderer;
@@ -15,8 +15,8 @@ namespace VitDeck.Validator.BoundsIndicators
         {
             get
             {
-                if(!skinnedMeshRenderer) return new Bounds();
-                
+                if (!skinnedMeshRenderer) return new Bounds();
+
                 return skinnedMeshRenderer.localBounds;
             }
         }

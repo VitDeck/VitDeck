@@ -21,15 +21,15 @@ namespace VitDeck.Validator
 
             var cullingType = serializedObject.FindProperty("m_CullingType");
             if (IsValueToPointOut(
-                cullingType.enumValueIndex == (int)AnimationCullingType.AlwaysAnimate,
-                cullingType.prefabOverride,
-                isOfficialAssetPart))
+                    cullingType.enumValueIndex == (int)AnimationCullingType.AlwaysAnimate,
+                    cullingType.prefabOverride,
+                    isOfficialAssetPart))
             {
                 AddIssue(new Issue(
                     component,
                     IssueLevel.Warning,
                     LocalizedMessage.Get("AnimationComponentRule.ShouldNotUseAlwaysAnimate")
-                    ));
+                ));
             }
         }
 
@@ -39,6 +39,7 @@ namespace VitDeck.Validator
             {
                 return false;
             }
+
             return value;
         }
 

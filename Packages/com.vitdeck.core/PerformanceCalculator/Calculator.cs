@@ -57,7 +57,8 @@ namespace VitDeck.PerformanceCalculator
                 EditorApplication.isPaused = false;
             }
 
-            foreach (Camera cam in Camera.allCameras.Union(SceneView.sceneViews.ToArray().Select(s => ((SceneView)s).camera)))
+            foreach (Camera cam in Camera.allCameras.Union(SceneView.sceneViews.ToArray()
+                         .Select(s => ((SceneView)s).camera)))
             {
                 cam.enabled = false;
             }
@@ -83,13 +84,16 @@ namespace VitDeck.PerformanceCalculator
                 {
                     EditorApplication.isPaused = false;
                 }
+
                 progress = (float)i / 360;
-                if (EditorUtility.DisplayCancelableProgressBar(ProgressTitle, (progress * 100).ToString("F2") + "%", progress))
+                if (EditorUtility.DisplayCancelableProgressBar(ProgressTitle, (progress * 100).ToString("F2") + "%",
+                        progress))
                 {
                     EditorApplication.isPlaying = false;
                     EditorUtility.ClearProgressBar();
                     yield break;
                 }
+
                 checkParentObj.transform.rotation = Quaternion.Euler(0, rotation, 0);
                 setPassCallsList.Add(UnityStats.setPassCalls);
                 batchesList.Add(UnityStats.batches);

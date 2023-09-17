@@ -14,6 +14,7 @@ namespace VitDeck.Validator
     public class AssetExtentionBlacklistRule : BaseRule
     {
         private readonly string[] extentions;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -44,15 +45,19 @@ namespace VitDeck.Validator
                     //AddIssue(new Issue(null, IssueLevel.Warning, "設定された拡張子は空文字のため無視されます。", string.Empty, string.Empty));
                 }
             }
+
             var hitPaths = target.GetAllAssetPaths()
-                .Where(targetPath => extList.Exists(ext => ext.Equals(Path.GetExtension(targetPath), StringComparison.InvariantCultureIgnoreCase)));
+                .Where(targetPath => extList.Exists(ext =>
+                    ext.Equals(Path.GetExtension(targetPath), StringComparison.InvariantCultureIgnoreCase)));
             var baseFolderPath = target.GetBaseFolderPath();
             foreach (var path in hitPaths)
             {
                 if (AssetDatabase.IsValidFolder(path) || !path.StartsWith(baseFolderPath))
                     continue;
                 var obj = AssetDatabase.LoadMainAssetAtPath(path);
-                var message = LocalizedMessage.Get("AssetExtentionBlacklistRule.UnauthorizedExtention", Path.GetExtension(path)) + Environment.NewLine + path;
+                var message =
+                    LocalizedMessage.Get("AssetExtentionBlacklistRule.UnauthorizedExtention", Path.GetExtension(path)) +
+                    Environment.NewLine + path;
                 AddIssue(new Issue(obj, IssueLevel.Error, message, string.Empty, string.Empty));
             }
         }

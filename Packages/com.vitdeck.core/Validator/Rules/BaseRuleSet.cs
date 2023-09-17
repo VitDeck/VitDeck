@@ -12,20 +12,14 @@ namespace VitDeck.Validator
         /// <summary>
         /// ルールセット名を返すプロパティ
         /// </summary>
-        public abstract string RuleSetName
-        {
-            get;
-        }
+        public abstract string RuleSetName { get; }
 
         /// <summary>
         /// 検証対象検索オブジェクトを返す。
         /// </summary>
         public virtual IValidationTargetFinder TargetFinder
         {
-            get
-            {
-                return new ValidationTargetFinder();
-            }
+            get { return new ValidationTargetFinder(); }
         }
 
         /// <summary>
@@ -36,16 +30,19 @@ namespace VitDeck.Validator
         {
             var rules = new List<IRule>();
             var ruleFields = this.GetType().GetFields()
-                 .Where(field => field.GetCustomAttributes(typeof(ValidationAttribute), false).Length > 0)
-                 .OrderBy(field => (ValidationAttribute)(field.GetCustomAttributes(typeof(ValidationAttribute), false).GetValue(0)));
+                .Where(field => field.GetCustomAttributes(typeof(ValidationAttribute), false).Length > 0)
+                .OrderBy(field =>
+                    (ValidationAttribute)(field.GetCustomAttributes(typeof(ValidationAttribute), false).GetValue(0)));
             foreach (var ruleField in ruleFields)
             {
                 var rule = ruleField.GetValue(this) as IRule;
                 if (rule != null)
                     rules.Add(rule);
                 else
-                    Debug.LogWarning(string.Format("IRule以外のフィールドに[Validation]が指定されているため無視されます。({0} in {1})", ruleField.Name, this.GetType().Name));
+                    Debug.LogWarning(string.Format("IRule以外のフィールドに[Validation]が指定されているため無視されます。({0} in {1})",
+                        ruleField.Name, this.GetType().Name));
             }
+
             return rules.ToArray();
         }
     }

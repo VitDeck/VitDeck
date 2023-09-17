@@ -55,7 +55,8 @@ namespace VitDeck.Language
                 }
                 else
                 {
-                    Debug.Log(LogHeader + "LanguageFile which for current system language is not found. load default LanguageFile.");
+                    Debug.Log(LogHeader +
+                              "LanguageFile which for current system language is not found. load default LanguageFile.");
                     languageGUID = LanguageFileGUIDs[defaultLanguage];
                 }
 

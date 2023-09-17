@@ -9,7 +9,7 @@ namespace VitDeck.Validator
         {
             get { return "例外テストルールセット"; }
         }
-        [Validation]
-        public IRule exceptionRule= new ExceptionRule("例外テストルール");
+
+        [Validation] public IRule exceptionRule = new ExceptionRule("例外テストルール");
     }
 }

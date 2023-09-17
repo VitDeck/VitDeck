@@ -18,9 +18,10 @@ namespace VitDeck.Validator.Test
                 CreateSimpleGameObject("TestTargetObject1", true, new Vector3(1, 0, 0)),
                 CreateSimpleGameObject("TestTargetObject2", false, new Vector3(1000, 0, 0)),
                 CreateRendererGameObject("TestTargetObject3", true, new Vector3(0, 1, 0), new Vector3(2, 2, 2)),
-                CreateRendererGameObject("TestTargetObject4", false, new Vector3(0, 100, 0), new Vector3(200, 200, 200)),
-                CreateRectGameObject("TestTargetObject5", true, new Vector3(0, 1, 0), new Vector2(2, 2) ),
-                CreateRectGameObject("TestTargetObject6", false, new Vector3(1000, 1, 0), new Vector2(2, 2) ),
+                CreateRendererGameObject("TestTargetObject4", false, new Vector3(0, 100, 0),
+                    new Vector3(200, 200, 200)),
+                CreateRectGameObject("TestTargetObject5", true, new Vector3(0, 1, 0), new Vector2(2, 2)),
+                CreateRectGameObject("TestTargetObject6", false, new Vector3(1000, 1, 0), new Vector2(2, 2)),
             };
             var rootObject = CreateSimpleGameObject("TestTargetRootObject", true, Vector3.zero);
             foreach (var target in targetObjects)
@@ -29,21 +30,24 @@ namespace VitDeck.Validator.Test
             }
 
             targetContainer = new ValidationTarget(
-                ValidatorTestUtilities.TestDirectoryPath ,
+                ValidatorTestUtilities.TestDirectoryPath,
                 allObjects: targetObjects,
                 rootObjects: new GameObject[] { rootObject });
         }
 
         public static readonly object[] TestCases =
         {
-            CreateTestCase( "TestRule0", Vector3.zero, new Vector3(3, 5, 4), 0f, FailedTargetObjectIndices(2, 4, 6) ),
-            CreateTestCase( "TestRule1", Vector3.zero, new Vector3(2, 5, 4), 0f, FailedTargetObjectIndices(2, 4, 6) ),
-            CreateTestCase( "TestRule2", Vector3.zero, new Vector3(1.9f, 5, 4), 0f, FailedTargetObjectIndices(1, 3, 5, 6) ),
-            CreateTestCase( "TestRule3", Vector3.zero, new Vector3(1.9f, 5, 4), 0.1f, FailedTargetObjectIndices(2, 4, 6) ),
+            CreateTestCase("TestRule0", Vector3.zero, new Vector3(3, 5, 4), 0f, FailedTargetObjectIndices(2, 4, 6)),
+            CreateTestCase("TestRule1", Vector3.zero, new Vector3(2, 5, 4), 0f, FailedTargetObjectIndices(2, 4, 6)),
+            CreateTestCase("TestRule2", Vector3.zero, new Vector3(1.9f, 5, 4), 0f,
+                FailedTargetObjectIndices(1, 3, 5, 6)),
+            CreateTestCase("TestRule3", Vector3.zero, new Vector3(1.9f, 5, 4), 0.1f,
+                FailedTargetObjectIndices(2, 4, 6)),
         };
 
         [TestCaseSource("TestCases")]
-        public void TestValidation(string ruleName, Vector3 pivot, Vector3 size, float margin, int[] willFailedTargetIndices)
+        public void TestValidation(string ruleName, Vector3 pivot, Vector3 size, float margin,
+            int[] willFailedTargetIndices)
         {
             var rule = new BoothBoundsRule(ruleName, size, margin, pivot);
 
@@ -77,6 +81,7 @@ namespace VitDeck.Validator.Test
             {
                 Object.DestroyImmediate(gameObject);
             }
+
             targetContainer = null;
         }
 
@@ -91,7 +96,8 @@ namespace VitDeck.Validator.Test
             return gameObject;
         }
 
-        public static GameObject CreateRendererGameObject(string name, bool isActive, Vector3 position, Vector3 meshSize)
+        public static GameObject CreateRendererGameObject(string name, bool isActive, Vector3 position,
+            Vector3 meshSize)
         {
             var mesh = new Mesh();
             mesh.bounds = new Bounds(Vector3.zero, meshSize);
@@ -117,7 +123,8 @@ namespace VitDeck.Validator.Test
             return failedTargets ?? new int[] { };
         }
 
-        public static object[] CreateTestCase(string ruleName, Vector3 pivot, Vector3 size, float margin, int[] failedTargets)
+        public static object[] CreateTestCase(string ruleName, Vector3 pivot, Vector3 size, float margin,
+            int[] failedTargets)
         {
             return new object[] { ruleName, pivot, size, margin, failedTargets };
         }

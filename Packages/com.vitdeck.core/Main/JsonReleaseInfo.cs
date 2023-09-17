@@ -41,7 +41,10 @@ namespace VitDeck.Main
             if (string.IsNullOrEmpty(releaseUrl))
                 return;
             var release = ReleaseEnumerator(releaseUrl);
-            while (release.MoveNext()) { }
+            while (release.MoveNext())
+            {
+            }
+
             if (release != null && release.Current != null)
             {
                 var info = JsonUtility.FromJson<ReleaseInfo>(release.Current.ToString());

@@ -22,15 +22,18 @@ namespace VitDeck.Validator.Test
             Assert.That(errors.Count(DetectedDontMoveCollider), Is.Zero);
             Assert.That(errors.Count(DetectedTransformWithoutCollider), Is.Zero);
             Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animator")), Is.EqualTo(5));
-            Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animator (OverrideController)")), Is.EqualTo(1));
-            Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animator (No Node Connection)")), Is.EqualTo(1));
+            Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animator (OverrideController)")),
+                Is.EqualTo(1));
+            Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animator (No Node Connection)")),
+                Is.EqualTo(1));
             Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animator (Layered)")), Is.EqualTo(1));
             Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animator (SubState)")), Is.EqualTo(1));
             Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animator (Blending)")), Is.EqualTo(2));
             Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animation")), Is.EqualTo(1));
-            Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animation (Has In Array)")), Is.EqualTo(1));
-            Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animator (With Rigidbody)")), Is.EqualTo(0));
-
+            Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animation (Has In Array)")),
+                Is.EqualTo(1));
+            Assert.That(errors.Count(issue => IsRootGameobjectNameOf(issue, "Animator (With Rigidbody)")),
+                Is.EqualTo(0));
         }
 
         private bool DetectedDontMoveCollider(Issue issue)

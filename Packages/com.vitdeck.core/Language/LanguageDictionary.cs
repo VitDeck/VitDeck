@@ -13,16 +13,12 @@ namespace VitDeck.Language
             public string Value;
         }
 
-        [SerializeField]
-        private Pair[] language = new Pair[0];
+        [SerializeField] private Pair[] language = new Pair[0];
         private Dictionary<string, string> dictionary;
 
         public string this[string key]
         {
-            get
-            {
-                return dictionary[key];
-            }
+            get { return dictionary[key]; }
         }
 
         internal Pair[] GetTranslations()
@@ -43,7 +39,6 @@ namespace VitDeck.Language
 
         public void OnBeforeSerialize()
         {
-
         }
 
         public void OnAfterDeserialize()

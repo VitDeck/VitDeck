@@ -36,13 +36,13 @@ namespace VitDeck.AssetGuardian
             {
                 case "Duplicate":
                     var objs = Selection.objects;
-                    foreach(var obj in objs)
+                    foreach (var obj in objs)
                     {
                         var p = AssetDatabase.GetAssetPath(obj);
                         if (OnAssetWillDuplicate != null)
                             OnAssetWillDuplicate(p);
                     }
-                    
+
                     break;
                 default:
                     // Debug.Log("Event: " + evt.type + " command: " + evt.commandName + " item: " + asset.name);

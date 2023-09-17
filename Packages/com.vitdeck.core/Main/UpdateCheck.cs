@@ -12,10 +12,7 @@ namespace VitDeck.Main
     {
         public static bool Enabled
         {
-            get
-            {
-                return !string.IsNullOrEmpty(JsonReleaseInfo.GetReleaseUrl());
-            }
+            get { return !string.IsNullOrEmpty(JsonReleaseInfo.GetReleaseUrl()); }
         }
 
         public static string GetLatestVersion()

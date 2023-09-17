@@ -30,7 +30,8 @@ namespace VitDeck.Validator
             Result = dictionary.CreateReadonlyDictionary();
         }
 
-        private static void FindAssetReferencesRecursive(Object unityObject, HashSet<Object> searchedAsset, ReferenceDictionary dictionary)
+        private static void FindAssetReferencesRecursive(Object unityObject, HashSet<Object> searchedAsset,
+            ReferenceDictionary dictionary)
         {
             if (unityObject == null)
                 return;
@@ -43,6 +44,7 @@ namespace VitDeck.Validator
             {
                 return;
             }
+
             if (TryFindAssetReferencesAsMaterial(unityObject, dictionary))
             {
                 return;
@@ -58,7 +60,7 @@ namespace VitDeck.Validator
             {
                 return false;
             }
-            
+
             FindMaterialReferenceRecursive(material, dictionary);
 
             return true;
@@ -72,11 +74,11 @@ namespace VitDeck.Validator
             {
                 return false;
             }
-            
+
             dictionary.AddReference(gameObject);
 
             var prefabStatus = PrefabUtility.GetPrefabInstanceStatus(gameObject);
-            if ( prefabStatus == PrefabInstanceStatus.Connected )
+            if (prefabStatus == PrefabInstanceStatus.Connected)
             {
                 var prefabRoot = PrefabUtility.GetNearestPrefabInstanceRoot(gameObject);
                 if (prefabRoot == gameObject)
@@ -132,7 +134,8 @@ namespace VitDeck.Validator
             }
         }
 
-        private static void FindSerializedObjectReferenceRecursive(Object unityObject, HashSet<Object> searchedAsset, ReferenceDictionary dictionary)
+        private static void FindSerializedObjectReferenceRecursive(Object unityObject, HashSet<Object> searchedAsset,
+            ReferenceDictionary dictionary)
         {
             var serializedObject = new SerializedObject(unityObject);
 
@@ -160,14 +163,17 @@ namespace VitDeck.Validator
 
         private class ReferenceDictionary
         {
-            private readonly Dictionary<Object, List<Object>> reverseDictionary = new Dictionary<Object, List<Object>>();
-            private readonly Dictionary<Object, List<Object>> forwardDictionary = new Dictionary<Object, List<Object>>();
+            private readonly Dictionary<Object, List<Object>>
+                reverseDictionary = new Dictionary<Object, List<Object>>();
+
+            private readonly Dictionary<Object, List<Object>>
+                forwardDictionary = new Dictionary<Object, List<Object>>();
 
             public ReadonlyReferenceDictionary CreateReadonlyDictionary()
             {
                 return new ReadonlyReferenceDictionary(forwardDictionary, reverseDictionary);
             }
-            
+
             public void AddReference(Object referrer, Object referred)
             {
                 if (!reverseDictionary.TryGetValue(referred, out var referrers))
@@ -175,6 +181,7 @@ namespace VitDeck.Validator
                     referrers = new List<Object>();
                     reverseDictionary.Add(referred, referrers);
                 }
+
                 referrers.Add(referrer);
 
                 if (!forwardDictionary.TryGetValue(referrer, out var referredObjects))
@@ -182,6 +189,7 @@ namespace VitDeck.Validator
                     referredObjects = new List<Object>();
                     forwardDictionary.Add(referrer, referredObjects);
                 }
+
                 referredObjects.Add(referred);
             }
 

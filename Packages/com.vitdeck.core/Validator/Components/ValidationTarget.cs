@@ -28,12 +28,12 @@ namespace VitDeck.Validator
         /// <param name="rootObjects">検証対象のルートオブジェクト</param>
         /// <param name="allObjects">検証対象の全てのオブジェクト</param>
         public ValidationTarget(string baseFolderPath,
-                                string[] assetGuids = null,
-                                string[] assetPaths = null,
-                                UnityEngine.Object[] assetObjects = null,
-                                Scene[] scenes = null,
-                                GameObject[] rootObjects = null,
-                                GameObject[] allObjects = null)
+            string[] assetGuids = null,
+            string[] assetPaths = null,
+            UnityEngine.Object[] assetObjects = null,
+            Scene[] scenes = null,
+            GameObject[] rootObjects = null,
+            GameObject[] allObjects = null)
         {
             this.baseFolderPath = baseFolderPath;
             this.assetGuids = assetGuids;
@@ -52,6 +52,7 @@ namespace VitDeck.Validator
         {
             return baseFolderPath;
         }
+
         /// <summary>
         /// 検証対象の全てのシーンファイルを取得する
         /// </summary>
@@ -62,6 +63,7 @@ namespace VitDeck.Validator
                 throw new FatalValidationErrorException("Faild to get scenes.");
             return scenes;
         }
+
         /// <summary>
         /// 検証対象の全てのルートオブジェクトを取得する
         /// </summary
@@ -72,6 +74,7 @@ namespace VitDeck.Validator
                 throw new FatalValidationErrorException("Faild to get root objects.");
             return rootObjects;
         }
+
         /// <summary>
         /// ルートオブジェクト以下の全てのGameObjectを取得する
         /// </summary>
@@ -81,8 +84,8 @@ namespace VitDeck.Validator
             if (allObjects == null)
                 throw new FatalValidationErrorException("Faild to get all objects.");
             return allObjects;
-
         }
+
         /// <summary>
         /// 検証対象の全てのアセットのGUIDを取得する
         /// </summary>
@@ -93,6 +96,7 @@ namespace VitDeck.Validator
                 throw new FatalValidationErrorException("Faild to get asset GUIDs.");
             return assetGuids;
         }
+
         /// <summary>
         /// 検証対象の全てのアセットのパスを取得する
         /// </summary>
@@ -103,6 +107,7 @@ namespace VitDeck.Validator
                 throw new FatalValidationErrorException("Faild to get asset Paths.");
             return assetPaths;
         }
+
         /// <summary>
         /// 検証対象の全てのアセットのオブジェクト
         /// </summary>

@@ -7,7 +7,6 @@ namespace VitDeck.Validator
 {
     public class AudioSourcePrefabRule : BasePrefabRule
     {
-
         public AudioSourcePrefabRule(string name, string[] targetPrefabGUIDs) : base(name, targetPrefabGUIDs)
         {
         }
@@ -18,7 +17,6 @@ namespace VitDeck.Validator
             var mods = PrefabUtility.GetPropertyModifications(gameObject);
             foreach (var mod in mods)
             {
-
                 var prefabObject = mod.target as AudioSource;
                 if (prefabObject == null)
                 {
@@ -26,7 +24,8 @@ namespace VitDeck.Validator
                 }
 
                 var prefabInstance = audioSources
-                    .Single(source => PrefabUtility.GetCorrespondingObjectFromSource<AudioSource>(source) == prefabObject);
+                    .Single(source =>
+                        PrefabUtility.GetCorrespondingObjectFromSource<AudioSource>(source) == prefabObject);
 
                 if (mod.propertyPath == "Loop")
                 {
@@ -36,9 +35,9 @@ namespace VitDeck.Validator
                         moddedValue == true)
                     {
                         AddIssue(new Issue(
-                        prefabInstance,
-                        IssueLevel.Error,
-                        LocalizedMessage.Get("AudioSourcePrefabRule.DontLoop")
+                            prefabInstance,
+                            IssueLevel.Error,
+                            LocalizedMessage.Get("AudioSourcePrefabRule.DontLoop")
                         ));
                     }
                 }
@@ -53,11 +52,11 @@ namespace VitDeck.Validator
                         AddIssue(new Issue(
                             prefabInstance,
                             IssueLevel.Error,
-                            LocalizedMessage.Get("AudioSourcePrefabRule.DontIncreaseMaxDistance", defaultValue, moddedValue)
-                            ));
+                            LocalizedMessage.Get("AudioSourcePrefabRule.DontIncreaseMaxDistance", defaultValue,
+                                moddedValue)
+                        ));
                     }
                 }
-
             }
         }
     }

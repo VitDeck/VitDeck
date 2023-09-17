@@ -19,7 +19,7 @@ namespace VitDeck.Organizer.Utilities
                 .Select(AssetDatabase.GetAssetPath);
 
             var builder = new StringBuilder();
-            foreach(var path in paths)
+            foreach (var path in paths)
             {
                 builder.AppendLine($"\"{AssetDatabase.AssetPathToGUID(path)}\", // {path}");
             }

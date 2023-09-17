@@ -22,7 +22,6 @@ namespace VitDeck.Validator
         {
             if (component.enabled)
             {
-
                 var message = LocalizedMessage.Get("VideoPlayerComponentRule.DefaultDisabled");
                 var solution = LocalizedMessage.Get("VideoPlayerComponentRule.DefaultDisabled.Solution");
 
@@ -42,7 +41,7 @@ namespace VitDeck.Validator
                     component,
                     IssueLevel.Error,
                     LocalizedMessage.Get("VideoPlayerComponentRule.DontUseURL")
-                    ));
+                ));
             }
         }
 

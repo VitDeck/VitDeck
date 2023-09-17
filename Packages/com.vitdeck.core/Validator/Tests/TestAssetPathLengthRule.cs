@@ -13,17 +13,18 @@ namespace VitDeck.Validator.Test
         {
             var version = UnityEngine.Application.unityVersion;
             var rule = new AssetPathLengthRule("アセットパス長制限テスト");
-            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath , assetPaths: new string[] { });
+            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath, assetPaths: new string[] { });
             var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("アセットパス長制限テスト"));
             Assert.That(result.Issues.Count, Is.EqualTo(0));
         }
+
         [Test]
         public void TestValidate()
         {
             var targetAssetPath = ValidatorTestUtilities.TestDirectoryPath + "/TestAssetPathLengthRule.cs";
             var targetAssetPaths = new string[] { targetAssetPath };
-            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath , assetPaths: targetAssetPaths);
+            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath, assetPaths: targetAssetPaths);
 
             var willPassRule = new AssetPathLengthRule("アセットパス長制限テスト", targetAssetPath.Length);
             var willFailRule = new AssetPathLengthRule("アセットパス長制限テスト", targetAssetPath.Length - 1);

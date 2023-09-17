@@ -53,7 +53,8 @@ namespace VitDeck.ExhibitorGUI
 
             if (workspace == null)
             {
-                EditorGUILayout.HelpBox("To enable the Workspace window, open a scene that exists within the workspace.", MessageType.Info);
+                EditorGUILayout.HelpBox(
+                    "To enable the Workspace window, open a scene that exists within the workspace.", MessageType.Info);
                 return;
             }
 

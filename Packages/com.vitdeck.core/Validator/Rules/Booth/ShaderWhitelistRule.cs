@@ -34,7 +34,8 @@ namespace VitDeck.Validator
             {
                 foreach (var shader in this.GetShaders(gameObject))
                 {
-                    if (shader.name == "Hidden/InternalErrorShader") {
+                    if (shader.name == "Hidden/InternalErrorShader")
+                    {
                         continue;
                     }
 
@@ -62,6 +63,7 @@ namespace VitDeck.Validator
                                 path
                             ), solution, solutionURL));
                         }
+
                         continue;
                     }
 

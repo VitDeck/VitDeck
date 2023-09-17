@@ -31,7 +31,9 @@ namespace VitDeck.Validator
         /// <param name="size">バウンディングボックスの大きさ</param>
         /// <param name="margin">制限に持たせる余裕</param>
         public BoothBoundsRule(string name, Vector3 size, float margin)
-            : this(name, size, margin, pivot: Vector3.zero) { }
+            : this(name, size, margin, pivot: Vector3.zero)
+        {
+        }
 
         /// <summary>
         /// コンストラクタ。
@@ -61,7 +63,8 @@ namespace VitDeck.Validator
         /// <param name="margin">制限に持たせる余裕</param>
         /// <param name="pivot">バウンディングボックスの原点（中心下）</param>
         /// <param name="guids">無視するguid</param>
-        public BoothBoundsRule(string name, Vector3 size, float margin, Vector3 pivot, string[] guids) :this(name, size, margin, pivot)
+        public BoothBoundsRule(string name, Vector3 size, float margin, Vector3 pivot, string[] guids) : this(name,
+            size, margin, pivot)
         {
             ignoreIDSet = new HashSet<string>(guids);
         }
@@ -81,6 +84,7 @@ namespace VitDeck.Validator
             {
                 indicatorResetter.Reset();
             }
+
             indicatorResetter = new ResetTokenSource();
 
             var rootObjects = target.GetRootObjects();
@@ -224,10 +228,14 @@ namespace VitDeck.Validator
             public readonly Bounds bounds;
 
             public BoundsData(Object objectReference, Vector3 center)
-                : this(objectReference, center, Vector3.zero) { }
+                : this(objectReference, center, Vector3.zero)
+            {
+            }
 
             public BoundsData(Object objectReference, Vector3 center, Vector3 size)
-                : this(objectReference, new Bounds(center, size)) { }
+                : this(objectReference, new Bounds(center, size))
+            {
+            }
 
             public BoundsData(Object objectReference, Bounds bounds)
             {

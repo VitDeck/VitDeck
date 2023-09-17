@@ -24,7 +24,7 @@ namespace VitDeck.Validator
         void LogicForRootObject(GameObject rootObject)
         {
             CheckObjectIdentity(rootObject);
-            
+
             GameObject staticRoot = null;
             GameObject dynamicRoot = null;
 
@@ -45,7 +45,7 @@ namespace VitDeck.Validator
                         IssueLevel.Error,
                         LocalizedMessage.Get("ExhibitStructureRule.UnauthorizedObject"),
                         LocalizedMessage.Get("ExhibitStructureRule.UnauthorizedObject.Solution")
-                        ));
+                    ));
                 }
             }
 
@@ -58,29 +58,29 @@ namespace VitDeck.Validator
             if (instance == null)
             {
                 AddIssue(new Issue(
-                        rootObject,
-                        IssueLevel.Error,
-                        LocalizedMessage.Get("ExhibitStructureRule.RootObjectNotFound", instanceName),
-                        LocalizedMessage.Get("ExhibitStructureRule.RootObjectNotFound.Solution", instanceName)
-                        ));
+                    rootObject,
+                    IssueLevel.Error,
+                    LocalizedMessage.Get("ExhibitStructureRule.RootObjectNotFound", instanceName),
+                    LocalizedMessage.Get("ExhibitStructureRule.RootObjectNotFound.Solution", instanceName)
+                ));
                 return;
             }
 
             CheckObjectIdentity(instance);
-            
+
             var components = instance.GetComponents<Component>();
 
             if (components.Length > 1 || components[0] is RectTransform)
             {
                 AddIssue(new Issue(
-                        instance,
-                        IssueLevel.Error,
-                        LocalizedMessage.Get("ExhibitStructureRule.UnauthorizedComponent", instanceName),
-                        LocalizedMessage.Get("ExhibitStructureRule.UnauthorizedComponent.Solution", instanceName)
-                        ));
+                    instance,
+                    IssueLevel.Error,
+                    LocalizedMessage.Get("ExhibitStructureRule.UnauthorizedComponent", instanceName),
+                    LocalizedMessage.Get("ExhibitStructureRule.UnauthorizedComponent.Solution", instanceName)
+                ));
             }
         }
-        
+
         private void CheckObjectIdentity(GameObject instance)
         {
             var transform = instance.transform;
@@ -94,6 +94,7 @@ namespace VitDeck.Validator
                     IssueLevel.Error,
                     message, solution, solutionURL));
             }
+
             if (transform.localRotation != Quaternion.identity)
             {
                 var message = LocalizedMessage.Get("ExhibitStructureRule.NotInitialRotation");
@@ -104,6 +105,7 @@ namespace VitDeck.Validator
                     IssueLevel.Error,
                     message, solution, solutionURL));
             }
+
             if (transform.localScale != Vector3.one)
             {
                 var message = LocalizedMessage.Get("ExhibitStructureRule.NotInitialScale");

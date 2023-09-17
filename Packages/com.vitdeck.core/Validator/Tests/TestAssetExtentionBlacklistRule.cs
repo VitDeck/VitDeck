@@ -14,24 +14,27 @@ namespace VitDeck.Validator.Test
         public void TestValidate()
         {
             var rule = new AssetExtentionBlacklistRule("拡張子テスト", new string[] { "TXT", ".prefab", ".FBX" });
-            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath , assetPaths: new string[] { });
+            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath, assetPaths: new string[] { });
             var result = rule.Validate(target);
             Assert.That(result.RuleName, Is.EqualTo("拡張子テスト"));
             Assert.That(result.Issues.Count, Is.EqualTo(0));
         }
+
         [Test]
         public void TestValidateError()
         {
             var rule = new AssetExtentionBlacklistRule("拡張子テスト", new string[] { "TXT", ".prefab", ".Fbx" });
             var path = ValidatorTestUtilities.DataDirectoryPath + "/AssetExtentionBlacklistRule/TestData.txt";
             var folderPath = ValidatorTestUtilities.DataDirectoryPath + "/AssetExtentionBlacklistRule/test.txt";
-            var targetPaths = new string[] {
-                path ,
+            var targetPaths = new string[]
+            {
+                path,
                 folderPath,
-                ValidatorTestUtilities.TestDirectoryPath + "/test dummy data.prefab" ,
+                ValidatorTestUtilities.TestDirectoryPath + "/test dummy data.prefab",
                 ValidatorTestUtilities.TestDirectoryPath + "/test dummy data.fake.FBX",
-                ValidatorTestUtilities.TestDirectoryPath + "/test_dummy_OK.fbx2" };
-            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath , assetPaths: targetPaths);
+                ValidatorTestUtilities.TestDirectoryPath + "/test_dummy_OK.fbx2"
+            };
+            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath, assetPaths: targetPaths);
             var result = rule.Validate(target);
             Assert.That(result.Issues.Count, Is.EqualTo(3));
             var issue = result.Issues[0];

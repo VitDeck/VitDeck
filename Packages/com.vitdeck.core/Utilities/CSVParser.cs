@@ -1,6 +1,6 @@
 /*
  * Original:
- * Simple CSV Parser for C# without any dependency. 
+ * Simple CSV Parser for C# without any dependency.
  *
  * These codes are licensed under CC0.
  * https://github.com/yutokun/CSV-Parser
@@ -23,7 +23,7 @@ namespace VitDeck.Utilities
         }
 
         static readonly Dictionary<Delimiter, char> Delimiters = new Dictionary<Delimiter, char>()
-            {{Delimiter.Comma, ','}, {Delimiter.Tab, '\t'}};
+            { { Delimiter.Comma, ',' }, { Delimiter.Tab, '\t' } };
 
         /// <summary>
         /// Load CSV data from specified path.
@@ -57,11 +57,13 @@ namespace VitDeck.Utilities
         /// <param name="data"></param>
         /// <param name="delimiter"></param>
         /// <returns></returns>
-        public static IEnumerable<IDictionary<string, string>> LoadFromStringWithHeader(string data, Delimiter delimiter = Delimiter.Comma)
+        public static IEnumerable<IDictionary<string, string>> LoadFromStringWithHeader(string data,
+            Delimiter delimiter = Delimiter.Comma)
         {
             var fieldsList = Parse(data, delimiter);
             var header = fieldsList.First();
-            return fieldsList.Skip(1).Select(fields => header.Zip(fields, (name, value) => (name, value)).ToDictionary(item => item.name, item => item.value));
+            return fieldsList.Skip(1).Select(fields =>
+                header.Zip(fields, (name, value) => (name, value)).ToDictionary(item => item.name, item => item.value));
         }
 
         static List<List<string>> Parse(string data, Delimiter delimiter)

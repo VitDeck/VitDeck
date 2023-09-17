@@ -30,7 +30,8 @@ namespace VitDeck.Validator.Test
         {
             var rule = new MissingReferenceRule("missing検出ルール");
             var gameObject = new GameObject("TestObject");
-            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath , allObjects: new GameObject[] { gameObject });
+            var target = new ValidationTarget(ValidatorTestUtilities.TestDirectoryPath,
+                allObjects: new GameObject[] { gameObject });
 
             var meshAsset = new TestMeshAsset(rootFolder.Path);
             var meshFilter = gameObject.AddComponent<MeshFilter>();
@@ -40,7 +41,8 @@ namespace VitDeck.Validator.Test
             var result = rule.Validate(target);
             Assert.That(result.Issues.Count, Is.EqualTo(1));
             Assert.That(result.Issues[0].message,
-                Is.EqualTo(string.Format("missingフィールドが含まれています！（{0} > {1} > Mesh）", gameObject.name, typeof(MeshFilter).Name)));
+                Is.EqualTo(string.Format("missingフィールドが含まれています！（{0} > {1} > Mesh）", gameObject.name,
+                    typeof(MeshFilter).Name)));
             Assert.That(result.Issues[0].target, Is.EqualTo(meshFilter));
         }
 
@@ -69,11 +71,13 @@ namespace VitDeck.Validator.Test
 
             Assert.NotNull(result.Issues.Find(issue =>
                 issue.message == "missingフィールドが含まれています！（RecursiveMissingTestPrefabChild > EventTrigger > Target）" &&
-                issue.target == AssetDatabase.LoadMainAssetAtPath(testData + "/RecursiveMissingTestPrefabChild.prefab")));
+                issue.target ==
+                AssetDatabase.LoadMainAssetAtPath(testData + "/RecursiveMissingTestPrefabChild.prefab")));
 
             Assert.NotNull(result.Issues.Find(issue =>
                 issue.message == "missingコンポーネントが含まれています！（RecursiveMissingTestPrefabChild）" &&
-                issue.target == AssetDatabase.LoadMainAssetAtPath(testData + "/RecursiveMissingTestPrefabChild.prefab")));
+                issue.target ==
+                AssetDatabase.LoadMainAssetAtPath(testData + "/RecursiveMissingTestPrefabChild.prefab")));
         }
     }
 }

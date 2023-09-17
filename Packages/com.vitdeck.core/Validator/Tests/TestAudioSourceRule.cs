@@ -11,8 +11,11 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestLoopValidate()
         {
-            var guid = AssetDatabase.AssetPathToGUID(ValidatorTestUtilities.DataDirectoryPath + "/AudioSourcePrefabRule/ForLoopValidation.prefab");
-            var target = new ValidationTargetFinder().Find(ValidatorTestUtilities.DataDirectoryPath + "/AudioSourcePrefabRule", true);
+            var guid = AssetDatabase.AssetPathToGUID(ValidatorTestUtilities.DataDirectoryPath +
+                                                     "/AudioSourcePrefabRule/ForLoopValidation.prefab");
+            var target =
+                new ValidationTargetFinder().Find(ValidatorTestUtilities.DataDirectoryPath + "/AudioSourcePrefabRule",
+                    true);
             var result = new AudioSourcePrefabRule("", new string[] { guid }).Validate(target);
 
 
@@ -30,8 +33,11 @@ namespace VitDeck.Validator.Test
         [Test]
         public void TestMaxDistanceValidate()
         {
-            var guid = AssetDatabase.AssetPathToGUID(ValidatorTestUtilities.DataDirectoryPath + "/AudioSourcePrefabRule/ForMaxDistanceValidation.prefab");
-            var target = new ValidationTargetFinder().Find(ValidatorTestUtilities.DataDirectoryPath + "/AudioSourcePrefabRule", true);
+            var guid = AssetDatabase.AssetPathToGUID(ValidatorTestUtilities.DataDirectoryPath +
+                                                     "/AudioSourcePrefabRule/ForMaxDistanceValidation.prefab");
+            var target =
+                new ValidationTargetFinder().Find(ValidatorTestUtilities.DataDirectoryPath + "/AudioSourcePrefabRule",
+                    true);
             var result = new AudioSourcePrefabRule("", new string[] { guid }).Validate(target);
 
             var prefabMaxDistanceValue = 10f;

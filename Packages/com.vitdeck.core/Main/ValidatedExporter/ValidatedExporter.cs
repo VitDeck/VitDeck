@@ -23,7 +23,8 @@ namespace VitDeck.Main.ValidatedExporter
         /// <see cref="ValidatedExportResult"/>。
         /// asyncメソッドを利用すると、<see cref="BuildPipeline.BuildAssetBundles"/>時にasyncメソッドが二重実行されてしまう問題を回避するため、TaskではなくIEnumeratorを返す。
         /// </returns>
-        public static IEnumerator ValidatedExport(string baseFolderPath, ExportSetting setting, bool forceExport = false, bool forceOpenScene = false)
+        public static IEnumerator ValidatedExport(string baseFolderPath, ExportSetting setting,
+            bool forceExport = false, bool forceOpenScene = false)
         {
             if (setting == null)
                 throw new ArgumentNullException("Argument `setting` is null.");
@@ -43,29 +44,35 @@ namespace VitDeck.Main.ValidatedExporter
                     if (ruleSet == null)
                     {
                         result.log += LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileValidating") +
-                            LocalizedMessage.Get("ValidatedExporter.RuleNotFound", setting.ruleSetName);
+                                      LocalizedMessage.Get("ValidatedExporter.RuleNotFound", setting.ruleSetName);
                         yield return result;
                         yield break;
                     }
+
                     var problemOccurred = false;
                     try
                     {
-                        result.validationResults = Validator.Validator.Validate(ruleSet, baseFolderPath, forceOpenScene);
+                        result.validationResults =
+                            Validator.Validator.Validate(ruleSet, baseFolderPath, forceOpenScene);
                     }
                     catch (FatalValidationErrorException e)
                     {
                         result.log += LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileValidating")
-                            + System.Environment.NewLine + e.Message;
+                                      + System.Environment.NewLine + e.Message;
                     }
+
                     if (problemOccurred)
                     {
                         yield return result;
                         yield break;
                     }
-                    if (!result.HasValidationIssues(setting.ignoreValidationWarning ? IssueLevel.Error : IssueLevel.Warning))
+
+                    if (!result.HasValidationIssues(setting.ignoreValidationWarning
+                            ? IssueLevel.Error
+                            : IssueLevel.Warning))
                     {
                         result.log += LocalizedMessage.Get("ValidatedExporter.IssueFound") + System.Environment.NewLine;
-                            problemOccurred = true;
+                        problemOccurred = true;
                         yield return result;
                         yield break;
                     }
@@ -83,9 +90,11 @@ namespace VitDeck.Main.ValidatedExporter
                     {
                         yield return null;
                     }
-                    if (buildByteCountEnumerator.Current == null) {
+
+                    if (buildByteCountEnumerator.Current == null)
+                    {
                         result.log += LocalizedMessage.Get("ValidatedExporter.ProblemOccurredWhileBuildSizeCheck")
-                            + System.Environment.NewLine;
+                                      + System.Environment.NewLine;
                         yield return result;
                         yield break;
                     }
@@ -97,15 +106,18 @@ namespace VitDeck.Main.ValidatedExporter
                     buildSizeValidationResult.AddIssue(new Issue(
                         target: null,
                         IssueLevel.Info,
-                        LocalizedMessage.Get("BuildSizeCalculator.BuildSize", SceneManager.GetActiveScene().path, formattedBuildSize)
+                        LocalizedMessage.Get("BuildSizeCalculator.BuildSize", SceneManager.GetActiveScene().path,
+                            formattedBuildSize)
                     ));
-                    result.validationResults = result.validationResults.Concat(new[] { buildSizeValidationResult }).ToArray();
+                    result.validationResults =
+                        result.validationResults.Concat(new[] { buildSizeValidationResult }).ToArray();
                     if (buildByteCount > setting.MaxBuildByteCount)
                     {
                         buildSizeValidationResult.AddIssue(new Issue(
-                        target: null,
+                            target: null,
                             IssueLevel.Fatal,
-                            LocalizedMessage.Get("ValidatedExporter.MaxBuildSize", MathUtility.FormatByteCount(setting.MaxBuildByteCount))
+                            LocalizedMessage.Get("ValidatedExporter.MaxBuildSize",
+                                MathUtility.FormatByteCount(setting.MaxBuildByteCount))
                         ));
                         result.log += LocalizedMessage.Get("ValidatedExporter.IssueFound") + System.Environment.NewLine;
                         yield return result;
@@ -114,7 +126,8 @@ namespace VitDeck.Main.ValidatedExporter
                 }
                 else
                 {
-                    result.log += LocalizedMessage.Get("ValidatedExporter.SkipBuildSizeCheck") + System.Environment.NewLine;
+                    result.log += LocalizedMessage.Get("ValidatedExporter.SkipBuildSizeCheck") +
+                                  System.Environment.NewLine;
                 }
             }
 
@@ -129,6 +142,7 @@ namespace VitDeck.Main.ValidatedExporter
             {
                 result.log += LocalizedMessage.Get("ValidatedExporter.Failed") + System.Environment.NewLine;
             }
+
             yield return result;
         }
 

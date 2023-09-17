@@ -40,7 +40,6 @@ namespace VitDeck.Validator
 
                 foreach (var light in foundLights)
                 {
-
                     AddIssue(new Issue(
                         light,
                         IssueLevel.Error,

@@ -13,7 +13,8 @@ namespace VitDeck.AssetGuardian
     /// </summary>
     public class AssetRestorer
     {
-        private static readonly Dictionary<AssetTypeIdentifier, IRestorer> restoreTools = new Dictionary<AssetTypeIdentifier, IRestorer>();
+        private static readonly Dictionary<AssetTypeIdentifier, IRestorer> restoreTools =
+            new Dictionary<AssetTypeIdentifier, IRestorer>();
 
         private static readonly IRestorer defaultRestorer = new SimpleRestorer(HideFlags.None);
 
@@ -33,7 +34,7 @@ namespace VitDeck.AssetGuardian
             IRestorer tool;
             if (!restoreTools.TryGetValue(detail, out tool))
                 tool = defaultRestorer;
-            
+
             tool.Restore(asset);
         }
 
@@ -75,7 +76,7 @@ namespace VitDeck.AssetGuardian
             restoreTools.Add(
                 new AssetTypeIdentifier(typeof(UnityEngine.Video.VideoClip)),
                 new SimpleRestorer(HideFlags.NotEditable));
-            #if UNITY_2019_4_OR_NEWER
+#if UNITY_2019_4_OR_NEWER
             restoreTools.Add(
                 new AssetTypeIdentifier(typeof(UnityEngine.Cubemap)),
                 new SimpleRestorer(HideFlags.NotEditable));
@@ -85,7 +86,7 @@ namespace VitDeck.AssetGuardian
             restoreTools.Add(
                 new AssetTypeIdentifier(typeof(UnityEngine.Sprite)),
                 new SimpleRestorer(HideFlags.None, HideFlags.NotEditable));
-            #endif
+#endif
         }
 
         private interface IRestorer
@@ -97,6 +98,7 @@ namespace VitDeck.AssetGuardian
         {
             private readonly HideFlags baseHideFlags;
             private bool isModel;
+
             public PrefabRestorer(HideFlags baseHideFlags, bool isModel)
             {
                 this.baseHideFlags = baseHideFlags;
@@ -118,6 +120,7 @@ namespace VitDeck.AssetGuardian
                         transform.gameObject.hideFlags = baseHideFlags | HideFlags.HideInHierarchy;
                     }
                 }
+
                 // コンポーネントのHideFlagsのセットは後でやらないとGameObject側に対する処理で上書きされてしまう。
                 HideAllComponents(rootGameObject);
             }
@@ -155,7 +158,9 @@ namespace VitDeck.AssetGuardian
             private readonly HideFlags defaultMainHideFlags;
             private readonly HideFlags defaultSubHideFlags;
 
-            public SimpleRestorer(HideFlags defaultHideFlags) : this(defaultHideFlags, defaultHideFlags) { }
+            public SimpleRestorer(HideFlags defaultHideFlags) : this(defaultHideFlags, defaultHideFlags)
+            {
+            }
 
             public SimpleRestorer(HideFlags defaultMainHideFlags, HideFlags defaultSubHideFlags)
             {
@@ -171,6 +176,7 @@ namespace VitDeck.AssetGuardian
                 {
                     subAssets.hideFlags = defaultSubHideFlags;
                 }
+
                 asset.hideFlags = defaultMainHideFlags;
             }
         }
@@ -183,7 +189,9 @@ namespace VitDeck.AssetGuardian
             static AudioMixerRestorer()
             {
                 // Internalなのでリフレクションで取得する。
-                var assembly = System.Reflection.Assembly.Load("UnityEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
+                var assembly =
+                    System.Reflection.Assembly.Load(
+                        "UnityEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
                 AudioMixerMainAssetType = assembly.GetType("UnityEditor.Audio.AudioMixerController");
                 AudioMixerHiddenAssetType = assembly.GetType("UnityEditor.Audio.AudioMixerEffectController");
             }

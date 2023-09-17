@@ -9,6 +9,7 @@ namespace VitDeck.TemplateLoader
     internal class GuidReferenceModifier : IReferenceModifier
     {
         Dictionary<string, string> replaceGuidPairDictionary;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -28,11 +29,13 @@ namespace VitDeck.TemplateLoader
                 s = sr.ReadToEnd();
                 sr.Close();
             }
+
             string replaced = s;
             foreach (var guid in replaceGuidPairDictionary.Keys)
             {
                 replaced = replaced.Replace(guid, replaceGuidPairDictionary[guid]);
             }
+
             if (s != replaced)
             {
                 using (StreamWriter sw = new StreamWriter(Path.GetFullPath(path)))

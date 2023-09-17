@@ -11,7 +11,7 @@ namespace VitDeck.Language
         public static LanguageDictionaryTreeView CreateInstance(
             LanguageDictionary dictionary,
             ref TreeViewState state
-            )
+        )
         {
             if (state == null)
             {
@@ -41,9 +41,10 @@ namespace VitDeck.Language
             };
 
             var headerState = new MultiColumnHeaderState(
-                new MultiColumnHeaderState.Column[] {
-                        keyColumn,
-                        valueColumn
+                new MultiColumnHeaderState.Column[]
+                {
+                    keyColumn,
+                    valueColumn
                 });
 
             var header = new MultiColumnHeader(headerState);
@@ -87,6 +88,7 @@ namespace VitDeck.Language
             {
                 rows = new List<TreeViewItem>();
             }
+
             rows.Clear();
 
             var langList = dictionary.GetTranslations();

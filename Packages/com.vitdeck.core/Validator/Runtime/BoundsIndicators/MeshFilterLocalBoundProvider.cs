@@ -6,17 +6,17 @@ namespace VitDeck.Validator.BoundsIndicators
     {
         private readonly MeshFilter filter;
 
-        public MeshFilterLocalBoundProvider( MeshFilter filter)
+        public MeshFilterLocalBoundProvider(MeshFilter filter)
         {
             this.filter = filter;
         }
-        
+
         public Bounds Bounds
         {
             get
             {
                 if (!filter) return new Bounds();
-                
+
                 var mesh = filter.mesh;
                 return mesh != null ? mesh.bounds : new Bounds();
             }

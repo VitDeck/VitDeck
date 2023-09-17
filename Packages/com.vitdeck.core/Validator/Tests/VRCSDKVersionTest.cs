@@ -55,7 +55,6 @@ namespace VitDeck.Validator
             Assert.Throws<InvalidVersionFormatException>(() => new VRCSDKVersion("2019.09.18.12.05.01"));
             Assert.Throws<InvalidVersionFormatException>(() => new VRCSDKVersion("2019.09.18.12"));
             Assert.Throws<InvalidVersionFormatException>(() => new VRCSDKVersion("2019.09.18.12.abc"));
-
         }
     }
 }

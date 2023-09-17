@@ -34,8 +34,9 @@ namespace VitDeck.Validator
 
             var baseFolderPath = target.GetBaseFolderPath();
             var forbiddenPaths = target.GetAllAssetPaths().Where(path => path.StartsWith(baseFolderPath)
-                && !AssetDatabase.IsValidFolder(path)
-                && !allowedExtensions.Contains(Path.GetExtension(path).ToLower()));
+                                                                         && !AssetDatabase.IsValidFolder(path)
+                                                                         && !allowedExtensions.Contains(
+                                                                             Path.GetExtension(path).ToLower()));
             if (forbiddenPaths.Count() == 0)
             {
                 return;
@@ -44,7 +45,8 @@ namespace VitDeck.Validator
             this.AddIssue(new Issue(
                 AssetDatabase.LoadAssetAtPath<DefaultAsset>(baseFolderPath),
                 IssueLevel.Warning,
-                LocalizedMessage.Get("AllowedExtensionsForExportRule.ForbiddenPaths") + "\n" + string.Join("\n", forbiddenPaths)
+                LocalizedMessage.Get("AllowedExtensionsForExportRule.ForbiddenPaths") + "\n" +
+                string.Join("\n", forbiddenPaths)
             ));
         }
     }

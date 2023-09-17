@@ -17,7 +17,9 @@ namespace VitDeck.AssetGuardian
         readonly Action action = null;
         readonly bool resetOnMoreReserved;
 
-        public EditorDelayedAction(Action action, int delayCount) : this(action, delayCount, false) { }
+        public EditorDelayedAction(Action action, int delayCount) : this(action, delayCount, false)
+        {
+        }
 
         public EditorDelayedAction(Action action, int delayCount, bool resetOnMoreReserved)
         {
@@ -67,6 +69,7 @@ namespace VitDeck.AssetGuardian
                 action.Invoke();
                 StopWatching();
             }
+
             delayedFrames++;
         }
 

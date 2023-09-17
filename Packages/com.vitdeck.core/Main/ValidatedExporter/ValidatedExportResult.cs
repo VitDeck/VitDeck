@@ -23,21 +23,20 @@ namespace VitDeck.Main.ValidatedExporter
             if (validationResults != null)
             {
                 foreach (var result in validationResults)
-                    foreach (var issue in result.Issues)
-                        if (issue.level >= level)
-                            return false;
+                foreach (var issue in result.Issues)
+                    if (issue.level >= level)
+                        return false;
             }
+
             return true;
         }
+
         /// <summary>
         /// エクスポートが成功したかどうかを返す
         /// </summary>
         public bool IsExportSuccess
         {
-            get
-            {
-                return exportResult != null ? exportResult.exportResult : false;
-            }
+            get { return exportResult != null ? exportResult.exportResult : false; }
         }
 
         public string GetValidationLog()
@@ -50,6 +49,7 @@ namespace VitDeck.Main.ValidatedExporter
                     log += result.GetResultLog() + System.Environment.NewLine;
                 }
             }
+
             return log;
         }
 

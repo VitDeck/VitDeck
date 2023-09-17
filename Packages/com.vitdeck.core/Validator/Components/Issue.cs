@@ -18,31 +18,38 @@ namespace VitDeck.Validator
             this.solutionURL = solutionURL;
             this.resolver = resolver;
         }
+
         /// <summary>
         /// 対象のオブジェクト
         /// </summary>
         public readonly Object target;
+
         /// <summary>
         /// 問題の重要度
         /// </summary>
         public readonly IssueLevel level;
+
         /// <summary>
         /// 問題に対するメッセージ
         /// </summary>
         public readonly string message;
+
         /// <summary>
         /// 解決策のメッセージ
         /// </summary>
         public readonly string solution;
+
         /// <summary>
         /// 解決策が記載されたWebページのURL
         /// </summary>
         public readonly string solutionURL;
+
         /// <summary>
         /// 問題を修正するためのデリゲート
         /// </summary>
         public readonly ResolverDelegate resolver;
     }
+
     /// <summary>
     /// 検出した問題の重要度
     /// </summary>

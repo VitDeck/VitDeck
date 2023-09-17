@@ -13,7 +13,9 @@ namespace VitDeck.Validator
         /// コンストラクタ。
         /// </summary>
         /// <param name="name">ルール名</param>
-        public ErrorShaderRule(string name) : base(name) { }
+        public ErrorShaderRule(string name) : base(name)
+        {
+        }
 
         protected override void Logic(ValidationTarget target)
         {
@@ -28,19 +30,22 @@ namespace VitDeck.Validator
                 {
                     if (material == null)
                     {
-                        AddIssue(new Issue(obj, IssueLevel.Info, "オブジェクトのRendererにマテリアルの参照がありません。", string.Empty, string.Empty));
+                        AddIssue(new Issue(obj, IssueLevel.Info, "オブジェクトのRendererにマテリアルの参照がありません。", string.Empty,
+                            string.Empty));
                         continue;
                     }
 
                     if (material.shader.name == "Hidden/InternalErrorShader")
                     {
-                        AddIssue(new Issue(obj, IssueLevel.Error, "オブジェクトのマテリアルで正しいシェーダーが参照されていません。", string.Empty, string.Empty));
+                        AddIssue(new Issue(obj, IssueLevel.Error, "オブジェクトのマテリアルで正しいシェーダーが参照されていません。", string.Empty,
+                            string.Empty));
                         continue;
                     }
 
                     if (material.shader.name == string.Empty || material.shader.name == null)
                     {
-                        AddIssue(new Issue(obj, IssueLevel.Error, "オブジェクトでシェーダーエラーが検出されました。", string.Empty, string.Empty));
+                        AddIssue(new Issue(obj, IssueLevel.Error, "オブジェクトでシェーダーエラーが検出されました。", string.Empty,
+                            string.Empty));
                     }
                 }
             }
