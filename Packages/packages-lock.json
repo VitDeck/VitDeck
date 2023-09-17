@@ -154,7 +154,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.vitdeck.core": "2.0.0"
+        "com.vitdeck.core": "2.0.0-exp.2"
       }
     },
     "com.vitdeck.organizer": {
@@ -162,7 +162,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.vitdeck.core": "2.0.0"
+        "com.vitdeck.core": "2.0.0-exp.2"
       }
     },
     "nuget.mono-cecil": {
