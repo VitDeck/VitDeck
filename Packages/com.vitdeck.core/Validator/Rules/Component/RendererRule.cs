@@ -6,7 +6,7 @@ namespace VitDeck.Validator
     /// <summary>
     /// マテリアル数が1以上であることを確認する。
     /// </summary>
-    internal class RendererRule : ComponentBaseRule<Renderer>
+    public class RendererRule : ComponentBaseRule<Renderer>
     {
         public RendererRule(string name) : base(name)
         {

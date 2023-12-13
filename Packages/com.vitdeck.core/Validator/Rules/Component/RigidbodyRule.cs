@@ -4,7 +4,7 @@ using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
-    internal class RigidbodyRule : ComponentBaseRule<Rigidbody>
+    public class RigidbodyRule : ComponentBaseRule<Rigidbody>
     {
         public RigidbodyRule(string name) : base(name)
         {

@@ -15,7 +15,7 @@ namespace VitDeck.Validator
     /// また、プレハブをGUIDで与えることで、そのプレハブに元から追加してあるコンポーネントを許可されているものとして無視します。
     /// UsableComponentListRule と同じ使い方です。
     /// </remarks>
-    internal class UsableUdonAssemblyListRule : BaseUdonBehaviourRule
+    public class UsableUdonAssemblyListRule : BaseUdonBehaviourRule
     {
         private readonly UdonAssemblyReference[] _references;
 
@@ -52,7 +52,7 @@ namespace VitDeck.Validator
             if (isIgnorePrefabInstance && isPrefabComponent) return;
             // ProgramSource が null の場合はスルー
             if (component.programSource == null) return;
-            
+
             // UdonProgramName
             var programName = component.programSource.name;
 

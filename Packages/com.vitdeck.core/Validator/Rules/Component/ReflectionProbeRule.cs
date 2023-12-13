@@ -6,7 +6,7 @@ using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
-    internal class ReflectionProbeRule : ComponentBaseRule<ReflectionProbe>
+    public class ReflectionProbeRule : ComponentBaseRule<ReflectionProbe>
     {
         private readonly IEnumerable<ReflectionProbeMode> allowedModes;
 

@@ -8,7 +8,7 @@ namespace VitDeck.Validator
     /// <summary>
     /// UdonBehaviourを含むオブジェクトのLayerはUserLayer23としてください
     /// </summary>
-    internal class UdonBehaviourLayerConstraintRule : BaseUdonBehaviourRule
+    public class UdonBehaviourLayerConstraintRule : BaseUdonBehaviourRule
     {
         public UdonBehaviourLayerConstraintRule(string name) : base(name)
         {
@@ -26,8 +26,8 @@ namespace VitDeck.Validator
                 if (obj.gameObject.layer != 23)
                 {
                     AddIssue(new Issue(
-                            obj, 
-                            IssueLevel.Error, 
+                            obj,
+                            IssueLevel.Error,
                             LocalizedMessage.Get("UdonBehaviourLayerConstraintRule.InvalidLayer"),
                             LocalizedMessage.Get("UdonBehaviourLayerConstraintRule.InvalidLayer.solution")
                         )

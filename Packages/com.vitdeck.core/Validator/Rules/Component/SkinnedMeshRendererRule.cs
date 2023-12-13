@@ -3,7 +3,7 @@ using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
-    internal class SkinnedMeshRendererRule : ComponentBaseRule<SkinnedMeshRenderer>
+    public class SkinnedMeshRendererRule : ComponentBaseRule<SkinnedMeshRenderer>
     {
         public SkinnedMeshRendererRule(string name) : base(name)
         {

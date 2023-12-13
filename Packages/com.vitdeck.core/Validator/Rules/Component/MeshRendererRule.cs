@@ -4,7 +4,7 @@ using VitDeck.Language;
 
 namespace VitDeck.Validator
 {
-    internal class MeshRendererRule : ComponentBaseRule<MeshRenderer>
+    public class MeshRendererRule : ComponentBaseRule<MeshRenderer>
     {
         public MeshRendererRule(string name) : base(name)
         {

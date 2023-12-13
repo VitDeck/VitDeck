@@ -9,7 +9,7 @@ namespace VitDeck.Validator
     /// UdonBehaviourを含むオブジェクト、UdonBehaviourによって操作を行うオブジェクトは全て入稿ルール
     /// C.Scene内階層規定におけるDynamicオブジェクトの階層下に入れてください
     /// </summary>
-    internal class UdonDynamicObjectParentRule : BaseRule
+    public class UdonDynamicObjectParentRule : BaseRule
     {
         public UdonDynamicObjectParentRule(string name) : base(name)
         {

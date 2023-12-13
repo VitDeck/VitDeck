@@ -7,7 +7,7 @@ namespace VitDeck.Validator
     /// <summary>
     /// UdonBehaviourのAllowOwnershipTransferOnCollisionは必ずFalseにすること
     /// </summary>
-    internal class UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule : BaseUdonBehaviourRule
+    public class UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule : BaseUdonBehaviourRule
     {
         public UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule(string name) : base(name)
         {
@@ -18,8 +18,8 @@ namespace VitDeck.Validator
             if (component.AllowCollisionOwnershipTransfer)
             {
                 AddIssue(new Issue(
-                        component, 
-                        IssueLevel.Error, 
+                        component,
+                        IssueLevel.Error,
                         LocalizedMessage.Get("UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.isTrue"),
                         LocalizedMessage.Get("UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.isTrue.solution")
                     )

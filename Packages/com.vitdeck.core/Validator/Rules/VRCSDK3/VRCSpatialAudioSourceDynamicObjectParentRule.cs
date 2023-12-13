@@ -8,7 +8,7 @@ namespace VitDeck.Validator
     /// <summary>
     /// VRCSpatialAudioSourceを含むオブジェクトは全てDynamicオブジェクトの階層下に入れてください
     /// </summary>
-    internal class VRCSpatialAudioSourceDynamicObjectParentRule : BaseRule
+    public class VRCSpatialAudioSourceDynamicObjectParentRule : BaseRule
     {
         public VRCSpatialAudioSourceDynamicObjectParentRule(string name) : base(name)
         {
