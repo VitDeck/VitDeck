@@ -36,8 +36,16 @@ namespace VitDeck.Validator
             }
         }
 
+        private readonly IssueLevel issueLevel;
+
         public AnimationMakesMoveCollidersRule(string name) : base(name)
         {
+            issueLevel = IssueLevel.Error;
+        }
+
+        public AnimationMakesMoveCollidersRule(string name, IssueLevel issueLevel) : base(name)
+        {
+            this.issueLevel = issueLevel;
         }
 
         protected override void Logic(ValidationTarget target)
@@ -52,7 +60,7 @@ namespace VitDeck.Validator
             {
                 AddIssue(new Issue(
                     movableCollider.collider,
-                    IssueLevel.Error,
+                    issueLevel,
                     LocalizedMessage.Get("AnimationMakesMoveCollidersRule.WillMakesMove",
                         movableCollider.rootObject.name),
                     LocalizedMessage.Get("AnimationMakesMoveCollidersRule.WillMakesMove.Solution")));
