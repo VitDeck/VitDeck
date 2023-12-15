@@ -6,14 +6,11 @@ namespace VitDeck.Validator
     public class VRCSDKVersion : IVersion, IEquatable<VRCSDKVersion>, IComparable<VRCSDKVersion>
     {
         private readonly string rawString;
-        private readonly int Year;
-        private readonly int Month;
-        private readonly int Date;
         private readonly int Major;
         private readonly int Minor;
+        private readonly int Patch;
 
-        private static readonly Regex regex =
-            new Regex(@"^(?<Year>\d+)\.(?<Month>\d+)\.(?<Date>\d+)\.(?<Major>\d+)\.(?<Minor>\d+)$");
+        private static readonly Regex regex = new Regex(@"^(?<Major>\d+)\.(?<Minor>\d+)\.(?<Patch>\d+)$");
 
         public VRCSDKVersion(string version)
         {
@@ -23,11 +20,9 @@ namespace VitDeck.Validator
 
             rawString = version;
 
-            Year = int.Parse(match.Groups["Year"].Value);
-            Month = int.Parse(match.Groups["Month"].Value);
-            Date = int.Parse(match.Groups["Date"].Value);
             Major = int.Parse(match.Groups["Major"].Value);
             Minor = int.Parse(match.Groups["Minor"].Value);
+            Patch = int.Parse(match.Groups["Patch"].Value);
         }
 
         public string ToInterconvertibleString()
@@ -39,8 +34,7 @@ namespace VitDeck.Validator
         {
             return rawString;
         }
-
-
+        
         public override bool Equals(object obj)
         {
             var version = obj as VRCSDKVersion;
@@ -48,46 +42,35 @@ namespace VitDeck.Validator
             {
                 return Equals(version);
             }
-
             return false;
         }
 
         public bool Equals(VRCSDKVersion other)
         {
             return (object)other != null &&
-                   Year == other.Year &&
-                   Month == other.Month &&
-                   Date == other.Date &&
                    Major == other.Major &&
-                   Minor == other.Minor;
+                   Minor == other.Minor &&
+                   Patch == other.Patch;
         }
 
         public override int GetHashCode()
         {
             var hashCode = 1394553890;
-            hashCode = hashCode * -1521134295 + Year.GetHashCode();
-            hashCode = hashCode * -1521134295 + Month.GetHashCode();
-            hashCode = hashCode * -1521134295 + Date.GetHashCode();
             hashCode = hashCode * -1521134295 + Major.GetHashCode();
             hashCode = hashCode * -1521134295 + Minor.GetHashCode();
+            hashCode = hashCode * -1521134295 + Patch.GetHashCode();
             return hashCode;
         }
 
         public int CompareTo(VRCSDKVersion other)
         {
-            var x = Year.CompareTo(other.Year);
-            if (x != 0) return x;
-
-            x = Month.CompareTo(other.Month);
-            if (x != 0) return x;
-
-            x = Date.CompareTo(other.Date);
-            if (x != 0) return x;
-
-            x = Major.CompareTo(other.Major);
+            var x = Major.CompareTo(other.Major);
             if (x != 0) return x;
 
             x = Minor.CompareTo(other.Minor);
+            if (x != 0) return x;
+
+            x = Patch.CompareTo(other.Patch);
             return x;
         }
 
