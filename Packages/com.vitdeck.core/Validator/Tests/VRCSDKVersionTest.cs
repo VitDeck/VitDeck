@@ -8,10 +8,10 @@ namespace VitDeck.Validator
         [Test]
         public void OperatorTest()
         {
-            var version = new VRCSDKVersion("2019.09.18.12.05");
-            var sameVersion = new VRCSDKVersion("2019.09.18.12.05");
-            var prevVersion = new VRCSDKVersion("2019.09.18.12.04");
-            var nextVersion = new VRCSDKVersion("2019.09.18.12.06");
+            var version = new VRCSDKVersion("3.5.0");
+            var sameVersion = new VRCSDKVersion("3.5.0");
+            var prevVersion = new VRCSDKVersion("3.4.9");
+            var nextVersion = new VRCSDKVersion("3.5.1");
 
             Assert.IsTrue(version > prevVersion);
             Assert.IsFalse(version > sameVersion);
@@ -41,7 +41,7 @@ namespace VitDeck.Validator
         [Test]
         public void InterconvertibleTest()
         {
-            var version = new VRCSDKVersion("2019.09.18.12.05");
+            var version = new VRCSDKVersion("3.5.0");
 
             var regeneratedVersion = new VRCSDKVersion(version.ToInterconvertibleString());
 
@@ -53,8 +53,9 @@ namespace VitDeck.Validator
         {
             Assert.Throws<InvalidVersionFormatException>(() => new VRCSDKVersion(""));
             Assert.Throws<InvalidVersionFormatException>(() => new VRCSDKVersion("2019.09.18.12.05.01"));
-            Assert.Throws<InvalidVersionFormatException>(() => new VRCSDKVersion("2019.09.18.12"));
-            Assert.Throws<InvalidVersionFormatException>(() => new VRCSDKVersion("2019.09.18.12.abc"));
+            Assert.Throws<InvalidVersionFormatException>(() => new VRCSDKVersion("3.5.0.1"));
+            Assert.Throws<InvalidVersionFormatException>(() => new VRCSDKVersion("3.5"));
+            Assert.Throws<InvalidVersionFormatException>(() => new VRCSDKVersion("3.5.abc"));
         }
     }
 }
