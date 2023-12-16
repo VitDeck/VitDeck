@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace VitDeck.Validator.BoundsIndicators
 {
-    [ExecuteInEditMode]
+    [ExecuteAlways]
     public class BoothRangeIndicator : MonoBehaviour, IBoothRoot
     {
         [System.NonSerialized] bool initialized = false;
@@ -24,7 +22,8 @@ namespace VitDeck.Validator.BoundsIndicators
 
         private void Token_Reset()
         {
-            SafeDestroy();
+            if(this)
+                SafeDestroy();
         }
 
         private void Update()
