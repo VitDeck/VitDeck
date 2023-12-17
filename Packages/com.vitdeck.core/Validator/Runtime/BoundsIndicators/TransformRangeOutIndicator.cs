@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace VitDeck.Validator.BoundsIndicators
 {
-    [ExecuteInEditMode]
+    [ExecuteAlways]
     public class TransformRangeOutIndicator : MonoBehaviour
     {
         [System.NonSerialized] private bool initialized = false;
@@ -42,6 +42,10 @@ namespace VitDeck.Validator.BoundsIndicators
 
         private void SafeDestroy()
         {
+            if (!this)
+            {
+                return;
+            }
             if (Application.isPlaying)
             {
                 Destroy(this);

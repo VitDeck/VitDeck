@@ -22,8 +22,7 @@ namespace VitDeck.Validator.BoundsIndicators
 
         private void Token_Reset()
         {
-            if(this)
-                SafeDestroy();
+            SafeDestroy();
         }
 
         private void Update()
@@ -36,6 +35,10 @@ namespace VitDeck.Validator.BoundsIndicators
 
         private void SafeDestroy()
         {
+            if (!this)
+            {
+                return;
+            }
             if (Application.isPlaying)
             {
                 Destroy(this);
