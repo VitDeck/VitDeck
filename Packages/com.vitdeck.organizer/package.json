@@ -1,10 +1,10 @@
 {
   "name": "com.vitdeck.organizer",
   "displayName": "VitDeck Organizer",
-  "version": "2.0.0-exp.3",
+  "version": "2.0.0-exp.4",
   "unity": "2019.4",
   "description": "This package provides tools for to develop rules and templates for VitDeck.",
   "dependencies": {
-    "com.vitdeck.core": "2.0.0-exp.3"
+    "com.vitdeck.core": "2.0.0-exp.4"
   }
 }

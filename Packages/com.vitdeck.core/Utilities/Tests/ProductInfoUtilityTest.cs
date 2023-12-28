@@ -8,7 +8,7 @@ namespace VitDeck.Utilities.Tests
         public void TestGetVersion()
         {
             var version = ProductInfoUtility.GetVersion();
-            Assert.That(version, Is.EqualTo("2.0.0-exp.3"));
+            Assert.That(version, Is.EqualTo("2.0.0-exp.4"));
         }
 
         [Test]
