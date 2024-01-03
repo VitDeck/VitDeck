@@ -1,0 +1,26 @@
+name: Run-Tests
+on: push
+
+jobs:
+  test:
+    runs-on: windows-2022
+    strategy:
+      matrix:
+        unity-version: 
+          - 2019.4.31f1
+          - 2022.3.6f1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Run tests
+        uses: game-ci/unity-test-runner@v4
+        env:
+          UNITY_LICENSE: ${{ secrests.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrests.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrests.UNITY_PASSWORD }}
+        with:
+          unityVersion: ${{ matrix.unity-version }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
