@@ -18,9 +18,9 @@ jobs:
       - name: Run tests
         uses: game-ci/unity-test-runner@v4
         env:
-          UNITY_LICENSE: ${{ secrests.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrests.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrests.UNITY_PASSWORD }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           unityVersion: ${{ matrix.unity-version }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
