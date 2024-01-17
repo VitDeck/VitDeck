@@ -5,6 +5,7 @@ jobs:
   test:
     runs-on: windows-2022
     strategy:
+      fail-fast: false
       matrix:
         unity-version: 
           - 2019.4.31f1
