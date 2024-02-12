@@ -25,3 +25,4 @@ jobs:
         with:
           unityVersion: ${{ matrix.unity-version }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
+          checkName: Result(${{ matrix.unity-version }})
