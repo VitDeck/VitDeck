@@ -16,6 +16,12 @@ jobs:
           fetch-depth: 0
           lfs: true
 
+      - name: Cache Docker images
+        uses: actions/cache@v4
+        with:
+          path: C:\ProgramData\Docker
+          key: docker-windows-${{ matrix.unity-version }}
+
       - name: Run tests
         uses: sokuhatiku/unity-test-runner@52b336a8c9e31ac6c7c867e48791dac1fdf1c79c
         env:
