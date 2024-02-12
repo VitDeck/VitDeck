@@ -21,6 +21,7 @@ jobs:
         with:
           path: C:\ProgramData\Docker
           key: docker-windows-${{ matrix.unity-version }}
+          save-always: true
 
       - name: Run tests
         id: run-tests
