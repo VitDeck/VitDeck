@@ -23,6 +23,7 @@ jobs:
           key: docker-windows-${{ matrix.unity-version }}
 
       - name: Run tests
+        id: run-tests
         uses: sokuhatiku/unity-test-runner@52b336a8c9e31ac6c7c867e48791dac1fdf1c79c
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -32,3 +33,9 @@ jobs:
           unityVersion: ${{ matrix.unity-version }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           checkName: Result(${{ matrix.unity-version }})
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: Unity${{ matrix.unity-version }}
+          path: ${{ steps.run-tests.outputs.artifactsPath }}
