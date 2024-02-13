@@ -16,12 +16,11 @@ jobs:
           fetch-depth: 0
           lfs: true
 
-      - name: Cache Docker images
-        uses: actions/cache@v4
+      - name: Cache Docker images.
+        uses: ScribeMD/docker-cache@0.3.7
+        if: always()
         with:
-          path: C:\ProgramData\Docker
-          key: docker-windows-${{ matrix.unity-version }}
-          save-always: true
+          key: docker-${{ runner.os }}-${{ matrix.unity-version }}
 
       - name: Run tests
         id: run-tests
