@@ -64,7 +64,7 @@ namespace VitDeck.Validator
         protected static string GetDisassembleCode(IUdonProgram program)
         {
             var disasm = new UAssemblyDisassembler();
-            return String.Join("\n", disasm.DisassembleProgram(program));
+            return program == null ? string.Empty : String.Join("\n", disasm.DisassembleProgram(program));
         }
 
         /// <summary>
