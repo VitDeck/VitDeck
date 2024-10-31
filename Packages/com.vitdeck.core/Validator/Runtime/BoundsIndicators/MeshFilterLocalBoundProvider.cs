@@ -17,7 +17,7 @@ namespace VitDeck.Validator.BoundsIndicators
             {
                 if (!filter) return new Bounds();
 
-                var mesh = filter.mesh;
+                var mesh = filter.sharedMesh;
                 return mesh != null ? mesh.bounds : new Bounds();
             }
         }
