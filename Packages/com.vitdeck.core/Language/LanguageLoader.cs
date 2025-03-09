@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
@@ -7,12 +5,18 @@ using UnityEngine;
 
 namespace VitDeck.Language
 {
-    public class LanguageLoader
+    /// <summary>
+    /// Unityエディタが読み込まれたときに、VitDeckの翻訳機能にコア翻訳ファイルを自動で読み込ませるためのクラス。
+    /// </summary>
+    public static class LanguageLoader
     {
         private static Dictionary<SystemLanguage, string> languageGUIDs;
-        private static SystemLanguage defaultLanguage = SystemLanguage.English;
+        private const SystemLanguage DefaultLanguage = SystemLanguage.English;
         private const string LogHeader = "[VitDeck]";
 
+        /// <summary>
+        /// 各種言語別に、コア翻訳ファイルのGUIDを保持するDictionary。
+        /// </summary>
         private static Dictionary<SystemLanguage, string> LanguageFileGUIDs
         {
             get
@@ -37,6 +41,7 @@ namespace VitDeck.Language
         {
             var settings = FindLanguageSettingsInstance();
 
+            // Unityの読込直後は言語設定ファイルを掴み損ねる可能性があるため、その場合はEditor.updateのタイミングまで遅延させる
             if (settings == null)
             {
                 EditorApplication.update += DelayedInitialize;
@@ -46,10 +51,9 @@ namespace VitDeck.Language
             LanguageDictionary dictionary;
             if (settings.language == null)
             {
-                string languageGUID;
                 var currentLanguage = Application.systemLanguage;
                 Debug.Log(LogHeader + "Current system language = " + currentLanguage);
-                if (LanguageFileGUIDs.TryGetValue(currentLanguage, out languageGUID))
+                if (LanguageFileGUIDs.TryGetValue(currentLanguage, out var languageFileGuid))
                 {
                     Debug.Log(LogHeader + "Load LanguageFile which for " + currentLanguage);
                 }
@@ -57,10 +61,10 @@ namespace VitDeck.Language
                 {
                     Debug.Log(LogHeader +
                               "LanguageFile which for current system language is not found. load default LanguageFile.");
-                    languageGUID = LanguageFileGUIDs[defaultLanguage];
+                    languageFileGuid = LanguageFileGUIDs[DefaultLanguage];
                 }
 
-                var defaultLanguagePath = AssetDatabase.GUIDToAssetPath(languageGUID);
+                var defaultLanguagePath = AssetDatabase.GUIDToAssetPath(languageFileGuid);
                 dictionary = AssetDatabase.LoadAssetAtPath<LanguageDictionary>(defaultLanguagePath);
             }
             else
