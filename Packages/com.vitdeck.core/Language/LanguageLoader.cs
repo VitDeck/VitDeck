@@ -11,8 +11,6 @@ namespace VitDeck.Language
     public static class LanguageLoader
     {
         private static Dictionary<SystemLanguage, string> languageGUIDs;
-        private const SystemLanguage DefaultLanguage = SystemLanguage.English;
-        private const string LogHeader = "[VitDeck]";
 
         /// <summary>
         /// 各種言語別に、コア翻訳ファイルのGUIDを保持するDictionary。
@@ -39,7 +37,7 @@ namespace VitDeck.Language
         [InitializeOnLoadMethod]
         private static void Initialize()
         {
-            var settings = FindLanguageSettingsInstance();
+            var settings = FindOrCreateLanguageSettingsInstance();
 
             // Unityの読込直後は言語設定ファイルを掴み損ねる可能性があるため、その場合はEditor.updateのタイミングまで遅延させる
             if (settings == null)
@@ -48,35 +46,22 @@ namespace VitDeck.Language
                 return;
             }
 
-            LanguageDictionary dictionary;
-            if (settings.language == null)
+            var pairs = LanguageFileGUIDs;
+            foreach (var pair in pairs)
             {
-                var currentLanguage = Application.systemLanguage;
-                Debug.Log(LogHeader + "Current system language = " + currentLanguage);
-                if (LanguageFileGUIDs.TryGetValue(currentLanguage, out var languageFileGuid))
-                {
-                    Debug.Log(LogHeader + "Load LanguageFile which for " + currentLanguage);
-                }
-                else
-                {
-                    Debug.Log(LogHeader +
-                              "LanguageFile which for current system language is not found. load default LanguageFile.");
-                    languageFileGuid = LanguageFileGUIDs[DefaultLanguage];
-                }
-
-                var defaultLanguagePath = AssetDatabase.GUIDToAssetPath(languageFileGuid);
-                dictionary = AssetDatabase.LoadAssetAtPath<LanguageDictionary>(defaultLanguagePath);
-            }
-            else
-            {
-                Debug.Log(LogHeader + "Load overrode LanguageFile = " + settings.language);
-                dictionary = settings.language;
+                var guid = pair.Value;
+                var path = AssetDatabase.GUIDToAssetPath(guid);
+                var asset = AssetDatabase.LoadAssetAtPath<LanguageDictionary>(path);
+                LocalizedMessage.AddSystemDictionary(pair.Key, asset);
             }
 
-            LocalizedMessage.SetDictionary(dictionary);
+            if (!LocalizedMessage.ExternalConfiguratorAvailable)
+            {
+                LocalizedMessage.SetCurrentLanguageInternal(settings.language, false);
+            }
         }
 
-        private static LanguageSettings FindLanguageSettingsInstance()
+        private static LanguageSettings FindOrCreateLanguageSettingsInstance()
         {
             LanguageSettings asset;
             var assetPath = Path.Combine(Utilities.AssetUtility.ConfigFolderPath, "LanguageSettings.asset");
