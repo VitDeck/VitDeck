@@ -529,7 +529,7 @@ MonoBehaviour:
   - Key: VketRuleSetBase.UnusabePrefabRule.Title
     Value: "\u5165\u7A3F\u30D5\u30A9\u30EB\u30C0\u30FC\u306B\u542B\u307E\u308C\u3066\u3044\u308BPrefab\u3001\u304A\u3088\u3073\u516C\u5F0FPrefab\u4EE5\u5916\u306EPrefab\u3092\u4F7F\u7528\u3057\u306A\u3044\u3053\u3068"
   - Key: VketUdonRuleSetBase.UdonBehaviourLayerConstraintRule.Title
-    Value: "UdonBehaviour \u3092\u542B\u3080GameOnject \u306ELayer\u306F 23 \u3068\u3059\u308B"
+    Value: "UdonBehaviour \u3092\u542B\u3080GameObject \u306ELayer\u306F 23 \u3068\u3059\u308B"
   - Key: UdonBehaviourLayerConstraintRule.InvalidLayer
     Value: "\u30EC\u30A4\u30E4\u30FC\u304C\u4E0D\u6B63\u3067\u3059"
   - Key: UdonBehaviourLayerConstraintRule.InvalidLayer.solution
@@ -607,8 +607,8 @@ MonoBehaviour:
     Value: "\u95A2\u6570 [{0}] \u306E\u5F15\u6570 {1} \u3092 const _maxDistance \u3067
       {2} \u4EE5\u4E0B\u306B\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044"
   - Key: UdonAssemblyPhysicsCastFunctionRule.LayerMaskError
-    Value: "UdonAssembly \u306E \u95A2\u6570 [{0}] \u306E\u5F15\u6570 _layerMask \u304C\u4E0D\u6B63({3})\u3067\u3059\u3002:
-      {1} ({2})"
+    Value: "UdonAssembly \u306E \u95A2\u6570 [{0}] \u306E\u5F15\u6570 _layerMask
+      \u304C\u4E0D\u6B63({3})\u3067\u3059\u3002: {1} ({2})"
   - Key: UdonAssemblyPhysicsCastFunctionRule.LayerMaskError.Solution
     Value: "\u95A2\u6570 [{0}] \u306E\u5F15\u6570 {1} \u3092 const _layerMask \u3067
       {2} \u3068\u6307\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044"
