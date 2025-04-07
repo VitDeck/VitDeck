@@ -24,7 +24,7 @@ MonoBehaviour:
   - Key: PerformanceCalculator.Result
     Value: SetPassCalls for {0} is {1} and Batches is {2}.
   - Key: Validator.SerchingValidationTarget
-    Value: Validating
+    Value: Searching Validation Target...
   - Key: Validator.AbortWithException
     Value: 'Rule verification aborted with exception: {0}'
   - Key: ValidatorWindow.ValidationCompleted
@@ -32,9 +32,9 @@ MonoBehaviour:
   - Key: ValidatorWindow.ValidationAborted
     Value: Rule verification aborted
   - Key: VketTargetFinder.PackageFolderNotFound
-    Value: Submissions folder not found
+    Value: Submission folder not found
   - Key: VketTargetFinder.ExhibitNotFound
-    Value: Submissions not found
+    Value: Submission not found
   - Key: VketTargetFinder.ManyExhibits
     Value: Submission duplicates found
   - Key: VketTargetFinder.SceneNotFound
@@ -46,11 +46,11 @@ MonoBehaviour:
   - Key: VketTargetFinder.SceneOpenDialog.Continue
     Value: Run
   - Key: VketTargetFinder.SceneOpenDialog.Abort
-    Value: Abord
+    Value: Abort
   - Key: VketTargetFinder.ValidationAborted
-    Value: Validation is aborted
+    Value: Validation has been aborted.
   - Key: VketTargetFinder.UserDidntSave
-    Value: Please save all changes and try again
+    Value: Please save all changes in the scene file and try again.
   - Key: VketRuleSetBase.UnityVersionRule.Title
     Value: Must use Unity version {0}
   - Key: VketRuleSetBase.VRCSDKVersionRule.Title
@@ -81,7 +81,8 @@ MonoBehaviour:
   - Key: VketRuleSetBase.LightMapsLimitRule.Title
     Value: Lightmap count must be kept under {0}, and resolutions below {1}
   - Key: VketRuleSetBase.GlobalIlluminationBakedRule.Title
-    Value: Global Illumination must be set to Baked when using Standard shader's Emission
+    Value: Global Illumination must be set to Baked when using Standard shader's
+      Emission
   - Key: VketRuleSetBase.UsableComponentListRule.Title
     Value: Unallowed components in use
   - Key: VketRuleSetBase.VRCTriggerConfigRule.Title
@@ -123,13 +124,13 @@ MonoBehaviour:
   - Key: VRCSDKVersionRule.NotInstalled
     Value: VRCSDK not found
   - Key: VRCSDKVersionRule.NotInstalled.Solution
-    Value: Please download the latest version of VRCSDK from the VRChat site and import
-      it
+    Value: Please download & import the latest version of VRCSDK from the VRChat
+      website.
   - Key: VRCSDKVersionRule.PreviousVersion
     Value: VRCSDK is outdated
   - Key: VRCSDKVersionRule.PreviousVersion.Solution
-    Value: Please download the latest version of VRCSDK from the VRChat site and import
-      it
+    Value: Please download & import the latest version of VRCSDK from the VRChat
+      website.
   - Key: PostProcessingExistsRule.SearchFailed
     Value: Failed to check the installation of PostProcessingStack
   - Key: PostProcessingExistsRule.SearchFailed.Solution
@@ -205,18 +206,16 @@ MonoBehaviour:
   - Key: SceneStructureRule.UnrelatedSceneDetected
     Value: A Scene that is unrelated to the Submission Scene is open
   - Key: SceneStructureRule.UnrelatedSceneDetected.Solution
-    Value: 'Please close or Unload the unrelated Scene '
+    Value: Please close or Unload the unrelated Scene
   - Key: SceneStructureRule.UnrelatedSceneDetected.SolutionURL
     Value: 
   - Key: SceneStructureRule.UnrelatedRootObjectDetected
     Value: An Object that is not supported or intended for submission was detected
       on the Scene
   - Key: SceneStructureRule.UnrelatedRootObjectDetected.Solution
-    Value: 'If you did intend to submit the detected object, make sure it is inside
-      the root object (the GameObject with the same name as the Scene name)
-
-      If you did not intend to submit it, make sure it is removed before any checks
-      are performed'
+    Value: If you intended to submit the detected object, ensure it is inside the
+      root object (the GameObject with the same name as the Scene). If you do not
+      intend to submit it, make sure it is removed before any checks.
   - Key: SceneStructureRule.UnrelatedRootObjectDetected.SolutionURL
     Value: 
   - Key: StaticFlagRule.OccludeeStaticNotSet
@@ -232,7 +231,7 @@ MonoBehaviour:
   - Key: StaticFlagRule.BatchingStaticNotSet.Solution
     Value: Please only disable BatchingStatic if it affects the exhibits visually
   - Key: StaticFlagRule.OccluderStaticNotAllowed
-    Value: Please disable OccluderStatic
+    Value: Please disable OccluderStatic.
   - Key: StaticFlagRule.OccluderStaticNotAllowed.Solution
     Value: 
   - Key: StaticFlagRule.OccluderStaticNotAllowed.SolutionURL
@@ -242,8 +241,8 @@ MonoBehaviour:
   - Key: StaticFlagRule.StaticNotAllowed.Solution
     Value: Please disable Static settings.
   - Key: BoothBoundsRule.Exceeded
-    Value: Object exceeded the booth size limit by {0}. Size limit={1}, Target size={2},  Object
-      type={3}
+    Value: Object exceeded the booth size limit by {0}. Size limit={1}, Target size={2}, 
+      Object type={3}
   - Key: AssetTypeLimitRule.Overuse
     Value: '{0} count({2}) exceeded the count limit of {1}.'
   - Key: AssetTypeLimitRule.Overuse.Solution
@@ -258,8 +257,7 @@ MonoBehaviour:
   - Key: UsableComponentListRule.Disallow
     Value: '{0}: Usage of {1} is not allowed'
   - Key: UsableComponentListRule.Disallow.Solution
-    Value: If a replacement Prefab is released by Virtual Market, you could substitute
-      it by using that instead
+    Value: If an official Prefab is available, please use it to replace the function.
   - Key: UsableComponentListRule.Disallow.SolutionURL
     Value: 
   - Key: VRCTriggerConfigRule.UnauthorizedBroadcastType
@@ -275,9 +273,9 @@ MonoBehaviour:
   - Key: VRCTriggerConfigRule.UnauthorizedActionType.Solution
     Value: Please change to a supported action type
   - Key: UseMeshColliderRule.ShouldNotUse
-    Value: MeshCollider usage is discouraged
+    Value: MeshCollider usage is not recommended.
   - Key: UseMeshColliderRule.ShouldNotUse.Solution
-    Value: Please use other collider types
+    Value: Please use other collider types.
   - Key: VRCTriggerCountLimitRule.Overuse
     Value: 'VRC_Trigger count exceeded limit of {0}. (Current count: {1})'
   - Key: VRCTriggerCountLimitRule.Overuse.Solution
@@ -299,8 +297,8 @@ MonoBehaviour:
   - Key: AvatarPedestalPrefabRule.BroadcastTypeMustLocal
     Value: VRC_Trigger's BroadcastType must be set to local
   - Key: AvatarPedestalPrefabRule.UnauthorizedTriggerType
-    Value: 'TriggerType {0} is not supported. VRC_Trigger''s TriggerType must be set
-      to one of the following: [Custom, OnInteract, OnEnterTrigger, OnExitTrigger,
+    Value: 'TriggerType {0} is not supported. VRC_Trigger''s TriggerType must be
+      set to one of the following: [Custom, OnInteract, OnEnterTrigger, OnExitTrigger,
       OnPickup, OnDrop, OnPickupUseDown, OnPickupUseUp]'
   - Key: AvatarPedestalPrefabRule.RPCMustSetAvatarUse
     Value: VRC_Trigger's SendRPC must be set to SetAvatarUse
@@ -315,7 +313,7 @@ MonoBehaviour:
   - Key: PrefabLimitRule.Overuse
     Value: 'Prefab''s usage limit of {0} exceeded. (Current count: {1})'
   - Key: PrefabLimitRule.Overuse.Solution
-    Value: Please reduce the usage count
+    Value: Please reduce the usage count.
   - Key: PrefabLimitRule.Overuse.SolutionURL
     Value: 
   - Key: VideoPlayerComponentRule.DefaultDisabled
@@ -336,7 +334,7 @@ MonoBehaviour:
   - Key: CanvasRenderModeRule.CanvasIsNotInWorldSpace
     Value: Please set the RenderMode of the canvas located under {0} to WorldSpace
   - Key: VketRuleSetBase.CameraComponentRule.Title
-    Value: Please follow the set rules when using a Camera
+    Value: Please follow the Camera usage rules
   - Key: CameraComponentRule.DefaultDisabled
     Value: The component must be set to Disabled by default
   - Key: CameraComponentRule.DefaultDisabled.Solution
@@ -354,7 +352,7 @@ MonoBehaviour:
   - Key: CameraComponentMaxCountRule.Exceeded.Solution
     Value: Please reduce the component count
   - Key: VketRuleSetBase.ProjectorComponentRule.Title
-    Value: Please follow the set rules when using a Projector
+    Value: Please follow the Projector usage rules
   - Key: ProjectorComponentRule.DefaultDisabled
     Value: The component must be set to Disabled by default
   - Key: ProjectorComponentRule.DefaultDisabled.Solution
@@ -377,17 +375,17 @@ MonoBehaviour:
   - Key: AnimationMakesMoveCollidersRule.WillMakesMove.Solution
     Value: Please remove either the animator or the collider.
   - Key: VketRuleSetBase.AnimationClipRule.Title
-    Value: Please conform to the limitation of AnimationClip's usage
+    Value: Please follow the AnimationClip usage rules
   - Key: AnimationClipRule.DontChangeMaterialInAnimation
     Value: Switching of materials using AnimationClips is not allowed
   - Key: AnimationClipRule.DontAccessParentObject
     Value: AnimationClips must not contain paths containing ../
   - Key: VketRuleSetBase.AnimationComponentRule.Title
-    Value: Please conform to the limitation of AnimationComponent's usage
+    Value: Please follow the AnimationComponent usage rules
   - Key: AnimationComponentRule.ShouldNotUseAlwaysAnimate
     Value: In the exception of bugs, please avoid setting CullingType to Always.
   - Key: VketRuleSetBase.AnimatorComponentRule.Title
-    Value: Please conform to the limitation of AnimatorComponent's usage
+    Value: Please follow the AnimatorComponent usage rules
   - Key: AnimatorComponentRule.ShouldNotUseAlwaysAnimate
     Value: In the exception of bugs, please avoid setting CullingType to Always.
   - Key: AnimatorComponentRule.ShouldNotUseApplyRootMotion
@@ -449,7 +447,7 @@ MonoBehaviour:
   - Key: AssetGuardian.Notificator.CloseDialog
     Value: OK
   - Key: ValidatedExporter.ProblemOccurredWhileValidating
-    Value: Unexpected error occured during validation.
+    Value: Unexpected error occured during rule check.
   - Key: ValidatedExporter.RuleNotFound
     Value: Rule {0} not found.
   - Key: ValidatedExporter.IssueFound
@@ -470,33 +468,34 @@ MonoBehaviour:
     Value: All assets to be submitted (excluding distributed prefabs) must be placed
       within a folder renamed to your Exhibitor's ID located under the Assets folder.
   - Key: ExistInSubmitFolderRule.HasOutOfPackageReference
-    Value: 
+    Value: An asset ({0}) placed outside the submission folder is being referred.
   - Key: ExistInSubmitFolderRule.HasOutOfPackageReference.Solution
-    Value: 
+    Value: Please remove the asset if it is unneeded, or move it into the submission
+      folder.
   - Key: ExistInSubmitFolderRule.HasOutOfPackageReference.SolutionURL
     Value: 
   - Key: LightmapSizeLimitRule.MustLightmapBakingManually
-    Value: LightMaps can not be examined when set to Auto Generate
+    Value: LightMaps can not be checked as intended when set to Auto Generate.
   - Key: LightmapSizeLimitRule.MustLightmapBakingManually.Solution
-    Value: "Please set lightmap baking to Manual with the following steps:\n1. Open
-      the Lighting menu through the unity taskbar\u2192Window\u2192Lighting\u2192Setting\n2.
-      Uncheck the Auto Generate checkbox located towards the bottom of the lighting
-      menu\n3. Click the Generate Lighting button\n4. Hold on while the lightmap baking
-      commences. Progress can be confirmed from the bottom right of the lighting menu\n5.
-      Restart the validation process once the baking process is done\nPlease repead
-      steps 3-5 when adding objects or changing the positions of existing objects."
+    Value: "Please set the lightmap baking mode to Manual with the following steps:
+      1. Open the Lighting menu through the unity taskbar\u2192Window\u2192Lighting\u2192Setting.
+      2. Uncheck the Auto Generate checkbox located at the bottom of the lighting
+      menu 3. Click Generate Lighting4. Wait as the lightmap is in progress. Progress
+      can be viewed on the bottom right progress bar at the lighting menu 5. Restart
+      the check process once the baking process is done Please run step 3-5 whenever
+      adding objects / changing the positions of existing objects."
   - Key: LightmapSizeLimitRule.Overuse
     Value: Current Lightmap count {1} has exceeded the limit of {0}.
   - Key: LightmapSizeLimitRule.Overuse.Solution
-    Value: Try reducing the object count or lowering the Scale in Lightmap value in
-      the MeshRenderer settings.
+    Value: Try reducing the object count or lowering the Scale in Lightmap value
+      in the MeshRenderer settings.
   - Key: LightmapSizeLimitRule.Overresolution
     Value: Current Lightmap resolution of {1}, {2} has exceeded the limit of {0}.
   - Key: LightmapSizeLimitRule.Overresolution.Solution
-    Value: "Please lower the lightmap resolution with the following steps:\n1. Open
-      the Lighting menu through the unity taskbar\u2192Window\u2192Lighting\u2192Setting\n2.
-      Select the 'Scene' tab from the top of the Lighting menu\n3. Scroll down and
-      expand the 'Lightmap Settings' tab\n4. Set the Lightmap Size value to {0}"
+    Value: "Please lower the lightmap resolution with the following steps: 1. Open
+      the Lighting menu through the unity taskbar\u2192Window\u2192Lighting\u2192Setting
+      2. Select the 'Scene' tab from the top of the Lighting menu 3. Scroll down
+      and expand the 'Lightmap Settings' tab 4. Set the Lightmap Size value to {0}"
   - Key: LightConfigRule.UnauthorizedLightType
     Value: '{0} Light usage is not supported.'
   - Key: LightConfigRule.UnauthorizedLightType.Solution
@@ -504,36 +503,36 @@ MonoBehaviour:
   - Key: LightConfigRule.UnauthorizedLightMode
     Value: '{0} Light must be set to {1} mode. Current mode: {2}'
   - Key: LightConfigRule.UnauthorizedLightMode.Solution
-    Value: Set the light Mode to {0}
+    Value: Set the light Mode to {0}.
   - Key: LightConfigRule.UnauthorizedShadowTypes
     Value: '{0} Light must be set to {1} shadow. Current mode: {2}'
   - Key: LightConfigRule.UnauthorizedShadowTypes.Solution
-    Value: Set the Shadow to {0}
+    Value: Set the Shadow to {0}.
   - Key: LightConfigRule.OverRange
     Value: '{0} Light''s Range value has exceeded the allowed range of {1}~{2}. Current
       value {3}'
   - Key: LightConfigRule.OverRange.Solution
-    Value: Set the Range value to within the allowed range.
+    Value: Set the Range value within the allowed range.
   - Key: LightConfigRule.OverIntensity
     Value: '{0} Light''s Intensity value has exceeded the allowed range of {1}~{2}.
       Current value {3}'
   - Key: LightConfigRule.OverIntensity.Solution
-    Value: Set the Intensity value to within the allowed range.
+    Value: Set the Intensity value within the allowed range.
   - Key: LightConfigRule.OverIndirectMultiplier
     Value: '{0} Light''s Indirect Multiplier value has exceeded the allowed range
       of {1}~{2}. Current value {3}'
   - Key: LightConfigRule.OverIndirectMultiplier.Solution
-    Value: Set the Indirect Multiplier value to within the allowed range.
+    Value: Set the Indirect Multiplier value within the allowed range.
   - Key: VketRuleSetBase.RendererRule.Title
     Value: Please follow the SkinnedMeshRenderer or MeshRenderer's usage rules.
   - Key: RendererRule.MustAttachMaterial
     Value: SkinnedMeshRenderers / MeshRenderers must have at least 1 material assigned.
   - Key: VketRuleSetBase.SkinnedMeshRendererRule.Title
-    Value: Please follow the SkinnedMeshRenderer's usage rules.
+    Value: Please follow the SkinnedMeshRenderer usage rules
   - Key: VketRuleSetBase.MeshRendererRule.Title
-    Value: Please follow the MeshRenderer/MeshFilter's usage rules.
+    Value: Please follow the MeshRenderer/MeshFilter usage rules
   - Key: VketRuleSetBase.ReflectionProbeRule.Title
-    Value: Please follow the ReflectionProbe's usage rules.
+    Value: Please follow the ReflectionProbe usage rules
   - Key: SkinnedMeshRendererRule.MustTurnOffUpdateWhenOffscreen
     Value: UpdateWhenOffscreen must be set to off.
   - Key: MeshRendererRule.StaticMeshMustPutInEnvironmentLayer
@@ -544,19 +543,19 @@ MonoBehaviour:
     Value: 'ReflectionProbe''s Type {1} is not supported. It must be set to one of
       the following: [{0}]'
   - Key: VketRuleSetBase.RigidbodyRule.Title
-    Value: Rigidbody parameters must meet the allowed values
+    Value: Rigidbody parameters must have IsKinematic enabled
   - Key: RigidbodyRule.UseIsKinematic
     Value: Please enable IsKinematic on RigidBody objects
   - Key: VketRuleSetBase.UnusabePrefabRule.Title
     Value: Unallowed prefabs in use
   - Key: VketUdonRuleSetBase.UdonBehaviourLayerConstraintRule.Title
-    Value: GameObject Layer including UdonBehaviour must 23.
+    Value: Layer of GameObjects including UdonBehaviour must be set to 23.
   - Key: UdonBehaviourLayerConstraintRule.InvalidLayer
     Value: Wrong Layer
   - Key: UdonBehaviourLayerConstraintRule.InvalidLayer.solution
-    Value: GameObject including UdonBehaviour must set Later 23.
+    Value: GameObjects including UdonBehaviour must set to UserLayer23.
   - Key: VketUdonRuleSetBase.UsableUdonAssemblyListRule.Title
-    Value: Do not use forbidden Udon Assembly
+    Value: Do not use prohibited Udon Assembly
   - Key: UsableUdonAssemblyListRule.Disallow
     Value: '{0}: Usage of {1} is not allowed'
   - Key: UsableUdonAssemblyListRule.DefaultComponentGroupName
@@ -568,7 +567,7 @@ MonoBehaviour:
   - Key: UdonDynamicObjectInactiveRule.isActive
     Value: Dynamic object is Active.
   - Key: UdonDynamicObjectInactiveRule.isActive.Solution
-    Value: Dynamic object make Inactive on initial state.
+    Value: Please set Dynamic object as Inactive on initial state.
   - Key: UdonSharpScriptNamespaceRule.NotUdonSharp
     Value: Class {0} must be child of UdonSharp.UdonSharpBehaviour.
   - Key: UdonSharpScriptNamespaceRule.InvalidNamespace
@@ -578,33 +577,34 @@ MonoBehaviour:
   - Key: VketUdonRuleSetBase.UdonSharpNameSpaceRule.Title
     Value: UdonSharp class definition rules.
   - Key: UdonBehaviourSynchronizePositionCountLimitRule.Overuse
-    Value: 'UdonBehaviour with synchronize position count exceeded limit of {0}. (Current
-      count: {1})'
+    Value: 'UdonBehaviour with synchronize position count exceeded limit of {0}.
+      (Current count: {1})'
   - Key: UdonBehaviourSynchronizePositionCountLimitRule.Overuse.Solution
     Value: Please reduce the component count.
   - Key: VketUdonRuleSetBase.UdonBehaviourSynchronizePositionCountLimitRule.Title
     Value: UdonSharp with SynchronizePosition  count must be kept under {0}
   - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.Title
-    Value: UdonBehaviour AllowOwnershipTransferOnCollision to be false.
+    Value: UdonBehaviour AllowOwnershipTransferOnCollision must be set to false.
   - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.isTrue
-    Value: AllowOwnershipTransferOnCollision is true.
+    Value: AllowOwnershipTransferOnCollision must be set to false
   - Key: UdonBehaviourAllowOwnershipTransferOnCollisionIsFalseRule.isTrue.solution
-    Value: UdonBehaviour AllowOwnershipTransferOnCollision must be false.
+    Value: Please set AllowOwnershipTransferOnCollision to false.
   - Key: VketUdonRuleSetBase.UdonDynamicObjectParentRule.Title
-    Value: UdonBehaviour and it's affected object are set child of Dynamic object.
+    Value: UdonBehaviour and its affected object muset be set as child of Dynamic
+      object.
   - Key: UdonDynamicObjectParentRule.noDynamicObject
-    Value: Object Dynamic is not exists.
+    Value: The Dynamic object does not exist.
   - Key: UdonDynamicObjectParentRule.noDynamicObject.Solution
-    Value: Create Dynamic object.
+    Value: Rereate a Dynamic object.
   - Key: UdonDynamicObjectParentRule.UdonBehaviourIsNotChildOfDynamic
     Value: UdonBehaviour [{0}] is must be child of Dynamic object.
   - Key: UdonDynamicObjectParentRule.UdonBehaviourIsNotChildOfDynamic.Solution
-    Value: Set it child of Dynamic object.
+    Value: Reposition the object to be a child of Dynamic object.
   - Key: UdonDynamicObjectParentRule.UdonBehaviourPublicValueIsNotChildOfDynamic
     Value: The object UdonBehaviour [{0}]'s public variable [{1}] is must be child
       of Dynamic object.
   - Key: UdonDynamicObjectParentRule.UdonBehaviourPublicValueIsNotChildOfDynamic.Solution
-    Value: Set it child of Dynamic object.
+    Value: Reposition the object to be a child of Dynamic object.
   - Key: VketUdonRuleSetBase.UdonBehaviourSyncedVariablesRule.Title
     Value: SyncedVariables limitation of UdonBehaviour.
   - Key: UdonBehaviourSyncedVariablesRule.Overuse
@@ -633,7 +633,8 @@ MonoBehaviour:
   - Key: UdonAssemblyPhysicsCastFunctionRule.LayerMaskError.Solution
     Value: Set argument {1} {2} as const _layerMask in the function {0}.
   - Key: StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap
-    Value: Models using Lightmap Static must be enabled Generate Lightmap UVs in ImportSetting.
+    Value: Models using Lightmap Static must be enabled Generate Lightmap UVs in
+      ImportSetting.
   - Key: StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.Solution
     Value: 
   - Key: StaticFlagRule.LightmapStaticMeshAssetShouldGenerateLightmap.SolutionURL
@@ -641,7 +642,7 @@ MonoBehaviour:
   - Key: StaticFlagRule.LightmapStaticMeshShouldHaveUV2
     Value: Meshes using Contribute GI must have UV2.
   - Key: StaticFlagRule.LightmapStaticMeshShouldHaveUV2.Solution
-    Value: Generate UV2 , or disable Contribute GI.
+    Value: Generate UV2 or disable Contribute GI.
   - Key: StaticFlagRule.LightmapStaticMeshShouldHaveUV2.SolutionURL
     Value: 
   - Key: VketUdonRuleSetBase.VRCStationCountLimitRule.Title
@@ -653,24 +654,25 @@ MonoBehaviour:
   - Key: VketUdonRuleSetBase.SpatialAudioDynamicObjectParentRule.Title
     Value: VRCSpatialAudioSources are must set child of Dynamic object.
   - Key: SpatialAudioDynamicObjectParentRule.noDynamicObject
-    Value: Object Dynamic is not exists.
+    Value: Dynamic object does not exist
   - Key: SpatialAudioDynamicObjectParentRule.noDynamicObject.Solution
-    Value: Create Dynamic object.
+    Value: Please recreate the Dynamic object.
   - Key: SpatialAudioDynamicObjectParentRule.IsNotChildOfDynamic
-    Value: VRCSpatialAudioSource [{0}] is must be child of Dynamic object.
+    Value: VRCSpatialAudioSource [{0}] must be a child of Dynamic object.
   - Key: SpatialAudioDynamicObjectParentRule.IsNotChildOfDynamic.Solution
-    Value: Set it child of Dynamic object.
+    Value: Reposition the object to be a child of Dynamic object.
   - Key: VketUdonRuleSetBase.VRCPickupUdonBehaviourRule.Title
     Value: VRCPickup UdonAssembly constraints
   - Key: VRCPickupUdonBehaviourRule.NotImplementedAutoResetPickup
-    Value: VRCPickup must be together UdonBehaviour [AutoResetPickup]
+    Value: VRCPickup must be together with UdonBehaviour [AutoResetPickup]
   - Key: VRCPickupUdonBehaviourRule.NotImplementedAutoResetPickup.Solution
     Value: Add component Udonbehaviour with UdonProgramAssembly [AutoResetPickup].
-      They are included official prefabs.
+      This prefab is included in the official prefabs!
   - Key: VRCPickupUdonBehaviourRule.SynchronizePositionFalse
-    Value: UdonBehaviour [AutoResetPickup] must set Synchronize Position is True.
+    Value: UdonBehaviour [AutoResetPickup]'s Synchronize Position must be set to
+      True.
   - Key: VRCPickupUdonBehaviourRule.SynchronizePositionFalse.Solution
-    Value: Check UdonBehaviour property Synchronize Position is True.
+    Value: 'Check UdonBehaviour property: set Synchronize Position to True.'
   - Key: AllowedExtensionsForExportRule.Title
     Value: Extensions
   - Key: AllowedExtensionsForExportRule.ForbiddenPaths
