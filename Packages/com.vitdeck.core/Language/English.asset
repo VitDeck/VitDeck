@@ -482,7 +482,7 @@ MonoBehaviour:
     Value: "Please set the lightmap baking mode to Manual with the following steps:\n1.
       Open the Lighting menu through the unity taskbar\u2192Window\u2192Lighting\u2192Setting.\n2.
       Uncheck the Auto Generate checkbox located at the bottom of the lighting menu\n3.
-      Click \\enerate Lighting\\\n4. Wait as the lightmap is in progress. Progress
+      Click \"Generate Lighting\"\n4. Wait as the lightmap is in progress. Progress
       can be viewed on the bottom right progress bar at the lighting menu\n5. Restart
       the check process once the baking process is done\nPlease run step 3-5 whenever
       adding objects / changing the positions of existing objects."
