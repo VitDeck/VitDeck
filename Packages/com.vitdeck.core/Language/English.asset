@@ -679,3 +679,6 @@ MonoBehaviour:
     Value: Extensions
   - Key: AllowedExtensionsForExportRule.ForbiddenPaths
     Value: 'The following files will not be exported:'
+  - Key: languageSettingsEditor.externalConfiguratorAvailable
+    Value: Language settings cannot be changed in this configuration file as they
+      are being overridden by another tool.
