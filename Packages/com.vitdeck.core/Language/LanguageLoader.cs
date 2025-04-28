@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
@@ -7,12 +5,16 @@ using UnityEngine;
 
 namespace VitDeck.Language
 {
-    public class LanguageLoader
+    /// <summary>
+    /// Unityエディタが読み込まれたときに、VitDeckの翻訳機能にコア翻訳ファイルを自動で読み込ませるためのクラス。
+    /// </summary>
+    public static class LanguageLoader
     {
         private static Dictionary<SystemLanguage, string> languageGUIDs;
-        private static SystemLanguage defaultLanguage = SystemLanguage.English;
-        private const string LogHeader = "[VitDeck]";
 
+        /// <summary>
+        /// 各種言語別に、コア翻訳ファイルのGUIDを保持するDictionary。
+        /// </summary>
         private static Dictionary<SystemLanguage, string> LanguageFileGUIDs
         {
             get
@@ -35,44 +37,31 @@ namespace VitDeck.Language
         [InitializeOnLoadMethod]
         private static void Initialize()
         {
-            var settings = FindLanguageSettingsInstance();
+            var settings = FindOrCreateLanguageSettingsInstance();
 
+            // Unityの読込直後は言語設定ファイルを掴み損ねる可能性があるため、その場合はEditor.updateのタイミングまで遅延させる
             if (settings == null)
             {
                 EditorApplication.update += DelayedInitialize;
                 return;
             }
 
-            LanguageDictionary dictionary;
-            if (settings.language == null)
+            var pairs = LanguageFileGUIDs;
+            foreach (var pair in pairs)
             {
-                string languageGUID;
-                var currentLanguage = Application.systemLanguage;
-                Debug.Log(LogHeader + "Current system language = " + currentLanguage);
-                if (LanguageFileGUIDs.TryGetValue(currentLanguage, out languageGUID))
-                {
-                    Debug.Log(LogHeader + "Load LanguageFile which for " + currentLanguage);
-                }
-                else
-                {
-                    Debug.Log(LogHeader +
-                              "LanguageFile which for current system language is not found. load default LanguageFile.");
-                    languageGUID = LanguageFileGUIDs[defaultLanguage];
-                }
-
-                var defaultLanguagePath = AssetDatabase.GUIDToAssetPath(languageGUID);
-                dictionary = AssetDatabase.LoadAssetAtPath<LanguageDictionary>(defaultLanguagePath);
-            }
-            else
-            {
-                Debug.Log(LogHeader + "Load overrode LanguageFile = " + settings.language);
-                dictionary = settings.language;
+                var guid = pair.Value;
+                var path = AssetDatabase.GUIDToAssetPath(guid);
+                var asset = AssetDatabase.LoadAssetAtPath<LanguageDictionary>(path);
+                LocalizedMessage.AddSystemDictionary(pair.Key, asset);
             }
 
-            LocalizedMessage.SetDictionary(dictionary);
+            if (!LocalizedMessage.ExternalConfiguratorAvailable)
+            {
+                LocalizedMessage.SetCurrentLanguageInternal(settings.language, false);
+            }
         }
 
-        private static LanguageSettings FindLanguageSettingsInstance()
+        private static LanguageSettings FindOrCreateLanguageSettingsInstance()
         {
             LanguageSettings asset;
             var assetPath = Path.Combine(Utilities.AssetUtility.ConfigFolderPath, "LanguageSettings.asset");
