@@ -14,7 +14,7 @@ namespace VitDeck.Language
         private static readonly Dictionary<SystemLanguage, LanguageDictionaryAggregator> LanguageDictionaries
             = new Dictionary<SystemLanguage, LanguageDictionaryAggregator>();
 
-        private static SystemLanguage currentCurrentLanguage = Application.systemLanguage;
+        private static SystemLanguage currentLanguage = Application.systemLanguage;
         private static ILanguage currentLanguageDictionary = null;
         private static bool externalConfiguratorAvailable = false;
 
@@ -28,7 +28,7 @@ namespace VitDeck.Language
         public static string Get(string messageID, params object[] args)
         {
             if (currentLanguageDictionary == null &&
-                !TryGetLanguageDictionary(currentCurrentLanguage, out currentLanguageDictionary))
+                !TryGetLanguageDictionary(currentLanguage, out currentLanguageDictionary))
             {
                 return messageID;
             }
@@ -68,7 +68,7 @@ namespace VitDeck.Language
         /// </summary>
         public static SystemLanguage CurrentLanguage
         {
-            get => currentCurrentLanguage;
+            get => currentLanguage;
             set => SetCurrentLanguageInternal(value, true);
         }
 
@@ -79,7 +79,7 @@ namespace VitDeck.Language
 
         internal static void SetCurrentLanguageInternal(SystemLanguage language, bool isExternalOperation)
         {
-            currentCurrentLanguage = language;
+            currentLanguage = language;
             externalConfiguratorAvailable = isExternalOperation;
             currentLanguageDictionary = null;
         }
