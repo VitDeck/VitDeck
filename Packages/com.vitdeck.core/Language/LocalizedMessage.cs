@@ -27,19 +27,13 @@ namespace VitDeck.Language
         /// <exception cref="FormatException"></exception>
         public static string Get(string messageID, params object[] args)
         {
-            if (currentLanguageDictionary == null)
-            {
-                currentLanguageDictionary = ChooseLanguageDictionary(currentCurrentLanguage);
-            }
-
-            if (currentLanguageDictionary == null)
+            if (currentLanguageDictionary == null &&
+                !TryGetLanguageDictionary(currentCurrentLanguage, out currentLanguageDictionary))
             {
                 return messageID;
             }
 
-            var found = currentLanguageDictionary.TryGetValue(messageID, out var translated);
-
-            if (!found)
+            if (!currentLanguageDictionary.TryGetValue(messageID, out var translated))
             {
                 return messageID;
             }
@@ -124,24 +118,24 @@ namespace VitDeck.Language
             aggregator.Add(dictionary, false);
         }
 
-        private static ILanguage ChooseLanguageDictionary(SystemLanguage language)
+        private static bool TryGetLanguageDictionary(SystemLanguage language, out ILanguage dictionary)
+
         {
-            if (LanguageDictionaries.TryGetValue(language, out var dictionary))
+            if (LanguageDictionaries.TryGetValue(language, out var aggregatedDictionary))
             {
-                return dictionary;
+                dictionary = aggregatedDictionary;
+                return true;
             }
 
-            if (language == DefaultLanguage)
+            if (language != DefaultLanguage &&
+                LanguageDictionaries.TryGetValue(DefaultLanguage, out aggregatedDictionary))
             {
-                return null;
+                dictionary = aggregatedDictionary;
+                return true;
             }
 
-            if (LanguageDictionaries.TryGetValue(DefaultLanguage, out dictionary))
-            {
-                return dictionary;
-            }
-
-            return null;
+            dictionary = null;
+            return false;
         }
     }
 }
