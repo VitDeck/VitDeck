@@ -23,8 +23,8 @@ namespace VitDeck.Validator
             var objects = target
                 .GetAllObjects()
                 .Where(obj => PrefabUtility.GetPrefabInstanceStatus(obj) == PrefabInstanceStatus.Connected)
-                .Select(PrefabUtility.GetOutermostPrefabInstanceRoot)
-                .Distinct()
+                // 入れ子のPrefabがカウントをすり抜けないよう、最も外側ではなく全てのPrefabインスタンスのルートを対象にする
+                .Where(PrefabUtility.IsAnyPrefabInstanceRoot)
                 .Where(IsTargetPrefabInstance)
                 .ToArray();
 
@@ -46,8 +46,9 @@ namespace VitDeck.Validator
 
         private bool IsTargetPrefabInstance(GameObject obj)
         {
-            var asset = PrefabUtility.GetCorrespondingObjectFromSource(obj);
-            var path = AssetDatabase.GetAssetPath(asset);
+            // 入れ子の内側のルートはGetCorrespondingObjectFromSourceだと外側のPrefab内のオブジェクトを返すため、
+            // そのルート自身の元Prefabのパスを取得する
+            var path = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(obj);
             var guid = AssetDatabase.AssetPathToGUID(path);
 
             return prefabGUIDs.Contains(guid);
