@@ -9,6 +9,8 @@ namespace VitDeck.Validator
         {
             Windows,
             Android,
+            iOS,
+            Other,
         }
 
         private readonly Platform platform;
@@ -30,6 +32,10 @@ namespace VitDeck.Validator
                     Platform.Windows
 #elif UNITY_ANDROID
                 Platform.Android
+#elif UNITY_IOS
+                Platform.iOS
+#else
+                Platform.Other
 #endif
                 ;
 
