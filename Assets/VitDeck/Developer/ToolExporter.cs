@@ -15,14 +15,12 @@ namespace VitDeck.Developer
         private static readonly string DestinationFolderPath
             = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
-        private static readonly Regex IgnorePattern = new Regex(@"^Assets/VitDeck/(
-            Utilities/GUIDEnumerator\.cs
-            |Temporary(/.+)?
-            |.+/Tests/.+
+        // パッケージに含めないアセットのパターン。フォルダ自身も除外しないと空フォルダがパッケージに残るため、
+        // 各項目はフォルダのパス(末尾なし)と配下のパス(/.+)の両方に一致させている。
+        private static readonly Regex IgnorePattern = new Regex(@"^Packages/com\.vitdeck\.[a-z]+/(
+            .+/Tests(/.+)?
             |TestUtilities(/.+)?
-            |Templates/(Sample_template|0.+)(/.+)?
             |Validator/Rules/Sample(/.+)?
-            |Config/(UserSettings|DefaultExportSetting.*|PlacementSettings|Vket.+)\.asset
         )$", RegexOptions.ExplicitCapture | RegexOptions.IgnorePatternWhitespace);
 
         [MenuItem("VitDeck/Export VitDeck", false, 201)]
