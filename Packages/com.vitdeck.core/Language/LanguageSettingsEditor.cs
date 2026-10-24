@@ -32,27 +32,26 @@ namespace VitDeck.Language
 
             // 外部からの設定変更がない場合は、言語選択フィールドを表示する
             EditorGUI.BeginChangeCheck();
-            var language = ConvertPropertyValueToSystemLanguage(property.enumValueIndex);
+            var language = ReadLanguage(property);
             var supportedLanguagesList = LocalizedMessage.GetSupportedLanguages().ToArray();
             var newLanguage = DrawEnumPopup(language, supportedLanguagesList);
 
             if (EditorGUI.EndChangeCheck())
             {
-                property.enumValueIndex = ConvertSystemLanguageToPropertyValue(newLanguage);
+                WriteLanguage(property, newLanguage);
                 LocalizedMessage.SetCurrentLanguageInternal(newLanguage, false);
             }
         }
 
-        // SerializedPropertyの値からSystemLanguageへの変換
-        private static SystemLanguage ConvertPropertyValueToSystemLanguage(int propertyValue)
+        // enumValueIndexは宣言順の位置でSystemLanguageの値とずれるため、列挙値そのものを返すintValueを使う
+        internal static SystemLanguage ReadLanguage(SerializedProperty property)
         {
-            return (SystemLanguage)(propertyValue - 1);
+            return (SystemLanguage)property.intValue;
         }
 
-        // SystemLanguageからSerializedPropertyの値への変換
-        private static int ConvertSystemLanguageToPropertyValue(SystemLanguage language)
+        internal static void WriteLanguage(SerializedProperty property, SystemLanguage language)
         {
-            return (int)language + 1;
+            property.intValue = (int)language;
         }
 
         private static SystemLanguage DrawEnumPopup(SystemLanguage language, IReadOnlyList<SystemLanguage> availableLanguages)
